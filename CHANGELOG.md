@@ -1,2660 +1,2083 @@
-# Changelog
+# Change Log
 
 All notable changes to this project will be documented in this file.
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+This project adheres to [Semantic Versioning](https://semver.org/).
+This change log adheres to standards from [Keep a CHANGELOG](https://keepachangelog.com).
 
 ## [Unreleased]
 
-- Nothing yet!
-
-## [3.4.10] - 2024-08-13
-
-### Fixed
-
-- Bump versions of plugins in the Standalone CLI ([#14185](https://github.com/tailwindlabs/tailwindcss/pull/14185))
-
-## [3.4.9] - 2024-08-08
-
-### Fixed
-
-- No longer warns when broad glob patterns are detecting `vendor` folders
-
-## [3.4.8] - 2024-08-07
-
-### Fixed
-
-- Fix minification when using nested CSS ([#14105](https://github.com/tailwindlabs/tailwindcss/pull/14105))
-- Warn when broad glob patterns are used in the content configuration ([#14140](https://github.com/tailwindlabs/tailwindcss/pull/14140))
-
-## [3.4.7] - 2024-07-25
-
-### Fixed
-
-- Fix class detection in Slim templates with attached attributes and ID ([#14019](https://github.com/tailwindlabs/tailwindcss/pull/14019))
-- Ensure attribute values in `data-*` and `aria-*` modifiers are always quoted in the generated CSS ([#14037](https://github.com/tailwindlabs/tailwindcss/pull/14037))
-
-## [3.4.6] - 2024-07-16
-
-### Fixed
-
-- Fix detection of some utilities in Slim/Pug templates ([#14006](https://github.com/tailwindlabs/tailwindcss/pull/14006))
-
-### Changed
-
-- Loosen `:is()` wrapping rules when using an important selector ([#13900](https://github.com/tailwindlabs/tailwindcss/pull/13900))
-
-## [3.4.5] - 2024-07-15
-
-### Fixed
-
-- Disable automatic `var()` injection for anchor properties ([#13826](https://github.com/tailwindlabs/tailwindcss/pull/13826))
-- Use no value instead of `blur(0px)` for `backdrop-blur-none` and `blur-none` utilities ([#13830](https://github.com/tailwindlabs/tailwindcss/pull/13830))
-- Add `.mts` and `.cts` config file detection ([#13940](https://github.com/tailwindlabs/tailwindcss/pull/13940))
-- Don't generate utilities like `px-1` unnecessarily when using utilities like `px-1.5` ([#13959](https://github.com/tailwindlabs/tailwindcss/pull/13959))
-- Always generate `-webkit-backdrop-filter` for `backdrop-*` utilities ([#13997](https://github.com/tailwindlabs/tailwindcss/pull/13997))
-
-## [3.4.4] - 2024-06-05
-
-### Fixed
-
-- Make it possible to use multiple `<alpha-value>` placeholders in a single color definition ([#13740](https://github.com/tailwindlabs/tailwindcss/pull/13740))
-- Don't prefix classes in arbitrary values of `has-*`, `group-has-*`, and `peer-has-*` variants ([#13770](https://github.com/tailwindlabs/tailwindcss/pull/13770))
-- Support negative values for `{col,row}-{start,end}` utilities ([#13781](https://github.com/tailwindlabs/tailwindcss/pull/13781))
-- Update embedded browserslist database ([#13792](https://github.com/tailwindlabs/tailwindcss/pull/13792))
-
-## [3.4.3] - 2024-03-27
-
-### Fixed
-
-- Revert changes to glob handling ([#13384](https://github.com/tailwindlabs/tailwindcss/pull/13384))
-
-## [3.4.2] - 2024-03-27
-
-### Fixed
-
-- Ensure max specificity of `0,0,1` for button and input Preflight rules ([#12735](https://github.com/tailwindlabs/tailwindcss/pull/12735))
-- Improve glob handling for folders with `(`, `)`, `[` or `]` in the file path ([#12715](https://github.com/tailwindlabs/tailwindcss/pull/12715))
-- Split `:has` rules when using `experimental.optimizeUniversalDefaults` ([#12736](https://github.com/tailwindlabs/tailwindcss/pull/12736))
-- Sort arbitrary properties alphabetically across multiple class lists ([#12911](https://github.com/tailwindlabs/tailwindcss/pull/12911))
-- Add `mix-blend-plus-darker` utility ([#12923](https://github.com/tailwindlabs/tailwindcss/pull/12923))
-- Ensure dashes are allowed in variant modifiers ([#13303](https://github.com/tailwindlabs/tailwindcss/pull/13303))
-- Fix crash showing completions in Intellisense when using a custom separator ([#13306](https://github.com/tailwindlabs/tailwindcss/pull/13306))
-- Transpile `import.meta.url` in config files ([#13322](https://github.com/tailwindlabs/tailwindcss/pull/13322))
-- Reset letter spacing for form elements ([#13150](https://github.com/tailwindlabs/tailwindcss/pull/13150))
-- Fix missing `xx-large` and remove double `x-large` absolute size ([#13324](https://github.com/tailwindlabs/tailwindcss/pull/13324))
-- Don't error when encountering nested CSS unless trying to `@apply` a class that uses nesting ([#13325](https://github.com/tailwindlabs/tailwindcss/pull/13325))
-- Ensure that arbitrary properties respect `important` configuration ([#13353](https://github.com/tailwindlabs/tailwindcss/pull/13353))
-- Change dark mode selector so `@apply` works correctly with pseudo elements ([#13379](https://github.com/tailwindlabs/tailwindcss/pull/13379))
-
-## [3.4.1] - 2024-01-05
-
-### Fixed
-
-- Don't remove keyframe stops when using important utilities ([#12639](https://github.com/tailwindlabs/tailwindcss/pull/12639))
-- Don't add spaces to gradients and grid track names when followed by `calc()` ([#12704](https://github.com/tailwindlabs/tailwindcss/pull/12704))
-- Restore old behavior for `class` dark mode strategy ([#12717](https://github.com/tailwindlabs/tailwindcss/pull/12717))
-- Improve glob handling for folders with `(`, `)`, `[` or `]` in the file path ([#12715](https://github.com/tailwindlabs/tailwindcss/pull/12715))
+## [2.32.0] - 2025-06-20
 
 ### Added
+- add [`enforce-node-protocol-usage`] rule and `import/node-version` setting ([#3024], thanks [@GoldStrikeArch] and [@sevenc-nanashi])
+- add TypeScript types ([#3097], thanks [@G-Rath])
+- [`extensions`]: add `pathGroupOverrides to allow enforcement decision overrides based on specifier ([#3105], thanks [@Xunnamius])
+- [`order`]: add `sortTypesGroup` option to allow intragroup sorting of type-only imports ([#3104], thanks [@Xunnamius])
+- [`order`]: add `newlines-between-types` option to control intragroup sorting of type-only imports ([#3127], thanks [@Xunnamius])
+- [`order`]: add `consolidateIslands` option to collapse excess spacing for aesthetically pleasing imports ([#3129], thanks [@Xunnamius])
 
-- Add new `selector` and `variant` strategies for dark mode ([#12717](https://github.com/tailwindlabs/tailwindcss/pull/12717))
-
-### Changed
-
-- Support `rtl` and `ltr` variants on same element as `dir` attribute ([#12717](https://github.com/tailwindlabs/tailwindcss/pull/12717))
-
-## [3.4.0] - 2023-12-19
-
-### Added
-
-- Add `svh`, `lvh`, and `dvh` values to default `height`/`min-height`/`max-height` theme ([#11317](https://github.com/tailwindlabs/tailwindcss/pull/11317))
-- Add `has-*` variants for `:has(...)` pseudo-class ([#11318](https://github.com/tailwindlabs/tailwindcss/pull/11318))
-- Add `text-wrap` utilities including `text-balance` and `text-pretty` ([#11320](https://github.com/tailwindlabs/tailwindcss/pull/11320), [#12031](https://github.com/tailwindlabs/tailwindcss/pull/12031))
-- Extend default `opacity` scale to include all steps of 5 ([#11832](https://github.com/tailwindlabs/tailwindcss/pull/11832))
-- Update Preflight `html` styles to include shadow DOM `:host` pseudo-class ([#11200](https://github.com/tailwindlabs/tailwindcss/pull/11200))
-- Increase default values for `grid-rows-*` utilities from 1–6 to 1–12 ([#12180](https://github.com/tailwindlabs/tailwindcss/pull/12180))
-- Add `size-*` utilities ([#12287](https://github.com/tailwindlabs/tailwindcss/pull/12287))
-- Add utilities for CSS subgrid ([#12298](https://github.com/tailwindlabs/tailwindcss/pull/12298))
-- Add spacing scale to `min-w-*`, `min-h-*`, and `max-w-*` utilities ([#12300](https://github.com/tailwindlabs/tailwindcss/pull/12300))
-- Add `forced-color-adjust` utilities ([#11931](https://github.com/tailwindlabs/tailwindcss/pull/11931))
-- Add `forced-colors` variant ([#11694](https://github.com/tailwindlabs/tailwindcss/pull/11694), [#12582](https://github.com/tailwindlabs/tailwindcss/pull/12582))
-- Add `appearance-auto` utility ([#12404](https://github.com/tailwindlabs/tailwindcss/pull/12404))
-- Add logical property values for `float` and `clear` utilities ([#12480](https://github.com/tailwindlabs/tailwindcss/pull/12480))
-- Add `*` variant for targeting direct children ([#12551](https://github.com/tailwindlabs/tailwindcss/pull/12551))
+### Fixed
+- [`no-unused-modules`]: provide more meaningful error message when no .eslintrc is present ([#3116], thanks [@michaelfaith])
+- configs: added missing name attribute for eslint config inspector ([#3151], thanks [@NishargShah])
+- [`order`]: ensure arcane imports do not cause undefined behavior ([#3128], thanks [@Xunnamius])
+- [`order`]: resolve undefined property access issue when using `named` ordering ([#3166], thanks [@Xunnamius])
+- [`enforce-node-protocol-usage`]: avoid a crash with some TS code ([#3173], thanks [@ljharb])
+- [`order`]: codify invariants from docs into config schema ([#3152], thanks [@Xunnamius])
 
 ### Changed
+- [Docs] [`extensions`], [`order`]: improve documentation ([#3106], thanks [@Xunnamius])
+- [Docs] add flat config guide for using `tseslint.config()` ([#3125], thanks [@lnuvy])
+- [Docs] add missing comma ([#3122], thanks [@RyanGst])
+- [readme] Update flatConfig example to include typescript config ([#3138], thanks [@intellix])
+- [Refactor] [`order`]: remove unnecessary negative check ([#3167], thanks [@JounQin])
+- [Docs] [`no-unused-modules`]: add missing double quote ([#3191], thanks [@albertpastrana])
+- [Docs] `no-restricted-paths`: clarify wording and fix errors ([#3172], thanks [@greim])
 
-- Simplify the `sans` font-family stack ([#11748](https://github.com/tailwindlabs/tailwindcss/pull/11748))
-- Disable the tap highlight overlay on iOS ([#12299](https://github.com/tailwindlabs/tailwindcss/pull/12299))
-- Improve relative precedence of `rtl`, `ltr`, `forced-colors`, and `dark` variants ([#12584](https://github.com/tailwindlabs/tailwindcss/pull/12584))
-
-## [3.3.7] - 2023-12-18
-
-### Fixed
-
-- Fix support for container query utilities with arbitrary values ([#12534](https://github.com/tailwindlabs/tailwindcss/pull/12534))
-- Fix custom config loading in Standalone CLI ([#12616](https://github.com/tailwindlabs/tailwindcss/pull/12616))
-
-## [3.3.6] - 2023-12-04
-
-### Fixed
-
-- Don’t add spaces to negative numbers following a comma ([#12324](https://github.com/tailwindlabs/tailwindcss/pull/12324))
-- Don't emit `@config` in CSS when watching via the CLI ([#12327](https://github.com/tailwindlabs/tailwindcss/pull/12327))
-- Improve types for `resolveConfig` ([#12272](https://github.com/tailwindlabs/tailwindcss/pull/12272))
-- Ensure configured `font-feature-settings` for `mono` are included in Preflight ([#12342](https://github.com/tailwindlabs/tailwindcss/pull/12342))
-- Improve candidate detection in minified JS arrays (without spaces) ([#12396](https://github.com/tailwindlabs/tailwindcss/pull/12396))
-- Don't crash when given applying a variant to a negated version of a simple utility ([#12514](https://github.com/tailwindlabs/tailwindcss/pull/12514))
-- Fix support for slashes in arbitrary modifiers ([#12515](https://github.com/tailwindlabs/tailwindcss/pull/12515))
-- Fix source maps of variant utilities that come from an `@layer` rule ([#12508](https://github.com/tailwindlabs/tailwindcss/pull/12508))
-- Fix loading of built-in plugins when using an ESM or TypeScript config with the Standalone CLI ([#12506](https://github.com/tailwindlabs/tailwindcss/pull/12506))
-
-## [3.3.5] - 2023-10-25
-
-### Fixed
-
-- Fix incorrect spaces around `-` in `calc()` expression ([#12283](https://github.com/tailwindlabs/tailwindcss/pull/12283))
-
-## [3.3.4] - 2023-10-24
-
-### Fixed
-
-- Improve normalisation of `calc()`-like functions ([#11686](https://github.com/tailwindlabs/tailwindcss/pull/11686))
-- Skip `calc()` normalisation in nested `theme()` calls ([#11705](https://github.com/tailwindlabs/tailwindcss/pull/11705))
-- Fix incorrectly generated CSS when using square brackets inside arbitrary properties ([#11709](https://github.com/tailwindlabs/tailwindcss/pull/11709))
-- Make `content` optional for presets in TypeScript types ([#11730](https://github.com/tailwindlabs/tailwindcss/pull/11730))
-- Handle variable colors that have variable fallback values ([#12049](https://github.com/tailwindlabs/tailwindcss/pull/12049))
-- Batch reading content files to prevent `too many open files` error ([#12079](https://github.com/tailwindlabs/tailwindcss/pull/12079))
-- Skip over classes inside `:not(…)` when nested in an at-rule ([#12105](https://github.com/tailwindlabs/tailwindcss/pull/12105))
-- Update types to work with `Node16` module resolution ([#12097](https://github.com/tailwindlabs/tailwindcss/pull/12097))
-- Don’t crash when important and parent selectors are equal in `@apply` ([#12112](https://github.com/tailwindlabs/tailwindcss/pull/12112))
-- Eliminate irrelevant rules when applying variants ([#12113](https://github.com/tailwindlabs/tailwindcss/pull/12113))
-- Improve RegEx parser, reduce possibilities as the key for arbitrary properties ([#12121](https://github.com/tailwindlabs/tailwindcss/pull/12121))
-- Fix sorting of utilities that share multiple candidates ([#12173](https://github.com/tailwindlabs/tailwindcss/pull/12173))
-- Ensure variants with arbitrary values and a modifier are correctly matched in the RegEx based parser ([#12179](https://github.com/tailwindlabs/tailwindcss/pull/12179))
-- Fix crash when watching renamed files on FreeBSD ([#12193](https://github.com/tailwindlabs/tailwindcss/pull/12193))
-- Allow plugins from a parent document to be used in an iframe ([#12208](https://github.com/tailwindlabs/tailwindcss/pull/12208))
-- Add types for `tailwindcss/nesting` ([#12269](https://github.com/tailwindlabs/tailwindcss/pull/12269))
-- Bump `jiti`, `fast-glob`, and `browserlist` dependencies ([#11550](https://github.com/tailwindlabs/tailwindcss/pull/11550))
-- Improve automatic `var` injection for properties that accept a `<dashed-ident>` ([#12236](https://github.com/tailwindlabs/tailwindcss/pull/12236))
-
-## [3.3.3] - 2023-07-13
-
-### Fixed
-
-- Fix issue where some pseudo-element variants generated the wrong selector ([#10943](https://github.com/tailwindlabs/tailwindcss/pull/10943), [#10962](https://github.com/tailwindlabs/tailwindcss/pull/10962), [#11111](https://github.com/tailwindlabs/tailwindcss/pull/11111))
-- Make font settings propagate into buttons, inputs, etc. ([#10940](https://github.com/tailwindlabs/tailwindcss/pull/10940))
-- Fix parsing of `theme()` inside `calc()` when there are no spaces around operators ([#11157](https://github.com/tailwindlabs/tailwindcss/pull/11157))
-- Ensure `repeating-conic-gradient` is detected as an image ([#11180](https://github.com/tailwindlabs/tailwindcss/pull/11180))
-- Move unknown pseudo-elements outside of `:is` by default ([#11345](https://github.com/tailwindlabs/tailwindcss/pull/11345))
-- Escape animation names when prefixes contain special characters ([#11470](https://github.com/tailwindlabs/tailwindcss/pull/11470))
-- Don't prefix arbitrary classes in `group` and `peer` variants ([#11454](https://github.com/tailwindlabs/tailwindcss/pull/11454))
-- Sort classes using position of first matching rule ([#11504](https://github.com/tailwindlabs/tailwindcss/pull/11504))
-- Allow variant to be an at-rule without a prelude ([#11589](https://github.com/tailwindlabs/tailwindcss/pull/11589))
-- Make PostCSS plugin async to improve performance ([#11548](https://github.com/tailwindlabs/tailwindcss/pull/11548))
-- Don’t error when a config file is missing ([f97759f](https://github.com/tailwindlabs/tailwindcss/commit/f97759f808d15ace66647b1405744fcf95a392e5))
+## [2.31.0] - 2024-10-03
 
 ### Added
+- support eslint v9 ([#2996], thanks [@G-Rath] [@michaelfaith])
+- [`order`]: allow validating named imports ([#3043], thanks [@manuth])
+- [`extensions`]: add the `checkTypeImports` option ([#2817], thanks [@phryneas])
 
-- Add `aria-busy` utility ([#10966](https://github.com/tailwindlabs/tailwindcss/pull/10966))
+### Fixed
+- `ExportMap` / flat config: include `languageOptions` in context ([#3052], thanks [@michaelfaith])
+- [`no-named-as-default`]: Allow using an identifier if the export is both a named and a default export ([#3032], thanks [@akwodkiewicz])
+- [`export`]: False positive for exported overloaded functions in TS ([#3065], thanks [@liuxingbaoyu])
+- `exportMap`: export map cache is tainted by unreliable parse results ([#3062], thanks [@michaelfaith])
+- `exportMap`: improve cacheKey when using flat config ([#3072], thanks [@michaelfaith])
+- adjust "is source type module" checks for flat config ([#2996], thanks [@G-Rath])
 
 ### Changed
+- [Docs] [`no-relative-packages`]: fix typo ([#3066], thanks [@joshuaobrien])
+- [Performance] [`no-cycle`]: dont scc for each linted file ([#3068], thanks [@soryy708])
+- [Docs] [`no-cycle`]: add `disableScc` to docs ([#3070], thanks [@soryy708])
+- [Tests] use re-exported `RuleTester` ([#3071], thanks [@G-Rath])
+- [Docs] [`no-restricted-paths`]: fix grammar ([#3073], thanks [@unbeauvoyage])
+- [Tests] [`no-default-export`], [`no-named-export`]:  add test case (thanks [@G-Rath])
 
-- Reset padding for `<dialog>` elements in preflight ([#11069](https://github.com/tailwindlabs/tailwindcss/pull/11069))
+## [2.30.0] - 2024-09-02
 
-## [3.3.2] - 2023-04-25
+### Added
+- [`dynamic-import-chunkname`]: add `allowEmpty` option to allow empty leading comments ([#2942], thanks [@JiangWeixian])
+- [`dynamic-import-chunkname`]: Allow empty chunk name when webpackMode: 'eager' is set; add suggestions to remove name in eager mode ([#3004], thanks [@amsardesai])
+- [`no-unused-modules`]: Add `ignoreUnusedTypeExports` option ([#3011], thanks [@silverwind])
+- add support for Flat Config ([#3018], thanks [@michaelfaith])
 
 ### Fixed
-
-- Don’t move unknown pseudo-elements to the end of selectors ([#10943](https://github.com/tailwindlabs/tailwindcss/pull/10943), [#10962](https://github.com/tailwindlabs/tailwindcss/pull/10962))
-- Inherit gradient stop positions when using variants ([#11002](https://github.com/tailwindlabs/tailwindcss/pull/11002))
-- Honor default `to` position of gradient when using implicit transparent colors ([#11002](https://github.com/tailwindlabs/tailwindcss/pull/11002))
-- Ensure `@tailwindcss/oxide` doesn't leak in the stable engine ([#10988](https://github.com/tailwindlabs/tailwindcss/pull/10988))
-- Ensure multiple `theme(spacing[5])` calls with bracket notation in arbitrary properties work ([#11039](https://github.com/tailwindlabs/tailwindcss/pull/11039))
-- Normalize arbitrary modifiers ([#11057](https://github.com/tailwindlabs/tailwindcss/pull/11057))
+- [`no-extraneous-dependencies`]: allow wrong path ([#3012], thanks [@chabb])
+- [`no-cycle`]: use scc algorithm to optimize ([#2998], thanks [@soryy708])
+- [`no-duplicates`]: Removing duplicates breaks in TypeScript ([#3033], thanks [@yesl-kim])
+- [`newline-after-import`]: fix considerComments option when require ([#2952], thanks [@developer-bandi])
+- [`order`]: do not compare first path segment for relative paths ([#2682]) ([#2885], thanks [@mihkeleidast])
 
 ### Changed
+- [Docs] [`no-extraneous-dependencies`]: Make glob pattern description more explicit ([#2944], thanks [@mulztob])
+- [`no-unused-modules`]: add console message to help debug [#2866]
+- [Refactor] `ExportMap`: make procedures static instead of monkeypatching exportmap ([#2982], thanks [@soryy708])
+- [Refactor] `ExportMap`: separate ExportMap instance from its builder logic ([#2985], thanks [@soryy708])
+- [Docs] [`order`]: Add a quick note on how unbound imports and --fix ([#2640], thanks [@minervabot])
+- [Tests] appveyor -> GHA (run tests on Windows in both pwsh and WSL + Ubuntu) ([#2987], thanks [@joeyguerra])
+- [actions] migrate OSX tests to GHA ([ljharb#37], thanks [@aks-])
+- [Refactor] `exportMapBuilder`: avoid hoisting ([#2989], thanks [@soryy708])
+- [Refactor] `ExportMap`: extract "builder" logic to separate files ([#2991], thanks [@soryy708])
+- [Docs] [`order`]: update the description of the `pathGroupsExcludedImportTypes` option ([#3036], thanks [@liby])
+- [readme] Clarify how to install the plugin ([#2993], thanks [@jwbth])
 
-- Drop support for Node.js v12 ([#11089](https://github.com/tailwindlabs/tailwindcss/pull/11089))
-
-## [3.3.1] - 2023-03-30
+## [2.29.1] - 2023-12-14
 
 ### Fixed
+- [`no-extraneous-dependencies`]: ignore `export type { ... } from '...'` when `includeTypes` is `false` ([#2919], thanks [@Pandemic1617])
+- [`no-unused-modules`]: support export patterns with array destructuring ([#2930], thanks [@ljharb])
+- [Deps] update `tsconfig-paths` ([#2447], thanks [@domdomegg])
 
-- Fix edge case bug when loading a TypeScript config file with webpack ([#10898](https://github.com/tailwindlabs/tailwindcss/pull/10898))
-- Fix variant, `@apply`, and `important` selectors when using `:is()` or `:has()` with pseudo-elements ([#10903](https://github.com/tailwindlabs/tailwindcss/pull/10903))
-- Fix `safelist` config types ([#10901](https://github.com/tailwindlabs/tailwindcss/pull/10901))
-- Fix build errors caused by `@tailwindcss/line-clamp` warning ([#10915](https://github.com/tailwindlabs/tailwindcss/pull/10915), [#10919](https://github.com/tailwindlabs/tailwindcss/pull/10919))
-- Fix "process is not defined" error ([#10919](https://github.com/tailwindlabs/tailwindcss/pull/10919))
-
-## [3.3.0] - 2023-03-27
+## [2.29.0] - 2023-10-22
 
 ### Added
+- TypeScript config: add .cts and .mts extensions ([#2851], thanks [@Zamiell])
+- [`newline-after-import`]: new option `exactCount` and docs update ([#1933], thanks [@anikethsaha] and [@reosarevok])
+- [`newline-after-import`]: fix `exactCount` with `considerComments` false positive, when there is a leading comment ([#2884], thanks [@kinland])
 
-- Support ESM and TypeScript config files ([#10785](https://github.com/tailwindlabs/tailwindcss/pull/10785))
-- Extend default color palette with new 950 shades ([#10879](https://github.com/tailwindlabs/tailwindcss/pull/10879))
-- Add `line-height` modifier support to `font-size` utilities ([#9875](https://github.com/tailwindlabs/tailwindcss/pull/9875))
-- Add support for using variables as arbitrary values without `var(...)` ([#9880](https://github.com/tailwindlabs/tailwindcss/pull/9880), [#9962](https://github.com/tailwindlabs/tailwindcss/pull/9962))
-- Add logical properties support for inline direction ([#10166](https://github.com/tailwindlabs/tailwindcss/pull/10166))
-- Add `hyphens` utilities ([#10071](https://github.com/tailwindlabs/tailwindcss/pull/10071))
-- Add `from-{position}`, `via-{position}` and `to-{position}` utilities ([#10886](https://github.com/tailwindlabs/tailwindcss/pull/10886))
-- Add `list-style-image` utilities ([#10817](https://github.com/tailwindlabs/tailwindcss/pull/10817))
-- Add `caption-side` utilities ([#10470](https://github.com/tailwindlabs/tailwindcss/pull/10470))
-- Add `line-clamp` utilities from `@tailwindcss/line-clamp` to core ([#10768](https://github.com/tailwindlabs/tailwindcss/pull/10768), [#10876](https://github.com/tailwindlabs/tailwindcss/pull/10876), [#10862](https://github.com/tailwindlabs/tailwindcss/pull/10862))
-- Add `delay-0` and `duration-0` utilities ([#10294](https://github.com/tailwindlabs/tailwindcss/pull/10294))
-- Add `justify-normal` and `justify-stretch` utilities ([#10560](https://github.com/tailwindlabs/tailwindcss/pull/10560))
-- Add `content-normal` and `content-stretch` utilities ([#10645](https://github.com/tailwindlabs/tailwindcss/pull/10645))
-- Add `whitespace-break-spaces` utility ([#10729](https://github.com/tailwindlabs/tailwindcss/pull/10729))
-- Add support for configuring default `font-variation-settings` for a `font-family` ([#10034](https://github.com/tailwindlabs/tailwindcss/pull/10034), [#10515](https://github.com/tailwindlabs/tailwindcss/pull/10515))
+## [2.28.1] - 2023-08-18
 
 ### Fixed
-
-- Disallow using multiple selectors in arbitrary variants ([#10655](https://github.com/tailwindlabs/tailwindcss/pull/10655))
-- Sort class lists deterministically for Prettier plugin ([#10672](https://github.com/tailwindlabs/tailwindcss/pull/10672))
-- Ensure CLI builds have a non-zero exit code on failure ([#10703](https://github.com/tailwindlabs/tailwindcss/pull/10703))
-- Ensure module dependencies for value `null`, is an empty `Set` ([#10877](https://github.com/tailwindlabs/tailwindcss/pull/10877))
-- Fix format assumption when resolving module dependencies ([#10878](https://github.com/tailwindlabs/tailwindcss/pull/10878))
+- [`order`]: revert breaking change to single nested group ([#2854], thanks [@yndajas])
 
 ### Changed
+- [Docs] remove duplicate fixable notices in docs ([#2850], thanks [@bmish])
 
-- Mark `rtl` and `ltr` variants as stable and remove warnings ([#10764](https://github.com/tailwindlabs/tailwindcss/pull/10764))
-- Use `inset` instead of `top`, `right`, `bottom`, and `left` properties ([#10765](https://github.com/tailwindlabs/tailwindcss/pull/10765))
-- Make `dark` and `rtl`/`ltr` variants insensitive to DOM order ([#10766](https://github.com/tailwindlabs/tailwindcss/pull/10766))
-- Use `:is` to make important selector option insensitive to DOM order ([#10835](https://github.com/tailwindlabs/tailwindcss/pull/10835))
-
-## [3.2.7] - 2023-02-16
+## [2.28.0] - 2023-07-27
 
 ### Fixed
-
-- Fix use of `:where(.btn)` when matching `!btn` ([#10601](https://github.com/tailwindlabs/tailwindcss/pull/10601))
-- Revert including `outline-color` in `transition` and `transition-colors` by default ([#10604](https://github.com/tailwindlabs/tailwindcss/pull/10604))
-
-## [3.2.6] - 2023-02-08
-
-### Fixed
-
-- Fix installation failing with yarn and pnpm by dropping `oxide-api-shim` ([add1636](https://github.com/tailwindlabs/tailwindcss/commit/add16364b4b1100e1af23ad1ca6900a0b53cbba0))
-
-## [3.2.5] - 2023-02-08
-
-### Added
-
-- Add standalone CLI build for 64-bit Windows on ARM (`node16-win-arm64`) ([#10001](https://github.com/tailwindlabs/tailwindcss/pull/10001))
-
-### Fixed
-
-- Cleanup unused `variantOrder` ([#9829](https://github.com/tailwindlabs/tailwindcss/pull/9829))
-- Fix `foo-[abc]/[def]` not being handled correctly ([#9866](https://github.com/tailwindlabs/tailwindcss/pull/9866))
-- Add container queries plugin to standalone CLI ([#9865](https://github.com/tailwindlabs/tailwindcss/pull/9865))
-- Support renaming of output files by PostCSS plugins in CLI ([#9944](https://github.com/tailwindlabs/tailwindcss/pull/9944))
-- Improve return value of `resolveConfig`, unwrap `ResolvableTo` ([#9972](https://github.com/tailwindlabs/tailwindcss/pull/9972))
-- Clip unbalanced brackets in arbitrary values ([#9973](https://github.com/tailwindlabs/tailwindcss/pull/9973))
-- Don’t reorder webkit scrollbar pseudo elements ([#9991](https://github.com/tailwindlabs/tailwindcss/pull/9991))
-- Deterministic sorting of arbitrary variants ([#10016](https://github.com/tailwindlabs/tailwindcss/pull/10016))
-- Add `data` key to theme types ([#10023](https://github.com/tailwindlabs/tailwindcss/pull/10023))
-- Prevent invalid arbitrary variant selectors from failing the build ([#10059](https://github.com/tailwindlabs/tailwindcss/pull/10059))
-- Properly handle subtraction followed by a variable ([#10074](https://github.com/tailwindlabs/tailwindcss/pull/10074))
-- Fix missing `string[]` in the `theme.dropShadow` types ([#10072](https://github.com/tailwindlabs/tailwindcss/pull/10072))
-- Update list of length units ([#10100](https://github.com/tailwindlabs/tailwindcss/pull/10100))
-- Fix not matching arbitrary properties when closely followed by square brackets ([#10212](https://github.com/tailwindlabs/tailwindcss/pull/10212))
-- Allow direct nesting in `root` or `@layer` nodes ([#10229](https://github.com/tailwindlabs/tailwindcss/pull/10229))
-- Don't prefix classes in arbitrary variants ([#10214](https://github.com/tailwindlabs/tailwindcss/pull/10214))
-- Fix perf regression when checking for changed content ([#10234](https://github.com/tailwindlabs/tailwindcss/pull/10234))
-- Fix missing `blocklist` member in the `Config` type ([#10239](https://github.com/tailwindlabs/tailwindcss/pull/10239))
-- Escape group names in selectors ([#10276](https://github.com/tailwindlabs/tailwindcss/pull/10276))
-- Consider earlier variants before sorting functions ([#10288](https://github.com/tailwindlabs/tailwindcss/pull/10288))
-- Allow variants with slashes ([#10336](https://github.com/tailwindlabs/tailwindcss/pull/10336))
-- Ensure generated CSS is always sorted in the same order for a given set of templates ([#10382](https://github.com/tailwindlabs/tailwindcss/pull/10382))
-- Handle variants when the same class appears multiple times in a selector ([#10397](https://github.com/tailwindlabs/tailwindcss/pull/10397))
-- Handle group/peer variants with quoted strings ([#10400](https://github.com/tailwindlabs/tailwindcss/pull/10400))
-- Parse alpha value from rgba/hsla colors when using variables ([#10429](https://github.com/tailwindlabs/tailwindcss/pull/10429))
-- Sort by `layer` inside `variants` layer ([#10505](https://github.com/tailwindlabs/tailwindcss/pull/10505))
-- Add `--watch=always` option to prevent exit when stdin closes ([#9966](https://github.com/tailwindlabs/tailwindcss/pull/9966))
+- [`no-duplicates`]: remove duplicate identifiers in duplicate imports ([#2577], thanks [@joe-matsec])
+- [`consistent-type-specifier-style`]: fix accidental removal of comma in certain cases ([#2754], thanks [@bradzacher])
+- [Perf] `ExportMap`: Improve `ExportMap.for` performance on larger codebases ([#2756], thanks [@leipert])
+- [`no-extraneous-dependencies`]/TypeScript: do not error when importing inline type from dev dependencies ([#2735], thanks [@andyogo])
+- [`newline-after-import`]/TypeScript: do not error when re-exporting a namespaced import ([#2832], thanks [@laurens-dg])
+- [`order`]: partial fix for [#2687] (thanks [@ljharb])
+- [`no-duplicates`]: Detect across type and regular imports ([#2835], thanks [@benkrejci])
+- [`extensions`]: handle `.` and `..` properly ([#2778], thanks [@benasher44])
+- [`no-unused-modules`]: improve schema (thanks [@ljharb])
+- [`no-unused-modules`]: report error on binding instead of parent export ([#2842], thanks [@Chamion])
 
 ### Changed
+- [Docs] [`no-duplicates`]: fix example schema ([#2684], thanks [@simmo])
+- [Docs] [`group-exports`]: fix syntax highlighting ([#2699], thanks [@devinrhode2])
+- [Docs] [`extensions`]: reference node ESM behavior ([#2748], thanks [@xM8WVqaG])
+- [Refactor] [`exports-last`]: use `array.prototype.findlastindex` (thanks [@ljharb])
+- [Refactor] [`no-anonymous-default-export`]: use `object.fromentries` (thanks [@ljharb])
+- [Refactor] [`no-unused-modules`]: use `array.prototype.flatmap` (thanks [@ljharb])
 
-- Alphabetize `theme` keys in default config ([#9953](https://github.com/tailwindlabs/tailwindcss/pull/9953))
-- Update esbuild to v17 ([#10368](https://github.com/tailwindlabs/tailwindcss/pull/10368))
-- Include `outline-color` in `transition` and `transition-colors` utilities ([#10385](https://github.com/tailwindlabs/tailwindcss/pull/10385))
+## [2.27.5] - 2023-01-16
 
-## [3.2.4] - 2022-11-11
+### Fixed
+- [`order]`: Fix group ranks order when alphabetizing ([#2674], thanks [@Pearce-Ropion])
+
+## [2.27.4] - 2023-01-11
+
+### Fixed
+- `semver` should be a prod dep ([#2668])
+
+## [2.27.3] - 2023-01-11
+
+### Fixed
+- [`no-empty-named-blocks`]: rewrite rule to only check import declarations ([#2666])
+
+## [2.27.2] - 2023-01-11
+
+### Fixed
+- [`no-duplicates`]: do not unconditionally require `typescript` ([#2665])
+
+## [2.27.1] - 2023-01-11
+
+### Fixed
+- `array.prototype.flatmap` should be a prod dep ([#2664], thanks [@cristobal])
+
+## [2.27.0] - 2023-01-11
 
 ### Added
-
-- Add `blocklist` option to prevent generating unwanted CSS ([#9812](https://github.com/tailwindlabs/tailwindcss/pull/9812))
-
-### Fixed
-
-- Fix watching of files on Linux when renames are involved ([#9796](https://github.com/tailwindlabs/tailwindcss/pull/9796))
-- Make sure errors are always displayed when watching for changes ([#9810](https://github.com/tailwindlabs/tailwindcss/pull/9810))
-
-## [3.2.3] - 2022-11-09
-
-### Fixed
-
-- Fixed use of `raw` content in the CLI ([#9773](https://github.com/tailwindlabs/tailwindcss/pull/9773))
-- Pick up changes from files that are both context and content deps ([#9787](https://github.com/tailwindlabs/tailwindcss/pull/9787))
-- Sort pseudo-elements ONLY after classes when using variants and `@apply` ([#9765](https://github.com/tailwindlabs/tailwindcss/pull/9765))
-- Support important utilities in the safelist (pattern must include a `!`) ([#9791](https://github.com/tailwindlabs/tailwindcss/pull/9791))
-
-## [3.2.2] - 2022-11-04
+- [`newline-after-import`]: add `considerComments` option ([#2399], thanks [@pri1311])
+- [`no-cycle`]: add `allowUnsafeDynamicCyclicDependency` option ([#2387], thanks [@GerkinDev])
+- [`no-restricted-paths`]: support arrays for `from` and `target` options ([#2466], thanks [@AdriAt360])
+- [`no-anonymous-default-export`]: add `allowNew` option ([#2505], thanks [@DamienCassou])
+- [`order`]: Add `distinctGroup` option ([#2395], thanks [@hyperupcall])
+- [`no-extraneous-dependencies`]: Add `includeInternal` option ([#2541], thanks [@bdwain])
+- [`no-extraneous-dependencies`]: Add `includeTypes` option ([#2543], thanks [@bdwain])
+- [`order`]: new `alphabetize.orderImportKind` option to sort imports with same path based on their kind (`type`, `typeof`) ([#2544], thanks [@stropho])
+- [`consistent-type-specifier-style`]: add rule ([#2473], thanks [@bradzacher])
+- Add [`no-empty-named-blocks`] rule ([#2568], thanks [@guilhermelimak])
+- [`prefer-default-export`]: add "target" option ([#2602], thanks [@azyzz228])
+- [`no-absolute-path`]: add fixer ([#2613], thanks [@adipascu])
+- [`no-duplicates`]: support inline type import with `inlineTypeImport` option ([#2475], thanks [@snewcomer])
 
 ### Fixed
-
-- Escape special characters in resolved content base paths ([#9650](https://github.com/tailwindlabs/tailwindcss/pull/9650))
-- Don't reuse container for array returning variant functions ([#9644](https://github.com/tailwindlabs/tailwindcss/pull/9644))
-- Exclude non-relevant selectors when generating rules with the important modifier ([#9677](https://github.com/tailwindlabs/tailwindcss/issues/9677))
-- Fix merging of arrays during config resolution ([#9706](https://github.com/tailwindlabs/tailwindcss/issues/9706))
-- Ensure configured `font-feature-settings` are included in Preflight ([#9707](https://github.com/tailwindlabs/tailwindcss/pull/9707))
-- Fix fractional values not being parsed properly inside arbitrary properties ([#9705](https://github.com/tailwindlabs/tailwindcss/pull/9705))
-- Fix incorrect selectors when using `@apply` in selectors with combinators and pseudos ([#9722](https://github.com/tailwindlabs/tailwindcss/pull/9722))
-- Fix cannot read properties of undefined (reading 'modifier') ([#9656](https://github.com/tailwindlabs/tailwindcss/pull/9656), [aa979d6](https://github.com/tailwindlabs/tailwindcss/commit/aa979d645f8bf4108c5fc938d7c0ba085b654c31))
-
-## [3.2.1] - 2022-10-21
-
-### Fixed
-
-- Fix missing `supports` in types ([#9616](https://github.com/tailwindlabs/tailwindcss/pull/9616))
-- Fix missing PostCSS dependencies in the CLI ([#9617](https://github.com/tailwindlabs/tailwindcss/pull/9617))
-- Ensure `micromatch` is a proper CLI dependency ([#9620](https://github.com/tailwindlabs/tailwindcss/pull/9620))
-- Ensure modifier values exist when using a `modifiers` object for `matchVariant` ([ba6551d](https://github.com/tailwindlabs/tailwindcss/commit/ba6551db0f2726461371b4f3c6cd4c7090888504))
-
-## [3.2.0] - 2022-10-19
-
-### Added
-
-- Add new `@config` directive ([#9405](https://github.com/tailwindlabs/tailwindcss/pull/9405))
-- Add new `relative: true` option to resolve content paths relative to the config file ([#9396](https://github.com/tailwindlabs/tailwindcss/pull/9396))
-- Add new `supports-*` variant ([#9453](https://github.com/tailwindlabs/tailwindcss/pull/9453))
-- Add new `min-*` and `max-*` variants ([#9558](https://github.com/tailwindlabs/tailwindcss/pull/9558))
-- Add new `aria-*` variants ([#9557](https://github.com/tailwindlabs/tailwindcss/pull/9557), [#9588](https://github.com/tailwindlabs/tailwindcss/pull/9588))
-- Add new `data-*` variants ([#9559](https://github.com/tailwindlabs/tailwindcss/pull/9559), [#9588](https://github.com/tailwindlabs/tailwindcss/pull/9588))
-- Add new `break-keep` utility for `word-break: keep-all` ([#9393](https://github.com/tailwindlabs/tailwindcss/pull/9393))
-- Add new `collapse` utility for `visibility: collapse` ([#9181](https://github.com/tailwindlabs/tailwindcss/pull/9181))
-- Add new `fill-none` utility for `fill: none` ([#9403](https://github.com/tailwindlabs/tailwindcss/pull/9403))
-- Add new `stroke-none` utility for `stroke: none` ([#9403](https://github.com/tailwindlabs/tailwindcss/pull/9403))
-- Add new `place-content-baseline` utility for `place-content: baseline` ([#9498](https://github.com/tailwindlabs/tailwindcss/pull/9498))
-- Add new `place-items-baseline` utility for `place-items: baseline` ([#9507](https://github.com/tailwindlabs/tailwindcss/pull/9507))
-- Add new `content-baseline` utility for `align-content: baseline` ([#9507](https://github.com/tailwindlabs/tailwindcss/pull/9507))
-- Add support for configuring default `font-feature-settings` for a font family ([#9039](https://github.com/tailwindlabs/tailwindcss/pull/9039))
-- Add standalone CLI build for 32-bit Linux on ARM (`node16-linux-armv7`) ([#9084](https://github.com/tailwindlabs/tailwindcss/pull/9084))
-- Add future flag to disable color opacity utility plugins ([#9088](https://github.com/tailwindlabs/tailwindcss/pull/9088))
-- Add negative value support for `outline-offset` ([#9136](https://github.com/tailwindlabs/tailwindcss/pull/9136))
-- Add support for modifiers to `matchUtilities` ([#9541](https://github.com/tailwindlabs/tailwindcss/pull/9541))
-- Allow negating utilities using `min`/`max`/`clamp` ([#9237](https://github.com/tailwindlabs/tailwindcss/pull/9237))
-- Implement fallback plugins when there is ambiguity between plugins when using arbitrary values ([#9376](https://github.com/tailwindlabs/tailwindcss/pull/9376))
-- Support `sort` function in `matchVariant` ([#9423](https://github.com/tailwindlabs/tailwindcss/pull/9423))
-- Upgrade to `postcss-nested` v6.0 ([#9546](https://github.com/tailwindlabs/tailwindcss/pull/9546))
-
-### Fixed
-
-- Use absolute paths when resolving changed files for resilience against working directory changes ([#9032](https://github.com/tailwindlabs/tailwindcss/pull/9032))
-- Fix ring color utility generation when using `respectDefaultRingColorOpacity` ([#9070](https://github.com/tailwindlabs/tailwindcss/pull/9070))
-- Sort tags before classes when `@apply`-ing a selector with joined classes ([#9107](https://github.com/tailwindlabs/tailwindcss/pull/9107))
-- Remove invalid `outline-hidden` utility ([#9147](https://github.com/tailwindlabs/tailwindcss/pull/9147))
-- Honor the `hidden` attribute on elements in preflight ([#9174](https://github.com/tailwindlabs/tailwindcss/pull/9174))
-- Don't stop watching atomically renamed files ([#9173](https://github.com/tailwindlabs/tailwindcss/pull/9173), [#9215](https://github.com/tailwindlabs/tailwindcss/pull/9215))
-- Fix duplicate utilities issue causing memory leaks ([#9208](https://github.com/tailwindlabs/tailwindcss/pull/9208))
-- Fix `fontFamily` config TypeScript types ([#9214](https://github.com/tailwindlabs/tailwindcss/pull/9214))
-- Handle variants on complex selector utilities ([#9262](https://github.com/tailwindlabs/tailwindcss/pull/9262))
-- Fix shared config mutation issue ([#9294](https://github.com/tailwindlabs/tailwindcss/pull/9294))
-- Fix ordering of parallel variants ([#9282](https://github.com/tailwindlabs/tailwindcss/pull/9282))
-- Handle variants in utility selectors using `:where()` and `:has()` ([#9309](https://github.com/tailwindlabs/tailwindcss/pull/9309))
-- Improve data type analysis for arbitrary values ([#9320](https://github.com/tailwindlabs/tailwindcss/pull/9320))
-- Don't emit generated utilities with invalid uses of theme functions ([#9319](https://github.com/tailwindlabs/tailwindcss/pull/9319))
-- Revert change that only listened for stdin close on TTYs ([#9331](https://github.com/tailwindlabs/tailwindcss/pull/9331))
-- Ignore unset values (like `null` or `undefined`) when resolving the classList for intellisense ([#9385](https://github.com/tailwindlabs/tailwindcss/pull/9385))
-- Improve type checking for formal syntax ([#9349](https://github.com/tailwindlabs/tailwindcss/pull/9349), [#9448](https://github.com/tailwindlabs/tailwindcss/pull/9448))
-- Fix incorrect required `content` key in custom plugin configs ([#9502](https://github.com/tailwindlabs/tailwindcss/pull/9502), [#9545](https://github.com/tailwindlabs/tailwindcss/pull/9545))
-- Fix content path detection on Windows ([#9569](https://github.com/tailwindlabs/tailwindcss/pull/9569))
-- Ensure `--content` is used in the CLI when passed ([#9587](https://github.com/tailwindlabs/tailwindcss/pull/9587))
-
-## [3.1.8] - 2022-08-05
-
-### Fixed
-
-- Don’t prefix classes within reused arbitrary variants ([#8992](https://github.com/tailwindlabs/tailwindcss/pull/8992))
-- Fix usage of alpha values inside single-named colors that are functions ([#9008](https://github.com/tailwindlabs/tailwindcss/pull/9008))
-- Fix `@apply` of user utilities when negative and non-negative versions both exist ([#9027](https://github.com/tailwindlabs/tailwindcss/pull/9027))
-
-## [3.1.7] - 2022-07-29
-
-### Fixed
-
-- Don't rewrite source maps for `@layer` rules ([#8971](https://github.com/tailwindlabs/tailwindcss/pull/8971))
-
-### Added
-
-- Added types for `resolveConfig` ([#8924](https://github.com/tailwindlabs/tailwindcss/pull/8924))
-
-## [3.1.6] - 2022-07-11
-
-### Fixed
-
-- Fix usage on Node 12.x ([b4e637e](https://github.com/tailwindlabs/tailwindcss/commit/b4e637e2e096a9d6f2210efba9541f6fd4f28e56))
-- Handle theme keys with slashes when using `theme()` in CSS ([#8831](https://github.com/tailwindlabs/tailwindcss/pull/8831))
-
-## [3.1.5] - 2022-07-07
-
-### Added
-
-- Support configuring a default `font-weight` for each font size utility ([#8763](https://github.com/tailwindlabs/tailwindcss/pull/8763))
-- Add support for alpha values in safe list ([#8774](https://github.com/tailwindlabs/tailwindcss/pull/8774))
-
-### Fixed
-
-- Improve types to support fallback values in the CSS-in-JS syntax used in plugin APIs ([#8762](https://github.com/tailwindlabs/tailwindcss/pull/8762))
-- Support including `tailwindcss` and `autoprefixer` in `postcss.config.js` in standalone CLI ([#8769](https://github.com/tailwindlabs/tailwindcss/pull/8769))
-- Fix using special-characters as prefixes ([#8772](https://github.com/tailwindlabs/tailwindcss/pull/8772))
-- Don’t prefix classes used within arbitrary variants ([#8773](https://github.com/tailwindlabs/tailwindcss/pull/8773))
-- Add more explicit types for the default theme ([#8780](https://github.com/tailwindlabs/tailwindcss/pull/8780))
-
-## [3.1.4] - 2022-06-21
-
-### Fixed
-
-- Provide default to `<alpha-value>` when using `theme()` ([#8652](https://github.com/tailwindlabs/tailwindcss/pull/8652))
-- Detect arbitrary variants with quotes ([#8687](https://github.com/tailwindlabs/tailwindcss/pull/8687))
-- Don’t add spaces around raw `/` that are preceded by numbers ([#8688](https://github.com/tailwindlabs/tailwindcss/pull/8688))
-
-## [3.1.3] - 2022-06-14
-
-### Fixed
-
-- Fix extraction of multi-word utilities with arbitrary values and quotes ([#8604](https://github.com/tailwindlabs/tailwindcss/pull/8604))
-- Fix casing of import of `corePluginList` type definition ([#8587](https://github.com/tailwindlabs/tailwindcss/pull/8587))
-- Ignore PostCSS nodes returned by `addVariant` ([#8608](https://github.com/tailwindlabs/tailwindcss/pull/8608))
-- Fix missing spaces around arithmetic operators ([#8615](https://github.com/tailwindlabs/tailwindcss/pull/8615))
-- Detect alpha value in CSS `theme()` function when using quotes ([#8625](https://github.com/tailwindlabs/tailwindcss/pull/8625))
-- Fix "Maximum call stack size exceeded" bug ([#8636](https://github.com/tailwindlabs/tailwindcss/pull/8636))
-- Allow functions returning parallel variants to mutate the container ([#8622](https://github.com/tailwindlabs/tailwindcss/pull/8622))
-- Remove text opacity CSS variables from `::marker` ([#8622](https://github.com/tailwindlabs/tailwindcss/pull/8622))
-
-## [3.1.2] - 2022-06-10
-
-### Fixed
-
-- Ensure `\` is a valid arbitrary variant token ([#8576](https://github.com/tailwindlabs/tailwindcss/pull/8576))
-- Enable `postcss-import` in the CLI by default in watch mode ([#8574](https://github.com/tailwindlabs/tailwindcss/pull/8574), [#8580](https://github.com/tailwindlabs/tailwindcss/pull/8580))
-
-## [3.1.1] - 2022-06-09
-
-### Fixed
-
-- Fix candidate extractor regression ([#8558](https://github.com/tailwindlabs/tailwindcss/pull/8558))
-- Split `::backdrop` into separate defaults group ([#8567](https://github.com/tailwindlabs/tailwindcss/pull/8567))
-- Fix postcss plugin type ([#8564](https://github.com/tailwindlabs/tailwindcss/pull/8564))
-- Fix class detection in markdown code fences and slim templates ([#8569](https://github.com/tailwindlabs/tailwindcss/pull/8569))
-
-## [3.1.0] - 2022-06-08
-
-### Fixed
-
-- Types: allow for arbitrary theme values (for 3rd party plugins) ([#7926](https://github.com/tailwindlabs/tailwindcss/pull/7926))
-- Don’t split vars with numbers in them inside arbitrary values ([#8091](https://github.com/tailwindlabs/tailwindcss/pull/8091))
-- Require matching prefix when detecting negatives ([#8121](https://github.com/tailwindlabs/tailwindcss/pull/8121))
-- Handle duplicate At Rules without children ([#8122](https://github.com/tailwindlabs/tailwindcss/pull/8122))
-- Allow arbitrary values with commas in `@apply` ([#8125](https://github.com/tailwindlabs/tailwindcss/pull/8125))
-- Fix intellisense for plugins with multiple `@apply` rules ([#8213](https://github.com/tailwindlabs/tailwindcss/pull/8213))
-- Improve type detection for arbitrary color values ([#8201](https://github.com/tailwindlabs/tailwindcss/pull/8201))
-- Support PostCSS config options in config file in CLI ([#8226](https://github.com/tailwindlabs/tailwindcss/pull/8226))
-- Remove default `[hidden]` style in preflight ([#8248](https://github.com/tailwindlabs/tailwindcss/pull/8248))
-- Only check selectors containing base apply candidates for circular dependencies ([#8222](https://github.com/tailwindlabs/tailwindcss/pull/8222))
-- Rewrite default class extractor ([#8204](https://github.com/tailwindlabs/tailwindcss/pull/8204))
-- Move `important` selector to the front when `@apply`-ing selector-modifying variants in custom utilities ([#8313](https://github.com/tailwindlabs/tailwindcss/pull/8313))
-- Error when registering an invalid custom variant ([#8345](https://github.com/tailwindlabs/tailwindcss/pull/8345))
-- Create tailwind.config.cjs file in ESM package when running init ([#8363](https://github.com/tailwindlabs/tailwindcss/pull/8363))
-- Fix `matchVariant` that use at-rules and placeholders ([#8392](https://github.com/tailwindlabs/tailwindcss/pull/8392))
-- Improve types of the `tailwindcss/plugin` ([#8400](https://github.com/tailwindlabs/tailwindcss/pull/8400))
-- Allow returning parallel variants from `addVariant` or `matchVariant` callback functions ([#8455](https://github.com/tailwindlabs/tailwindcss/pull/8455))
-- Try using local `postcss` installation first in the CLI ([#8270](https://github.com/tailwindlabs/tailwindcss/pull/8270))
-- Allow default ring color to be a function ([#7587](https://github.com/tailwindlabs/tailwindcss/pull/7587))
-- Don't inherit `to` value from parent gradients ([#8489](https://github.com/tailwindlabs/tailwindcss/pull/8489))
-- Remove process dependency from log functions ([#8530](https://github.com/tailwindlabs/tailwindcss/pull/8530))
-- Ensure we can use `@import 'tailwindcss/...'` without node_modules ([#8537](https://github.com/tailwindlabs/tailwindcss/pull/8537))
+- [`order`]: move nested imports closer to main import entry ([#2396], thanks [@pri1311])
+- [`no-restricted-paths`]: fix an error message ([#2466], thanks [@AdriAt360])
+- [`no-restricted-paths`]: use `Minimatch.match` instead of `minimatch` to comply with Windows Native paths ([#2466], thanks [@AdriAt360])
+- [`order`]: require with member expression could not be fixed if alphabetize.order was used ([#2490], thanks [@msvab])
+- [`order`]: leave more space in rankings for consecutive path groups ([#2506], thanks [@Pearce-Ropion])
+- [`no-cycle`]: add ExportNamedDeclaration statements to dependencies ([#2511], thanks [@BenoitZugmeyer])
+- [`dynamic-import-chunkname`]: prevent false report on a valid webpack magic comment ([#2330], thanks [@mhmadhamster])
+- [`export`]: do not error on TS export overloads ([#1590], thanks [@ljharb])
+- [`no-unresolved`], [`extensions`]: ignore type only exports ([#2436], thanks [@Lukas-Kullmann])
+- `ExportMap`: add missing param to function ([#2589], thanks [@Fdawgs])
+- [`no-unused-modules`]: `checkPkgFieldObject` filters boolean fields from checks ([#2598], thanks [@mpint])
+- [`no-cycle`]: accept Flow `typeof` imports, just like `type` ([#2608], thanks [@gnprice])
+- [`no-import-module-exports`]: avoid a false positive for import variables ([#2315], thanks [@BarryThePenguin])
 
 ### Changed
+- [Tests] [`named`]: Run all TypeScript test ([#2427], thanks [@ProdigySim])
+- [readme] note use of typescript in readme `import/extensions` section ([#2440], thanks [@OutdatedVersion])
+- [Docs] [`order`]: use correct default value ([#2392], thanks [@hyperupcall])
+- [meta] replace git.io link in comments with the original URL ([#2444], thanks [@liby])
+- [Docs] remove global install in readme ([#2412], thanks [@aladdin-add])
+- [readme] clarify `eslint-import-resolver-typescript` usage ([#2503], thanks [@JounQin])
+- [Refactor] [`no-cycle`]: Add per-run caching of traversed paths ([#2419], thanks [@nokel81])
+- [Performance] `ExportMap`: add caching after parsing for an ambiguous module ([#2531], thanks [@stenin-nikita])
+- [Docs] [`no-useless-path-segments`]: fix paths ([#2424], thanks [@s-h-a-d-o-w])
+- [Tests] [`no-cycle`]: add passing test cases ([#2438], thanks [@georeith])
+- [Refactor] [`no-extraneous-dependencies`] improve performance using cache ([#2374], thanks [@meowtec])
+- [meta] `CONTRIBUTING.md`: mention inactive PRs ([#2546], thanks [@stropho])
+- [readme] make json for setting groups multiline ([#2570], thanks [@bertyhell])
+- [Tests] [`no-restricted-paths`]: Tests for `import type` statements ([#2459], thanks [@golergka])
+- [Tests] [`no-restricted-paths`]: fix one failing `import type` test case, submitted by [@golergka], thanks [@azyzz228]
+- [Docs] automate docs with eslint-doc-generator ([#2582], thanks [@bmish])
+- [readme] Increase clarity around typescript configuration ([#2588], thanks [@Nfinished])
+- [Docs] update `eslint-doc-generator` to v1.0.0 ([#2605], thanks [@bmish])
+- [Perf] [`no-cycle`], [`no-internal-modules`], [`no-restricted-paths`]: use `anyOf` instead of `oneOf` (thanks [@ljharb], [@remcohaszing])
 
-- Only apply hover styles when supported (future) ([#8394](https://github.com/tailwindlabs/tailwindcss/pull/8394))
-- Respect default ring color opacity (future) ([#8448](https://github.com/tailwindlabs/tailwindcss/pull/8448), [3f4005e](https://github.com/tailwindlabs/tailwindcss/commit/3f4005e833445f7549219eb5ae89728cbb3a2630))
-
-### Added
-
-- Support PostCSS `Document` nodes ([#7291](https://github.com/tailwindlabs/tailwindcss/pull/7291))
-- Add `text-start` and `text-end` utilities ([#6656](https://github.com/tailwindlabs/tailwindcss/pull/6656))
-- Support customizing class name when using `darkMode: 'class'` ([#5800](https://github.com/tailwindlabs/tailwindcss/pull/5800))
-- Add `--poll` option to the CLI ([#7725](https://github.com/tailwindlabs/tailwindcss/pull/7725))
-- Add new `border-spacing` utilities ([#7102](https://github.com/tailwindlabs/tailwindcss/pull/7102))
-- Add `enabled` variant ([#7905](https://github.com/tailwindlabs/tailwindcss/pull/7905))
-- Add TypeScript types for the `tailwind.config.js` file ([#7891](https://github.com/tailwindlabs/tailwindcss/pull/7891))
-- Add `backdrop` variant ([#7924](https://github.com/tailwindlabs/tailwindcss/pull/7924), [#8526](https://github.com/tailwindlabs/tailwindcss/pull/8526))
-- Add `grid-flow-dense` utility ([#8193](https://github.com/tailwindlabs/tailwindcss/pull/8193))
-- Add `mix-blend-plus-lighter` utility ([#8288](https://github.com/tailwindlabs/tailwindcss/pull/8288))
-- Add arbitrary variants ([#8299](https://github.com/tailwindlabs/tailwindcss/pull/8299))
-- Add experimental `matchVariant` API ([#8310](https://github.com/tailwindlabs/tailwindcss/pull/8310), [34fd0fb8](https://github.com/tailwindlabs/tailwindcss/commit/34fd0fb82aa574cddc5c7aa3ad7d1af5e3735e5d))
-- Add `prefers-contrast` media query variants ([#8410](https://github.com/tailwindlabs/tailwindcss/pull/8410))
-- Add opacity support when referencing colors with `theme` function ([#8416](https://github.com/tailwindlabs/tailwindcss/pull/8416))
-- Add `postcss-import` support to the CLI ([#8437](https://github.com/tailwindlabs/tailwindcss/pull/8437))
-- Add `optional` variant ([#8486](https://github.com/tailwindlabs/tailwindcss/pull/8486))
-- Add `<alpha-value>` placeholder support for custom colors ([#8501](https://github.com/tailwindlabs/tailwindcss/pull/8501))
-
-## [3.0.24] - 2022-04-12
-
-### Fixed
-
-- Prevent nesting plugin from breaking other plugins ([#7563](https://github.com/tailwindlabs/tailwindcss/pull/7563))
-- Recursively collapse adjacent rules ([#7565](https://github.com/tailwindlabs/tailwindcss/pull/7565))
-- Preserve source maps for generated CSS ([#7588](https://github.com/tailwindlabs/tailwindcss/pull/7588))
-- Split box shadows on top-level commas only ([#7479](https://github.com/tailwindlabs/tailwindcss/pull/7479))
-- Use local user CSS cache for `@apply` ([#7524](https://github.com/tailwindlabs/tailwindcss/pull/7524))
-- Invalidate context when main CSS changes ([#7626](https://github.com/tailwindlabs/tailwindcss/pull/7626))
-- Only add `!` to selector class matching template candidate when using important modifier with multi-class selectors ([#7664](https://github.com/tailwindlabs/tailwindcss/pull/7664))
-- Correctly parse and prefix animation names with dots ([#7163](https://github.com/tailwindlabs/tailwindcss/pull/7163))
-- Fix extraction from template literal/function with array ([#7481](https://github.com/tailwindlabs/tailwindcss/pull/7481))
-- Don't output unparsable arbitrary values ([#7789](https://github.com/tailwindlabs/tailwindcss/pull/7789))
-- Fix generation of `div:not(.foo)` if `.foo` is never defined ([#7815](https://github.com/tailwindlabs/tailwindcss/pull/7815))
-- Allow for custom properties in `rgb`, `rgba`, `hsl` and `hsla` colors ([#7933](https://github.com/tailwindlabs/tailwindcss/pull/7933))
-- Remove autoprefixer as explicit peer-dependency to avoid invalid warnings in situations where it isn't actually needed ([#7949](https://github.com/tailwindlabs/tailwindcss/pull/7949))
-- Ensure the `percentage` data type is validated correctly ([#8015](https://github.com/tailwindlabs/tailwindcss/pull/8015))
-- Make sure `font-weight` is inherited by form controls in all browsers ([#8078](https://github.com/tailwindlabs/tailwindcss/pull/8078))
-
-### Changed
-
-- Replace `chalk` with `picocolors` ([#6039](https://github.com/tailwindlabs/tailwindcss/pull/6039))
-- Replace `cosmiconfig` with `lilconfig` ([#6039](https://github.com/tailwindlabs/tailwindcss/pull/6038))
-- Update `cssnano` to avoid removing empty variables when minifying ([#7818](https://github.com/tailwindlabs/tailwindcss/pull/7818))
-
-## [3.0.23] - 2022-02-16
-
-### Fixed
-
-- Remove opacity variables from `:visited` pseudo class ([#7458](https://github.com/tailwindlabs/tailwindcss/pull/7458))
-- Support arbitrary values + calc + theme with quotes ([#7462](https://github.com/tailwindlabs/tailwindcss/pull/7462))
-- Don't duplicate layer output when scanning content with variants + wildcards ([#7478](https://github.com/tailwindlabs/tailwindcss/pull/7478))
-- Implement `getClassOrder` instead of `sortClassList` ([#7459](https://github.com/tailwindlabs/tailwindcss/pull/7459))
-
-## [3.0.22] - 2022-02-11
-
-### Fixed
-
-- Temporarily move `postcss` to dependencies ([#7424](https://github.com/tailwindlabs/tailwindcss/pull/7424))
-
-## [3.0.21] - 2022-02-10
-
-### Fixed
-
-- Move prettier plugin to dev dependencies ([#7418](https://github.com/tailwindlabs/tailwindcss/pull/7418))
-
-## [3.0.20] - 2022-02-10
+## [2.26.0] - 2022-04-05
 
 ### Added
-
-- Expose `context.sortClassList(classes)` ([#7412](https://github.com/tailwindlabs/tailwindcss/pull/7412))
-
-## [3.0.19] - 2022-02-07
-
-### Fixed
-
-- Fix preflight border color fallback ([#7288](https://github.com/tailwindlabs/tailwindcss/pull/7288))
-- Correctly parse shadow lengths without a leading zero ([#7289](https://github.com/tailwindlabs/tailwindcss/pull/7289))
-- Don't crash when scanning extremely long class candidates ([#7331](https://github.com/tailwindlabs/tailwindcss/pull/7331))
-- Use less hacky fix for URLs detected as custom properties ([#7275](https://github.com/tailwindlabs/tailwindcss/pull/7275))
-- Correctly generate negative utilities when dash is before the prefix ([#7295](https://github.com/tailwindlabs/tailwindcss/pull/7295))
-- Detect prefixed negative utilities in the safelist ([#7295](https://github.com/tailwindlabs/tailwindcss/pull/7295))
-
-## [3.0.18] - 2022-01-28
+- [`no-named-default`], [`no-default-export`], [`prefer-default-export`], [`no-named-export`], [`export`], [`named`], [`namespace`], [`no-unused-modules`]: support arbitrary module namespace names ([#2358], thanks [@sosukesuzuki])
+- [`no-dynamic-require`]: support dynamic import with espree ([#2371], thanks [@sosukesuzuki])
+- [`no-relative-packages`]: add fixer ([#2381], thanks [@forivall])
 
 ### Fixed
+- [`default`]: `typescript-eslint-parser`: avoid a crash on exporting as namespace (thanks [@ljharb])
+- [`export`]/TypeScript: false positive for typescript namespace merging ([#1964], thanks [@magarcia])
+- [`no-duplicates`]: ignore duplicate modules in different TypeScript module declarations ([#2378], thanks [@remcohaszing])
+- [`no-unused-modules`]: avoid a crash when processing re-exports ([#2388], thanks [@ljharb])
 
-- Fix `@apply` order regression (in `addComponents`, `addUtilities`, ...) ([#7232](https://github.com/tailwindlabs/tailwindcss/pull/7232))
-- Quick fix for incorrect arbitrary properties when using URLs ([#7252](https://github.com/tailwindlabs/tailwindcss/pull/7252))
+### Changed
+- [Tests] [`no-nodejs-modules`]: add tests for node protocol URL ([#2367], thanks [@sosukesuzuki])
+- [Tests] [`default`], [`no-anonymous-default-export`], [`no-mutable-exports`], [`no-named-as-default-member`], [`no-named-as-default`]: add tests for arbitrary module namespace names ([#2358], thanks [@sosukesuzuki])
+- [Docs] [`no-unresolved`]: Fix RegExp escaping in readme ([#2332], thanks [@stephtr])
+- [Refactor] [`namespace`]: try to improve performance ([#2340], thanks [@ljharb])
+- [Docs] make rule doc titles consistent ([#2393], thanks [@TheJaredWilcurt])
+- [Docs] [`order`]: TS code examples should use TS code blocks ([#2411], thanks [@MM25Zamanian])
+- [Docs] [`no-unresolved`]: fix link ([#2417], thanks [@kylemh])
 
-## [3.0.17] - 2022-01-26
-
-### Fixed
-
-- Remove false positive warning in CLI when using the `--content` option ([#7220](https://github.com/tailwindlabs/tailwindcss/pull/7220))
-
-## [3.0.16] - 2022-01-24
-
-### Fixed
-
-- Ensure to transpile the PostCSS Nesting plugin (tailwindcss/nesting) ([#7080](https://github.com/tailwindlabs/tailwindcss/pull/7080))
-- Improve various warnings ([#7118](https://github.com/tailwindlabs/tailwindcss/pull/7118))
-- Fix grammatical mistake ([cca5a38](https://github.com/tailwindlabs/tailwindcss/commit/cca5a3804e1d3ee0214491921e1aec35bf62a813))
-
-## [3.0.15] - 2022-01-15
+## [2.25.4] - 2022-01-02
 
 ### Fixed
+- `importType`: avoid crashing on a non-string' ([#2305], thanks [@ljharb])
+- [`first`]: prevent crash when parsing angular templates ([#2210], thanks [@ljharb])
+- `importType`: properly resolve `@/*`-aliased imports as internal ([#2334], thanks [@ombene])
+- [`named`]/`ExportMap`: handle named imports from CJS modules that use dynamic import ([#2341], thanks [@ludofischer])
 
-- Temporarily remove optional chaining in nesting plugin ([#7077](https://github.com/tailwindlabs/tailwindcss/pull/7077))
+### Changed
+- [`no-default-import`]: report on the token "default" instead of the entire node ([#2299], thanks [@pmcelhaney])
+- [Docs] [`order`]: Remove duplicate mention of default ([#2280], thanks [@johnthagen])
+- [Deps] update `eslint-module-utils`
 
-## [3.0.14] - 2022-01-14
+## [2.25.3] - 2021-11-09
+
+### Fixed
+- [`extensions`]: ignore unresolveable type-only imports ([#2270], [#2271], thanks [@jablko])
+- `importType`: fix `isExternalModule` calculation ([#2282], thanks [@mx-bernhard])
+- [`no-import-module-exports`]: avoid false positives with a shadowed `module` or `exports` ([#2297], thanks [@ljharb])
+
+### Changed
+- [Docs] [`order`]: add type to the default groups ([#2272], thanks [@charpeni])
+- [readme] Add note to TypeScript docs to install appropriate resolver ([#2279], thanks [@johnthagen])
+- [Refactor] `importType`: combine redundant `isScoped` and `isScopedModule` (thanks [@ljharb])
+- [Docs] HTTP => HTTPS ([#2287], thanks [@Schweinepriester])
+
+## [2.25.2] - 2021-10-12
+
+### Fixed
+- [Deps] update `eslint-module-utils` for real this time ([#2255], thanks [@ljharb])
+
+## [2.25.1] - 2021-10-11
+
+### Fixed
+- [Deps] update `eslint-module-utils`
+
+## [2.25.0] - 2021-10-11
 
 ### Added
-
-- Show warnings for invalid content config ([#7065](https://github.com/tailwindlabs/tailwindcss/pull/7065))
-
-### Fixed
-
-- Only emit utility/component variants when those layers exist ([#7066](https://github.com/tailwindlabs/tailwindcss/pull/7066))
-- Ensure nesting plugins can receive options ([#7016](https://github.com/tailwindlabs/tailwindcss/pull/7016))
-
-## [3.0.13] - 2022-01-11
+- Support `eslint` v8 ([#2191], thanks [@ota-meshi])
+- [`no-unresolved`]: add `caseSensitiveStrict` option ([#1262], thanks [@sergei-startsev])
+- [`no-unused-modules`]: add eslint v8 support ([#2194], thanks [@coderaiser])
+- [`no-restricted-paths`]: add/restore glob pattern support ([#2219], thanks [@stropho])
+- [`no-unused-modules`]: support dynamic imports ([#1660], [#2212], thanks [@maxkomarychev], [@aladdin-add], [@Hypnosphi])
 
 ### Fixed
+- [`no-unresolved`]: ignore type-only imports ([#2220], thanks [@jablko])
+- [`order`]: fix sorting imports inside TypeScript module declarations ([#2226], thanks [@remcohaszing])
+- [`default`], `ExportMap`: Resolve extended TypeScript configuration files ([#2240], thanks [@mrmckeb])
 
-- Fix consecutive builds with at apply producing different CSS ([#6999](https://github.com/tailwindlabs/tailwindcss/pull/6999))
+### Changed
+- [Refactor] switch to an internal replacement for `pkg-up` and `read-pkg-up` ([#2047], thanks [@mgwalker])
+- [patch] TypeScript config: remove `.d.ts` from [`import/parsers` setting] and [`import/extensions` setting] ([#2220], thanks [@jablko])
+- [Refactor] [`no-unresolved`], [`no-extraneous-dependencies`]: moduleVisitor usage ([#2233], thanks [@jablko])
 
-## [3.0.12] - 2022-01-07
-
-### Fixed
-
-- Allow use of falsy values in theme config ([#6917](https://github.com/tailwindlabs/tailwindcss/pull/6917))
-- Ensure we can apply classes that are grouped with non-class selectors ([#6922](https://github.com/tailwindlabs/tailwindcss/pull/6922))
-- Improve standalone CLI compatibility on Linux by switching to the `linuxstatic` build target ([#6914](https://github.com/tailwindlabs/tailwindcss/pull/6914))
-- Ensure `@apply` works consistently with or without `@layer` ([#6938](https://github.com/tailwindlabs/tailwindcss/pull/6938))
-- Only emit defaults when using base layer ([#6926](https://github.com/tailwindlabs/tailwindcss/pull/6926))
-- Emit plugin defaults regardless of usage ([#6926](https://github.com/tailwindlabs/tailwindcss/pull/6926))
-- Move default border color back to preflight ([#6926](https://github.com/tailwindlabs/tailwindcss/pull/6926))
-- Change `experimental.optimizeUniversalDefaults` to only work with `@tailwind base` ([#6926](https://github.com/tailwindlabs/tailwindcss/pull/6926))
-
-## [3.0.11] - 2022-01-05
+## [2.24.2] - 2021-08-24
 
 ### Fixed
+- [`named`], [`namespace`]: properly handle ExportAllDeclarations ([#2199], thanks [@ljharb])
 
-- Preserve casing of CSS variables added by plugins ([#6888](https://github.com/tailwindlabs/tailwindcss/pull/6888))
-- Ignore content paths that are passed in but don't actually exist ([#6901](https://github.com/tailwindlabs/tailwindcss/pull/6901))
-- Revert change that applies Tailwind's defaults in isolated environments like CSS modules ([9fdc391](https://github.com/tailwindlabs/tailwindcss/commit/9fdc391d4ff93e7e350f5ce439060176b1f0162f))
-
-## [3.0.10] - 2022-01-04
+## [2.24.1] - 2021-08-19
 
 ### Fixed
+- `ExportMap`: Add default export when esModuleInterop is true and anything is exported ([#2184], thanks [@Maxim-Mazurok])
+- [`named`], [`namespace`]: properly set reexports on `export * as … from` ([#1998], [#2161], thanks [@ljharb])
+- [`no-duplicates`]: correctly handle case of mixed default/named type imports ([#2149], thanks [@GoodForOneFare], [@nwalters512])
+- [`no-duplicates`]: avoid crash with empty `import type {}` ([#2201], thanks [@ljharb])
 
-- Fix `@apply` in files without `@tailwind` directives ([#6580](https://github.com/tailwindlabs/tailwindcss/pull/6580), [#6875](https://github.com/tailwindlabs/tailwindcss/pull/6875))
-- CLI: avoid unnecessary writes to output files ([#6550](https://github.com/tailwindlabs/tailwindcss/pull/6550))
+### Changed
+- [Docs] `max-dependencies`: 📖 Document `ignoreTypeImports` option ([#2196], thanks [@himynameisdave])
+
+## [2.24.0] - 2021-08-08
 
 ### Added
-
-- Allow piping data into the CLI ([#6876](https://github.com/tailwindlabs/tailwindcss/pull/6876))
-
-## [3.0.9] - 2022-01-03
-
-### Fixed
-
-- Improve `DEBUG` flag ([#6797](https://github.com/tailwindlabs/tailwindcss/pull/6797), [#6804](https://github.com/tailwindlabs/tailwindcss/pull/6804))
-- Ensure we can use `<` and `>` characters in modifiers ([#6851](https://github.com/tailwindlabs/tailwindcss/pull/6851))
-- Validate `theme()` works in arbitrary values ([#6852](https://github.com/tailwindlabs/tailwindcss/pull/6852))
-- Properly detect `theme()` value usage in arbitrary properties ([#6854](https://github.com/tailwindlabs/tailwindcss/pull/6854))
-- Improve collapsing of duplicate declarations ([#6856](https://github.com/tailwindlabs/tailwindcss/pull/6856))
-- Remove support for `TAILWIND_MODE=watch` ([#6858](https://github.com/tailwindlabs/tailwindcss/pull/6858))
-
-## [3.0.8] - 2021-12-28
+- [`no-dynamic-require`]: add option `esmodule` ([#1223], thanks [@vikr01])
+- [`named`]: add `commonjs` option ([#1222], thanks [@vikr01])
+- [`no-namespace`]: Add `ignore` option ([#2112], thanks [@aberezkin])
+- [`max-dependencies`]: add option `ignoreTypeImports` ([#1847], thanks [@rfermann])
 
 ### Fixed
+- [`no-duplicates`]: ensure autofix avoids excessive newlines ([#2028], thanks [@ertrzyiks])
+- [`extensions`]: avoid crashing on partially typed import/export statements ([#2118], thanks [@ljharb])
+- [`no-extraneous-dependencies`]: add ESM intermediate package.json support ([#2121], thanks [@paztis])
+- Use `context.getPhysicalFilename()` when available (ESLint 7.28+) ([#2160], thanks [@pmcelhaney])
+- [`extensions`]/`importType`: fix isScoped treating @/abc as scoped module ([#2146], thanks [@rperello])
 
-- Reduce specificity of `abbr` rule in preflight ([#6671](https://github.com/tailwindlabs/tailwindcss/pull/6671))
-- Support HSL with hue units in arbitrary values ([#6726](https://github.com/tailwindlabs/tailwindcss/pull/6726))
-- Add `node16-linux-arm64` target for standalone CLI ([#6693](https://github.com/tailwindlabs/tailwindcss/pull/6693))
+### Changed
+- [Docs] [`extensions`]: improved cases for using `@/...` ([#2140], thanks [@wenfangdu])
+- [Docs] [`extensions`]: removed incorrect cases ([#2138], thanks [@wenfangdu])
+- [Tests] [`order`]: add tests for `pathGroupsExcludedImportTypes: ['type']` ([#2158], thanks [@atav32])
+- [Docs] [`order`]:  improve the documentation for the `pathGroupsExcludedImportTypes` option ([#2156], thanks [@liby])
+- [Tests] [`no-cycle`]: Restructure test files ([#1517], thanks [@soryy708])
+- [Docs] add description how to use plugin with yarn berry ([#2179], thanks [@KostyaZgara])
 
-## [3.0.7] - 2021-12-17
-
-### Fixed
-
-- Don't mutate custom color palette when overriding per-plugin colors ([#6546](https://github.com/tailwindlabs/tailwindcss/pull/6546))
-- Improve circular dependency detection when using `@apply` ([#6588](https://github.com/tailwindlabs/tailwindcss/pull/6588))
-- Only generate variants for non-`user` layers ([#6589](https://github.com/tailwindlabs/tailwindcss/pull/6589))
-- Properly extract classes with arbitrary values in arrays and classes followed by escaped quotes ([#6590](https://github.com/tailwindlabs/tailwindcss/pull/6590))
-- Improve jsx interpolation candidate matching ([#6593](https://github.com/tailwindlabs/tailwindcss/pull/6593))
-- Ensure `@apply` of a rule inside an AtRule works ([#6594](https://github.com/tailwindlabs/tailwindcss/pull/6594))
-
-## [3.0.6] - 2021-12-16
+## [2.23.4] - 2021-05-29
 
 ### Fixed
+- [`no-import-module-exports`]: Don't crash if packages have no entrypoint ([#2099], thanks [@eps1lon])
+- [`no-extraneous-dependencies`]: fix package name algorithm ([#2097], thanks [@paztis])
 
-- Support square bracket notation in paths ([#6519](https://github.com/tailwindlabs/tailwindcss/pull/6519))
-- Ensure all plugins are executed for a given candidate ([#6540](https://github.com/tailwindlabs/tailwindcss/pull/6540))
-
-## [3.0.5] - 2021-12-15
-
-### Fixed
-
-- Revert: add `li` to list-style reset ([9777562d](https://github.com/tailwindlabs/tailwindcss/commit/9777562da37ee631bbf77374c0d14825f09ef9af))
-
-## [3.0.4] - 2021-12-15
+## [2.23.3] - 2021-05-21
 
 ### Fixed
+- [`no-restricted-paths`]: fix false positive matches ([#2090], thanks [@malykhinvi])
+- [`no-cycle`]: ignore imports where imported file only imports types of importing file ([#2083], thanks [@cherryblossom000])
+- [`no-cycle`]: fix false negative when file imports a type after importing a value in Flow ([#2083], thanks [@cherryblossom000])
+- [`order`]: restore default behavior unless `type` is in groups ([#2087], thanks [@grit96])
 
-- Insert always-on defaults layer in correct spot ([#6526](https://github.com/tailwindlabs/tailwindcss/pull/6526))
+### Changed
+- [Docs] Add [`no-relative-packages`] to list of to the list of rules ([#2075], thanks [@arvigeus])
 
-## [3.0.3] - 2021-12-15
+## [2.23.2] - 2021-05-15
+
+### Changed
+- [meta] add `safe-publish-latest`; use `prepublishOnly` script for npm 7+
+
+## [2.23.1] - 2021-05-14
+
+### Fixed
+- [`newline-after-import`]: fix crash with `export {}` syntax ([#2063], [#2056], thanks [@ljharb])
+- `ExportMap`: do not crash when tsconfig lacks `.compilerOptions` ([#2067], thanks [@ljharb])
+- [`order`]: fix alphabetical sorting ([#2071], thanks [@grit96])
+
+## [2.23.0] - 2021-05-13
 
 ### Added
-
-- Warn about invalid globs in `content` ([#6449](https://github.com/tailwindlabs/tailwindcss/pull/6449))
-- Add standalone tailwindcss CLI ([#6506](https://github.com/tailwindlabs/tailwindcss/pull/6506))
-- Add `li` to list-style reset ([00f60e6](https://github.com/tailwindlabs/tailwindcss/commit/00f60e61013c6e4e3419e4b699371a13eb30b75d))
-
-### Fixed
-
-- Don't output unparsable values ([#6469](https://github.com/tailwindlabs/tailwindcss/pull/6469))
-- Fix text decoration utilities from overriding the new text decoration color/style/thickness utilities when used with a modifier ([#6378](https://github.com/tailwindlabs/tailwindcss/pull/6378))
-- Move defaults to their own always-on layer ([#6500](https://github.com/tailwindlabs/tailwindcss/pull/6500))
-- Support negative values in safelist patterns ([#6480](https://github.com/tailwindlabs/tailwindcss/pull/6480))
-
-## [3.0.2] - 2021-12-13
+- [`no-commonjs`]: Also detect require calls with expressionless template literals: ``` require(`x`) ``` ([#1958], thanks [@FloEdelmann])
+- [`no-internal-modules`]: Add `forbid` option ([#1846], thanks [@guillaumewuip])
+- add [`no-relative-packages`] ([#1860], [#966], thanks [@tapayne88] [@panrafal])
+- add [`no-import-module-exports`] rule: report import declarations with CommonJS exports ([#804], thanks [@kentcdodds] and [@ttmarek])
+- [`no-unused-modules`]: Support destructuring assignment for `export`. ([#1997], thanks [@s-h-a-d-o-w])
+- [`order`]: support type imports ([#2021], thanks [@grit96])
+- [`order`]: Add `warnOnUnassignedImports` option to enable warnings for out of order unassigned imports ([#1990], thanks [@hayes])
 
 ### Fixed
+- [`export`]/TypeScript: properly detect export specifiers as children of a TS module block ([#1889], thanks [@andreubotella])
+- [`order`]: ignore non-module-level requires ([#1940], thanks [@golopot])
+- [`no-webpack-loader-syntax`]/TypeScript: avoid crash on missing name ([#1947], thanks [@leonardodino])
+- [`no-extraneous-dependencies`]: Add package.json cache ([#1948], thanks [@fa93hws])
+- [`prefer-default-export`]: handle empty array destructuring ([#1965], thanks [@ljharb])
+- [`no-unused-modules`]: make type imports mark a module as used (fixes [#1924]) ([#1974], thanks [@cherryblossom000])
+- [`no-cycle`]: fix perf regression ([#1944], thanks [@Blasz])
+- [`first`]: fix handling of `import = require` ([#1963], thanks [@MatthiasKunnen])
+- [`no-cycle`]/[`extensions`]: fix isExternalModule usage ([#1696], thanks [@paztis])
+- [`extensions`]/[`no-cycle`]/[`no-extraneous-dependencies`]: Correct module real path resolution ([#1696], thanks [@paztis])
+- [`no-named-default`]: ignore Flow import type and typeof ([#1983], thanks [@christianvuerings])
+- [`no-extraneous-dependencies`]: Exclude flow `typeof` imports ([#1534], thanks [@devongovett])
+- [`newline-after-import`]: respect decorator annotations ([#1985], thanks [@lilling])
+- [`no-restricted-paths`]: enhance performance for zones with `except` paths ([#2022], thanks [@malykhinvi])
+- [`no-unresolved`]: check import() ([#2026], thanks [@aladdin-add])
 
-- Temporarily disable optimize universal defaults, fixes issue with transforms/filters/rings not being `@apply`-able in CSS modules/Svelte components/Vue components ([#6461](https://github.com/tailwindlabs/tailwindcss/pull/6461))
+### Changed
+- [Generic Import Callback] Make callback for all imports once in rules ([#1237], thanks [@ljqx])
+- [Docs] [`no-named-as-default`]: add semicolon ([#1897], thanks [@bicstone])
+- [Docs] [`no-extraneous-dependencies`]: correct peerDependencies option default to `true` ([#1993], thanks [@dwardu])
+- [Docs] [`order`]: Document options required to match ordering example ([#1992], thanks [@silviogutierrez])
+- [Tests] [`no-unresolved`]: add tests for `import()` ([#2012], thanks [@davidbonnet])
+- [Docs] Add import/recommended ruleset to README ([#2034], thanks [@edemaine])
 
-## [3.0.1] - 2021-12-10
+## [2.22.1] - 2020-09-27
 
 ### Fixed
+- [`default`]/TypeScript: avoid crash on `export =` with a MemberExpression ([#1841], thanks [@ljharb])
+- [`extensions`]/importType: Fix @/abc being treated as scoped module ([#1854], thanks [@3nuc])
+- allow using rest operator in named export ([#1878], thanks [@foray1010])
+- [`dynamic-import-chunkname`]: allow single quotes to match Webpack support ([#1848], thanks [@straub])
 
-- Ensure complex variants with multiple classes work ([#6311](https://github.com/tailwindlabs/tailwindcss/pull/6311))
-- Re-add `default` interop to public available functions ([#6348](https://github.com/tailwindlabs/tailwindcss/pull/6348))
-- Detect circular dependencies when using `@apply` ([#6365](https://github.com/tailwindlabs/tailwindcss/pull/6365))
-- Fix defaults optimization when vendor prefixes are involved ([#6369](https://github.com/tailwindlabs/tailwindcss/pull/6369))
+### Changed
+- [`export`]: add tests for a name collision with `export * from` ([#1704], thanks [@tomprats])
 
-## [3.0.0] - 2021-12-09
-
-### Fixed
-
-- Enforce the order of some variants (like `before` and `after`) ([#6018](https://github.com/tailwindlabs/tailwindcss/pull/6018))
+## [2.22.0] - 2020-06-26
 
 ### Added
+- [`no-unused-modules`]: consider exported TypeScript interfaces, types and enums ([#1819], thanks [@nicolashenry])
+- [`no-cycle`]: allow `maxDepth` option to be `"∞"` (thanks [@ljharb])
 
-- Add `placeholder` variant ([#6106](https://github.com/tailwindlabs/tailwindcss/pull/6106))
-- Add composable `touch-action` utilities ([#6115](https://github.com/tailwindlabs/tailwindcss/pull/6115))
-- Add support for "arbitrary properties" ([#6161](https://github.com/tailwindlabs/tailwindcss/pull/6161))
-- Add `portrait` and `landscape` variants ([#6046](https://github.com/tailwindlabs/tailwindcss/pull/6046))
-- Add `text-decoration-style`, `text-decoration-thickness`, and `text-underline-offset` utilities ([#6004](https://github.com/tailwindlabs/tailwindcss/pull/6004))
-- Add `menu` reset to preflight ([#6213](https://github.com/tailwindlabs/tailwindcss/pull/6213))
-- Allow `0` as a valid `length` value ([#6233](https://github.com/tailwindlabs/tailwindcss/pull/6233), [#6259](https://github.com/tailwindlabs/tailwindcss/pull/6259))
-- Add CSS functions to data types ([#6258](https://github.com/tailwindlabs/tailwindcss/pull/6258))
-- Support negative values for `scale-*` utilities ([c48e629](https://github.com/tailwindlabs/tailwindcss/commit/c48e629955585ad18dadba9f470fda59cc448ab7))
-- Improve `length` data type, by validating each value individually ([#6283](https://github.com/tailwindlabs/tailwindcss/pull/6283))
-
-### Changed
-
-- Deprecate `decoration-slice` and `decoration-break` in favor `box-decoration-slice` and `box-decoration-break` _(non-breaking)_ ([#6004](https://github.com/tailwindlabs/tailwindcss/pull/6004))
-
-## [3.0.0-alpha.2] - 2021-11-08
+### Fixed
+- [`order`]/TypeScript: properly support `import = object` expressions ([#1823], thanks [@manuth])
+- [`no-extraneous-dependencies`]/TypeScript: do not error when importing type from dev dependencies ([#1820], thanks [@fernandopasik])
+- [`default`]: avoid crash with `export =` ([#1822], thanks [@AndrewLeedham])
+- [`order`]/[`newline-after-import`]: ignore TypeScript's "export import object" ([#1830], thanks [@be5invis])
+- [`dynamic-import-chunkname`]/TypeScript: supports `@typescript-eslint/parser` ([#1833], thanks [@noelebrun])
+- [`order`]/TypeScript: ignore ordering of object imports ([#1831], thanks [@manuth])
+- [`namespace`]: do not report on shadowed import names ([#518], thanks [@ljharb])
+- [`export`]: avoid warning on `export * as` non-conflicts ([#1834], thanks [@ljharb])
 
 ### Changed
+- [`no-extraneous-dependencies`]: add tests for importing types ([#1824], thanks [@taye])
+- [docs] [`no-default-export`]: Fix docs url ([#1836], thanks [@beatrizrezener])
+- [docs] [`imports-first`]: deprecation info and link to `first` docs ([#1835], thanks [@beatrizrezener])
 
-- Don't use pointer cursor on disabled buttons by default ([#5772](https://github.com/tailwindlabs/tailwindcss/pull/5772))
-- Set default content value in preflight instead of within each before/after utility ([#5820](https://github.com/tailwindlabs/tailwindcss/pull/5820))
-- Remove `prefix` as a function ([#5829](https://github.com/tailwindlabs/tailwindcss/pull/5829))
+## [2.21.2] - 2020-06-09
+
+### Fixed
+- [`order`]: avoid a crash on TypeScript’s `export import` syntax ([#1808], thanks [@ljharb])
+- [`newline-after-import`]: consider TypeScript `import =` syntax' ([#1811], thanks [@ljharb])
+- [`no-internal-modules`]: avoid a crash on a named export declaration ([#1814], thanks [@ljharb])
+
+## [2.21.1] - 2020-06-07
+
+### Fixed
+- TypeScript: [`import/named`]: avoid requiring `typescript` when not using TS ([#1805], thanks [@ljharb])
+
+## [2.21.0] - 2020-06-07
 
 ### Added
-
-- Add `flex-basis` utilities ([#5671](https://github.com/tailwindlabs/tailwindcss/pull/5671))
-- Make negative values a first-class feature ([#5709](https://github.com/tailwindlabs/tailwindcss/pull/5709))
-- Add `fit-content` values for `min/max-width/height` utilities ([#5638](https://github.com/tailwindlabs/tailwindcss/pull/5638))
-- Add `min/max-content` values for `min/max-height` utilities ([#5729](https://github.com/tailwindlabs/tailwindcss/pull/5729))
-- Add all standard `cursor-*` values by default ([#5734](https://github.com/tailwindlabs/tailwindcss/pull/5734))
-- Add `grow-*` and `shrink-*` utilities, deprecate `flex-grow-*` and `flex-shrink-*` ([#5733](https://github.com/tailwindlabs/tailwindcss/pull/5733))
-- Add `text-decoration-color` utilities ([#5760](https://github.com/tailwindlabs/tailwindcss/pull/5760))
-- Add new declarative `addVariant` API ([#5809](https://github.com/tailwindlabs/tailwindcss/pull/5809))
-- Add first-class `print` variant for targeting printed media ([#5885](https://github.com/tailwindlabs/tailwindcss/pull/5885))
-- Add `outline-style`, `outline-color`, `outline-width` and `outline-offset` utilities ([#5887](https://github.com/tailwindlabs/tailwindcss/pull/5887))
-- Add full color palette for `fill-*` and `stroke-*` utilities (#5933[](https://github.com/tailwindlabs/tailwindcss/pull/5933))
-- Add composable API for colored box shadows ([#5979](https://github.com/tailwindlabs/tailwindcss/pull/5979))
+- [`import/default`]: support default export in TSExportAssignment ([#1528], thanks [@joaovieira])
+- [`no-cycle`]: add `ignoreExternal` option ([#1681], thanks [@sveyret])
+- [`order`]: Add support for TypeScript's "import equals"-expressions ([#1785], thanks [@manuth])
+- [`import/default`]: support default export in TSExportAssignment ([#1689], thanks [@Maxim-Mazurok])
+- [`no-restricted-paths`]: add custom message support ([#1802], thanks [@malykhinvi])
 
 ### Fixed
-
-- Configure chokidar's `awaitWriteFinish` setting to avoid occasional stale builds on Windows ([#5774](https://github.com/tailwindlabs/tailwindcss/pull/5774))
-- Fix CLI `--content` option ([#5775](https://github.com/tailwindlabs/tailwindcss/pull/5775))
-- Fix before/after utilities overriding custom content values at larger breakpoints ([#5820](https://github.com/tailwindlabs/tailwindcss/pull/5820))
-- Cleanup duplicate properties ([#5830](https://github.com/tailwindlabs/tailwindcss/pull/5830))
-- Allow `_` inside `url()` when using arbitrary values ([#5853](https://github.com/tailwindlabs/tailwindcss/pull/5853))
-- Prevent crashes when using comments in `@layer` AtRules ([#5854](https://github.com/tailwindlabs/tailwindcss/pull/5854))
-- Handle color transformations properly with `theme(...)` for all relevant plugins ([#4533](https://github.com/tailwindlabs/tailwindcss/pull/4533), [#5871](https://github.com/tailwindlabs/tailwindcss/pull/5871))
-- Ensure `@apply`-ing a utility with multiple definitions works ([#5870](https://github.com/tailwindlabs/tailwindcss/pull/5870))
-
-## [3.0.0-alpha.1] - 2021-10-01
+- [`group-exports`]: Flow type export awareness ([#1702], thanks [@ernestostifano])
+- [`order`]: Recognize pathGroup config for first group ([#1719], [#1724], thanks [@forivall], [@xpl])
+- [`no-unused-modules`]: Fix re-export not counting as usage when used in combination with import ([#1722], thanks [@Ephem])
+- [`no-duplicates`]: Handle TS import type ([#1676], thanks [@kmui2])
+- [`newline-after-import`]: recognize decorators ([#1139], thanks [@atos1990])
+- [`no-unused-modules`]: Revert "[flow] [`no-unused-modules`]: add flow type support" ([#1770], thanks [@Hypnosphi])
+- TypeScript: Add nested namespace handling ([#1763], thanks [@julien1619])
+- [`namespace`]/`ExportMap`: Fix interface declarations for TypeScript ([#1764], thanks [@julien1619])
+- [`no-unused-modules`]: avoid order-dependence ([#1744], thanks [@darkartur])
+- [`no-internal-modules`]: also check `export from` syntax ([#1691], thanks [@adjerbetian])
+- TypeScript: [`export`]: avoid a crash with `export =` ([#1801], thanks [@ljharb])
 
 ### Changed
+- [Refactor] [`no-extraneous-dependencies`]: use moduleVisitor ([#1735], thanks [@adamborowski])
+- TypeScript config: Disable [`named`][] ([#1726], thanks [@astorije])
+- [readme] Remove duplicate [`no-unused-modules`] from docs ([#1690], thanks [@arvigeus])
+- [Docs] [`order`]: fix bad inline config ([#1788], thanks [@nickofthyme])
+- [Tests] Add fix for Windows Subsystem for Linux ([#1786], thanks [@manuth])
+- [Docs] [`no-unused-rules`]: Fix docs for unused exports ([#1776], thanks [@barbogast])
+- [eslint] bump minimum v7 version to v7.2.0
 
-- Remove AOT engine, make JIT the default ([#5340](https://github.com/tailwindlabs/tailwindcss/pull/5340))
-- Throw when trying to `@apply` the `group` class ([#4666](https://github.com/tailwindlabs/tailwindcss/pull/4666))
-- Remove dependency on `modern-normalize`, inline and consolidate with Preflight ([#5358](https://github.com/tailwindlabs/tailwindcss/pull/5358))
-- Enable extended color palette by default with updated color names ([#5384](https://github.com/tailwindlabs/tailwindcss/pull/5384))
-- Move `vertical-align` values to config file instead of hard-coding ([#5487](https://github.com/tailwindlabs/tailwindcss/pull/5487))
-- Rename `overflow-clip` to `text-clip` and `overflow-ellipsis` to `text-ellipsis` ([#5630](https://github.com/tailwindlabs/tailwindcss/pull/5630))
+## [2.20.2] - 2020-03-28
+
+### Fixed
+- [`order`]: fix `isExternalModule` detect on windows ([#1651], thanks [@fisker])
+- [`order`]: recognize ".." as a "parent" path ([#1658], thanks [@golopot])
+- [`no-duplicates`]: fix fixer on cases with default import ([#1666], thanks [@golopot])
+- [`no-unused-modules`]: Handle `export { default } from` syntax ([#1631], thanks [@richardxia])
+- [`first`]: Add a way to disable `absolute-first` explicitly ([#1664], thanks [@TheCrueltySage])
+- [Docs] [`no-webpack-loader-syntax`]: Updates webpack URLs ([#1751], thanks [@MikeyBeLike])
+
+## [2.20.1] - 2020-02-01
+
+### Fixed
+- [`export`]: Handle function overloading in `*.d.ts` ([#1619], thanks [@IvanGoncharov])
+- [`no-absolute-path`]: fix a crash with invalid import syntax ([#1616], thanks [@ljharb])
+- [`import/external-module-folders` setting] now correctly works with directories containing modules symlinked from `node_modules` ([#1605], thanks [@skozin])
+- [`extensions`]: for invalid code where `name` does not exist, do not crash ([#1613], thanks [@ljharb])
+- [`extensions`]: Fix scope regex ([#1611], thanks [@yordis])
+- [`no-duplicates`]: allow duplicate imports if one is a namespace and the other not ([#1612], thanks [@sveyret])
+- Add some missing rule meta schemas and types ([#1620], thanks [@bmish])
+- [`named`]: for importing from a module which re-exports named exports from a `node_modules` module ([#1569], [#1447], thanks [@redbugz], [@kentcdodds])
+- [`order`]: Fix alphabetize for mixed requires and imports ([#1626], thanks [@wschurman])
+
+### Changed
+- [`import/external-module-folders` setting] behavior is more strict now: it will only match complete path segments ([#1605], thanks [@skozin])
+- [meta] fix "files" field to include/exclude the proper files ([#1635], thanks [@ljharb])
+- [Tests] [`order`]: Add TS import type tests ([#1736], thanks [@kmui2])
+
+## [2.20.0] - 2020-01-10
 
 ### Added
-
-- Add native `aspect-ratio` utilities ([#5359](https://github.com/tailwindlabs/tailwindcss/pull/5359))
-- Unify config callback helpers into single object ([#5382](https://github.com/tailwindlabs/tailwindcss/pull/5382))
-- Preserve original color format when adding opacity whenever possible ([#5154](https://github.com/tailwindlabs/tailwindcss/pull/5154))
-- Add `accent-color` utilities ([#5387](https://github.com/tailwindlabs/tailwindcss/pull/5387))
-- Add `scroll-behavior` utilities ([#5388](https://github.com/tailwindlabs/tailwindcss/pull/5388))
-- Add `will-change` utilities ([#5448](https://github.com/tailwindlabs/tailwindcss/pull/5448))
-- Add `text-indent` utilities ([#5449](https://github.com/tailwindlabs/tailwindcss/pull/5449))
-- Add `column` utilities ([#5457](https://github.com/tailwindlabs/tailwindcss/pull/5457))
-- Add `border-hidden` utility ([#5485](https://github.com/tailwindlabs/tailwindcss/pull/5485))
-- Add `align-sub` and `align-super` utilities by default ([#5486](https://github.com/tailwindlabs/tailwindcss/pull/5486))
-- Add `break-before`, `break-inside` and `break-after` utilities ([#5530](https://github.com/tailwindlabs/tailwindcss/pull/5530))
-- Add `file` variant for `::file-selector-button` pseudo element ([#4936](https://github.com/tailwindlabs/tailwindcss/pull/4936))
-- Add comprehensive arbitrary value support ([#5568](https://github.com/tailwindlabs/tailwindcss/pull/5568))
-- Add `touch-action` utilities ([#5603](https://github.com/tailwindlabs/tailwindcss/pull/5603))
-- Add `inherit` to default color palette ([#5597](https://github.com/tailwindlabs/tailwindcss/pull/5597))
-- Add `overflow-clip`, `overflow-x-clip` and `overflow-y-clip` utilities ([#5630](https://github.com/tailwindlabs/tailwindcss/pull/5630))
-- Add `[open]` variant ([#5627](https://github.com/tailwindlabs/tailwindcss/pull/5627))
-- Add `scroll-snap` utilities ([#5637](https://github.com/tailwindlabs/tailwindcss/pull/5637))
-- Add `border-x` and `border-y` width and color utilities ([#5639](https://github.com/tailwindlabs/tailwindcss/pull/5639))
+- [`order`]: added `caseInsensitive` as an additional option to `alphabetize` ([#1586], thanks [@dbrewer5])
+- [`no-restricted-paths`]: New `except` option per `zone`, allowing exceptions to be defined for a restricted zone ([#1238], thanks [@rsolomon])
+- [`order`]: add option pathGroupsExcludedImportTypes to allow ordering of external import types ([#1565], thanks [@Mairu])
 
 ### Fixed
+- [`no-unused-modules`]: fix usage of [`import/extensions` setting] ([#1560], thanks [@stekycz])
+- [`extensions`]: ignore non-main modules ([#1563], thanks [@saschanaz])
+- TypeScript config: lookup for external modules in @types folder ([#1526], thanks [@joaovieira])
+- [`no-extraneous-dependencies`]: ensure `node.source` is truthy ([#1589], thanks [@ljharb])
+- [`extensions`]: Ignore query strings when checking for extensions ([#1572], thanks [@pcorpet])
 
-- Fix defining colors as functions when color opacity plugins are disabled ([#5470](https://github.com/tailwindlabs/tailwindcss/pull/5470))
-- Fix using negated `content` globs ([#5625](https://github.com/tailwindlabs/tailwindcss/pull/5625))
-- Fix using backslashes in `content` globs ([#5628](https://github.com/tailwindlabs/tailwindcss/pull/5628))
+### Docs
+- [`extensions`]: improve `ignorePackages` docs ([#1248], thanks [@ivo-stefchev])
 
-## [2.2.19] - 2021-10-29
-
-### Fixed
-
-- Ensure `corePlugins` order is consistent in AOT mode ([#5928](https://github.com/tailwindlabs/tailwindcss/pull/5928))
-
-## [2.2.18] - 2021-10-29
+## [2.19.1] - 2019-12-08
 
 ### Fixed
+- [`no-extraneous-dependencies`]: ensure `node.source` exists
 
-- Bump versions for security vulnerabilities ([#5924](https://github.com/tailwindlabs/tailwindcss/pull/5924))
-
-## [2.2.17] - 2021-10-13
-
-### Fixed
-
-- Configure chokidar's `awaitWriteFinish` setting to avoid occasional stale builds on Windows ([#5758](https://github.com/tailwindlabs/tailwindcss/pull/5758))
-
-## [2.2.16] - 2021-09-26
-
-### Fixed
-
-- JIT: Properly handle animations that use CSS custom properties ([#5602](https://github.com/tailwindlabs/tailwindcss/pull/5602))
-
-## [2.2.15] - 2021-09-10
-
-### Fixed
-
-- Ensure using CLI without `-i` for input file continues to work even though deprecated ([#5464](https://github.com/tailwindlabs/tailwindcss/pull/5464))
-
-## [2.2.14] - 2021-09-08
-
-### Fixed
-
-- Only use `@defaults` in JIT, switch back to `clean-css` in case there's any meaningful differences in the output ([bf248cb](https://github.com/tailwindlabs/tailwindcss/commit/bf248cb0de889d48854fbdd26536f4a492556efd))
-
-## [2.2.13] - 2021-09-08
-
-### Fixed
-
-- Replace `clean-css` with `cssnano` for CDN builds to fix minified builds ([75cc3ca](https://github.com/tailwindlabs/tailwindcss/commit/75cc3ca305aedddc8a85f3df1a420fefad3fb5c4))
-
-## [2.2.12] - 2021-09-08
-
-### Fixed
-
-- Ensure that divide utilities inject a default border color ([#5438](https://github.com/tailwindlabs/tailwindcss/pull/5438))
-
-## [2.2.11] - 2021-09-07
-
-### Fixed
-
-- Rebundle to fix missing CLI peer dependencies
-
-## [2.2.10] - 2021-09-06
-
-### Fixed
-
-- Fix build error when using `presets: []` in config file ([#4903](https://github.com/tailwindlabs/tailwindcss/pull/4903))
+## [2.19.0] - 2019-12-08
 
 ### Added
-
-- Reintroduce universal selector optimizations under experimental `optimizeUniversalDefaults` flag ([a9e160c](https://github.com/tailwindlabs/tailwindcss/commit/a9e160cf9acb75a2bbac34f8864568b12940f89a))
-
-## [2.2.9] - 2021-08-30
-
-### Fixed
-
-- JIT: Fix `@apply`ing utilities that contain variants + the important modifier ([#4854](https://github.com/tailwindlabs/tailwindcss/pull/4854))
-- JIT: Don't strip "null" when parsing tracked file paths ([#5008](https://github.com/tailwindlabs/tailwindcss/pull/5008))
-- Pin `clean-css` to v5.1.4 to fix empty CSS variables in CDN builds ([#5338](https://github.com/tailwindlabs/tailwindcss/pull/5338))
-
-## [2.2.8] - 2021-08-27
+- [`internal-regex` setting]: regex pattern for marking packages "internal"  ([#1491], thanks [@Librazy])
+- [`group-exports`]: make aggregate module exports valid ([#1472], thanks [@atikenny])
+- [`no-namespace`]: Make rule fixable ([#1401], thanks [@TrevorBurnham])
+- support `parseForESLint` from custom parser ([#1435], thanks [@JounQin])
+- [`no-extraneous-dependencies`]: Implement support for [bundledDependencies](https://npm.github.io/using-pkgs-docs/package-json/types/bundleddependencies.html) ([#1436], thanks [@schmidsi]))
+- [`no-unused-modules`]: add flow type support ([#1542], thanks [@rfermann])
+- [`order`]: Adds support for pathGroups to allow ordering by defined patterns ([#795], [#1386], thanks [@Mairu])
+- [`no-duplicates`]: Add `considerQueryString` option : allow duplicate imports with different query strings ([#1107], thanks [@pcorpet]).
+- [`order`]: Add support for alphabetical sorting of import paths within import groups ([#1360], [#1105], [#629], thanks [@duncanbeevers], [@stropho], [@luczsoma], [@randallreedjr])
+- [`no-commonjs`]: add `allowConditionalRequire` option ([#1439], thanks [@Pessimistress])
 
 ### Fixed
+- [`default`]: make error message less confusing ([#1470], thanks [@golopot])
+- Improve performance of `ExportMap.for` by only loading paths when necessary. ([#1519], thanks [@brendo])
+- Support export of a merged TypeScript namespace declaration ([#1495], thanks [@benmunro])
+- [`order`]: fix autofix to not move imports across fn calls ([#1253], thanks [@tihonove])
+- [`prefer-default-export`]: fix false positive with type export ([#1506], thanks [@golopot])
+- [`extensions`]: Fix `ignorePackages` to produce errors ([#1521], thanks [@saschanaz])
+- [`no-unused-modules`]: fix crash due to `export *` ([#1496], thanks [@Taranys])
+- [`no-cycle`]: should not warn for Flow imports ([#1494], thanks [@maxmalov])
+- [`order`]: fix `@someModule` considered as `unknown` instead of `internal` ([#1493], thanks [@aamulumi])
+- [`no-extraneous-dependencies`]: Check `export from` ([#1049], thanks [@marcusdarmstrong])
 
-- Improve accessibility of default link focus styles in Firefox ([#5082](https://github.com/tailwindlabs/tailwindcss/pull/5082))
-- JIT: Fix animation variants corrupting keyframes rules ([#5223](https://github.com/tailwindlabs/tailwindcss/pull/5223))
-- JIT: Ignore escaped commas when splitting selectors to apply prefixes ([#5239](https://github.com/tailwindlabs/tailwindcss/pull/5239/))
-- Nesting: Maintain PostCSS node sources when handling `@apply` ([#5249](https://github.com/tailwindlabs/tailwindcss/pull/5249))
-- JIT: Fix support for animation lists ([#5252](https://github.com/tailwindlabs/tailwindcss/pull/5252))
-- JIT: Fix arbitrary value support for `object-position` utilities ([#5245](https://github.com/tailwindlabs/tailwindcss/pull/5245))
-- CLI: Abort watcher if stdin is closed to avoid zombie processes ([#4997](https://github.com/tailwindlabs/tailwindcss/pull/4997))
-- JIT: Ignore arbitrary values with unbalanced brackets ([#5293](https://github.com/tailwindlabs/tailwindcss/pull/5293))
+### Docs
+- [`no-useless-path-segments`]: add docs for option `commonjs` ([#1507], thanks [@golopot])
 
-## [2.2.7] - 2021-07-23
+### Changed
+- [`no-unused-modules`]/`eslint-module-utils`: Avoid superfluous calls and code ([#1551], thanks [@brettz9])
+
+## [2.18.2] - 2019-07-19
 
 ### Fixed
+- Skip warning on type interfaces ([#1425], thanks [@lencioni])
 
-- Temporarily revert runtime performance optimizations introduced in v2.2.5, use universal selector again ([#5060](https://github.com/tailwindlabs/tailwindcss/pull/5060))
-
-## [2.2.6] - 2021-07-21
+## [2.18.1] - 2019-07-18
 
 ### Fixed
+- Improve parse perf when using `@typescript-eslint/parser` ([#1409], thanks [@bradzacher])
+- [`prefer-default-export`]: don't warn on TypeAlias & TSTypeAliasDeclaration ([#1377], thanks [@sharmilajesupaul])
+- [`no-unused-modules`]: Exclude package "main"/"bin"/"browser" entry points ([#1404], thanks [@rfermann])
+- [`export`]: false positive for TypeScript overloads ([#1412], thanks [@golopot])
 
-- Fix issue where base styles not generated for translate transforms in JIT ([#5038](https://github.com/tailwindlabs/tailwindcss/pull/5038))
+### Refactors
+- [`no-extraneous-dependencies`], `importType`: remove lodash ([#1419], thanks [@ljharb])
 
-## [2.2.5] - 2021-07-21
+## [2.18.0] - 2019-06-24
 
 ### Added
-
-- Added `self-baseline` utility (I know this is a patch release, no one's going to die relax) ([#5000](https://github.com/tailwindlabs/tailwindcss/pull/5000))
-
-### Changed
-
-- JIT: Optimize universal selector usage by inlining only the relevant selectors ([#4850](https://github.com/tailwindlabs/tailwindcss/pull/4850)))
-
-  This provides a very significant performance boost on pages with a huge number of DOM nodes, but there's a chance it could be a breaking change in very rare edge cases we haven't thought of. Please open an issue if anything related to shadows, rings, transforms, filters, or backdrop-filters seems to be behaving differently after upgrading.
+- Support eslint v6 ([#1393], thanks [@sheepsteak])
+- [`order`]: Adds support for correctly sorting unknown types into a single group ([#1375], thanks [@swernerx])
+- [`order`]: add fixer for destructuring commonjs import ([#1372], thanks [@golopot])
+- TypeScript config: add TS def extensions + defer to TS over JS ([#1366], thanks [@benmosher])
 
 ### Fixed
+- [`no-unused-modules`]: handle ClassDeclaration ([#1371], thanks [@golopot])
 
-- Fix support for `step-start` and `step-end` in animation utilities ([#4795](https://github.com/tailwindlabs/tailwindcss/pull/4795)))
-- JIT: Prevent presence of `!*` in templates from ruining everything ([#4816](https://github.com/tailwindlabs/tailwindcss/pull/4816)))
-- JIT: Improve support for quotes in arbitrary values ([#4817](https://github.com/tailwindlabs/tailwindcss/pull/4817)))
-- Fix filter/backdrop-filter/transform utilities being inserted into the wrong position if not all core plugins are enabled ([#4852](https://github.com/tailwindlabs/tailwindcss/pull/4852)))
-- JIT: Fix `@layer` rules being mistakenly inserted during incremental rebuilds ([#4853](https://github.com/tailwindlabs/tailwindcss/pull/4853)))
-- Improve build performance for projects with many small non-Tailwind stylesheets ([#4644](https://github.com/tailwindlabs/tailwindcss/pull/4644))
-- Ensure `[hidden]` works as expected on elements where we override the default `display` value in Preflight ([#4873](https://github.com/tailwindlabs/tailwindcss/pull/4873))
-- Fix variant configuration not being applied to `backdropOpacity` utilities ([#4892](https://github.com/tailwindlabs/tailwindcss/pull/4892))
+### Docs
+- [`no-cycle`]: split code examples so file separation is obvious ([#1370], thanks [@alex-page])
+- [`no-named-as-default-member`]: update broken link ([#1389], thanks [@fooloomanzoo])
 
-## [2.2.4] - 2021-06-23
+## [2.17.3] - 2019-05-23
 
 ### Fixed
+- [`no-common-js`]: Also throw an error when assigning ([#1354], thanks [@charlessuh])
+- [`no-unused-modules`]: don't crash when lint file outside src-folder ([#1347], thanks [@rfermann])
+- [`no-unused-modules`]: make `import { name as otherName }` work ([#1340], [#1342], thanks [@rfermann])
+- [`no-unused-modules`]: make appveyor tests passing ([#1333], thanks [@rfermann])
+- [`named`]: ignore Flow `typeof` imports and `type` exports ([#1345], thanks [@loganfsmyth])
+- [refactor] fix eslint 6 compat by fixing imports (thank [@ljharb])
+- Improve support for TypeScript declare structures ([#1356], thanks [@christophercurrie])
 
-- Remove `postinstall` script that was preventing people from installing the library ([1eacfb9](https://github.com/tailwindlabs/tailwindcss/commit/1eacfb98849c0d4737e0af3595ddec8c73addaac))
+### Docs
+- add missing [`no-unused-modules`] in README ([#1358], thanks [@golopot])
+- [`no-unused-modules`]: Indicates usage, plugin defaults to no-op, and add description to main README.md ([#1352], thanks [@johndevedu])
+- Document `env` option for `eslint-import-resolver-webpack` ([#1363], thanks [@kgregory])
 
-## [2.2.3] - 2021-06-23
+## [2.17.2] - 2019-04-16
+
+### Fixed
+- [`no-unused-modules`]: avoid crash when using `ignoreExports`-option ([#1331], [#1323], thanks [@rfermann])
+- [`no-unused-modules`]: make sure that rule with no options will not fail ([#1330], [#1334], thanks [@kiwka])
+
+## [2.17.1] - 2019-04-13
+
+### Fixed
+- require v2.4 of `eslint-module-utils` ([#1322])
+
+## [2.17.0] - 2019-04-13
 
 ### Added
-
-- Pass extended color palette to theme closures so it can be used without installing Tailwind when using `npx tailwindcss` ([359252c](https://github.com/tailwindlabs/tailwindcss/commit/359252c9b429e81217c28eb3ca7bab73d8f81e6d))
-
-### Fixed
-
-- JIT: Explicitly error when `-` is used as a custom separator ([#4704](https://github.com/tailwindlabs/tailwindcss/pull/4704))
-- JIT: Don't add multiple `~` when stacking `peer-*` variants ([#4757](https://github.com/tailwindlabs/tailwindcss/pull/4757))
-- Remove outdated focus style fix in Preflight ([#4780](https://github.com/tailwindlabs/tailwindcss/pull/4780))
-- Enable `purge` if provided on the CLI ([#4772](https://github.com/tailwindlabs/tailwindcss/pull/4772))
-- JIT: Fix error when not using a config file with postcss-cli ([#4773](https://github.com/tailwindlabs/tailwindcss/pull/4773))
-- Fix issue with `resolveConfig` not being importable in Next.js pages ([#4725](https://github.com/tailwindlabs/tailwindcss/pull/4725))
-
-## [2.2.2] - 2021-06-18
+- [`no-useless-path-segments`]: Add `noUselessIndex` option ([#1290], thanks [@timkraut])
+- [`no-duplicates`]: Add autofix ([#1312], thanks [@lydell])
+- Add [`no-unused-modules`] rule ([#1142], thanks [@rfermann])
+- support export type named exports from TypeScript ([#1304], thanks [@bradennapier] and [@schmod])
 
 ### Fixed
+- [`order`]: Fix interpreting some external modules being interpreted as internal modules ([#793], [#794] thanks [@ephys])
+- allow aliases that start with @ to be "internal" ([#1293], [#1294], thanks [@jeffshaver])
+- aliased internal modules that look like core modules ([#1297], thanks [@echenley])
+- [`namespace`]: add check for null ExportMap ([#1235], [#1144], thanks [@ljqx])
+- [ExportMap] fix condition for checking if block comment ([#1234], [#1233], thanks [@ljqx])
+- Fix overwriting of dynamic import() CallExpression ([`no-cycle`], [`no-relative-parent-imports`], [`no-unresolved`], [`no-useless-path-segments`]) ([#1218], [#1166], [#1035], thanks [@vikr01])
+- [`export`]: false positives for TypeScript type + value export ([#1319], thanks [@bradzacher])
+- [`export`]: Support TypeScript namespaces ([#1320], [#1300], thanks [@bradzacher])
 
-- JIT: Reintroduce `transform`, `filter`, and `backdrop-filter` classes purely to create stacking contexts to minimize the impact of the breaking change ([#4700](https://github.com/tailwindlabs/tailwindcss/pull/4700))
+### Docs
+- Update readme for TypeScript ([#1256], [#1277], thanks [@kirill-konshin])
+- make rule names consistent ([#1112], thanks [@feychenie])
 
-## [2.2.1] - 2021-06-18
+### Tests
+- fix broken tests on master ([#1295], thanks [@jeffshaver] and [@ljharb])
+- [`no-commonjs`]: add tests that show corner cases ([#1308], thanks [@TakeScoop])
 
-### Fixed
-
-- Recover from errors gracefully in CLI watch mode ([#4693](https://github.com/tailwindlabs/tailwindcss/pull/4693))
-- Fix issue with media queries not being generated properly when using PostCSS 7 ([#4695](https://github.com/tailwindlabs/tailwindcss/pull/4695))
-
-## [2.2.0] - 2021-06-17
-
-### Changed
-
-- JIT: Use "tracking" context by default instead of "watching" context for improved reliability with most bundlers ([#4514](https://github.com/tailwindlabs/tailwindcss/pull/4514))
-
-  Depending on which tooling you use, you may need to explicitly set `TAILWIND_MODE=watch` until your build runner has been updated to support PostCSS's `dir-dependency` message type.
+## [2.16.0] - 2019-01-29
 
 ### Added
-
-- Add `background-origin` utilities ([#4117](https://github.com/tailwindlabs/tailwindcss/pull/4117))
-- Improve `@apply` performance in projects that process many CSS sources ([#3178](https://github.com/tailwindlabs/tailwindcss/pull/3718))
-- JIT: Don't use CSS variables for color utilities if color opacity utilities are disabled ([#3984](https://github.com/tailwindlabs/tailwindcss/pull/3984))
-- JIT: Redesign `matchUtilities` API to make it more suitable for third-party use ([#4232](https://github.com/tailwindlabs/tailwindcss/pull/4232))
-- JIT: Support applying important utility variants ([#4260](https://github.com/tailwindlabs/tailwindcss/pull/4260))
-- JIT: Support coercing arbitrary values when the type isn't detectable ([#4263](https://github.com/tailwindlabs/tailwindcss/pull/4263))
-- JIT: Support for `raw` syntax in `purge` config ([#4272](https://github.com/tailwindlabs/tailwindcss/pull/4272))
-- Add `empty` variant ([#3298](https://github.com/tailwindlabs/tailwindcss/pull/3298))
-- Update `modern-normalize` to v1.1 ([#4287](https://github.com/tailwindlabs/tailwindcss/pull/4287))
-- Implement `theme` function internally, remove `postcss-functions` dependency ([#4317](https://github.com/tailwindlabs/tailwindcss/pull/4317))
-- Add `screen` function to improve nesting plugin compatibility ([#4318](https://github.com/tailwindlabs/tailwindcss/pull/4318))
-- JIT: Add universal shorthand color opacity syntax ([#4348](https://github.com/tailwindlabs/tailwindcss/pull/4348))
-- JIT: Add `@tailwind variants` directive to replace `@tailwind screens` ([#4356](https://github.com/tailwindlabs/tailwindcss/pull/4356))
-- JIT: Add support for PostCSS `dir-dependency` messages in `TAILWIND_DISABLE_TOUCH` mode ([#4388](https://github.com/tailwindlabs/tailwindcss/pull/4388))
-- JIT: Add per-side border color utilities ([#4404](https://github.com/tailwindlabs/tailwindcss/pull/4404))
-- JIT: Add support for `before` and `after` pseudo-element variants and `content` utilities ([#4461](https://github.com/tailwindlabs/tailwindcss/pull/4461))
-- Add new `transform` and `extract` APIs to simplify PurgeCSS/JIT customization ([#4469](https://github.com/tailwindlabs/tailwindcss/pull/4469))
-- JIT: Add exhaustive pseudo-class and pseudo-element variant support ([#4482](https://github.com/tailwindlabs/tailwindcss/pull/4482))
-- JIT: Add `caret-color` utilities ([#4499](https://github.com/tailwindlabs/tailwindcss/pull/4499))
-- Rename `lightBlue` to `sky`, emit console warning when using deprecated name ([#4513](https://github.com/tailwindlabs/tailwindcss/pull/4513))
-- New CLI with improved JIT support, `--watch` mode, and more ([#4526](https://github.com/tailwindlabs/tailwindcss/pull/4526), [4558](https://github.com/tailwindlabs/tailwindcss/pull/4558))
-- JIT: Add new `peer-*` variants for styling based on sibling state ([#4556](https://github.com/tailwindlabs/tailwindcss/pull/4556))
-- Expose `safelist` as a top-level option under `purge` for both JIT and classic engines ([#4580](https://github.com/tailwindlabs/tailwindcss/pull/4580))
-- JIT: Remove need for `transform` class when using classes like `scale-*`, `rotate-*`, etc. ([#4604](https://github.com/tailwindlabs/tailwindcss/pull/4604))
-- JIT: Remove need for `filter` and `backdrop-filter` classes when using classes like `contrast-*`, `backdrop-blur-*`, etc. ([#4614](https://github.com/tailwindlabs/tailwindcss/pull/4614))
-- Support passing a custom path for your PostCSS configuration in the Tailwind CLI ([#4607](https://github.com/tailwindlabs/tailwindcss/pull/4607))
-- Add `blur-none` by default with intent to deprecate `blur-0` ([#4614](https://github.com/tailwindlabs/tailwindcss/pull/4614))
+- `typescript` config ([#1257], thanks [@kirill-konshin])
 
 ### Fixed
+- Memory leak of `SourceCode` objects for all parsed dependencies, resolved. (issue [#1266], thanks [@asapach] and [@sergei-startsev] for digging in)
 
-- JIT: Improve support for Svelte class bindings ([#4187](https://github.com/tailwindlabs/tailwindcss/pull/4187))
-- JIT: Improve support for `calc` and `var` in arbitrary values ([#4147](https://github.com/tailwindlabs/tailwindcss/pull/4147))
-- Convert `hsl` colors to `hsla` when transforming for opacity support instead of `rgba` ([#3850](https://github.com/tailwindlabs/tailwindcss/pull/3850))
-- Fix `backdropBlur` variants not being generated ([#4188](https://github.com/tailwindlabs/tailwindcss/pull/4188))
-- Improve animation value parsing ([#4250](https://github.com/tailwindlabs/tailwindcss/pull/4250))
-- Ignore unknown object types when hashing config ([82f4eaa](https://github.com/tailwindlabs/tailwindcss/commit/82f4eaa6832ef8a4e3fd90869e7068efdf6e34f2))
-- Ensure variants are grouped properly for plugins with order-dependent utilities ([#4273](https://github.com/tailwindlabs/tailwindcss/pull/4273))
-- JIT: Fix temp file storage when node temp directories are kept on a different drive than the project itself ([#4044](https://github.com/tailwindlabs/tailwindcss/pull/4044))
-- Support border-opacity utilities alongside default `border` utility ([#4277](https://github.com/tailwindlabs/tailwindcss/pull/4277))
-- JIT: Fix source maps for expanded `@tailwind` directives ([2f15411](https://github.com/tailwindlabs/tailwindcss/commit/2f1541123dea29d8a2ab0f1411bf60c79eeb96b4))
-- JIT: Ignore whitespace when collapsing adjacent rules ([15642fb](https://github.com/tailwindlabs/tailwindcss/commit/15642fbcc885eba9cc50b7678a922b09c90d6b51))
-- JIT: Generate group parent classes correctly when using custom separator ([#4508](https://github.com/tailwindlabs/tailwindcss/pull/4508))
-- JIT: Fix incorrect stacking of multiple `group` variants ([#4551](https://github.com/tailwindlabs/tailwindcss/pull/4551))
-- JIT: Fix memory leak due to holding on to unused contexts ([#4571](https://github.com/tailwindlabs/tailwindcss/pull/4571))
-
-### Internals
-
-- Add integration tests for popular build runners ([#4354](https://github.com/tailwindlabs/tailwindcss/pull/4354))
-
-## [2.1.4] - 2021-06-02
-
-### Fixed
-
-- Skip `raw` PurgeCSS sources when registering template dependencies ([#4542](https://github.com/tailwindlabs/tailwindcss/pull/4542))
-
-## [2.1.3] - 2021-06-01
-
-### Fixed
-
-- Register PurgeCSS paths as PostCSS dependencies to guarantee proper cache-busting in webpack 5 ([#4530](https://github.com/tailwindlabs/tailwindcss/pull/4530))
-
-## [2.1.2] - 2021-04-23
-
-### Fixed
-
-- Fix issue where JIT engine would generate the wrong CSS when using PostCSS 7 ([#4078](https://github.com/tailwindlabs/tailwindcss/pull/4078))
-
-## [2.1.1] - 2021-04-05
-
-### Fixed
-
-- Fix issue where JIT engine would fail to compile when a source path isn't provided by the build runner for the current input file ([#3978](https://github.com/tailwindlabs/tailwindcss/pull/3978))
-
-## [2.1.0] - 2021-04-05
+## [2.15.0] - 2019-01-22
 
 ### Added
-
-- Add alternate JIT engine (in preview) ([#3905](https://github.com/tailwindlabs/tailwindcss/pull/3905))
-- Add new `mix-blend-mode` and `background-blend-mode` utilities ([#3920](https://github.com/tailwindlabs/tailwindcss/pull/3920))
-- Add new `box-decoration-break` utilities ([#3911](https://github.com/tailwindlabs/tailwindcss/pull/3911))
-- Add new `isolation` utilities ([#3914](https://github.com/tailwindlabs/tailwindcss/pull/3914))
-- Add `inline-table` display utility ([#3563](https://github.com/tailwindlabs/tailwindcss/pull/3563))
-- Add `list-item` display utility ([#3929](https://github.com/tailwindlabs/tailwindcss/pull/3929))
-- Add new `filter` and `backdrop-filter` utilities ([#3923](https://github.com/tailwindlabs/tailwindcss/pull/3923))
-
-## [2.0.4] - 2021-03-17
+- new rule: [`no-named-export`] ([#1157], thanks [@fsmaia])
 
 ### Fixed
+- [`no-extraneous-dependencies`]: `packageDir` option with array value was clobbering package deps instead of merging them ([#1175]/[#1176], thanks [@aravindet] & [@pzhine])
+- [`dynamic-import-chunkname`]: Add proper webpack comment parsing ([#1163], thanks [@st-sloth])
+- [`named`]: fix destructuring assignment ([#1232], thanks [@ljqx])
 
-- Pass full `var(--bg-opacity)` value as `opacityValue` when defining colors as functions
-
-## [2.0.3] - 2021-02-07
-
-### Fixed
-
-- Ensure sourcemap input is deterministic when using `@apply` in Vue components ([#3356](https://github.com/tailwindlabs/tailwindcss/pull/3356))
-- Ensure placeholder opacity is consistent across browsers ([#3308](https://github.com/tailwindlabs/tailwindcss/pull/3308))
-- Fix issue where `theme()` didn't work with colors defined as functions ([#2919](https://github.com/tailwindlabs/tailwindcss/pull/2919))
-- Enable `dark` variants by default for color opacity utilities ([#2975](https://github.com/tailwindlabs/tailwindcss/pull/2975))
+## [2.14.0] - 2018-08-13
 
 ### Added
-
-- Add support for a `tailwind.config.cjs` file in Node ESM projects ([#3181](https://github.com/tailwindlabs/tailwindcss/pull/3181))
-- Add version comment to Preflight ([#3255](https://github.com/tailwindlabs/tailwindcss/pull/3255))
-- Add `cursor-help` by default ([#3199](https://github.com/tailwindlabs/tailwindcss/pull/3199))
-
-## [2.0.2] - 2020-12-11
+- [`no-useless-path-segments`]: add commonJS (CJS) support ([#1128], thanks [@1pete])
+- [`namespace`]: add JSX check ([#1151], thanks [@jf248])
 
 ### Fixed
+- [`no-cycle`]: ignore Flow imports ([#1126], thanks [@gajus])
+- fix Flow type imports ([#1106], thanks [@syymza])
+- [`no-relative-parent-imports`]: resolve paths ([#1135], thanks [@chrislloyd])
+- [`order`]: fix autofixer when using typescript-eslint-parser ([#1137], thanks [@justinanastos])
+- repeat fix from [#797] for [#717], in another place (thanks [@ljharb])
 
-- Fix issue with `@apply` not working as expected with `!important` inside an at-rule ([#2824](https://github.com/tailwindlabs/tailwindcss/pull/2824))
-- Fix issue with `@apply` not working as expected with defined classes ([#2832](https://github.com/tailwindlabs/tailwindcss/pull/2832))
-- Fix memory leak, and broken `@apply` when splitting up files ([#3032](https://github.com/tailwindlabs/tailwindcss/pull/3032))
+### Refactors
+- add explicit support for RestElement alongside ExperimentalRestProperty (thanks [@ljharb])
+
+## [2.13.0] - 2018-06-24
 
 ### Added
+- Add ESLint 5 support ([#1122], thanks [@ai] and [@ljharb])
+- Add [`no-relative-parent-imports`] rule: disallow relative imports from parent directories ([#1093], thanks [@chrislloyd])
 
-- Add default values for the `ring` utility ([#2951](https://github.com/tailwindlabs/tailwindcss/pull/2951))
+### Fixed
+- `namespace` rule: ensure it works in eslint 5/ecmaVersion 2018 (thanks [@ljharb])
 
-## [2.0.1] - 2020-11-18
-
-- Nothing, just the only thing I could do when I found out npm won't let me publish the same version under two tags.
-
-## [2.0.0] - 2020-11-18
+## [2.12.0] - 2018-05-17
 
 ### Added
+- Ignore type imports for [`named`] rule ([#931], thanks [@mattijsbliek])
+- Add documentation for [`no-useless-path-segments`] rule ([#1068], thanks [@manovotny])
+- `packageDir` option for [`no-extraneous-dependencies`] can be array-valued ([#1085], thanks [@hulkish])
 
-- Add redesigned color palette ([#2623](https://github.com/tailwindlabs/tailwindcss/pull/2623), [700866c](https://github.com/tailwindlabs/tailwindcss/commit/700866ce5e0c0b8d140be161c4d07fc6f31242bc), [#2633](https://github.com/tailwindlabs/tailwindcss/pull/2633))
-- Add dark mode support ([#2279](https://github.com/tailwindlabs/tailwindcss/pull/2279), [#2631](https://github.com/tailwindlabs/tailwindcss/pull/2631))
-- Add `overflow-ellipsis` and `overflow-clip` utilities ([#1289](https://github.com/tailwindlabs/tailwindcss/pull/1289))
-- Add `transform-gpu` to force hardware acceleration on transforms when desired ([#1380](https://github.com/tailwindlabs/tailwindcss/pull/1380))
-- Extend default spacing scale ([#2630](https://github.com/tailwindlabs/tailwindcss/pull/2630), [7f05204](https://github.com/tailwindlabs/tailwindcss/commit/7f05204ce7a5581b6845591448265c3c21afde86))
-- Add spacing scale to `inset` plugin ([#2630](https://github.com/tailwindlabs/tailwindcss/pull/2630))
-- Add percentage sizes to `translate`, `inset`, and `height` plugins ([#2630](https://github.com/tailwindlabs/tailwindcss/pull/2630), [5259560](https://github.com/tailwindlabs/tailwindcss/commit/525956065272dc53e8f8395f55f9ad13077a38d1))
-- Extend default font size scale ([#2609](https://github.com/tailwindlabs/tailwindcss/pull/2609), [#2619](https://github.com/tailwindlabs/tailwindcss/pull/2619))
-- Support using `@apply` with complex classes, including variants like `lg:hover:bg-blue-500` ([#2159](https://github.com/tailwindlabs/tailwindcss/pull/2159))
-- Add new `2xl` breakpoint at 1536px by default ([#2609](https://github.com/tailwindlabs/tailwindcss/pull/2609))
-- Add default line-height values for font-size utilities ([#2609](https://github.com/tailwindlabs/tailwindcss/pull/2609))
-- Support defining theme values using arrays for CSS properties that support comma separated values ([e13f083c4](https://github.com/tailwindlabs/tailwindcss/commit/e13f083c4bc48bf9870d27c966136a9584943127))
-- Enable `group-hover` for color plugins, `boxShadow`, and `textDecoration` by default ([28985b6](https://github.com/tailwindlabs/tailwindcss/commit/28985b6cd592e72d4849fdb9ce97eb045744e09c), [f6923b1](https://github.com/tailwindlabs/tailwindcss/commit/f6923b1))
-- Enable `focus` for z-index utilities by default ([ae5b3d3](https://github.com/tailwindlabs/tailwindcss/commit/ae5b3d312d5000ae9c2065001f3df7add72dc365))
-- Support `extend` in `variants` configuration ([#2651](https://github.com/tailwindlabs/tailwindcss/pull/2651))
-- Add `max-w-prose` class by default ([#2574](https://github.com/tailwindlabs/tailwindcss/pull/2574))
-- Support flattening deeply nested color objects ([#2148](https://github.com/tailwindlabs/tailwindcss/pull/2148))
-- Support defining presets as functions ([#2680](https://github.com/tailwindlabs/tailwindcss/pull/2680))
-- Support deep merging of objects under `extend` ([#2679](https://github.com/tailwindlabs/tailwindcss/pull/2679), [#2700](https://github.com/tailwindlabs/tailwindcss/pull/2700))
-- Enable `focus-within` for all plugins that have `focus` enabled by default ([1a21f072](https://github.com/tailwindlabs/tailwindcss/commit/1a21f0721c7368d61fa3feef33d616de3f78c7d7), [f6923b1](https://github.com/tailwindlabs/tailwindcss/commit/f6923b1))
-- Added new `ring` utilities for creating outline/focus rings using box shadows ([#2747](https://github.com/tailwindlabs/tailwindcss/pull/2747), [879f088](https://github.com/tailwindlabs/tailwindcss/commit/879f088), [e0788ef](https://github.com/tailwindlabs/tailwindcss/commit/879f088))
-- Added `5` and `95` to opacity scale ([#2747](https://github.com/tailwindlabs/tailwindcss/pull/2747))
-- Add support for default duration and timing function values whenever enabling transitions ([#2755](https://github.com/tailwindlabs/tailwindcss/pull/2755))
-
-### Changed
-
-- Completely redesign color palette ([#2623](https://github.com/tailwindlabs/tailwindcss/pull/2623), [700866c](https://github.com/tailwindlabs/tailwindcss/commit/700866ce5e0c0b8d140be161c4d07fc6f31242bc), [#2633](https://github.com/tailwindlabs/tailwindcss/pull/2633))
-- Drop support for Node 8 and 10 ([#2582](https://github.com/tailwindlabs/tailwindcss/pull/2582))
-- Removed `target` feature and dropped any compatibility with IE 11 ([#2571](https://github.com/tailwindlabs/tailwindcss/pull/2571))
-- Upgrade to PostCSS 8 (but include PostCSS 7 compatibility build) ([729b400](https://github.com/tailwindlabs/tailwindcss/commit/729b400a685973f46af73c8a68b364f20f7c5e1e), [1d8679d](https://github.com/tailwindlabs/tailwindcss/commit/1d8679d37e0eb1ba8281b2076bade5fc754f47dd), [c238ed1](https://github.com/tailwindlabs/tailwindcss/commit/c238ed15b5c02ff51978965511312018f2bc2cae))
-- Removed `shadow-outline`, `shadow-solid`, and `shadow-xs` by default in favor of new `ring` API ([#2747](https://github.com/tailwindlabs/tailwindcss/pull/2747))
-- Switch `normalize.css` to `modern-normalize` ([#2572](https://github.com/tailwindlabs/tailwindcss/pull/2572))
-- Rename `whitespace-no-wrap` to `whitespace-nowrap` ([#2664](https://github.com/tailwindlabs/tailwindcss/pull/2664))
-- Rename `flex-no-wrap` to `flex-nowrap` ([#2676](https://github.com/tailwindlabs/tailwindcss/pull/2676))
-- Remove `clearfix` utility, recommend `flow-root` instead ([#2766](https://github.com/tailwindlabs/tailwindcss/pull/2766))
-- Disable `hover` and `focus` for `fontWeight` utilities by default ([f6923b1](https://github.com/tailwindlabs/tailwindcss/commit/f6923b1))
-- Remove `grid-gap` fallbacks needed for old versions of Safari ([5ec45fa](https://github.com/tailwindlabs/tailwindcss/commit/5ec45fa))
-- Change special use of 'default' in config to 'DEFAULT' ([#2580](https://github.com/tailwindlabs/tailwindcss/pull/2580))
-- New `@apply` implementation, slight backwards incompatibilities with previous behavior ([#2159](https://github.com/tailwindlabs/tailwindcss/pull/2159))
-- Make `theme` retrieve the expected resolved value when theme value is complex ([e13f083c4](https://github.com/tailwindlabs/tailwindcss/commit/e13f083c4bc48bf9870d27c966136a9584943127))
-- Move `truncate` class to `textOverflow` core plugin ([#2562](https://github.com/tailwindlabs/tailwindcss/pull/2562))
-- Remove `scrolling-touch` and `scrolling-auto` utilities ([#2573](https://github.com/tailwindlabs/tailwindcss/pull/2573))
-- Modernize default system font stacks ([#1711](https://github.com/tailwindlabs/tailwindcss/pull/1711))
-- Upgrade to PurgeCSS 3.0 ([8e4e0a0](https://github.com/tailwindlabs/tailwindcss/commit/8e4e0a0eb8dcbf84347c7562988b4f9afd344081))
-- Change default `text-6xl` font-size to 3.75rem instead of 4rem ([#2619](https://github.com/tailwindlabs/tailwindcss/pull/2619))
-- Ignore `[hidden]` elements within `space` and `divide` utilities instead of `template` elements ([#2642](https://github.com/tailwindlabs/tailwindcss/pull/2642))
-- Automatically prefix keyframes and animation names when a prefix is configured ([#2621](https://github.com/tailwindlabs/tailwindcss/pull/2621), [#2641](https://github.com/tailwindlabs/tailwindcss/pull/2641))
-- Merge `extend` objects deeply by default ([#2679](https://github.com/tailwindlabs/tailwindcss/pull/2679))
-- Respect `preserveHtmlElements` option even when using custom PurgeCSS extractor ([#2704](https://github.com/tailwindlabs/tailwindcss/pull/2704))
-- Namespace all internal custom properties under `tw-` to avoid collisions with end-user custom properties ([#2771](https://github.com/tailwindlabs/tailwindcss/pull/2771))
-
-## [2.0.0-alpha.25] - 2020-11-17
-
-### Fixed
-
-- Fix issue where `ring-offset-0` didn't work due to unitless `0` in `calc` function ([3de0c48](https://github.com/tailwindlabs/tailwindcss/commit/3de0c48))
-
-## [2.0.0-alpha.24] - 2020-11-16
-
-### Changed
-
-- Don't override ring color when overriding ring width with a variant ([e40079a](https://github.com/tailwindlabs/tailwindcss/commit/e40079a))
-
-### Fixed
-
-- Prevent shadow/ring styles from cascading to children ([e40079a](https://github.com/tailwindlabs/tailwindcss/commit/e40079a))
-- Ensure rings have a default color even if `colors.blue.500` is not present in config ([e40079a](https://github.com/tailwindlabs/tailwindcss/commit/e40079a))
-
-## [2.0.0-alpha.23] - 2020-11-16
+## [2.11.0] - 2018-04-09
 
 ### Added
-
-- Add scripts for generating a PostCSS 7 compatible build alongside PostCSS 8 version ([#2773](https://github.com/tailwindlabs/tailwindcss/pull/2773))
-
-### Changed
-
-- All custom properties have been internally namespaced under `tw-` to avoid collisions with end-user custom properties ([#2771](https://github.com/tailwindlabs/tailwindcss/pull/2771))
-
-## [2.0.0-alpha.22] - 2020-11-16
-
-### Changed
-
-- ~~All custom properties have been internally namespaced under `tw-` to avoid collisions with end-user custom properties ([#2771](https://github.com/tailwindlabs/tailwindcss/pull/2771))~~ I made a git boo-boo, check alpha.23 instead
-
-## [2.0.0-alpha.21] - 2020-11-15
-
-### Changed
-
-- Upgrade to PostCSS 8, Autoprefixer 10, move `postcss` and `autoprefixer` to peerDependencies ([729b400](https://github.com/tailwindlabs/tailwindcss/commit/729b400))
-
-## [2.0.0-alpha.20] - 2020-11-13
-
-### Changed
-
-- Remove `clearfix` utility, recommend `flow-root` instead ([#2766](https://github.com/tailwindlabs/tailwindcss/pull/2766))
-
-## [2.0.0-alpha.19] - 2020-11-13
+- Fixer for [`first`] ([#1046], thanks [@fengkfengk])
+- `allow-require` option for [`no-commonjs`] rule ([#880], thanks [@futpib])
 
 ### Fixed
+- memory/CPU regression where ASTs were held in memory ([#1058], thanks [@klimashkin]/[@lukeapage])
 
-- Don't crash when color palette is empty ([278c203](https://github.com/tailwindlabs/tailwindcss/commit/278c203))
-
-## [2.0.0-alpha.18] - 2020-11-13
-
-### Changed
-
-- `black` and `white` have been added to `colors.js` ([b3ed724](https://github.com/tailwindlabs/tailwindcss/commit/b3ed724))
-
-### Fixed
-
-- Add support for colors as closures to `ringColor` and `ringOffsetColor`, previously would crash build ([62a47f9](https://github.com/tailwindlabs/tailwindcss/commit/62a47f9))
-
-## [2.0.0-alpha.17] - 2020-11-13
-
-### Changed
-
-- Remove `grid-gap` fallbacks needed for old versions of Safari ([5ec45fa](https://github.com/tailwindlabs/tailwindcss/commit/5ec45fa))
-
-## [2.0.0-alpha.16] - 2020-11-12
+## [2.10.0] - 2018-03-29
 
 ### Added
+- Autofixer for [`order`] rule ([#908], thanks [@tihonove])
+- Add [`no-cycle`] rule: reports import cycles.
 
-- Enable `focus`, `focus-within`, and `dark` variants (when enabled) for all ring utilities by default ([e0788ef](https://github.com/tailwindlabs/tailwindcss/commit/879f088))
-
-## [2.0.0-alpha.15] - 2020-11-11
-
-### Added
-
-- Added `ring-inset` utility for rendering rings as inset shadows ([879f088](https://github.com/tailwindlabs/tailwindcss/commit/879f088))
-
-### Changed
-
-- `ringWidth` utilities always reset ring styles to ensure no accidental variable inheritance through the cascade ([879f088](https://github.com/tailwindlabs/tailwindcss/commit/879f088))
-
-## [2.0.0-alpha.14] - 2020-11-11
+## [2.9.0] - 2018-02-21
 
 ### Added
+- Add [`group-exports`] rule: style-guide rule to report use of multiple named exports ([#721], thanks [@robertrossmann])
+- Add [`no-self-import`] rule: forbids a module from importing itself. ([#727], [#449], [#447], thanks [@giodamelio]).
+- Add [`no-default-export`] rule ([#889], thanks [@isiahmeadows])
+- Add [`no-useless-path-segments`] rule ([#912], thanks [@graingert] and [@danny-andrews])
+- ... and more! check the commits for v[2.9.0]
 
-- Enable `focus-within` for `outline` utilities by default ([f6923b1](https://github.com/tailwindlabs/tailwindcss/commit/f6923b1))
-- Enable `focus-within` for `ringWidth` utilities by default ([f6923b1](https://github.com/tailwindlabs/tailwindcss/commit/f6923b1))
-- Enable `group-hover` for `boxShadow` utilities by default ([f6923b1](https://github.com/tailwindlabs/tailwindcss/commit/f6923b1))
-- Enable `group-hover` and `focus-within` for `textDecoration` utilities by default ([f6923b1](https://github.com/tailwindlabs/tailwindcss/commit/f6923b1))
+## [2.8.0] - 2017-10-18
+### Added
+- [`exports-last`] rule ([#620] + [#632], thanks [@k15a])
 
 ### Changed
+- Case-sensitivity checking ignores working directory and ancestors. ([#720] + [#858], thanks [@laysent])
 
-- Disable `hover` and `focus` for `fontWeight` utilities by default ([f6923b1](https://github.com/tailwindlabs/tailwindcss/commit/f6923b1))
+### Fixed
+- support scoped modules containing hyphens ([#744], thanks [@rosswarren])
+- core-modules now resolves files inside declared modules ([#886] / [#891], thanks [@mplewis])
+- TypeError for missing AST fields from TypeScript ([#842] / [#944], thanks [@alexgorbatchev])
 
-## [2.0.0-alpha.13] - 2020-11-11
+## [2.7.0] - 2017-07-06
+
+### Changed
+- [`no-absolute-path`] picks up speed boost, optional AMD support ([#843], thanks [@jseminck])
+
+## [2.6.1] - 2017-06-29
+
+### Fixed
+- update bundled node resolver dependency to latest version
+
+## [2.6.0] - 2017-06-23
+
+### Changed
+- update tests / peerDeps for ESLint 4.0 compatibility ([#871], thanks [@mastilver])
+- [`memo-parser`] updated to require `filePath` on parser options as it melts
+  down if it's not there, now that this plugin always provides it. (see [#863])
+
+## [2.5.0] - 2017-06-22
+
+Re-releasing v[2.4.0] after discovering that the memory leak is isolated to the [`memo-parser`],
+which is more or less experimental anyway.
 
 ### Added
+- Autofixer for newline-after-import. ([#686] + [#696], thanks [@eelyafi])
 
-- Add support for default duration and timing function values whenever enabling transitions ([#2755](https://github.com/tailwindlabs/tailwindcss/pull/2755))
+## [2.4.0] - 2017-06-02 [YANKED]
 
-## [2.0.0-alpha.12] - 2020-11-10
-
-### Fixed
-
-- Prevent `boxShadow` utilities from overriding ring shadows added by components like in the custom forms plugin ([c3dd3b6](https://github.com/tailwindlabs/tailwindcss/commit/c3dd3b68454ad418833a9edf7f3409cad66fb5b0))
-
-## [2.0.0-alpha.11] - 2020-11-09
-
-### Fixed
-
-- Convert `none` to `0 0 #0000` when used for shadows to ensure compatibility with `ring` utilities ([4eecc27](https://github.com/tailwindlabs/tailwindcss/commit/4eecc2751ca0c461e8da5bd5772ae650197a2e5d))
-
-## [2.0.0-alpha.10] - 2020-11-09
+Yanked due to critical issue in eslint-module-utils with cache key resulting from [#839].
 
 ### Added
+- Add `filePath` into `parserOptions` passed to `parser` ([#839], thanks [@sompylasar])
+- Add `allow` option to [`no-unassigned-import`] to allow for files that match the globs ([#671], [#737], thanks [@kevin940726]).
 
-- Added new `ring` utilities ([#2747](https://github.com/tailwindlabs/tailwindcss/pull/2747))
-- Added `5` and `95` to opacity scale ([#2747](https://github.com/tailwindlabs/tailwindcss/pull/2747))
-
-### Changed
-
-- Removed `shadow-outline`, `shadow-solid`, and `shadow-xs` in favor of new `ring` API ([#2747](https://github.com/tailwindlabs/tailwindcss/pull/2747))
-
-## [2.0.0-alpha.9] - 2020-11-07
+## [2.3.0] - 2017-05-18
 
 ### Added
-
-- Added `shadow-solid` utility, a 2px solid shadow that uses the current text color ([369cfae](https://github.com/tailwindlabs/tailwindcss/commit/369cfae2905a577033529c46a5e8ca58c69f5623))
-- Enable `focus-within` where useful by default ([1a21f072](https://github.com/tailwindlabs/tailwindcss/commit/1a21f0721c7368d61fa3feef33d616de3f78c7d7))
+- [`no-anonymous-default-export`] rule: report anonymous default exports ([#712], thanks [@duncanbeevers]).
+- Add new value to [`order`]'s `newlines-between` option to allow newlines inside import groups ([#627], [#628], thanks [@giodamelio])
+- Add `count` option to the [`newline-after-import`] rule to allow configuration of number of newlines expected ([#742], thanks [@ntdb])
 
 ### Changed
+- [`no-extraneous-dependencies`]: use `read-pkg-up` to simplify finding + loading `package.json` ([#680], thanks [@wtgtybhertgeghgtwtg])
+- Add support to specify the package.json [`no-extraneous-dependencies`] ([#685], thanks [@ramasilveyra])
 
-- Update `shadow-outline` to use the new blue ([b078238](https://github.com/tailwindlabs/tailwindcss/commit/b0782385c9832d35a10929b38b4fcaf27e055d6b))
+### Fixed
+- attempt to fix crash in [`no-mutable-exports`]. ([#660])
+- "default is a reserved keyword" in no-maned-default tests by locking down babylon to 6.15.0 (#756, thanks @gmathieu)
+- support scoped modules containing non word characters
 
-## [2.0.0-alpha.8] - 2020-11-06
+## [2.2.0] - 2016-11-07
+
+### Fixed
+- Corrected a few gaffs in the auto-ignore logic to fix major performance issues
+  with projects that did not explicitly ignore `node_modules`. ([#654])
+- [`import/ignore` setting] was only being respected if the ignored module didn't start with
+  an `import` or `export` JS statement
+- [`prefer-default-export`]: fixed crash on export extensions ([#653])
+
+## [2.1.0] - 2016-11-02
 
 ### Added
+- Add [`no-named-default`] rule: style-guide rule to report use of unnecessarily named default imports ([#596], thanks [@ntdb])
+- [`no-extraneous-dependencies`]: check globs against CWD + absolute path ([#602] + [#630], thanks [@ljharb])
 
-- Add `11` to spacing scale ([7f05204](https://github.com/tailwindlabs/tailwindcss/commit/7f05204ce7a5581b6845591448265c3c21afde86))
-- Add percentage-based height values ([5259560](https://github.com/tailwindlabs/tailwindcss/commit/525956065272dc53e8f8395f55f9ad13077a38d1))
-- Add indigo to the color palette by default ([700866c](https://github.com/tailwindlabs/tailwindcss/commit/700866ce5e0c0b8d140be161c4d07fc6f31242bc))
+### Fixed
+- [`prefer-default-export`] handles flow `export type` ([#484] + [#639], thanks [@jakubsta])
+- [`prefer-default-export`] handles re-exported default exports ([#609])
+- Fix crash when using [`newline-after-import`] with decorators ([#592])
+- Properly report [`newline-after-import`] when next line is a decorator
+- Fixed documentation for the default values for the [`order`] rule ([#601])
 
-### Changed
+## [2.0.1] - 2016-10-06
 
-- Use `coolGray` as the default gray ([700866c](https://github.com/tailwindlabs/tailwindcss/commit/700866ce5e0c0b8d140be161c4d07fc6f31242bc))
+### Fixed
+- Fixed code that relied on removed dependencies. ([#604])
 
-## [2.0.0-alpha.7] - 2020-11-05
-
-### Changed
-
-- Revert upgrading to PostCSS 8 lol
-
-## [2.0.0-alpha.6] - 2020-11-04
-
-### Changed
-
-- Respect `preserveHtmlElements` option even when using custom PurgeCSS extractor ([#2704](https://github.com/tailwindlabs/tailwindcss/pull/2704))
-- Set font-family and line-height to `inherit` on `body` to behave more like v1.x ([#2729](https://github.com/tailwindlabs/tailwindcss/pull/2729))
-
-## [2.0.0-alpha.5] - 2020-10-30
-
-### Changed
-
-- Upgrade to PostCSS 8 ([59aa484](https://github.com/tailwindlabs/tailwindcss/commit/59aa484dfea0607d96bff6ef41b1150c78576c37))
-
-## [2.0.0-alpha.4] - 2020-10-29
+## [2.0.0]! - 2016-09-30
 
 ### Added
+- [`unambiguous`] rule: report modules that are not unambiguously ES modules.
+- `recommended` shared config. Roughly `errors` and `warnings` mixed together,
+  with some `parserOptions` in the mix. ([#402])
+- `react` shared config: added `jsx: true` to `parserOptions.ecmaFeatures`.
+- Added [`no-webpack-loader-syntax`] rule: forbid custom Webpack loader syntax in imports. ([#586], thanks [@fson]!)
+- Add option `newlines-between: "ignore"` to [`order`] ([#519])
+- Added [`no-unassigned-import`] rule ([#529])
 
-- Support deep merging of arrays of objects under `extend` ([#2700](https://github.com/tailwindlabs/tailwindcss/pull/2700))
+### Breaking
+- [`import/extensions` setting] defaults to `['.js']`. ([#306])
+- [`import/ignore` setting] defaults to nothing, and ambiguous modules are ignored natively. This means importing from CommonJS modules will no longer be reported by [`default`], [`named`], or [`namespace`], regardless of `import/ignore`. ([#270])
+- [`newline-after-import`]: Removed need for an empty line after an inline `require` call ([#570])
+- [`order`]: Default value for `newlines-between` option is now `ignore` ([#519])
 
-## [2.0.0-alpha.3] - 2020-10-27
+### Changed
+- `imports-first` is renamed to [`first`]. `imports-first` alias will continue to
+  exist, but may be removed in a future major release.
+- Case-sensitivity: now specifically (and optionally) reported by [`no-unresolved`].
+  Other rules will ignore case-mismatches on paths on case-insensitive filesystems. ([#311])
+
+### Fixed
+- [`no-internal-modules`]: support `@`-scoped packages ([#577]+[#578], thanks [@spalger])
+
+## [1.16.0] - 2016-09-22
 
 ### Added
+- Added [`no-dynamic-require`] rule: forbid `require()` calls with expressions. ([#567], [#568])
+- Added [`no-internal-modules`] rule: restrict deep package imports to specific folders. ([#485], thanks [@spalger]!)
+- [`extensions`]: allow override of a chosen default with options object ([#555], thanks [@ljharb]!)
 
-- Support flattening deeply nested color objects ([#2148](https://github.com/tailwindlabs/tailwindcss/pull/2148))
-- Support defining presets as functions ([#2680](https://github.com/tailwindlabs/tailwindcss/pull/2680))
+### Fixed
+- [`no-named-as-default`] no longer false-positives on `export default from '...'` ([#566], thanks [@preco21])
+- [`default`]: allow re-export of values from ignored files as default ([#545], thanks [@skyrpex])
 
-### Changed
-
-- Merge `extend` objects deeply by default ([#2679](https://github.com/tailwindlabs/tailwindcss/pull/2679))
-- Rename `flex-no-wrap` to `flex-nowrap` ([#2676](https://github.com/tailwindlabs/tailwindcss/pull/2676))
-
-## [2.0.0-alpha.2] - 2020-10-25
+## [1.15.0] - 2016-09-12
 
 ### Added
+- Added an `allow` option to [`no-nodejs-modules`] to allow exceptions ([#452], [#509]).
+- Added [`no-absolute-path`] rule ([#530], [#538])
+- [`max-dependencies`] for specifying the maximum number of dependencies (both `import` and `require`) a module can have. (see [#489], thanks [@tizmagik])
+- Added glob option to config for [`no-extraneous-dependencies`], after much bikeshedding. Thanks, [@knpwrs]! ([#527])
 
-- Support `extend` in `variants` configuration ([#2651](https://github.com/tailwindlabs/tailwindcss/pull/2651))
-- Add `max-w-prose` class by default ([#2574](https://github.com/tailwindlabs/tailwindcss/pull/2574))
+### Fixed
+- [`no-named-as-default-member`] Allow default import to have a property named "default" ([#507], [#508], thanks [@jquense] for both!)
 
-### Changed
-
-- Revert use of logical properties for `space` and `divide` utilities ([#2644](https://github.com/tailwindlabs/tailwindcss/pull/2644))
-- `space` and `divide` utilities ignore elements with `[hidden]` now instead of only ignoring `template` elements ([#2642](https://github.com/tailwindlabs/tailwindcss/pull/2642))
-- Set default font on `body`, not just `html` ([#2643](https://github.com/tailwindlabs/tailwindcss/pull/2643))
-- Automatically prefix keyframes and animation names when a prefix is configured ([#2621](https://github.com/tailwindlabs/tailwindcss/pull/2621), [#2641](https://github.com/tailwindlabs/tailwindcss/pull/2641))
-- Rename `whitespace-no-wrap` to `whitespace-nowrap` ([#2664](https://github.com/tailwindlabs/tailwindcss/pull/2664))
-
-## [1.9.6] - 2020-10-23
-
-### Changed
-
-- The `presets` feature had unexpected behavior where a preset config without its own `presets` key would not extend the default config. ([#2662](https://github.com/tailwindlabs/tailwindcss/pull/2662))
-
-  If you were depending on this unexpected behavior, just add `presets: []` to your own preset to exclude the default configuration.
-
-## [2.0.0-alpha.1] - 2020-10-20
+## [1.14.0] - 2016-08-22
 
 ### Added
-
-- Added dark mode support ([#2279](https://github.com/tailwindlabs/tailwindcss/pull/2279), [#2631](https://github.com/tailwindlabs/tailwindcss/pull/2631))
-- Added `overflow-ellipsis` and `overflow-clip` utilities ([#1289](https://github.com/tailwindlabs/tailwindcss/pull/1289))
-- Add `transform-gpu` to force hardware acceleration on transforms when beneficial ([#1380](https://github.com/tailwindlabs/tailwindcss/pull/1380))
-- Extended spacing scale ([#2630](https://github.com/tailwindlabs/tailwindcss/pull/2630))
-- Add spacing scale to `inset` plugin ([#2630](https://github.com/tailwindlabs/tailwindcss/pull/2630))
-- Enable useful relative sizes for more plugins ([#2630](https://github.com/tailwindlabs/tailwindcss/pull/2630))
-- Extend font size scale ([#2609](https://github.com/tailwindlabs/tailwindcss/pull/2609), [#2619](https://github.com/tailwindlabs/tailwindcss/pull/2619))
-- Support using `@apply` with complex classes ([#2159](https://github.com/tailwindlabs/tailwindcss/pull/2159))
-- Add new `2xl` breakpoint ([#2609](https://github.com/tailwindlabs/tailwindcss/pull/2609))
-- Add default line-height values for font-size utilities ([#2609](https://github.com/tailwindlabs/tailwindcss/pull/2609))
-- Support defining theme values using arrays wherever it makes sense (box-shadow, transition-property, etc.) ([e13f083c4](https://github.com/tailwindlabs/tailwindcss/commit/e13f083c4bc48bf9870d27c966136a9584943127))
-- Enable `group-hover` for color utilities by default ([28985b6](https://github.com/tailwindlabs/tailwindcss/commit/28985b6cd592e72d4849fdb9ce97eb045744e09c))
-- Enable `focus` for z-index utilities by default ([ae5b3d3](https://github.com/tailwindlabs/tailwindcss/commit/ae5b3d312d5000ae9c2065001f3df7add72dc365))
-
-### Changed
-
-- New `@apply` implementation, slight backwards incompatibilities with previous behavior ([#2159](https://github.com/tailwindlabs/tailwindcss/pull/2159))
-- Move `truncate` class to `textOverflow` core plugin ([#2562](https://github.com/tailwindlabs/tailwindcss/pull/2562))
-- Removed `target` feature and dropped any compatibility with IE 11 ([#2571](https://github.com/tailwindlabs/tailwindcss/pull/2571))
-- Switch `normalize.css` to `modern-normalize` ([#2572](https://github.com/tailwindlabs/tailwindcss/pull/2572))
-- Remove `scrolling-touch` and `scrolling-auto` utilities ([#2573](https://github.com/tailwindlabs/tailwindcss/pull/2573))
-- Change special use of 'default' in config to 'DEFAULT' ([#2580](https://github.com/tailwindlabs/tailwindcss/pull/2580))
-- Drop support for Node 8 and 10 ([#2582](https://github.com/tailwindlabs/tailwindcss/pull/2582))
-- Modernize default system font stacks ([#1711](https://github.com/tailwindlabs/tailwindcss/pull/1711))
-- Upgrade to PurgeCSS 3.0
-- ~~Upgrade to PostCSS 8.0~~ Reverted for now
-- Use logical properties for `space` and `divide` utilities ([#1883](https://github.com/tailwindlabs/tailwindcss/pull/1883))
-- Make `theme` retrieve the expected resolved value when theme value is complex ([e13f083c4](https://github.com/tailwindlabs/tailwindcss/commit/e13f083c4bc48bf9870d27c966136a9584943127))
-- Adjust default font-size scale to include 60px instead of 64px ([#2619](https://github.com/tailwindlabs/tailwindcss/pull/2619))
-- Update default colors in Preflight to match new color palette ([#2633](https://github.com/tailwindlabs/tailwindcss/pull/2633))
-
-## [1.9.5] - 2020-10-19
+- [`import/parsers` setting]: parse some dependencies (i.e. TypeScript!) with a different parser than the ESLint-configured parser. ([#503])
 
 ### Fixed
+- [`namespace`] exception for get property from `namespace` import, which are re-export from commonjs module ([#499] fixes [#416], thanks [@wKich])
 
-- Fix issue where using `theme` with default line-heights did not resolve correctly
-
-## [1.9.4] - 2020-10-17
-
-### Fixed
-
-- Fix issue changing plugins defined using the `withOptions` API would not trigger rebuilds in watch processes
-
-## [1.9.3] - 2020-10-16
-
-### Fixed
-
-- Fix issue where `tailwindcss init --full` scaffolded a corrupt config file (https://github.com/tailwindlabs/tailwindcss/issues/2556)
-
-### Changed
-
-- Remove console warnings about upcoming breaking changes
-
-## [1.9.2] - 2020-10-14
-
-### Fixed
-
-- Merge plugins when merging config with preset ([#2561](https://github.com/tailwindlabs/tailwindcss/pulls/#2561)
-- Use `word-wrap` and `overflow-wrap` together, not one or the other since `word-wrap` is IE-only
-
-## [1.9.1] - 2020-10-14
-
-### Fixed
-
-- Don't import `corePlugins` in `resolveConfig` to avoid bundling browser-incompatible code ([#2548](https://github.com/tailwindlabs/tailwindcss/pull/2548))
-
-## [1.9.0] - 2020-10-12
+## [1.13.0] - 2016-08-11
 
 ### Added
-
-- Add new `presets` config option ([#2474](https://github.com/tailwindlabs/tailwindcss/pull/2474))
-- Scaffold new `tailwind.config.js` files with available `future` flags commented out ([#2379](https://github.com/tailwindlabs/tailwindcss/pull/2379))
-- Add `col-span-full` and `row-span-full` ([#2471](https://github.com/tailwindlabs/tailwindcss/pull/2471))
-- Make `outline` configurable, `outline-none` more accessible by default, and add `outline-black` and `outline-white` ([#2460](https://github.com/tailwindlabs/tailwindcss/pull/2460))
-- Add additional small `rotate` and `skew` values ([#2528](https://github.com/tailwindlabs/tailwindcss/pull/2528))
-- Add `xl`, `2xl`, and `3xl` border radius values ([#2529](https://github.com/tailwindlabs/tailwindcss/pull/2529))
-- Add new utilities for `grid-auto-columns` and `grid-auto-rows` ([#2531](https://github.com/tailwindlabs/tailwindcss/pull/2531))
-- Promote `defaultLineHeights` and `standardFontWeights` from experimental to future
-
-### Fixed
-
-- Don't escape keyframe values ([#2432](https://github.com/tailwindlabs/tailwindcss/pull/2432))
-- Use `word-wrap` instead of `overflow-wrap` in `ie11` target mode ([#2391](https://github.com/tailwindlabs/tailwindcss/pull/2391))
-
-### Experimental
-
-- Add experimental `2xl` breakpoint ([#2468](https://github.com/tailwindlabs/tailwindcss/pull/2468))
-- Rename `{u}-max-content` and `{u}-min-content` utilities to `{u}-max` and `{u}-min` in experimental extended spacing scale ([#2532](https://github.com/tailwindlabs/tailwindcss/pull/2532))
-- Support disabling dark mode variants globally ([#2530](https://github.com/tailwindlabs/tailwindcss/pull/2530))
-
-## [1.8.13] - 2020-10-09
-
-### Fixed
-
-- Support defining colors as closures even when opacity variables are not supported ([#2536](https://github.com/tailwindlabs/tailwindcss/pull/2515))
-
-## [1.8.12] - 2020-10-07
-
-### Fixed
-
-- Reset color opacity variable in utilities generated using closure colors ([#2515](https://github.com/tailwindlabs/tailwindcss/pull/2515))
-
-## [1.8.11] - 2020-10-06
-
-- Make `tailwindcss.plugin` work in ESM environments for reasons
-
-## [1.8.10] - 2020-09-14
-
-### Fixed
-
-- Prevent new `dark` experiment from causing third-party `dark` variants to inherit stacking behavior ([#2382](https://github.com/tailwindlabs/tailwindcss/pull/2382))
-
-## [1.8.9] - 2020-09-13
-
-### Fixed
-
-- Add negative spacing values to inset plugin in the `extendedSpacingScale` experiment ([#2358](https://github.com/tailwindlabs/tailwindcss/pull/2358))
-- Fix issue where `!important` was stripped from declarations within rules that used `@apply` with `applyComplexClasses` ([#2376](https://github.com/tailwindlabs/tailwindcss/pull/2376))
+- `allowComputed` option for [`namespace`] rule. If set to `true`, won't report
+  computed member references to namespaces. (see [#456])
 
 ### Changed
-
-- Add `future` section to config stubs ([#2372](https://github.com/tailwindlabs/tailwindcss/pull/2372), [3090b98](https://github.com/tailwindlabs/tailwindcss/commit/3090b98ece766b1046abe5bbaa94204e811f7fac))
-
-## [1.8.8] - 2020-09-11
+- Modified [`no-nodejs-modules`] error message to include the module's name ([#453], [#461])
 
 ### Fixed
+- [`import/extensions` setting] is respected in spite of the appearance of imports
+  in an imported file. (fixes [#478], thanks [@rhys-vdw])
 
-- Register dark mode plugin outside of `resolveConfig` code path ([#2368](https://github.com/tailwindlabs/tailwindcss/pull/2368))
-
-## [1.8.7] - 2020-09-10
-
-### Fixed
-
-- Fix issue where classes in escaped strings (like `class=\"block\"`) weren't extracted properly for purging ([#2364](https://github.com/tailwindlabs/tailwindcss/pull/2364))
-
-## [1.8.6] - 2020-09-09
-
-### Fixed
-
-- Fix issue where container padding not applied when using object syntax ([#2353](https://github.com/tailwindlabs/tailwindcss/pull/2353))
-
-## [1.8.5] - 2020-09-07
-
-### Fixed
-
-- Fix issue where `resolveConfig` didn't take into account configs added by feature flags ([#2347](https://github.com/tailwindlabs/tailwindcss/pull/2347))
-
-## [1.8.4] - 2020-09-06
-
-### Fixed
-
-- Fix [issue](https://github.com/tailwindlabs/tailwindcss/issues/2258) where inserting extra PurgeCSS control comments could break integrated PurgeCSS support
-- Fix issue where dark variant in 'class' mode was incompatible with 'group-hover' variant ([#2337](https://github.com/tailwindlabs/tailwindcss/pull/2337))
-- Support basic nesting structure with `@apply` when using the `applyComplexClasses` experiment ([#2271](https://github.com/tailwindlabs/tailwindcss/pull/2271))
-
-### Changed
-
-- Rename `font-hairline` and `font-thin` to `font-thin` and `font-extralight` behind `standardFontWeights` flag (experimental until v1.9.0) ([#2333](https://github.com/tailwindlabs/tailwindcss/pull/2333))
-
-## [1.8.3] - 2020-09-05
-
-### Fixed
-
-- Fix issue where `font-variant-numeric` utilities would break in combination with most CSS minifier configurations ([f3660ce](https://github.com/tailwindlabs/tailwindcss/commit/f3660ceed391cfc9390ca4ea1a729a955e64b895))
-- Only warn about `conservative` purge mode being deprecated once per process ([58781b5](https://github.com/tailwindlabs/tailwindcss/commit/58781b517daffbaf80fc5c0791d311f53b2d67d8))
-
-## [1.8.2] - 2020-09-04
-
-### Fixed
-
-- Fix bug where dark mode variants would cause an error if you had a `plugins` array in your config ([#2322](https://github.com/tailwindlabs/tailwindcss/pull/2322))
-
-## [1.8.1] - 2020-09-04
-
-### Fixed
-
-- Fix bug in the new font-variant-numeric utilities which broke the whole rule ([#2318](https://github.com/tailwindlabs/tailwindcss/pull/2318))
-- Fix bug while purging ([#2320](https://github.com/tailwindlabs/tailwindcss/pull/2320))
-
-## [1.8.0] - 2020-09-04
+## [1.12.0] - 2016-07-26
 
 ### Added
+- [`import/external-module-folders` setting]: a possibility to configure folders for "external" modules ([#444], thanks [@zloirock])
 
-- Dark mode variant (experimental) ([#2279](https://github.com/tailwindlabs/tailwindcss/pull/2279))
-- New `preserveHtmlElements` option for `purge` ([#2283](https://github.com/tailwindlabs/tailwindcss/pull/2283))
-- New `layers` mode for `purge` ([#2288](https://github.com/tailwindlabs/tailwindcss/pull/2288))
-- New `font-variant-numeric` utilities ([#2305](https://github.com/tailwindlabs/tailwindcss/pull/2305))
-- New `place-items`, `place-content`, `place-self`, `justify-items`, and `justify-self` utilities ([#2306](https://github.com/tailwindlabs/tailwindcss/pull/2306))
-- Support configuring variants as functions ([#2309](https://github.com/tailwindlabs/tailwindcss/pull/2309))
-
-### Changed
-
-- CSS within `@layer` at-rules are now grouped with the corresponding `@tailwind` at-rule ([#2312](https://github.com/tailwindlabs/tailwindcss/pull/2312))
-
-### Deprecated
-
-- `conservative` purge mode, deprecated in favor of `layers`
-
-## [1.7.6] - 2020-08-29
+## [1.11.1] - 2016-07-20
 
 ### Fixed
+- [`newline-after-import`] exception for `switch` branches with `require`s iff parsed as `sourceType:'module'`.
+  (still [#441], thanks again [@ljharb])
 
-- Fix bug where the new experimental `@apply` implementation broke when applying a variant class with the important option globally enabled
-
-## [1.7.5] - 2020-08-28
-
-### Changed
-
-- Update lodash to latest to silence security warnings
-
-## [1.7.4] - 2020-08-26
+## [1.11.0] - 2016-07-17
 
 ### Added
-
-- Add new -p flag to CLI to quickly scaffold a `postcss.config.js` file
-
-### Changed
-
-- Make `@apply` insensitive to whitespace in the new `applyComplexClasses` experiment
+- Added an `peerDependencies` option to [`no-extraneous-dependencies`] to allow/forbid peer dependencies ([#423], [#428], thanks [@jfmengels]!).
 
 ### Fixed
+- [`newline-after-import`] exception for multiple `require`s in an arrow
+  function expression (e.g. `() => require('a') || require('b')`). ([#441], thanks [@ljharb])
 
-- Fix bug where the new `applyComplexClasses` experiment didn't behave as expected with rules with multiple selectors, like `.foo, .bar { color: red }`
-
-## [1.7.3] - 2020-08-20
-
-### Changed
-
-- Log feature flag notices to stderr instead of stdout to preserve compatibility with pipe-based build systems
-- Add missing bg-none utility for disabling background images
+## [1.10.3] - 2016-07-08
 
 ### Fixed
+- removing `Symbol` dependencies (i.e. `for-of` loops) due to Node 0.10 polyfill
+  issue (see [#415]). Should not make any discernible semantic difference.
 
-- Fix bug that prevented defining colors as closures when the `gradientColorStops` plugin was enabled
+## [1.10.2] - 2016-07-04
 
-## [1.7.2] - 2020-08-19
+### Fixed
+- Something horrible happened during `npm prepublish` of 1.10.1.
+  Several `rm -rf node_modules && npm i` and `gulp clean && npm prepublish`s later, it is rebuilt and republished as 1.10.2. Thanks [@rhettlivingston] for noticing and reporting!
+
+## [1.10.1] - 2016-07-02 [YANKED]
 
 ### Added
+- Officially support ESLint 3.x. (peerDependencies updated to `2.x - 3.x`)
 
-- Reuse generated CSS as much as possible in long-running processes instead of needlessly recalculating
-
-## [1.7.1] - 2020-08-28
-
-### Changed
-
-- Don't issue duplicate flag notices in long-running build processes
-
-## [1.7.0] - 2020-08-28
+## [1.10.0] - 2016-06-30
 
 ### Added
-
-- Gradients
-- New background-clip utilities
-- New `contents` display utility
-- Default letter-spacing per font-size
-- Divide border styles
-- Access entire config object from plugins
-- Define colors as closures
-- Use `@apply` with variants and other complex classes (experimental)
-- New additional color-palette (experimental)
-- Extended spacing scale (experimental)
-- Default line-heights per font-size by default (experimental)
-- Extended font size scale (experimental)
-
-### Deprecated
-
-- Deprecated gap utilities
-
-## [1.6.3] - 2020-08-18
+- Added new rule [`no-restricted-paths`]. ([#155]/[#371], thanks [@lo1tuma])
+- [`import/core-modules` setting]: allow configuration of additional module names,
+  to be treated as builtin modules (a la `path`, etc. in Node). ([#275] + [#365], thanks [@sindresorhus] for driving)
+- React Native shared config (based on comment from [#283])
 
 ### Fixed
+- Fixed crash with `newline-after-import` related to the use of switch cases. (fixes [#386], thanks [@ljharb] for reporting) ([#395])
 
-- Fixes issue where motion-safe and motion-reduce variants didn't stack correctly with group-hover variants
-
-## [1.6.2] - 2020-08-03
-
-### Fixed
-
-- Fixes issue where `@keyframes` respecting the important option would break animations in Chrome
-
-## [1.6.1] - 2020-08-02
+## [1.9.2] - 2016-06-21
 
 ### Fixed
+- Issues with ignored/CJS files in [`export`] and [`no-deprecated`] rules. ([#348], [#370])
 
-- Fixes an issue where animation keyframes weren't included in the build without @tailwind base (#2108)
+## [1.9.1] - 2016-06-16
 
-## [1.6.0] - 2020-07-28
+### Fixed
+- Reordered precedence for loading resolvers. ([#373])
+
+## [1.9.0] - 2016-06-10
 
 ### Added
-
-- Animation support
-- New `prefers-reduced-motion` variants
-- New `overscroll-behaviour` utilities
-- Generate CSS without an input file
-
-## [1.5.2] - 2020-07-21
+- Added support TomDoc comments to [`no-deprecated`]. ([#321], thanks [@josh])
+- Added support for loading custom resolvers ([#314], thanks [@le0nik])
 
 ### Fixed
+- [`prefer-default-export`] handles `export function` and `export const` in same file ([#359], thanks [@scottnonnenberg])
 
-- Fixes issue where you could no longer use `@apply` with unprefixed class names if you had configured a prefix
-
-## [1.5.1] - 2020-07-15
+## [1.8.1] - 2016-05-23
 
 ### Fixed
+- `export * from 'foo'` now properly ignores a `default` export from `foo`, if any. ([#328]/[#332], thanks [@jkimbo])
+  This impacts all static analysis of imported names. ([`default`], [`named`], [`namespace`], [`export`])
+- Make [`order`]'s `newline-between` option handle multiline import statements ([#313], thanks [@singles])
+- Make [`order`]'s `newline-between` option handle not assigned import statements ([#313], thanks [@singles])
+- Make [`order`]'s `newline-between` option ignore `require` statements inside object literals ([#313], thanks [@singles])
+- [`prefer-default-export`] properly handles deep destructuring, `export * from ...`, and files with no exports. ([#342]+[#343], thanks [@scottnonnenberg])
 
-- Fixes accidental breaking change where adding component variants using the old manual syntax (as recommended in the docs) stopped working
-
-## [1.5.0] - 2020-07-15
+## [1.8.0] - 2016-05-11
 
 ### Added
-
-- Component `variants` support
-- Responsive `container` variants
-- New `focus-visible` variant
-- New `checked` variant
-
-## v0.0.0-658250a96 - 2020-07-12 [YANKED]
-
-No release notes
-
-## [1.4.6] - 2020-05-08
-
-### Changed
-
-- Explicitly error when using a class as the important config option instead of just generating the wrong CSS
-
-## [1.4.5] - 2020-05-06
+- [`prefer-default-export`], new rule. ([#308], thanks [@gavriguy])
 
 ### Fixed
+- Ignore namespace / ES7 re-exports in [`no-mutable-exports`]. ([#317], fixed by [#322]. thanks [@borisyankov] + [@jfmengels])
+- Make [`no-extraneous-dependencies`] handle scoped packages ([#316], thanks [@jfmengels])
 
-- Fix bug where the `divideColor` plugin was using the wrong '' in IE11 target mode
-
-## [1.4.4] - 2020-05-01
-
-### Fixed
-
-- Fix bug where target: 'browserslist' didn't work, only `target: ['browserslist', {...}]` did
-
-## [1.4.3] - 2020-05-01
-
-### Changed
-
-- Don't generate unnecessary CSS in color plugins when color opacity utilities are disabled
-
-## [1.4.2] - 2020-05-01
-
-### Fixed
-
-- Fix issue where `purge: { enabled: false }` was ignored, add `purge: false` shorthand
-
-## [1.4.1] - 2020-04-30
-
-### Changed
-
-- Improve built-in PurgeCSS extractor to better support Haml and Slim templates
-
-## [1.4.0] - 2020-04-29
+## [1.7.0] - 2016-05-06
 
 ### Added
+- [`newline-after-import`], new rule. ([#245], thanks [@singles])
+- Added an `optionalDependencies` option to [`no-extraneous-dependencies`] to allow/forbid optional dependencies ([#266], thanks [@jfmengels]).
+- Added `newlines-between` option to [`order`] rule ([#298], thanks [@singles])
+- add [`no-mutable-exports`] rule ([#290], thanks [@josh])
+- [`import/extensions` setting]: a list of file extensions to parse as modules
+  and search for `export`s. If unspecified, all extensions are considered valid (for now).
+  In v2, this will likely default to `['.js', MODULE_EXT]`. ([#297], to fix [#267])
 
-- New color opacity utilities
-- Built-in PurgeCSS
-- IE 11 target mode (experimental)
+### Fixed
+- [`extensions`]: fallback to source path for extension enforcement if imported
+  module is not resolved. Also, never report for builtins (i.e. `path`). ([#296])
 
-## [1.3.5] - 2020-04-23
+## [1.6.1] - 2016-04-28
+
+### Fixed
+- [`no-named-as-default-member`]: don't crash on rest props. ([#281], thanks [@SimenB])
+- support for Node 6: don't pass `null` to `path` functions.
+  Thanks to [@strawbrary] for bringing this up ([#272]) and adding OSX support to the Travis
+  config ([#288]).
+
+## [1.6.0] - 2016-04-25
+
+### Added
+- add [`no-named-as-default-member`] to `warnings` canned config
+- add [`no-extraneous-dependencies`] rule ([#241], thanks [@jfmengels])
+- add [`extensions`] rule ([#250], thanks [@lo1tuma])
+- add [`no-nodejs-modules`] rule ([#261], thanks [@jfmengels])
+- add [`order`] rule ([#247], thanks [@jfmengels])
+- consider `resolve.fallback` config option in the webpack resolver ([#254])
+
+### Changed
+- [`imports-first`] now allows directives (i.e. `'use strict'`) strictly before
+  any imports ([#256], thanks [@lemonmade])
+
+### Fixed
+- [`named`] now properly ignores the source module if a name is re-exported from
+  an ignored file (i.e. `node_modules`). Also improved the reported error. (thanks to [@jimbolla] for reporting)
+- [`no-named-as-default-member`] had a crash on destructuring in loops (thanks for heads up from [@lemonmade])
+
+## [1.5.0] - 2016-04-18
+
+### Added
+- report resolver errors at the top of the linted file
+- add [`no-namespace`] rule ([#239], thanks [@singles])
+- add [`no-named-as-default-member`] rule ([#243], thanks [@dmnd])
+
+### Changed
+- Rearranged rule groups in README in preparation for more style guide rules
+
+### Removed
+- support for Node 0.10, via `es6-*` ponyfills. Using native Map/Set/Symbol.
+
+## [1.4.0] - 2016-03-25
+
+### Added
+- Resolver plugin interface v2: more explicit response format that more clearly covers the found-but-core-module case, where there is no path.
+  Still backwards-compatible with the original version of the resolver spec.
+- [Resolver documentation](./resolvers/README.md)
+
+### Changed
+- using `package.json/files` instead of `.npmignore` for package file inclusion ([#228], thanks [@mathieudutour])
+- using `es6-*` ponyfills instead of `babel-runtime`
+
+## [1.3.0] - 2016-03-20
+
+Major perf improvements. Between parsing only once and ignoring gigantic, non-module `node_modules`,
+there is very little added time.
+
+My test project takes 17s to lint completely, down from 55s, when using the
+memoizing parser, and takes only 27s with naked `babel-eslint` (thus, reparsing local modules).
+
+### Added
+- This change log ([#216])
+- Experimental memoizing [parser](./memo-parser/README.md)
+
+### Fixed
+- Huge reduction in execution time by _only_ ignoring [`import/ignore` setting] if
+  something that looks like an `export` is detected in the module content.
+
+## [1.2.0] - 2016-03-19
+
+Thanks [@lencioni] for identifying a huge amount of rework in resolve and kicking
+off a bunch of memoization.
+
+I'm seeing 62% improvement over my normal test codebase when executing only
+[`no-unresolved`] in isolation, and ~35% total reduction in lint time.
+
+### Changed
+- added caching to core/resolve via [#214], configured via [`import/cache` setting]
+
+## [1.1.0] - 2016-03-15
+
+### Added
+- Added an [`ignore`](./docs/rules/no-unresolved.md#ignore) option to [`no-unresolved`] for those pesky files that no resolver can find. (still prefer enhancing the Webpack and Node resolvers to using it, though). See [#89] for details.
+
+## [1.0.4] - 2016-03-11
+
+### Changed
+- respect hoisting for deep namespaces ([`namespace`]/[`no-deprecated`]) ([#211])
+
+### Fixed
+- don't crash on self references ([#210])
+- correct cache behavior in `eslint_d` for deep namespaces ([#200])
+
+## [1.0.3] - 2016-02-26
+
+### Changed
+- no-deprecated follows deep namespaces ([#191])
+
+### Fixed
+- [`namespace`] no longer flags modules with only a default export as having no names. (ns.default is valid ES6)
+
+## [1.0.2] - 2016-02-26
+
+### Fixed
+- don't parse imports with no specifiers ([#192])
+
+## [1.0.1] - 2016-02-25
+
+### Fixed
+- export `stage-0` shared config
+- documented [`no-deprecated`]
+- deep namespaces are traversed regardless of how they get imported ([#189])
+
+## [1.0.0] - 2016-02-24
+
+### Added
+- [`no-deprecated`]: WIP rule to let you know at lint time if you're using deprecated functions, constants, classes, or modules.
+
+### Changed
+- [`namespace`]: support deep namespaces ([#119] via [#157])
+
+## [1.0.0-beta.0] - 2016-02-13
+
+### Changed
+- support for (only) ESLint 2.x
+- no longer needs/refers to `import/parser` or `import/parse-options`. Instead, ESLint provides the configured parser + options to the rules, and they use that to parse dependencies.
 
 ### Removed
 
-- Drop `fs-extra` dependency to `^8.0.0` to preserve Node 8 compatibility until Tailwind 2.0
+- `babylon` as default import parser (see Breaking)
 
-### Fixed
-
-- Fix missing unit in calc bug in space plugin (`space-x-0` didn't work for example)
-
-## [1.3.4] - 2020-04-21
-
-### Fixed
-
-- Fix bug where `divide-{x/y}-0` utilities didn't work due to missing unit in `calc` call
-
-## [1.3.3] - 2020-04-21
+## [0.13.0] - 2016-02-08
 
 ### Added
-
-- Add forgotten responsive variants for `space`, `divideWidth`, and `divideColor` utilities
-
-## [1.3.1] - 2020-04-21
-
-### Fixed
-
-- Fix bug where the `space-x` utilities were not being applied correctly due to referencing `--space-y-reverse` instead of `--space-x-reverse`
-
-## [1.3.0] - 2020-04-21
-
-### Added
-
-- New `space` and `divide` layout utilities
-- New `transition-delay` utilities
-- New `group-focus` variant
-- Support for specifying a default line-height for each font-size utility
-- Support for breakpoint-specific padding for `container` class
-- Added `current` to the default color palette
-- New `inline-grid` utility
-- New `flow-root` display utility
-- New `clear-none` utility
-
-## [1.2.0] - 2020-02-05
-
-### Added
-
-- CSS Transition support
-- CSS Transform support
-- CSS Grid support
-- Added `max-w-{screen}` utilities
-- Added `max-w-none` utility
-- Added `rounded-md` utility
-- Added `shadow-sm` utility
-- Added `shadow-xs` utility
-- Added `stroke-width` utilities
-- Added fixed line-height utilities
-- Added additional display utilities for table elements
-- Added box-sizing utilities
-- Added clear utilities
-- Config file dependencies are now watchable
-- Added new `plugin` and `plugin.withOptions` APIs
-
-### Changed
-
-- Allow plugins to extend the user's config
-
-## [1.2.0-canary.8] - 2020-02-05
-
-### Added
-
-- Add additional fixed-size line-height utilities
-
-## [1.2.0-canary.7] - 2020-02-04
+- [`no-commonjs`] rule
+- [`no-amd`] rule
 
 ### Removed
+- Removed vestigial `no-require` rule. [`no-commonjs`] is more complete.
 
-- Remove Inter from font-sans, plan to add later under new class
+## [0.12.2] - 2016-02-06 [YANKED]
 
-## [1.2.0-canary.6] - 2020-02-03
+Unpublished from npm and re-released as 0.13.0. See [#170].
+
+## [0.12.1] - 2015-12-17
+
+### Changed
+- Broke docs for rules out into individual files.
+
+## [0.12.0] - 2015-12-14
+
+### Changed
+- Ignore [`import/ignore` setting] if exports are actually found in the parsed module. Does this to support use of `jsnext:main` in `node_modules` without the pain of managing an allow list or a nuanced deny list.
+
+## [0.11.0] - 2015-11-27
 
 ### Added
-
-- Add system-ui to default font stack
-- Add shadow-xs, increase shadow-sm alpha to 0.05
-- Support import syntax even without postcss-import
-- Alias tailwind bin to tailwindcss
-- Add fill/stroke to transition-colors
-- Add transition-shadow, add box-shadow to default transition
-- Combine gap/columnGap/rowGap
-- Add grid row utilities
-- Add skew utilities
-
-### Changed
-
-- Use font-sans as default font
-
-## [1.2.0-canary.5] - 2020-01-08
-
-### Added
-
-- Adds missing dependency `resolve` which is required for making config dependencies watchable
-
-## [1.2.0-canary.4] - 2020-01-08
-
-### Added
-
-- CSS Transition support
-- CSS Transform support
-- CSS Grid support
-- New `max-w-{screen}` utilities
-- Added `max-w-none` utility
-- Added "Inter" to the default sans-serif font stack
-- Add `rounded-md` utility
-- Add `shadow-sm` utility
-- Added stroke-width utilities
-- Added additional display utilities for table elements
-- Added box-sizing utilities
-- Added clear utilities
-- Config file dependencies are now watchable
-- Allow plugins to extend the user's config
-- Add new `plugin` and `plugin.withOptions` APIs
-
-## [v1.2.0-canary.3] - 2020-01-08 [YANKED]
-
-No release notes
-
-## [1.1.4] - 2019-11-25
-
-### Changed
-
-- Note: Although this is a bugfix it could affect your site if you were working around the bug in your own code by not prefixing the `.group` class. I'm sorry 😞
-
-### Fixed
-
-- Fixes a bug where the `.group` class was not receiving the user's configured prefix when using the `prefix` option
-
-## [1.2.0-canary.1] - 2019-10-22
-
-### Changed
-
-- Don't watch `node_modules` files for changes
-
-### Fixed
-
-- Fixes significant build performance regression in `v1.2.0-canary.0`
-
-## [1.1.3] - 2019-10-22
-
-### Fixed
-
-- Fixes an issue where in some cases function properties in the user's `theme` config didn't receive the second utils argument
-
-## [1.2.0-canary.0] - 2019-10-14
-
-### Added
-
-- Automatically watch all config file dependencies (plugins, design tokens imported from other files, etc.) for changes when build watcher is running
-- Add `justify-evenly` utility
-
-### Changed
-
-- Allow plugins to add their own config file to be resolved with the user's custom config
-
-## [1.1.2] - 2019-08-14
-
-### Fixed
-
-- Fixes a bug with horizontal rules where they were displayed with a 2px border instead of a 1px border
-- Fixes a bug with horizontal rules where they were rendered with default top/bottom margin
-
-## [1.1.1] - 2019-08-09
-
-### Fixed
-
-- Fixes issue where values like `auto` would fail to make it through the default negative margin config
-
-## [1.1.0] - 2019-08-06
-
-### Added
-
-- Added utilities for screenreader visibility
-- Added utilities for placeholder color
-- First, last, even, and odd child variants
-- Disabled variant
-- Visited variant
-- Increase utility specificity using a scope instead of !important
-- Add hover/focus variants for opacity by default
-- Added `border-double` utility
-- Support negative prefix for boxShadow and letterSpacing plugins
-- Support passing config path via object
-
-### Fixed
-
-- Placeholders no longer have a default opacity
-- Make horizontal rules visible by default
-- Generate correct negative margins when using calc
-
-## [1.0.6] - 2019-08-01
-
-### Fixed
-
-- Fixes issue where modifiers would mutate nested rules
-
-## [1.0.5] - 2019-07-11
-
-### Added
-
-- Support built-in variants for utilities that include pseudo-elements
-
-### Changed
-
-- Update several dependencies, including postcss-js which fixes an issue with using `!important` directly in Tailwind utility plugins
-
-## [1.0.4] - 2019-06-11
-
-### Changed
-
-- Increase precision of percentage width values to avoid 1px rounding issues in grid layouts
-
-## [1.0.3] - 2019-06-01
-
-### Changed
-
-- Throws an error when someone tries to use `@tailwind preflight` instead of `@tailwind base`, this is the source of many support requests
-
-## [1.0.2] - 2019-05-27
-
-### Fixed
-
-- Fixes a bug where `@screen` rules weren't bubbled properly when nested in plugins
-
-## [1.0.1] - 2019-05-13
-
-### Fixed
-
-- Fixes a bug where global variants weren't properly merged
-
-## [1.0.0] - 2019-05-13
-
-No release notes
-
-## [1.0.0-beta.10] - 2019-05-12
-
-### Changed
-
-- Use `9999` and `-9999` for `order-last` and `order-first` utilities respectively
-
-## [1.0.0-beta.9] - 2019-05-12
-
-### Added
-
-- Add `bg-repeat-round` and `bg-repeat-space` utilities
-- Add `select-all` and `select-auto` utilities
-
-### Changed
-
-- Make all utilities responsive by default
-
-## [1.0.0-beta.8] - 2019-04-28
-
-### Added
-
-- Adds `responsive` variants for the new order utilities by default, should have been there all along
-
-## [1.0.0-beta.7] - 2019-04-27
-
-### Fixed
-
-- Fixes a bug where you couldn't extend the margin config
-
-## [1.0.0-beta.6] - 2019-04-27
-
-### Added
-
-- Added support for negative inset (`-top-6`, `-right-4`) and z-index (`-z-10`) utilities, using the same negative key syntax supported by the margin plugin
-- Add missing fractions as well as x/12 fractions to width scale
-- Add `order` utilities
-- Add `cursor-text` class by default
-
-### Changed
-
-- Make it possible to access your fully merged config file in JS
-
-### Removed
-
-- Removed `negativeMargin` plugin, now the regular `margin` plugin supports generating negative classes (like `-mx-6`) by using negative keys in the config, like `-6`
-
-## [1.0.0-beta.5] - 2019-04-18
-
-### Changed
-
-- Make it possible to disable all core plugins using `corePlugins: false`
-- Make it possible to configure a single list of variants that applies to all utility plugins
-- Make it possible to safelist which core plugins should be enabled
-
-### Fixed
-
-- Fix a bug where stroke and fill plugins didn't properly handle the next object syntax for color definitions
-- Fix a bug where you couldn't have comments near `@apply` directives
-
-## [1.0.0-beta.4] - 2019-03-29
-
-### Added
-
-- Add the `container` key to the scaffolded config file when generated with `--full`
-
-### Changed
-
-- Bumps node dependency to 8.9.0 so we can keep our default config file clean, 6.9.0 is EOL next month anyways
-
-### Removed
-
-- Removes `SFMono-Regular` from the beginning of the default monospace font stack, it has no italic support and Menlo looks better anyways
-
-### Fixed
-
-- Fixes an issue where the user's config object was being mutated during processing (only affects @bradlc 😅)
-- Fixes an issue where you couldn't use a closure to define theme sections under `extend`
-
-## [1.0.0-beta.3] - 2019-03-18
-
-### Added
-
-- Support lazy evaluation in `theme.extend`
-
-### Changed
-
-- Use lighter default border color
-- Revert #745 and use `bolder` for strong tags by default instead of `fontWeight.bold`
-
-## [1.0.0-beta.2] - 2019-03-17
-
-### Changed
-
-- Closures in the `theme` section of the config file are now passed a `theme` function instead of an object
-
-### Fixed
-
-- Fix issue where `@screen` didn't work at all 🙃
-
-## [1.0.0-beta.1] - 2019-03-17
-
-### Added
-
-- New config file structure
-- New expanded default color palette
-- New default `maxWidth` scale
-- Added utilities for `list-style-type` and `list-style-position`
-- Added `break-all` utility
-
-### Changed
-
-- `object-position` utilities are now customizable under `theme.objectPosition`
-- `cursor` utilities are now customizable under `theme.cursors`
-- `flex-grow/shrink` utilities are now customizable under `theme.flexGrow/flexShrink`
-- Default variant output position can be customized
-- Extended default line-height scale
-- Extended default letter-spacing scale
-
-## [0.7.4] - 2019-01-23
-
-### Changed
-
-- Update our PostCSS related dependencies
-
-### Fixed
-
-- Fix bug where class names containing a `.`character had the responsive prefix added in the wrong place
-
-## [0.7.3] - 2018-12-03
-
-### Changed
-
-- Update Normalize to v8.0.1
-
-## [0.7.2] - 2018-11-05
-
-### Added
-
-- Add `--no-autoprefixer` option to CLI `build` command
-
-## [0.7.1] - 2018-11-05
-
-### Changed
-
-- Update autoprefixer dependency
-
-## [0.7.0] - 2018-10-31
-
-### Added
-
-- Registering new variants from plugins
-- Variant order can be customized per module
-- Added focus-within variant
-- Fancy CLI updates
-- Option to generate config without comments
-- Make configured prefix optional when using @apply
-- Improve Flexbox behavior in IE 10/11
-
-### Changed
-
-- Variant order in modules is now significant
-- Normalize.css updated to v8.0.0
-- Removed CSS fix for Chrome 62 button border radius change
-
-## [0.6.6] - 2018-09-21
-
-### Changed
-
-- Promote `shadowLookup` from experiment to official feature
-
-## [0.6.5] - 2018-08-18
-
-### Fixed
-
-- Fixes an issue where units were stripped from zero value properties
-
-## [0.6.4] - 2018-07-16
-
-### Fixed
-
-- Fixes an issue where changes to your configuration file were ignored when using `webpack --watch`
-
-## [0.6.3] - 2018-07-11
-
-### Fixed
-
-- Fixes an issue where `@tailwind utilities` generated no output
-
-## [0.6.2] - 2018-03-11
-
-### Added
-
-- Added table layout utilities for styling tables
-- Configuration can now be passed as an object
-- Registering new variants from plugins (experimental)
-- Allow `@apply`-ing classes that aren't defined but would be generated (experimental)
-
-### Changed
-
-- Default config file changes
-
-## [0.6.1] - 2018-06-22
-
-### Fixed
-
-- Fix incorrect box-shadow syntax for the `.shadow-outline` utility 🤦‍♂️
-
-## [0.6.0] - 2018-06-21
-
-### Added
-
-- Added border collapse utilities for styling tables
-- Added more axis-specific overflow utilities
-- Added `.outline-none` utility for suppressing focus styles
-- Added `.shadow-outline` utility as an alternative to default browser focus styles
-- Extended default padding, margin, negative margin, width, and height scales
-- Enable focus and hover variants for more modules by default
-
-### Changed
-
-- Removed default `outline: none !important` styles from focusable but keyboard-inaccessible elements
-- Moved screen prefix for responsive `group-hover` variants
-- Default config file changes
-
-## [0.5.3] - 2018-05-07
-
-### Changed
-
-- Improve sourcemaps for replaced styles like `preflight`
-
-### Fixed
-
-- Fix bug where informational messages were being logged to stdout during build, preventing the ability to use Tailwind's output in Unix pipelines
-
-## [0.5.2] - 2018-03-29
-
-### Fixed
-
-- Fixes an issue with a dependency that had a security vulnerability
-
-## [0.5.1] - 2018-03-13
-
-### Removed
-
-- Reverts a change that renamed the `.roman` class to `.not-italic` due to the fact that it breaks compatibility with cssnext: [postcss/postcss-selector-not#10](https://github.com/postcss/postcss-selector-not/issues/10). We'll stick with `.roman` for now with a plan to switch to `.not-italic` in another breaking version should that issue get resolved in postcss-selector-not.
-
-## [0.5.0] - 2018-03-13
-
-### Added
-
-- Plugin system
-- Added `.sticky position` utility
-- Added `.cursor-wait` and `.cursor-move` utilities
-- Added `.bg-auto` background size utility
-- Background sizes are now customizable
-- Support for active variants
-- Better postcss-import support
-- Configuration options for the `.container` component
-
-### Changed
-
-- The `.container` component is now a built-in plugin
-- State variant precedence changes
-- New config file keys
-- `.overflow-x/y-scroll` now set `overflow: scroll` instead of `overflow: auto`
-- `.roman` renamed to `.not-italic`
-
-## [0.4.3] - 2018-03-13
-
-### Changed
-
-- Use `global.Object` to avoid issues with polyfills when importing the Tailwind config into other JS
-
-## [0.4.2] - 2018-03-01
-
-### Added
-
-- Add support for using a function to define class prefixes in addition to a simple string
-
-### Changed
-
-- Improve the performance of @apply by using a lookup table instead of searching
-
-### Fixed
-
-- Fix an issue where borders couldn't be applied to `img` tags without specifying a border style
-
-## [0.4.1] - 2018-01-22
-
-### Changed
-
-- Make default sans-serif font stack more future proof and safe to use with CSS `font` shorthand
-- Replace stylefmt with Perfectionist to avoid weird stylelint conflicts
-
-## [0.4.0] - 2017-12-15
-
-### Added
-
-- `@apply`'d classes can now be made `!important` explicitly
-
-### Changed
-
-- `@apply` now strips `!important` from any mixed in classes
-- Default color palette tweaks
-
-## [0.3.0] - 2017-12-01
-
-### Added
-
-- Enable/disable modules and control which variants are generated for each
-- Focus variants
-- Group hover variants
-- New `@variants` at-rule
-- Customize the separator character
-- Missing config keys now fallback to their default values
-- New utilities
-
-### Changed
-
-- Lists now have no margins by default
-- `.pin` no longer sets width and height to 100%
-- SVG `fill` no longer defaults to currentColor
-
-## [0.2.2] - 2017-11-19
-
-### Fixed
-
-- Fix issue with dist files not being published due to bug in latest npm
-
-## [0.2.1] - 2017-11-18
-
-### Fixed
-
-- Fix overly specific border-radius reset for Chrome 62 button styles
-
-## [0.2.0] - 2017-11-17
-
-### Added
-
-- Add a custom prefix to all utilities
-- Optionally make all utilities `!important`
-- Round element corners independently
-- Cascading border colors and styles
-
-### Changed
-
-- `auto` is no longer a hard-coded margin value
-- The `defaultConfig` function is now a separate module
-- Rounded utilities now combine position and radius size
-- Border width utilities no longer affect border color/style
-- `@apply` is now very strict about what classes can be applied
-- Add `options` key to your config
-- Spacing, radius, and border width utility declaration order changes
-
-## [0.1.6] - 2017-11-09
-
-### Fixed
-
-- Fix CDN files not being published to npm
-
-## [0.1.5] - 2017-11-08
-
-### Changed
-
-- Apply the same default placeholder styling that's applied to inputs to textareas
-
-### Fixed
-
-- Fix CLI tool not loading config files properly
-
-## [0.1.4] - 2017-11-06
-
-### Added
-
-- Autoprefix dist assets for quick hacking and prototyping
-- Add `my-auto`, `mt-auto`, and `mb-auto` margin utilities
-- Add `sans-serif` to end of default `sans` font stack
-
-### Changed
-
-- If using Webpack, it will now watch your config file changes
-- When running `tailwind init [filename]`, automatically append `.js` to filename if not present
-- Support default fallback value in `config(...)` function, ie. `config('colors.blue', #0000ff)`
-- Don't output empty media queries if Tailwind processes a file that doesn't use Tailwind
-
-### Fixed
-
-- Move list utilities earlier in stylesheet to allow overriding with spacing utilities
-
-## [0.1.3] - 2017-11-02
-
-### Added
-
-- Add new `.scrolling-touch` and `.scrolling-auto` utilities for controlling inertial scroll behavior on WebKit touch devices
-- Generate separate dist files for preflight, utilities, and tailwind for CDN usage
-
-## [0.1.2] - 2017-11-01
-
-### Changed
-
-- Target Node 6.9.0 explicitly (instead of 8.6 implicitly) to support more users
-
-### Fixed
-
-- Fix issue with config option not being respected in `tailwind build`
-
-## [0.1.1] - 2017-11-01
-
-### Fixed
-
-- Fix `tailwind build` CLI command not writing output files
-
-## [0.1.0] - 2017-11-01
-
-### Added
-
-- Everything!
-
-[unreleased]: https://github.com/tailwindlabs/tailwindcss/compare/v3.4.10...HEAD
-[3.4.10]: https://github.com/tailwindlabs/tailwindcss/compare/v3.4.9...v3.4.10
-[3.4.9]: https://github.com/tailwindlabs/tailwindcss/compare/v3.4.8...v3.4.9
-[3.4.8]: https://github.com/tailwindlabs/tailwindcss/compare/v3.4.7...v3.4.8
-[3.4.7]: https://github.com/tailwindlabs/tailwindcss/compare/v3.4.6...v3.4.7
-[3.4.6]: https://github.com/tailwindlabs/tailwindcss/compare/v3.4.5...v3.4.6
-[3.4.5]: https://github.com/tailwindlabs/tailwindcss/compare/v3.4.4...v3.4.5
-[3.4.4]: https://github.com/tailwindlabs/tailwindcss/compare/v3.4.3...v3.4.4
-[3.4.3]: https://github.com/tailwindlabs/tailwindcss/compare/v3.4.2...v3.4.3
-[3.4.2]: https://github.com/tailwindlabs/tailwindcss/compare/v3.4.1...v3.4.2
-[3.4.1]: https://github.com/tailwindlabs/tailwindcss/compare/v3.4.0...v3.4.1
-[3.4.0]: https://github.com/tailwindlabs/tailwindcss/compare/v3.3.7...v3.4.0
-[3.3.7]: https://github.com/tailwindlabs/tailwindcss/compare/v3.3.6...v3.3.7
-[3.3.6]: https://github.com/tailwindlabs/tailwindcss/compare/v3.3.5...v3.3.6
-[3.3.5]: https://github.com/tailwindlabs/tailwindcss/compare/v3.3.4...v3.3.5
-[3.3.4]: https://github.com/tailwindlabs/tailwindcss/compare/v3.3.3...v3.3.4
-[3.3.3]: https://github.com/tailwindlabs/tailwindcss/compare/v3.3.2...v3.3.3
-[3.3.2]: https://github.com/tailwindlabs/tailwindcss/compare/v3.3.1...v3.3.2
-[3.3.1]: https://github.com/tailwindlabs/tailwindcss/compare/v3.3.0...v3.3.1
-[3.3.0]: https://github.com/tailwindlabs/tailwindcss/compare/v3.2.7...v3.3.0
-[3.2.7]: https://github.com/tailwindlabs/tailwindcss/compare/v3.2.6...v3.2.7
-[3.2.6]: https://github.com/tailwindlabs/tailwindcss/compare/v3.2.5...v3.2.6
-[3.2.5]: https://github.com/tailwindlabs/tailwindcss/compare/v3.2.4...v3.2.5
-[3.2.4]: https://github.com/tailwindlabs/tailwindcss/compare/v3.2.3...v3.2.4
-[3.2.3]: https://github.com/tailwindlabs/tailwindcss/compare/v3.2.2...v3.2.3
-[3.2.2]: https://github.com/tailwindlabs/tailwindcss/compare/v3.2.1...v3.2.2
-[3.2.1]: https://github.com/tailwindlabs/tailwindcss/compare/v3.2.0...v3.2.1
-[3.2.0]: https://github.com/tailwindlabs/tailwindcss/compare/v3.1.8...v3.2.0
-[3.1.8]: https://github.com/tailwindlabs/tailwindcss/compare/v3.1.7...v3.1.8
-[3.1.7]: https://github.com/tailwindlabs/tailwindcss/compare/v3.1.6...v3.1.7
-[3.1.6]: https://github.com/tailwindlabs/tailwindcss/compare/v3.1.5...v3.1.6
-[3.1.5]: https://github.com/tailwindlabs/tailwindcss/compare/v3.1.4...v3.1.5
-[3.1.4]: https://github.com/tailwindlabs/tailwindcss/compare/v3.1.3...v3.1.4
-[3.1.3]: https://github.com/tailwindlabs/tailwindcss/compare/v3.1.2...v3.1.3
-[3.1.2]: https://github.com/tailwindlabs/tailwindcss/compare/v3.1.1...v3.1.2
-[3.1.1]: https://github.com/tailwindlabs/tailwindcss/compare/v3.1.0...v3.1.1
-[3.1.0]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.24...v3.1.0
-[3.0.24]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.23...v3.0.24
-[3.0.23]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.22...v3.0.23
-[3.0.22]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.21...v3.0.22
-[3.0.21]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.20...v3.0.21
-[3.0.20]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.19...v3.0.20
-[3.0.19]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.18...v3.0.19
-[3.0.18]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.17...v3.0.18
-[3.0.17]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.16...v3.0.17
-[3.0.16]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.15...v3.0.16
-[3.0.15]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.14...v3.0.15
-[3.0.14]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.13...v3.0.14
-[3.0.13]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.12...v3.0.13
-[3.0.12]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.11...v3.0.12
-[3.0.11]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.10...v3.0.11
-[3.0.10]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.9...v3.0.10
-[3.0.9]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.8...v3.0.9
-[3.0.8]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.7...v3.0.8
-[3.0.7]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.6...v3.0.7
-[3.0.6]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.5...v3.0.6
-[3.0.5]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.4...v3.0.5
-[3.0.4]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.3...v3.0.4
-[3.0.3]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.2...v3.0.3
-[3.0.2]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.1...v3.0.2
-[3.0.1]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.0...v3.0.1
-[3.0.0]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.0-alpha.2...v3.0.0
-[3.0.0-alpha.2]: https://github.com/tailwindlabs/tailwindcss/compare/v3.0.0-alpha.1...v3.0.0-alpha.2
-[3.0.0-alpha.1]: https://github.com/tailwindlabs/tailwindcss/compare/v2.2.19...v3.0.0-alpha.1
-[2.2.19]: https://github.com/tailwindlabs/tailwindcss/compare/v2.2.18...v2.2.19
-[2.2.18]: https://github.com/tailwindlabs/tailwindcss/compare/v2.2.17...v2.2.18
-[2.2.17]: https://github.com/tailwindlabs/tailwindcss/compare/v2.2.16...v2.2.17
-[2.2.16]: https://github.com/tailwindlabs/tailwindcss/compare/v2.2.15...v2.2.16
-[2.2.15]: https://github.com/tailwindlabs/tailwindcss/compare/v2.2.14...v2.2.15
-[2.2.14]: https://github.com/tailwindlabs/tailwindcss/compare/v2.2.13...v2.2.14
-[2.2.13]: https://github.com/tailwindlabs/tailwindcss/compare/v2.2.12...v2.2.13
-[2.2.12]: https://github.com/tailwindlabs/tailwindcss/compare/v2.2.11...v2.2.12
-[2.2.11]: https://github.com/tailwindlabs/tailwindcss/compare/v2.2.10...v2.2.11
-[2.2.10]: https://github.com/tailwindlabs/tailwindcss/compare/v2.2.9...v2.2.10
-[2.2.9]: https://github.com/tailwindlabs/tailwindcss/compare/v2.2.8...v2.2.9
-[2.2.8]: https://github.com/tailwindlabs/tailwindcss/compare/v2.2.7...v2.2.8
-[2.2.7]: https://github.com/tailwindlabs/tailwindcss/compare/v2.2.6...v2.2.7
-[2.2.6]: https://github.com/tailwindlabs/tailwindcss/compare/v2.2.5...v2.2.6
-[2.2.5]: https://github.com/tailwindlabs/tailwindcss/compare/v2.2.4...v2.2.5
-[2.2.4]: https://github.com/tailwindlabs/tailwindcss/compare/v2.2.3...v2.2.4
-[2.2.3]: https://github.com/tailwindlabs/tailwindcss/compare/v2.2.2...v2.2.3
-[2.2.2]: https://github.com/tailwindlabs/tailwindcss/compare/v2.2.1...v2.2.2
-[2.2.1]: https://github.com/tailwindlabs/tailwindcss/compare/v2.2.0...v2.2.1
-[2.2.0]: https://github.com/tailwindlabs/tailwindcss/compare/v2.1.4...v2.2.0
-[2.1.4]: https://github.com/tailwindlabs/tailwindcss/compare/v2.1.3...v2.1.4
-[2.1.3]: https://github.com/tailwindlabs/tailwindcss/compare/v2.1.2...v2.1.3
-[2.1.2]: https://github.com/tailwindlabs/tailwindcss/compare/v2.1.1...v2.1.2
-[2.1.1]: https://github.com/tailwindlabs/tailwindcss/compare/v2.1.0...v2.1.1
-[2.1.0]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.4...v2.1.0
-[2.0.4]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.3...v2.0.4
-[2.0.3]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.2...v2.0.3
-[2.0.2]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.1...v2.0.2
-[2.0.1]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0...v2.0.1
-[2.0.0]: https://github.com/tailwindlabs/tailwindcss/compare/v1.9.6...v2.0.0
-[2.0.0-alpha.25]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.24...v2.0.0-alpha.25
-[2.0.0-alpha.24]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.23...v2.0.0-alpha.24
-[2.0.0-alpha.23]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.22...v2.0.0-alpha.23
-[2.0.0-alpha.22]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.21...v2.0.0-alpha.22
-[2.0.0-alpha.21]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.20...v2.0.0-alpha.21
-[2.0.0-alpha.20]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.19...v2.0.0-alpha.20
-[2.0.0-alpha.19]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.18...v2.0.0-alpha.19
-[2.0.0-alpha.18]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.17...v2.0.0-alpha.18
-[2.0.0-alpha.17]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.16...v2.0.0-alpha.17
-[2.0.0-alpha.16]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.15...v2.0.0-alpha.16
-[2.0.0-alpha.15]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.14...v2.0.0-alpha.15
-[2.0.0-alpha.14]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.13...v2.0.0-alpha.14
-[2.0.0-alpha.13]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.12...v2.0.0-alpha.13
-[2.0.0-alpha.12]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.11...v2.0.0-alpha.12
-[2.0.0-alpha.11]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.10...v2.0.0-alpha.11
-[2.0.0-alpha.10]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.9...v2.0.0-alpha.10
-[2.0.0-alpha.9]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.8...v2.0.0-alpha.9
-[2.0.0-alpha.8]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.7...v2.0.0-alpha.8
-[2.0.0-alpha.7]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.6...v2.0.0-alpha.7
-[2.0.0-alpha.6]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.5...v2.0.0-alpha.6
-[2.0.0-alpha.5]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.4...v2.0.0-alpha.5
-[2.0.0-alpha.4]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.3...v2.0.0-alpha.4
-[2.0.0-alpha.3]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.2...v2.0.0-alpha.3
-[2.0.0-alpha.2]: https://github.com/tailwindlabs/tailwindcss/compare/v2.0.0-alpha.1...v2.0.0-alpha.2
-[1.9.6]: https://github.com/tailwindlabs/tailwindcss/compare/v1.9.5...v1.9.6
-[2.0.0-alpha.1]: https://github.com/tailwindlabs/tailwindcss/compare/v1.9.5...v2.0.0-alpha.1
-[1.9.5]: https://github.com/tailwindlabs/tailwindcss/compare/v1.9.4...v1.9.5
-[1.9.4]: https://github.com/tailwindlabs/tailwindcss/compare/v1.9.3...v1.9.4
-[1.9.3]: https://github.com/tailwindlabs/tailwindcss/compare/v1.9.2...v1.9.3
-[1.9.2]: https://github.com/tailwindlabs/tailwindcss/compare/v1.9.1...v1.9.2
-[1.9.1]: https://github.com/tailwindlabs/tailwindcss/compare/v1.9.0...v1.9.1
-[1.9.0]: https://github.com/tailwindlabs/tailwindcss/compare/v1.8.13...v1.9.0
-[1.8.13]: https://github.com/tailwindlabs/tailwindcss/compare/v1.8.12...v1.8.13
-[1.8.12]: https://github.com/tailwindlabs/tailwindcss/compare/v1.8.11...v1.8.12
-[1.8.11]: https://github.com/tailwindlabs/tailwindcss/compare/v1.8.10...v1.8.11
-[1.8.10]: https://github.com/tailwindlabs/tailwindcss/compare/v1.8.9...v1.8.10
-[1.8.9]: https://github.com/tailwindlabs/tailwindcss/compare/v1.8.8...v1.8.9
-[1.8.8]: https://github.com/tailwindlabs/tailwindcss/compare/v1.8.7...v1.8.8
-[1.8.7]: https://github.com/tailwindlabs/tailwindcss/compare/v1.8.6...v1.8.7
-[1.8.6]: https://github.com/tailwindlabs/tailwindcss/compare/v1.8.5...v1.8.6
-[1.8.5]: https://github.com/tailwindlabs/tailwindcss/compare/v1.8.4...v1.8.5
-[1.8.4]: https://github.com/tailwindlabs/tailwindcss/compare/v1.8.3...v1.8.4
-[1.8.3]: https://github.com/tailwindlabs/tailwindcss/compare/v1.8.2...v1.8.3
-[1.8.2]: https://github.com/tailwindlabs/tailwindcss/compare/v1.8.1...v1.8.2
-[1.8.1]: https://github.com/tailwindlabs/tailwindcss/compare/v1.8.0...v1.8.1
-[1.8.0]: https://github.com/tailwindlabs/tailwindcss/compare/v1.7.6...v1.8.0
-[1.7.6]: https://github.com/tailwindlabs/tailwindcss/compare/v1.7.5...v1.7.6
-[1.7.5]: https://github.com/tailwindlabs/tailwindcss/compare/v1.7.4...v1.7.5
-[1.7.4]: https://github.com/tailwindlabs/tailwindcss/compare/v1.7.3...v1.7.4
-[1.7.3]: https://github.com/tailwindlabs/tailwindcss/compare/v1.7.2...v1.7.3
-[1.7.2]: https://github.com/tailwindlabs/tailwindcss/compare/v1.7.1...v1.7.2
-[1.7.1]: https://github.com/tailwindlabs/tailwindcss/compare/v1.7.0...v1.7.1
-[1.7.0]: https://github.com/tailwindlabs/tailwindcss/compare/v1.6.3...v1.7.0
-[1.6.3]: https://github.com/tailwindlabs/tailwindcss/compare/v1.6.2...v1.6.3
-[1.6.2]: https://github.com/tailwindlabs/tailwindcss/compare/v1.6.1...v1.6.2
-[1.6.1]: https://github.com/tailwindlabs/tailwindcss/compare/v1.6.0...v1.6.1
-[1.6.0]: https://github.com/tailwindlabs/tailwindcss/compare/v1.5.2...v1.6.0
-[1.5.2]: https://github.com/tailwindlabs/tailwindcss/compare/v1.5.1...v1.5.2
-[1.5.1]: https://github.com/tailwindlabs/tailwindcss/compare/v1.5.0...v1.5.1
-[1.5.0]: https://github.com/tailwindlabs/tailwindcss/compare/v1.4.6...v1.5.0
-[1.4.6]: https://github.com/tailwindlabs/tailwindcss/compare/v1.4.5...v1.4.6
-[1.4.5]: https://github.com/tailwindlabs/tailwindcss/compare/v1.4.4...v1.4.5
-[1.4.4]: https://github.com/tailwindlabs/tailwindcss/compare/v1.4.3...v1.4.4
-[1.4.3]: https://github.com/tailwindlabs/tailwindcss/compare/v1.4.2...v1.4.3
-[1.4.2]: https://github.com/tailwindlabs/tailwindcss/compare/v1.4.1...v1.4.2
-[1.4.1]: https://github.com/tailwindlabs/tailwindcss/compare/v1.4.0...v1.4.1
-[1.4.0]: https://github.com/tailwindlabs/tailwindcss/compare/v1.3.5...v1.4.0
-[1.3.5]: https://github.com/tailwindlabs/tailwindcss/compare/v1.3.4...v1.3.5
-[1.3.4]: https://github.com/tailwindlabs/tailwindcss/compare/v1.3.3...v1.3.4
-[1.3.3]: https://github.com/tailwindlabs/tailwindcss/compare/v1.3.1...v1.3.3
-[1.3.1]: https://github.com/tailwindlabs/tailwindcss/compare/v1.3.0...v1.3.1
-[1.3.0]: https://github.com/tailwindlabs/tailwindcss/compare/v1.2.0...v1.3.0
-[1.2.0]: https://github.com/tailwindlabs/tailwindcss/compare/v1.1.4...v1.2.0
-[1.2.0-canary.8]: https://github.com/tailwindlabs/tailwindcss/compare/v1.2.0-canary.7...v1.2.0-canary.8
-[1.2.0-canary.7]: https://github.com/tailwindlabs/tailwindcss/compare/v1.2.0-canary.6...v1.2.0-canary.7
-[1.2.0-canary.6]: https://github.com/tailwindlabs/tailwindcss/compare/v1.2.0-canary.5...v1.2.0-canary.6
-[1.2.0-canary.5]: https://github.com/tailwindlabs/tailwindcss/compare/v1.2.0-canary.4...v1.2.0-canary.5
-[1.2.0-canary.4]: https://github.com/tailwindlabs/tailwindcss/compare/v1.2.0-canary.3...v1.2.0-canary.4
-[1.1.4]: https://github.com/tailwindlabs/tailwindcss/compare/v1.1.3...v1.1.4
-[1.2.0-canary.1]: https://github.com/tailwindlabs/tailwindcss/compare/v1.2.0-canary.0...v1.2.0-canary.1
-[1.1.3]: https://github.com/tailwindlabs/tailwindcss/compare/v1.1.2...v1.1.3
-[1.2.0-canary.0]: https://github.com/tailwindlabs/tailwindcss/compare/v1.1.2...v1.2.0-canary.0
-[1.1.2]: https://github.com/tailwindlabs/tailwindcss/compare/v1.1.1...v1.1.2
-[1.1.1]: https://github.com/tailwindlabs/tailwindcss/compare/v1.1.0...v1.1.1
-[1.1.0]: https://github.com/tailwindlabs/tailwindcss/compare/v1.0.6...v1.1.0
-[1.0.6]: https://github.com/tailwindlabs/tailwindcss/compare/v1.0.5...v1.0.6
-[1.0.5]: https://github.com/tailwindlabs/tailwindcss/compare/v1.0.4...v1.0.5
-[1.0.4]: https://github.com/tailwindlabs/tailwindcss/compare/v1.0.3...v1.0.4
-[1.0.3]: https://github.com/tailwindlabs/tailwindcss/compare/v1.0.2...v1.0.3
-[1.0.2]: https://github.com/tailwindlabs/tailwindcss/compare/v1.0.1...v1.0.2
-[1.0.1]: https://github.com/tailwindlabs/tailwindcss/compare/v1.0.0...v1.0.1
-[1.0.0]: https://github.com/tailwindlabs/tailwindcss/compare/v1.0.0-beta.10...v1.0.0
-[1.0.0-beta.10]: https://github.com/tailwindlabs/tailwindcss/compare/v1.0.0-beta.9...v1.0.0-beta.10
-[1.0.0-beta.9]: https://github.com/tailwindlabs/tailwindcss/compare/v1.0.0-beta.8...v1.0.0-beta.9
-[1.0.0-beta.8]: https://github.com/tailwindlabs/tailwindcss/compare/v1.0.0-beta.7...v1.0.0-beta.8
-[1.0.0-beta.7]: https://github.com/tailwindlabs/tailwindcss/compare/v1.0.0-beta.6...v1.0.0-beta.7
-[1.0.0-beta.6]: https://github.com/tailwindlabs/tailwindcss/compare/v1.0.0-beta.5...v1.0.0-beta.6
-[1.0.0-beta.5]: https://github.com/tailwindlabs/tailwindcss/compare/v1.0.0-beta.4...v1.0.0-beta.5
-[1.0.0-beta.4]: https://github.com/tailwindlabs/tailwindcss/compare/v1.0.0-beta.3...v1.0.0-beta.4
-[1.0.0-beta.3]: https://github.com/tailwindlabs/tailwindcss/compare/v1.0.0-beta.2...v1.0.0-beta.3
-[1.0.0-beta.2]: https://github.com/tailwindlabs/tailwindcss/compare/v1.0.0-beta.1...v1.0.0-beta.2
-[1.0.0-beta.1]: https://github.com/tailwindlabs/tailwindcss/compare/v0.7.4...v1.0.0-beta.1
-[0.7.4]: https://github.com/tailwindlabs/tailwindcss/compare/v0.7.3...v0.7.4
-[0.7.3]: https://github.com/tailwindlabs/tailwindcss/compare/v0.7.2...v0.7.3
-[0.7.2]: https://github.com/tailwindlabs/tailwindcss/compare/v0.7.1...v0.7.2
-[0.7.1]: https://github.com/tailwindlabs/tailwindcss/compare/v0.7.0...v0.7.1
-[0.7.0]: https://github.com/tailwindlabs/tailwindcss/compare/v0.6.6...v0.7.0
-[0.6.6]: https://github.com/tailwindlabs/tailwindcss/compare/v0.6.5...v0.6.6
-[0.6.5]: https://github.com/tailwindlabs/tailwindcss/compare/v0.6.4...v0.6.5
-[0.6.4]: https://github.com/tailwindlabs/tailwindcss/compare/v0.6.3...v0.6.4
-[0.6.3]: https://github.com/tailwindlabs/tailwindcss/compare/v0.6.2...v0.6.3
-[0.6.2]: https://github.com/tailwindlabs/tailwindcss/compare/v0.6.1...v0.6.2
-[0.6.1]: https://github.com/tailwindlabs/tailwindcss/compare/v0.6.0...v0.6.1
-[0.6.0]: https://github.com/tailwindlabs/tailwindcss/compare/v0.5.3...v0.6.0
-[0.5.3]: https://github.com/tailwindlabs/tailwindcss/compare/v0.5.2...v0.5.3
-[0.5.2]: https://github.com/tailwindlabs/tailwindcss/compare/v0.5.1...v0.5.2
-[0.5.1]: https://github.com/tailwindlabs/tailwindcss/compare/v0.5.0...v0.5.1
-[0.5.0]: https://github.com/tailwindlabs/tailwindcss/compare/v0.4.3...v0.5.0
-[0.4.3]: https://github.com/tailwindlabs/tailwindcss/compare/v0.4.2...v0.4.3
-[0.4.2]: https://github.com/tailwindlabs/tailwindcss/compare/v0.4.1...v0.4.2
-[0.4.1]: https://github.com/tailwindlabs/tailwindcss/compare/v0.4.0...v0.4.1
-[0.4.0]: https://github.com/tailwindlabs/tailwindcss/compare/v0.3.0...v0.4.0
-[0.3.0]: https://github.com/tailwindlabs/tailwindcss/compare/v0.2.2...v0.3.0
-[0.2.2]: https://github.com/tailwindlabs/tailwindcss/compare/v0.2.1...v0.2.2
-[0.2.1]: https://github.com/tailwindlabs/tailwindcss/compare/v0.2.0...v0.2.1
-[0.2.0]: https://github.com/tailwindlabs/tailwindcss/compare/v0.1.6...v0.2.0
-[0.1.6]: https://github.com/tailwindlabs/tailwindcss/compare/v0.1.5...v0.1.6
-[0.1.5]: https://github.com/tailwindlabs/tailwindcss/compare/v0.1.4...v0.1.5
-[0.1.4]: https://github.com/tailwindlabs/tailwindcss/compare/v0.1.3...v0.1.4
-[0.1.3]: https://github.com/tailwindlabs/tailwindcss/compare/v0.1.2...v0.1.3
-[0.1.2]: https://github.com/tailwindlabs/tailwindcss/compare/v0.1.1...v0.1.2
-[0.1.1]: https://github.com/tailwindlabs/tailwindcss/compare/v0.1.0...v0.1.1
-[0.1.0]: https://github.com/tailwindlabs/tailwindcss/releases/tag/v0.1.0
+- Resolver plugins. Now the linter can read Webpack config, properly follow aliases and ignore externals, dismisses inline loaders, etc. etc.!
+
+## Earlier releases (0.10.1 and younger)
+See [GitHub release notes](https://github.com/import-js/eslint-plugin-import/releases?after=v0.11.0)
+for info on changes for earlier releases.
+
+
+[`import/cache` setting]: ./README.md#importcache
+[`import/ignore` setting]: ./README.md#importignore
+[`import/extensions` setting]: ./README.md#importextensions
+[`import/parsers` setting]: ./README.md#importparsers
+[`import/core-modules` setting]: ./README.md#importcore-modules
+[`import/external-module-folders` setting]: ./README.md#importexternal-module-folders
+[`internal-regex` setting]: ./README.md#importinternal-regex
+[`import/node-version` setting]: ./README.md#importnode-version
+
+[`consistent-type-specifier-style`]: ./docs/rules/consistent-type-specifier-style.md
+[`default`]: ./docs/rules/default.md
+[`dynamic-import-chunkname`]: ./docs/rules/dynamic-import-chunkname.md
+[`enforce-node-protocol-usage`]: ./docs/rules/enforce-node-protocol-usage.md
+[`export`]: ./docs/rules/export.md
+[`exports-last`]: ./docs/rules/exports-last.md
+[`extensions`]: ./docs/rules/extensions.md
+[`first`]: ./docs/rules/first.md
+[`group-exports`]: ./docs/rules/group-exports.md
+[`imports-first`]: ./docs/rules/first.md
+[`max-dependencies`]: ./docs/rules/max-dependencies.md
+[`named`]: ./docs/rules/named.md
+[`namespace`]: ./docs/rules/namespace.md
+[`newline-after-import`]: ./docs/rules/newline-after-import.md
+[`no-absolute-path`]: ./docs/rules/no-absolute-path.md
+[`no-amd`]: ./docs/rules/no-amd.md
+[`no-anonymous-default-export`]: ./docs/rules/no-anonymous-default-export.md
+[`no-commonjs`]: ./docs/rules/no-commonjs.md
+[`no-cycle`]: ./docs/rules/no-cycle.md
+[`no-default-export`]: ./docs/rules/no-default-export.md
+[`no-deprecated`]: ./docs/rules/no-deprecated.md
+[`no-duplicates`]: ./docs/rules/no-duplicates.md
+[`no-dynamic-require`]: ./docs/rules/no-dynamic-require.md
+[`no-empty-named-blocks`]: ./docs/rules/no-empty-named-blocks.md
+[`no-extraneous-dependencies`]: ./docs/rules/no-extraneous-dependencies.md
+[`no-import-module-exports`]: ./docs/rules/no-import-module-exports.md
+[`no-internal-modules`]: ./docs/rules/no-internal-modules.md
+[`no-mutable-exports`]: ./docs/rules/no-mutable-exports.md
+[`no-named-as-default-member`]: ./docs/rules/no-named-as-default-member.md
+[`no-named-as-default`]: ./docs/rules/no-named-as-default.md
+[`no-named-default`]: ./docs/rules/no-named-default.md
+[`no-named-export`]: ./docs/rules/no-named-export.md
+[`no-namespace`]: ./docs/rules/no-namespace.md
+[`no-nodejs-modules`]: ./docs/rules/no-nodejs-modules.md
+[`no-relative-packages`]: ./docs/rules/no-relative-packages.md
+[`no-relative-parent-imports`]: ./docs/rules/no-relative-parent-imports.md
+[`no-restricted-paths`]: ./docs/rules/no-restricted-paths.md
+[`no-self-import`]: ./docs/rules/no-self-import.md
+[`no-unassigned-import`]: ./docs/rules/no-unassigned-import.md
+[`no-unresolved`]: ./docs/rules/no-unresolved.md
+[`no-unused-modules`]: ./docs/rules/no-unused-modules.md
+[`no-useless-path-segments`]: ./docs/rules/no-useless-path-segments.md
+[`no-webpack-loader-syntax`]: ./docs/rules/no-webpack-loader-syntax.md
+[`order`]: ./docs/rules/order.md
+[`prefer-default-export`]: ./docs/rules/prefer-default-export.md
+[`unambiguous`]: ./docs/rules/unambiguous.md
+
+[`memo-parser`]: ./memo-parser/README.md
+
+[#3191]: https://github.com/import-js/eslint-plugin-import/pull/3191
+[#3173]: https://github.com/import-js/eslint-plugin-import/pull/3173
+[#3172]: https://github.com/import-js/eslint-plugin-import/pull/3172
+[#3167]: https://github.com/import-js/eslint-plugin-import/pull/3167
+[#3166]: https://github.com/import-js/eslint-plugin-import/pull/3166
+[#3152]: https://github.com/import-js/eslint-plugin-import/pull/3152
+[#3151]: https://github.com/import-js/eslint-plugin-import/pull/3151
+[#3138]: https://github.com/import-js/eslint-plugin-import/pull/3138
+[#3129]: https://github.com/import-js/eslint-plugin-import/pull/3129
+[#3128]: https://github.com/import-js/eslint-plugin-import/pull/3128
+[#3127]: https://github.com/import-js/eslint-plugin-import/pull/3127
+[#3125]: https://github.com/import-js/eslint-plugin-import/pull/3125
+[#3122]: https://github.com/import-js/eslint-plugin-import/pull/3122
+[#3116]: https://github.com/import-js/eslint-plugin-import/pull/3116
+[#3106]: https://github.com/import-js/eslint-plugin-import/pull/3106
+[#3105]: https://github.com/import-js/eslint-plugin-import/pull/3105
+[#3104]: https://github.com/import-js/eslint-plugin-import/pull/3104
+[#3097]: https://github.com/import-js/eslint-plugin-import/pull/3097
+[#3073]: https://github.com/import-js/eslint-plugin-import/pull/3073
+[#3072]: https://github.com/import-js/eslint-plugin-import/pull/3072
+[#3071]: https://github.com/import-js/eslint-plugin-import/pull/3071
+[#3070]: https://github.com/import-js/eslint-plugin-import/pull/3070
+[#3068]: https://github.com/import-js/eslint-plugin-import/pull/3068
+[#3066]: https://github.com/import-js/eslint-plugin-import/pull/3066
+[#3065]: https://github.com/import-js/eslint-plugin-import/pull/3065
+[#3062]: https://github.com/import-js/eslint-plugin-import/pull/3062
+[#3052]: https://github.com/import-js/eslint-plugin-import/pull/3052
+[#3043]: https://github.com/import-js/eslint-plugin-import/pull/3043
+[#3036]: https://github.com/import-js/eslint-plugin-import/pull/3036
+[#3033]: https://github.com/import-js/eslint-plugin-import/pull/3033
+[#3032]: https://github.com/import-js/eslint-plugin-import/pull/3032
+[#3024]: https://github.com/import-js/eslint-plugin-import/pull/3024
+[#3018]: https://github.com/import-js/eslint-plugin-import/pull/3018
+[#3012]: https://github.com/import-js/eslint-plugin-import/pull/3012
+[#3011]: https://github.com/import-js/eslint-plugin-import/pull/3011
+[#3004]: https://github.com/import-js/eslint-plugin-import/pull/3004
+[#2998]: https://github.com/import-js/eslint-plugin-import/pull/2998
+[#2996]: https://github.com/import-js/eslint-plugin-import/pull/2996
+[#2993]: https://github.com/import-js/eslint-plugin-import/pull/2993
+[#2991]: https://github.com/import-js/eslint-plugin-import/pull/2991
+[#2989]: https://github.com/import-js/eslint-plugin-import/pull/2989
+[#2987]: https://github.com/import-js/eslint-plugin-import/pull/2987
+[#2985]: https://github.com/import-js/eslint-plugin-import/pull/2985
+[#2982]: https://github.com/import-js/eslint-plugin-import/pull/2982
+[#2952]: https://github.com/import-js/eslint-plugin-import/pull/2952
+[#2944]: https://github.com/import-js/eslint-plugin-import/pull/2944
+[#2942]: https://github.com/import-js/eslint-plugin-import/pull/2942
+[#2919]: https://github.com/import-js/eslint-plugin-import/pull/2919
+[#2885]: https://github.com/import-js/eslint-plugin-import/pull/2885
+[#2884]: https://github.com/import-js/eslint-plugin-import/pull/2884
+[#2866]: https://github.com/import-js/eslint-plugin-import/pull/2866
+[#2854]: https://github.com/import-js/eslint-plugin-import/pull/2854
+[#2851]: https://github.com/import-js/eslint-plugin-import/pull/2851
+[#2850]: https://github.com/import-js/eslint-plugin-import/pull/2850
+[#2842]: https://github.com/import-js/eslint-plugin-import/pull/2842
+[#2835]: https://github.com/import-js/eslint-plugin-import/pull/2835
+[#2832]: https://github.com/import-js/eslint-plugin-import/pull/2832
+[#2817]: https://github.com/import-js/eslint-plugin-import/pull/2817
+[#2778]: https://github.com/import-js/eslint-plugin-import/pull/2778
+[#2756]: https://github.com/import-js/eslint-plugin-import/pull/2756
+[#2754]: https://github.com/import-js/eslint-plugin-import/pull/2754
+[#2748]: https://github.com/import-js/eslint-plugin-import/pull/2748
+[#2735]: https://github.com/import-js/eslint-plugin-import/pull/2735
+[#2699]: https://github.com/import-js/eslint-plugin-import/pull/2699
+[#2664]: https://github.com/import-js/eslint-plugin-import/pull/2664
+[#2640]: https://github.com/import-js/eslint-plugin-import/pull/2640
+[#2613]: https://github.com/import-js/eslint-plugin-import/pull/2613
+[#2608]: https://github.com/import-js/eslint-plugin-import/pull/2608
+[#2605]: https://github.com/import-js/eslint-plugin-import/pull/2605
+[#2602]: https://github.com/import-js/eslint-plugin-import/pull/2602
+[#2598]: https://github.com/import-js/eslint-plugin-import/pull/2598
+[#2589]: https://github.com/import-js/eslint-plugin-import/pull/2589
+[#2588]: https://github.com/import-js/eslint-plugin-import/pull/2588
+[#2582]: https://github.com/import-js/eslint-plugin-import/pull/2582
+[#2570]: https://github.com/import-js/eslint-plugin-import/pull/2570
+[#2568]: https://github.com/import-js/eslint-plugin-import/pull/2568
+[#2546]: https://github.com/import-js/eslint-plugin-import/pull/2546
+[#2541]: https://github.com/import-js/eslint-plugin-import/pull/2541
+[#2531]: https://github.com/import-js/eslint-plugin-import/pull/2531
+[#2511]: https://github.com/import-js/eslint-plugin-import/pull/2511
+[#2506]: https://github.com/import-js/eslint-plugin-import/pull/2506
+[#2503]: https://github.com/import-js/eslint-plugin-import/pull/2503
+[#2490]: https://github.com/import-js/eslint-plugin-import/pull/2490
+[#2475]: https://github.com/import-js/eslint-plugin-import/pull/2475
+[#2473]: https://github.com/import-js/eslint-plugin-import/pull/2473
+[#2466]: https://github.com/import-js/eslint-plugin-import/pull/2466
+[#2459]: https://github.com/import-js/eslint-plugin-import/pull/2459
+[#2440]: https://github.com/import-js/eslint-plugin-import/pull/2440
+[#2438]: https://github.com/import-js/eslint-plugin-import/pull/2438
+[#2436]: https://github.com/import-js/eslint-plugin-import/pull/2436
+[#2427]: https://github.com/import-js/eslint-plugin-import/pull/2427
+[#2424]: https://github.com/import-js/eslint-plugin-import/pull/2424
+[#2419]: https://github.com/import-js/eslint-plugin-import/pull/2419
+[#2417]: https://github.com/import-js/eslint-plugin-import/pull/2417
+[#2411]: https://github.com/import-js/eslint-plugin-import/pull/2411
+[#2399]: https://github.com/import-js/eslint-plugin-import/pull/2399
+[#2396]: https://github.com/import-js/eslint-plugin-import/pull/2396
+[#2395]: https://github.com/import-js/eslint-plugin-import/pull/2395
+[#2393]: https://github.com/import-js/eslint-plugin-import/pull/2393
+[#2388]: https://github.com/import-js/eslint-plugin-import/pull/2388
+[#2387]: https://github.com/import-js/eslint-plugin-import/pull/2387
+[#2381]: https://github.com/import-js/eslint-plugin-import/pull/2381
+[#2378]: https://github.com/import-js/eslint-plugin-import/pull/2378
+[#2374]: https://github.com/import-js/eslint-plugin-import/pull/2374
+[#2371]: https://github.com/import-js/eslint-plugin-import/pull/2371
+[#2367]: https://github.com/import-js/eslint-plugin-import/pull/2367
+[#2358]: https://github.com/import-js/eslint-plugin-import/pull/2358
+[#2341]: https://github.com/import-js/eslint-plugin-import/pull/2341
+[#2332]: https://github.com/import-js/eslint-plugin-import/pull/2332
+[#2334]: https://github.com/import-js/eslint-plugin-import/pull/2334
+[#2330]: https://github.com/import-js/eslint-plugin-import/pull/2330
+[#2315]: https://github.com/import-js/eslint-plugin-import/pull/2315
+[#2305]: https://github.com/import-js/eslint-plugin-import/pull/2305
+[#2299]: https://github.com/import-js/eslint-plugin-import/pull/2299
+[#2297]: https://github.com/import-js/eslint-plugin-import/pull/2297
+[#2287]: https://github.com/import-js/eslint-plugin-import/pull/2287
+[#2282]: https://github.com/import-js/eslint-plugin-import/pull/2282
+[#2280]: https://github.com/import-js/eslint-plugin-import/pull/2280
+[#2279]: https://github.com/import-js/eslint-plugin-import/pull/2279
+[#2272]: https://github.com/import-js/eslint-plugin-import/pull/2272
+[#2271]: https://github.com/import-js/eslint-plugin-import/pull/2271
+[#2270]: https://github.com/import-js/eslint-plugin-import/pull/2270
+[#2240]: https://github.com/import-js/eslint-plugin-import/pull/2240
+[#2233]: https://github.com/import-js/eslint-plugin-import/pull/2233
+[#2226]: https://github.com/import-js/eslint-plugin-import/pull/2226
+[#2220]: https://github.com/import-js/eslint-plugin-import/pull/2220
+[#2219]: https://github.com/import-js/eslint-plugin-import/pull/2219
+[#2212]: https://github.com/import-js/eslint-plugin-import/pull/2212
+[#2196]: https://github.com/import-js/eslint-plugin-import/pull/2196
+[#2194]: https://github.com/import-js/eslint-plugin-import/pull/2194
+[#2191]: https://github.com/import-js/eslint-plugin-import/pull/2191
+[#2184]: https://github.com/import-js/eslint-plugin-import/pull/2184
+[#2179]: https://github.com/import-js/eslint-plugin-import/pull/2179
+[#2160]: https://github.com/import-js/eslint-plugin-import/pull/2160
+[#2158]: https://github.com/import-js/eslint-plugin-import/pull/2158
+[#2156]: https://github.com/import-js/eslint-plugin-import/pull/2156
+[#2149]: https://github.com/import-js/eslint-plugin-import/pull/2149
+[#2146]: https://github.com/import-js/eslint-plugin-import/pull/2146
+[#2140]: https://github.com/import-js/eslint-plugin-import/pull/2140
+[#2138]: https://github.com/import-js/eslint-plugin-import/pull/2138
+[#2121]: https://github.com/import-js/eslint-plugin-import/pull/2121
+[#2112]: https://github.com/import-js/eslint-plugin-import/pull/2112
+[#2099]: https://github.com/import-js/eslint-plugin-import/pull/2099
+[#2097]: https://github.com/import-js/eslint-plugin-import/pull/2097
+[#2090]: https://github.com/import-js/eslint-plugin-import/pull/2090
+[#2087]: https://github.com/import-js/eslint-plugin-import/pull/2087
+[#2083]: https://github.com/import-js/eslint-plugin-import/pull/2083
+[#2075]: https://github.com/import-js/eslint-plugin-import/pull/2075
+[#2071]: https://github.com/import-js/eslint-plugin-import/pull/2071
+[#2047]: https://github.com/import-js/eslint-plugin-import/pull/2047
+[#2034]: https://github.com/import-js/eslint-plugin-import/pull/2034
+[#2028]: https://github.com/import-js/eslint-plugin-import/pull/2028
+[#2026]: https://github.com/import-js/eslint-plugin-import/pull/2026
+[#2022]: https://github.com/import-js/eslint-plugin-import/pull/2022
+[#2021]: https://github.com/import-js/eslint-plugin-import/pull/2021
+[#2012]: https://github.com/import-js/eslint-plugin-import/pull/2012
+[#1997]: https://github.com/import-js/eslint-plugin-import/pull/1997
+[#1993]: https://github.com/import-js/eslint-plugin-import/pull/1993
+[#1990]: https://github.com/import-js/eslint-plugin-import/pull/1990
+[#1985]: https://github.com/import-js/eslint-plugin-import/pull/1985
+[#1983]: https://github.com/import-js/eslint-plugin-import/pull/1983
+[#1974]: https://github.com/import-js/eslint-plugin-import/pull/1974
+[#1958]: https://github.com/import-js/eslint-plugin-import/pull/1958
+[#1948]: https://github.com/import-js/eslint-plugin-import/pull/1948
+[#1947]: https://github.com/import-js/eslint-plugin-import/pull/1947
+[#1944]: https://github.com/import-js/eslint-plugin-import/pull/1944
+[#1940]: https://github.com/import-js/eslint-plugin-import/pull/1940
+[#1897]: https://github.com/import-js/eslint-plugin-import/pull/1897
+[#1889]: https://github.com/import-js/eslint-plugin-import/pull/1889
+[#1878]: https://github.com/import-js/eslint-plugin-import/pull/1878
+[#1860]: https://github.com/import-js/eslint-plugin-import/pull/1860
+[#1848]: https://github.com/import-js/eslint-plugin-import/pull/1848
+[#1847]: https://github.com/import-js/eslint-plugin-import/pull/1847
+[#1846]: https://github.com/import-js/eslint-plugin-import/pull/1846
+[#1836]: https://github.com/import-js/eslint-plugin-import/pull/1836
+[#1835]: https://github.com/import-js/eslint-plugin-import/pull/1835
+[#1833]: https://github.com/import-js/eslint-plugin-import/pull/1833
+[#1831]: https://github.com/import-js/eslint-plugin-import/pull/1831
+[#1830]: https://github.com/import-js/eslint-plugin-import/pull/1830
+[#1824]: https://github.com/import-js/eslint-plugin-import/pull/1824
+[#1823]: https://github.com/import-js/eslint-plugin-import/pull/1823
+[#1822]: https://github.com/import-js/eslint-plugin-import/pull/1822
+[#1820]: https://github.com/import-js/eslint-plugin-import/pull/1820
+[#1819]: https://github.com/import-js/eslint-plugin-import/pull/1819
+[#1802]: https://github.com/import-js/eslint-plugin-import/pull/1802
+[#1788]: https://github.com/import-js/eslint-plugin-import/pull/1788
+[#1786]: https://github.com/import-js/eslint-plugin-import/pull/1786
+[#1785]: https://github.com/import-js/eslint-plugin-import/pull/1785
+[#1776]: https://github.com/import-js/eslint-plugin-import/pull/1776
+[#1770]: https://github.com/import-js/eslint-plugin-import/pull/1770
+[#1764]: https://github.com/import-js/eslint-plugin-import/pull/1764
+[#1763]: https://github.com/import-js/eslint-plugin-import/pull/1763
+[#1751]: https://github.com/import-js/eslint-plugin-import/pull/1751
+[#1744]: https://github.com/import-js/eslint-plugin-import/pull/1744
+[#1736]: https://github.com/import-js/eslint-plugin-import/pull/1736
+[#1735]: https://github.com/import-js/eslint-plugin-import/pull/1735
+[#1726]: https://github.com/import-js/eslint-plugin-import/pull/1726
+[#1724]: https://github.com/import-js/eslint-plugin-import/pull/1724
+[#1719]: https://github.com/import-js/eslint-plugin-import/pull/1719
+[#1696]: https://github.com/import-js/eslint-plugin-import/pull/1696
+[#1691]: https://github.com/import-js/eslint-plugin-import/pull/1691
+[#1690]: https://github.com/import-js/eslint-plugin-import/pull/1690
+[#1689]: https://github.com/import-js/eslint-plugin-import/pull/1689
+[#1681]: https://github.com/import-js/eslint-plugin-import/pull/1681
+[#1676]: https://github.com/import-js/eslint-plugin-import/pull/1676
+[#1666]: https://github.com/import-js/eslint-plugin-import/pull/1666
+[#1664]: https://github.com/import-js/eslint-plugin-import/pull/1664
+[#1660]: https://github.com/import-js/eslint-plugin-import/pull/1660
+[#1658]: https://github.com/import-js/eslint-plugin-import/pull/1658
+[#1651]: https://github.com/import-js/eslint-plugin-import/pull/1651
+[#1626]: https://github.com/import-js/eslint-plugin-import/pull/1626
+[#1620]: https://github.com/import-js/eslint-plugin-import/pull/1620
+[#1619]: https://github.com/import-js/eslint-plugin-import/pull/1619
+[#1612]: https://github.com/import-js/eslint-plugin-import/pull/1612
+[#1611]: https://github.com/import-js/eslint-plugin-import/pull/1611
+[#1605]: https://github.com/import-js/eslint-plugin-import/pull/1605
+[#1586]: https://github.com/import-js/eslint-plugin-import/pull/1586
+[#1572]: https://github.com/import-js/eslint-plugin-import/pull/1572
+[#1569]: https://github.com/import-js/eslint-plugin-import/pull/1569
+[#1563]: https://github.com/import-js/eslint-plugin-import/pull/1563
+[#1560]: https://github.com/import-js/eslint-plugin-import/pull/1560
+[#1551]: https://github.com/import-js/eslint-plugin-import/pull/1551
+[#1542]: https://github.com/import-js/eslint-plugin-import/pull/1542
+[#1534]: https://github.com/import-js/eslint-plugin-import/pull/1534
+[#1528]: https://github.com/import-js/eslint-plugin-import/pull/1528
+[#1526]: https://github.com/import-js/eslint-plugin-import/pull/1526
+[#1521]: https://github.com/import-js/eslint-plugin-import/pull/1521
+[#1519]: https://github.com/import-js/eslint-plugin-import/pull/1519
+[#1517]: https://github.com/import-js/eslint-plugin-import/pull/1517
+[#1507]: https://github.com/import-js/eslint-plugin-import/pull/1507
+[#1506]: https://github.com/import-js/eslint-plugin-import/pull/1506
+[#1496]: https://github.com/import-js/eslint-plugin-import/pull/1496
+[#1495]: https://github.com/import-js/eslint-plugin-import/pull/1495
+[#1494]: https://github.com/import-js/eslint-plugin-import/pull/1494
+[#1493]: https://github.com/import-js/eslint-plugin-import/pull/1493
+[#1491]: https://github.com/import-js/eslint-plugin-import/pull/1491
+[#1472]: https://github.com/import-js/eslint-plugin-import/pull/1472
+[#1470]: https://github.com/import-js/eslint-plugin-import/pull/1470
+[#1447]: https://github.com/import-js/eslint-plugin-import/pull/1447
+[#1439]: https://github.com/import-js/eslint-plugin-import/pull/1439
+[#1436]: https://github.com/import-js/eslint-plugin-import/pull/1436
+[#1435]: https://github.com/import-js/eslint-plugin-import/pull/1435
+[#1425]: https://github.com/import-js/eslint-plugin-import/pull/1425
+[#1419]: https://github.com/import-js/eslint-plugin-import/pull/1419
+[#1412]: https://github.com/import-js/eslint-plugin-import/pull/1412
+[#1409]: https://github.com/import-js/eslint-plugin-import/pull/1409
+[#1404]: https://github.com/import-js/eslint-plugin-import/pull/1404
+[#1401]: https://github.com/import-js/eslint-plugin-import/pull/1401
+[#1393]: https://github.com/import-js/eslint-plugin-import/pull/1393
+[#1389]: https://github.com/import-js/eslint-plugin-import/pull/1389
+[#1386]: https://github.com/import-js/eslint-plugin-import/pull/1386
+[#1377]: https://github.com/import-js/eslint-plugin-import/pull/1377
+[#1375]: https://github.com/import-js/eslint-plugin-import/pull/1375
+[#1372]: https://github.com/import-js/eslint-plugin-import/pull/1372
+[#1371]: https://github.com/import-js/eslint-plugin-import/pull/1371
+[#1370]: https://github.com/import-js/eslint-plugin-import/pull/1370
+[#1363]: https://github.com/import-js/eslint-plugin-import/pull/1363
+[#1360]: https://github.com/import-js/eslint-plugin-import/pull/1360
+[#1358]: https://github.com/import-js/eslint-plugin-import/pull/1358
+[#1356]: https://github.com/import-js/eslint-plugin-import/pull/1356
+[#1354]: https://github.com/import-js/eslint-plugin-import/pull/1354
+[#1352]: https://github.com/import-js/eslint-plugin-import/pull/1352
+[#1347]: https://github.com/import-js/eslint-plugin-import/pull/1347
+[#1345]: https://github.com/import-js/eslint-plugin-import/pull/1345
+[#1342]: https://github.com/import-js/eslint-plugin-import/pull/1342
+[#1340]: https://github.com/import-js/eslint-plugin-import/pull/1340
+[#1333]: https://github.com/import-js/eslint-plugin-import/pull/1333
+[#1331]: https://github.com/import-js/eslint-plugin-import/pull/1331
+[#1330]: https://github.com/import-js/eslint-plugin-import/pull/1330
+[#1320]: https://github.com/import-js/eslint-plugin-import/pull/1320
+[#1319]: https://github.com/import-js/eslint-plugin-import/pull/1319
+[#1312]: https://github.com/import-js/eslint-plugin-import/pull/1312
+[#1308]: https://github.com/import-js/eslint-plugin-import/pull/1308
+[#1304]: https://github.com/import-js/eslint-plugin-import/pull/1304
+[#1297]: https://github.com/import-js/eslint-plugin-import/pull/1297
+[#1295]: https://github.com/import-js/eslint-plugin-import/pull/1295
+[#1294]: https://github.com/import-js/eslint-plugin-import/pull/1294
+[#1290]: https://github.com/import-js/eslint-plugin-import/pull/1290
+[#1277]: https://github.com/import-js/eslint-plugin-import/pull/1277
+[#1262]: https://github.com/import-js/eslint-plugin-import/pull/1262
+[#1257]: https://github.com/import-js/eslint-plugin-import/pull/1257
+[#1253]: https://github.com/import-js/eslint-plugin-import/pull/1253
+[#1248]: https://github.com/import-js/eslint-plugin-import/pull/1248
+[#1238]: https://github.com/import-js/eslint-plugin-import/pull/1238
+[#1237]: https://github.com/import-js/eslint-plugin-import/pull/1237
+[#1235]: https://github.com/import-js/eslint-plugin-import/pull/1235
+[#1234]: https://github.com/import-js/eslint-plugin-import/pull/1234
+[#1232]: https://github.com/import-js/eslint-plugin-import/pull/1232
+[#1223]: https://github.com/import-js/eslint-plugin-import/pull/1223
+[#1222]: https://github.com/import-js/eslint-plugin-import/pull/1222
+[#1218]: https://github.com/import-js/eslint-plugin-import/pull/1218
+[#1176]: https://github.com/import-js/eslint-plugin-import/pull/1176
+[#1163]: https://github.com/import-js/eslint-plugin-import/pull/1163
+[#1157]: https://github.com/import-js/eslint-plugin-import/pull/1157
+[#1151]: https://github.com/import-js/eslint-plugin-import/pull/1151
+[#1142]: https://github.com/import-js/eslint-plugin-import/pull/1142
+[#1139]: https://github.com/import-js/eslint-plugin-import/pull/1139
+[#1137]: https://github.com/import-js/eslint-plugin-import/pull/1137
+[#1135]: https://github.com/import-js/eslint-plugin-import/pull/1135
+[#1128]: https://github.com/import-js/eslint-plugin-import/pull/1128
+[#1126]: https://github.com/import-js/eslint-plugin-import/pull/1126
+[#1122]: https://github.com/import-js/eslint-plugin-import/pull/1122
+[#1112]: https://github.com/import-js/eslint-plugin-import/pull/1112
+[#1107]: https://github.com/import-js/eslint-plugin-import/pull/1107
+[#1106]: https://github.com/import-js/eslint-plugin-import/pull/1106
+[#1105]: https://github.com/import-js/eslint-plugin-import/pull/1105
+[#1093]: https://github.com/import-js/eslint-plugin-import/pull/1093
+[#1085]: https://github.com/import-js/eslint-plugin-import/pull/1085
+[#1068]: https://github.com/import-js/eslint-plugin-import/pull/1068
+[#1049]: https://github.com/import-js/eslint-plugin-import/pull/1049
+[#1046]: https://github.com/import-js/eslint-plugin-import/pull/1046
+[#966]: https://github.com/import-js/eslint-plugin-import/pull/966
+[#944]: https://github.com/import-js/eslint-plugin-import/pull/944
+[#912]: https://github.com/import-js/eslint-plugin-import/pull/912
+[#908]: https://github.com/import-js/eslint-plugin-import/pull/908
+[#891]: https://github.com/import-js/eslint-plugin-import/pull/891
+[#889]: https://github.com/import-js/eslint-plugin-import/pull/889
+[#880]: https://github.com/import-js/eslint-plugin-import/pull/880
+[#871]: https://github.com/import-js/eslint-plugin-import/pull/871
+[#858]: https://github.com/import-js/eslint-plugin-import/pull/858
+[#843]: https://github.com/import-js/eslint-plugin-import/pull/843
+[#804]: https://github.com/import-js/eslint-plugin-import/pull/804
+[#797]: https://github.com/import-js/eslint-plugin-import/pull/797
+[#794]: https://github.com/import-js/eslint-plugin-import/pull/794
+[#744]: https://github.com/import-js/eslint-plugin-import/pull/744
+[#742]: https://github.com/import-js/eslint-plugin-import/pull/742
+[#737]: https://github.com/import-js/eslint-plugin-import/pull/737
+[#727]: https://github.com/import-js/eslint-plugin-import/pull/727
+[#721]: https://github.com/import-js/eslint-plugin-import/pull/721
+[#712]: https://github.com/import-js/eslint-plugin-import/pull/712
+[#696]: https://github.com/import-js/eslint-plugin-import/pull/696
+[#685]: https://github.com/import-js/eslint-plugin-import/pull/685
+[#680]: https://github.com/import-js/eslint-plugin-import/pull/680
+[#654]: https://github.com/import-js/eslint-plugin-import/pull/654
+[#639]: https://github.com/import-js/eslint-plugin-import/pull/639
+[#632]: https://github.com/import-js/eslint-plugin-import/pull/632
+[#630]: https://github.com/import-js/eslint-plugin-import/pull/630
+[#629]: https://github.com/import-js/eslint-plugin-import/pull/629
+[#628]: https://github.com/import-js/eslint-plugin-import/pull/628
+[#596]: https://github.com/import-js/eslint-plugin-import/pull/596
+[#586]: https://github.com/import-js/eslint-plugin-import/pull/586
+[#578]: https://github.com/import-js/eslint-plugin-import/pull/578
+[#568]: https://github.com/import-js/eslint-plugin-import/pull/568
+[#555]: https://github.com/import-js/eslint-plugin-import/pull/555
+[#538]: https://github.com/import-js/eslint-plugin-import/pull/538
+[#527]: https://github.com/import-js/eslint-plugin-import/pull/527
+[#518]: https://github.com/import-js/eslint-plugin-import/pull/518
+[#509]: https://github.com/import-js/eslint-plugin-import/pull/509
+[#508]: https://github.com/import-js/eslint-plugin-import/pull/508
+[#503]: https://github.com/import-js/eslint-plugin-import/pull/503
+[#499]: https://github.com/import-js/eslint-plugin-import/pull/499
+[#489]: https://github.com/import-js/eslint-plugin-import/pull/489
+[#485]: https://github.com/import-js/eslint-plugin-import/pull/485
+[#461]: https://github.com/import-js/eslint-plugin-import/pull/461
+[#449]: https://github.com/import-js/eslint-plugin-import/pull/449
+[#444]: https://github.com/import-js/eslint-plugin-import/pull/444
+[#428]: https://github.com/import-js/eslint-plugin-import/pull/428
+[#395]: https://github.com/import-js/eslint-plugin-import/pull/395
+[#371]: https://github.com/import-js/eslint-plugin-import/pull/371
+[#365]: https://github.com/import-js/eslint-plugin-import/pull/365
+[#359]: https://github.com/import-js/eslint-plugin-import/pull/359
+[#343]: https://github.com/import-js/eslint-plugin-import/pull/343
+[#332]: https://github.com/import-js/eslint-plugin-import/pull/332
+[#322]: https://github.com/import-js/eslint-plugin-import/pull/322
+[#321]: https://github.com/import-js/eslint-plugin-import/pull/321
+[#316]: https://github.com/import-js/eslint-plugin-import/pull/316
+[#314]: https://github.com/import-js/eslint-plugin-import/pull/314
+[#308]: https://github.com/import-js/eslint-plugin-import/pull/308
+[#298]: https://github.com/import-js/eslint-plugin-import/pull/298
+[#297]: https://github.com/import-js/eslint-plugin-import/pull/297
+[#296]: https://github.com/import-js/eslint-plugin-import/pull/296
+[#290]: https://github.com/import-js/eslint-plugin-import/pull/290
+[#288]: https://github.com/import-js/eslint-plugin-import/pull/288
+[#261]: https://github.com/import-js/eslint-plugin-import/pull/261
+[#256]: https://github.com/import-js/eslint-plugin-import/pull/256
+[#254]: https://github.com/import-js/eslint-plugin-import/pull/254
+[#250]: https://github.com/import-js/eslint-plugin-import/pull/250
+[#247]: https://github.com/import-js/eslint-plugin-import/pull/247
+[#245]: https://github.com/import-js/eslint-plugin-import/pull/245
+[#243]: https://github.com/import-js/eslint-plugin-import/pull/243
+[#241]: https://github.com/import-js/eslint-plugin-import/pull/241
+[#239]: https://github.com/import-js/eslint-plugin-import/pull/239
+[#228]: https://github.com/import-js/eslint-plugin-import/pull/228
+[#211]: https://github.com/import-js/eslint-plugin-import/pull/211
+[#157]: https://github.com/import-js/eslint-plugin-import/pull/157
+
+[ljharb#37]: https://github.com/ljharb/eslint-plugin-import/pull/37
+
+[#2930]: https://github.com/import-js/eslint-plugin-import/issues/2930
+[#2687]: https://github.com/import-js/eslint-plugin-import/issues/2687
+[#2684]: https://github.com/import-js/eslint-plugin-import/issues/2684
+[#2682]: https://github.com/import-js/eslint-plugin-import/issues/2682
+[#2674]: https://github.com/import-js/eslint-plugin-import/issues/2674
+[#2668]: https://github.com/import-js/eslint-plugin-import/issues/2668
+[#2666]: https://github.com/import-js/eslint-plugin-import/issues/2666
+[#2665]: https://github.com/import-js/eslint-plugin-import/issues/2665
+[#2577]: https://github.com/import-js/eslint-plugin-import/issues/2577
+[#2447]: https://github.com/import-js/eslint-plugin-import/issues/2447
+[#2444]: https://github.com/import-js/eslint-plugin-import/issues/2444
+[#2412]: https://github.com/import-js/eslint-plugin-import/issues/2412
+[#2392]: https://github.com/import-js/eslint-plugin-import/issues/2392
+[#2340]: https://github.com/import-js/eslint-plugin-import/issues/2340
+[#2255]: https://github.com/import-js/eslint-plugin-import/issues/2255
+[#2210]: https://github.com/import-js/eslint-plugin-import/issues/2210
+[#2201]: https://github.com/import-js/eslint-plugin-import/issues/2201
+[#2199]: https://github.com/import-js/eslint-plugin-import/issues/2199
+[#2161]: https://github.com/import-js/eslint-plugin-import/issues/2161
+[#2118]: https://github.com/import-js/eslint-plugin-import/issues/2118
+[#2067]: https://github.com/import-js/eslint-plugin-import/issues/2067
+[#2063]: https://github.com/import-js/eslint-plugin-import/issues/2063
+[#2056]: https://github.com/import-js/eslint-plugin-import/issues/2056
+[#1998]: https://github.com/import-js/eslint-plugin-import/issues/1998
+[#1965]: https://github.com/import-js/eslint-plugin-import/issues/1965
+[#1924]: https://github.com/import-js/eslint-plugin-import/issues/1924
+[#1854]: https://github.com/import-js/eslint-plugin-import/issues/1854
+[#1841]: https://github.com/import-js/eslint-plugin-import/issues/1841
+[#1834]: https://github.com/import-js/eslint-plugin-import/issues/1834
+[#1814]: https://github.com/import-js/eslint-plugin-import/issues/1814
+[#1811]: https://github.com/import-js/eslint-plugin-import/issues/1811
+[#1808]: https://github.com/import-js/eslint-plugin-import/issues/1808
+[#1805]: https://github.com/import-js/eslint-plugin-import/issues/1805
+[#1801]: https://github.com/import-js/eslint-plugin-import/issues/1801
+[#1722]: https://github.com/import-js/eslint-plugin-import/issues/1722
+[#1704]: https://github.com/import-js/eslint-plugin-import/issues/1704
+[#1702]: https://github.com/import-js/eslint-plugin-import/issues/1702
+[#1635]: https://github.com/import-js/eslint-plugin-import/issues/1635
+[#1631]: https://github.com/import-js/eslint-plugin-import/issues/1631
+[#1616]: https://github.com/import-js/eslint-plugin-import/issues/1616
+[#1613]: https://github.com/import-js/eslint-plugin-import/issues/1613
+[#1590]: https://github.com/import-js/eslint-plugin-import/issues/1590
+[#1589]: https://github.com/import-js/eslint-plugin-import/issues/1589
+[#1565]: https://github.com/import-js/eslint-plugin-import/issues/1565
+[#1366]: https://github.com/import-js/eslint-plugin-import/issues/1366
+[#1334]: https://github.com/import-js/eslint-plugin-import/issues/1334
+[#1323]: https://github.com/import-js/eslint-plugin-import/issues/1323
+[#1322]: https://github.com/import-js/eslint-plugin-import/issues/1322
+[#1300]: https://github.com/import-js/eslint-plugin-import/issues/1300
+[#1293]: https://github.com/import-js/eslint-plugin-import/issues/1293
+[#1266]: https://github.com/import-js/eslint-plugin-import/issues/1266
+[#1256]: https://github.com/import-js/eslint-plugin-import/issues/1256
+[#1233]: https://github.com/import-js/eslint-plugin-import/issues/1233
+[#1175]: https://github.com/import-js/eslint-plugin-import/issues/1175
+[#1166]: https://github.com/import-js/eslint-plugin-import/issues/1166
+[#1144]: https://github.com/import-js/eslint-plugin-import/issues/1144
+[#1058]: https://github.com/import-js/eslint-plugin-import/issues/1058
+[#1035]: https://github.com/import-js/eslint-plugin-import/issues/1035
+[#931]: https://github.com/import-js/eslint-plugin-import/issues/931
+[#886]: https://github.com/import-js/eslint-plugin-import/issues/886
+[#863]: https://github.com/import-js/eslint-plugin-import/issues/863
+[#842]: https://github.com/import-js/eslint-plugin-import/issues/842
+[#839]: https://github.com/import-js/eslint-plugin-import/issues/839
+[#795]: https://github.com/import-js/eslint-plugin-import/issues/795
+[#793]: https://github.com/import-js/eslint-plugin-import/issues/793
+[#720]: https://github.com/import-js/eslint-plugin-import/issues/720
+[#717]: https://github.com/import-js/eslint-plugin-import/issues/717
+[#686]: https://github.com/import-js/eslint-plugin-import/issues/686
+[#671]: https://github.com/import-js/eslint-plugin-import/issues/671
+[#660]: https://github.com/import-js/eslint-plugin-import/issues/660
+[#653]: https://github.com/import-js/eslint-plugin-import/issues/653
+[#627]: https://github.com/import-js/eslint-plugin-import/issues/627
+[#620]: https://github.com/import-js/eslint-plugin-import/issues/620
+[#609]: https://github.com/import-js/eslint-plugin-import/issues/609
+[#604]: https://github.com/import-js/eslint-plugin-import/issues/604
+[#602]: https://github.com/import-js/eslint-plugin-import/issues/602
+[#601]: https://github.com/import-js/eslint-plugin-import/issues/601
+[#592]: https://github.com/import-js/eslint-plugin-import/issues/592
+[#577]: https://github.com/import-js/eslint-plugin-import/issues/577
+[#570]: https://github.com/import-js/eslint-plugin-import/issues/570
+[#567]: https://github.com/import-js/eslint-plugin-import/issues/567
+[#566]: https://github.com/import-js/eslint-plugin-import/issues/566
+[#545]: https://github.com/import-js/eslint-plugin-import/issues/545
+[#530]: https://github.com/import-js/eslint-plugin-import/issues/530
+[#529]: https://github.com/import-js/eslint-plugin-import/issues/529
+[#519]: https://github.com/import-js/eslint-plugin-import/issues/519
+[#507]: https://github.com/import-js/eslint-plugin-import/issues/507
+[#484]: https://github.com/import-js/eslint-plugin-import/issues/484
+[#478]: https://github.com/import-js/eslint-plugin-import/issues/478
+[#456]: https://github.com/import-js/eslint-plugin-import/issues/456
+[#453]: https://github.com/import-js/eslint-plugin-import/issues/453
+[#452]: https://github.com/import-js/eslint-plugin-import/issues/452
+[#447]: https://github.com/import-js/eslint-plugin-import/issues/447
+[#441]: https://github.com/import-js/eslint-plugin-import/issues/441
+[#423]: https://github.com/import-js/eslint-plugin-import/issues/423
+[#416]: https://github.com/import-js/eslint-plugin-import/issues/416
+[#415]: https://github.com/import-js/eslint-plugin-import/issues/415
+[#402]: https://github.com/import-js/eslint-plugin-import/issues/402
+[#386]: https://github.com/import-js/eslint-plugin-import/issues/386
+[#373]: https://github.com/import-js/eslint-plugin-import/issues/373
+[#370]: https://github.com/import-js/eslint-plugin-import/issues/370
+[#348]: https://github.com/import-js/eslint-plugin-import/issues/348
+[#342]: https://github.com/import-js/eslint-plugin-import/issues/342
+[#328]: https://github.com/import-js/eslint-plugin-import/issues/328
+[#317]: https://github.com/import-js/eslint-plugin-import/issues/317
+[#313]: https://github.com/import-js/eslint-plugin-import/issues/313
+[#311]: https://github.com/import-js/eslint-plugin-import/issues/311
+[#306]: https://github.com/import-js/eslint-plugin-import/issues/306
+[#283]: https://github.com/import-js/eslint-plugin-import/issues/283
+[#281]: https://github.com/import-js/eslint-plugin-import/issues/281
+[#275]: https://github.com/import-js/eslint-plugin-import/issues/275
+[#272]: https://github.com/import-js/eslint-plugin-import/issues/272
+[#270]: https://github.com/import-js/eslint-plugin-import/issues/270
+[#267]: https://github.com/import-js/eslint-plugin-import/issues/267
+[#266]: https://github.com/import-js/eslint-plugin-import/issues/266
+[#216]: https://github.com/import-js/eslint-plugin-import/issues/216
+[#214]: https://github.com/import-js/eslint-plugin-import/issues/214
+[#210]: https://github.com/import-js/eslint-plugin-import/issues/210
+[#200]: https://github.com/import-js/eslint-plugin-import/issues/200
+[#192]: https://github.com/import-js/eslint-plugin-import/issues/192
+[#191]: https://github.com/import-js/eslint-plugin-import/issues/191
+[#189]: https://github.com/import-js/eslint-plugin-import/issues/189
+[#170]: https://github.com/import-js/eslint-plugin-import/issues/170
+[#155]: https://github.com/import-js/eslint-plugin-import/issues/155
+[#119]: https://github.com/import-js/eslint-plugin-import/issues/119
+[#89]: https://github.com/import-js/eslint-plugin-import/issues/89
+
+[Unreleased]: https://github.com/import-js/eslint-plugin-import/compare/v2.32.0...HEAD
+[2.32.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.31.0...v2.32.0
+[2.31.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.30.0...v2.31.0
+[2.30.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.29.1...v2.30.0
+[2.29.1]: https://github.com/import-js/eslint-plugin-import/compare/v2.29.0...v2.29.1
+[2.29.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.28.1...v2.29.0
+[2.28.1]: https://github.com/import-js/eslint-plugin-import/compare/v2.28.0...v2.28.1
+[2.28.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.27.5...v2.28.0
+[2.27.5]: https://github.com/import-js/eslint-plugin-import/compare/v2.27.4...v2.27.5
+[2.27.4]: https://github.com/import-js/eslint-plugin-import/compare/v2.27.3...v2.27.4
+[2.27.3]: https://github.com/import-js/eslint-plugin-import/compare/v2.27.2...v2.27.3
+[2.27.2]: https://github.com/import-js/eslint-plugin-import/compare/v2.27.1...v2.27.2
+[2.27.1]: https://github.com/import-js/eslint-plugin-import/compare/v2.27.0...v2.27.1
+[2.27.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.26.0...v2.27.0
+[2.26.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.25.4...v2.26.0
+[2.25.4]: https://github.com/import-js/eslint-plugin-import/compare/v2.25.3...v2.25.4
+[2.25.3]: https://github.com/import-js/eslint-plugin-import/compare/v2.25.2...v2.25.3
+[2.25.2]: https://github.com/import-js/eslint-plugin-import/compare/v2.25.1...v2.25.2
+[2.25.1]: https://github.com/import-js/eslint-plugin-import/compare/v2.25.0...v2.25.1
+[2.25.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.24.2...v2.25.0
+[2.24.2]: https://github.com/import-js/eslint-plugin-import/compare/v2.24.1...v2.24.2
+[2.24.1]: https://github.com/import-js/eslint-plugin-import/compare/v2.24.0...v2.24.1
+[2.24.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.23.4...v2.24.0
+[2.23.4]: https://github.com/import-js/eslint-plugin-import/compare/v2.23.3...v2.23.4
+[2.23.3]: https://github.com/import-js/eslint-plugin-import/compare/v2.23.2...v2.23.3
+[2.23.2]: https://github.com/import-js/eslint-plugin-import/compare/v2.23.1...v2.23.2
+[2.23.1]: https://github.com/import-js/eslint-plugin-import/compare/v2.23.0...v2.23.1
+[2.23.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.22.1...v2.23.0
+[2.22.1]: https://github.com/import-js/eslint-plugin-import/compare/v2.22.0...v2.22.1
+[2.22.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.21.1...v2.22.0
+[2.21.2]: https://github.com/import-js/eslint-plugin-import/compare/v2.21.1...v2.21.2
+[2.21.1]: https://github.com/import-js/eslint-plugin-import/compare/v2.21.0...v2.21.1
+[2.21.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.20.1...v2.21.0
+[2.20.1]: https://github.com/import-js/eslint-plugin-import/compare/v2.20.0...v2.20.1
+[2.20.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.19.1...v2.20.0
+[2.19.1]: https://github.com/import-js/eslint-plugin-import/compare/v2.19.0...v2.19.1
+[2.19.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.18.2...v2.19.0
+[2.18.2]: https://github.com/import-js/eslint-plugin-import/compare/v2.18.1...v2.18.2
+[2.18.1]: https://github.com/import-js/eslint-plugin-import/compare/v2.18.0...v2.18.1
+[2.18.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.17.3...v2.18.0
+[2.17.3]: https://github.com/import-js/eslint-plugin-import/compare/v2.17.2...v2.17.3
+[2.17.2]: https://github.com/import-js/eslint-plugin-import/compare/v2.17.1...v2.17.2
+[2.17.1]: https://github.com/import-js/eslint-plugin-import/compare/v2.17.0...v2.17.1
+[2.17.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.16.0...v2.17.0
+[2.16.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.15.0...v2.16.0
+[2.15.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.14.0...v2.15.0
+[2.14.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.13.0...v2.14.0
+[2.13.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.12.0...v2.13.0
+[2.12.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.11.0...v2.12.0
+[2.11.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.10.0...v2.11.0
+[2.10.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.9.0...v2.10.0
+[2.9.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.8.0...v2.9.0
+[2.8.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.7.0...v2.8.0
+[2.7.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.6.1...v2.7.0
+[2.6.1]: https://github.com/import-js/eslint-plugin-import/compare/v2.6.0...v2.6.1
+[2.6.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.5.0...v2.6.0
+[2.5.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.4.0...v2.5.0
+[2.4.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.3.0...v2.4.0
+[2.3.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.2.0...v2.3.0
+[2.2.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.1.0...v2.2.0
+[2.1.0]: https://github.com/import-js/eslint-plugin-import/compare/v2.0.1...v2.1.0
+[2.0.1]: https://github.com/import-js/eslint-plugin-import/compare/v2.0.0...v2.0.1
+[2.0.0]: https://github.com/import-js/eslint-plugin-import/compare/v1.16.0...v2.0.0
+[1.16.0]: https://github.com/import-js/eslint-plugin-import/compare/v1.15.0...v1.16.0
+[1.15.0]: https://github.com/import-js/eslint-plugin-import/compare/v1.14.0...v1.15.0
+[1.14.0]: https://github.com/import-js/eslint-plugin-import/compare/v1.13.0...v1.14.0
+[1.13.0]: https://github.com/import-js/eslint-plugin-import/compare/v1.12.0...v1.13.0
+[1.12.0]: https://github.com/import-js/eslint-plugin-import/compare/v1.11.1...v1.12.0
+[1.11.1]: https://github.com/import-js/eslint-plugin-import/compare/v1.11.0...v1.11.1
+[1.11.0]: https://github.com/import-js/eslint-plugin-import/compare/v1.10.3...v1.11.0
+[1.10.3]: https://github.com/import-js/eslint-plugin-import/compare/v1.10.2...v1.10.3
+[1.10.2]: https://github.com/import-js/eslint-plugin-import/compare/v1.10.1...v1.10.2
+[1.10.1]: https://github.com/import-js/eslint-plugin-import/compare/v1.10.0...v1.10.1
+[1.10.0]: https://github.com/import-js/eslint-plugin-import/compare/v1.9.2...v1.10.0
+[1.9.2]: https://github.com/import-js/eslint-plugin-import/compare/v1.9.1...v1.9.2
+[1.9.1]: https://github.com/import-js/eslint-plugin-import/compare/v1.9.0...v1.9.1
+[1.9.0]: https://github.com/import-js/eslint-plugin-import/compare/v1.8.1...v1.9.0
+[1.8.1]: https://github.com/import-js/eslint-plugin-import/compare/v1.8.0...v1.8.1
+[1.8.0]: https://github.com/import-js/eslint-plugin-import/compare/v1.7.0...v1.8.0
+[1.7.0]: https://github.com/import-js/eslint-plugin-import/compare/v1.6.1...v1.7.0
+[1.6.1]: https://github.com/import-js/eslint-plugin-import/compare/v1.6.0...v1.6.1
+[1.6.0]: https://github.com/import-js/eslint-plugin-import/compare/v1.5.0...1.6.0
+[1.5.0]: https://github.com/import-js/eslint-plugin-import/compare/v1.4.0...v1.5.0
+[1.4.0]: https://github.com/import-js/eslint-plugin-import/compare/v1.3.0...v1.4.0
+[1.3.0]: https://github.com/import-js/eslint-plugin-import/compare/v1.2.0...v1.3.0
+[1.2.0]: https://github.com/import-js/eslint-plugin-import/compare/v1.1.0...v1.2.0
+[1.1.0]: https://github.com/import-js/eslint-plugin-import/compare/v1.0.4...v1.1.0
+[1.0.4]: https://github.com/import-js/eslint-plugin-import/compare/v1.0.3...v1.0.4
+[1.0.3]: https://github.com/import-js/eslint-plugin-import/compare/v1.0.2...v1.0.3
+[1.0.2]: https://github.com/import-js/eslint-plugin-import/compare/v1.0.1...v1.0.2
+[1.0.1]: https://github.com/import-js/eslint-plugin-import/compare/v1.0.0...v1.0.1
+[1.0.0]: https://github.com/import-js/eslint-plugin-import/compare/v1.0.0-beta.0...v1.0.0
+[1.0.0-beta.0]: https://github.com/import-js/eslint-plugin-import/compare/v0.13.0...v1.0.0-beta.0
+[0.13.0]: https://github.com/import-js/eslint-plugin-import/compare/v0.12.1...v0.13.0
+[0.12.2]: https://github.com/import-js/eslint-plugin-import/compare/v0.12.1...v0.12.2
+[0.12.1]: https://github.com/import-js/eslint-plugin-import/compare/v0.12.0...v0.12.1
+[0.12.0]: https://github.com/import-js/eslint-plugin-import/compare/v0.11.0...v0.12.0
+[0.11.0]: https://github.com/import-js/eslint-plugin-import/compare/v0.10.1...v0.11.0
+
+[@1pete]: https://github.com/1pete
+[@3nuc]: https://github.com/3nuc
+[@aamulumi]: https://github.com/aamulumi
+[@aberezkin]: https://github.com/aberezkin
+[@adamborowski]: https://github.com/adamborowski
+[@adjerbetian]: https://github.com/adjerbetian
+[@AdriAt360]: https://github.com/AdriAt360
+[@ai]: https://github.com/ai
+[@aks-]: https://github.com/aks-
+[@akwodkiewicz]: https://github.com/akwodkiewicz
+[@aladdin-add]: https://github.com/aladdin-add
+[@albertpastrana]: https://github.com/albertpastrana
+[@alex-page]: https://github.com/alex-page
+[@alexgorbatchev]: https://github.com/alexgorbatchev
+[@amsardesai]: https://github.com/amsardesai
+[@andreubotella]: https://github.com/andreubotella
+[@AndrewLeedham]: https://github.com/AndrewLeedham
+[@andyogo]: https://github.com/andyogo
+[@aravindet]: https://github.com/aravindet
+[@arvigeus]: https://github.com/arvigeus
+[@asapach]: https://github.com/asapach
+[@astorije]: https://github.com/astorije
+[@atav32]: https://github.com/atav32
+[@atikenny]: https://github.com/atikenny
+[@atos1990]: https://github.com/atos1990
+[@azyzz228]: https://github.com/azyzz228
+[@barbogast]: https://github.com/barbogast
+[@BarryThePenguin]: https://github.com/BarryThePenguin
+[@be5invis]: https://github.com/be5invis
+[@beatrizrezener]: https://github.com/beatrizrezener
+[@benasher44]: https://github.com/benasher44
+[@benkrejci]: https://github.com/benkrejci
+[@benmosher]: https://github.com/benmosher
+[@benmunro]: https://github.com/benmunro
+[@BenoitZugmeyer]: https://github.com/BenoitZugmeyer
+[@bertyhell]: https://github.com/bertyhell
+[@bicstone]: https://github.com/bicstone
+[@Blasz]: https://github.com/Blasz
+[@bmish]: https://github.com/bmish
+[@borisyankov]: https://github.com/borisyankov
+[@bradennapier]: https://github.com/bradennapier
+[@bradzacher]: https://github.com/bradzacher
+[@brendo]: https://github.com/brendo
+[@brettz9]: https://github.com/brettz9
+[@chabb]: https://github.com/chabb
+[@Chamion]: https://github.com/Chamion
+[@charlessuh]: https://github.com/charlessuh
+[@charpeni]: https://github.com/charpeni
+[@cherryblossom000]: https://github.com/cherryblossom000
+[@chrislloyd]: https://github.com/chrislloyd
+[@christianvuerings]: https://github.com/christianvuerings
+[@christophercurrie]: https://github.com/christophercurrie
+[@cristobal]: https://github.com/cristobal
+[@DamienCassou]: https://github.com/DamienCassou
+[@danny-andrews]: https://github.com/dany-andrews
+[@darkartur]: https://github.com/darkartur
+[@davidbonnet]: https://github.com/davidbonnet
+[@dbrewer5]: https://github.com/dbrewer5
+[@developer-bandi]: https://github.com/developer-bandi
+[@devinrhode2]: https://github.com/devinrhode2
+[@devongovett]: https://github.com/devongovett
+[@dmnd]: https://github.com/dmnd
+[@domdomegg]: https://github.com/domdomegg
+[@duncanbeevers]: https://github.com/duncanbeevers
+[@dwardu]: https://github.com/dwardu
+[@echenley]: https://github.com/echenley
+[@edemaine]: https://github.com/edemaine
+[@eelyafi]: https://github.com/eelyafi
+[@Ephem]: https://github.com/Ephem
+[@ephys]: https://github.com/ephys
+[@eps1lon]: https://github.com/eps1lon
+[@ernestostifano]: https://github.com/ernestostifano
+[@ertrzyiks]: https://github.com/ertrzyiks
+[@fa93hws]: https://github.com/fa93hws
+[@Fdawgs]: https://github.com/Fdawgs
+[@fengkfengk]: https://github.com/fengkfengk
+[@fernandopasik]: https://github.com/fernandopasik
+[@feychenie]: https://github.com/feychenie
+[@fisker]: https://github.com/fisker
+[@FloEdelmann]: https://github.com/FloEdelmann
+[@fooloomanzoo]: https://github.com/fooloomanzoo
+[@foray1010]: https://github.com/foray1010
+[@forivall]: https://github.com/forivall
+[@fsmaia]: https://github.com/fsmaia
+[@fson]: https://github.com/fson
+[@futpib]: https://github.com/futpib
+[@G-Rath]: https://github.com/G-Rath
+[@gajus]: https://github.com/gajus
+[@gausie]: https://github.com/gausie
+[@gavriguy]: https://github.com/gavriguy
+[@georeith]: https://github.com/georeith
+[@giodamelio]: https://github.com/giodamelio
+[@gnprice]: https://github.com/gnprice
+[@GoldStrikeArch]: https://github.com/GoldStrikeArch
+[@golergka]: https://github.com/golergka
+[@golopot]: https://github.com/golopot
+[@GoodForOneFare]: https://github.com/GoodForOneFare
+[@graingert]: https://github.com/graingert
+[@greim]: https://github.com/greim
+[@grit96]: https://github.com/grit96
+[@guilhermelimak]: https://github.com/guilhermelimak
+[@guillaumewuip]: https://github.com/guillaumewuip
+[@hayes]: https://github.com/hayes
+[@himynameisdave]: https://github.com/himynameisdave
+[@hulkish]: https://github.com/hulkish
+[@hyperupcall]: https://github.com/hyperupcall
+[@Hypnosphi]: https://github.com/Hypnosphi
+[@intellix]: https://github.com/intellix
+[@isiahmeadows]: https://github.com/isiahmeadows
+[@IvanGoncharov]: https://github.com/IvanGoncharov
+[@ivo-stefchev]: https://github.com/ivo-stefchev
+[@jablko]: https://github.com/jablko
+[@jakubsta]: https://github.com/jakubsta
+[@jeffshaver]: https://github.com/jeffshaver
+[@jf248]: https://github.com/jf248
+[@jfmengels]: https://github.com/jfmengels
+[@JiangWeixian]: https://github.com/JiangWeixian
+[@jimbolla]: https://github.com/jimbolla
+[@jkimbo]: https://github.com/jkimbo
+[@joaovieira]: https://github.com/joaovieira
+[@joe-matsec]: https://github.com/joe-matsec
+[@joeyguerra]: https://github.com/joeyguerra
+[@johndevedu]: https://github.com/johndevedu
+[@johnthagen]: https://github.com/johnthagen
+[@jonboiser]: https://github.com/jonboiser
+[@josh]: https://github.com/josh
+[@joshuaobrien]: https://github.com/joshuaobrien
+[@JounQin]: https://github.com/JounQin
+[@jquense]: https://github.com/jquense
+[@jseminck]: https://github.com/jseminck
+[@julien1619]: https://github.com/julien1619
+[@justinanastos]: https://github.com/justinanastos
+[@jwbth]: https://github.com/jwbth
+[@k15a]: https://github.com/k15a
+[@kentcdodds]: https://github.com/kentcdodds
+[@kevin940726]: https://github.com/kevin940726
+[@kgregory]: https://github.com/kgregory
+[@kinland]: https://github.com/kinland
+[@kirill-konshin]: https://github.com/kirill-konshin
+[@kiwka]: https://github.com/kiwka
+[@klimashkin]: https://github.com/klimashkin
+[@kmui2]: https://github.com/kmui2
+[@knpwrs]: https://github.com/knpwrs
+[@KostyaZgara]: https://github.com/KostyaZgara
+[@kylemh]: https://github.com/kylemh
+[@laurens-dg]: https://github.com/laurens-dg
+[@laysent]: https://github.com/laysent
+[@le0nik]: https://github.com/le0nik
+[@leipert]: https://github.com/leipert
+[@lemonmade]: https://github.com/lemonmade
+[@lencioni]: https://github.com/lencioni
+[@leonardodino]: https://github.com/leonardodino
+[@Librazy]: https://github.com/Librazy
+[@liby]: https://github.com/liby
+[@lilling]: https://github.com/lilling
+[@liuxingbaoyu]: https://github.com/liuxingbaoyu
+[@ljharb]: https://github.com/ljharb
+[@ljqx]: https://github.com/ljqx
+[@lnuvy]: https://github.com/lnuvy
+[@lo1tuma]: https://github.com/lo1tuma
+[@loganfsmyth]: https://github.com/loganfsmyth
+[@luczsoma]: https://github.com/luczsoma
+[@ludofischer]: https://github.com/ludofischer
+[@Lukas-Kullmann]: https://github.com/Lukas-Kullmann
+[@lukeapage]: https://github.com/lukeapage
+[@lydell]: https://github.com/lydell
+[@magarcia]: https://github.com/magarcia
+[@Mairu]: https://github.com/Mairu
+[@malykhinvi]: https://github.com/malykhinvi
+[@manovotny]: https://github.com/manovotny
+[@manuth]: https://github.com/manuth
+[@marcusdarmstrong]: https://github.com/marcusdarmstrong
+[@mastilver]: https://github.com/mastilver
+[@mathieudutour]: https://github.com/mathieudutour
+[@MatthiasKunnen]: https://github.com/MatthiasKunnen
+[@mattijsbliek]: https://github.com/mattijsbliek
+[@Maxim-Mazurok]: https://github.com/Maxim-Mazurok
+[@maxkomarychev]: https://github.com/maxkomarychev
+[@maxmalov]: https://github.com/maxmalov
+[@meowtec]: https://github.com/meowtec
+[@mgwalker]: https://github.com/mgwalker
+[@mhmadhamster]: https://github.com/MhMadHamster
+[@michaelfaith]: https://github.com/michaelfaith
+[@mihkeleidast]: https://github.com/mihkeleidast
+[@MikeyBeLike]: https://github.com/MikeyBeLike
+[@minervabot]: https://github.com/minervabot
+[@mpint]: https://github.com/mpint
+[@mplewis]: https://github.com/mplewis
+[@mrmckeb]: https://github.com/mrmckeb
+[@msvab]: https://github.com/msvab
+[@mulztob]: https://github.com/mulztob
+[@mx-bernhard]: https://github.com/mx-bernhard
+[@Nfinished]: https://github.com/Nfinished
+[@nickofthyme]: https://github.com/nickofthyme
+[@nicolashenry]: https://github.com/nicolashenry
+[@NishargShah]: https://github.com/NishargShah
+[@noelebrun]: https://github.com/noelebrun
+[@ntdb]: https://github.com/ntdb
+[@nwalters512]: https://github.com/nwalters512
+[@ombene]: https://github.com/ombene
+[@ota-meshi]: https://github.com/ota-meshi
+[@OutdatedVersion]: https://github.com/OutdatedVersion
+[@Pandemic1617]: https://github.com/Pandemic1617
+[@panrafal]: https://github.com/panrafal
+[@paztis]: https://github.com/paztis
+[@pcorpet]: https://github.com/pcorpet
+[@Pearce-Ropion]: https://github.com/Pearce-Ropion
+[@Pessimistress]: https://github.com/Pessimistress
+[@phryneas]: https://github.com/phryneas
+[@pmcelhaney]: https://github.com/pmcelhaney
+[@preco21]: https://github.com/preco21
+[@pri1311]: https://github.com/pri1311
+[@ProdigySim]: https://github.com/ProdigySim
+[@pzhine]: https://github.com/pzhine
+[@ramasilveyra]: https://github.com/ramasilveyra
+[@randallreedjr]: https://github.com/randallreedjr
+[@redbugz]: https://github.com/redbugz
+[@remcohaszing]: https://github.com/remcohaszing
+[@rfermann]: https://github.com/rfermann
+[@rhettlivingston]: https://github.com/rhettlivingston
+[@rhys-vdw]: https://github.com/rhys-vdw
+[@richardxia]: https://github.com/richardxia
+[@robertrossmann]: https://github.com/robertrossmann
+[@rosswarren]: https://github.com/rosswarren
+[@rperello]: https://github.com/rperello
+[@rsolomon]: https://github.com/rsolomon
+[@RyanGst]: https://github.com/
+[@s-h-a-d-o-w]: https://github.com/s-h-a-d-o-w
+[@saschanaz]: https://github.com/saschanaz
+[@schmidsi]: https://github.com/schmidsi
+[@schmod]: https://github.com/schmod
+[@Schweinepriester]: https://github.com/Schweinepriester
+[@scottnonnenberg]: https://github.com/scottnonnenberg
+[@sergei-startsev]: https://github.com/sergei-startsev
+[@sevenc-nanashi]: https://github.com/sevenc-nanashi
+[@sharmilajesupaul]: https://github.com/sharmilajesupaul
+[@sheepsteak]: https://github.com/sheepsteak
+[@silverwind]: https://github.com/silverwind
+[@silviogutierrez]: https://github.com/silviogutierrez
+[@SimenB]: https://github.com/SimenB
+[@simmo]: https://github.com/simmo
+[@sindresorhus]: https://github.com/sindresorhus
+[@singles]: https://github.com/singles
+[@skozin]: https://github.com/skozin
+[@skyrpex]: https://github.com/skyrpex
+[@snewcomer]: https://github.com/snewcomer
+[@sompylasar]: https://github.com/sompylasar
+[@soryy708]: https://github.com/soryy708
+[@sosukesuzuki]: https://github.com/sosukesuzuki
+[@spalger]: https://github.com/spalger
+[@st-sloth]: https://github.com/st-sloth
+[@stekycz]: https://github.com/stekycz
+[@stenin-nikita]: https://github.com/stenin-nikita
+[@stephtr]: https://github.com/stephtr
+[@straub]: https://github.com/straub
+[@strawbrary]: https://github.com/strawbrary
+[@stropho]: https://github.com/stropho
+[@sveyret]: https://github.com/sveyret
+[@swernerx]: https://github.com/swernerx
+[@syymza]: https://github.com/syymza
+[@TakeScoop]: https://github.com/TakeScoop
+[@tapayne88]: https://github.com/tapayne88
+[@Taranys]: https://github.com/Taranys
+[@taye]: https://github.com/taye
+[@TheCrueltySage]: https://github.com/TheCrueltySage
+[@TheJaredWilcurt]: https://github.com/TheJaredWilcurt
+[@tihonove]: https://github.com/tihonove
+[@timkraut]: https://github.com/timkraut
+[@tizmagik]: https://github.com/tizmagik
+[@tomprats]: https://github.com/tomprats
+[@TrevorBurnham]: https://github.com/TrevorBurnham
+[@ttmarek]: https://github.com/ttmarek
+[@unbeauvoyage]: https://github.com/unbeauvoyage
+[@vikr01]: https://github.com/vikr01
+[@wenfangdu]: https://github.com/wenfangdu
+[@wKich]: https://github.com/wKich
+[@wschurman]: https://github.com/wschurman
+[@wtgtybhertgeghgtwtg]: https://github.com/wtgtybhertgeghgtwtg
+[@xM8WVqaG]: https://github.com/xM8WVqaG
+[@xpl]: https://github.com/xpl
+[@Xunnamius]: https://github.com/Xunnamius
+[@yesl-kim]: https://github.com/yesl-kim
+[@yndajas]: https://github.com/yndajas
+[@yordis]: https://github.com/yordis
+[@Zamiell]: https://github.com/Zamiell
+[@zloirock]: https://github.com/zloirock
