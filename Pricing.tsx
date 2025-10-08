@@ -15,7 +15,6 @@ export function Pricing() {
       period: "/month",
       cta: "Upgrade to Basic",
       features: ["Up to 3 photos", "About section", "Up to 3 practice areas", "Lead form (email)"],
-      highlighted: false,
     },
     {
       name: "Professional",
@@ -23,7 +22,6 @@ export function Pricing() {
       period: "/month",
       cta: "Get Professional",
       features: ["Photo gallery + logo", "Unlimited practice areas", "Reviews & FAQs", "Priority ranking (featured)"],
-      highlighted: true,
     },
     {
       name: "Expert",
@@ -43,7 +41,10 @@ export function Pricing() {
           {tiers.map((t) => (
             <div
               key={t.name}
-              className={["rounded-2xl border bg-white p-6 shadow-sm", t.highlighted ? "ring-2 ring-amber-400" : ""].join(" ")}
+              className={[
+                "rounded-2xl border bg-white p-6 shadow-sm",
+                t.name === "Professional" ? "ring-2 ring-amber-400" : "",
+              ].join(" ")}
             >
               <div className="flex items-baseline gap-2">
                 <h3 className="text-xl font-semibold">{t.name}</h3>
@@ -60,7 +61,10 @@ export function Pricing() {
                   </li>
                 ))}
               </ul>
-              <a href="/admin" className="mt-6 block w-full rounded-xl bg-black px-4 py-2 text-center text-white transition hover:opacity-90">
+              <a
+                href="/admin"
+                className="mt-6 block w-full rounded-xl bg-black px-4 py-2 text-center text-white transition hover:opacity-90"
+              >
                 {t.cta}
               </a>
             </div>
@@ -70,3 +74,4 @@ export function Pricing() {
     </section>
   );
 }
+
