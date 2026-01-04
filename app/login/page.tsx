@@ -29,3 +29,24 @@ export default function LoginPage() {
     </div>
   );
 }
+<button
+  onClick={async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+      },
+    });
+  }}
+  style={{
+    marginTop: 12,
+    width: "100%",
+    padding: "12px",
+    borderRadius: 6,
+    border: "1px solid #ddd",
+    background: "#fff",
+    cursor: "pointer",
+  }}
+>
+  Continue with Google
+</button>
