@@ -6,7 +6,7 @@ import { supabase } from "@/lib/supabase";
 export default function AuthCallbackPage() {
   useEffect(() => {
     supabase.auth.getSession().then(() => {
-      window.location.replace("/dashboard");
+      window.location.replace("/#/dashboard");
     });
   }, []);
 
