@@ -14,10 +14,10 @@ export default function SignupPage() {
 
   return (
     <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <div style={{ padding: 32, border: "1px solid #ddd", borderRadius: 10, width: 360 }}>
-        <h1 style={{ margin: 0 }}>Sign up</h1>
+      <div style={{ padding: 32, border: "1px solid #ddd", borderRadius: 10, width: 420 }}>
+        <h1 style={{ margin: 0 }}>Create Account</h1>
         <p style={{ marginTop: 8, marginBottom: 16, color: "#555" }}>
-          Create your account.
+          Register your law firm
         </p>
 
         <button
@@ -36,15 +36,23 @@ export default function SignupPage() {
           Continue with Google
         </button>
 
-        <div style={{ textAlign: "center", marginBottom: 12, color: "#888" }}>
-          or
-        </div>
+        <div style={{ textAlign: "center", marginBottom: 12, color: "#888" }}>or</div>
 
-        <form>
-          <input type="email" placeholder="Email" style={{ width: "100%", padding: "12px", marginBottom: 12, border: "1px solid #ddd", borderRadius: 8 }} />
-          <input type="password" placeholder="Password" style={{ width: "100%", padding: "12px", marginBottom: 12, border: "1px solid #ddd", borderRadius: 8 }} />
-          <button type="submit" style={{ width: "100%", padding: "12px", borderRadius: 8, background: "#000", color: "#fff", cursor: "pointer" }}>Sign up</button>
-        </form>
+        {/* Placeholder form (keep yours if you already have one) */}
+        <input placeholder="Law Firm Name" style={{ width: "100%", padding: 12, marginBottom: 10, borderRadius: 8, border: "1px solid #ddd" }} />
+        <input placeholder="Contact Name" style={{ width: "100%", padding: 12, marginBottom: 10, borderRadius: 8, border: "1px solid #ddd" }} />
+        <input placeholder="Phone" style={{ width: "100%", padding: 12, marginBottom: 10, borderRadius: 8, border: "1px solid #ddd" }} />
+        <input placeholder="Email" style={{ width: "100%", padding: 12, marginBottom: 10, borderRadius: 8, border: "1px solid #ddd" }} />
+        <input placeholder="Password" type="password" style={{ width: "100%", padding: 12, marginBottom: 10, borderRadius: 8, border: "1px solid #ddd" }} />
+        <input placeholder="Confirm Password" type="password" style={{ width: "100%", padding: 12, marginBottom: 16, borderRadius: 8, border: "1px solid #ddd" }} />
+
+        <button style={{ width: "100%", padding: 12, borderRadius: 8, border: "none", background: "#2563eb", color: "#fff", cursor: "pointer" }}>
+          Sign Up
+        </button>
+
+        <div style={{ textAlign: "center", marginTop: 14 }}>
+          <a href="/login">Already have an account? Sign in</a>
+        </div>
       </div>
     </div>
   );

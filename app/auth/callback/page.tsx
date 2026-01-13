@@ -8,16 +8,16 @@ export default function AuthCallbackPage() {
   const router = useRouter();
 
   useEffect(() => {
-    supabase.auth.getSession().then(() => {
-      // After Google login, send user to dashboard
-      router.replace("/dashboard");
-
-    });
+    const run = async () => {
+      try {
+        // This ensures the session is loaded after OAuth redirect
+        await supabase.auth.getSession();
+      } finally {
+        router.replace("/dashboard");
+      }
+    };
+    run();
   }, [router]);
 
-  return (
-    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <div>Signing you in…</div>
-    </div>
-  );
+  return <div style={{ padding: 40 }}>Signing you in...</div>;
 }

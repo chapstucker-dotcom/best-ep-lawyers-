@@ -21,19 +21,23 @@ export default function LoginPage() {
         </p>
 
         <button
+          type="button"
           onClick={signInWithGoogle}
           style={{
             width: "100%",
-            padding: "12px 16px",
-            fontSize: 16,
-            cursor: "pointer",
-            borderRadius: 6,
+            padding: "12px",
+            borderRadius: 8,
             border: "1px solid #ddd",
             background: "#fff",
+            cursor: "pointer",
           }}
         >
           Continue with Google
         </button>
+
+        <div style={{ textAlign: "center", marginTop: 14 }}>
+          <a href="/signup">Need an account? Sign up</a>
+        </div>
       </div>
     </div>
   );
