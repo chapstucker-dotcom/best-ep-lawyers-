@@ -35,7 +35,7 @@ export default function DashboardPage() {
 
   return (
     <div style={{ padding: 40, maxWidth: 720 }}>
-      <h1 style={{ marginTop: 0 }}>Dashboard</h1>
+      <h1 style={{ marginTop: 0 }}>Welcome Back!</h1>
       <p>Signed in as: <b>{email}</b></p>
 
       <button

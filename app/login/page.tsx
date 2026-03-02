@@ -26,7 +26,10 @@ export default function LoginPage() {
           style={{
             width: "100%",
             padding: "12px",
-            borderRadius: 8,
+            borderRadius: 8,<h1 style={{ color: "red" }}>
+  BUILD 888 – LOGIN PAGE
+</h1>
+
             border: "1px solid #ddd",
             background: "#fff",
             cursor: "pointer",
