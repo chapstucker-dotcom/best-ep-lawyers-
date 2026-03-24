@@ -1,6 +1,6 @@
 "use client";
 
-import { supabase } from "@/lib/supabase";
+import { supabase } from "../../lib/supabase";
 
 export default function SignupPage() {
   const continueWithGoogle = async () => {
@@ -56,7 +56,6 @@ export default function SignupPage() {
       </div>
     </div>
   );
-}git add .
-git commit -m "build 888 login test"
-git push origin main
+}
+
 

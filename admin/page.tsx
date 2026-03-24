@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { z } from "zod";
-import { hasSupabase, supabase } from "@/lib/supabase";
+import { supabase } from "../lib/supabase";
 
 const schema = z.object({
   name: z.string().min(2),
@@ -39,37 +39,20 @@ export default function AdminPage() {
 
       const categories = data.categories.split(",").map((s) => s.trim()).filter(Boolean);
 
-      if (hasSupabase) {
-        const { error } = await supabase.from("firms").insert({
-          name: data.name,
-          email: data.email,
-          phone: data.phone,
-          website: data.website || null,
-          address: data.address,
-          categories,
-          plan: data.plan,
-          photo: data.photo || null,
-          about: data.about || null,
-          slug: data.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
-        });
-        if (error) throw error;
-        setStatus("Submitted! Your firm will appear after review.");
-      } else {
-        // Fallback: require admin key to write to localStorage
-        const requiredKey = process.env.NEXT_PUBLIC_ADMIN_KEY || "change-me-admin-key";
-        if (data.plan !== "Free" && data.adminKey !== requiredKey) {
-          setStatus("In demo mode. To assign paid plans without Supabase, provide the correct Admin Key.");
-        }
-        const current = JSON.parse(localStorage.getItem("firms_demo") || "[]");
-        current.push({
-          ...data,
-          categories,
-          slug: data.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
-          createdAt: new Date().toISOString(),
-        });
-        localStorage.setItem("firms_demo", JSON.stringify(current));
-        setStatus("Saved locally (demo mode). Add Supabase env vars to persist to a database.");
-      }
+      const { error } = await supabase.from("firms").insert({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        website: data.website || null,
+        address: data.address,
+        categories,
+        plan: data.plan,
+        photo: data.photo || null,
+        about: data.about || null,
+        slug: data.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+      });
+      if (error) throw error;
+      setStatus("Submitted! Your firm will appear after review.");
     } catch (e: any) {
       setStatus(e.message || "Error");
     } finally {

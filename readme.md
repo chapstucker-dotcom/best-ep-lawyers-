@@ -1,53 +1,153 @@
-# wrap-ansi
+# Best EP Lawyers
 
-> Wordwrap a string with [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code#Colors_and_Styles)
+A modern React application for finding employment and labor law firms. Built with Vite, TypeScript, Tailwind CSS, and Supabase.
 
-## Install
+## Features
+
+- 🔍 Search and filter law firms by practice area and location
+- 👥 User authentication with Google OAuth
+- 📱 Responsive design for all devices
+- 🎨 Modern UI with Radix UI components
+- ⚡ Fast development with Vite
+- 🔒 Secure authentication with Supabase
+
+## Tech Stack
+
+- **Frontend**: React 18, TypeScript, Tailwind CSS
+- **Routing**: React Router DOM
+- **UI Components**: Radix UI, Lucide Icons
+- **State Management**: React Query, Context API
+- **Authentication**: Supabase Auth
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS with custom design system
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+- Supabase account
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd best-ep-lawyers
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up Supabase**
+
+   a. Create a new project at [supabase.com](https://supabase.com)
+
+   b. Go to Authentication > Settings and configure:
+      - Site URL: `http://localhost:8080`
+      - Redirect URLs: `http://localhost:8080/auth/callback`
+
+   c. Enable Google OAuth in Authentication > Providers
+
+   d. Copy your project URL and anon key
+
+4. **Configure environment variables**
+
+   Copy `.env.example` to `.env` and fill in your Supabase credentials:
+   ```env
+   VITE_SUPABASE_URL=your_supabase_project_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+
+5. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+   The application will be available at `http://localhost:8080`
+
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run build:dev` - Build for development
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+
+## Project Structure
 
 ```
-$ npm install wrap-ansi
+src/
+├── components/          # Reusable UI components
+│   ├── ui/             # Base UI components (Button, etc.)
+│   ├── Layout.tsx      # Main layout with navigation
+│   ├── FirmCard.tsx    # Law firm card component
+│   └── ...
+├── contexts/           # React contexts
+│   └── AuthContext.tsx # Authentication context
+├── data/               # Static data
+│   └── sampleData.ts   # Sample law firm data
+├── lib/                # Utility libraries
+│   ├── supabase.ts     # Supabase client
+│   └── utils.ts        # Utility functions
+├── pages/              # Page components
+│   ├── HomePage.tsx    # Homepage
+│   ├── LoginPage.tsx   # Login page
+│   ├── SignupPage.tsx  # Signup page
+│   ├── DashboardPage.tsx # User dashboard
+│   ├── FirmPage.tsx    # Individual firm page
+│   ├── CategoryPage.tsx # Category listing page
+│   └── AuthCallback.tsx # OAuth callback handler
+├── App.tsx             # Main app component with routing
+├── main.tsx            # Application entry point
+└── index.css           # Global styles
 ```
 
-## Usage
+## Authentication Flow
 
-```js
-import chalk from 'chalk';
-import wrapAnsi from 'wrap-ansi';
+1. Users can sign up/login with Google OAuth
+2. After authentication, users are redirected to the dashboard
+3. Auth state is managed globally via React Context
+4. Protected routes automatically redirect to login if not authenticated
 
-const input = 'The quick brown ' + chalk.red('fox jumped over ') +
-	'the lazy ' + chalk.green('dog and then ran away with the unicorn.');
+## Deployment
 
-console.log(wrapAnsi(input, 20));
-```
+### Vercel (Recommended)
 
-<img width="331" src="screenshot.png">
+1. Connect your GitHub repository to Vercel
+2. Add environment variables in Vercel dashboard:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+3. Update Supabase redirect URLs to include your production domain
+4. Deploy!
 
-## API
+### Other Platforms
 
-### wrapAnsi(string, columns, options?)
+The app can be deployed to any static hosting service that supports SPA routing:
 
-Wrap words to the specified column width.
+- Netlify
+- GitHub Pages
+- AWS S3 + CloudFront
+- etc.
 
-#### string
+## Contributing
 
-Type: `string`
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/your-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin feature/your-feature`
+5. Submit a pull request
 
-String with ANSI escape codes. Like one styled by [`chalk`](https://github.com/chalk/chalk). Newline characters will be normalized to `\n`.
+## License
 
-#### columns
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Type: `number`
+## Support
 
-Number of columns to wrap the text to.
-
-#### options
-
-Type: `object`
-
-##### hard
-
-Type: `boolean`\
-Default: `false`
+For support, email support@besteplawyers.com or create an issue in this repository.
 
 By default the wrap is soft, meaning long words may extend past the column width. Setting this to `true` will make it hard wrap at the column width.
 

@@ -84,4 +84,7 @@
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1"
   }
-}
+}supabase link --project-ref yvcuhnnhspqjfnrbkhok
+supabase functions deploy create-checkout
+
+dir supabase\functions\create-checkout

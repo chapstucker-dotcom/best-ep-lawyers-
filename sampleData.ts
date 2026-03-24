@@ -1,43 +1,4 @@
-import type { Category, Plan } from "./constants";
-
-export type Firm = {
-  id: string;
-  slug: string;
-  name: string;
-  plan: Plan;
-  categories: Category[];
-  phone: string;
-  email: string;
-  website: string;
-  photo: string;
-  address: string;
-  blurb: string;
-  about?: string;
-};
-
-export const SAMPLE_FIRMS: Firm[] = [
-  {
-    id: "sun-city-legal-group",
-    slug: "sun-city-legal-group",
-    name: "Sun City Legal Group",
-    plan: "Professional",
-    categories: ["Personal Injury", "Medical Malpractice"],
-    phone: "(915) 555-0142",
-    email: "contact@suncitylegal.com",
-    website: "https://example.com/suncity",
-    photo: "https://images.unsplash.com/photo-1555375771-14b2a63968fe?q=80&w=1200&auto=format&fit=crop",
-    address: "201 N Kansas St, El Paso, TX 79901",
-    blurb: "Aggressive representation for accident and injury victims across El Paso County.",
-    about: "Decades of experience in catastrophic injury and malpractice litigation.",
-  },
-  {
-    id: "rio-grande-family-law",
-    slug: "rio-grande-family-law",
-    name: "Rio Grande Family Law",
-    plan: "Basic",
-    categories: ["Family Law"],
-    phone: "(915) 555-0177",
-    email: "info@riograndefamilylaw.com",
+// All demo/sample data removed. This file intentionally left blank for production.
     website: "https://example.com/rgfl",
     photo: "https://images.unsplash.com/photo-1528740561666-dc2479dc08ab?q=80&w=1200&auto=format&fit=crop",
     address: "123 East Mills Ave, El Paso, TX 79901",

@@ -28,3 +28,4 @@ const supabaseAnonKey =
   readEnv("NEXT_PUBLIC_database_ANON_KEY");
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
