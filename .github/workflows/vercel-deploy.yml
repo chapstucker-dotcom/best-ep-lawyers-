@@ -15,23 +15,19 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
 
       - name: Install dependencies
-        run: |
-          cd "EP BEST LAWYERS"
-          npm ci
+        run: npm ci
+        working-directory: 'EP BEST LAWYERS'
 
       - name: Build (Vite)
-        run: |
-          cd "EP BEST LAWYERS"
-          npm run build
+        run: npm run build
+        working-directory: 'EP BEST LAWYERS'
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
 
       - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: '--prod'
-          working-directory: 'EP BEST LAWYERS'
+        run: vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
+        working-directory: 'EP BEST LAWYERS'
