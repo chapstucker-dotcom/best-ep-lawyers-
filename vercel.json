@@ -5,7 +5,7 @@
       "src": "EP BEST LAWYERS/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "EP BEST LAWYERS/dist"
+        "distDir": "dist"
       }
     }
   ],
