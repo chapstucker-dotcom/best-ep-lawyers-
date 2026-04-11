@@ -1,11 +1,5 @@
 { 
-  "name": "your-package-name",
+  "name": "best-ep-lawyers-root",
   "version": "1.0.0",
-  "description": "Your package description here",
-  "main": "index.js",
-  "scripts": { 
-    // Removed pasted Vite scripts block 
-  }, 
-  "author": "Your Name",
-  "license": "ISC"
+  "private": true
 }
