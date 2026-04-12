@@ -34,5 +34,31 @@ Local build & test
 - Build locally: `npm run build`
 - Preview built site: `npm run preview`
 
-Optional: GitHub → Vercel CI
-- Connect repo to Vercel for automatic deploys on push to `main`/`master`.
+GitHub Actions → Vercel CI (`.github/workflows/vercel-deploy.yml`)
+
+The workflow deploys automatically on every push to `main` and can also be triggered manually.
+
+Required GitHub repository secrets (Settings → Secrets and variables → Actions):
+
+| Secret | Required | Description | Where to get it |
+|---|---|---|---|
+| `VERCEL_TOKEN` | ✅ Yes | Vercel API token for authentication | https://vercel.com/account/tokens |
+| `VITE_SUPABASE_URL` | ✅ Yes | Supabase project URL (baked into frontend build) | Supabase dashboard → Settings → API |
+| `VITE_SUPABASE_ANON_KEY` | ✅ Yes | Supabase anon/public key (baked into frontend build) | Supabase dashboard → Settings → API → anon key |
+| `VITE_STRIPE_PUBLISHABLE_KEY` | ⚪ Optional | Stripe publishable key for payment UI | https://dashboard.stripe.com/apikeys |
+
+Where each variable belongs:
+
+- **GitHub Secrets** (used by the workflow for the Vite build and Vercel deploy):
+  `VERCEL_TOKEN`, `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_STRIPE_PUBLISHABLE_KEY`
+
+- **Supabase Secrets only** (server-side Edge Functions — never in GitHub or Vercel):
+  `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `SUPABASE_SERVICE_ROLE_KEY`
+
+- **Supabase Authentication config only** (not a secret, set in Supabase dashboard):
+  `SITE_URL` — go to Authentication → URL Configuration and add your production domain
+
+Note on `VERCEL_ORG_ID` / `VERCEL_PROJECT_ID`: These are optional. The workflow uses
+`--name=best-ep-lawyers` to set the project name directly, avoiding the repository name
+validation issue (the repo name `best-ep-lawyers-` contains a trailing hyphen that Vercel
+rejects as `---` when combined with auto-generated slugs).
