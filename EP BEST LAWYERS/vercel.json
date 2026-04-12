@@ -5,6 +5,5 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "installCommand": "npm ci",
-  "framework": "vite",
-  "rootDirectory": "EP BEST LAWYERS"
+  "framework": "vite"
 }

@@ -1,7 +1,10 @@
 name: Deploy to Vercel
 
 on:
-  workflow_dispatch:  # manual trigger only - Vercel's native GitHub integration handles auto-deploys
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -23,10 +26,70 @@ jobs:
       - name: Build (Vite)
         run: npm run build
         working-directory: 'EP BEST LAWYERS'
+        env:
+          # Required: Supabase public credentials (set in GitHub repository secrets)
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          # Optional: Stripe publishable key for frontend Stripe integration
+          VITE_STRIPE_PUBLISHABLE_KEY: ${{ secrets.VITE_STRIPE_PUBLISHABLE_KEY }}
+          # Optional: production site URL
+          SITE_URL: ${{ secrets.SITE_URL }}
 
       - name: Install Vercel CLI
         run: npm install -g vercel@latest
 
-      - name: Deploy to Vercel
-        run: vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Configure Vercel project link
+        # When VERCEL_PROJECT_ID + VERCEL_ORG_ID are provided as secrets, write
+        # .vercel/project.json directly so the CLI skips auto-detection (which
+        # fails because the repo name produces an invalid "---" project name).
+        # jq is used to safely construct JSON without risk of injection from
+        # special characters in the secret values.
+        # When the IDs are not provided, fall back to "vercel link" with an
+        # explicit valid project name.
+        run: |
+          mkdir -p .vercel
+          if [ -n "$VERCEL_PROJECT_ID" ] && [ -n "$VERCEL_ORG_ID" ]; then
+            jq -n --arg org "$VERCEL_ORG_ID" --arg proj "$VERCEL_PROJECT_ID" \
+              '{"orgId": $org, "projectId": $proj}' > .vercel/project.json
+            echo "Linked using VERCEL_ORG_ID and VERCEL_PROJECT_ID."
+          else
+            echo "VERCEL_PROJECT_ID/VERCEL_ORG_ID not set — linking with explicit project name."
+            vercel link --yes --project=elpaso-best-lawyers
+          fi
         working-directory: 'EP BEST LAWYERS'
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Prepare Vercel build output
+        # Convert the Vite dist/ output into Vercel Build Output API format so
+        # "vercel deploy --prebuilt" can upload the already-compiled assets.
+        # This avoids Vercel rebuilding the project (which would lack the VITE_
+        # secrets) and bakes the secrets into the static bundle at CI time.
+        run: |
+          mkdir -p .vercel/output/static
+          cp -r dist/. .vercel/output/static/
+          cat > .vercel/output/config.json << 'EOF'
+          {
+            "version": 3,
+            "routes": [
+              {
+                "src": "/assets/(.*)",
+                "headers": { "cache-control": "public, max-age=31536000, immutable" },
+                "continue": true
+              },
+              { "handle": "filesystem" },
+              { "src": "/(.*)", "dest": "/index.html" }
+            ]
+          }
+          EOF
+        working-directory: 'EP BEST LAWYERS'
+
+      - name: Deploy to Vercel
+        run: vercel deploy --prod --yes --prebuilt
+        working-directory: 'EP BEST LAWYERS'
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
