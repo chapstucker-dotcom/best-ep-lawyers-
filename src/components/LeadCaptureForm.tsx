@@ -1,4 +1,50 @@
+import { useState } from "react";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  "https://yvcuhnnhspqjfnrbkhok.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2Y3Vobm5oc3BxamZucmJraG9rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk2NjExNjYsImV4cCI6MjA3NTIzNzE2Nn0.k5X-NsG95dt5Qn0taRJL_BvCF3pEHACjtHE-aZvf6RA"
+);
+
 export default function LeadCaptureForm() {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [legalIssue, setLegalIssue] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e: any) {
+    e.preventDefault();
+
+    setLoading(true);
+
+    const { error } = await supabase
+      .from("leads")
+      .insert([
+        {
+          full_name: fullName,
+          email,
+          phone,
+          legal_issue: legalIssue,
+        },
+      ]);
+
+    setLoading(false);
+
+    if (error) {
+      alert("Something went wrong.");
+      console.log(error);
+      return;
+    }
+
+    alert("Consultation request submitted!");
+
+    setFullName("");
+    setEmail("");
+    setPhone("");
+    setLegalIssue("");
+  }
+
   return (
     <section
       style={{
@@ -30,6 +76,7 @@ export default function LeadCaptureForm() {
       </p>
 
       <form
+        onSubmit={handleSubmit}
         style={{
           display: "grid",
           gap: "20px",
@@ -37,22 +84,30 @@ export default function LeadCaptureForm() {
       >
         <input
           placeholder="Full Name"
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
           style={inputStyle}
         />
 
         <input
           placeholder="Email Address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           style={inputStyle}
         />
 
         <input
           placeholder="Phone Number"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
           style={inputStyle}
         />
 
         <textarea
           placeholder="Describe your legal issue"
           rows={5}
+          value={legalIssue}
+          onChange={(e) => setLegalIssue(e.target.value)}
           style={{
             ...inputStyle,
             resize: "vertical",
@@ -61,6 +116,7 @@ export default function LeadCaptureForm() {
 
         <button
           type="submit"
+          disabled={loading}
           style={{
             background: "#fbbf24",
             color: "#0f172a",
@@ -72,7 +128,9 @@ export default function LeadCaptureForm() {
             cursor: "pointer",
           }}
         >
-          Request Free Consultation
+          {loading
+            ? "Submitting..."
+            : "Request Free Consultation"}
         </button>
       </form>
     </section>
