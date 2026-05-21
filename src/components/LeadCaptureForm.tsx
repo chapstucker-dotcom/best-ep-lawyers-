@@ -31,12 +31,11 @@ export default function LeadCaptureForm() {
 
     setLoading(false);
 
-    if (error) {
-      alert("Something went wrong.");
-      console.log(error);
-      return;
-    }
-
+if (error) {
+  console.log(error);
+  alert(JSON.stringify(error));
+  return;
+}
     alert("Consultation request submitted!");
 
     setFullName("");
