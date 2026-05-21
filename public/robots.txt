@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Sitemap: https://besteplawyers.com/sitemap.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://best-ep-lawyers-2.vercel.app/</loc>
+  </url>
+
+  <url>
+    <loc>https://best-ep-lawyers-2.vercel.app/el-paso-personal-injury-lawyers</loc>
+  </url>
+
+</urlset>
