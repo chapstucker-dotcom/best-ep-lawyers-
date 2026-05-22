@@ -1,5 +1,13 @@
+import "./App.css";
+import AttorneyProfile from "./pages/AttorneyProfile";
+import CarAccidentLawyers from "./pages/CarAccidentLawyers";
+
 export default function App() {
   const path = window.location.pathname;
+
+  if (path === "/el-paso-car-accident-lawyers") {
+    return <CarAccidentLawyers />;
+  }
 
   if (path === "/attorneys/johnson-injury-lawyers") {
     return (
@@ -84,4 +92,6 @@ export default function App() {
       />
     );
   }
-  import CarAccidentLawyers from "./pages/CarAccidentLawyers";
+
+  return <CarAccidentLawyers />;
+}
