@@ -1,14 +1,9 @@
 import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { Resend } from "resend";
 
 const supabase = createClient(
   "https://yvcuhnnhspqjfnrbkhok.supabase.co",
   "YOUR_SUPABASE_ANON_KEY"
-);
-
-const resend = new Resend(
-  import.meta.env.VITE_RESEND_API_KEY
 );
 
 export default function LeadCaptureForm() {
@@ -42,30 +37,19 @@ export default function LeadCaptureForm() {
       return;
     }
 
-    // SEND EMAIL
-    try {
-      await resend.emails.send({
-        from: "Best EP Lawyers <onboarding@resend.dev>",
-        to: import.meta.env.VITE_ADMIN_EMAIL,
-        subject: "New Legal Lead Submitted",
-        html: `
-          <div style="font-family: Arial; padding: 20px;">
-            <h1>New Lead Submitted</h1>
-
-            <p><strong>Name:</strong> ${fullName}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Phone:</strong> ${phone}</p>
-            <p><strong>Legal Issue:</strong></p>
-
-            <div style="padding:16px;background:#f4f4f4;border-radius:8px;">
-              ${legalIssue}
-            </div>
-          </div>
-        `,
-      });
-    } catch (emailError) {
-      console.log(emailError);
-    }
+    // SEND EMAIL VIA API
+    await fetch("/api/send-lead", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fullName,
+        email,
+        phone,
+        legalIssue,
+      }),
+    });
 
     setLoading(false);
 
