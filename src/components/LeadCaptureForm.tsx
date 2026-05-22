@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
+import { Resend } from "resend";
 
 const supabase = createClient(
   "https://yvcuhnnhspqjfnrbkhok.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2Y3Vobm5oc3BxamZucmJraG9rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk2NjExNjYsImV4cCI6MjA3NTIzNzE2Nn0.k5X-NsG95dt5Qn0taRJL_BvCF3pEHACjtHE-aZvf6RA"
+  "YOUR_SUPABASE_ANON_KEY"
+);
+
+const resend = new Resend(
+  import.meta.env.VITE_RESEND_API_KEY
 );
 
 export default function LeadCaptureForm() {
@@ -18,6 +23,7 @@ export default function LeadCaptureForm() {
 
     setLoading(true);
 
+    // SAVE TO SUPABASE
     const { error } = await supabase
       .from("leads")
       .insert([
@@ -29,13 +35,40 @@ export default function LeadCaptureForm() {
         },
       ]);
 
+    if (error) {
+      console.log(error);
+      alert(JSON.stringify(error));
+      setLoading(false);
+      return;
+    }
+
+    // SEND EMAIL
+    try {
+      await resend.emails.send({
+        from: "Best EP Lawyers <onboarding@resend.dev>",
+        to: import.meta.env.VITE_ADMIN_EMAIL,
+        subject: "New Legal Lead Submitted",
+        html: `
+          <div style="font-family: Arial; padding: 20px;">
+            <h1>New Lead Submitted</h1>
+
+            <p><strong>Name:</strong> ${fullName}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Phone:</strong> ${phone}</p>
+            <p><strong>Legal Issue:</strong></p>
+
+            <div style="padding:16px;background:#f4f4f4;border-radius:8px;">
+              ${legalIssue}
+            </div>
+          </div>
+        `,
+      });
+    } catch (emailError) {
+      console.log(emailError);
+    }
+
     setLoading(false);
 
-if (error) {
-  console.log(error);
-  alert(JSON.stringify(error));
-  return;
-}
     alert("Consultation request submitted!");
 
     setFullName("");
