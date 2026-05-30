@@ -34,6 +34,8 @@ const featuredFirms = [
   },
 ];
 
+const firms = featuredFirms;
+
 const plans = [
   {
     name: "Category Exclusive",
