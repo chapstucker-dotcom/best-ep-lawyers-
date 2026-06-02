@@ -58,3 +58,5 @@ export const categories: Category[] = [
     icon: 'https://d64gsuwffb70l.cloudfront.net/68ed9016467af1e849aff0b4_1760400727419_ba6e95ab.webp'
   }
 ];
+
+

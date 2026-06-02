@@ -91,3 +91,4 @@ export interface Plan {
   attorneyProfileLimit: number;
   additionalAttorneyPrice: number; // Price per additional attorney profile
 }
+

@@ -59,3 +59,5 @@ export default function ArticleModal({ article, open, onClose }: ArticleModalPro
     </Dialog>
   );
 }
+
+

@@ -112,3 +112,5 @@ export default {
     typography,
   ],
 } satisfies Config;
+
+

@@ -73,3 +73,5 @@ export default function FirmModal({ firm, open, onClose }: FirmModalProps) {
     </Dialog>
   );
 }
+
+

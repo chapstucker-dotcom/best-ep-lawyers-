@@ -52,3 +52,5 @@ export default function PricingCard({ plan }: PricingCardProps) {
     </Card>
   );
 }
+
+

@@ -112,3 +112,5 @@ export const getAllFirms = async (): Promise<{ data: Firm[] | null; error: any }
 
   return { data, error };
 };
+
+

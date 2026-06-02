@@ -69,3 +69,5 @@ export const deleteLogo = async (logoUrl: string): Promise<{ error: any }> => {
     return { error };
   }
 };
+
+

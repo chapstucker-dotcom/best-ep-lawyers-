@@ -32,7 +32,7 @@ export default function Hero({ onSearch }: HeroProps) {
       </div>
       <div className="relative max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto">
-          <h1 className="text-5xl font-bold mb-4">Best EP Lawyers</h1>
+          <h1 className="text-5xl font-bold mb-4">El Paso's Best Lawyers</h1>
           <p className="text-2xl mb-2">Find trusted attorneys in El Paso, TX</p>
           <p className="text-lg mb-8 opacity-90">
             Search by name or practice area. Compare firms, read plain-English Texas law guides, and contact attorneys directly.
@@ -76,4 +76,6 @@ export default function Hero({ onSearch }: HeroProps) {
     </div>
   );
 }
+
+
 

@@ -108,3 +108,5 @@ export const attorneyService = {
     return data.publicUrl;
   }
 };
+
+

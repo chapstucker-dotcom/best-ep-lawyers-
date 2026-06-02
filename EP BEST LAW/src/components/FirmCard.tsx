@@ -103,3 +103,5 @@ export default function FirmCard({ firm, onClick }: FirmCardProps) {
     </Card>
   );
 }
+
+

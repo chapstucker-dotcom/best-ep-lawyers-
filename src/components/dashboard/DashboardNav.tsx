@@ -50,3 +50,5 @@ export const DashboardNav = ({ activeTab, setActiveTab }: { activeTab: string; s
     </div>
   );
 };
+
+

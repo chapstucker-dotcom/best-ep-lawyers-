@@ -12,7 +12,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Scale className="h-8 w-8 text-[#F5B800]" />
-              <span className="text-xl font-bold">Best EP Lawyers</span>
+              <span className="text-xl font-bold">El Paso's Best Lawyers</span>
             </div>
             <p className="text-sm text-gray-300">
               Find trusted attorneys in El Paso, TX
@@ -54,9 +54,11 @@ export default function Footer() {
           <p className="mb-4">
             <strong>Advertising Disclosure:</strong> Some listings are paid advertisements. Featured labels indicate paid placement.
           </p>
-          <p>© 2025 Best EP Lawyers. All rights reserved.</p>
+          <p>© 2025 El Paso's Best Lawyers. All rights reserved.</p>
         </div>
       </div>
     </footer>
   );
 }
+
+

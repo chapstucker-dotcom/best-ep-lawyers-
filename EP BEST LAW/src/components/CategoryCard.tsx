@@ -26,3 +26,5 @@ export default function CategoryCard({ category, onClick }: CategoryCardProps) {
     </Card>
   );
 }
+
+

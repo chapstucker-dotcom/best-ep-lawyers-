@@ -32,3 +32,5 @@ export default function ArticleCard({ article, onClick }: ArticleCardProps) {
     </Card>
   );
 }
+
+

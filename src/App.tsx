@@ -114,7 +114,7 @@ const plans = [
 function Header() {
   return (
     <header style={styles.header}>
-      <a href="/" style={styles.logo}>Best EP Lawyers</a>
+      <a href="/" style={styles.logo}>El Paso's Best Lawyers</a>
 
       <nav style={styles.nav}>
         <a href="/el-paso-personal-injury-lawyers" style={styles.navLink}>
@@ -212,7 +212,7 @@ function Home() {
             </h1>
 
             <p style={styles.heroText}>
-              Best EP Lawyers helps people compare local law firms by practice
+              El Paso's Best Lawyers helps people compare local law firms by practice
               area while giving attorneys a clean way to get discovered,
               capture leads, and own premium category placement.
             </p>
@@ -661,3 +661,4 @@ const styles: Record<string, React.CSSProperties> = {
 };
 
 export default App;
+

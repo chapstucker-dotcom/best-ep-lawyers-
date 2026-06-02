@@ -84,3 +84,5 @@ if (!isSupabaseConfigured && typeof window !== 'undefined') {
     'Get your anon key from: https://supabase.com/dashboard/project/yvcuhnnhspqjfnrbkhok/settings/api'
   );
 }
+
+

@@ -94,3 +94,5 @@ export function AttorneyGallery({ attorneys }: AttorneyGalleryProps) {
     </div>
   );
 }
+
+

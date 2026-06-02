@@ -256,3 +256,5 @@ git push
 * Homepage exposure hierarchy
 * Featured vs Exclusive differentiation
 * Real SaaS marketplace pricing psychology
+
+
