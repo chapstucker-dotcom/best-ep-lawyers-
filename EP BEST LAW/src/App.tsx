@@ -114,7 +114,7 @@ const plans = [
 function Header() {
   return (
     <header style={styles.header}>
-      <a href="/" style={styles.logo}>Best EP Lawyers</a>
+      <a href="/" style={styles.logo}>El Paso's Best Lawyers</a>
 
       <nav style={styles.nav}>
         <a href="/el-paso-personal-injury-lawyers" style={styles.navLink}>
@@ -212,7 +212,7 @@ function Home() {
             </h1>
 
             <p style={styles.heroText}>
-              Best EP Lawyers helps people compare local law firms by practice
+              El Paso's Best Lawyers helps people find trusted attorneys while helping leading law firms increase visibility, generate qualified leads, and dominate their practice areas.
               area while giving attorneys a clean way to get discovered,
               capture leads, and own premium category placement.
             </p>
@@ -359,7 +359,7 @@ function CategoryPage() {
           </h1>
 
           <p style={styles.heroText}>
-            Compare local personal injury law firms in El Paso and connect
+            Find the Right El Paso Lawyer in Minutes
             with attorneys serving accident victims and injury clients.
           </p>
         </section>
