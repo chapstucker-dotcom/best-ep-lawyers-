@@ -1,3 +1,4 @@
+import { useMemo, useState } from "react";
 import "./App.css";
 
 const practiceAreas = [
@@ -5,17 +6,31 @@ const practiceAreas = [
   ["Car Accidents", "Auto accident attorneys for El Paso drivers and families."],
   ["Truck Accidents", "18-wheeler and commercial vehicle accident claims."],
   ["Criminal Defense", "DWI, misdemeanors, felonies, and federal defense."],
-  ["Family Law", "Divorce, custody, child support, and family court matters."],
+  ["DWI", "DWI defense, license issues, and criminal court representation."],
   ["Immigration", "Visas, deportation defense, residency, and citizenship."],
+  ["Family Law", "Divorce, custody, child support, and family court matters."],
+  ["Estate Planning", "Wills, trusts, probate, and estate planning support."],
+  ["Business Law", "Contracts, disputes, formation, and business legal matters."],
 ];
 
 const firms = [
   ["Cesar Ornelas Injury Law", "Personal Injury", "(915) 209-0646", "Category Exclusive"],
   ["Setra Law Firm", "Criminal Defense", "(915) 337-8100", "Featured"],
   ["Villar & Garcia Immigration Attorneys", "Immigration", "(915) 314-2363", "Featured"],
+  ["El Paso Family Law Group", "Family Law", "(915) 555-2000", "Featured"],
+  ["Border Defense Lawyers", "DWI / Criminal Defense", "(915) 555-3000", "Featured"],
+  ["West Texas Estate Counsel", "Estate Planning", "(915) 555-4000", "Expert"],
 ];
 
 export default function App() {
+  const [search, setSearch] = useState("");
+
+  const filteredFirms = useMemo(() => {
+    const q = search.toLowerCase().trim();
+    if (!q) return firms;
+    return firms.filter((firm) => firm.join(" ").toLowerCase().includes(q));
+  }, [search]);
+
   return (
     <main>
       <header className="site-header">
@@ -24,7 +39,7 @@ export default function App() {
           <a href="#areas">Practice Areas</a>
           <a href="#firms">Featured Firms</a>
           <a href="#pricing">Pricing</a>
-          <a className="header-button" href="#pricing">List Your Firm</a>
+          <a className="header-button" href="#lead">List Your Firm</a>
         </nav>
       </header>
 
@@ -37,7 +52,11 @@ export default function App() {
         </p>
 
         <div className="search-box">
-          <input placeholder="Search attorneys, law firms, or practice areas..." />
+          <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search attorneys, law firms, or practice areas..."
+          />
           <button>Search</button>
         </div>
 
@@ -67,14 +86,14 @@ export default function App() {
         <h2>Top-Rated Attorneys You Can Trust</h2>
 
         <div className="grid">
-          {firms.map(([name, category, phone, badge]) => (
+          {filteredFirms.map(([name, category, phone, badge]) => (
             <article className="firm-card" key={name}>
               <span className="badge">{badge}</span>
               <h3>{name}</h3>
               <p className="stars">★★★★★ 4.9 Reviews</p>
               <p>{category}</p>
               <p className="phone">{phone}</p>
-              <a className="button small gold" href="#">View Profile</a>
+              <a className="button small gold" href="#lead">Request Consultation</a>
             </article>
           ))}
         </div>
@@ -89,26 +108,26 @@ export default function App() {
             <h3>Expert Listing</h3>
             <div className="price">$299/mo</div>
             <p>Enhanced profile, lead capture form, analytics, and up to 5 attorney profiles.</p>
-            <a className="button gold" href="#">Claim This Spot</a>
+            <a className="button gold" href="#lead">Claim This Spot</a>
           </article>
 
           <article className="price-card featured">
             <h3>Category Featured</h3>
             <div className="price">$2,000/mo</div>
             <p>Premium placement, homepage exposure, featured badge, and priority lead visibility.</p>
-            <a className="button gold" href="#">Become Featured</a>
+            <a className="button gold" href="#lead">Become Featured</a>
           </article>
 
           <article className="price-card">
             <h3>Category Exclusive</h3>
             <div className="price">$5,000/mo</div>
             <p>One firm per category, top placement, Category Owner badge, and competitor lockout.</p>
-            <a className="button gold" href="#">Apply for Exclusivity</a>
+            <a className="button gold" href="#lead">Apply for Exclusivity</a>
           </article>
         </div>
       </section>
 
-      <section className="section lead">
+      <section id="lead" className="section lead">
         <h2>Need a Lawyer?</h2>
         <p>Tell us what kind of attorney you need and compare available El Paso firms.</p>
 
@@ -119,7 +138,9 @@ export default function App() {
           <select>
             <option>Practice Area</option>
             <option>Personal Injury</option>
+            <option>Car Accidents</option>
             <option>Criminal Defense</option>
+            <option>DWI</option>
             <option>Immigration</option>
             <option>Family Law</option>
           </select>
