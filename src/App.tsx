@@ -2,24 +2,32 @@ import { useMemo, useState } from "react";
 import "./App.css";
 
 const practiceAreas = [
-  ["Personal Injury", "Car accidents, wrongful death, and serious injury claims."],
-  ["Car Accidents", "Auto accident attorneys for El Paso drivers and families."],
-  ["Truck Accidents", "18-wheeler and commercial vehicle accident claims."],
-  ["Criminal Defense", "DWI, misdemeanors, felonies, and federal defense."],
+  ["Personal Injury", "Car accidents, wrongful death, catastrophic injury, and negligence claims."],
+  ["Car Accidents", "Compare El Paso attorneys handling auto accident and insurance claims."],
+  ["Truck Accidents", "18-wheeler, commercial vehicle, and serious trucking accident cases."],
+  ["Criminal Defense", "DWI, misdemeanors, felonies, and federal defense representation."],
   ["DWI", "DWI defense, license issues, and criminal court representation."],
-  ["Immigration", "Visas, deportation defense, residency, and citizenship."],
+  ["Immigration", "Visas, deportation defense, residency, green cards, and citizenship."],
   ["Family Law", "Divorce, custody, child support, and family court matters."],
   ["Estate Planning", "Wills, trusts, probate, and estate planning support."],
-  ["Business Law", "Contracts, disputes, formation, and business legal matters."],
+  ["Business Law", "Contracts, disputes, business formation, and commercial legal matters."],
+];
+
+const exclusiveSlots = [
+  ["Personal Injury", "Available", "$5,000/mo"],
+  ["Criminal Defense", "Available", "$5,000/mo"],
+  ["Immigration", "Available", "$5,000/mo"],
+  ["Family Law", "Available", "$5,000/mo"],
+  ["DWI", "Available", "$5,000/mo"],
 ];
 
 const firms = [
-  ["Cesar Ornelas Injury Law", "Personal Injury", "(915) 209-0646", "Category Exclusive"],
-  ["Setra Law Firm", "Criminal Defense", "(915) 337-8100", "Featured"],
-  ["Villar & Garcia Immigration Attorneys", "Immigration", "(915) 314-2363", "Featured"],
-  ["El Paso Family Law Group", "Family Law", "(915) 555-2000", "Featured"],
-  ["Border Defense Lawyers", "DWI / Criminal Defense", "(915) 555-3000", "Featured"],
-  ["West Texas Estate Counsel", "Estate Planning", "(915) 555-4000", "Expert"],
+  ["Cesar Ornelas Injury Law", "Personal Injury", "(915) 209-0646", "Category Exclusive", "Car accidents, injury claims, wrongful death, and serious injury cases."],
+  ["Setra Law Firm", "Criminal Defense", "(915) 337-8100", "Featured", "DWI, misdemeanors, felonies, and criminal defense representation."],
+  ["Villar & Garcia Immigration Attorneys", "Immigration", "(915) 314-2363", "Featured", "Immigration, deportation defense, residency, and visa matters."],
+  ["El Paso Family Law Group", "Family Law", "(915) 555-2000", "Featured", "Divorce, custody, support, and family law matters."],
+  ["Border Defense Lawyers", "DWI / Criminal Defense", "(915) 555-3000", "Featured", "DWI, criminal defense, and courtroom representation."],
+  ["West Texas Estate Counsel", "Estate Planning", "(915) 555-4000", "Expert", "Wills, trusts, probate, and estate planning."],
 ];
 
 export default function App() {
@@ -37,6 +45,7 @@ export default function App() {
         <div className="logo">El Paso&apos;s Best Lawyers</div>
         <nav>
           <a href="#areas">Practice Areas</a>
+          <a href="#exclusive">Exclusive Slots</a>
           <a href="#firms">Featured Firms</a>
           <a href="#pricing">Pricing</a>
           <a className="header-button" href="#lead">List Your Firm</a>
@@ -48,7 +57,7 @@ export default function App() {
         <h1>Find the Right El Paso Lawyer in Minutes.</h1>
         <p className="hero-text">
           Search and compare trusted El Paso attorneys by practice area, reviews,
-          experience, and availability.
+          experience, availability, and premium category placement.
         </p>
 
         <div className="search-box">
@@ -62,7 +71,31 @@ export default function App() {
 
         <div className="hero-actions">
           <a className="button gold" href="#firms">Find a Lawyer</a>
-          <a className="button outline" href="#pricing">List Your Firm</a>
+          <a className="button outline" href="#exclusive">Claim a Category</a>
+        </div>
+
+        <div className="trust-strip">
+          <span>Verified Local Firm Profiles</span>
+          <span>Fast Consultation Requests</span>
+          <span>Premium Category Placement</span>
+        </div>
+      </section>
+
+      <section id="exclusive" className="section exclusive-section">
+        <p className="eyebrow centered">CATEGORY EXCLUSIVE PARTNERS</p>
+        <h2>Own Your Practice Area Before a Competitor Does</h2>
+
+        <div className="grid">
+          {exclusiveSlots.map(([category, status, price]) => (
+            <article className="exclusive-card" key={category}>
+              <span className="badge">CATEGORY EXCLUSIVE</span>
+              <h3>{category}</h3>
+              <p>One firm only. Top placement. Competitor lockout.</p>
+              <strong>{status}</strong>
+              <div className="price smaller">{price}</div>
+              <a className="button gold" href="#lead">Claim This Category</a>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -86,14 +119,19 @@ export default function App() {
         <h2>Top-Rated Attorneys You Can Trust</h2>
 
         <div className="grid">
-          {filteredFirms.map(([name, category, phone, badge]) => (
+          {filteredFirms.map(([name, category, phone, badge, description]) => (
             <article className="firm-card" key={name}>
               <span className="badge">{badge}</span>
+              <div className="firm-avatar">{name.charAt(0)}</div>
               <h3>{name}</h3>
               <p className="stars">★★★★★ 4.9 Reviews</p>
-              <p>{category}</p>
+              <p><strong>{category}</strong></p>
+              <p>{description}</p>
               <p className="phone">{phone}</p>
-              <a className="button small gold" href="#lead">Request Consultation</a>
+              <div className="card-actions">
+                <a className="button small gold" href="#lead">Request Consultation</a>
+                <a className="button small dark-btn" href="#lead">View Profile</a>
+              </div>
             </article>
           ))}
         </div>
@@ -101,7 +139,7 @@ export default function App() {
 
       <section id="pricing" className="section dark">
         <p className="eyebrow centered">FOR ATTORNEYS</p>
-        <h2>Claim Premium Placement in Your Practice Area</h2>
+        <h2>Turn Local Search Into Qualified Legal Leads</h2>
 
         <div className="grid">
           <article className="price-card">
@@ -128,8 +166,9 @@ export default function App() {
       </section>
 
       <section id="lead" className="section lead">
-        <h2>Need a Lawyer?</h2>
-        <p>Tell us what kind of attorney you need and compare available El Paso firms.</p>
+        <p className="eyebrow centered">GET MATCHED</p>
+        <h2>Need a Lawyer or Want to List Your Firm?</h2>
+        <p>Tell us what you need. We&apos;ll help connect people with trusted El Paso law firms.</p>
 
         <form className="lead-form">
           <input placeholder="Full Name" />
@@ -143,9 +182,10 @@ export default function App() {
             <option>DWI</option>
             <option>Immigration</option>
             <option>Family Law</option>
+            <option>Attorney Advertising</option>
           </select>
-          <textarea placeholder="Briefly describe your legal issue" />
-          <button type="button">Request a Consultation</button>
+          <textarea placeholder="Briefly describe your legal issue or listing request" />
+          <button type="button">Submit Request</button>
         </form>
       </section>
 
