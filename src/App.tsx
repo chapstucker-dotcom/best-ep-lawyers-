@@ -66,7 +66,7 @@ export default function App() {
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search attorneys, law firms, or practice areas..."
           />
-          <button>Search</button>
+        <a className="search-button" href="#firms">Search</a>
         </div>
 
         <div className="hero-actions">
