@@ -64,4 +64,28 @@ git push origin main
   padding: 11px 16px;
   border-radius: 999px;
   font-weight: 800;
+}.search-box input {
+  color: #0f172a !important;
+  background: white !important;
+}
+
+.search-box input::placeholder {
+  color: #94a3b8 !important;
+}
+
+.search-box button,
+.search-button {
+  border: 0;
+  background: #d4af37;
+  color: #0f172a;
+  font-weight: 900;
+  padding: 22px 36px;
+  cursor: pointer;
+}
+
+.results-count {
+  text-align: center;
+  font-weight: 800;
+  margin: -25px 0 35px;
+  color: #334155;
 }

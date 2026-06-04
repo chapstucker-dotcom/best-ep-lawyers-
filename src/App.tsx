@@ -66,7 +66,12 @@ export default function App() {
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search attorneys, law firms, or practice areas..."
           />
-        <a className="search-button" href="#firms">Search</a>
+   <button
+  type="button"
+  onClick={() => document.getElementById("firms")?.scrollIntoView({ behavior: "smooth" })}
+>
+  Search
+</button>
         </div>
 
         <div className="hero-actions">
@@ -119,6 +124,10 @@ export default function App() {
         <h2>Top-Rated Attorneys You Can Trust</h2>
 
         <div className="grid">
+<p className="results-count">
+  Showing {filteredFirms.length} firm{filteredFirms.length === 1 ? "" : "s"}
+  {search ? ` for "${search}"` : ""}
+</p>
           {filteredFirms.map(([name, category, phone, badge, description]) => (
             <article className="firm-card" key={name}>
               <span className="badge">{badge}</span>
