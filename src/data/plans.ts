@@ -2,58 +2,67 @@ import { Plan } from './types';
 
 export const plans: Plan[] = [
   {
-    id: 'basic',
-    name: 'Basic',
-    priceMonth: 29.99,
+    id: 'free',
+    name: 'Free Listing',
+    priceMonth: 0,
     features: [
-      'Law firm basic information',
-      'Name, contact info & address',
-      'Up to 3 practice areas',
-      'Logo and cover photo',
-      'Appears in search results',
-      'Lead contact form'
+      'Firm name listing',
+      'Address display',
+      'Phone number',
+      'Website link',
+      'One practice area focus',
+      'Basic profile page',
     ],
-    stripePriceId: 'price_basic_monthly',
-    isFeatured: false,
+    stripePriceId: '',
     attorneyProfileLimit: 0,
-    additionalAttorneyPrice: 1.00
-  },
-  {
-    id: 'professional',
-    name: 'Professional',
-    priceMonth: 79.99,
-    features: [
-      'All Basic features',
-      'Up to 3 attorney profiles',
-      'Unlimited practice areas',
-      'Photo gallery',
-      'Client reviews & ratings',
-      'Featured placement',
-      'Priority in search results'
-    ],
-    stripePriceId: 'price_professional_monthly',
-    isFeatured: true,
-    attorneyProfileLimit: 3,
-    additionalAttorneyPrice: 1.00
   },
   {
     id: 'expert',
     name: 'Expert',
-    priceMonth: 149.99,
+    priceMonth: 299,
     features: [
-      'All Professional features',
-      'Up to 10 attorney profiles',
-      'Top-of-page placement',
-      'Video showcase',
-      'Case highlights section',
-      'Featured badge site-wide',
-      'Maximum exposure'
+      'Everything in Free',
+      'Enhanced firm profile',
+      'Multiple practice areas',
+      'Lead capture form',
+      'Analytics dashboard',
+      'Up to 5 attorney profiles',
     ],
     stripePriceId: 'price_expert_monthly',
-    isFeatured: true,
+    attorneyProfileLimit: 5,
+  },
+  {
+    id: 'category-featured',
+    name: 'Category Featured',
+    priceMonth: 2000,
+    features: [
+      'Everything in Expert',
+      'Premium placement under Exclusive',
+      'Rotating homepage exposure',
+      'Max 2 firms per category',
+      'Priority lead routing',
+      'Up to 10 attorney profiles',
+      'Limited to 10 firms total',
+    ],
+    stripePriceId: 'price_category_featured_monthly',
     attorneyProfileLimit: 10,
-    additionalAttorneyPrice: 1.00
-  }
+    popular: true,
+  },
+  {
+    id: 'category-exclusive',
+    name: 'Category Exclusive',
+    priceMonth: 5000,
+    features: [
+      'Everything in Category Featured',
+      '1 firm per category hard limit',
+      'Top placement in category',
+      'Category Owner badge',
+      'Full homepage exposure',
+      'Competitor lockout',
+      'Up to 20 attorney profiles',
+      'Only 5 total available in El Paso',
+    ],
+    stripePriceId: 'price_category_exclusive_monthly',
+    attorneyProfileLimit: 20,
+  },
 ];
-
-
