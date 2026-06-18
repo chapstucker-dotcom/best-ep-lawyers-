@@ -128,8 +128,8 @@ export default function AppLayout() {
 
     return matchesSearch && matchesCategory && matchesFeatured;
   });
-
-  const sortedFirms = [...filteredFirms].sort((a: any, b: any) => {
+const visibleFirms = filteredFirms.length > 0 ? filteredFirms : firms;
+const sortedFirms = [...visibleFirms].sort((a: any, b: any) => {
     if (sortBy === 'name') return String(a.name || '').localeCompare(String(b.name || ''));
     if (sortBy === 'newest') return new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime();
     return 0;
