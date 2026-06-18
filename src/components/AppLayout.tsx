@@ -38,10 +38,25 @@ export default function AppLayout() {
     loadFirms();
   }, []);
 
-  const handleSearch = (query: string) => {
+const handleSearch = (query: string) => {
+  const cleanQuery = query.toLowerCase().trim();
+
+  const matchedCategory = categories.find(cat =>
+    cat.title.toLowerCase().includes(cleanQuery) ||
+    cat.slug.toLowerCase().includes(cleanQuery) ||
+    cleanQuery.includes(cat.title.toLowerCase().split(' ')[0])
+  );
+
+  if (matchedCategory) {
+    setSelectedCategory(matchedCategory.slug);
+    setSearchQuery('');
+  } else {
+    setSelectedCategory('all');
     setSearchQuery(query);
-    document.getElementById('search')?.scrollIntoView({ behavior: 'smooth' });
-  };
+  }
+
+  document.getElementById('search')?.scrollIntoView({ behavior: 'smooth' });
+};
 
   const handleCategoryClick = (slug: string) => {
     setSelectedCategory(slug);
@@ -54,8 +69,14 @@ export default function AppLayout() {
       firm.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       firm.specialties?.some(s => s.toLowerCase().includes(searchQuery.toLowerCase()));
     
-    const matchesCategory = selectedCategory === 'all' || 
-      firm.specialties?.some(s => s.toLowerCase().includes(selectedCategory.toLowerCase()));
+  const selectedCategoryObj = categories.find(cat => cat.slug === selectedCategory);
+
+const matchesCategory =
+  selectedCategory === 'all' ||
+  firm.category?.toLowerCase().includes(selectedCategoryObj?.title.toLowerCase() || selectedCategory.toLowerCase()) ||
+  firm.specialties?.some(s =>
+    s.toLowerCase().includes(selectedCategoryObj?.title.toLowerCase() || selectedCategory.toLowerCase())
+  );
     const matchesFeatured = !featuredOnly || firm.is_featured;
     
     return matchesSearch && matchesCategory && matchesFeatured;
