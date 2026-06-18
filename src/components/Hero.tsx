@@ -1,175 +1,146 @@
-import { Search, MapPin, Scale, Car, Shield, Users, Gavel, FileText, Building2, Grid3X3 } from 'lucide-react';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Search, MapPin, Scale } from "lucide-react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 interface HeroProps {
   onSearch: (query: string) => void;
 }
 
-const quickPracticeAreas = [
-  { label: 'Personal Injury', icon: Car },
-  { label: 'Criminal Defense', icon: Scale },
-  { label: 'Family Law', icon: Users },
-  { label: 'DWI / DUI', icon: Gavel },
-  { label: 'Immigration', icon: FileText },
-  { label: 'Business Law', icon: Shield },
+const practiceAreas = [
+  "Personal Injury",
+  "Criminal Defense",
+  "Family Law",
+  "DWI / DUI",
+  "Immigration",
+  "Business Law",
+  "Probate",
+  "Estate Planning",
+  "Employment Law",
+  "Civil Litigation",
+  "Bankruptcy",
+  "Real Estate Law"
 ];
 
 export default function Hero({ onSearch }: HeroProps) {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [practiceArea, setPracticeArea] = useState('All Practice Areas');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
-  const handleSearch = (e: React.FormEvent) => {
+  const filteredSuggestions =
+    searchQuery.length > 0
+      ? practiceAreas.filter((item) =>
+          item.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      : [];
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const combined = `${searchQuery} ${practiceArea === 'All Practice Areas' ? '' : practiceArea}`.trim();
-    onSearch(combined);
+    onSearch(searchQuery);
+    setShowSuggestions(false);
   };
 
-  const handleQuickArea = (area: string) => {
-    setPracticeArea(area);
-    onSearch(area);
+  const handleSuggestionClick = (value: string) => {
+    setSearchQuery(value);
+    onSearch(value);
+    setShowSuggestions(false);
   };
 
   return (
-    <div className="bg-white">
-      <header className="relative z-20 bg-white border-b border-slate-200 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="h-16 w-16 rounded-xl bg-[#C99A2E]/10 flex items-center justify-center">
-              <Scale className="h-10 w-10 text-[#C99A2E]" />
-            </div>
+    <section className="bg-[#021B45] text-white">
+      <div className="max-w-7xl mx-auto px-6 py-10">
+
+        <div className="flex items-center justify-between mb-12">
+          <div className="flex items-center gap-3">
+            <Scale className="h-10 w-10 text-[#D4A62A]" />
             <div>
-              <div className="text-3xl font-serif font-bold tracking-wide text-[#0B1F3A] leading-none">
-                EL PASO'S
-              </div>
-              <div className="text-2xl font-serif font-bold tracking-[0.18em] text-[#C99A2E] leading-none">
-                BEST LAWYERS
-              </div>
-              <div className="text-[11px] tracking-[0.25em] text-[#0B1F3A] font-semibold mt-1">
-                EL PASO'S TRUSTED LEGAL DIRECTORY
-              </div>
+              <h1 className="text-3xl font-bold">
+                El Paso's Best Lawyers
+              </h1>
+              <p className="text-sm text-gray-300">
+                El Paso's Trusted Legal Directory
+              </p>
             </div>
           </div>
 
-          <nav className="hidden lg:flex items-center gap-9 text-[#0B1F3A] font-semibold">
-            <button onClick={() => document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' })}>
-              Practice Areas
-            </button>
-            <button onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}>
-              For Attorneys
-            </button>
-            <button onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}>
-              Pricing
-            </button>
-            <button onClick={() => document.getElementById('resources')?.scrollIntoView({ behavior: 'smooth' })}>
-              Articles
-            </button>
-            <Button asChild className="bg-[#C99A2E] hover:bg-[#B88923] text-white font-bold px-7">
-              <Link to="/signup">LIST YOUR FIRM</Link>
-            </Button>
-          </nav>
-        </div>
-      </header>
+          <div className="hidden md:flex gap-6 items-center">
+            <Link to="/pricing">Pricing</Link>
+            <Link to="/login">Login</Link>
 
-      <section className="relative overflow-hidden bg-[#07182E] text-white">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-70"
-          style={{
-            backgroundImage:
-              'url(https://images.unsplash.com/photo-1548225686-2f8b36b99d5f?auto=format&fit=crop&w=1800&q=80)',
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#07182E] via-[#07182E]/85 to-[#07182E]/35" />
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
-          <div className="max-w-3xl">
-            <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6">
-              Find the Right
-              <br />
-              <span className="text-[#D6A437]">El Paso Lawyer.</span>
-            </h1>
-
-            <p className="text-xl sm:text-2xl font-semibold max-w-2xl mb-8 text-white/95">
-              Search and compare trusted attorneys and law firms across El Paso, Texas by practice area, reviews, and experience.
-            </p>
-          </div>
-
-          <form
-            onSubmit={handleSearch}
-            className="bg-white rounded-xl shadow-2xl p-3 lg:p-4 grid grid-cols-1 lg:grid-cols-[1.4fr_1fr_1fr_auto] gap-3 max-w-6xl border border-white/30"
-          >
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[#0B1F3A]/60 h-5 w-5" />
-              <Input
-                type="text"
-                placeholder="Search by lawyer name, firm, or keyword..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="h-14 pl-12 border-0 text-[#0B1F3A] text-base focus-visible:ring-0"
-              />
-            </div>
-
-            <select
-              value={practiceArea}
-              onChange={(e) => setPracticeArea(e.target.value)}
-              className="h-14 rounded-md border-0 bg-white px-4 text-[#0B1F3A] font-medium outline-none"
+            <Link
+              to="/signup"
+              className="bg-[#D4A62A] text-[#021B45] px-5 py-2 rounded-md font-semibold"
             >
-              <option>All Practice Areas</option>
-              <option>Personal Injury</option>
-              <option>Criminal Defense</option>
-              <option>Family Law</option>
-              <option>DWI / DUI</option>
-              <option>Immigration</option>
-              <option>Business Law</option>
-              <option>Divorce</option>
-              <option>Employment Law</option>
-            </select>
+              List Your Firm
+            </Link>
+          </div>
+        </div>
 
-            <div className="relative">
-              <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-[#0B1F3A]/60 h-5 w-5" />
-              <Input
-                value="El Paso, TX"
-                readOnly
-                className="h-14 pl-12 border-0 text-[#0B1F3A] font-medium focus-visible:ring-0"
+        <div className="max-w-4xl">
+          <h2 className="text-6xl font-bold leading-tight mb-4">
+            Find the Right
+            <br />
+            <span className="text-[#D4A62A]">
+              El Paso Lawyer.
+            </span>
+          </h2>
+
+          <p className="text-2xl mb-10 text-gray-200">
+            Search and compare trusted attorneys and law firms
+            across El Paso, Texas by practice area, reviews,
+            and experience.
+          </p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="relative">
+          <div className="bg-white rounded-xl p-4 flex flex-col lg:flex-row gap-4">
+
+            <div className="relative flex-1">
+              <Search className="absolute left-4 top-4 h-5 w-5 text-gray-500" />
+
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setShowSuggestions(true);
+                }}
+                onFocus={() => setShowSuggestions(true)}
+                placeholder="Search by lawyer name, firm, or keyword..."
+                className="w-full pl-12 pr-4 py-3 border rounded-lg text-black"
               />
+
+              {showSuggestions &&
+                filteredSuggestions.length > 0 && (
+                  <div className="absolute z-50 mt-1 bg-white border rounded-lg shadow-lg w-full overflow-hidden">
+                    {filteredSuggestions.map((item) => (
+                      <button
+                        key={item}
+                        type="button"
+                        onClick={() =>
+                          handleSuggestionClick(item)
+                        }
+                        className="w-full text-left px-4 py-3 hover:bg-gray-100 text-black"
+                      >
+                        {item}
+                      </button>
+                    ))}
+                  </div>
+                )}
             </div>
 
-            <Button type="submit" className="h-14 px-9 bg-[#C99A2E] hover:bg-[#B88923] text-white font-bold text-lg">
-              <Search className="mr-2 h-5 w-5" />
-              Search
-            </Button>
-          </form>
-
-          <div className="mt-5 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 rounded-xl overflow-hidden border border-white/15 bg-[#07182E]/80 backdrop-blur">
-            {quickPracticeAreas.map(({ label, icon: Icon }) => (
-              <button
-                key={label}
-                onClick={() => handleQuickArea(label)}
-                className="flex items-center gap-3 px-5 py-5 text-left border-r border-white/10 hover:bg-white/10 transition"
-              >
-                <Icon className="h-8 w-8 text-[#D6A437]" />
-                <div>
-                  <div className="font-bold text-sm">{label}</div>
-                  <div className="text-xs text-white/70">View Lawyers →</div>
-                </div>
-              </button>
-            ))}
+            <div className="flex items-center gap-2 border rounded-lg px-4 py-3 text-black">
+              <MapPin size={18} />
+              El Paso, TX
+            </div>
 
             <button
-              onClick={() => document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' })}
-              className="flex items-center gap-3 px-5 py-5 text-left hover:bg-white/10 transition"
+              type="submit"
+              className="bg-[#D4A62A] text-[#021B45] px-8 py-3 rounded-lg font-bold"
             >
-              <Grid3X3 className="h-8 w-8 text-[#D6A437]" />
-              <div>
-                <div className="font-bold text-sm">View All</div>
-                <div className="text-xs text-white/70">All Practice Areas →</div>
-              </div>
+              Search
             </button>
           </div>
-        </div>
-      </section>
-    </div>
+        </form>
+      </div>
+    </section>
   );
 }
