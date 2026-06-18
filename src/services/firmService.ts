@@ -9,17 +9,26 @@ const fallbackFirms = (): Firm[] =>
     id: String(index + 1),
     name: firm.name,
     category: firm.category,
+    description: firm.bio,
+    bio: firm.bio,
     phone: firm.phone,
     website: firm.website,
     address: firm.address,
-    bio: firm.bio,
+    city: "El Paso",
+    state: "TX",
+    zip_code: "",
+    specialties: [firm.category],
     is_featured: firm.featured ?? false,
     is_exclusive: firm.exclusive ?? false,
     is_verified: firm.verified ?? false,
     created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
   })) as Firm[];
 
-export const getAllFirms = async (): Promise<{ data: Firm[] | null; error: any }> => {
+export const getAllFirms = async (): Promise<{
+  data: Firm[] | null;
+  error: any;
+}> => {
   if (!isSupabaseConfigured || !supabase) {
     return { data: fallbackFirms(), error: null };
   }
@@ -39,7 +48,10 @@ export const createFirm = async (
   firm: FirmInput
 ): Promise<{ data: Firm | null; error: any }> => {
   if (!isSupabaseConfigured || !supabase) {
-    return { data: null, error: { message: "Supabase is not configured" } };
+    return {
+      data: null,
+      error: { message: "Supabase is not configured" },
+    };
   }
 
   const { data, error } = await supabase
@@ -56,7 +68,10 @@ export const updateFirm = async (
   updates: FirmInput
 ): Promise<{ data: Firm | null; error: any }> => {
   if (!isSupabaseConfigured || !supabase) {
-    return { data: null, error: { message: "Supabase is not configured" } };
+    return {
+      data: null,
+      error: { message: "Supabase is not configured" },
+    };
   }
 
   const { data, error } = await supabase
@@ -73,7 +88,9 @@ export const deleteFirm = async (
   firmId: string
 ): Promise<{ error: any }> => {
   if (!isSupabaseConfigured || !supabase) {
-    return { error: { message: "Supabase is not configured" } };
+    return {
+      error: { message: "Supabase is not configured" },
+    };
   }
 
   const { error } = await supabase
