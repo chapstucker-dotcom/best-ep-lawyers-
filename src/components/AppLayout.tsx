@@ -26,78 +26,148 @@ export default function AppLayout() {
   const [selectedFirm, setSelectedFirm] = useState<Firm | null>(null);
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
 
-  // Load firms from database
   useEffect(() => {
     const loadFirms = async () => {
       const { data, error } = await getAllFirms();
+
       if (data && !error) {
         setFirms(data);
+      } else if (data) {
+        setFirms(data);
       }
+
       setLoading(false);
     };
+
     loadFirms();
   }, []);
 
-const handleSearch = (query: string) => {
-  const cleanQuery = query.toLowerCase().trim();
+  const scrollToSearch = () => {
+    setTimeout(() => {
+      document.getElementById('search')?.scrollIntoView({ behavior: 'smooth' });
+    }, 50);
+  };
 
-  const matchedCategory = categories.find(cat =>
-    cat.title.toLowerCase().includes(cleanQuery) ||
-    cat.slug.toLowerCase().includes(cleanQuery) ||
-    cleanQuery.includes(cat.title.toLowerCase().split(' ')[0])
-  );
+  const normalizeText = (value: unknown) =>
+    String(value || '')
+      .toLowerCase()
+      .replace(/[-_/]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
 
-  if (matchedCategory) {
-    setSelectedCategory(matchedCategory.slug);
-    setSearchQuery('');
-  } else {
-    setSelectedCategory('all');
-    setSearchQuery(query);
-  }
+  const getFirmSearchText = (firm: any) => {
+    return normalizeText([
+      firm.name,
+      firm.category,
+      firm.description,
+      firm.bio,
+      firm.phone,
+      firm.website,
+      firm.address,
+      firm.city,
+      firm.state,
+      ...(firm.specialties || []),
+    ].filter(Boolean).join(' '));
+  };
 
-  document.getElementById('search')?.scrollIntoView({ behavior: 'smooth' });
-};
+  const handleSearch = (query: string) => {
+    const cleanQuery = normalizeText(query);
+
+    const matchedCategory = categories.find((cat: any) => {
+      const catTitle = normalizeText(cat.title);
+      const catSlug = normalizeText(cat.slug);
+      const firstWord = catTitle.split(' ')[0];
+
+      return (
+        cleanQuery === catTitle ||
+        cleanQuery === catSlug ||
+        catTitle.includes(cleanQuery) ||
+        catSlug.includes(cleanQuery) ||
+        cleanQuery.includes(catTitle) ||
+        cleanQuery.includes(firstWord)
+      );
+    });
+
+    if (matchedCategory) {
+      setSelectedCategory(matchedCategory.slug);
+      setSearchQuery('');
+    } else {
+      setSelectedCategory('all');
+      setSearchQuery(query);
+    }
+
+    scrollToSearch();
+  };
 
   const handleCategoryClick = (slug: string) => {
     setSelectedCategory(slug);
-    document.getElementById('search')?.scrollIntoView({ behavior: 'smooth' });
+    setSearchQuery('');
+    scrollToSearch();
   };
 
-  const filteredFirms = firms.filter(firm => {
-    const matchesSearch = searchQuery === '' || 
-      firm.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      firm.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      firm.specialties?.some(s => s.toLowerCase().includes(searchQuery.toLowerCase()));
-    
-  const selectedCategoryObj = categories.find(cat => cat.slug === selectedCategory);
+  const filteredFirms = firms.filter((firm: any) => {
+    const q = normalizeText(searchQuery);
+    const searchableText = getFirmSearchText(firm);
 
-const matchesCategory =
-  selectedCategory === 'all' ||
-  firm.category?.toLowerCase().includes(selectedCategoryObj?.title.toLowerCase() || selectedCategory.toLowerCase()) ||
-  firm.specialties?.some(s =>
-    s.toLowerCase().includes(selectedCategoryObj?.title.toLowerCase() || selectedCategory.toLowerCase())
-  );
+    const selectedCategoryObj = categories.find((cat: any) => cat.slug === selectedCategory);
+    const selectedTitle = normalizeText(selectedCategoryObj?.title);
+    const selectedSlug = normalizeText(selectedCategoryObj?.slug || selectedCategory);
+
+    const matchesSearch =
+      q === '' ||
+      searchableText.includes(q) ||
+      q.split(' ').some(word => word.length > 2 && searchableText.includes(word));
+
+    const matchesCategory =
+      selectedCategory === 'all' ||
+      searchableText.includes(selectedTitle) ||
+      searchableText.includes(selectedSlug) ||
+      (selectedTitle && selectedTitle.split(' ').some(word => word.length > 2 && searchableText.includes(word)));
+
     const matchesFeatured = !featuredOnly || firm.is_featured;
-    
+
     return matchesSearch && matchesCategory && matchesFeatured;
   });
 
-  const sortedFirms = [...filteredFirms].sort((a, b) => {
-    if (sortBy === 'name') return a.name.localeCompare(b.name);
-    if (sortBy === 'newest') return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+  const sortedFirms = [...filteredFirms].sort((a: any, b: any) => {
+    if (sortBy === 'name') return String(a.name || '').localeCompare(String(b.name || ''));
+    if (sortBy === 'newest') return new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime();
     return 0;
   });
 
-  const featuredFirms = firms.filter(f => f.is_featured).slice(0, 6);
+  const featuredFirms = firms.filter((f: any) => f.is_featured).slice(0, 6);
 
   return (
     <div className="min-h-screen bg-[#F8FAFC]">
       <Hero onSearch={handleSearch} />
-      
-      {/* Featured Firms */}
+
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-[#0F2A43] mb-8 text-center">Featured Law Firms</h2>
+          <div className="flex items-end justify-between gap-4 mb-8">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-widest text-[#C99A2E] mb-2">
+                Featured Law Firms
+              </p>
+              <h2 className="text-3xl font-bold text-[#0F2A43]">
+                Top-Rated El Paso Lawyers You Can Trust
+              </h2>
+              <p className="text-gray-600 mt-2">
+                Verified profiles, direct contact, and practice-area visibility.
+              </p>
+            </div>
+
+            <button
+              onClick={() => {
+                setSelectedCategory('all');
+                setSearchQuery('');
+                scrollToSearch();
+              }}
+              className="hidden md:inline-flex border border-[#0F2A43]/20 rounded-lg px-5 py-3 font-semibold text-[#0F2A43] hover:bg-[#0F2A43] hover:text-white transition"
+            >
+              View All Firms →
+            </button>
+          </div>
+
           {loading ? (
             <div className="flex justify-center py-12">
               <Loader2 className="h-8 w-8 animate-spin text-primary" />
@@ -114,10 +184,12 @@ const matchesCategory =
         </div>
       </section>
 
-      {/* Categories */}
       <section id="categories" className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-[#0F2A43] mb-8 text-center">Browse by Practice Area</h2>
+          <h2 className="text-3xl font-bold text-[#0F2A43] mb-8 text-center">
+            Browse by Practice Area
+          </h2>
+
           <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
             {categories.map(cat => (
               <CategoryCard key={cat.id} category={cat} onClick={() => handleCategoryClick(cat.slug)} />
@@ -126,10 +198,17 @@ const matchesCategory =
         </div>
       </section>
 
-      {/* Search & Results */}
       <section id="search" className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-[#0F2A43] mb-8">Find Lawyers</h2>
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold text-[#0F2A43]">Find Lawyers</h2>
+            <p className="text-gray-600 mt-2">
+              {selectedCategory === 'all'
+                ? 'Search all listed El Paso law firms.'
+                : `Showing ${categories.find((cat: any) => cat.slug === selectedCategory)?.title || selectedCategory} firms.`}
+            </p>
+          </div>
+
           <div className="grid lg:grid-cols-4 gap-6">
             <div className="lg:col-span-1">
               <SearchFilters
@@ -141,6 +220,7 @@ const matchesCategory =
                 onSortChange={setSortBy}
               />
             </div>
+
             <div className="lg:col-span-3">
               {loading ? (
                 <div className="flex justify-center py-12">
@@ -162,26 +242,29 @@ const matchesCategory =
         </div>
       </section>
 
-      {/* How It Works */}
       <section className="py-16 bg-gradient-to-br from-[#0F2A43] to-[#1FA8A1] text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold mb-12 text-center">How It Works</h2>
+
           <div className="grid md:grid-cols-4 gap-8">
             <div className="text-center">
               <Scale className="h-12 w-12 mx-auto mb-4 text-[#F5B800]" />
               <h3 className="font-bold mb-2">Search</h3>
               <p className="text-sm opacity-90">Browse by name or practice area</p>
             </div>
+
             <div className="text-center">
               <Users className="h-12 w-12 mx-auto mb-4 text-[#F5B800]" />
               <h3 className="font-bold mb-2">Compare</h3>
               <p className="text-sm opacity-90">View profiles, reviews & credentials</p>
             </div>
+
             <div className="text-center">
               <Shield className="h-12 w-12 mx-auto mb-4 text-[#F5B800]" />
               <h3 className="font-bold mb-2">Connect</h3>
               <p className="text-sm opacity-90">Contact attorneys directly</p>
             </div>
+
             <div className="text-center">
               <Award className="h-12 w-12 mx-auto mb-4 text-[#F5B800]" />
               <h3 className="font-bold mb-2">Get Help</h3>
@@ -191,13 +274,16 @@ const matchesCategory =
         </div>
       </section>
 
-      {/* Resources */}
       <section id="resources" className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-[#0F2A43] mb-4 text-center">Texas Law Resources</h2>
+          <h2 className="text-3xl font-bold text-[#0F2A43] mb-4 text-center">
+            Texas Law Resources
+          </h2>
+
           <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
             Plain-English guides to Texas law, written for El Paso residents
           </p>
+
           <div className="grid md:grid-cols-2 gap-6">
             {articles.map(article => (
               <ArticleCard key={article.id} article={article} onClick={() => setSelectedArticle(article)} />
@@ -206,46 +292,56 @@ const matchesCategory =
         </div>
       </section>
 
-      {/* Pricing */}
       <section id="pricing" className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-[#0F2A43] mb-4 text-center">Plans for Law Firms</h2>
-          <p className="text-center text-gray-600 mb-8">Start free. Upgrade any time.</p>
+          <h2 className="text-3xl font-bold text-[#0F2A43] mb-4 text-center">
+            Plans for Law Firms
+          </h2>
+
+          <p className="text-center text-gray-600 mb-8">
+            Start free. Upgrade any time.
+          </p>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {plans.map(plan => (
               <PricingCard key={plan.id} plan={plan} />
             ))}
           </div>
+
           <p className="text-center text-sm text-gray-600">
             Plans renew monthly. Cancel anytime. Upgrades take effect immediately.
           </p>
         </div>
       </section>
 
-      {/* List Your Firm */}
       <section id="list-form" className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ListFirmForm />
         </div>
       </section>
 
-      {/* Disclaimers */}
       <section id="disclaimers" className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-[#0F2A43] mb-8 text-center">Legal Disclaimers</h2>
+          <h2 className="text-3xl font-bold text-[#0F2A43] mb-8 text-center">
+            Legal Disclaimers
+          </h2>
+
           <div className="space-y-6 text-gray-700">
             <div>
               <h3 className="font-bold mb-2">No Legal Advice</h3>
               <p>Information on this site is for general informational purposes only and is not legal advice.</p>
             </div>
+
             <div>
               <h3 className="font-bold mb-2">Advertising Disclosure</h3>
               <p>Some listings are paid advertisements. Featured labels indicate paid placement.</p>
             </div>
+
             <div>
               <h3 className="font-bold mb-2">Accuracy</h3>
               <p>We do not guarantee the completeness or accuracy of profiles; confirm details with the firm directly.</p>
             </div>
+
             <div>
               <h3 className="font-bold mb-2">Texas-Specific</h3>
               <p>Texas law changes over time; consult a licensed Texas attorney for advice about your situation.</p>
@@ -261,5 +357,3 @@ const matchesCategory =
     </div>
   );
 }
-
-
