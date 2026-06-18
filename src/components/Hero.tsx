@@ -45,8 +45,16 @@ export default function Hero({ onSearch }: HeroProps) {
   };
 
   return (
-    <section className="bg-[#021B45] text-white">
-      <div className="max-w-7xl mx-auto px-6 py-10">
+   <section
+  className="relative text-white overflow-hidden"
+  style={{
+    backgroundImage:
+      "linear-gradient(rgba(2,27,69,.78), rgba(2,27,69,.78)), url('https://images.unsplash.com/photo-1577086664693-894d8405334a?auto=format&fit=crop&w=2000&q=80')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  }}
+>
+      <div className="max-w-7xl mx-auto px-6 py-16">
 
         <div className="flex items-center justify-between mb-12">
           <div className="flex items-center gap-3">
