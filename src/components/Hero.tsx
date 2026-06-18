@@ -49,7 +49,7 @@ export default function Hero({ onSearch }: HeroProps) {
   className="relative text-white overflow-hidden"
   style={{
     backgroundImage:
-      "linear-gradient(rgba(2,27,69,.78), rgba(2,27,69,.78)), url('https://images.unsplash.com/photo-1577086664693-894d8405334a?auto=format&fit=crop&w=2000&q=80')",
+      "linear-gradient(rgba(2,27,69,.78), rgba(2,27,69,.78)), url('/franklin-star.jpg')
     backgroundSize: "cover",
     backgroundPosition: "center",
   }}
