@@ -49,7 +49,12 @@ export default function Hero({ onSearch }: HeroProps) {
     <section
       className="text-white"
       style={{
-        backgroundImage: `linear-gradient(rgba(2,27,69,0.65), rgba(2,27,69,0.82)), url(${heroImage})`,
+        backgroundImage: style={{
+  backgroundImage: `linear-gradient(rgba(2,27,69,0.65), rgba(2,27,69,0.82)), url(${heroImage})`,
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+}}
     >
    <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="flex items-center justify-between mb-12">
