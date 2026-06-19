@@ -28,8 +28,8 @@ export default function Hero({ onSearch }: HeroProps) {
 
   const filteredSuggestions =
     searchQuery.length > 0
-      ? practiceAreas.filter((item) =>
-          item.toLowerCase().includes(searchQuery.toLowerCase())
+      ? practiceAreas.filter((area) =>
+          area.toLowerCase().includes(searchQuery.toLowerCase())
         )
       : [];
 
@@ -39,9 +39,9 @@ export default function Hero({ onSearch }: HeroProps) {
     setShowSuggestions(false);
   };
 
-  const handleSuggestionClick = (value: string) => {
-    setSearchQuery(value);
-    onSearch(value);
+  const chooseSuggestion = (area: string) => {
+    setSearchQuery(area);
+    onSearch(area);
     setShowSuggestions(false);
   };
 
@@ -49,14 +49,15 @@ export default function Hero({ onSearch }: HeroProps) {
     <section
       className="text-white"
       style={{
-        backgroundImage: style={{
-  backgroundImage: `linear-gradient(rgba(2,27,69,0.65), rgba(2,27,69,0.82)), url(${heroImage})`,
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
-}}
+        backgroundImage: `linear-gradient(rgba(2,27,69,0.65), rgba(2,27,69,0.82)), url(${heroImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
     >
-   <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="max-w-7xl mx-auto px-6 py-12">
+
+        {/* Header */}
         <div className="flex items-center justify-between mb-12">
           <div className="flex items-center gap-3">
             <Scale className="h-10 w-10 text-[#D4A62A]" />
@@ -90,80 +91,84 @@ export default function Hero({ onSearch }: HeroProps) {
           </div>
         </div>
 
+        {/* Hero Text */}
         <div className="max-w-4xl">
+
           <div className="inline-flex items-center gap-2 bg-[#D4A62A]/20 border border-[#D4A62A]/40 rounded-full px-4 py-2 mb-6">
             <MapPin className="h-4 w-4 text-[#D4A62A]" />
             <span>Serving El Paso, Texas</span>
-<p className="text-[#D4A62A] uppercase tracking-widest font-semibold mt-6 mb-4">
-  Limited Premium Placements Available
-</p>
           </div>
 
+          <p className="text-[#D4A62A] uppercase tracking-widest font-semibold mb-4">
+            Limited Premium Placements Available
+          </p>
+
           <h2 className="text-5xl md:text-7xl font-bold leading-tight mb-6">
-            Find the Right
+            Find El Paso's
             <br />
-           Find El Paso's
-<br />
-<span className="text-[#D4A62A]">
-  Top-Rated Attorneys.
-</span>
+            <span className="text-[#D4A62A]">
+              Top-Rated Attorneys.
+            </span>
           </h2>
 
           <p className="text-xl md:text-2xl text-gray-200 mb-10">
-            Search and compare trusted attorneys and law firms across
-            El Paso by practice area, experience, and reputation.
+            Find trusted El Paso attorneys by practice area,
+            compare top law firms, and connect directly with
+            experienced local counsel.
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="relative max-w-5xl">
+        {/* Search Box */}
+        <form onSubmit={handleSubmit} className="relative max-w-6xl">
           <div className="bg-white rounded-xl p-4 flex flex-col lg:flex-row gap-4 shadow-2xl">
+
             <div className="relative flex-1">
+
               <Search className="absolute left-4 top-4 h-5 w-5 text-gray-500" />
 
               <input
                 type="text"
                 value={searchQuery}
+                placeholder="Search by lawyer or practice area..."
+                className="w-full pl-12 pr-4 py-3 rounded-lg border text-black"
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
                   setShowSuggestions(true);
                 }}
                 onFocus={() => setShowSuggestions(true)}
-                placeholder="Search by lawyer or practice area..."
-                className="w-full pl-12 pr-4 py-3 rounded-lg border text-black"
               />
 
-              {showSuggestions &&
-                filteredSuggestions.length > 0 && (
-                  <div className="absolute z-50 mt-1 bg-white border rounded-lg shadow-lg w-full overflow-hidden">
-                    {filteredSuggestions.map((item) => (
-                      <button
-                        key={item}
-                        type="button"
-                        onClick={() =>
-                          handleSuggestionClick(item)
-                        }
-                        className="block w-full text-left px-4 py-3 hover:bg-gray-100 text-black"
-                      >
-                        {item}
-                      </button>
-                    ))}
-                  </div>
-                )}
+              {showSuggestions && filteredSuggestions.length > 0 && (
+                <div className="absolute z-50 mt-1 bg-white border rounded-lg shadow-lg w-full overflow-hidden">
+                  {filteredSuggestions.map((area) => (
+                    <button
+                      key={area}
+                      type="button"
+                      onClick={() => chooseSuggestion(area)}
+                      className="block w-full text-left px-4 py-3 hover:bg-gray-100 text-black"
+                    >
+                      {area}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
-            <div className="flex items-center gap-2 border rounded-lg px-4 py-3 text-black">
+            <div className="flex items-center gap-2 border rounded-lg px-6 py-3 text-black">
               <MapPin className="h-5 w-5" />
               El Paso, TX
             </div>
 
             <button
               type="submit"
-              className="bg-[#D4A62A] text-[#021B45] px-8 py-3 rounded-lg font-bold"
+              className="bg-[#D4A62A] text-[#021B45] px-10 py-3 rounded-lg font-bold"
             >
               Search
             </button>
+
           </div>
         </form>
+
       </div>
     </section>
   );
