@@ -1,6 +1,7 @@
 import { Search, MapPin, Scale } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import heroImage from "../assets/hero-franklin-star.png";
 
 interface HeroProps {
   onSearch: (query: string) => void;
@@ -48,13 +49,9 @@ export default function Hero({ onSearch }: HeroProps) {
     <section
       className="text-white"
       style={{
-        backgroundImage:
-          "linear-gradient(rgba(2,27,69,0.75), rgba(2,27,69,0.85)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2400&q=80')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+        backgroundImage: `linear-gradient(rgba(2,27,69,0.65), rgba(2,27,69,0.82)), url(${heroImage})`,
     >
-      <div className="max-w-7xl mx-auto px-6 py-16">
+   <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="flex items-center justify-between mb-12">
           <div className="flex items-center gap-3">
             <Scale className="h-10 w-10 text-[#D4A62A]" />
@@ -92,14 +89,19 @@ export default function Hero({ onSearch }: HeroProps) {
           <div className="inline-flex items-center gap-2 bg-[#D4A62A]/20 border border-[#D4A62A]/40 rounded-full px-4 py-2 mb-6">
             <MapPin className="h-4 w-4 text-[#D4A62A]" />
             <span>Serving El Paso, Texas</span>
+<p className="text-[#D4A62A] uppercase tracking-widest font-semibold mt-6 mb-4">
+  Limited Premium Placements Available
+</p>
           </div>
 
           <h2 className="text-5xl md:text-7xl font-bold leading-tight mb-6">
             Find the Right
             <br />
-            <span className="text-[#D4A62A]">
-              El Paso Lawyer.
-            </span>
+           Find El Paso's
+<br />
+<span className="text-[#D4A62A]">
+  Top-Rated Attorneys.
+</span>
           </h2>
 
           <p className="text-xl md:text-2xl text-gray-200 mb-10">
