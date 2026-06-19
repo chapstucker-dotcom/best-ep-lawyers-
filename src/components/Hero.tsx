@@ -74,12 +74,7 @@ export default function Hero({ onSearch }: HeroProps) {
       className="relative text-white overflow-hidden"
       style={{
         backgroundImage:
- style={{
-  backgroundImage:
-    "linear-gradient(rgba(2,27,69,.78), rgba(2,27,69,.82)), url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2000&q=80')",
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-}},
+          "linear-gradient(rgba(2,27,69,0.80), rgba(2,27,69,0.86)), url('https://d64gsuwffb70l.cloudfront.net/68ed9016467af1e849aff0b4_1760400701590_f9474cff.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
