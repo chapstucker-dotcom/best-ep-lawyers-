@@ -1,4 +1,5 @@
-import { Search, MapPin, Scale } from "lucide-react";
+
+import heroImage from "../assets/hero-franklin-star.png";import { Search, MapPin, Scale } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -50,11 +51,7 @@ export default function Hero({ onSearch }: HeroProps) {
       className="text-white"
       style={{
         backgroundImage:
-  "linear-gradient(rgba(2,27,69,0.65), rgba(2,27,69,0.82)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2400&q=80')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
+backgroundImage: `linear-gradient(rgba(2,27,69,0.65), rgba(2,27,69,0.82)), url(${heroImage})`,
     >
       <div className="max-w-7xl mx-auto px-6 py-12">
 
