@@ -59,10 +59,13 @@ export default function Hero({ onSearch }: HeroProps) {
         <div className="flex items-center justify-between mb-12">
           <div className="flex items-center gap-3">
             <Scale className="h-10 w-10 text-[#D4A62A]" />
-
             <div>
-              <h1 className="text-3xl font-bold">El Paso's Best Lawyers</h1>
-              <p className="text-gray-300">El Paso's Trusted Legal Directory</p>
+              <h1 className="text-3xl font-bold">
+                El Paso's Best Lawyers
+              </h1>
+              <p className="text-gray-300">
+                El Paso's Trusted Legal Directory
+              </p>
             </div>
           </div>
 
@@ -97,12 +100,15 @@ export default function Hero({ onSearch }: HeroProps) {
           <h2 className="text-5xl md:text-7xl font-bold leading-tight mb-6">
             Find El Paso's
             <br />
-            <span className="text-[#D4A62A]">Top-Rated Attorneys.</span>
+            <span className="text-[#D4A62A]">
+              Top-Rated Attorneys.
+            </span>
           </h2>
 
           <p className="text-xl md:text-2xl text-gray-200 mb-10">
-            Find trusted El Paso attorneys by practice area, compare top law
-            firms, and connect directly with experienced local counsel.
+            Find trusted El Paso attorneys by practice area,
+            compare top law firms, and connect directly with
+            experienced local counsel.
           </p>
         </div>
 
