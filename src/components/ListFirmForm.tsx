@@ -58,6 +58,28 @@ export default function ListFirmForm() {
       return;
     }
 
+    try {
+      await fetch("/api/send-lead", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firmName: formData.name,
+          contactName: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          website,
+          address: formData.address,
+          city: "El Paso",
+          state: "TX",
+          plan: formData.plan,
+        }),
+      });
+    } catch (emailError) {
+      console.error("Email notification failed:", emailError);
+    }
+
     setStatus("Success! Your listing was submitted for review.");
 
     setFormData({
