@@ -357,4 +357,3 @@ const sortedFirms = [...visibleFirms].sort((a: any, b: any) => {
     </div>
   );
 }
-api/send-lead.ts
