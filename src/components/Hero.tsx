@@ -78,7 +78,9 @@ export default function Hero({ onSearch }: HeroProps) {
               Pricing
             </button>
 
-            <Link to="/login" className="hover:text-[#D4A62A]">
+<a href="/#/login" className="hover:text-[#D4A62A]">
+  Login
+</a>
               Login
             </Link>
 
