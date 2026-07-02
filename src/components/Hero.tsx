@@ -34,7 +34,9 @@ export default function Hero({ onSearch }: HeroProps) {
       : [];
 
   const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById(id)?.scrollIntoView({
+      behavior: "smooth",
+    });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -63,13 +65,20 @@ export default function Hero({ onSearch }: HeroProps) {
         <div className="flex items-center justify-between mb-12">
           <div className="flex items-center gap-3">
             <Scale className="h-10 w-10 text-[#D4A62A]" />
+
             <div>
-              <h1 className="text-3xl font-bold">El Paso's Best Lawyers</h1>
-              <p className="text-gray-300">El Paso's Trusted Legal Directory</p>
+              <h1 className="text-3xl font-bold">
+                El Paso's Best Lawyers
+              </h1>
+
+              <p className="text-gray-300">
+                El Paso's Trusted Legal Directory
+              </p>
             </div>
           </div>
 
           <div className="hidden md:flex items-center gap-6">
+
             <button
               type="button"
               onClick={() => scrollToSection("pricing")}
@@ -78,9 +87,10 @@ export default function Hero({ onSearch }: HeroProps) {
               Pricing
             </button>
 
-<a href="/#/login" className="hover:text-[#D4A62A]">
-  Login
-</a>
+            <Link
+              to="/login"
+              className="hover:text-[#D4A62A]"
+            >
               Login
             </Link>
 
@@ -91,10 +101,12 @@ export default function Hero({ onSearch }: HeroProps) {
             >
               List Your Firm
             </button>
+
           </div>
         </div>
 
         <div className="max-w-4xl">
+
           <div className="inline-flex items-center gap-2 bg-[#D4A62A]/20 border border-[#D4A62A]/40 rounded-full px-4 py-2 mb-6">
             <MapPin className="h-4 w-4 text-[#D4A62A]" />
             <span>Serving El Paso, Texas</span>
@@ -107,18 +119,27 @@ export default function Hero({ onSearch }: HeroProps) {
           <h2 className="text-5xl md:text-7xl font-bold leading-tight mb-6">
             Find El Paso's
             <br />
-            <span className="text-[#D4A62A]">Top-Rated Attorneys.</span>
+            <span className="text-[#D4A62A]">
+              Top-Rated Attorneys.
+            </span>
           </h2>
 
           <p className="text-xl md:text-2xl text-gray-200 mb-10">
-            Find trusted El Paso attorneys by practice area, compare top law firms,
-            and connect directly with experienced local counsel.
+            Find trusted El Paso attorneys by practice area,
+            compare top law firms, and connect directly with
+            experienced local counsel.
           </p>
+
         </div>
 
-        <form onSubmit={handleSubmit} className="relative max-w-6xl">
+        <form
+          onSubmit={handleSubmit}
+          className="relative max-w-6xl"
+        >
           <div className="bg-white rounded-xl p-4 flex flex-col lg:flex-row gap-4 shadow-2xl">
+
             <div className="relative flex-1">
+
               <Search className="absolute left-4 top-4 h-5 w-5 text-gray-500" />
 
               <input
@@ -135,6 +156,7 @@ export default function Hero({ onSearch }: HeroProps) {
 
               {showSuggestions && filteredSuggestions.length > 0 && (
                 <div className="absolute z-50 mt-1 bg-white border rounded-lg shadow-lg w-full overflow-hidden">
+
                   {filteredSuggestions.map((area) => (
                     <button
                       key={area}
@@ -145,8 +167,10 @@ export default function Hero({ onSearch }: HeroProps) {
                       {area}
                     </button>
                   ))}
+
                 </div>
               )}
+
             </div>
 
             <div className="flex items-center gap-2 border rounded-lg px-6 py-3 text-black">
@@ -160,8 +184,10 @@ export default function Hero({ onSearch }: HeroProps) {
             >
               Search
             </button>
+
           </div>
         </form>
+
       </div>
     </section>
   );
