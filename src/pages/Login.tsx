@@ -63,7 +63,7 @@ export default function Login() {
           <CardDescription>Sign in to manage your law firm profile</CardDescription>
         </CardHeader>
         <CardContent>
-          {!isConfigured && (
+       {isConfigured && (
             <>
             <Alert variant="destructive" className="mb-4">
               <AlertTriangle className="h-4 w-4" />
