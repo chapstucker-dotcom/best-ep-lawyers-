@@ -36,7 +36,7 @@ export const uploadLogo = async (file: File, userId: string): Promise<{ url: str
 
     // Get public URL
     const { data: { publicUrl } } = supabase.storage
-      .from('firm-assets')
+      .from('firm-logos')
       .getPublicUrl(filePath);
 
     return { url: publicUrl, error: null };
