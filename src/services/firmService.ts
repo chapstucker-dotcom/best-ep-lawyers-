@@ -109,17 +109,3 @@ export async function getFirmByUserId(userId: string) {
 
   return { data, error };
 }
-  const { supabase } = await import("@/lib/supabase");
-
-  if (!supabase) {
-    return { data: null, error: new Error("Supabase is not configured") };
-  }
-
-  const { data, error } = await supabase
-    .from("firms")
-    .select("*")
-    .eq("user_id", userId)
-    .maybeSingle();
-
-  return { data, error };
-}
