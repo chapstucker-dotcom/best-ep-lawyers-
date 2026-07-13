@@ -101,6 +101,14 @@ export const deleteFirm = async (
   return { error };
 };
 export async function getFirmByUserId(userId: string) {
+  const { data, error } = await supabase
+    .from("firms")
+    .select("*")
+    .eq("user_id", userId)
+    .maybeSingle();
+
+  return { data, error };
+}
   const { supabase } = await import("@/lib/supabase");
 
   if (!supabase) {
