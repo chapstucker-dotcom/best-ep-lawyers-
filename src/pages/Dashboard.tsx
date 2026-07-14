@@ -35,7 +35,7 @@ export default function Dashboard() {
   useEffect(() => {
     const loadFirmData = async () => {
       if (!user || !isSupabaseConfigured) return;
-      const { data } = await supabase.from('firms').select('id').eq('user_id', user.id).single();
+      const { data } = await supabase.from('firms').select('id').eq('user_id', user.id).maybeSingle();
       if (data) setFirmId(data.id);
     };
     loadFirmData();
