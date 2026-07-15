@@ -55,6 +55,34 @@ const emptyProfile: ProfileForm = {
 };
 
 const parsePracticeAreas = (data: any): string[] => {
+  const specialties = Array.isArray(data?.specialties)
+    ? data.specialties
+        .map((item: unknown) => String(item).trim())
+        .filter(Boolean)
+    : typeof data?.specialties === "string"
+      ? data.specialties
+          .split(",")
+          .map((item: string) => item.trim())
+          .filter(Boolean)
+      : [];
+
+  if (specialties.length > 0) {
+    return specialties;
+  }
+
+  const practiceAreas = Array.isArray(data?.practice_areas)
+    ? data.practice_areas
+        .map((item: unknown) => String(item).trim())
+        .filter(Boolean)
+    : typeof data?.practice_areas === "string"
+      ? data.practice_areas
+          .split(",")
+          .map((item: string) => item.trim())
+          .filter(Boolean)
+      : [];
+
+  return practiceAreas;
+};
   if (Array.isArray(data?.specialties)) {
     return data.specialties
       .map((item: unknown) => String(item).trim())
