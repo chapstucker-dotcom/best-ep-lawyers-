@@ -11,13 +11,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Trash2, Loader2 } from "lucide-react";
+import { Loader2, Trash2 } from "lucide-react";
 import {
   createFirm,
   getFirmByUserId,
   updateFirm,
 } from "@/services/firmService";
-import { uploadLogo, deleteLogo } from "@/services/storageService";
+import { deleteLogo, uploadLogo } from "@/services/storageService";
 import { validateFirmProfile } from "@/utils/validation";
 
 type ProfileForm = {
@@ -54,6 +54,36 @@ const emptyProfile: ProfileForm = {
   logo_url: "",
 };
 
+const parsePracticeAreas = (data: any): string[] => {
+  if (Array.isArray(data?.specialties)) {
+    return data.specialties
+      .map((item: unknown) => String(item).trim())
+      .filter(Boolean);
+  }
+
+  if (Array.isArray(data?.practice_areas)) {
+    return data.practice_areas
+      .map((item: unknown) => String(item).trim())
+      .filter(Boolean);
+  }
+
+  if (typeof data?.practice_areas === "string") {
+    return data.practice_areas
+      .split(",")
+      .map((item: string) => item.trim())
+      .filter(Boolean);
+  }
+
+  if (typeof data?.specialties === "string") {
+    return data.specialties
+      .split(",")
+      .map((item: string) => item.trim())
+      .filter(Boolean);
+  }
+
+  return [];
+};
+
 export const ProfileEditor = () => {
   const { user } = useAuth();
   const { toast } = useToast();
@@ -76,6 +106,14 @@ export const ProfileEditor = () => {
 
         if (error) {
           console.error("Profile load error:", error);
+
+          toast({
+            title: "Profile could not load",
+            description:
+              error.message || "There was a problem loading the firm profile.",
+            variant: "destructive",
+          });
+
           return;
         }
 
@@ -92,9 +130,7 @@ export const ProfileEditor = () => {
             phone: data.phone || "",
             email: data.email || user.email || "",
             website: data.website || "",
-            specialties: Array.isArray(data.specialties)
-              ? data.specialties
-              : [],
+            specialties: parsePracticeAreas(data),
             years_experience:
               data.years_experience === null ||
               data.years_experience === undefined
@@ -117,15 +153,26 @@ export const ProfileEditor = () => {
             email: user.email || "",
           }));
         }
-      } catch (error) {
+      } catch (error: unknown) {
         console.error("Unexpected profile load error:", error);
+
+        const message =
+          error instanceof Error
+            ? error.message
+            : "There was a problem loading the profile.";
+
+        toast({
+          title: "Profile could not load",
+          description: message,
+          variant: "destructive",
+        });
       } finally {
         setLoadingProfile(false);
       }
     };
 
-    loadProfile();
-  }, [user]);
+    void loadProfile();
+  }, [toast, user]);
 
   const updateProfile = (
     field: keyof ProfileForm,
@@ -138,24 +185,24 @@ export const ProfileEditor = () => {
   };
 
   const normalizeWebsite = (website: string) => {
-    const cleanWebsite = website.trim();
+    const cleanedWebsite = website.trim();
 
-    if (!cleanWebsite) {
+    if (!cleanedWebsite) {
       return "";
     }
 
     if (
-      cleanWebsite.startsWith("http://") ||
-      cleanWebsite.startsWith("https://")
+      cleanedWebsite.startsWith("http://") ||
+      cleanedWebsite.startsWith("https://")
     ) {
-      return cleanWebsite;
+      return cleanedWebsite;
     }
 
-    return `https://${cleanWebsite}`;
+    return `https://${cleanedWebsite}`;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
     if (!user) {
       toast({
@@ -163,6 +210,7 @@ export const ProfileEditor = () => {
         description: "Please sign in before saving your profile.",
         variant: "destructive",
       });
+
       return;
     }
 
@@ -176,17 +224,26 @@ export const ProfileEditor = () => {
       phone: profile.phone.trim(),
       email: profile.email.trim(),
       website: normalizeWebsite(profile.website),
+
+      // Save both column names so old and new parts of the site can use them.
       specialties: profile.specialties,
+      practice_areas: profile.specialties,
+
       years_experience:
         profile.years_experience === ""
           ? 0
           : Number(profile.years_experience),
+
       team_size:
-        profile.team_size === "" ? 0 : Number(profile.team_size),
+        profile.team_size === ""
+          ? 0
+          : Number(profile.team_size),
+
       consultation_fee:
         profile.consultation_fee === ""
           ? 0
           : Number(profile.consultation_fee),
+
       logo_url: profile.logo_url,
       user_id: user.id,
     };
@@ -199,6 +256,7 @@ export const ProfileEditor = () => {
         description: errors[0].message,
         variant: "destructive",
       });
+
       return;
     }
 
@@ -212,9 +270,11 @@ export const ProfileEditor = () => {
       if (result.error) {
         toast({
           title: "Save failed",
-          description: result.error.message,
+          description:
+            result.error.message || "The firm profile could not be saved.",
           variant: "destructive",
         });
+
         return;
       }
 
@@ -224,9 +284,10 @@ export const ProfileEditor = () => {
 
       setProfile((current) => ({
         ...current,
-        website: firmProfile.website,
         city: firmProfile.city,
         state: firmProfile.state,
+        website: firmProfile.website,
+        specialties: firmProfile.specialties,
       }));
 
       toast({
@@ -235,7 +296,9 @@ export const ProfileEditor = () => {
       });
     } catch (error: unknown) {
       const message =
-        error instanceof Error ? error.message : "Failed to save profile.";
+        error instanceof Error
+          ? error.message
+          : "The firm profile could not be saved.";
 
       toast({
         title: "Save failed",
@@ -248,11 +311,22 @@ export const ProfileEditor = () => {
   };
 
   const handleFileUpload = async (
-    e: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const file = e.target.files?.[0];
+    const file = event.target.files?.[0];
 
-    if (!file || !user) {
+    if (!file) {
+      return;
+    }
+
+    if (!user) {
+      toast({
+        title: "Sign-in required",
+        description: "Please sign in before uploading a logo.",
+        variant: "destructive",
+      });
+
+      event.target.value = "";
       return;
     }
 
@@ -262,6 +336,8 @@ export const ProfileEditor = () => {
         description: "Please choose an image smaller than 5 MB.",
         variant: "destructive",
       });
+
+      event.target.value = "";
       return;
     }
 
@@ -273,23 +349,35 @@ export const ProfileEditor = () => {
       if (error) {
         toast({
           title: "Upload failed",
-          description: error.message,
+          description: error.message || "The logo could not be uploaded.",
           variant: "destructive",
         });
+
         return;
       }
 
-      if (url) {
-        updateProfile("logo_url", url);
-
+      if (!url) {
         toast({
-          title: "Success",
-          description: "Logo uploaded successfully!",
+          title: "Upload failed",
+          description: "Supabase did not return a logo URL.",
+          variant: "destructive",
         });
+
+        return;
       }
+
+      updateProfile("logo_url", url);
+
+      toast({
+        title: "Logo uploaded",
+        description:
+          "The logo was uploaded. Click Save Profile to save it to the firm.",
+      });
     } catch (error: unknown) {
       const message =
-        error instanceof Error ? error.message : "Logo upload failed.";
+        error instanceof Error
+          ? error.message
+          : "The logo could not be uploaded.";
 
       toast({
         title: "Upload failed",
@@ -298,7 +386,7 @@ export const ProfileEditor = () => {
       });
     } finally {
       setUploading(false);
-      e.target.value = "";
+      event.target.value = "";
     }
   };
 
@@ -315,21 +403,25 @@ export const ProfileEditor = () => {
       if (error) {
         toast({
           title: "Delete failed",
-          description: error.message || "Failed to delete the logo.",
+          description: error.message || "The logo could not be deleted.",
           variant: "destructive",
         });
+
         return;
       }
 
       updateProfile("logo_url", "");
 
       toast({
-        title: "Success",
-        description: "Logo deleted successfully.",
+        title: "Logo removed",
+        description:
+          "The logo was removed. Click Save Profile to save the change.",
       });
     } catch (error: unknown) {
       const message =
-        error instanceof Error ? error.message : "Failed to delete logo.";
+        error instanceof Error
+          ? error.message
+          : "The logo could not be deleted.";
 
       toast({
         title: "Delete failed",
@@ -360,14 +452,14 @@ export const ProfileEditor = () => {
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
-            <Label>Firm Logo</Label>
+            <Label htmlFor="firm-logo">Firm Logo</Label>
 
             <div className="flex items-center gap-4">
               {profile.logo_url && (
                 <div className="relative">
                   <img
                     src={profile.logo_url}
-                    alt="Firm logo"
+                    alt={`${profile.name || "Firm"} logo`}
                     className="h-24 w-24 rounded-lg border object-cover"
                   />
 
@@ -387,6 +479,8 @@ export const ProfileEditor = () => {
 
               <div className="flex-1">
                 <Input
+                  id="firm-logo"
+                  name="firm-logo"
                   type="file"
                   accept=".jpg,.jpeg,.png,.webp,.svg,image/*"
                   onChange={handleFileUpload}
@@ -396,6 +490,13 @@ export const ProfileEditor = () => {
                 <p className="mt-1 text-xs text-muted-foreground">
                   Maximum 5 MB. JPG, PNG, WebP, or SVG.
                 </p>
+
+                {uploading && (
+                  <div className="mt-2 flex items-center text-sm">
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Uploading logo...
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -406,8 +507,11 @@ export const ProfileEditor = () => {
 
               <Input
                 id="name"
+                name="name"
                 value={profile.name}
-                onChange={(e) => updateProfile("name", e.target.value)}
+                onChange={(event) =>
+                  updateProfile("name", event.target.value)
+                }
                 required
               />
             </div>
@@ -417,9 +521,10 @@ export const ProfileEditor = () => {
 
               <Textarea
                 id="description"
+                name="description"
                 value={profile.description}
-                onChange={(e) =>
-                  updateProfile("description", e.target.value)
+                onChange={(event) =>
+                  updateProfile("description", event.target.value)
                 }
                 rows={4}
                 placeholder="Tell potential clients about your firm..."
@@ -431,8 +536,11 @@ export const ProfileEditor = () => {
 
               <Input
                 id="address"
+                name="address"
                 value={profile.address}
-                onChange={(e) => updateProfile("address", e.target.value)}
+                onChange={(event) =>
+                  updateProfile("address", event.target.value)
+                }
               />
             </div>
 
@@ -441,8 +549,11 @@ export const ProfileEditor = () => {
 
               <Input
                 id="city"
+                name="city"
                 value={profile.city}
-                onChange={(e) => updateProfile("city", e.target.value)}
+                onChange={(event) =>
+                  updateProfile("city", event.target.value)
+                }
                 placeholder="El Paso"
               />
             </div>
@@ -452,12 +563,15 @@ export const ProfileEditor = () => {
 
               <Input
                 id="state"
+                name="state"
                 value={profile.state}
                 maxLength={2}
-                onChange={(e) =>
+                onChange={(event) =>
                   updateProfile(
                     "state",
-                    e.target.value.replace(/[^a-zA-Z]/g, "").toUpperCase()
+                    event.target.value
+                      .replace(/[^a-zA-Z]/g, "")
+                      .toUpperCase()
                   )
                 }
                 placeholder="TX"
@@ -469,14 +583,15 @@ export const ProfileEditor = () => {
 
               <Input
                 id="zip_code"
+                name="zip_code"
                 type="text"
                 inputMode="numeric"
                 maxLength={5}
                 value={profile.zip_code}
-                onChange={(e) =>
+                onChange={(event) =>
                   updateProfile(
                     "zip_code",
-                    e.target.value.replace(/\D/g, "").slice(0, 5)
+                    event.target.value.replace(/\D/g, "").slice(0, 5)
                   )
                 }
                 placeholder="79901"
@@ -488,9 +603,12 @@ export const ProfileEditor = () => {
 
               <Input
                 id="phone"
+                name="phone"
                 type="tel"
                 value={profile.phone}
-                onChange={(e) => updateProfile("phone", e.target.value)}
+                onChange={(event) =>
+                  updateProfile("phone", event.target.value)
+                }
                 placeholder="(915) 555-1234"
               />
             </div>
@@ -500,9 +618,12 @@ export const ProfileEditor = () => {
 
               <Input
                 id="email"
+                name="email"
                 type="email"
                 value={profile.email}
-                onChange={(e) => updateProfile("email", e.target.value)}
+                onChange={(event) =>
+                  updateProfile("email", event.target.value)
+                }
               />
             </div>
 
@@ -511,9 +632,12 @@ export const ProfileEditor = () => {
 
               <Input
                 id="website"
+                name="website"
                 type="text"
                 value={profile.website}
-                onChange={(e) => updateProfile("website", e.target.value)}
+                onChange={(event) =>
+                  updateProfile("website", event.target.value)
+                }
                 placeholder="example.com"
               />
             </div>
@@ -525,11 +649,12 @@ export const ProfileEditor = () => {
 
               <Input
                 id="specialties"
+                name="specialties"
                 value={profile.specialties.join(", ")}
-                onChange={(e) =>
+                onChange={(event) =>
                   updateProfile(
                     "specialties",
-                    e.target.value
+                    event.target.value
                       .split(",")
                       .map((item) => item.trim())
                       .filter(Boolean)
@@ -546,12 +671,13 @@ export const ProfileEditor = () => {
 
               <Input
                 id="years_experience"
+                name="years_experience"
                 type="number"
                 min="0"
                 step="1"
                 value={profile.years_experience}
-                onChange={(e) =>
-                  updateProfile("years_experience", e.target.value)
+                onChange={(event) =>
+                  updateProfile("years_experience", event.target.value)
                 }
                 placeholder="10"
               />
@@ -562,12 +688,13 @@ export const ProfileEditor = () => {
 
               <Input
                 id="team_size"
+                name="team_size"
                 type="number"
                 min="0"
                 step="1"
                 value={profile.team_size}
-                onChange={(e) =>
-                  updateProfile("team_size", e.target.value)
+                onChange={(event) =>
+                  updateProfile("team_size", event.target.value)
                 }
                 placeholder="5"
               />
@@ -580,12 +707,13 @@ export const ProfileEditor = () => {
 
               <Input
                 id="consultation_fee"
+                name="consultation_fee"
                 type="number"
                 min="0"
                 step="0.01"
                 value={profile.consultation_fee}
-                onChange={(e) =>
-                  updateProfile("consultation_fee", e.target.value)
+                onChange={(event) =>
+                  updateProfile("consultation_fee", event.target.value)
                 }
                 placeholder="100"
               />
