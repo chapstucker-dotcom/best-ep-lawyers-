@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
 import { Loader2, Trash2 } from "lucide-react";
-import { createFirm, getFirmByUserId, updateFirm } from "@/services/firmService";
+import { getFirmByUserId, saveFirmProfile } from "@/services/firmService";
 import { deleteLogo, uploadLogo } from "@/services/storageService";
-import { validateFirmProfile } from "@/utils/validation";
 
-interface ProfileFormState {
+type FormState = {
   name: string;
   description: string;
   address: string;
@@ -26,9 +23,9 @@ interface ProfileFormState {
   team_size: string;
   consultation_fee: string;
   logo_url: string;
-}
+};
 
-const EMPTY_PROFILE: ProfileFormState = {
+const EMPTY: FormState = {
   name: "",
   description: "",
   address: "",
@@ -45,54 +42,43 @@ const EMPTY_PROFILE: ProfileFormState = {
   logo_url: "",
 };
 
-const asText = (value: unknown): string =>
+const text = (value: unknown) =>
   value === null || value === undefined ? "" : String(value);
 
-const readPracticeAreas = (firm: Record<string, unknown>): string => {
-  const candidates = [firm.specialties, firm.practice_areas];
-
-  for (const candidate of candidates) {
+const areasText = (firm: Record<string, unknown>) => {
+  for (const candidate of [firm.specialties, firm.practice_areas]) {
     if (Array.isArray(candidate)) {
-      const values = candidate.map(String).map((value) => value.trim()).filter(Boolean);
-      if (values.length > 0) return values.join(", ");
+      const values = candidate.map(String).map((v) => v.trim()).filter(Boolean);
+      if (values.length) return values.join(", ");
     }
-
     if (typeof candidate === "string" && candidate.trim()) {
-      return candidate
-        .split(",")
-        .map((value) => value.trim())
-        .filter(Boolean)
-        .join(", ");
+      return candidate.split(",").map((v) => v.trim()).filter(Boolean).join(", ");
     }
   }
-
   return "";
 };
 
-const normalizeIntegerInput = (value: string): string => {
+const integerInput = (value: string) => {
   const digits = value.replace(/\D/g, "");
-  if (!digits) return "";
-  return digits.replace(/^0+(?=\d)/, "");
+  return digits ? digits.replace(/^0+(?=\d)/, "") : "";
 };
 
-const normalizeMoneyInput = (value: string): string => {
+const moneyInput = (value: string) => {
   const cleaned = value.replace(/[^\d.]/g, "");
-  const [rawWhole = "", ...decimalParts] = cleaned.split(".");
-  const whole = rawWhole.replace(/^0+(?=\d)/, "");
-
-  if (decimalParts.length === 0) return whole;
-
-  const decimals = decimalParts.join("").slice(0, 2);
-  return `${whole || "0"}.${decimals}`;
+  const dot = cleaned.indexOf(".");
+  if (dot < 0) return cleaned.replace(/^0+(?=\d)/, "");
+  const whole = cleaned.slice(0, dot).replace(/^0+(?=\d)/, "") || "0";
+  const decimals = cleaned.slice(dot + 1).replace(/\./g, "").slice(0, 2);
+  return `${whole}.${decimals}`;
 };
 
-const normalizeWebsite = (value: string): string => {
-  const website = value.trim();
-  if (!website) return "";
-  return /^https?:\/\//i.test(website) ? website : `https://${website}`;
+const websiteValue = (value: string) => {
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+  return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
 };
 
-const toNonNegativeNumber = (value: string): number | null => {
+const optionalNumber = (value: string) => {
   if (!value.trim()) return null;
   const parsed = Number(value);
   return Number.isFinite(parsed) && parsed >= 0 ? parsed : null;
@@ -100,182 +86,183 @@ const toNonNegativeNumber = (value: string): number | null => {
 
 export const ProfileEditor = () => {
   const { user } = useAuth();
-  const { toast } = useToast();
-  const [profile, setProfile] = useState<ProfileFormState>(EMPTY_PROFILE);
-  const [firmId, setFirmId] = useState<string | null>(null);
-  const [loadingProfile, setLoadingProfile] = useState(true);
+  const [form, setForm] = useState<FormState>(EMPTY);
+  const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState<"success" | "error" | "">("");
+
+  const setField = (field: keyof FormState, value: string) =>
+    setForm((current) => ({ ...current, [field]: value }));
 
   useEffect(() => {
-    let cancelled = false;
+    let active = true;
 
-    const loadProfile = async () => {
+    const load = async () => {
       if (!user) {
-        setLoadingProfile(false);
+        setLoading(false);
         return;
       }
 
-      setLoadingProfile(true);
+      setLoading(true);
+      setMessage("");
 
-      try {
-        const { data, error } = await getFirmByUserId(user.id);
-        if (error) throw error;
-        if (cancelled) return;
+      const { data, error } = await getFirmByUserId(user.id);
+      if (!active) return;
 
-        if (!data) {
-          setProfile({ ...EMPTY_PROFILE, email: user.email ?? "" });
-          setFirmId(null);
-          return;
-        }
-
-        const firm = data as unknown as Record<string, unknown>;
-        setFirmId(data.id);
-        setProfile({
-          name: asText(firm.name),
-          description: asText(firm.description),
-          address: asText(firm.address),
-          city: asText(firm.city) || "El Paso",
-          state: asText(firm.state) || "TX",
-          zip_code: asText(firm.zip_code),
-          phone: asText(firm.phone),
-          email: asText(firm.email) || user.email || "",
-          website: asText(firm.website),
-          practiceAreas: readPracticeAreas(firm),
-          years_experience: asText(firm.years_experience),
-          team_size: asText(firm.team_size),
-          consultation_fee: asText(firm.consultation_fee),
-          logo_url: asText(firm.logo_url),
-        });
-      } catch (error: unknown) {
-        if (cancelled) return;
-        const message = error instanceof Error ? error.message : "Unable to load the firm profile.";
-        console.error("Profile load error:", error);
-        toast({ title: "Profile load failed", description: message, variant: "destructive" });
-      } finally {
-        if (!cancelled) setLoadingProfile(false);
+      if (error) {
+        const problem = error as { message?: string; details?: string };
+        setMessage(problem.message || problem.details || "Could not load the profile.");
+        setMessageType("error");
+        setLoading(false);
+        return;
       }
+
+      if (data) {
+        const firm = data as unknown as Record<string, unknown>;
+        setForm({
+          name: text(firm.name),
+          description: text(firm.description),
+          address: text(firm.address),
+          city: text(firm.city) || "El Paso",
+          state: text(firm.state) || "TX",
+          zip_code: text(firm.zip_code),
+          phone: text(firm.phone),
+          email: text(firm.email) || user.email || "",
+          website: text(firm.website),
+          practiceAreas: areasText(firm),
+          years_experience: text(firm.years_experience),
+          team_size: text(firm.team_size),
+          consultation_fee: text(firm.consultation_fee),
+          logo_url: text(firm.logo_url),
+        });
+      } else {
+        setForm({ ...EMPTY, email: user.email || "" });
+      }
+
+      setLoading(false);
     };
 
-    void loadProfile();
+    void load();
     return () => {
-      cancelled = true;
+      active = false;
     };
-  }, [toast, user]);
+  }, [user]);
 
-  const setField = (field: keyof ProfileFormState, value: string) => {
-    setProfile((current) => ({ ...current, [field]: value }));
-  };
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setMessage("");
+    setMessageType("");
 
     if (!user) {
-      toast({ title: "Sign-in required", description: "Please sign in before saving.", variant: "destructive" });
+      setMessage("You must be signed in before saving.");
+      setMessageType("error");
       return;
     }
 
-    const specialties = profile.practiceAreas
+    if (form.name.trim().length < 3) {
+      setMessage("Firm name must be at least 3 characters.");
+      setMessageType("error");
+      return;
+    }
+
+    const specialties = form.practiceAreas
       .split(",")
       .map((value) => value.trim())
       .filter(Boolean);
 
-    const payload = {
-      user_id: user.id,
-      name: profile.name.trim(),
-      description: profile.description.trim() || null,
-      address: profile.address.trim() || null,
-      city: profile.city.trim() || "El Paso",
-      state: profile.state.trim().toUpperCase() || "TX",
-      zip_code: profile.zip_code.trim() || null,
-      phone: profile.phone.trim() || null,
-      email: profile.email.trim() || null,
-      website: normalizeWebsite(profile.website) || null,
-      specialties,
-      years_experience: toNonNegativeNumber(profile.years_experience),
-      team_size: toNonNegativeNumber(profile.team_size),
-      consultation_fee: toNonNegativeNumber(profile.consultation_fee),
-      logo_url: profile.logo_url || null,
-    };
+    setSaving(true);
 
-    const validationErrors = validateFirmProfile(payload);
-    if (validationErrors.length > 0) {
-      toast({ title: "Check this field", description: validationErrors[0].message, variant: "destructive" });
+    const { data, error } = await saveFirmProfile(user.id, {
+      name: form.name.trim(),
+      description: form.description.trim() || null,
+      address: form.address.trim() || null,
+      city: form.city.trim() || "El Paso",
+      state: form.state.trim().toUpperCase() || "TX",
+      zip_code: form.zip_code.trim() || null,
+      phone: form.phone.trim() || null,
+      email: form.email.trim() || null,
+      website: websiteValue(form.website),
+      specialties,
+      years_experience: optionalNumber(form.years_experience),
+      team_size: optionalNumber(form.team_size),
+      consultation_fee: optionalNumber(form.consultation_fee),
+      logo_url: form.logo_url || null,
+    });
+
+    setSaving(false);
+
+    if (error) {
+      const problem = error as { message?: string; details?: string; hint?: string; code?: string };
+      setMessage(
+        [problem.message, problem.details, problem.hint, problem.code]
+          .filter(Boolean)
+          .join(" — ") || "The profile could not be saved."
+      );
+      setMessageType("error");
       return;
     }
 
-    setSaving(true);
-
-    try {
-      const result = firmId
-        ? await updateFirm(firmId, payload)
-        : await createFirm(payload);
-
-      if (result.error) throw result.error;
-      if (!result.data) throw new Error("The database did not return the saved firm profile.");
-
-      setFirmId(result.data.id);
-      setProfile((current) => ({
-        ...current,
-        website: asText(result.data?.website),
-        practiceAreas: Array.isArray(result.data?.specialties)
-          ? result.data.specialties.join(", ")
-          : current.practiceAreas,
-        years_experience: asText(result.data?.years_experience),
-        team_size: asText(result.data?.team_size),
-        consultation_fee: asText(result.data?.consultation_fee),
-      }));
-
-      toast({ title: "Profile saved", description: "Your firm profile has been saved." });
-    } catch (error: unknown) {
-      const details = error as { message?: string; details?: string; hint?: string };
-      const message = [details?.message, details?.details, details?.hint].filter(Boolean).join(" — ") || "Unable to save the profile.";
-      console.error("Profile save error:", error);
-      toast({ title: "Save failed", description: message, variant: "destructive" });
-    } finally {
-      setSaving(false);
+    if (!data) {
+      setMessage("The database did not return the saved profile.");
+      setMessageType("error");
+      return;
     }
+
+    const saved = data as unknown as Record<string, unknown>;
+    setForm((current) => ({
+      ...current,
+      website: text(saved.website),
+      practiceAreas: areasText(saved) || current.practiceAreas,
+      years_experience: text(saved.years_experience),
+      team_size: text(saved.team_size),
+      consultation_fee: text(saved.consultation_fee),
+    }));
+    setMessage("Profile saved successfully.");
+    setMessageType("success");
   };
 
-  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const upload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file || !user) return;
 
     setUploading(true);
-    try {
-      const { url, error } = await uploadLogo(file, user.id);
-      if (error) throw error;
-      if (!url) throw new Error("No logo URL was returned.");
+    const { url, error } = await uploadLogo(file, user.id);
+    setUploading(false);
+    event.target.value = "";
 
-      setField("logo_url", url);
-      toast({ title: "Logo uploaded", description: "Click Save Profile to keep this logo." });
-    } catch (error: unknown) {
-      const message = error instanceof Error ? error.message : "Unable to upload the logo.";
-      toast({ title: "Upload failed", description: message, variant: "destructive" });
-    } finally {
-      setUploading(false);
-      event.target.value = "";
+    if (error || !url) {
+      const problem = error as { message?: string } | null;
+      setMessage(problem?.message || "Logo upload failed.");
+      setMessageType("error");
+      return;
     }
+
+    setField("logo_url", url);
+    setMessage("Logo uploaded. Click Save Profile to keep it.");
+    setMessageType("success");
   };
 
-  const handleDeleteLogo = async () => {
-    if (!profile.logo_url) return;
-
+  const removeLogo = async () => {
+    if (!form.logo_url) return;
     setUploading(true);
-    try {
-      const { error } = await deleteLogo(profile.logo_url);
-      if (error) throw error;
-      setField("logo_url", "");
-      toast({ title: "Logo removed", description: "Click Save Profile to keep this change." });
-    } catch (error: unknown) {
-      const message = error instanceof Error ? error.message : "Unable to remove the logo.";
-      toast({ title: "Delete failed", description: message, variant: "destructive" });
-    } finally {
-      setUploading(false);
+    const { error } = await deleteLogo(form.logo_url);
+    setUploading(false);
+
+    if (error) {
+      const problem = error as { message?: string };
+      setMessage(problem.message || "Logo deletion failed.");
+      setMessageType("error");
+      return;
     }
+
+    setField("logo_url", "");
+    setMessage("Logo removed. Click Save Profile to keep the change.");
+    setMessageType("success");
   };
 
-  if (loadingProfile) {
+  if (loading) {
     return (
       <Card>
         <CardContent className="flex justify-center py-16">
@@ -287,102 +274,71 @@ export const ProfileEditor = () => {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Edit Firm Profile</CardTitle>
-      </CardHeader>
+      <CardHeader><CardTitle>Edit Firm Profile</CardTitle></CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+        <form onSubmit={submit} className="space-y-6">
+          {message && (
+            <div className={`rounded-md border p-3 text-sm ${messageType === "error" ? "border-red-300 bg-red-50 text-red-800" : "border-green-300 bg-green-50 text-green-800"}`}>
+              {message}
+            </div>
+          )}
+
           <div className="space-y-2">
             <Label htmlFor="firm-logo">Firm Logo</Label>
             <div className="flex items-center gap-4">
-              {profile.logo_url && (
+              {form.logo_url && (
                 <div className="relative">
-                  <img src={profile.logo_url} alt="Firm logo" className="h-24 w-24 rounded-lg border object-cover" />
-                  <Button type="button" variant="destructive" size="icon" className="absolute -right-2 -top-2 h-7 w-7" onClick={handleDeleteLogo} disabled={uploading} aria-label="Remove logo">
-                    <Trash2 className="h-3 w-3" />
-                  </Button>
+                  <img src={form.logo_url} alt="Firm logo" className="h-24 w-24 rounded-lg border object-cover" />
+                  <button type="button" onClick={removeLogo} disabled={uploading} className="absolute -right-2 -top-2 rounded-full bg-red-600 p-1 text-white" aria-label="Remove logo">
+                    <Trash2 className="h-4 w-4" />
+                  </button>
                 </div>
               )}
-              <div className="flex-1">
-                <Input id="firm-logo" type="file" accept=".jpg,.jpeg,.png,.webp,.svg,image/*" onChange={handleFileUpload} disabled={uploading} />
-                <p className="mt-1 text-xs text-muted-foreground">Maximum 5 MB. JPG, PNG, WebP, or SVG.</p>
-                {uploading && <p className="mt-1 text-sm">Uploading…</p>}
-              </div>
+              <Input id="firm-logo" type="file" accept="image/*" onChange={upload} disabled={uploading} />
             </div>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
-            <div className="space-y-2 md:col-span-2">
-              <Label htmlFor="name">Firm Name *</Label>
-              <Input id="name" value={profile.name} onChange={(event) => setField("name", event.target.value)} required />
-            </div>
-
+            <Field label="Firm Name *" id="name" value={form.name} onChange={(v) => setField("name", v)} wide />
             <div className="space-y-2 md:col-span-2">
               <Label htmlFor="description">Description</Label>
-              <Textarea id="description" value={profile.description} onChange={(event) => setField("description", event.target.value)} rows={4} placeholder="Tell potential clients about your firm…" />
+              <Textarea id="description" value={form.description} onChange={(e) => setField("description", e.target.value)} rows={4} />
             </div>
-
-            <div className="space-y-2 md:col-span-2">
-              <Label htmlFor="address">Street Address</Label>
-              <Input id="address" value={profile.address} onChange={(event) => setField("address", event.target.value)} />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="city">City</Label>
-              <Input id="city" value={profile.city} onChange={(event) => setField("city", event.target.value)} placeholder="El Paso" />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="state">State</Label>
-              <Input id="state" value={profile.state} maxLength={2} onChange={(event) => setField("state", event.target.value.replace(/[^a-z]/gi, "").toUpperCase())} placeholder="TX" />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="zip_code">ZIP Code</Label>
-              <Input id="zip_code" type="text" inputMode="numeric" value={profile.zip_code} onChange={(event) => setField("zip_code", event.target.value.replace(/\D/g, "").slice(0, 5))} placeholder="79901" />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="phone">Phone</Label>
-              <Input id="phone" type="tel" value={profile.phone} onChange={(event) => setField("phone", event.target.value)} placeholder="(915) 555-1234" />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" value={profile.email} onChange={(event) => setField("email", event.target.value)} />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="website">Website</Label>
-              <Input id="website" type="text" value={profile.website} onChange={(event) => setField("website", event.target.value)} placeholder="example.com" />
-            </div>
-
-            <div className="space-y-2 md:col-span-2">
-              <Label htmlFor="practiceAreas">Practice Areas (comma separated)</Label>
-              <Input id="practiceAreas" type="text" value={profile.practiceAreas} onChange={(event) => setField("practiceAreas", event.target.value)} placeholder="Personal Injury, Criminal Defense, Family Law" />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="years_experience">Years of Experience</Label>
-              <Input id="years_experience" type="text" inputMode="numeric" value={profile.years_experience} onChange={(event) => setField("years_experience", normalizeIntegerInput(event.target.value))} placeholder="10" />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="team_size">Team Size</Label>
-              <Input id="team_size" type="text" inputMode="numeric" value={profile.team_size} onChange={(event) => setField("team_size", normalizeIntegerInput(event.target.value))} placeholder="5" />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="consultation_fee">Consultation Fee ($)</Label>
-              <Input id="consultation_fee" type="text" inputMode="decimal" value={profile.consultation_fee} onChange={(event) => setField("consultation_fee", normalizeMoneyInput(event.target.value))} placeholder="100.00" />
-            </div>
+            <Field label="Street Address" id="address" value={form.address} onChange={(v) => setField("address", v)} wide />
+            <Field label="City" id="city" value={form.city} onChange={(v) => setField("city", v)} />
+            <Field label="State" id="state" value={form.state} onChange={(v) => setField("state", v.replace(/[^a-z]/gi, "").slice(0, 2).toUpperCase())} />
+            <Field label="ZIP Code" id="zip_code" value={form.zip_code} onChange={(v) => setField("zip_code", v.replace(/\D/g, "").slice(0, 5))} />
+            <Field label="Phone" id="phone" value={form.phone} onChange={(v) => setField("phone", v)} />
+            <Field label="Email" id="email" value={form.email} onChange={(v) => setField("email", v)} type="email" />
+            <Field label="Website" id="website" value={form.website} onChange={(v) => setField("website", v)} />
+            <Field label="Practice Areas (comma separated)" id="practiceAreas" value={form.practiceAreas} onChange={(v) => setField("practiceAreas", v)} wide />
+            <Field label="Years of Experience" id="years_experience" value={form.years_experience} onChange={(v) => setField("years_experience", integerInput(v))} inputMode="numeric" />
+            <Field label="Team Size" id="team_size" value={form.team_size} onChange={(v) => setField("team_size", integerInput(v))} inputMode="numeric" />
+            <Field label="Consultation Fee ($)" id="consultation_fee" value={form.consultation_fee} onChange={(v) => setField("consultation_fee", moneyInput(v))} inputMode="decimal" />
           </div>
 
-          <Button type="submit" disabled={saving || uploading} className="w-full">
-            {saving ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Saving…</> : "Save Profile"}
-          </Button>
+          <button type="submit" disabled={saving || uploading} className="w-full rounded-md bg-blue-600 px-4 py-3 font-medium text-white disabled:opacity-60">
+            {saving ? "Saving…" : "Save Profile"}
+          </button>
         </form>
       </CardContent>
     </Card>
   );
 };
+
+type FieldProps = {
+  label: string;
+  id: string;
+  value: string;
+  onChange: (value: string) => void;
+  type?: string;
+  inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
+  wide?: boolean;
+};
+
+const Field = ({ label, id, value, onChange, type = "text", inputMode, wide }: FieldProps) => (
+  <div className={`space-y-2 ${wide ? "md:col-span-2" : ""}`}>
+    <Label htmlFor={id}>{label}</Label>
+    <Input id={id} type={type} inputMode={inputMode} value={value} onChange={(event) => onChange(event.target.value)} />
+  </div>
+);

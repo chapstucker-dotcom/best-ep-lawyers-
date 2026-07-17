@@ -3,11 +3,9 @@ import { supabase, isSupabaseConfigured } from "@/lib/supabase";
 import { Firm } from "@/data/types";
 
 type FirmInput = Partial<Firm> & Record<string, unknown>;
+type FirmResult = { data: Firm | null; error: unknown };
 
-type FirmResult = {
-  data: Firm | null;
-  error: unknown;
-};
+const unavailable = { message: "Supabase is not configured" };
 
 const fallbackFirms = (): Firm[] =>
   localFirms.map((firm: any, index: number) => ({
@@ -28,76 +26,64 @@ const fallbackFirms = (): Firm[] =>
     updated_at: new Date().toISOString(),
   })) as Firm[];
 
-const notConfiguredError = { message: "Supabase is not configured" };
-
 export const getAllFirms = async (): Promise<{ data: Firm[] | null; error: unknown }> => {
-  if (!isSupabaseConfigured || !supabase) {
-    return { data: fallbackFirms(), error: null };
-  }
-
-  const { data, error } = await supabase
-    .from("firms")
-    .select("*")
-    .order("created_at", { ascending: false });
-
-  return {
-    data: data && data.length > 0 ? (data as Firm[]) : fallbackFirms(),
-    error,
-  };
+  if (!isSupabaseConfigured || !supabase) return { data: fallbackFirms(), error: null };
+  const { data, error } = await supabase.from("firms").select("*").order("created_at", { ascending: false });
+  return { data: data && data.length ? (data as Firm[]) : fallbackFirms(), error };
 };
 
 export const getFirmByUserId = async (userId: string): Promise<FirmResult> => {
-  if (!isSupabaseConfigured || !supabase) {
-    return { data: null, error: notConfiguredError };
+  if (!isSupabaseConfigured || !supabase) return { data: null, error: unavailable };
+  const { data, error } = await supabase.from("firms").select("*").eq("user_id", userId).maybeSingle();
+  return { data: data as Firm | null, error };
+};
+
+export const saveFirmProfile = async (userId: string, values: FirmInput): Promise<FirmResult> => {
+  if (!isSupabaseConfigured || !supabase) return { data: null, error: unavailable };
+  if (!userId) return { data: null, error: { message: "A signed-in user is required." } };
+
+  const { data: existing, error: lookupError } = await supabase
+    .from("firms")
+    .select("id")
+    .eq("user_id", userId)
+    .maybeSingle();
+
+  if (lookupError) return { data: null, error: lookupError };
+
+  const payload = { ...values, user_id: userId };
+
+  if (existing?.id) {
+    const { data, error } = await supabase
+      .from("firms")
+      .update(payload)
+      .eq("id", existing.id)
+      .eq("user_id", userId)
+      .select("*")
+      .maybeSingle();
+    return { data: data as Firm | null, error };
   }
 
   const { data, error } = await supabase
     .from("firms")
+    .insert(payload)
     .select("*")
-    .eq("user_id", userId)
     .maybeSingle();
-
   return { data: data as Firm | null, error };
 };
 
 export const createFirm = async (firm: FirmInput): Promise<FirmResult> => {
-  if (!isSupabaseConfigured || !supabase) {
-    return { data: null, error: notConfiguredError };
-  }
-
-  if (!firm.user_id) {
-    return { data: null, error: { message: "A signed-in user is required to create a firm profile." } };
-  }
-
-  const { data, error } = await supabase
-    .from("firms")
-    .insert(firm)
-    .select("*")
-    .single();
-
-  return { data: data as Firm | null, error };
+  const userId = typeof firm.user_id === "string" ? firm.user_id : "";
+  return saveFirmProfile(userId, firm);
 };
 
 export const updateFirm = async (firmId: string, updates: FirmInput): Promise<FirmResult> => {
-  if (!isSupabaseConfigured || !supabase) {
-    return { data: null, error: notConfiguredError };
-  }
-
-  const { data, error } = await supabase
-    .from("firms")
-    .update(updates)
-    .eq("id", firmId)
-    .select("*")
-    .single();
-
+  if (!isSupabaseConfigured || !supabase) return { data: null, error: unavailable };
+  const { data, error } = await supabase.from("firms").update(updates).eq("id", firmId).select("*").maybeSingle();
   return { data: data as Firm | null, error };
 };
 
 export const deleteFirm = async (firmId: string): Promise<{ error: unknown }> => {
-  if (!isSupabaseConfigured || !supabase) {
-    return { error: notConfiguredError };
-  }
-
+  if (!isSupabaseConfigured || !supabase) return { error: unavailable };
   const { error } = await supabase.from("firms").delete().eq("id", firmId);
   return { error };
 };
