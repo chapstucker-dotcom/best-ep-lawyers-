@@ -1,11 +1,8 @@
 import { firms as localFirms } from "@/data/firms";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
-import { Firm } from "@/data/types";
+import type { Firm } from "@/data/types";
 
 type FirmInput = Partial<Firm> & Record<string, unknown>;
-type FirmResult = { data: Firm | null; error: unknown };
-
-const unavailable = { message: "Supabase is not configured" };
 
 const fallbackFirms = (): Firm[] =>
   localFirms.map((firm: any, index: number) => ({
@@ -24,66 +21,117 @@ const fallbackFirms = (): Firm[] =>
     is_verified: firm.verified ?? false,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
-  })) as Firm[];
+  }));
 
-export const getAllFirms = async (): Promise<{ data: Firm[] | null; error: unknown }> => {
-  if (!isSupabaseConfigured || !supabase) return { data: fallbackFirms(), error: null };
-  const { data, error } = await supabase.from("firms").select("*").order("created_at", { ascending: false });
-  return { data: data && data.length ? (data as Firm[]) : fallbackFirms(), error };
-};
+const notConfigured = { message: "Supabase is not configured" };
 
-export const getFirmByUserId = async (userId: string): Promise<FirmResult> => {
-  if (!isSupabaseConfigured || !supabase) return { data: null, error: unavailable };
-  const { data, error } = await supabase.from("firms").select("*").eq("user_id", userId).maybeSingle();
-  return { data: data as Firm | null, error };
-};
-
-export const saveFirmProfile = async (userId: string, values: FirmInput): Promise<FirmResult> => {
-  if (!isSupabaseConfigured || !supabase) return { data: null, error: unavailable };
-  if (!userId) return { data: null, error: { message: "A signed-in user is required." } };
-
-  const { data: existing, error: lookupError } = await supabase
-    .from("firms")
-    .select("id")
-    .eq("user_id", userId)
-    .maybeSingle();
-
-  if (lookupError) return { data: null, error: lookupError };
-
-  const payload = { ...values, user_id: userId };
-
-  if (existing?.id) {
-    const { data, error } = await supabase
-      .from("firms")
-      .update(payload)
-      .eq("id", existing.id)
-      .eq("user_id", userId)
-      .select("*")
-      .maybeSingle();
-    return { data: data as Firm | null, error };
+export const getAllFirms = async (): Promise<{
+  data: Firm[] | null;
+  error: any;
+}> => {
+  if (!isSupabaseConfigured || !supabase) {
+    return { data: fallbackFirms(), error: null };
   }
 
   const { data, error } = await supabase
     .from("firms")
-    .insert(payload)
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  return {
+    data: data && data.length > 0 ? (data as Firm[]) : fallbackFirms(),
+    error,
+  };
+};
+
+export const getFirmByUserId = async (userId: string) => {
+  if (!isSupabaseConfigured || !supabase) {
+    return { data: null, error: notConfigured };
+  }
+
+  return supabase
+    .from("firms")
+    .select("*")
+    .eq("user_id", userId)
+    .maybeSingle();
+};
+
+export const saveFirmProfile = async (
+  userId: string,
+  profile: FirmInput
+): Promise<{ data: Firm | null; error: any }> => {
+  if (!isSupabaseConfigured || !supabase) {
+    return { data: null, error: notConfigured };
+  }
+
+  // Update first. This works even if the database does not have a unique
+  // constraint on user_id, which makes it safer than upsert(onConflict).
+  const updateResult = await supabase
+    .from("firms")
+    .update({ ...profile, user_id: userId })
+    .eq("user_id", userId)
     .select("*")
     .maybeSingle();
+
+  if (updateResult.error) {
+    return { data: null, error: updateResult.error };
+  }
+
+  if (updateResult.data) {
+    return { data: updateResult.data as Firm, error: null };
+  }
+
+  const insertResult = await supabase
+    .from("firms")
+    .insert({ ...profile, user_id: userId })
+    .select("*")
+    .single();
+
+  return {
+    data: (insertResult.data as Firm | null) ?? null,
+    error: insertResult.error,
+  };
+};
+
+export const createFirm = async (
+  firm: FirmInput
+): Promise<{ data: Firm | null; error: any }> => {
+  if (!isSupabaseConfigured || !supabase) {
+    return { data: null, error: notConfigured };
+  }
+
+  const { data, error } = await supabase
+    .from("firms")
+    .insert(firm)
+    .select("*")
+    .single();
+
   return { data: data as Firm | null, error };
 };
 
-export const createFirm = async (firm: FirmInput): Promise<FirmResult> => {
-  const userId = typeof firm.user_id === "string" ? firm.user_id : "";
-  return saveFirmProfile(userId, firm);
-};
+export const updateFirm = async (
+  firmId: string,
+  updates: FirmInput
+): Promise<{ data: Firm | null; error: any }> => {
+  if (!isSupabaseConfigured || !supabase) {
+    return { data: null, error: notConfigured };
+  }
 
-export const updateFirm = async (firmId: string, updates: FirmInput): Promise<FirmResult> => {
-  if (!isSupabaseConfigured || !supabase) return { data: null, error: unavailable };
-  const { data, error } = await supabase.from("firms").update(updates).eq("id", firmId).select("*").maybeSingle();
+  const { data, error } = await supabase
+    .from("firms")
+    .update(updates)
+    .eq("id", firmId)
+    .select("*")
+    .single();
+
   return { data: data as Firm | null, error };
 };
 
-export const deleteFirm = async (firmId: string): Promise<{ error: unknown }> => {
-  if (!isSupabaseConfigured || !supabase) return { error: unavailable };
+export const deleteFirm = async (firmId: string): Promise<{ error: any }> => {
+  if (!isSupabaseConfigured || !supabase) {
+    return { error: notConfigured };
+  }
+
   const { error } = await supabase.from("firms").delete().eq("id", firmId);
   return { error };
 };

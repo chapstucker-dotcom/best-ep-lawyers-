@@ -45,15 +45,12 @@ const EMPTY: FormState = {
 const text = (value: unknown) =>
   value === null || value === undefined ? "" : String(value);
 
-const areasText = (firm: Record<string, unknown>) => {
-  for (const candidate of [firm.specialties, firm.practice_areas]) {
-    if (Array.isArray(candidate)) {
-      const values = candidate.map(String).map((v) => v.trim()).filter(Boolean);
-      if (values.length) return values.join(", ");
-    }
-    if (typeof candidate === "string" && candidate.trim()) {
-      return candidate.split(",").map((v) => v.trim()).filter(Boolean).join(", ");
-    }
+const areasText = (value: unknown): string => {
+  if (Array.isArray(value)) {
+    return value.map(String).map((item) => item.trim()).filter(Boolean).join(", ");
+  }
+  if (typeof value === "string") {
+    return value.split(",").map((item) => item.trim()).filter(Boolean).join(", ");
   }
   return "";
 };
@@ -106,36 +103,32 @@ export const ProfileEditor = () => {
       }
 
       setLoading(true);
-      setMessage("");
-
       const { data, error } = await getFirmByUserId(user.id);
       if (!active) return;
 
       if (error) {
-        const problem = error as { message?: string; details?: string };
-        setMessage(problem.message || problem.details || "Could not load the profile.");
+        setMessage(error.message || "Could not load the profile.");
         setMessageType("error");
         setLoading(false);
         return;
       }
 
       if (data) {
-        const firm = data as unknown as Record<string, unknown>;
         setForm({
-          name: text(firm.name),
-          description: text(firm.description),
-          address: text(firm.address),
-          city: text(firm.city) || "El Paso",
-          state: text(firm.state) || "TX",
-          zip_code: text(firm.zip_code),
-          phone: text(firm.phone),
-          email: text(firm.email) || user.email || "",
-          website: text(firm.website),
-          practiceAreas: areasText(firm),
-          years_experience: text(firm.years_experience),
-          team_size: text(firm.team_size),
-          consultation_fee: text(firm.consultation_fee),
-          logo_url: text(firm.logo_url),
+          name: text(data.name),
+          description: text(data.description),
+          address: text(data.address),
+          city: text(data.city) || "El Paso",
+          state: text(data.state) || "TX",
+          zip_code: text(data.zip_code),
+          phone: text(data.phone),
+          email: text(data.email) || user.email || "",
+          website: text(data.website),
+          practiceAreas: areasText(data.specialties),
+          years_experience: text(data.years_experience),
+          team_size: text(data.team_size),
+          consultation_fee: text(data.consultation_fee),
+          logo_url: text(data.logo_url),
         });
       } else {
         setForm({ ...EMPTY, email: user.email || "" });
@@ -150,8 +143,7 @@ export const ProfileEditor = () => {
     };
   }, [user]);
 
-  const submit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const save = async () => {
     setMessage("");
     setMessageType("");
 
@@ -173,7 +165,6 @@ export const ProfileEditor = () => {
       .filter(Boolean);
 
     setSaving(true);
-
     const { data, error } = await saveFirmProfile(user.id, {
       name: form.name.trim(),
       description: form.description.trim() || null,
@@ -190,13 +181,11 @@ export const ProfileEditor = () => {
       consultation_fee: optionalNumber(form.consultation_fee),
       logo_url: form.logo_url || null,
     });
-
     setSaving(false);
 
     if (error) {
-      const problem = error as { message?: string; details?: string; hint?: string; code?: string };
       setMessage(
-        [problem.message, problem.details, problem.hint, problem.code]
+        [error.message, error.details, error.hint, error.code]
           .filter(Boolean)
           .join(" — ") || "The profile could not be saved."
       );
@@ -210,14 +199,13 @@ export const ProfileEditor = () => {
       return;
     }
 
-    const saved = data as unknown as Record<string, unknown>;
     setForm((current) => ({
       ...current,
-      website: text(saved.website),
-      practiceAreas: areasText(saved) || current.practiceAreas,
-      years_experience: text(saved.years_experience),
-      team_size: text(saved.team_size),
-      consultation_fee: text(saved.consultation_fee),
+      website: text(data.website),
+      practiceAreas: areasText(data.specialties),
+      years_experience: text(data.years_experience),
+      team_size: text(data.team_size),
+      consultation_fee: text(data.consultation_fee),
     }));
     setMessage("Profile saved successfully.");
     setMessageType("success");
@@ -233,8 +221,7 @@ export const ProfileEditor = () => {
     event.target.value = "";
 
     if (error || !url) {
-      const problem = error as { message?: string } | null;
-      setMessage(problem?.message || "Logo upload failed.");
+      setMessage(error?.message || "Logo upload failed.");
       setMessageType("error");
       return;
     }
@@ -251,8 +238,7 @@ export const ProfileEditor = () => {
     setUploading(false);
 
     if (error) {
-      const problem = error as { message?: string };
-      setMessage(problem.message || "Logo deletion failed.");
+      setMessage(error.message || "Logo deletion failed.");
       setMessageType("error");
       return;
     }
@@ -276,7 +262,7 @@ export const ProfileEditor = () => {
     <Card>
       <CardHeader><CardTitle>Edit Firm Profile</CardTitle></CardHeader>
       <CardContent>
-        <form onSubmit={submit} className="space-y-6">
+        <div className="space-y-6">
           {message && (
             <div className={`rounded-md border p-3 text-sm ${messageType === "error" ? "border-red-300 bg-red-50 text-red-800" : "border-green-300 bg-green-50 text-green-800"}`}>
               {message}
@@ -307,7 +293,7 @@ export const ProfileEditor = () => {
             <Field label="Street Address" id="address" value={form.address} onChange={(v) => setField("address", v)} wide />
             <Field label="City" id="city" value={form.city} onChange={(v) => setField("city", v)} />
             <Field label="State" id="state" value={form.state} onChange={(v) => setField("state", v.replace(/[^a-z]/gi, "").slice(0, 2).toUpperCase())} />
-            <Field label="ZIP Code" id="zip_code" value={form.zip_code} onChange={(v) => setField("zip_code", v.replace(/\D/g, "").slice(0, 5))} />
+            <Field label="ZIP Code" id="zip_code" value={form.zip_code} onChange={(v) => setField("zip_code", v.replace(/\D/g, "").slice(0, 5))} inputMode="numeric" />
             <Field label="Phone" id="phone" value={form.phone} onChange={(v) => setField("phone", v)} />
             <Field label="Email" id="email" value={form.email} onChange={(v) => setField("email", v)} type="email" />
             <Field label="Website" id="website" value={form.website} onChange={(v) => setField("website", v)} />
@@ -317,10 +303,10 @@ export const ProfileEditor = () => {
             <Field label="Consultation Fee ($)" id="consultation_fee" value={form.consultation_fee} onChange={(v) => setField("consultation_fee", moneyInput(v))} inputMode="decimal" />
           </div>
 
-          <button type="submit" disabled={saving || uploading} className="w-full rounded-md bg-blue-600 px-4 py-3 font-medium text-white disabled:opacity-60">
+          <button type="button" onClick={save} disabled={saving || uploading} className="w-full rounded-md bg-blue-600 px-4 py-3 font-medium text-white disabled:opacity-60">
             {saving ? "Saving…" : "Save Profile"}
           </button>
-        </form>
+        </div>
       </CardContent>
     </Card>
   );
