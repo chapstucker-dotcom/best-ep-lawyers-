@@ -9,6 +9,8 @@ import AuthCallback from "./pages/AuthCallback";
 import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
 import AdminDashboard from "./pages/AdminDashboard";
+import AttorneyDetails from "./pages/AttorneyDetails";
+
 import { AuthProvider } from "./contexts/AuthContext";
 
 export default function App() {
@@ -23,6 +25,10 @@ export default function App() {
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/reset-password" element={<ResetPassword />} />
+
+        {/* Attorney profile page */}
+        <Route path="/attorney/:id" element={<AttorneyDetails />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AuthProvider>
