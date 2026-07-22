@@ -43,6 +43,12 @@ interface FirmModalProps {
   onClose: () => void;
 }
 
+type FirmWithDescription = Firm & {
+  description?: string | null;
+  blurb?: string | null;
+  logo_url?: string | null;
+};
+
 export default function FirmModal({
   firm,
   open,
@@ -117,6 +123,18 @@ export default function FirmModal({
 
   if (!firm) return null;
 
+  const publicFirm = firm as FirmWithDescription;
+
+  const firmDescription =
+    publicFirm.description?.trim() ||
+    publicFirm.blurb?.trim() ||
+    '';
+
+  const firmLogo =
+    publicFirm.logo ||
+    publicFirm.logo_url ||
+    '';
+
   const firmCategories = categories.filter((category) =>
     firm.categories?.includes(category.slug)
   );
@@ -171,9 +189,9 @@ export default function FirmModal({
 
         <div className="space-y-8">
           <section className="flex flex-col gap-5 sm:flex-row sm:items-start">
-            {firm.logo ? (
+            {firmLogo ? (
               <img
-                src={firm.logo}
+                src={firmLogo}
                 alt={`${firm.name} logo`}
                 className="h-24 w-24 rounded-lg border object-cover"
               />
@@ -205,20 +223,45 @@ export default function FirmModal({
                 )}
               </div>
 
-              {firm.blurb && (
-                <p className="leading-relaxed text-gray-600">
-                  {firm.blurb}
-                </p>
-              )}
-
               {fullAddress && (
-                <p className="mt-3 flex items-start gap-2 text-sm text-gray-600">
+                <p className="flex items-start gap-2 text-sm text-gray-600">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
                   {fullAddress}
                 </p>
               )}
+
+              {firmDescription && (
+                <div className="mt-5 max-w-3xl">
+                  <h3 className="mb-2 text-base font-semibold text-gray-900">
+                    About the Firm
+                  </h3>
+
+                  <p className="whitespace-pre-line leading-relaxed text-gray-600">
+                    {firmDescription}
+                  </p>
+                </div>
+              )}
             </div>
           </section>
+
+          {firmCategories.length > 0 && (
+            <section>
+              <h3 className="mb-3 text-lg font-bold">
+                Practice Areas
+              </h3>
+
+              <div className="flex flex-wrap gap-2">
+                {firmCategories.map((category) => (
+                  <Badge
+                    key={category.id}
+                    variant="secondary"
+                  >
+                    {category.title}
+                  </Badge>
+                ))}
+              </div>
+            </section>
+          )}
 
           <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {firm.phone && (
@@ -271,12 +314,10 @@ export default function FirmModal({
           </section>
 
           <section>
-            <div className="mb-4 flex items-center justify-between">
-              <h3 className="flex items-center gap-2 text-lg font-bold">
-                <UserRound className="h-5 w-5" />
-                Attorneys ({attorneys.length})
-              </h3>
-            </div>
+            <h3 className="mb-4 flex items-center gap-2 text-lg font-bold">
+              <UserRound className="h-5 w-5" />
+              Attorneys ({attorneys.length})
+            </h3>
 
             {loadingAttorneys ? (
               <div className="rounded-lg border p-6 text-center text-gray-500">
