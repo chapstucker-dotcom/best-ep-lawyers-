@@ -12,6 +12,7 @@ import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 
 import {
+  Building2,
   Globe,
   Mail,
   MapPin,
@@ -43,10 +44,14 @@ interface FirmModalProps {
   onClose: () => void;
 }
 
-type FirmWithDescription = Firm & {
+type PublicFirm = Firm & {
   description?: string | null;
   blurb?: string | null;
+  logo?: string | null;
   logo_url?: string | null;
+  is_featured?: boolean | null;
+  featured?: boolean | null;
+  is_verified?: boolean | null;
 };
 
 export default function FirmModal({
@@ -123,7 +128,7 @@ export default function FirmModal({
 
   if (!firm) return null;
 
-  const publicFirm = firm as FirmWithDescription;
+  const publicFirm = firm as PublicFirm;
 
   const firmDescription =
     publicFirm.description?.trim() ||
@@ -131,9 +136,16 @@ export default function FirmModal({
     '';
 
   const firmLogo =
-    publicFirm.logo ||
     publicFirm.logo_url ||
+    publicFirm.logo ||
     '';
+
+  const isFeatured =
+    Boolean(publicFirm.is_featured) ||
+    Boolean(publicFirm.featured);
+
+  const isVerified =
+    Boolean(publicFirm.is_verified);
 
   const firmCategories = categories.filter((category) =>
     firm.categories?.includes(category.slug)
@@ -161,11 +173,21 @@ export default function FirmModal({
   const openDirections = () => {
     if (!fullAddress) return;
 
-    const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-      fullAddress
-    )}`;
+    const directionsUrl =
+      `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+        fullAddress
+      )}`;
 
-    window.open(url, '_blank', 'noopener,noreferrer');
+    window.open(
+      directionsUrl,
+      '_blank',
+      'noopener,noreferrer'
+    );
+  };
+
+  const openAttorneyProfile = (attorneyId: string) => {
+    onClose();
+    navigate(`/attorney/${attorneyId}`);
   };
 
   return (
@@ -175,11 +197,9 @@ export default function FirmModal({
         if (!nextOpen) onClose();
       }}
     >
-      <DialogContent className="max-h-[90vh] max-w-5xl overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="text-2xl">
-            {firm.name}
-          </DialogTitle>
+      <DialogContent className="max-h-[92vh] max-w-6xl overflow-y-auto p-0">
+        <DialogHeader className="sr-only">
+          <DialogTitle>{firm.name}</DialogTitle>
 
           <DialogDescription>
             View firm information, attorneys, practice areas,
@@ -187,93 +207,92 @@ export default function FirmModal({
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-8">
-          <section className="flex flex-col gap-5 sm:flex-row sm:items-start">
+        {/* Premium header */}
+        <section className="bg-gradient-to-r from-[#0F2A43] via-[#176B78] to-[#1FA8A1] px-6 py-8 text-white sm:px-8">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
             {firmLogo ? (
               <img
                 src={firmLogo}
                 alt={`${firm.name} logo`}
-                className="h-24 w-24 rounded-lg border object-cover"
+                className="h-28 w-28 shrink-0 rounded-2xl border-4 border-white bg-white object-cover shadow-lg"
               />
             ) : (
-              <div className="flex h-24 w-24 items-center justify-center rounded-lg border bg-gray-100">
-                <UserRound className="h-10 w-10 text-gray-400" />
+              <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-2xl border-4 border-white/80 bg-white/10 shadow-lg">
+                <Building2 className="h-14 w-14 text-white" />
               </div>
             )}
 
             <div className="min-w-0 flex-1">
               <div className="mb-3 flex flex-wrap gap-2">
                 {firm.plan && (
-                  <Badge variant="outline">
+                  <Badge className="border border-white/30 bg-white/90 text-[#0F2A43]">
                     {firm.plan}
                   </Badge>
                 )}
 
-                {firm.featured && (
+                {isFeatured && (
                   <Badge className="bg-[#F5B800] text-[#0F2A43]">
-                    Featured
+                    <Star className="mr-1 h-3.5 w-3.5 fill-current" />
+                    Featured Firm
                   </Badge>
                 )}
 
-                {averageRating && (
-                  <Badge className="bg-yellow-100 text-yellow-800">
-                    <Star className="mr-1 h-3 w-3 fill-yellow-500" />
-                    {averageRating} ({reviews.length})
+                {isVerified && (
+                  <Badge className="border border-white/30 bg-white/15 text-white">
+                    Verified Listing
                   </Badge>
                 )}
               </div>
 
-              {fullAddress && (
-                <p className="flex items-start gap-2 text-sm text-gray-600">
-                  <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
-                  {fullAddress}
-                </p>
-              )}
+              <h2 className="text-3xl font-bold leading-tight sm:text-4xl">
+                {firm.name}
+              </h2>
 
-              {firmDescription && (
-                <div className="mt-5 max-w-3xl">
-                  <h3 className="mb-2 text-base font-semibold text-gray-900">
-                    About the Firm
-                  </h3>
+              {averageRating && (
+                <div className="mt-3 flex flex-wrap items-center gap-2">
+                  <div className="flex">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star
+                        key={star}
+                        className="h-5 w-5 fill-[#F5B800] text-[#F5B800]"
+                      />
+                    ))}
+                  </div>
 
-                  <p className="whitespace-pre-line leading-relaxed text-gray-600">
-                    {firmDescription}
-                  </p>
+                  <span className="font-semibold">
+                    {averageRating}
+                  </span>
+
+                  <span className="text-white/80">
+                    ({reviews.length}{' '}
+                    {reviews.length === 1 ? 'review' : 'reviews'})
+                  </span>
                 </div>
               )}
+
+              {fullAddress && (
+                <p className="mt-4 flex items-start gap-2 text-white/90">
+                  <MapPin className="mt-0.5 h-5 w-5 shrink-0" />
+                  <span>{fullAddress}</span>
+                </p>
+              )}
             </div>
-          </section>
+          </div>
+        </section>
 
-          {firmCategories.length > 0 && (
-            <section>
-              <h3 className="mb-3 text-lg font-bold">
-                Practice Areas
-              </h3>
-
-              <div className="flex flex-wrap gap-2">
-                {firmCategories.map((category) => (
-                  <Badge
-                    key={category.id}
-                    variant="secondary"
-                  >
-                    {category.title}
-                  </Badge>
-                ))}
-              </div>
-            </section>
-          )}
-
+        <div className="space-y-8 px-6 py-7 sm:px-8">
+          {/* Main actions */}
           <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {firm.phone && (
               <Button
                 type="button"
-                className="bg-[#1FA8A1] hover:bg-[#1FA8A1]/90"
+                className="h-12 bg-[#1FA8A1] text-base hover:bg-[#178D87]"
                 onClick={() =>
                   window.location.assign(`tel:${firm.phone}`)
                 }
               >
-                <Phone className="mr-2 h-4 w-4" />
-                Call
+                <Phone className="mr-2 h-5 w-5" />
+                Call Firm
               </Button>
             )}
 
@@ -281,12 +300,13 @@ export default function FirmModal({
               <Button
                 type="button"
                 variant="outline"
+                className="h-12 text-base"
                 onClick={() =>
                   window.location.assign(`mailto:${firm.email}`)
                 }
               >
-                <Mail className="mr-2 h-4 w-4" />
-                Email
+                <Mail className="mr-2 h-5 w-5" />
+                Email Firm
               </Button>
             )}
 
@@ -294,10 +314,11 @@ export default function FirmModal({
               <Button
                 type="button"
                 variant="outline"
+                className="h-12 text-base"
                 onClick={openWebsite}
               >
-                <Globe className="mr-2 h-4 w-4" />
-                Website
+                <Globe className="mr-2 h-5 w-5" />
+                Visit Website
               </Button>
             )}
 
@@ -305,153 +326,272 @@ export default function FirmModal({
               <Button
                 type="button"
                 variant="outline"
+                className="h-12 text-base"
                 onClick={openDirections}
               >
-                <MapPin className="mr-2 h-4 w-4" />
+                <MapPin className="mr-2 h-5 w-5" />
                 Directions
               </Button>
             )}
           </section>
 
-          <section>
-            <h3 className="mb-4 flex items-center gap-2 text-lg font-bold">
-              <UserRound className="h-5 w-5" />
-              Attorneys ({attorneys.length})
+          {/* Overview and quick information */}
+          <section className="grid gap-6 lg:grid-cols-[1.6fr_0.8fr]">
+            <div className="rounded-2xl border bg-white p-6 shadow-sm">
+              <h3 className="mb-4 text-2xl font-bold text-[#0F2A43]">
+                About the Firm
+              </h3>
+
+              {firmDescription ? (
+                <p className="whitespace-pre-line text-base leading-7 text-gray-600">
+                  {firmDescription}
+                </p>
+              ) : (
+                <p className="text-gray-500">
+                  This firm has not added a full description yet.
+                </p>
+              )}
+            </div>
+
+            <aside className="rounded-2xl border bg-gray-50 p-6">
+              <h3 className="mb-4 text-xl font-bold text-[#0F2A43]">
+                Firm Information
+              </h3>
+
+              <div className="space-y-4 text-sm">
+                {firm.phone && (
+                  <a
+                    href={`tel:${firm.phone}`}
+                    className="flex items-start gap-3 text-gray-700 hover:text-[#1FA8A1]"
+                  >
+                    <Phone className="mt-0.5 h-5 w-5 shrink-0 text-[#1FA8A1]" />
+                    <span>{firm.phone}</span>
+                  </a>
+                )}
+
+                {firm.email && (
+                  <a
+                    href={`mailto:${firm.email}`}
+                    className="flex items-start gap-3 break-all text-gray-700 hover:text-[#1FA8A1]"
+                  >
+                    <Mail className="mt-0.5 h-5 w-5 shrink-0 text-[#1FA8A1]" />
+                    <span>{firm.email}</span>
+                  </a>
+                )}
+
+                {firm.website && (
+                  <button
+                    type="button"
+                    onClick={openWebsite}
+                    className="flex items-start gap-3 text-left text-gray-700 hover:text-[#1FA8A1]"
+                  >
+                    <Globe className="mt-0.5 h-5 w-5 shrink-0 text-[#1FA8A1]" />
+                    <span className="break-all">
+                      {firm.website}
+                    </span>
+                  </button>
+                )}
+
+                {fullAddress && (
+                  <button
+                    type="button"
+                    onClick={openDirections}
+                    className="flex items-start gap-3 text-left text-gray-700 hover:text-[#1FA8A1]"
+                  >
+                    <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-[#1FA8A1]" />
+                    <span>{fullAddress}</span>
+                  </button>
+                )}
+              </div>
+            </aside>
+          </section>
+
+          {/* Practice areas */}
+          <section className="rounded-2xl border bg-white p-6 shadow-sm">
+            <h3 className="mb-4 text-2xl font-bold text-[#0F2A43]">
+              Practice Areas
             </h3>
 
+            {firmCategories.length > 0 ? (
+              <div className="flex flex-wrap gap-3">
+                {firmCategories.map((category) => (
+                  <Badge
+                    key={category.id}
+                    variant="secondary"
+                    className="rounded-full px-4 py-2 text-sm"
+                  >
+                    {category.title}
+                  </Badge>
+                ))}
+              </div>
+            ) : (
+              <p className="text-gray-500">
+                No practice areas have been added yet.
+              </p>
+            )}
+          </section>
+
+          {/* Attorneys */}
+          <section>
+            <div className="mb-5 flex items-center justify-between gap-4">
+              <h3 className="flex items-center gap-2 text-2xl font-bold text-[#0F2A43]">
+                <UserRound className="h-6 w-6" />
+                Attorneys ({attorneys.length})
+              </h3>
+            </div>
+
             {loadingAttorneys ? (
-              <div className="rounded-lg border p-6 text-center text-gray-500">
+              <div className="rounded-2xl border p-8 text-center text-gray-500">
                 Loading attorneys...
               </div>
             ) : attorneys.length === 0 ? (
-              <div className="rounded-lg border p-6 text-center text-gray-500">
+              <div className="rounded-2xl border p-8 text-center text-gray-500">
                 No attorney profiles have been added yet.
               </div>
             ) : (
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="grid gap-5">
                 {attorneys.map((attorney) => (
-                  <div
+                  <article
                     key={attorney.id}
-                    className="flex gap-4 rounded-lg border p-4"
+                    className="rounded-2xl border bg-white p-5 shadow-sm transition hover:border-[#1FA8A1]/50 hover:shadow-md"
                   >
-                    {attorney.photo_url ? (
-                      <img
-                        src={attorney.photo_url}
-                        alt={attorney.name}
-                        className="h-20 w-20 shrink-0 rounded-full object-cover"
-                      />
-                    ) : (
-                      <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-gray-100 text-2xl font-semibold text-gray-500">
-                        {attorney.name.charAt(0).toUpperCase()}
-                      </div>
-                    )}
-
-                    <div className="min-w-0 flex-1">
-                      <h4 className="font-semibold">
-                        {attorney.name}
-                      </h4>
-
-                      {attorney.title && (
-                        <p className="text-sm text-gray-600">
-                          {attorney.title}
-                        </p>
-                      )}
-
-                      {attorney.bio && (
-                        <p className="mt-2 line-clamp-3 text-sm text-gray-600">
-                          {attorney.bio}
-                        </p>
-                      )}
-
-                      {attorney.specialties?.length > 0 && (
-                        <div className="mt-3 flex flex-wrap gap-1">
-                          {attorney.specialties.map(
-                            (specialty, index) => (
-                              <Badge
-                                key={`${specialty}-${index}`}
-                                variant="secondary"
-                                className="text-xs"
-                              >
-                                {specialty}
-                              </Badge>
-                            )
-                          )}
+                    <div className="flex flex-col gap-5 sm:flex-row">
+                      {attorney.photo_url ? (
+                        <img
+                          src={attorney.photo_url}
+                          alt={attorney.name}
+                          className="h-28 w-28 shrink-0 rounded-2xl object-cover"
+                        />
+                      ) : (
+                        <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-2xl bg-gray-100 text-4xl font-bold text-gray-400">
+                          {attorney.name.charAt(0).toUpperCase()}
                         </div>
                       )}
 
-                      <div className="mt-3 flex flex-wrap gap-3 text-sm">
-                        {attorney.email && (
-                          <a
-                            href={`mailto:${attorney.email}`}
-                            className="text-blue-600 hover:underline"
-                          >
-                            Email
-                          </a>
+                      <div className="min-w-0 flex-1">
+                        <h4 className="text-xl font-bold text-[#0F2A43]">
+                          {attorney.name}
+                        </h4>
+
+                        {attorney.title && (
+                          <p className="mt-1 font-medium text-gray-600">
+                            {attorney.title}
+                          </p>
                         )}
 
-                        {attorney.phone && (
-                          <a
-                            href={`tel:${attorney.phone}`}
-                            className="text-blue-600 hover:underline"
-                          >
-                            Call
-                          </a>
+                        {attorney.bio && (
+                          <p className="mt-3 line-clamp-4 leading-6 text-gray-600">
+                            {attorney.bio}
+                          </p>
                         )}
 
-                        {attorney.linkedin_url && (
-                          <a
-                            href={
-                              attorney.linkedin_url.startsWith('http')
-                                ? attorney.linkedin_url
-                                : `https://${attorney.linkedin_url}`
+                        {attorney.specialties?.length > 0 && (
+                          <div className="mt-4 flex flex-wrap gap-2">
+                            {attorney.specialties.map(
+                              (specialty, index) => (
+                                <Badge
+                                  key={`${specialty}-${index}`}
+                                  variant="secondary"
+                                  className="rounded-full"
+                                >
+                                  {specialty}
+                                </Badge>
+                              )
+                            )}
+                          </div>
+                        )}
+
+                        <div className="mt-5 flex flex-wrap gap-3">
+                          {attorney.email && (
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="sm"
+                              asChild
+                            >
+                              <a href={`mailto:${attorney.email}`}>
+                                <Mail className="mr-2 h-4 w-4" />
+                                Email
+                              </a>
+                            </Button>
+                          )}
+
+                          {attorney.phone && (
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="sm"
+                              asChild
+                            >
+                              <a href={`tel:${attorney.phone}`}>
+                                <Phone className="mr-2 h-4 w-4" />
+                                Call
+                              </a>
+                            </Button>
+                          )}
+
+                          {attorney.linkedin_url && (
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="sm"
+                              asChild
+                            >
+                              <a
+                                href={
+                                  attorney.linkedin_url.startsWith(
+                                    'http'
+                                  )
+                                    ? attorney.linkedin_url
+                                    : `https://${attorney.linkedin_url}`
+                                }
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                LinkedIn
+                              </a>
+                            </Button>
+                          )}
+
+                          <Button
+                            type="button"
+                            size="sm"
+                            className="bg-[#1FA8A1] hover:bg-[#178D87]"
+                            onClick={() =>
+                              openAttorneyProfile(attorney.id)
                             }
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-600 hover:underline"
                           >
-                            LinkedIn
-                          </a>
-                        )}
+                            View Full Profile
+                          </Button>
+                        </div>
                       </div>
-
-                      <Button
-                        type="button"
-                        size="sm"
-                        className="mt-4"
-                        onClick={() => {
-                          onClose();
-                          navigate(`/attorney/${attorney.id}`);
-                        }}
-                      >
-                        View Full Profile
-                      </Button>
                     </div>
-                  </div>
+                  </article>
                 ))}
               </div>
             )}
           </section>
 
-          <section>
-            <div className="mb-4 flex items-center justify-between gap-4">
-              <h3 className="flex items-center gap-2 text-lg font-bold">
-                <MessageSquare className="h-5 w-5" />
-                Reviews ({reviews.length})
+          {/* Reviews */}
+          <section className="rounded-2xl border bg-white p-6 shadow-sm">
+            <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
+              <h3 className="flex items-center gap-2 text-2xl font-bold text-[#0F2A43]">
+                <MessageSquare className="h-6 w-6" />
+                Client Reviews ({reviews.length})
               </h3>
 
               <Button
                 type="button"
-                size="sm"
                 onClick={() =>
                   setShowReviewForm((current) => !current)
                 }
               >
-                {showReviewForm ? 'Cancel' : 'Write Review'}
+                {showReviewForm ? 'Cancel' : 'Write a Review'}
               </Button>
             </div>
 
             {showReviewForm && (
-              <div className="mb-5">
+              <div className="mb-6 rounded-xl border bg-gray-50 p-4">
                 <ReviewForm
                   firmId={firm.id}
                   firmName={firm.name}
@@ -464,44 +604,50 @@ export default function FirmModal({
             )}
 
             {reviews.length === 0 ? (
-              <div className="rounded-lg border p-6 text-center text-gray-500">
+              <div className="rounded-xl border border-dashed p-8 text-center text-gray-500">
                 No approved reviews yet.
               </div>
             ) : (
-              <div className="divide-y rounded-lg border px-4">
+              <div className="grid gap-4 md:grid-cols-2">
                 {reviews.map((review) => (
                   <article
                     key={review.id}
-                    className="py-4"
+                    className="rounded-xl border bg-gray-50 p-5"
                   >
-                    <div className="mb-1 flex flex-wrap items-center gap-2">
-                      <span className="font-medium">
-                        {review.reviewer_name}
-                      </span>
-
-                      <div className="flex">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <Star
-                            key={star}
-                            className={`h-4 w-4 ${
-                              review.rating >= star
-                                ? 'fill-yellow-400 text-yellow-400'
-                                : 'text-gray-300'
-                            }`}
-                          />
-                        ))}
-                      </div>
+                    <div className="mb-3 flex">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <Star
+                          key={star}
+                          className={`h-5 w-5 ${
+                            review.rating >= star
+                              ? 'fill-[#F5B800] text-[#F5B800]'
+                              : 'text-gray-300'
+                          }`}
+                        />
+                      ))}
                     </div>
 
                     {review.title && (
-                      <p className="text-sm font-medium">
+                      <h4 className="font-bold text-[#0F2A43]">
                         {review.title}
-                      </p>
+                      </h4>
                     )}
 
-                    <p className="mt-1 text-sm text-gray-600">
+                    <p className="mt-2 leading-6 text-gray-600">
                       {review.comment}
                     </p>
+
+                    <div className="mt-4 border-t pt-3">
+                      <p className="font-medium text-gray-800">
+                        {review.reviewer_name}
+                      </p>
+
+                      <p className="text-xs text-gray-500">
+                        {new Date(
+                          review.created_at
+                        ).toLocaleDateString()}
+                      </p>
+                    </div>
                   </article>
                 ))}
               </div>
