@@ -112,8 +112,7 @@ export const Subscription = () => {
           </Badge>
         </p>
       </div>
-
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {plans.map((plan) => {
           const isCurrentPlan =
             currentPlan === plan.id;
