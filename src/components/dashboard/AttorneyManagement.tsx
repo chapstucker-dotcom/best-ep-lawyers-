@@ -1,14 +1,35 @@
-import { useState, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import {
+  AlertCircle,
+  Edit,
+  Plus,
+  Trash2,
+} from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { AttorneyProfile } from '@/data/attorneyTypes';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import {
+  Alert,
+  AlertDescription,
+} from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+
+import type { AttorneyProfile } from '@/data/attorneyTypes';
 import { attorneyService } from '@/services/attorneyService';
 import { AttorneyForm } from './AttorneyForm';
-import { Plus, Edit, Trash2, AlertCircle } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
 
 interface AttorneyManagementProps {
   firmId: string;
@@ -17,37 +38,78 @@ interface AttorneyManagementProps {
   onCountChange: (count: number) => void;
 }
 
-export function AttorneyManagement({ firmId, planLimit, currentCount, onCountChange }: AttorneyManagementProps) {
+export function AttorneyManagement({
+  firmId,
+  planLimit,
+  onCountChange,
+}: AttorneyManagementProps) {
   const [attorneys, setAttorneys] = useState<AttorneyProfile[]>([]);
   const [loading, setLoading] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [editingAttorney, setEditingAttorney] = useState<AttorneyProfile | undefined>();
+  const [editingAttorney, setEditingAttorney] =
+    useState<AttorneyProfile | undefined>(undefined);
 
-  const loadAttorneys = async () => {
+  const actualCount = attorneys.length;
+  const hasAttorneyAccess = planLimit > 0;
+  const isAtLimit =
+    hasAttorneyAccess && actualCount >= planLimit;
+
+  const loadAttorneys = useCallback(async () => {
+    if (!firmId) {
+      setAttorneys([]);
+      setLoading(false);
+      onCountChange(0);
+      return;
+    }
+
+    setLoading(true);
+
     try {
-      const data = await attorneyService.getAllAttorneysByFirm(firmId);
+      const data =
+        await attorneyService.getAllAttorneysByFirm(firmId);
+
       setAttorneys(data);
       onCountChange(data.length);
     } catch (error) {
-      toast({ title: 'Failed to load attorneys', variant: 'destructive' });
+      console.error('Failed to load attorneys:', error);
+
+      toast({
+        title: 'Failed to load attorneys',
+        description:
+          error instanceof Error
+            ? error.message
+            : 'An unexpected error occurred.',
+        variant: 'destructive',
+      });
     } finally {
       setLoading(false);
     }
-  };
+  }, [firmId, onCountChange]);
 
   useEffect(() => {
-    loadAttorneys();
-  }, [firmId]);
+    void loadAttorneys();
+  }, [loadAttorneys]);
 
   const handleAdd = () => {
-    if (currentCount >= planLimit) {
+    if (!hasAttorneyAccess) {
       toast({
-        title: 'Profile limit reached',
-        description: 'Please upgrade your plan to add more attorney profiles',
-        variant: 'destructive'
+        title: 'Upgrade required',
+        description:
+          'Attorney profiles are available with the Expert plan or higher.',
+        variant: 'destructive',
       });
       return;
     }
+
+    if (isAtLimit) {
+      toast({
+        title: 'Profile limit reached',
+        description: `Your current plan includes up to ${planLimit} attorney profiles.`,
+        variant: 'destructive',
+      });
+      return;
+    }
+
     setEditingAttorney(undefined);
     setDialogOpen(true);
   };
@@ -58,97 +120,185 @@ export function AttorneyManagement({ firmId, planLimit, currentCount, onCountCha
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this attorney profile?')) return;
+    const confirmed = window.confirm(
+      'Are you sure you want to delete this attorney profile?'
+    );
+
+    if (!confirmed) return;
 
     try {
       await attorneyService.deleteAttorney(id);
-      toast({ title: 'Attorney profile deleted' });
-      loadAttorneys();
+
+      toast({
+        title: 'Attorney profile deleted',
+      });
+
+      await loadAttorneys();
     } catch (error) {
-      toast({ title: 'Failed to delete attorney', variant: 'destructive' });
+      console.error('Failed to delete attorney:', error);
+
+      toast({
+        title: 'Failed to delete attorney',
+        description:
+          error instanceof Error
+            ? error.message
+            : 'An unexpected error occurred.',
+        variant: 'destructive',
+      });
     }
   };
 
-  const handleSuccess = () => {
+  const handleSuccess = async () => {
     setDialogOpen(false);
-    loadAttorneys();
+    setEditingAttorney(undefined);
+    await loadAttorneys();
   };
 
-  const isAtLimit = currentCount >= planLimit;
-  const additionalProfiles = Math.max(0, currentCount - planLimit);
+  const handleDialogChange = (open: boolean) => {
+    setDialogOpen(open);
+
+    if (!open) {
+      setEditingAttorney(undefined);
+    }
+  };
 
   return (
     <Card>
       <CardHeader>
-        <div className="flex justify-between items-start">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <CardTitle>Attorney Profiles</CardTitle>
+
             <CardDescription>
-              Manage your firm's attorney profiles
+              Manage your firm&apos;s attorney profiles
             </CardDescription>
           </div>
-          <Button onClick={handleAdd} disabled={isAtLimit && planLimit > 0}>
-            <Plus className="w-4 h-4 mr-2" />
+
+          <Button
+            type="button"
+            onClick={handleAdd}
+            disabled={loading || !hasAttorneyAccess || isAtLimit}
+          >
+            <Plus className="mr-2 h-4 w-4" />
             Add Attorney
           </Button>
         </div>
-        <div className="flex items-center gap-4 mt-4">
-          <Badge variant={isAtLimit ? "destructive" : "default"}>
-            {currentCount} of {planLimit === 0 ? 'unlimited' : planLimit} profiles used
+
+        <div className="mt-4 flex flex-wrap items-center gap-3">
+          <Badge
+            variant={
+              !hasAttorneyAccess || isAtLimit
+                ? 'destructive'
+                : 'default'
+            }
+          >
+            {hasAttorneyAccess
+              ? `${actualCount} of ${planLimit} profiles used`
+              : 'Attorney profiles not included'}
           </Badge>
-          {additionalProfiles > 0 && (
-            <Badge variant="secondary">
-              +${additionalProfiles}/mo for additional profiles
-            </Badge>
-          )}
         </div>
       </CardHeader>
+
       <CardContent>
-        {isAtLimit && planLimit > 0 && (
+        {!hasAttorneyAccess && (
           <Alert className="mb-4">
             <AlertCircle className="h-4 w-4" />
+
             <AlertDescription>
-              You've reached your plan limit. Upgrade to add more attorney profiles or pay $1/month per additional profile.
+              Upgrade to the Expert plan or higher to add
+              attorney profiles.
+            </AlertDescription>
+          </Alert>
+        )}
+
+        {isAtLimit && (
+          <Alert className="mb-4">
+            <AlertCircle className="h-4 w-4" />
+
+            <AlertDescription>
+              You have reached the {planLimit}-profile limit
+              for your current plan.
             </AlertDescription>
           </Alert>
         )}
 
         {loading ? (
-          <div className="text-center py-8">Loading...</div>
+          <div className="py-8 text-center">
+            Loading attorney profiles...
+          </div>
         ) : attorneys.length === 0 ? (
-          <div className="text-center py-8 text-gray-500">
-            No attorney profiles yet. Add your first attorney to get started.
+          <div className="py-8 text-center text-gray-500">
+            No attorney profiles yet. Add your first attorney
+            to get started.
           </div>
         ) : (
           <div className="space-y-4">
             {attorneys.map((attorney) => (
-              <div key={attorney.id} className="border rounded-lg p-4 flex items-start gap-4">
-                {attorney.photo_url && (
+              <div
+                key={attorney.id}
+                className="flex flex-col gap-4 rounded-lg border p-4 sm:flex-row sm:items-start"
+              >
+                {attorney.photo_url ? (
                   <img
                     src={attorney.photo_url}
                     alt={attorney.name}
-                    className="w-16 h-16 rounded-full object-cover"
+                    className="h-16 w-16 rounded-full object-cover"
                   />
+                ) : (
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 text-xl font-semibold text-gray-500">
+                    {attorney.name.charAt(0).toUpperCase()}
+                  </div>
                 )}
-                <div className="flex-1">
-                  <h3 className="font-semibold">{attorney.name}</h3>
-                  {attorney.title && <p className="text-sm text-gray-600">{attorney.title}</p>}
-                  {attorney.specialties && attorney.specialties.length > 0 && (
-                    <div className="flex flex-wrap gap-1 mt-2">
-                      {attorney.specialties.map((s, i) => (
-                        <span key={i} className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
-                          {s}
-                        </span>
-                      ))}
-                    </div>
+
+                <div className="min-w-0 flex-1">
+                  <h3 className="font-semibold">
+                    {attorney.name}
+                  </h3>
+
+                  {attorney.title && (
+                    <p className="text-sm text-gray-600">
+                      {attorney.title}
+                    </p>
                   )}
+
+                  {attorney.specialties &&
+                    attorney.specialties.length > 0 && (
+                      <div className="mt-2 flex flex-wrap gap-1">
+                        {attorney.specialties.map(
+                          (specialty, index) => (
+                            <span
+                              key={`${specialty}-${index}`}
+                              className="rounded bg-blue-100 px-2 py-1 text-xs text-blue-800"
+                            >
+                              {specialty}
+                            </span>
+                          )
+                        )}
+                      </div>
+                    )}
                 </div>
+
                 <div className="flex gap-2">
-                  <Button variant="outline" size="sm" onClick={() => handleEdit(attorney)}>
-                    <Edit className="w-4 h-4" />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    aria-label={`Edit ${attorney.name}`}
+                    onClick={() => handleEdit(attorney)}
+                  >
+                    <Edit className="h-4 w-4" />
                   </Button>
-                  <Button variant="outline" size="sm" onClick={() => handleDelete(attorney.id)}>
-                    <Trash2 className="w-4 h-4" />
+
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    aria-label={`Delete ${attorney.name}`}
+                    onClick={() =>
+                      void handleDelete(attorney.id)
+                    }
+                  >
+                    <Trash2 className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
@@ -157,23 +307,27 @@ export function AttorneyManagement({ firmId, planLimit, currentCount, onCountCha
         )}
       </CardContent>
 
-      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <Dialog
+        open={dialogOpen}
+        onOpenChange={handleDialogChange}
+      >
+        <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
           <DialogHeader>
             <DialogTitle>
-              {editingAttorney ? 'Edit Attorney Profile' : 'Add Attorney Profile'}
+              {editingAttorney
+                ? 'Edit Attorney Profile'
+                : 'Add Attorney Profile'}
             </DialogTitle>
           </DialogHeader>
+
           <AttorneyForm
             attorney={editingAttorney}
             firmId={firmId}
-            onSuccess={handleSuccess}
-            onCancel={() => setDialogOpen(false)}
+            onSuccess={() => void handleSuccess()}
+            onCancel={() => handleDialogChange(false)}
           />
         </DialogContent>
       </Dialog>
     </Card>
   );
 }
-
-

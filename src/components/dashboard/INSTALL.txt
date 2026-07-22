@@ -1,0 +1,20 @@
+PROFILE DASHBOARD FIX
+
+1. Open this project folder:
+   C:\Users\PC\Projects\best-ep-lawyers-\EP BEST LAWYERS
+
+2. Copy the included src folder into that project folder.
+
+3. When Windows asks, choose "Replace the files in the destination."
+
+4. Open Command Prompt in the project folder and run:
+   npm run build
+
+5. If the build succeeds, run these commands one at a time:
+   git add src\components\dashboard\ProfileEditor.tsx src\services\firmService.ts
+   git commit -m "Fix profile editor save and number fields"
+   git push origin main
+
+The corrected files are:
+- src\components\dashboard\ProfileEditor.tsx
+- src\services\firmService.ts
