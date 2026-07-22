@@ -1,106 +1,209 @@
-import { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useEffect, useState } from 'react';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Check, Users, Loader2, CreditCard } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { Check, Loader2 } from 'lucide-react';
+
 import { plans } from '@/data/plans';
 import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/contexts/AuthContext';
+import { useToast } from '@/hooks/use-toast';
+
+const checkoutLinks: Record<string, string> = {
+  expert:
+    'https://buy.stripe.com/7sY8wOgQU8u65N198SaAw01',
+
+  'category-featured':
+    'https://buy.stripe.com/fZu6oG0RWeSu2AP98SaAw03',
+
+  'category-exclusive':
+    'https://buy.stripe.com/8x27sK3046lYb7lgBkaAw04',
+};
 
 export const Subscription = () => {
-  const [currentPlan, setCurrentPlan] = useState('basic');
-  const [loading, setLoading] = useState<string | null>(null);
-  const [subscription, setSubscription] = useState<any>(null);
-  const { toast } = useToast();
+  const [currentPlan, setCurrentPlan] = useState('free');
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(
+    null
+  );
+
   const { user } = useAuth();
+  const { toast } = useToast();
 
   useEffect(() => {
-    if (user) fetchSubscription();
+    const loadCurrentPlan = async () => {
+      if (!user) return;
+
+      const { data, error } = await supabase
+        .from('firms')
+        .select('plan, plan_key')
+        .eq('user_id', user.id)
+        .maybeSingle();
+
+      if (error) {
+        console.error(
+          'Unable to load current subscription plan:',
+          error
+        );
+        return;
+      }
+
+      if (!data) {
+        setCurrentPlan('free');
+        return;
+      }
+
+      const databasePlan =
+        data.plan_key || data.plan || 'free';
+
+      const normalizedPlan =
+        databasePlan === 'basic'
+          ? 'free'
+          : databasePlan;
+
+      setCurrentPlan(normalizedPlan);
+    };
+
+    void loadCurrentPlan();
   }, [user]);
 
-  const fetchSubscription = async () => {
-    const { data } = await supabase
-      .from('subscriptions')
-      .select('*')
-      .eq('user_id', user?.id)
-      .single();
-    if (data) {
-      setSubscription(data);
-      setCurrentPlan(data.plan_type);
-    }
-  };
-
-  const handleSubscribe = async (plan: typeof plans[0]) => {
-    setLoading(plan.id);
-    try {
-      const { data, error } = await supabase.functions.invoke('create-checkout', {
-        body: {
-          planId: plan.id,
-          planName: plan.name,
-          priceMonth: plan.priceMonth,
-          firmId: subscription?.firm_id || 'new',
-          userId: user?.id,
-          successUrl: `${window.location.origin}/dashboard?success=true`,
-          cancelUrl: `${window.location.origin}/dashboard?canceled=true`
-        }
+  const handleSubscribe = (planId: string) => {
+    if (planId === 'free') {
+      toast({
+        title: 'Free Listing',
+        description:
+          'Your firm already has access to the free listing plan.',
       });
-      if (error) throw error;
-      if (data?.url) window.location.href = data.url;
-    } catch (err: any) {
-      toast({ title: 'Error', description: err.message, variant: 'destructive' });
-    } finally {
-      setLoading(null);
+      return;
     }
+
+    const checkoutUrl = checkoutLinks[planId];
+
+    if (!checkoutUrl) {
+      toast({
+        title: 'Checkout unavailable',
+        description:
+          'The checkout link for this plan has not been configured.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    setLoadingPlan(planId);
+
+    window.location.href = checkoutUrl;
   };
 
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold">Subscription Management</h2>
-        <p className="text-gray-600 mt-2">
-          Current Plan: <Badge className="bg-[#1FA8A1]">{currentPlan}</Badge>
-          {subscription?.status && <Badge className="ml-2" variant="outline">{subscription.status}</Badge>}
+        <h2 className="text-2xl font-bold">
+          Subscription Management
+        </h2>
+
+        <p className="mt-2 text-gray-600">
+          Current Plan:{' '}
+          <Badge className="bg-[#1FA8A1]">
+            {currentPlan}
+          </Badge>
         </p>
       </div>
 
-      {subscription && (
-        <Card>
-          <CardHeader><CardTitle className="flex items-center gap-2"><CreditCard className="h-5 w-5" />Billing Info</CardTitle></CardHeader>
-          <CardContent>
-            <p className="text-sm text-gray-600">Next billing: {subscription.current_period_end ? new Date(subscription.current_period_end).toLocaleDateString() : 'N/A'}</p>
-          </CardContent>
-        </Card>
-      )}
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+        {plans.map((plan) => {
+          const isCurrentPlan =
+            currentPlan === plan.id;
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {plans.map((plan) => (
-          <Card key={plan.id} className={currentPlan === plan.id ? 'border-[#1FA8A1] border-2' : ''}>
-            <CardHeader>
-              <CardTitle className="text-center">
-                <div className="text-2xl font-bold">{plan.name}</div>
-                <div className="text-3xl font-bold text-[#1FA8A1] mt-2">${plan.priceMonth}<span className="text-sm text-gray-500">/mo</span></div>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-2 mb-6">
-                {plan.features.slice(0, 5).map((f, i) => (
-                  <li key={i} className="flex items-start text-sm"><Check className="h-4 w-4 text-[#1FA8A1] mr-2 mt-0.5" />{f}</li>
-                ))}
-              </ul>
-              {currentPlan === plan.id ? (
-                <Button className="w-full" disabled>Current Plan</Button>
-              ) : (
-                <Button className="w-full bg-[#1FA8A1] hover:bg-[#1FA8A1]/90" onClick={() => handleSubscribe(plan)} disabled={!!loading}>
-                  {loading === plan.id ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Subscribe'}
-                </Button>
-              )}
-            </CardContent>
-          </Card>
-        ))}
+          const isFreePlan =
+            plan.id === 'free';
+
+          const isLoading =
+            loadingPlan === plan.id;
+
+          return (
+            <Card
+              key={plan.id}
+              className={
+                isCurrentPlan
+                  ? 'border-2 border-[#1FA8A1]'
+                  : ''
+              }
+            >
+              <CardHeader>
+                <CardTitle className="text-center">
+                  <div className="text-2xl font-bold">
+                    {plan.name}
+                  </div>
+
+                  <div className="mt-2 text-3xl font-bold text-[#1FA8A1]">
+                    ${plan.priceMonth}
+                    <span className="text-sm text-gray-500">
+                      /mo
+                    </span>
+                  </div>
+                </CardTitle>
+              </CardHeader>
+
+              <CardContent>
+                <ul className="mb-6 space-y-2">
+                  {plan.features.map(
+                    (feature, index) => (
+                      <li
+                        key={`${feature}-${index}`}
+                        className="flex items-start text-sm"
+                      >
+                        <Check className="mr-2 mt-0.5 h-4 w-4 shrink-0 text-[#1FA8A1]" />
+                        <span>{feature}</span>
+                      </li>
+                    )
+                  )}
+                </ul>
+
+                {isCurrentPlan ? (
+                  <Button
+                    type="button"
+                    className="w-full"
+                    disabled
+                  >
+                    Current Plan
+                  </Button>
+                ) : isFreePlan ? (
+                  <Button
+                    type="button"
+                    className="w-full"
+                    variant="outline"
+                    disabled
+                  >
+                    Free Listing
+                  </Button>
+                ) : (
+                  <Button
+                    type="button"
+                    className="w-full bg-[#1FA8A1] hover:bg-[#178d87]"
+                    onClick={() =>
+                      handleSubscribe(plan.id)
+                    }
+                    disabled={isLoading}
+                  >
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Opening Checkout...
+                      </>
+                    ) : (
+                      'Subscribe'
+                    )}
+                  </Button>
+                )}
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
     </div>
   );
 };
-
-
