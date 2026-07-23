@@ -1,669 +1,690 @@
-import { useEffect, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useMemo, useState } from "react";
+
+import { useAuth } from "@/contexts/AuthContext";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+
+import { Check, Loader2, Trash2 } from "lucide-react";
 
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from './ui/dialog';
-
-import { Badge } from './ui/badge';
-import { Button } from './ui/button';
-
+  getFirmByUserId,
+  saveFirmProfile,
+} from "@/services/firmService";
 import {
-  Building2,
-  Globe,
-  Mail,
-  MapPin,
-  MessageSquare,
-  Phone,
-  Star,
-  UserRound,
-} from 'lucide-react';
+  deleteLogo,
+  uploadLogo,
+} from "@/services/storageService";
+import { categories } from "@/data/categories";
 
-import type { Firm } from '../data/types';
-import type { AttorneyProfile } from '../data/attorneyTypes';
-
-import { categories } from '../data/categories';
-import { ReviewForm } from './ReviewForm';
-import { supabase } from '@/lib/supabase';
-
-interface Review {
-  id: string;
-  reviewer_name: string;
-  rating: number;
-  title: string;
-  comment: string;
-  created_at: string;
-}
-
-interface FirmModalProps {
-  firm: Firm | null;
-  open: boolean;
-  onClose: () => void;
-}
-
-type PublicFirm = Firm & {
-  description?: string | null;
-  blurb?: string | null;
-  logo?: string | null;
-  logo_url?: string | null;
-  is_featured?: boolean | null;
-  featured?: boolean | null;
-  is_verified?: boolean | null;
-  specialties?: string[] | null;
+type FormState = {
+  name: string;
+  description: string;
+  address: string;
+  city: string;
+  state: string;
+  zip_code: string;
+  phone: string;
+  email: string;
+  website: string;
+  practiceAreas: string[];
+  years_experience: string;
+  team_size: string;
+  consultation_fee: string;
+  logo_url: string;
 };
 
-export default function FirmModal({
-  firm,
-  open,
-  onClose,
-}: FirmModalProps) {
-  const navigate = useNavigate();
+const EMPTY_FORM: FormState = {
+  name: "",
+  description: "",
+  address: "",
+  city: "El Paso",
+  state: "TX",
+  zip_code: "",
+  phone: "",
+  email: "",
+  website: "",
+  practiceAreas: [],
+  years_experience: "",
+  team_size: "",
+  consultation_fee: "",
+  logo_url: "",
+};
 
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const [attorneys, setAttorneys] = useState<AttorneyProfile[]>([]);
-  const [showReviewForm, setShowReviewForm] = useState(false);
-  const [loadingAttorneys, setLoadingAttorneys] = useState(false);
+const toText = (value: unknown): string => {
+  if (value === null || value === undefined) return "";
+  return String(value);
+};
+
+const normalizePracticeAreas = (value: unknown): string[] => {
+  let storedValues: string[] = [];
+
+  if (Array.isArray(value)) {
+    storedValues = value
+      .map(String)
+      .map((item) => item.trim())
+      .filter(Boolean);
+  } else if (typeof value === "string") {
+    storedValues = value
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean);
+  }
+
+  const normalized = storedValues.map((storedValue) => {
+    const match = categories.find(
+      (category) =>
+        category.slug.toLowerCase() === storedValue.toLowerCase() ||
+        category.title.toLowerCase() === storedValue.toLowerCase()
+    );
+
+    return match?.slug || storedValue;
+  });
+
+  return Array.from(new Set(normalized));
+};
+
+const cleanInteger = (value: string): string => {
+  const digits = value.replace(/\D/g, "");
+  return digits ? digits.replace(/^0+(?=\d)/, "") : "";
+};
+
+const cleanMoney = (value: string): string => {
+  const cleaned = value.replace(/[^\d.]/g, "");
+  const decimalPosition = cleaned.indexOf(".");
+
+  if (decimalPosition < 0) {
+    return cleaned.replace(/^0+(?=\d)/, "");
+  }
+
+  const wholeNumber =
+    cleaned
+      .slice(0, decimalPosition)
+      .replace(/^0+(?=\d)/, "") || "0";
+
+  const decimals = cleaned
+    .slice(decimalPosition + 1)
+    .replace(/\./g, "")
+    .slice(0, 2);
+
+  return `${wholeNumber}.${decimals}`;
+};
+
+const normalizeWebsite = (value: string): string | null => {
+  const trimmed = value.trim();
+
+  if (!trimmed) return null;
+
+  return /^https?:\/\//i.test(trimmed)
+    ? trimmed
+    : `https://${trimmed}`;
+};
+
+const optionalNumber = (value: string): number | null => {
+  if (!value.trim()) return null;
+
+  const parsed = Number(value);
+
+  return Number.isFinite(parsed) && parsed >= 0
+    ? parsed
+    : null;
+};
+
+export const ProfileEditor = () => {
+  const { user } = useAuth();
+
+  const [form, setForm] = useState<FormState>(EMPTY_FORM);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
+
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState<
+    "success" | "error" | ""
+  >("");
+
+  const setField = (
+    field: Exclude<keyof FormState, "practiceAreas">,
+    value: string
+  ) => {
+    setForm((current) => ({
+      ...current,
+      [field]: value,
+    }));
+  };
 
   useEffect(() => {
-    if (!firm?.id || !open) return;
+    let isActive = true;
 
-    void fetchReviews();
-    void fetchAttorneys();
-  }, [firm?.id, open]);
+    const loadFirmProfile = async () => {
+      if (!user) {
+        setLoading(false);
+        return;
+      }
 
-  const fetchReviews = async () => {
-    if (!firm?.id) return;
+      setLoading(true);
 
-    const { data, error } = await supabase
-      .from('reviews')
-      .select('*')
-      .eq('firm_id', firm.id)
-      .eq('is_approved', true)
-      .order('created_at', { ascending: false });
+      const { data, error } = await getFirmByUserId(user.id);
 
-    if (error) {
-      console.error('Failed to load reviews:', error);
-      setReviews([]);
+      if (!isActive) return;
+
+      if (error) {
+        setMessage(error.message || "Could not load the firm profile.");
+        setMessageType("error");
+        setLoading(false);
+        return;
+      }
+
+      if (data) {
+        setForm({
+          name: toText(data.name),
+          description: toText(data.description),
+          address: toText(data.address),
+          city: toText(data.city) || "El Paso",
+          state: toText(data.state) || "TX",
+          zip_code: toText(data.zip_code),
+          phone: toText(data.phone),
+          email: toText(data.email) || user.email || "",
+          website: toText(data.website),
+          practiceAreas: normalizePracticeAreas(data.specialties),
+          years_experience: toText(data.years_experience),
+          team_size: toText(data.team_size),
+          consultation_fee: toText(data.consultation_fee),
+          logo_url: toText(data.logo_url),
+        });
+      } else {
+        setForm({
+          ...EMPTY_FORM,
+          email: user.email || "",
+        });
+      }
+
+      setLoading(false);
+    };
+
+    void loadFirmProfile();
+
+    return () => {
+      isActive = false;
+    };
+  }, [user]);
+
+  const togglePracticeArea = (slug: string) => {
+    setForm((current) => {
+      const isSelected = current.practiceAreas.includes(slug);
+
+      return {
+        ...current,
+        practiceAreas: isSelected
+          ? current.practiceAreas.filter((item) => item !== slug)
+          : [...current.practiceAreas, slug],
+      };
+    });
+  };
+
+  const selectedPracticeAreas = useMemo(() => {
+    return form.practiceAreas.map((slug) => {
+      const category = categories.find((item) => item.slug === slug);
+
+      return {
+        slug,
+        title: category?.title || slug,
+      };
+    });
+  }, [form.practiceAreas]);
+
+  const saveProfile = async () => {
+    setMessage("");
+    setMessageType("");
+
+    if (!user) {
+      setMessage("You must be signed in before saving.");
+      setMessageType("error");
       return;
     }
 
-    setReviews(data ?? []);
-  };
-
-  const fetchAttorneys = async () => {
-    if (!firm?.id) return;
-
-    setLoadingAttorneys(true);
-
-    const { data, error } = await supabase
-      .from('attorney_profiles')
-      .select('*')
-      .eq('firm_id', firm.id)
-      .eq('is_active', true)
-      .order('display_order', { ascending: true });
-
-    if (error) {
-      console.error('Failed to load attorneys:', error);
-      setAttorneys([]);
-      setLoadingAttorneys(false);
+    if (form.name.trim().length < 3) {
+      setMessage("Firm name must be at least 3 characters.");
+      setMessageType("error");
       return;
     }
 
-    setAttorneys((data ?? []) as AttorneyProfile[]);
-    setLoadingAttorneys(false);
+    if (form.practiceAreas.length === 0) {
+      setMessage("Select at least one practice area.");
+      setMessageType("error");
+      return;
+    }
+
+    setSaving(true);
+
+    const { data, error } = await saveFirmProfile(user.id, {
+      name: form.name.trim(),
+      description: form.description.trim() || null,
+      address: form.address.trim() || null,
+      city: form.city.trim() || "El Paso",
+      state: form.state.trim().toUpperCase() || "TX",
+      zip_code: form.zip_code.trim() || null,
+      phone: form.phone.trim() || null,
+      email: form.email.trim() || null,
+      website: normalizeWebsite(form.website),
+
+      // Public profile and search should use this array.
+      specialties: form.practiceAreas,
+
+      years_experience: optionalNumber(form.years_experience),
+      team_size: optionalNumber(form.team_size),
+      consultation_fee: optionalNumber(form.consultation_fee),
+      logo_url: form.logo_url || null,
+    });
+
+    setSaving(false);
+
+    if (error) {
+      setMessage(
+        [error.message, error.details, error.hint, error.code]
+          .filter(Boolean)
+          .join(" — ") || "The profile could not be saved."
+      );
+      setMessageType("error");
+      return;
+    }
+
+    if (!data) {
+      setMessage("The database did not return the saved profile.");
+      setMessageType("error");
+      return;
+    }
+
+    setForm((current) => ({
+      ...current,
+      name: toText(data.name) || current.name,
+      description: toText(data.description),
+      address: toText(data.address),
+      city: toText(data.city) || "El Paso",
+      state: toText(data.state) || "TX",
+      zip_code: toText(data.zip_code),
+      phone: toText(data.phone),
+      email: toText(data.email),
+      website: toText(data.website),
+      practiceAreas: normalizePracticeAreas(data.specialties),
+      years_experience: toText(data.years_experience),
+      team_size: toText(data.team_size),
+      consultation_fee: toText(data.consultation_fee),
+      logo_url: toText(data.logo_url),
+    }));
+
+    setMessage("Profile saved successfully.");
+    setMessageType("success");
   };
 
-  const averageRating = useMemo(() => {
-    if (reviews.length === 0) return null;
+  const uploadFirmLogo = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files?.[0];
 
-    const total = reviews.reduce(
-      (sum, review) => sum + review.rating,
-      0
+    if (!file || !user) return;
+
+    setUploading(true);
+
+    const { url, error } = await uploadLogo(file, user.id);
+
+    setUploading(false);
+    event.target.value = "";
+
+    if (error || !url) {
+      setMessage(error?.message || "Logo upload failed.");
+      setMessageType("error");
+      return;
+    }
+
+    setField("logo_url", url);
+    setMessage("Logo uploaded. Click Save Profile to keep it.");
+    setMessageType("success");
+  };
+
+  const removeFirmLogo = async () => {
+    if (!form.logo_url) return;
+
+    setUploading(true);
+
+    const { error } = await deleteLogo(form.logo_url);
+
+    setUploading(false);
+
+    if (error) {
+      setMessage(error.message || "Logo deletion failed.");
+      setMessageType("error");
+      return;
+    }
+
+    setField("logo_url", "");
+    setMessage("Logo removed. Click Save Profile to keep the change.");
+    setMessageType("success");
+  };
+
+  if (loading) {
+    return (
+      <Card>
+        <CardContent className="flex justify-center py-16">
+          <Loader2 className="h-8 w-8 animate-spin" />
+        </CardContent>
+      </Card>
     );
-
-    return (total / reviews.length).toFixed(1);
-  }, [reviews]);
-
-  if (!firm) return null;
-
-  const publicFirm = firm as PublicFirm;
-
-  const firmDescription =
-    publicFirm.description?.trim() ||
-    publicFirm.blurb?.trim() ||
-    '';
-
-  const firmLogo =
-    publicFirm.logo_url ||
-    publicFirm.logo ||
-    '';
-
-  const isFeatured =
-    Boolean(publicFirm.is_featured) ||
-    Boolean(publicFirm.featured);
-
-  const isVerified =
-    Boolean(publicFirm.is_verified);
-
-  const storedPracticeAreas =
-    publicFirm.specialties?.length
-      ? publicFirm.specialties
-      : firm.categories || [];
-
-  const firmCategories = categories.filter((category) =>
-    storedPracticeAreas.some(
-      (storedValue) =>
-        storedValue.toLowerCase() === category.slug.toLowerCase() ||
-        storedValue.toLowerCase() === category.title.toLowerCase()
-    )
-  );
-
-  const addressParts = [
-    firm.address,
-    firm.city,
-    firm.state,
-    firm.zip,
-  ].filter(Boolean);
-
-  const fullAddress = addressParts.join(', ');
-
-  const openWebsite = () => {
-    if (!firm.website) return;
-
-    const website = firm.website.startsWith('http')
-      ? firm.website
-      : `https://${firm.website}`;
-
-    window.open(
-      website,
-      '_blank',
-      'noopener,noreferrer'
-    );
-  };
-
-  const openDirections = () => {
-    if (!fullAddress) return;
-
-    const directionsUrl =
-      `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-        fullAddress
-      )}`;
-
-    window.open(
-      directionsUrl,
-      '_blank',
-      'noopener,noreferrer'
-    );
-  };
-
-  const openAttorneyProfile = (attorneyId: string) => {
-    onClose();
-    navigate(`/attorney/${attorneyId}`);
-  };
+  }
 
   return (
-    <Dialog
-      open={open}
-      onOpenChange={(nextOpen) => {
-        if (!nextOpen) onClose();
-      }}
-    >
-      <DialogContent className="max-h-[92vh] max-w-6xl overflow-y-auto p-0">
-        <DialogHeader className="sr-only">
-          <DialogTitle>{firm.name}</DialogTitle>
+    <Card>
+      <CardHeader>
+        <CardTitle>Edit Firm Profile</CardTitle>
+      </CardHeader>
 
-          <DialogDescription>
-            View firm information, attorneys, practice areas,
-            contact options, and client reviews.
-          </DialogDescription>
-        </DialogHeader>
+      <CardContent>
+        <div className="space-y-8">
+          {message && (
+            <div
+              className={`rounded-md border p-3 text-sm ${
+                messageType === "error"
+                  ? "border-red-300 bg-red-50 text-red-800"
+                  : "border-green-300 bg-green-50 text-green-800"
+              }`}
+            >
+              {message}
+            </div>
+          )}
 
-        <section className="bg-gradient-to-r from-[#0F2A43] via-[#176B78] to-[#1FA8A1] px-6 py-8 text-white sm:px-8">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
-            {firmLogo ? (
-              <img
-                src={firmLogo}
-                alt={`${firm.name} logo`}
-                className="h-28 w-28 shrink-0 rounded-2xl border-4 border-white bg-white object-cover shadow-lg"
-              />
-            ) : (
-              <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-2xl border-4 border-white/80 bg-white/10 shadow-lg">
-                <Building2 className="h-14 w-14 text-white" />
-              </div>
-            )}
+          <section className="space-y-3">
+            <Label htmlFor="firm-logo">Firm Logo</Label>
 
-            <div className="min-w-0 flex-1">
-              <div className="mb-3 flex flex-wrap gap-2">
-                {firm.plan && (
-                  <Badge className="border border-white/30 bg-white/90 text-[#0F2A43]">
-                    {firm.plan}
-                  </Badge>
-                )}
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+              {form.logo_url ? (
+                <div className="relative w-fit">
+                  <img
+                    src={form.logo_url}
+                    alt="Firm logo preview"
+                    className="h-28 w-28 rounded-xl border bg-white object-cover shadow-sm"
+                  />
 
-                {isFeatured && (
-                  <Badge className="bg-[#F5B800] text-[#0F2A43]">
-                    <Star className="mr-1 h-3.5 w-3.5 fill-current" />
-                    Featured Firm
-                  </Badge>
-                )}
-
-                {isVerified && (
-                  <Badge className="border border-white/30 bg-white/15 text-white">
-                    Verified Listing
-                  </Badge>
-                )}
-              </div>
-
-              <h2 className="text-3xl font-bold leading-tight sm:text-4xl">
-                {firm.name}
-              </h2>
-
-              {averageRating && (
-                <div className="mt-3 flex flex-wrap items-center gap-2">
-                  <div className="flex">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star
-                        key={star}
-                        className="h-5 w-5 fill-[#F5B800] text-[#F5B800]"
-                      />
-                    ))}
-                  </div>
-
-                  <span className="font-semibold">
-                    {averageRating}
-                  </span>
-
-                  <span className="text-white/80">
-                    ({reviews.length}{' '}
-                    {reviews.length === 1 ? 'review' : 'reviews'})
-                  </span>
+                  <button
+                    type="button"
+                    onClick={removeFirmLogo}
+                    disabled={uploading}
+                    className="absolute -right-2 -top-2 rounded-full bg-red-600 p-1.5 text-white shadow"
+                    aria-label="Remove firm logo"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                </div>
+              ) : (
+                <div className="flex h-28 w-28 items-center justify-center rounded-xl border border-dashed bg-gray-50 text-center text-xs text-gray-500">
+                  No logo
+                  <br />
+                  uploaded
                 </div>
               )}
 
-              {fullAddress && (
-                <p className="mt-4 flex items-start gap-2 text-white/90">
-                  <MapPin className="mt-0.5 h-5 w-5 shrink-0" />
-                  <span>{fullAddress}</span>
+              <div className="flex-1">
+                <Input
+                  id="firm-logo"
+                  type="file"
+                  accept="image/png,image/jpeg,image/webp"
+                  onChange={uploadFirmLogo}
+                  disabled={uploading}
+                />
+
+                <p className="mt-2 text-xs text-gray-500">
+                  Upload a PNG, JPG, or WebP logo.
                 </p>
-              )}
-            </div>
-          </div>
-        </section>
-
-        <div className="space-y-8 px-6 py-7 sm:px-8">
-          <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {firm.phone && (
-              <Button
-                type="button"
-                className="h-12 bg-[#1FA8A1] text-base hover:bg-[#178D87]"
-                onClick={() =>
-                  window.location.assign(`tel:${firm.phone}`)
-                }
-              >
-                <Phone className="mr-2 h-5 w-5" />
-                Call Firm
-              </Button>
-            )}
-
-            {firm.email && (
-              <Button
-                type="button"
-                variant="outline"
-                className="h-12 text-base"
-                onClick={() =>
-                  window.location.assign(`mailto:${firm.email}`)
-                }
-              >
-                <Mail className="mr-2 h-5 w-5" />
-                Email Firm
-              </Button>
-            )}
-
-            {firm.website && (
-              <Button
-                type="button"
-                variant="outline"
-                className="h-12 text-base"
-                onClick={openWebsite}
-              >
-                <Globe className="mr-2 h-5 w-5" />
-                Visit Website
-              </Button>
-            )}
-
-            {fullAddress && (
-              <Button
-                type="button"
-                variant="outline"
-                className="h-12 text-base"
-                onClick={openDirections}
-              >
-                <MapPin className="mr-2 h-5 w-5" />
-                Directions
-              </Button>
-            )}
-          </section>
-
-          <section className="grid gap-6 lg:grid-cols-[1.6fr_0.8fr]">
-            <div className="rounded-2xl border bg-white p-6 shadow-sm">
-              <h3 className="mb-4 text-2xl font-bold text-[#0F2A43]">
-                About the Firm
-              </h3>
-
-              {firmDescription ? (
-                <p className="whitespace-pre-line text-base leading-7 text-gray-600">
-                  {firmDescription}
-                </p>
-              ) : (
-                <p className="text-gray-500">
-                  This firm has not added a full description yet.
-                </p>
-              )}
-            </div>
-
-            <aside className="rounded-2xl border bg-gray-50 p-6">
-              <h3 className="mb-4 text-xl font-bold text-[#0F2A43]">
-                Firm Information
-              </h3>
-
-              <div className="space-y-4 text-sm">
-                {firm.phone && (
-                  <a
-                    href={`tel:${firm.phone}`}
-                    className="flex items-start gap-3 text-gray-700 hover:text-[#1FA8A1]"
-                  >
-                    <Phone className="mt-0.5 h-5 w-5 shrink-0 text-[#1FA8A1]" />
-                    <span>{firm.phone}</span>
-                  </a>
-                )}
-
-                {firm.email && (
-                  <a
-                    href={`mailto:${firm.email}`}
-                    className="flex items-start gap-3 break-all text-gray-700 hover:text-[#1FA8A1]"
-                  >
-                    <Mail className="mt-0.5 h-5 w-5 shrink-0 text-[#1FA8A1]" />
-                    <span>{firm.email}</span>
-                  </a>
-                )}
-
-                {firm.website && (
-                  <button
-                    type="button"
-                    onClick={openWebsite}
-                    className="flex items-start gap-3 text-left text-gray-700 hover:text-[#1FA8A1]"
-                  >
-                    <Globe className="mt-0.5 h-5 w-5 shrink-0 text-[#1FA8A1]" />
-                    <span className="break-all">
-                      {firm.website}
-                    </span>
-                  </button>
-                )}
-
-                {fullAddress && (
-                  <button
-                    type="button"
-                    onClick={openDirections}
-                    className="flex items-start gap-3 text-left text-gray-700 hover:text-[#1FA8A1]"
-                  >
-                    <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-[#1FA8A1]" />
-                    <span>{fullAddress}</span>
-                  </button>
-                )}
               </div>
-            </aside>
+            </div>
           </section>
 
-          <section className="rounded-2xl border bg-white p-6 shadow-sm">
-            <h3 className="mb-4 text-2xl font-bold text-[#0F2A43]">
-              Practice Areas
+          <section className="grid gap-5 md:grid-cols-2">
+            <Field
+              label="Firm Name *"
+              id="name"
+              value={form.name}
+              onChange={(value) => setField("name", value)}
+              wide
+            />
+
+            <div className="space-y-2 md:col-span-2">
+              <Label htmlFor="description">About Your Firm</Label>
+
+              <Textarea
+                id="description"
+                value={form.description}
+                onChange={(event) =>
+                  setField("description", event.target.value)
+                }
+                rows={6}
+                placeholder="Describe your firm, experience, clients served, and approach to representation."
+              />
+            </div>
+
+            <Field
+              label="Street Address"
+              id="address"
+              value={form.address}
+              onChange={(value) => setField("address", value)}
+              wide
+            />
+
+            <Field
+              label="City"
+              id="city"
+              value={form.city}
+              onChange={(value) => setField("city", value)}
+            />
+
+            <Field
+              label="State"
+              id="state"
+              value={form.state}
+              onChange={(value) =>
+                setField(
+                  "state",
+                  value
+                    .replace(/[^a-z]/gi, "")
+                    .slice(0, 2)
+                    .toUpperCase()
+                )
+              }
+            />
+
+            <Field
+              label="ZIP Code"
+              id="zip_code"
+              value={form.zip_code}
+              onChange={(value) =>
+                setField(
+                  "zip_code",
+                  value.replace(/\D/g, "").slice(0, 5)
+                )
+              }
+              inputMode="numeric"
+            />
+
+            <Field
+              label="Phone"
+              id="phone"
+              value={form.phone}
+              onChange={(value) => setField("phone", value)}
+            />
+
+            <Field
+              label="Email"
+              id="email"
+              value={form.email}
+              onChange={(value) => setField("email", value)}
+              type="email"
+            />
+
+            <Field
+              label="Website"
+              id="website"
+              value={form.website}
+              onChange={(value) => setField("website", value)}
+              wide
+            />
+          </section>
+
+          <section className="rounded-xl border bg-gray-50 p-5">
+            <h3 className="text-lg font-bold text-gray-900">
+              Practice Areas *
             </h3>
 
-            {firmCategories.length > 0 ? (
-              <div className="flex flex-wrap gap-3">
-                {firmCategories.map((category) => (
-                  <Badge
+            <p className="mt-1 text-sm text-gray-600">
+              Select every practice area offered by your firm.
+            </p>
+
+            <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {categories.map((category) => {
+                const isSelected = form.practiceAreas.includes(
+                  category.slug
+                );
+
+                return (
+                  <button
                     key={category.id}
-                    variant="secondary"
-                    className="rounded-full px-4 py-2 text-sm"
+                    type="button"
+                    onClick={() =>
+                      togglePracticeArea(category.slug)
+                    }
+                    aria-pressed={isSelected}
+                    className={`flex items-center justify-between rounded-lg border px-4 py-3 text-left text-sm font-medium transition ${
+                      isSelected
+                        ? "border-[#1FA8A1] bg-[#1FA8A1]/10 text-[#0F2A43]"
+                        : "border-gray-200 bg-white text-gray-700 hover:border-[#1FA8A1]/60"
+                    }`}
                   >
-                    {category.title}
-                  </Badge>
-                ))}
-              </div>
-            ) : (
-              <p className="text-gray-500">
-                No practice areas have been added yet.
-              </p>
-            )}
-          </section>
+                    <span>{category.title}</span>
 
-          <section>
-            <div className="mb-5 flex items-center justify-between gap-4">
-              <h3 className="flex items-center gap-2 text-2xl font-bold text-[#0F2A43]">
-                <UserRound className="h-6 w-6" />
-                Attorneys ({attorneys.length})
-              </h3>
-            </div>
-
-            {loadingAttorneys ? (
-              <div className="rounded-2xl border p-8 text-center text-gray-500">
-                Loading attorneys...
-              </div>
-            ) : attorneys.length === 0 ? (
-              <div className="rounded-2xl border p-8 text-center text-gray-500">
-                No attorney profiles have been added yet.
-              </div>
-            ) : (
-              <div className="grid gap-5">
-                {attorneys.map((attorney) => (
-                  <article
-                    key={attorney.id}
-                    className="rounded-2xl border bg-white p-5 shadow-sm transition hover:border-[#1FA8A1]/50 hover:shadow-md"
-                  >
-                    <div className="flex flex-col gap-5 sm:flex-row">
-                      {attorney.photo_url ? (
-                        <img
-                          src={attorney.photo_url}
-                          alt={attorney.name}
-                          className="h-28 w-28 shrink-0 rounded-2xl object-cover"
-                        />
-                      ) : (
-                        <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-2xl bg-gray-100 text-4xl font-bold text-gray-400">
-                          {attorney.name.charAt(0).toUpperCase()}
-                        </div>
+                    <span
+                      className={`flex h-5 w-5 items-center justify-center rounded border ${
+                        isSelected
+                          ? "border-[#1FA8A1] bg-[#1FA8A1] text-white"
+                          : "border-gray-300"
+                      }`}
+                    >
+                      {isSelected && (
+                        <Check className="h-3.5 w-3.5" />
                       )}
-
-                      <div className="min-w-0 flex-1">
-                        <h4 className="text-xl font-bold text-[#0F2A43]">
-                          {attorney.name}
-                        </h4>
-
-                        {attorney.title && (
-                          <p className="mt-1 font-medium text-gray-600">
-                            {attorney.title}
-                          </p>
-                        )}
-
-                        {attorney.bio && (
-                          <p className="mt-3 line-clamp-4 leading-6 text-gray-600">
-                            {attorney.bio}
-                          </p>
-                        )}
-
-                        {attorney.specialties?.length > 0 && (
-                          <div className="mt-4 flex flex-wrap gap-2">
-                            {attorney.specialties.map(
-                              (specialty, index) => (
-                                <Badge
-                                  key={`${specialty}-${index}`}
-                                  variant="secondary"
-                                  className="rounded-full"
-                                >
-                                  {specialty}
-                                </Badge>
-                              )
-                            )}
-                          </div>
-                        )}
-
-                        <div className="mt-5 flex flex-wrap gap-3">
-                          {attorney.email && (
-                            <Button
-                              type="button"
-                              variant="outline"
-                              size="sm"
-                              asChild
-                            >
-                              <a href={`mailto:${attorney.email}`}>
-                                <Mail className="mr-2 h-4 w-4" />
-                                Email
-                              </a>
-                            </Button>
-                          )}
-
-                          {attorney.phone && (
-                            <Button
-                              type="button"
-                              variant="outline"
-                              size="sm"
-                              asChild
-                            >
-                              <a href={`tel:${attorney.phone}`}>
-                                <Phone className="mr-2 h-4 w-4" />
-                                Call
-                              </a>
-                            </Button>
-                          )}
-
-                          {attorney.linkedin_url && (
-                            <Button
-                              type="button"
-                              variant="outline"
-                              size="sm"
-                              asChild
-                            >
-                              <a
-                                href={
-                                  attorney.linkedin_url.startsWith(
-                                    'http'
-                                  )
-                                    ? attorney.linkedin_url
-                                    : `https://${attorney.linkedin_url}`
-                                }
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                LinkedIn
-                              </a>
-                            </Button>
-                          )}
-
-                          <Button
-                            type="button"
-                            size="sm"
-                            className="bg-[#1FA8A1] hover:bg-[#178D87]"
-                            onClick={() =>
-                              openAttorneyProfile(attorney.id)
-                            }
-                          >
-                            View Full Profile
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            )}
-          </section>
-
-          <section className="rounded-2xl border bg-white p-6 shadow-sm">
-            <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
-              <h3 className="flex items-center gap-2 text-2xl font-bold text-[#0F2A43]">
-                <MessageSquare className="h-6 w-6" />
-                Client Reviews ({reviews.length})
-              </h3>
-
-              <Button
-                type="button"
-                onClick={() =>
-                  setShowReviewForm((current) => !current)
-                }
-              >
-                {showReviewForm ? 'Cancel' : 'Write a Review'}
-              </Button>
+                    </span>
+                  </button>
+                );
+              })}
             </div>
 
-            {showReviewForm && (
-              <div className="mb-6 rounded-xl border bg-gray-50 p-4">
-                <ReviewForm
-                  firmId={firm.id}
-                  firmName={firm.name}
-                  onSuccess={() => {
-                    setShowReviewForm(false);
-                    void fetchReviews();
-                  }}
-                />
-              </div>
-            )}
+            {selectedPracticeAreas.length > 0 && (
+              <div className="mt-5 border-t pt-4">
+                <p className="mb-3 text-sm font-medium text-gray-700">
+                  Selected practice areas:
+                </p>
 
-            {reviews.length === 0 ? (
-              <div className="rounded-xl border border-dashed p-8 text-center text-gray-500">
-                No approved reviews yet.
-              </div>
-            ) : (
-              <div className="grid gap-4 md:grid-cols-2">
-                {reviews.map((review) => (
-                  <article
-                    key={review.id}
-                    className="rounded-xl border bg-gray-50 p-5"
-                  >
-                    <div className="mb-3 flex">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <Star
-                          key={star}
-                          className={`h-5 w-5 ${
-                            review.rating >= star
-                              ? 'fill-[#F5B800] text-[#F5B800]'
-                              : 'text-gray-300'
-                          }`}
-                        />
-                      ))}
-                    </div>
-
-                    {review.title && (
-                      <h4 className="font-bold text-[#0F2A43]">
-                        {review.title}
-                      </h4>
-                    )}
-
-                    <p className="mt-2 leading-6 text-gray-600">
-                      {review.comment}
-                    </p>
-
-                    <div className="mt-4 border-t pt-3">
-                      <p className="font-medium text-gray-800">
-                        {review.reviewer_name}
-                      </p>
-
-                      <p className="text-xs text-gray-500">
-                        {new Date(
-                          review.created_at
-                        ).toLocaleDateString()}
-                      </p>
-                    </div>
-                  </article>
-                ))}
+                <div className="flex flex-wrap gap-2">
+                  {selectedPracticeAreas.map((practiceArea) => (
+                    <Badge
+                      key={practiceArea.slug}
+                      variant="secondary"
+                      className="rounded-full px-3 py-1"
+                    >
+                      {practiceArea.title}
+                    </Badge>
+                  ))}
+                </div>
               </div>
             )}
           </section>
+
+          <section className="grid gap-5 md:grid-cols-3">
+            <Field
+              label="Years of Experience"
+              id="years_experience"
+              value={form.years_experience}
+              onChange={(value) =>
+                setField("years_experience", cleanInteger(value))
+              }
+              inputMode="numeric"
+            />
+
+            <Field
+              label="Team Size"
+              id="team_size"
+              value={form.team_size}
+              onChange={(value) =>
+                setField("team_size", cleanInteger(value))
+              }
+              inputMode="numeric"
+            />
+
+            <Field
+              label="Consultation Fee ($)"
+              id="consultation_fee"
+              value={form.consultation_fee}
+              onChange={(value) =>
+                setField("consultation_fee", cleanMoney(value))
+              }
+              inputMode="decimal"
+            />
+          </section>
+
+          <Button
+            type="button"
+            onClick={saveProfile}
+            disabled={saving || uploading}
+            className="h-12 w-full bg-[#1FA8A1] text-base font-semibold hover:bg-[#178D87]"
+          >
+            {saving ? (
+              <>
+                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                Saving Profile...
+              </>
+            ) : (
+              "Save Profile"
+            )}
+          </Button>
         </div>
-      </DialogContent>
-    </Dialog>
+      </CardContent>
+    </Card>
   );
-}
+};
+
+type FieldProps = {
+  label: string;
+  id: string;
+  value: string;
+  onChange: (value: string) => void;
+  type?: string;
+  inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
+  wide?: boolean;
+};
+
+const Field = ({
+  label,
+  id,
+  value,
+  onChange,
+  type = "text",
+  inputMode,
+  wide,
+}: FieldProps) => (
+  <div className={`space-y-2 ${wide ? "md:col-span-2" : ""}`}>
+    <Label htmlFor={id}>{label}</Label>
+
+    <Input
+      id={id}
+      type={type}
+      inputMode={inputMode}
+      value={value}
+      onChange={(event) => onChange(event.target.value)}
+    />
+  </div>
+);export default FirmModal;
