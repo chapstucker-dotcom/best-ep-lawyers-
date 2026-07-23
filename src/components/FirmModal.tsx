@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   Dialog,
@@ -7,10 +7,9 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from './ui/dialog';
-
-import { Badge } from './ui/badge';
-import { Button } from './ui/button';
+} from "./ui/dialog";
+import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
 
 import {
   Building2,
@@ -21,14 +20,14 @@ import {
   Phone,
   Star,
   UserRound,
-} from 'lucide-react';
+} from "lucide-react";
 
-import type { Firm } from '../data/types';
-import type { AttorneyProfile } from '../data/attorneyTypes';
+import type { Firm } from "../data/types";
+import type { AttorneyProfile } from "../data/attorneyTypes";
 
-import { categories } from '../data/categories';
-import { ReviewForm } from './ReviewForm';
-import { supabase } from '@/lib/supabase';
+import { categories } from "../data/categories";
+import { ReviewForm } from "./ReviewForm";
+import { supabase } from "@/lib/supabase";
 
 interface Review {
   id: string;
@@ -50,10 +49,12 @@ type PublicFirm = Firm & {
   blurb?: string | null;
   logo?: string | null;
   logo_url?: string | null;
+  specialties?: string[] | null;
+  categories?: string[] | null;
   is_featured?: boolean | null;
   featured?: boolean | null;
   is_verified?: boolean | null;
-  specialties?: string[] | null;
+  zip_code?: string | null;
 };
 
 function FirmModal({
@@ -68,49 +69,49 @@ function FirmModal({
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [loadingAttorneys, setLoadingAttorneys] = useState(false);
 
+  const loadReviews = async (firmId: string) => {
+    const { data, error } = await supabase
+      .from("reviews")
+      .select("*")
+      .eq("firm_id", firmId)
+      .eq("is_approved", true)
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Failed to load reviews:", error);
+      setReviews([]);
+      return;
+    }
+
+    setReviews((data ?? []) as Review[]);
+  };
+
+  const loadAttorneys = async (firmId: string) => {
+    setLoadingAttorneys(true);
+
+    const { data, error } = await supabase
+      .from("attorney_profiles")
+      .select("*")
+      .eq("firm_id", firmId)
+      .eq("is_active", true)
+      .order("display_order", { ascending: true });
+
+    if (error) {
+      console.error("Failed to load attorneys:", error);
+      setAttorneys([]);
+      setLoadingAttorneys(false);
+      return;
+    }
+
+    setAttorneys((data ?? []) as AttorneyProfile[]);
+    setLoadingAttorneys(false);
+  };
+
   useEffect(() => {
     if (!firm?.id || !open) return;
 
-    const fetchReviews = async () => {
-      const { data, error } = await supabase
-        .from('reviews')
-        .select('*')
-        .eq('firm_id', firm.id)
-        .eq('is_approved', true)
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        console.error('Failed to load reviews:', error);
-        setReviews([]);
-        return;
-      }
-
-      setReviews((data ?? []) as Review[]);
-    };
-
-    const fetchAttorneys = async () => {
-      setLoadingAttorneys(true);
-
-      const { data, error } = await supabase
-        .from('attorney_profiles')
-        .select('*')
-        .eq('firm_id', firm.id)
-        .eq('is_active', true)
-        .order('display_order', { ascending: true });
-
-      if (error) {
-        console.error('Failed to load attorneys:', error);
-        setAttorneys([]);
-        setLoadingAttorneys(false);
-        return;
-      }
-
-      setAttorneys((data ?? []) as AttorneyProfile[]);
-      setLoadingAttorneys(false);
-    };
-
-    void fetchReviews();
-    void fetchAttorneys();
+    void loadReviews(firm.id);
+    void loadAttorneys(firm.id);
   }, [firm?.id, open]);
 
   const averageRating = useMemo(() => {
@@ -131,49 +132,83 @@ function FirmModal({
   const firmDescription =
     publicFirm.description?.trim() ||
     publicFirm.blurb?.trim() ||
-    '';
+    "";
 
   const firmLogo =
-    publicFirm.logo_url ||
-    publicFirm.logo ||
-    '';
+    publicFirm.logo_url?.trim() ||
+    publicFirm.logo?.trim() ||
+    "";
 
   const isFeatured =
     Boolean(publicFirm.is_featured) ||
     Boolean(publicFirm.featured);
 
-  const isVerified = Boolean(publicFirm.is_verified);
+  const isVerified =
+    Boolean(publicFirm.is_verified);
 
-  const storedPracticeAreas =
+  const rawPracticeAreas =
     publicFirm.specialties?.length
       ? publicFirm.specialties
-      : firm.categories || [];
+      : publicFirm.categories ?? [];
 
-  const firmCategories = categories.filter((category) =>
-    storedPracticeAreas.some(
+  const normalizedPracticeAreas = rawPracticeAreas
+    .map((value) => String(value).trim())
+    .filter(Boolean);
+
+  const matchedCategories = categories.filter((category) =>
+    normalizedPracticeAreas.some(
       (storedValue) =>
         storedValue.toLowerCase() === category.slug.toLowerCase() ||
         storedValue.toLowerCase() === category.title.toLowerCase()
     )
   );
 
+  const unmatchedPracticeAreas = normalizedPracticeAreas.filter(
+    (storedValue) =>
+      !categories.some(
+        (category) =>
+          storedValue.toLowerCase() === category.slug.toLowerCase() ||
+          storedValue.toLowerCase() === category.title.toLowerCase()
+      )
+  );
+
+  const displayedPracticeAreas = [
+    ...matchedCategories.map((category) => ({
+      key: category.id,
+      title: category.title,
+    })),
+    ...unmatchedPracticeAreas.map((practiceArea) => ({
+      key: practiceArea,
+      title: practiceArea,
+    })),
+  ];
+
+  const zipCode =
+    publicFirm.zip_code ||
+    firm.zip ||
+    "";
+
   const addressParts = [
     firm.address,
     firm.city,
     firm.state,
-    firm.zip,
+    zipCode,
   ].filter(Boolean);
 
-  const fullAddress = addressParts.join(', ');
+  const fullAddress = addressParts.join(", ");
 
   const openWebsite = () => {
     if (!firm.website) return;
 
-    const website = firm.website.startsWith('http')
+    const websiteUrl = /^https?:\/\//i.test(firm.website)
       ? firm.website
       : `https://${firm.website}`;
 
-    window.open(website, '_blank', 'noopener,noreferrer');
+    window.open(
+      websiteUrl,
+      "_blank",
+      "noopener,noreferrer"
+    );
   };
 
   const openDirections = () => {
@@ -186,27 +221,9 @@ function FirmModal({
 
     window.open(
       directionsUrl,
-      '_blank',
-      'noopener,noreferrer'
+      "_blank",
+      "noopener,noreferrer"
     );
-  };
-
-  const refreshReviews = async () => {
-    if (!firm.id) return;
-
-    const { data, error } = await supabase
-      .from('reviews')
-      .select('*')
-      .eq('firm_id', firm.id)
-      .eq('is_approved', true)
-      .order('created_at', { ascending: false });
-
-    if (error) {
-      console.error('Failed to reload reviews:', error);
-      return;
-    }
-
-    setReviews((data ?? []) as Review[]);
   };
 
   const openAttorneyProfile = (attorneyId: string) => {
@@ -287,8 +304,8 @@ function FirmModal({
                   </span>
 
                   <span className="text-white/80">
-                    ({reviews.length}{' '}
-                    {reviews.length === 1 ? 'review' : 'reviews'})
+                    ({reviews.length}{" "}
+                    {reviews.length === 1 ? "review" : "reviews"})
                   </span>
                 </div>
               )}
@@ -432,15 +449,15 @@ function FirmModal({
               Practice Areas
             </h3>
 
-            {firmCategories.length > 0 ? (
+            {displayedPracticeAreas.length > 0 ? (
               <div className="flex flex-wrap gap-3">
-                {firmCategories.map((category) => (
+                {displayedPracticeAreas.map((practiceArea) => (
                   <Badge
-                    key={category.id}
+                    key={practiceArea.key}
                     variant="secondary"
                     className="rounded-full px-4 py-2 text-sm"
                   >
-                    {category.title}
+                    {practiceArea.title}
                   </Badge>
                 ))}
               </div>
@@ -470,7 +487,7 @@ function FirmModal({
                 {attorneys.map((attorney) => (
                   <article
                     key={attorney.id}
-                    className="rounded-2xl border bg-white p-5 shadow-sm"
+                    className="rounded-2xl border bg-white p-5 shadow-sm transition hover:border-[#1FA8A1]/50 hover:shadow-md"
                   >
                     <div className="flex flex-col gap-5 sm:flex-row">
                       {attorney.photo_url ? (
@@ -520,7 +537,12 @@ function FirmModal({
 
                         <div className="mt-5 flex flex-wrap gap-3">
                           {attorney.email && (
-                            <Button variant="outline" size="sm" asChild>
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="sm"
+                              asChild
+                            >
                               <a href={`mailto:${attorney.email}`}>
                                 <Mail className="mr-2 h-4 w-4" />
                                 Email
@@ -529,7 +551,12 @@ function FirmModal({
                           )}
 
                           {attorney.phone && (
-                            <Button variant="outline" size="sm" asChild>
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="sm"
+                              asChild
+                            >
                               <a href={`tel:${attorney.phone}`}>
                                 <Phone className="mr-2 h-4 w-4" />
                                 Call
@@ -538,10 +565,15 @@ function FirmModal({
                           )}
 
                           {attorney.linkedin_url && (
-                            <Button variant="outline" size="sm" asChild>
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="sm"
+                              asChild
+                            >
                               <a
                                 href={
-                                  attorney.linkedin_url.startsWith('http')
+                                  /^https?:\/\//i.test(attorney.linkedin_url)
                                     ? attorney.linkedin_url
                                     : `https://${attorney.linkedin_url}`
                                 }
@@ -585,7 +617,7 @@ function FirmModal({
                   setShowReviewForm((current) => !current)
                 }
               >
-                {showReviewForm ? 'Cancel' : 'Write a Review'}
+                {showReviewForm ? "Cancel" : "Write a Review"}
               </Button>
             </div>
 
@@ -596,7 +628,7 @@ function FirmModal({
                   firmName={firm.name}
                   onSuccess={() => {
                     setShowReviewForm(false);
-                    void refreshReviews();
+                    void loadReviews(firm.id);
                   }}
                 />
               </div>
@@ -619,8 +651,8 @@ function FirmModal({
                           key={star}
                           className={`h-5 w-5 ${
                             review.rating >= star
-                              ? 'fill-[#F5B800] text-[#F5B800]'
-                              : 'text-gray-300'
+                              ? "fill-[#F5B800] text-[#F5B800]"
+                              : "text-gray-300"
                           }`}
                         />
                       ))}
