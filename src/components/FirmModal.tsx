@@ -8,6 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from './ui/dialog';
+
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 
@@ -52,6 +53,7 @@ type PublicFirm = Firm & {
   is_featured?: boolean | null;
   featured?: boolean | null;
   is_verified?: boolean | null;
+  specialties?: string[] | null;
 };
 
 export default function FirmModal({
@@ -147,8 +149,17 @@ export default function FirmModal({
   const isVerified =
     Boolean(publicFirm.is_verified);
 
+  const storedPracticeAreas =
+    publicFirm.specialties?.length
+      ? publicFirm.specialties
+      : firm.categories || [];
+
   const firmCategories = categories.filter((category) =>
-    firm.categories?.includes(category.slug)
+    storedPracticeAreas.some(
+      (storedValue) =>
+        storedValue.toLowerCase() === category.slug.toLowerCase() ||
+        storedValue.toLowerCase() === category.title.toLowerCase()
+    )
   );
 
   const addressParts = [
@@ -167,7 +178,11 @@ export default function FirmModal({
       ? firm.website
       : `https://${firm.website}`;
 
-    window.open(website, '_blank', 'noopener,noreferrer');
+    window.open(
+      website,
+      '_blank',
+      'noopener,noreferrer'
+    );
   };
 
   const openDirections = () => {
@@ -207,7 +222,6 @@ export default function FirmModal({
           </DialogDescription>
         </DialogHeader>
 
-        {/* Premium header */}
         <section className="bg-gradient-to-r from-[#0F2A43] via-[#176B78] to-[#1FA8A1] px-6 py-8 text-white sm:px-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
             {firmLogo ? (
@@ -281,7 +295,6 @@ export default function FirmModal({
         </section>
 
         <div className="space-y-8 px-6 py-7 sm:px-8">
-          {/* Main actions */}
           <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {firm.phone && (
               <Button
@@ -335,7 +348,6 @@ export default function FirmModal({
             )}
           </section>
 
-          {/* Overview and quick information */}
           <section className="grid gap-6 lg:grid-cols-[1.6fr_0.8fr]">
             <div className="rounded-2xl border bg-white p-6 shadow-sm">
               <h3 className="mb-4 text-2xl font-bold text-[#0F2A43]">
@@ -406,7 +418,6 @@ export default function FirmModal({
             </aside>
           </section>
 
-          {/* Practice areas */}
           <section className="rounded-2xl border bg-white p-6 shadow-sm">
             <h3 className="mb-4 text-2xl font-bold text-[#0F2A43]">
               Practice Areas
@@ -431,7 +442,6 @@ export default function FirmModal({
             )}
           </section>
 
-          {/* Attorneys */}
           <section>
             <div className="mb-5 flex items-center justify-between gap-4">
               <h3 className="flex items-center gap-2 text-2xl font-bold text-[#0F2A43]">
@@ -572,7 +582,6 @@ export default function FirmModal({
             )}
           </section>
 
-          {/* Reviews */}
           <section className="rounded-2xl border bg-white p-6 shadow-sm">
             <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
               <h3 className="flex items-center gap-2 text-2xl font-bold text-[#0F2A43]">
