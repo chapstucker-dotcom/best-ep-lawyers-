@@ -17,7 +17,9 @@ import { Badge } from "@/components/ui/badge";
 import {
   Check,
   Loader2,
+  LockKeyhole,
   Trash2,
+  Video,
 } from "lucide-react";
 
 import {
@@ -47,6 +49,7 @@ type FormState = {
   team_size: string;
   consultation_fee: string;
   logo_url: string;
+  video_url: string;
 };
 
 const EMPTY: FormState = {
@@ -64,6 +67,7 @@ const EMPTY: FormState = {
   team_size: "",
   consultation_fee: "",
   logo_url: "",
+  video_url: "",
 };
 
 const text = (value: unknown): string =>
@@ -122,6 +126,61 @@ const optionalNumber = (
   return Number.isFinite(parsed) && parsed >= 0
     ? parsed
     : null;
+};
+
+type PlanKey =
+  | "free"
+  | "pro"
+  | "expert"
+  | "category_featured"
+  | "category_exclusive";
+
+const normalizePlanKey = (value: unknown): PlanKey => {
+  const normalized = text(value)
+    .trim()
+    .toLowerCase()
+    .replace(/[\s-]+/g, "_");
+
+  if (
+    normalized === "category_exclusive" ||
+    normalized === "exclusive"
+  ) {
+    return "category_exclusive";
+  }
+
+  if (
+    normalized === "category_featured" ||
+    normalized === "featured"
+  ) {
+    return "category_featured";
+  }
+
+  if (normalized === "expert") return "expert";
+  if (normalized === "pro") return "pro";
+
+  return "free";
+};
+
+const videoValue = (value: string): string | null => {
+  const trimmed = value.trim();
+
+  if (!trimmed) return null;
+
+  return /^https?:\/\//i.test(trimmed)
+    ? trimmed
+    : `https://${trimmed}`;
+};
+
+const planLabel = (plan: PlanKey): string => {
+  const labels: Record<PlanKey, string> = {
+    free: "Free",
+    pro: "Pro",
+    expert: "Expert",
+    category_featured: "Category Featured",
+    category_exclusive: "Category Exclusive",
+  };
+
+  return labels[plan];
 };
 
 /**
@@ -187,6 +246,13 @@ export const ProfileEditor = () => {
   const [messageType, setMessageType] =
     useState<"success" | "error" | "">("");
 
+  const [planKey, setPlanKey] =
+    useState<PlanKey>("free");
+
+  const hasVideoAccess =
+    planKey === "category_featured" ||
+    planKey === "category_exclusive";
+
   const setField = (
     field: keyof Omit<
       FormState,
@@ -227,6 +293,12 @@ export const ProfileEditor = () => {
       }
 
       if (data) {
+        setPlanKey(
+          normalizePlanKey(
+            data.plan_key ?? data.plan
+          )
+        );
+
         const storedPracticeAreas =
           data.specialties ??
           data.categories ??
@@ -257,6 +329,7 @@ export const ProfileEditor = () => {
             data.consultation_fee
           ),
           logo_url: text(data.logo_url),
+          video_url: text(data.video_url),
         });
       } else {
         setForm({
@@ -346,6 +419,20 @@ export const ProfileEditor = () => {
       return;
     }
 
+    if (
+      hasVideoAccess &&
+      form.video_url.trim() &&
+      !/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\//i.test(
+        form.video_url.trim()
+      )
+    ) {
+      setMessage(
+        "Enter a valid YouTube or Vimeo video URL."
+      );
+      setMessageType("error");
+      return;
+    }
+
     setSaving(true);
 
     const { data, error } =
@@ -388,6 +475,12 @@ export const ProfileEditor = () => {
           ),
         logo_url:
           form.logo_url || null,
+
+        // Video is a premium benefit. The plan itself is
+        // controlled by billing/admin logic, not by this form.
+        video_url: hasVideoAccess
+          ? videoValue(form.video_url)
+          : null,
       });
 
     setSaving(false);
@@ -432,6 +525,7 @@ export const ProfileEditor = () => {
       consultation_fee: text(
         data.consultation_fee
       ),
+      video_url: text(data.video_url),
     }));
 
     setMessage(
@@ -772,6 +866,74 @@ export const ProfileEditor = () => {
                 </div>
               </div>
             )}
+          </section>
+
+          {/* Premium introduction video */}
+          <section className="rounded-xl border bg-white p-5">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+              <div className="flex items-start gap-3">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#06224A] text-[#D4A62A]">
+                  <Video className="h-5 w-5" />
+                </div>
+
+                <div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h3 className="text-lg font-bold text-gray-900">
+                      Firm Introduction Video
+                    </h3>
+
+                    <Badge
+                      variant={
+                        hasVideoAccess
+                          ? "default"
+                          : "secondary"
+                      }
+                    >
+                      {planLabel(planKey)}
+                    </Badge>
+                  </div>
+
+                  <p className="mt-1 text-sm leading-6 text-gray-600">
+                    Embed a YouTube or Vimeo introduction video
+                    on your public firm profile.
+                  </p>
+                </div>
+              </div>
+
+              {!hasVideoAccess && (
+                <div className="flex items-center gap-2 rounded-lg bg-amber-50 px-3 py-2 text-sm font-medium text-amber-800">
+                  <LockKeyhole className="h-4 w-4" />
+                  Featured or Exclusive required
+                </div>
+              )}
+            </div>
+
+            <div className="mt-5 space-y-2">
+              <Label htmlFor="video_url">
+                YouTube or Vimeo URL
+              </Label>
+
+              <Input
+                id="video_url"
+                type="url"
+                value={form.video_url}
+                onChange={(event) =>
+                  setField(
+                    "video_url",
+                    event.target.value
+                  )
+                }
+                disabled={!hasVideoAccess}
+                placeholder="https://www.youtube.com/watch?v=..."
+              />
+
+              <p className="text-xs leading-5 text-gray-500">
+                Category Featured and Category Exclusive firms
+                may display one introduction video. Video files
+                remain hosted by YouTube or Vimeo so profiles stay
+                fast.
+              </p>
+            </div>
           </section>
 
           {/* Firm statistics */}
