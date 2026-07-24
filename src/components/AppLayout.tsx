@@ -395,6 +395,20 @@ export default function AppLayout() {
   return (
     <div className="min-h-screen bg-[#F8FAFC]">
       <Hero onSearch={handleSearch} />
+      <WhyLawFirmsJoin
+  onListFirm={() =>
+    document.getElementById("list-form")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    })
+  }
+  onViewPricing={() =>
+    document.getElementById("pricing")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    })
+  }
+/>
 
       {/* Featured firms */}
       <section className="bg-white py-16">
