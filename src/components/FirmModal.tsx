@@ -27,6 +27,7 @@ import type { AttorneyProfile } from "../data/attorneyTypes";
 
 import { categories } from "../data/categories";
 import { ReviewForm } from "./ReviewForm";
+import LeadCaptureForm from "./LeadCaptureForm";
 import { supabase } from "@/lib/supabase";
 
 interface Review {
@@ -244,6 +245,12 @@ function FirmModal({
 
           <DialogDescription>
             View firm information, attorneys, practice areas,
+            <LeadCaptureForm
+  firmId={firm.id}
+  firmName={firm.name}
+  firmEmail={firm.email}
+  practiceArea={displayedPracticeAreas[0]?.title}
+/>
             contact options, and client reviews.
           </DialogDescription>
         </DialogHeader>
