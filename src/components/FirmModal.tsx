@@ -15,9 +15,11 @@ import {
   Building2,
   Globe,
   Mail,
+  Crown,
   MapPin,
   MessageSquare,
   Phone,
+  PlayCircle,
   Star,
   UserRound,
 } from "lucide-react";
@@ -56,6 +58,64 @@ type PublicFirm = Firm & {
   featured?: boolean | null;
   is_verified?: boolean | null;
   zip_code?: string | null;
+  plan_key?: string | null;
+  video_url?: string | null;
+};
+
+
+const normalizePlanKey = (value: unknown): string =>
+  String(value ?? "")
+    .trim()
+    .toLowerCase()
+    .replace(/[\s-]+/g, "_");
+
+const getVideoEmbedUrl = (value: string): string | null => {
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+
+  try {
+    const url = new URL(
+      /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`
+    );
+
+    const host = url.hostname.replace(/^www\./, "").toLowerCase();
+
+    if (host === "youtu.be") {
+      const videoId = url.pathname.split("/").filter(Boolean)[0];
+      return videoId
+        ? `https://www.youtube-nocookie.com/embed/${videoId}`
+        : null;
+    }
+
+    if (
+      host === "youtube.com" ||
+      host === "m.youtube.com" ||
+      host === "music.youtube.com"
+    ) {
+      const videoId =
+        url.searchParams.get("v") ||
+        url.pathname.match(/\/(?:embed|shorts|live)\/([^/?#]+)/)?.[1];
+
+      return videoId
+        ? `https://www.youtube-nocookie.com/embed/${videoId}`
+        : null;
+    }
+
+    if (host === "vimeo.com" || host === "player.vimeo.com") {
+      const videoId = url.pathname
+        .split("/")
+        .filter(Boolean)
+        .find((part) => /^\d+$/.test(part));
+
+      return videoId
+        ? `https://player.vimeo.com/video/${videoId}`
+        : null;
+    }
+
+    return null;
+  } catch {
+    return null;
+  }
 };
 
 function FirmModal({
@@ -146,6 +206,26 @@ function FirmModal({
 
   const isVerified =
     Boolean(publicFirm.is_verified);
+
+  const planKey = normalizePlanKey(
+    publicFirm.plan_key ?? publicFirm.plan
+  );
+
+  const isCategoryFeatured =
+    planKey === "category_featured" ||
+    planKey === "featured";
+
+  const isCategoryExclusive =
+    planKey === "category_exclusive" ||
+    planKey === "exclusive";
+
+  const canDisplayVideo =
+    isCategoryFeatured || isCategoryExclusive;
+
+  const videoEmbedUrl =
+    canDisplayVideo && publicFirm.video_url
+      ? getVideoEmbedUrl(publicFirm.video_url)
+      : null;
 
   const rawPracticeAreas =
     publicFirm.specialties?.length
@@ -244,14 +324,8 @@ function FirmModal({
           <DialogTitle>{firm.name}</DialogTitle>
 
           <DialogDescription>
-            View firm information, attorneys, practice areas,
-            <LeadCaptureForm
-  firmId={firm.id}
-  firmName={firm.name}
-  firmEmail={firm.email}
-  practiceArea={displayedPracticeAreas[0]?.title}
-/>
-            contact options, and client reviews.
+            View firm information, attorneys, practice areas, contact options,
+            introduction video, consultation form, and client reviews.
           </DialogDescription>
         </DialogHeader>
 
@@ -271,9 +345,20 @@ function FirmModal({
 
             <div className="min-w-0 flex-1">
               <div className="mb-3 flex flex-wrap gap-2">
-                {firm.plan && (
+                {(publicFirm.plan_key || firm.plan) && (
                   <Badge className="border border-white/30 bg-white/90 text-[#0F2A43]">
-                    {firm.plan}
+                    {isCategoryExclusive
+                      ? "Category Exclusive"
+                      : isCategoryFeatured
+                        ? "Category Featured"
+                        : String(publicFirm.plan_key || firm.plan)}
+                  </Badge>
+                )}
+
+                {isCategoryExclusive && (
+                  <Badge className="bg-[#F5B800] text-[#0F2A43]">
+                    <Crown className="mr-1 h-3.5 w-3.5 fill-current" />
+                    Category Owner
                   </Badge>
                 )}
 
@@ -380,6 +465,49 @@ function FirmModal({
               </Button>
             )}
           </section>
+
+
+          {videoEmbedUrl && (
+            <section className="overflow-hidden rounded-2xl border border-[#D4A62A]/40 bg-[#0F2A43] shadow-lg">
+              <div className="flex flex-col gap-4 border-b border-white/10 px-6 py-5 text-white sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#D4A62A]">
+                    {isCategoryExclusive
+                      ? "Exclusive Video Introduction"
+                      : "Featured Video Introduction"}
+                  </p>
+
+                  <h3 className="mt-2 flex items-center gap-2 text-2xl font-bold">
+                    <PlayCircle className="h-6 w-6 text-[#D4A62A]" />
+                    Meet {firm.name}
+                  </h3>
+
+                  <p className="mt-2 text-sm leading-6 text-white/70">
+                    Learn about the firm, its attorneys, and its approach to
+                    serving clients in the El Paso area.
+                  </p>
+                </div>
+
+                {isCategoryExclusive && (
+                  <Badge className="w-fit bg-[#D4A62A] text-[#0F2A43]">
+                    <Crown className="mr-1 h-4 w-4 fill-current" />
+                    Category Exclusive
+                  </Badge>
+                )}
+              </div>
+
+              <div className="aspect-video w-full bg-black">
+                <iframe
+                  src={videoEmbedUrl}
+                  title={`${firm.name} introduction video`}
+                  className="h-full w-full"
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+            </section>
+          )}
 
           <section className="grid gap-6 lg:grid-cols-[1.6fr_0.8fr]">
             <div className="rounded-2xl border bg-white p-6 shadow-sm">
@@ -610,6 +738,13 @@ function FirmModal({
               </div>
             )}
           </section>
+
+          <LeadCaptureForm
+            firmId={firm.id}
+            firmName={firm.name}
+            firmEmail={firm.email}
+            practiceArea={displayedPracticeAreas[0]?.title}
+          />
 
           <section className="rounded-2xl border bg-white p-6 shadow-sm">
             <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
