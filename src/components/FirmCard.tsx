@@ -1,9 +1,5 @@
 import type { MouseEvent } from 'react';
 
-import { Badge } from './ui/badge';
-import { Button } from './ui/button';
-import { Card } from './ui/card';
-
 import {
   Building2,
   CheckCircle2,
@@ -13,7 +9,16 @@ import {
   Star,
 } from 'lucide-react';
 
+import { Badge } from './ui/badge';
+import { Button } from './ui/button';
+import { Card } from './ui/card';
+
 import type { Firm } from '../data/types';
+
+import {
+  getPracticeAreaTitle,
+} from '../data/categories';
+
 import { trackEvent } from '@/services/analyticsService';
 
 interface FirmCardProps {
@@ -50,10 +55,22 @@ export default function FirmCard({
     publicFirm.blurb?.trim() ||
     'View this firm’s profile, attorneys, practice areas, and contact information.';
 
-  const practiceAreas =
+  const rawPracticeAreas =
     publicFirm.specialties?.length
       ? publicFirm.specialties
-      : publicFirm.categories || [];
+      : publicFirm.categories ?? [];
+
+  const practiceAreas = Array.from(
+    new Set(
+      rawPracticeAreas
+        .map((value) =>
+          getPracticeAreaTitle(
+            String(value)
+          )
+        )
+        .filter(Boolean)
+    )
+  );
 
   const isFeatured =
     Boolean(publicFirm.is_featured) ||
@@ -65,9 +82,10 @@ export default function FirmCard({
   const planName =
     publicFirm.plan?.trim() || '';
 
-  const formattedPhone = firm.phone || '';
-
-  const location = [firm.city, firm.state]
+  const location = [
+    firm.city,
+    firm.state,
+  ]
     .filter(Boolean)
     .join(', ');
 
@@ -79,12 +97,19 @@ export default function FirmCard({
     if (!firm.phone) return;
 
     try {
-      await trackEvent(firm.id, 'click_phone');
+      await trackEvent(
+        firm.id,
+        'click_phone'
+      );
     } catch (error) {
-      console.error('Unable to track phone click:', error);
+      console.error(
+        'Unable to track phone click:',
+        error
+      );
     }
 
-    window.location.href = `tel:${firm.phone}`;
+    window.location.href =
+      `tel:${firm.phone}`;
   };
 
   const handleWebsiteClick = async (
@@ -95,14 +120,23 @@ export default function FirmCard({
     if (!firm.website) return;
 
     try {
-      await trackEvent(firm.id, 'click_website');
+      await trackEvent(
+        firm.id,
+        'click_website'
+      );
     } catch (error) {
-      console.error('Unable to track website click:', error);
+      console.error(
+        'Unable to track website click:',
+        error
+      );
     }
 
-    const websiteUrl = firm.website.startsWith('http')
-      ? firm.website
-      : `https://${firm.website}`;
+    const websiteUrl =
+      /^https?:\/\//i.test(
+        firm.website
+      )
+        ? firm.website
+        : `https://${firm.website}`;
 
     window.open(
       websiteUrl,
@@ -113,9 +147,15 @@ export default function FirmCard({
 
   const handleCardClick = async () => {
     try {
-      await trackEvent(firm.id, 'view');
+      await trackEvent(
+        firm.id,
+        'view'
+      );
     } catch (error) {
-      console.error('Unable to track profile view:', error);
+      console.error(
+        'Unable to track profile view:',
+        error
+      );
     }
 
     onClick();
@@ -124,7 +164,9 @@ export default function FirmCard({
   return (
     <Card
       className="group flex h-full cursor-pointer flex-col overflow-hidden border border-gray-200 bg-white transition duration-200 hover:-translate-y-1 hover:border-[#1FA8A1]/40 hover:shadow-xl"
-      onClick={handleCardClick}
+      onClick={() =>
+        void handleCardClick()
+      }
     >
       <div className="relative flex h-40 items-center justify-center overflow-hidden bg-gradient-to-br from-[#0F2A43] via-[#176B78] to-[#1FA8A1]">
         {logo ? (
@@ -147,11 +189,13 @@ export default function FirmCard({
             </Badge>
           )}
 
-          {planName && planName !== 'free' && planName !== 'basic' && (
-            <Badge className="border border-white/30 bg-white/90 text-[#0F2A43]">
-              {planName}
-            </Badge>
-          )}
+          {planName &&
+            planName !== 'free' &&
+            planName !== 'basic' && (
+              <Badge className="border border-white/30 bg-white/90 text-[#0F2A43]">
+                {planName}
+              </Badge>
+            )}
         </div>
       </div>
 
@@ -179,9 +223,9 @@ export default function FirmCard({
           <div className="mb-5 flex flex-wrap gap-2">
             {practiceAreas
               .slice(0, 3)
-              .map((practiceArea, index) => (
+              .map((practiceArea) => (
                 <Badge
-                  key={`${practiceArea}-${index}`}
+                  key={practiceArea}
                   variant="secondary"
                   className="rounded-full px-3 py-1 text-xs"
                 >
@@ -208,7 +252,7 @@ export default function FirmCard({
               className="flex items-center gap-2 text-left transition hover:text-[#1FA8A1]"
             >
               <Phone className="h-4 w-4 shrink-0" />
-              <span>{formattedPhone}</span>
+              <span>{firm.phone}</span>
             </button>
           )}
 
