@@ -1,164 +1,464 @@
-import { useState } from "react";
-import { createClient } from "@supabase/supabase-js";
+import {
+  useState,
+  type FormEvent,
+} from 'react';
 
-const supabase = createClient(
-  "https://yvcuhnnhspqjfnrbkhok.supabase.co",
-  "YOUR_SUPABASE_ANON_KEY"
-);
+import {
+  AlertCircle,
+  CheckCircle2,
+  Loader2,
+  Mail,
+  Phone,
+  Send,
+  UserRound,
+} from 'lucide-react';
 
-export default function LeadCaptureForm() {
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [legalIssue, setLegalIssue] = useState("");
-  const [loading, setLoading] = useState(false);
+import { supabase } from '@/lib/supabase';
 
-  async function handleSubmit(e: any) {
-    e.preventDefault();
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Alert,
+  AlertDescription,
+} from '@/components/ui/alert';
 
-    setLoading(true);
+interface LeadCaptureFormProps {
+  firmId?: string;
+  firmName?: string;
+  firmEmail?: string | null;
+  practiceArea?: string;
+  title?: string;
+  description?: string;
+  onSuccess?: () => void;
+}
 
-    // SAVE TO SUPABASE
-    const { error } = await supabase
-      .from("leads")
-      .insert([
+type FormState = {
+  fullName: string;
+  email: string;
+  phone: string;
+  legalIssue: string;
+};
+
+const EMPTY_FORM: FormState = {
+  fullName: '',
+  email: '',
+  phone: '',
+  legalIssue: '',
+};
+
+const isMissingColumnError = (
+  error: {
+    code?: string;
+    message?: string;
+  } | null
+): boolean => {
+  if (!error) return false;
+
+  return (
+    error.code === '42703' ||
+    error.code === 'PGRST204' ||
+    Boolean(
+      error.message
+        ?.toLowerCase()
+        .includes('column')
+    )
+  );
+};
+
+export default function LeadCaptureForm({
+  firmId,
+  firmName,
+  firmEmail,
+  practiceArea,
+  title,
+  description,
+  onSuccess,
+}: LeadCaptureFormProps) {
+  const [form, setForm] =
+    useState<FormState>(EMPTY_FORM);
+
+  const [loading, setLoading] =
+    useState(false);
+
+  const [successMessage, setSuccessMessage] =
+    useState('');
+
+  const [errorMessage, setErrorMessage] =
+    useState('');
+
+  const updateField = (
+    field: keyof FormState,
+    value: string
+  ) => {
+    setForm((current) => ({
+      ...current,
+      [field]: value,
+    }));
+  };
+
+  const validateForm = (): string => {
+    if (form.fullName.trim().length < 2) {
+      return 'Enter your full name.';
+    }
+
+    if (
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+        form.email.trim()
+      )
+    ) {
+      return 'Enter a valid email address.';
+    }
+
+    if (form.phone.trim().length < 7) {
+      return 'Enter a valid phone number.';
+    }
+
+    if (form.legalIssue.trim().length < 10) {
+      return 'Please briefly describe how the firm can help.';
+    }
+
+    return '';
+  };
+
+  const saveLead = async () => {
+    const baseLead = {
+      full_name: form.fullName.trim(),
+      email: form.email.trim(),
+      phone: form.phone.trim(),
+      legal_issue: form.legalIssue.trim(),
+    };
+
+    /*
+     * First try the complete lead record.
+     * This connects the inquiry to the selected firm.
+     */
+    const enrichedLead = {
+      ...baseLead,
+      firm_id: firmId || null,
+      firm_name: firmName || null,
+      practice_area:
+        practiceArea || null,
+      status: 'new',
+    };
+
+    const firstAttempt = await supabase
+      .from('leads')
+      .insert([enrichedLead])
+      .select('id')
+      .maybeSingle();
+
+    if (!firstAttempt.error) {
+      return firstAttempt;
+    }
+
+    /*
+     * Older lead tables may not yet contain
+     * firm_id, firm_name, practice_area, or status.
+     * Fall back to the original working columns
+     * instead of losing the inquiry.
+     */
+    if (
+      isMissingColumnError(firstAttempt.error)
+    ) {
+      return supabase
+        .from('leads')
+        .insert([baseLead])
+        .select('id')
+        .maybeSingle();
+    }
+
+    return firstAttempt;
+  };
+
+  const sendLeadNotification = async () => {
+    try {
+      const response = await fetch(
+        '/api/send-lead',
         {
-          full_name: fullName,
-          email,
-          phone,
-          legal_issue: legalIssue,
-        },
-      ]);
+          method: 'POST',
+          headers: {
+            'Content-Type':
+              'application/json',
+          },
+          body: JSON.stringify({
+            fullName: form.fullName.trim(),
+            email: form.email.trim(),
+            phone: form.phone.trim(),
+            legalIssue:
+              form.legalIssue.trim(),
+            firmId: firmId || null,
+            firmName: firmName || null,
+            firmEmail:
+              firmEmail || null,
+            practiceArea:
+              practiceArea || null,
+          }),
+        }
+      );
 
-    if (error) {
-      console.log(error);
-      alert(JSON.stringify(error));
-      setLoading(false);
+      if (!response.ok) {
+        console.warn(
+          'Lead saved, but email notification was not delivered.',
+          response.status
+        );
+      }
+    } catch (error) {
+      /*
+       * The database lead is already saved.
+       * Email failure should not show the visitor
+       * that their request failed.
+       */
+      console.warn(
+        'Lead notification request failed:',
+        error
+      );
+    }
+  };
+
+  const handleSubmit = async (
+    event: FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+
+    setSuccessMessage('');
+    setErrorMessage('');
+
+    const validationError =
+      validateForm();
+
+    if (validationError) {
+      setErrorMessage(validationError);
       return;
     }
 
-    // SEND EMAIL VIA API
-    await fetch("/api/send-lead", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        fullName,
-        email,
-        phone,
-        legalIssue,
-      }),
-    });
+    setLoading(true);
 
-    setLoading(false);
+    try {
+      const { error } =
+        await saveLead();
 
-    alert("Consultation request submitted!");
+      if (error) {
+        throw error;
+      }
 
-    setFullName("");
-    setEmail("");
-    setPhone("");
-    setLegalIssue("");
-  }
+      await sendLeadNotification();
+
+      setSuccessMessage(
+        firmName
+          ? `Your request was sent to ${firmName}. The firm may contact you using the information provided.`
+          : 'Your consultation request was submitted successfully.'
+      );
+
+      setForm(EMPTY_FORM);
+      onSuccess?.();
+    } catch (error) {
+      console.error(
+        'Lead submission failed:',
+        error
+      );
+
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : 'Your request could not be submitted. Please try again.'
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const formTitle =
+    title ||
+    (firmName
+      ? `Contact ${firmName}`
+      : 'Request a Consultation');
+
+  const formDescription =
+    description ||
+    'Share a few details about your legal matter. Submitting this form does not create an attorney-client relationship.';
 
   return (
     <section
-      style={{
-        background: "#111827",
-        border: "1px solid #1e293b",
-        borderRadius: "20px",
-        padding: "40px",
-        marginTop: "60px",
-      }}
+      id="lead-form"
+      className="overflow-hidden rounded-2xl border bg-white shadow-sm"
     >
-      <h2
-        style={{
-          color: "#fbbf24",
-          fontSize: "42px",
-          marginBottom: "20px",
-        }}
-      >
-        Speak With an El Paso Attorney
-      </h2>
+      <div className="bg-gradient-to-r from-[#0F2A43] to-[#176B78] px-6 py-6 text-white sm:px-8">
+        <p className="text-sm font-bold uppercase tracking-widest text-[#F5B800]">
+          Legal Help
+        </p>
 
-      <p
-        style={{
-          color: "#cbd5e1",
-          marginBottom: "30px",
-          lineHeight: 1.8,
-        }}
-      >
-        Submit your information below to request a consultation.
-      </p>
+        <h2 className="mt-2 text-2xl font-bold sm:text-3xl">
+          {formTitle}
+        </h2>
 
-      <form
-        onSubmit={handleSubmit}
-        style={{
-          display: "grid",
-          gap: "20px",
-        }}
-      >
-        <input
-          placeholder="Full Name"
-          value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
-          style={inputStyle}
-        />
+        <p className="mt-3 max-w-2xl text-sm leading-6 text-white/80">
+          {formDescription}
+        </p>
+      </div>
 
-        <input
-          placeholder="Email Address"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          style={inputStyle}
-        />
+      <div className="p-6 sm:p-8">
+        {successMessage && (
+          <Alert className="mb-6 border-green-300 bg-green-50 text-green-800">
+            <CheckCircle2 className="h-4 w-4" />
 
-        <input
-          placeholder="Phone Number"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          style={inputStyle}
-        />
+            <AlertDescription>
+              {successMessage}
+            </AlertDescription>
+          </Alert>
+        )}
 
-        <textarea
-          placeholder="Describe your legal issue"
-          rows={5}
-          value={legalIssue}
-          onChange={(e) => setLegalIssue(e.target.value)}
-          style={{
-            ...inputStyle,
-            resize: "vertical",
-          }}
-        />
+        {errorMessage && (
+          <Alert
+            variant="destructive"
+            className="mb-6"
+          >
+            <AlertCircle className="h-4 w-4" />
 
-        <button
-          type="submit"
-          disabled={loading}
-          style={{
-            background: "#fbbf24",
-            color: "#0f172a",
-            padding: "18px",
-            borderRadius: "12px",
-            border: "none",
-            fontWeight: "bold",
-            fontSize: "18px",
-            cursor: "pointer",
-          }}
+            <AlertDescription>
+              {errorMessage}
+            </AlertDescription>
+          </Alert>
+        )}
+
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-5"
         >
-          {loading
-            ? "Submitting..."
-            : "Request Free Consultation"}
-        </button>
-      </form>
+          <div className="grid gap-5 md:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="lead-full-name">
+                Full Name *
+              </Label>
+
+              <div className="relative">
+                <UserRound className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+
+                <Input
+                  id="lead-full-name"
+                  value={form.fullName}
+                  onChange={(event) =>
+                    updateField(
+                      'fullName',
+                      event.target.value
+                    )
+                  }
+                  placeholder="Your full name"
+                  autoComplete="name"
+                  className="pl-10"
+                  disabled={loading}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="lead-email">
+                Email Address *
+              </Label>
+
+              <div className="relative">
+                <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+
+                <Input
+                  id="lead-email"
+                  type="email"
+                  value={form.email}
+                  onChange={(event) =>
+                    updateField(
+                      'email',
+                      event.target.value
+                    )
+                  }
+                  placeholder="you@example.com"
+                  autoComplete="email"
+                  className="pl-10"
+                  disabled={loading}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2 md:col-span-2">
+              <Label htmlFor="lead-phone">
+                Phone Number *
+              </Label>
+
+              <div className="relative">
+                <Phone className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+
+                <Input
+                  id="lead-phone"
+                  type="tel"
+                  value={form.phone}
+                  onChange={(event) =>
+                    updateField(
+                      'phone',
+                      event.target.value
+                    )
+                  }
+                  placeholder="(915) 555-1234"
+                  autoComplete="tel"
+                  className="pl-10"
+                  disabled={loading}
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="lead-legal-issue">
+              How can the firm help? *
+            </Label>
+
+            <Textarea
+              id="lead-legal-issue"
+              value={form.legalIssue}
+              onChange={(event) =>
+                updateField(
+                  'legalIssue',
+                  event.target.value
+                )
+              }
+              placeholder="Briefly describe your legal issue, important dates, and the type of help you are seeking."
+              rows={6}
+              disabled={loading}
+              required
+            />
+
+            <p className="text-xs text-gray-500">
+              Do not include confidential or
+              highly sensitive information.
+            </p>
+          </div>
+
+          <Button
+            type="submit"
+            disabled={loading}
+            className="h-12 w-full bg-[#1FA8A1] text-base font-semibold hover:bg-[#178D87]"
+          >
+            {loading ? (
+              <>
+                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                Submitting Request...
+              </>
+            ) : (
+              <>
+                <Send className="mr-2 h-5 w-5" />
+                Request Consultation
+              </>
+            )}
+          </Button>
+
+          <p className="text-center text-xs leading-5 text-gray-500">
+            Submission does not guarantee
+            representation and does not create an
+            attorney-client relationship.
+          </p>
+        </form>
+      </div>
     </section>
   );
 }
-
-const inputStyle = {
-  padding: "18px",
-  borderRadius: "12px",
-  border: "1px solid #334155",
-  background: "#0f172a",
-  color: "white",
-  fontSize: "16px",
-};
-
