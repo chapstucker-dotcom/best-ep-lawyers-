@@ -1,3 +1,4 @@
+import WhyLawFirmsJoin from "./WhyLawFirmsJoin";
 import { useEffect, useMemo, useState } from 'react';
 
 import Hero from './Hero';
