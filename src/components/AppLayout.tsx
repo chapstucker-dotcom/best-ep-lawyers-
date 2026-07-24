@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+
 import Hero from './Hero';
 import FirmCard from './FirmCard';
-import CategoryCard from './CategoryCard';
 import FirmModal from './FirmModal';
 import ArticleCard from './ArticleCard';
 import ArticleModal from './ArticleModal';
@@ -9,87 +9,220 @@ import ListFirmForm from './ListFirmForm';
 import PricingCard from './PricingCard';
 import SearchFilters from './SearchFilters';
 import Footer from './Footer';
+
 import { getAllFirms } from '@/services/firmService';
-import { categories } from '../data/categories';
+import {
+  categories,
+  getPracticeAreaTitle,
+} from '../data/categories';
 import { articles } from '../data/articles';
 import { plans } from '../data/plans';
-import { Firm, Article } from '../data/types';
-import { Scale, Shield, Users, Award, Loader2 } from 'lucide-react';
+
+import type { Firm, Article } from '../data/types';
+
+import {
+  Award,
+  BriefcaseBusiness,
+  Building2,
+  Car,
+  ChevronDown,
+  ChevronUp,
+  Gavel,
+  HeartHandshake,
+  Home,
+  Landmark,
+  Loader2,
+  Scale,
+  Shield,
+  Users,
+} from 'lucide-react';
+
+const HOMEPAGE_CATEGORY_SLUGS = [
+  'personal-injury',
+  'criminal-defense',
+  'family-law',
+  'immigration',
+  'estate-planning',
+  'business-law',
+  'real-estate',
+  'employment-law',
+  'bankruptcy',
+  'dwi-dui',
+  'probate',
+  'civil-litigation',
+];
+
+const CATEGORY_ICONS: Record<
+  string,
+  React.ComponentType<{ className?: string }>
+> = {
+  'personal-injury': HeartHandshake,
+  'criminal-defense': Shield,
+  'family-law': Users,
+  immigration: Landmark,
+  'estate-planning': Scale,
+  'business-law': BriefcaseBusiness,
+  'real-estate': Home,
+  'employment-law': Building2,
+  bankruptcy: Gavel,
+  'dwi-dui': Car,
+  probate: Scale,
+  'civil-litigation': Gavel,
+};
+
+const normalizeText = (value: unknown): string =>
+  String(value ?? '')
+    .toLowerCase()
+    .replace(/[-_/]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 
 export default function AppLayout() {
   const [firms, setFirms] = useState<Firm[]>([]);
   const [loading, setLoading] = useState(true);
+
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [featuredOnly, setFeaturedOnly] = useState(false);
-  const [sortBy, setSortBy] = useState('relevance');
-  const [selectedFirm, setSelectedFirm] = useState<Firm | null>(null);
-  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+  const [selectedCategory, setSelectedCategory] =
+    useState('all');
+  const [featuredOnly, setFeaturedOnly] =
+    useState(false);
+  const [sortBy, setSortBy] =
+    useState('relevance');
+
+  const [selectedFirm, setSelectedFirm] =
+    useState<Firm | null>(null);
+  const [selectedArticle, setSelectedArticle] =
+    useState<Article | null>(null);
+
+  const [showAllCategories, setShowAllCategories] =
+    useState(false);
 
   useEffect(() => {
-    const loadFirms = async () => {
-      const { data, error } = await getAllFirms();
+    let active = true;
 
-      if (data && !error) {
-        setFirms(data);
-      } else if (data) {
-        setFirms(data);
+    const loadFirms = async () => {
+      setLoading(true);
+
+      const { data, error } =
+        await getAllFirms();
+
+      if (!active) return;
+
+      if (error) {
+        console.error(
+          'Failed to load firms:',
+          error
+        );
       }
 
+      setFirms(data ?? []);
       setLoading(false);
     };
 
-    loadFirms();
+    void loadFirms();
+
+    return () => {
+      active = false;
+    };
   }, []);
 
   const scrollToSearch = () => {
-    setTimeout(() => {
-      document.getElementById('search')?.scrollIntoView({ behavior: 'smooth' });
+    window.setTimeout(() => {
+      document
+        .getElementById('search')
+        ?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
     }, 50);
   };
 
-  const normalizeText = (value: unknown) =>
-    String(value || '')
-      .toLowerCase()
-      .replace(/[-_/]/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim();
+  const homepageCategories = useMemo(
+    () =>
+      HOMEPAGE_CATEGORY_SLUGS.map(
+        (slug) =>
+          categories.find(
+            (category) =>
+              category.slug === slug
+          )
+      ).filter(
+        (
+          category
+        ): category is (typeof categories)[number] =>
+          Boolean(category)
+      ),
+    []
+  );
 
-  const getFirmSearchText = (firm: any) => {
-    return normalizeText([
-      firm.name,
-      firm.category,
-      firm.description,
-      firm.bio,
-      firm.phone,
-      firm.website,
-      firm.address,
-      firm.city,
-      firm.state,
-      ...(firm.specialties || []),
-    ].filter(Boolean).join(' '));
+  const displayedCategories =
+    showAllCategories
+      ? categories
+      : homepageCategories;
+
+  const getFirmSearchText = (
+    firm: Firm
+  ): string => {
+    const publicFirm = firm as Firm & {
+      category?: string | null;
+      description?: string | null;
+      bio?: string | null;
+      specialties?: string[] | null;
+      categories?: string[] | null;
+    };
+
+    return normalizeText(
+      [
+        publicFirm.name,
+        publicFirm.category,
+        publicFirm.description,
+        publicFirm.bio,
+        publicFirm.phone,
+        publicFirm.email,
+        publicFirm.website,
+        publicFirm.address,
+        publicFirm.city,
+        publicFirm.state,
+        ...(publicFirm.specialties ?? []),
+        ...(publicFirm.categories ?? []),
+      ]
+        .filter(Boolean)
+        .join(' ')
+    );
   };
 
-  const handleSearch = (query: string) => {
-    const cleanQuery = normalizeText(query);
+  const handleSearch = (
+    query: string
+  ) => {
+    const cleanQuery =
+      normalizeText(query);
 
-    const matchedCategory = categories.find((cat: any) => {
-      const catTitle = normalizeText(cat.title);
-      const catSlug = normalizeText(cat.slug);
-      const firstWord = catTitle.split(' ')[0];
+    if (!cleanQuery) {
+      setSelectedCategory('all');
+      setSearchQuery('');
+      scrollToSearch();
+      return;
+    }
 
-      return (
-        cleanQuery === catTitle ||
-        cleanQuery === catSlug ||
-        catTitle.includes(cleanQuery) ||
-        catSlug.includes(cleanQuery) ||
-        cleanQuery.includes(catTitle) ||
-        cleanQuery.includes(firstWord)
-      );
-    });
+    const matchedCategory =
+      categories.find((category) => {
+        const title =
+          normalizeText(category.title);
+        const slug =
+          normalizeText(category.slug);
+
+        return (
+          cleanQuery === title ||
+          cleanQuery === slug ||
+          title.includes(cleanQuery) ||
+          slug.includes(cleanQuery) ||
+          cleanQuery.includes(title)
+        );
+      });
 
     if (matchedCategory) {
-      setSelectedCategory(matchedCategory.slug);
+      setSelectedCategory(
+        matchedCategory.slug
+      );
       setSearchQuery('');
     } else {
       setSelectedCategory('all');
@@ -99,70 +232,199 @@ export default function AppLayout() {
     scrollToSearch();
   };
 
-  const handleCategoryClick = (slug: string) => {
+  const handleCategoryClick = (
+    slug: string
+  ) => {
     setSelectedCategory(slug);
     setSearchQuery('');
     scrollToSearch();
   };
 
-  const filteredFirms = firms.filter((firm: any) => {
-    const q = normalizeText(searchQuery);
-    const searchableText = getFirmSearchText(firm);
+  const filteredFirms =
+    useMemo(() => {
+      const query =
+        normalizeText(searchQuery);
 
-    const selectedCategoryObj = categories.find((cat: any) => cat.slug === selectedCategory);
-    const selectedTitle = normalizeText(selectedCategoryObj?.title);
-    const selectedSlug = normalizeText(selectedCategoryObj?.slug || selectedCategory);
+      const selectedCategoryRecord =
+        categories.find(
+          (category) =>
+            category.slug ===
+            selectedCategory
+        );
 
-    const matchesSearch =
-      q === '' ||
-      searchableText.includes(q) ||
-      q.split(' ').some(word => word.length > 2 && searchableText.includes(word));
+      const selectedTitle =
+        normalizeText(
+          selectedCategoryRecord?.title
+        );
 
-    const matchesCategory =
-      selectedCategory === 'all' ||
-      searchableText.includes(selectedTitle) ||
-      searchableText.includes(selectedSlug) ||
-      (selectedTitle && selectedTitle.split(' ').some(word => word.length > 2 && searchableText.includes(word)));
+      const selectedSlug =
+        normalizeText(
+          selectedCategoryRecord?.slug ??
+            selectedCategory
+        );
 
-    const matchesFeatured = !featuredOnly || firm.is_featured;
+      return firms.filter((firm) => {
+        const searchableText =
+          getFirmSearchText(firm);
 
-    return matchesSearch && matchesCategory && matchesFeatured;
-  });
-const visibleFirms = filteredFirms.length > 0 ? filteredFirms : firms;
-const sortedFirms = [...visibleFirms].sort((a: any, b: any) => {
-    if (sortBy === 'name') return String(a.name || '').localeCompare(String(b.name || ''));
-    if (sortBy === 'newest') return new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime();
-    return 0;
-  });
+        const matchesSearch =
+          !query ||
+          searchableText.includes(query) ||
+          query
+            .split(' ')
+            .some(
+              (word) =>
+                word.length > 2 &&
+                searchableText.includes(word)
+            );
 
-  const featuredFirms = firms.filter((f: any) => f.is_featured).slice(0, 6);
+        const matchesCategory =
+          selectedCategory === 'all' ||
+          searchableText.includes(
+            selectedSlug
+          ) ||
+          searchableText.includes(
+            selectedTitle
+          );
+
+        const matchesFeatured =
+          !featuredOnly ||
+          Boolean(
+            (
+              firm as Firm & {
+                is_featured?: boolean;
+              }
+            ).is_featured
+          );
+
+        return (
+          matchesSearch &&
+          matchesCategory &&
+          matchesFeatured
+        );
+      });
+    }, [
+      firms,
+      searchQuery,
+      selectedCategory,
+      featuredOnly,
+    ]);
+
+  const sortedFirms = useMemo(() => {
+    const sorted = [...filteredFirms];
+
+    if (sortBy === 'name') {
+      sorted.sort((a, b) =>
+        String(a.name ?? '').localeCompare(
+          String(b.name ?? '')
+        )
+      );
+    }
+
+    if (sortBy === 'newest') {
+      sorted.sort((a, b) => {
+        const aDate = new Date(
+          (
+            a as Firm & {
+              created_at?: string;
+            }
+          ).created_at ?? 0
+        ).getTime();
+
+        const bDate = new Date(
+          (
+            b as Firm & {
+              created_at?: string;
+            }
+          ).created_at ?? 0
+        ).getTime();
+
+        return bDate - aDate;
+      });
+    }
+
+    if (sortBy === 'relevance') {
+      sorted.sort((a, b) => {
+        const aFeatured = Boolean(
+          (
+            a as Firm & {
+              is_featured?: boolean;
+            }
+          ).is_featured
+        );
+
+        const bFeatured = Boolean(
+          (
+            b as Firm & {
+              is_featured?: boolean;
+            }
+          ).is_featured
+        );
+
+        return Number(bFeatured) -
+          Number(aFeatured);
+      });
+    }
+
+    return sorted;
+  }, [filteredFirms, sortBy]);
+
+  const featuredFirms = useMemo(
+    () =>
+      firms
+        .filter((firm) =>
+          Boolean(
+            (
+              firm as Firm & {
+                is_featured?: boolean;
+              }
+            ).is_featured
+          )
+        )
+        .slice(0, 6),
+    [firms]
+  );
+
+  const selectedCategoryTitle =
+    selectedCategory === 'all'
+      ? null
+      : getPracticeAreaTitle(
+          selectedCategory
+        );
 
   return (
     <div className="min-h-screen bg-[#F8FAFC]">
       <Hero onSearch={handleSearch} />
 
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between gap-4 mb-8">
+      {/* Featured firms */}
+      <section className="bg-white py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-8 flex items-end justify-between gap-4">
             <div>
-              <p className="text-sm font-bold uppercase tracking-widest text-[#C99A2E] mb-2">
+              <p className="mb-2 text-sm font-bold uppercase tracking-widest text-[#C99A2E]">
                 Featured Law Firms
               </p>
+
               <h2 className="text-3xl font-bold text-[#0F2A43]">
-                Top-Rated El Paso Lawyers You Can Trust
+                Top-Rated El Paso Lawyers
+                You Can Trust
               </h2>
-              <p className="text-gray-600 mt-2">
-                Verified profiles, direct contact, and practice-area visibility.
+
+              <p className="mt-2 text-gray-600">
+                Verified profiles, direct
+                contact, and practice-area
+                visibility.
               </p>
             </div>
 
             <button
+              type="button"
               onClick={() => {
                 setSelectedCategory('all');
                 setSearchQuery('');
                 scrollToSearch();
               }}
-              className="hidden md:inline-flex border border-[#0F2A43]/20 rounded-lg px-5 py-3 font-semibold text-[#0F2A43] hover:bg-[#0F2A43] hover:text-white transition"
+              className="hidden rounded-lg border border-[#0F2A43]/20 px-5 py-3 font-semibold text-[#0F2A43] transition hover:bg-[#0F2A43] hover:text-white md:inline-flex"
             >
               View All Firms →
             </button>
@@ -170,52 +432,164 @@ const sortedFirms = [...visibleFirms].sort((a: any, b: any) => {
 
           {loading ? (
             <div className="flex justify-center py-12">
-              <Loader2 className="h-8 w-8 animate-spin text-primary" />
+              <Loader2 className="h-8 w-8 animate-spin text-[#1FA8A1]" />
             </div>
           ) : featuredFirms.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featuredFirms.map(firm => (
-                <FirmCard key={firm.id} firm={firm} onClick={() => setSelectedFirm(firm)} />
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {featuredFirms.map((firm) => (
+                <FirmCard
+                  key={firm.id}
+                  firm={firm}
+                  onClick={() =>
+                    setSelectedFirm(firm)
+                  }
+                />
               ))}
             </div>
           ) : (
-            <p className="text-center text-gray-500">No featured firms yet</p>
+            <div className="rounded-2xl border border-dashed bg-gray-50 px-6 py-12 text-center">
+              <p className="font-medium text-gray-600">
+                Premium featured placements
+                are currently available.
+              </p>
+
+              <button
+                type="button"
+                onClick={() =>
+                  document
+                    .getElementById(
+                      'pricing'
+                    )
+                    ?.scrollIntoView({
+                      behavior: 'smooth',
+                    })
+                }
+                className="mt-4 font-semibold text-[#1FA8A1] hover:underline"
+              >
+                View law firm plans
+              </button>
+            </div>
           )}
         </div>
       </section>
 
-      <section id="categories" className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-[#0F2A43] mb-8 text-center">
-            Browse by Practice Area
-          </h2>
+      {/* Practice areas */}
+      <section
+        id="categories"
+        className="bg-gray-50 py-16"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto mb-10 max-w-3xl text-center">
+            <p className="mb-2 text-sm font-bold uppercase tracking-widest text-[#C99A2E]">
+              Legal Services
+            </p>
 
-          <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {categories.map(cat => (
-              <CategoryCard key={cat.id} category={cat} onClick={() => handleCategoryClick(cat.slug)} />
-            ))}
+            <h2 className="text-3xl font-bold text-[#0F2A43]">
+              Browse by Practice Area
+            </h2>
+
+            <p className="mt-3 text-gray-600">
+              Choose a legal category to
+              find El Paso firms handling
+              that type of matter.
+            </p>
+          </div>
+
+          <div
+            className={`grid gap-4 ${
+              showAllCategories
+                ? 'sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
+                : 'sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
+            }`}
+          >
+            {displayedCategories.map(
+              (category) => {
+                const Icon =
+                  CATEGORY_ICONS[
+                    category.slug
+                  ] ?? Scale;
+
+                return (
+                  <button
+                    key={category.id}
+                    type="button"
+                    onClick={() =>
+                      handleCategoryClick(
+                        category.slug
+                      )
+                    }
+                    className="group flex min-h-36 flex-col items-center justify-center rounded-2xl border bg-white p-6 text-center shadow-sm transition hover:-translate-y-1 hover:border-[#1FA8A1] hover:shadow-lg"
+                  >
+                    <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0F2A43] to-[#1FA8A1] text-white shadow-sm transition group-hover:scale-105">
+                      <Icon className="h-7 w-7" />
+                    </span>
+
+                    <span className="font-bold text-[#0F2A43]">
+                      {category.title}
+                    </span>
+                  </button>
+                );
+              }
+            )}
+          </div>
+
+          <div className="mt-10 flex justify-center">
+            <button
+              type="button"
+              onClick={() =>
+                setShowAllCategories(
+                  (current) => !current
+                )
+              }
+              className="inline-flex items-center gap-2 rounded-lg border border-[#0F2A43]/20 bg-white px-6 py-3 font-semibold text-[#0F2A43] shadow-sm transition hover:bg-[#0F2A43] hover:text-white"
+            >
+              {showAllCategories ? (
+                <>
+                  Show Main Categories
+                  <ChevronUp className="h-5 w-5" />
+                </>
+              ) : (
+                <>
+                  View All Practice Areas
+                  <ChevronDown className="h-5 w-5" />
+                </>
+              )}
+            </button>
           </div>
         </div>
       </section>
 
-      <section id="search" className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Search listings */}
+      <section
+        id="search"
+        className="scroll-mt-20 bg-white py-16"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <h2 className="text-3xl font-bold text-[#0F2A43]">Find Lawyers</h2>
-            <p className="text-gray-600 mt-2">
-              {selectedCategory === 'all'
-                ? 'Search all listed El Paso law firms.'
-                : `Showing ${categories.find((cat: any) => cat.slug === selectedCategory)?.title || selectedCategory} firms.`}
+            <h2 className="text-3xl font-bold text-[#0F2A43]">
+              Find Lawyers
+            </h2>
+
+            <p className="mt-2 text-gray-600">
+              {selectedCategoryTitle
+                ? `Showing El Paso firms for ${selectedCategoryTitle}.`
+                : 'Search all listed El Paso law firms.'}
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-4 gap-6">
+          <div className="grid gap-6 lg:grid-cols-4">
             <div className="lg:col-span-1">
               <SearchFilters
-                selectedCategory={selectedCategory}
-                onCategoryChange={setSelectedCategory}
+                selectedCategory={
+                  selectedCategory
+                }
+                onCategoryChange={
+                  setSelectedCategory
+                }
                 featuredOnly={featuredOnly}
-                onFeaturedChange={setFeaturedOnly}
+                onFeaturedChange={
+                  setFeaturedOnly
+                }
                 sortBy={sortBy}
                 onSortChange={setSortBy}
               />
@@ -224,16 +598,40 @@ const sortedFirms = [...visibleFirms].sort((a: any, b: any) => {
             <div className="lg:col-span-3">
               {loading ? (
                 <div className="flex justify-center py-12">
-                  <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                  <Loader2 className="h-8 w-8 animate-spin text-[#1FA8A1]" />
                 </div>
-              ) : sortedFirms.length === 0 ? (
-                <div className="text-center py-12 text-gray-500">
-                  <p>No matches yet. Try a broader term or remove a filter.</p>
+              ) : sortedFirms.length ===
+                0 ? (
+                <div className="rounded-2xl border border-dashed bg-gray-50 py-12 text-center text-gray-500">
+                  <p className="font-medium">
+                    No matching firms were
+                    found.
+                  </p>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedCategory(
+                        'all'
+                      );
+                      setSearchQuery('');
+                      setFeaturedOnly(false);
+                    }}
+                    className="mt-3 font-semibold text-[#1FA8A1] hover:underline"
+                  >
+                    Clear filters
+                  </button>
                 </div>
               ) : (
-                <div className="grid md:grid-cols-2 gap-6">
-                  {sortedFirms.map(firm => (
-                    <FirmCard key={firm.id} firm={firm} onClick={() => setSelectedFirm(firm)} />
+                <div className="grid gap-6 md:grid-cols-2">
+                  {sortedFirms.map((firm) => (
+                    <FirmCard
+                      key={firm.id}
+                      firm={firm}
+                      onClick={() =>
+                        setSelectedFirm(firm)
+                      }
+                    />
                   ))}
                 </div>
               )}
@@ -242,109 +640,192 @@ const sortedFirms = [...visibleFirms].sort((a: any, b: any) => {
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-br from-[#0F2A43] to-[#1FA8A1] text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold mb-12 text-center">How It Works</h2>
+      {/* How it works */}
+      <section className="bg-gradient-to-br from-[#0F2A43] to-[#1FA8A1] py-16 text-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-12 text-center text-3xl font-bold">
+            How It Works
+          </h2>
 
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid gap-8 md:grid-cols-4">
             <div className="text-center">
-              <Scale className="h-12 w-12 mx-auto mb-4 text-[#F5B800]" />
-              <h3 className="font-bold mb-2">Search</h3>
-              <p className="text-sm opacity-90">Browse by name or practice area</p>
+              <Scale className="mx-auto mb-4 h-12 w-12 text-[#F5B800]" />
+              <h3 className="mb-2 font-bold">
+                Search
+              </h3>
+              <p className="text-sm opacity-90">
+                Browse by name or practice
+                area
+              </p>
             </div>
 
             <div className="text-center">
-              <Users className="h-12 w-12 mx-auto mb-4 text-[#F5B800]" />
-              <h3 className="font-bold mb-2">Compare</h3>
-              <p className="text-sm opacity-90">View profiles, reviews & credentials</p>
+              <Users className="mx-auto mb-4 h-12 w-12 text-[#F5B800]" />
+              <h3 className="mb-2 font-bold">
+                Compare
+              </h3>
+              <p className="text-sm opacity-90">
+                View profiles, reviews and
+                credentials
+              </p>
             </div>
 
             <div className="text-center">
-              <Shield className="h-12 w-12 mx-auto mb-4 text-[#F5B800]" />
-              <h3 className="font-bold mb-2">Connect</h3>
-              <p className="text-sm opacity-90">Contact attorneys directly</p>
+              <Shield className="mx-auto mb-4 h-12 w-12 text-[#F5B800]" />
+              <h3 className="mb-2 font-bold">
+                Connect
+              </h3>
+              <p className="text-sm opacity-90">
+                Contact attorneys directly
+              </p>
             </div>
 
             <div className="text-center">
-              <Award className="h-12 w-12 mx-auto mb-4 text-[#F5B800]" />
-              <h3 className="font-bold mb-2">Get Help</h3>
-              <p className="text-sm opacity-90">Resolve your legal matter</p>
+              <Award className="mx-auto mb-4 h-12 w-12 text-[#F5B800]" />
+              <h3 className="mb-2 font-bold">
+                Get Help
+              </h3>
+              <p className="text-sm opacity-90">
+                Find counsel for your legal
+                matter
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="resources" className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-[#0F2A43] mb-4 text-center">
+      {/* Resources */}
+      <section
+        id="resources"
+        className="bg-white py-16"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-4 text-center text-3xl font-bold text-[#0F2A43]">
             Texas Law Resources
           </h2>
 
-          <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
-            Plain-English guides to Texas law, written for El Paso residents
+          <p className="mx-auto mb-8 max-w-2xl text-center text-gray-600">
+            Plain-English guides to Texas
+            law, written for El Paso
+            residents.
           </p>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {articles.map(article => (
-              <ArticleCard key={article.id} article={article} onClick={() => setSelectedArticle(article)} />
+          <div className="grid gap-6 md:grid-cols-2">
+            {articles.map((article) => (
+              <ArticleCard
+                key={article.id}
+                article={article}
+                onClick={() =>
+                  setSelectedArticle(
+                    article
+                  )
+                }
+              />
             ))}
           </div>
         </div>
       </section>
 
-      <section id="pricing" className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-[#0F2A43] mb-4 text-center">
+      {/* Pricing */}
+      <section
+        id="pricing"
+        className="bg-gray-50 py-16"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-4 text-center text-3xl font-bold text-[#0F2A43]">
             Plans for Law Firms
           </h2>
 
-          <p className="text-center text-gray-600 mb-8">
-            Start free. Upgrade any time.
+          <p className="mb-8 text-center text-gray-600">
+            Start free. Upgrade at any
+            time.
           </p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            {plans.map(plan => (
-              <PricingCard key={plan.id} plan={plan} />
+          <div className="mb-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {plans.map((plan) => (
+              <PricingCard
+                key={plan.id}
+                plan={plan}
+              />
             ))}
           </div>
 
           <p className="text-center text-sm text-gray-600">
-            Plans renew monthly. Cancel anytime. Upgrades take effect immediately.
+            Plans renew monthly. Cancel
+            anytime. Upgrades take effect
+            immediately.
           </p>
         </div>
       </section>
 
-      <section id="list-form" className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* List firm */}
+      <section
+        id="list-form"
+        className="bg-white py-16"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ListFirmForm />
         </div>
       </section>
 
-      <section id="disclaimers" className="py-16 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-[#0F2A43] mb-8 text-center">
+      {/* Disclaimers */}
+      <section
+        id="disclaimers"
+        className="bg-gray-50 py-16"
+      >
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-8 text-center text-3xl font-bold text-[#0F2A43]">
             Legal Disclaimers
           </h2>
 
           <div className="space-y-6 text-gray-700">
             <div>
-              <h3 className="font-bold mb-2">No Legal Advice</h3>
-              <p>Information on this site is for general informational purposes only and is not legal advice.</p>
+              <h3 className="mb-2 font-bold">
+                No Legal Advice
+              </h3>
+              <p>
+                Information on this site is
+                for general informational
+                purposes only and is not
+                legal advice.
+              </p>
             </div>
 
             <div>
-              <h3 className="font-bold mb-2">Advertising Disclosure</h3>
-              <p>Some listings are paid advertisements. Featured labels indicate paid placement.</p>
+              <h3 className="mb-2 font-bold">
+                Advertising Disclosure
+              </h3>
+              <p>
+                Some listings are paid
+                advertisements. Featured
+                labels indicate paid
+                placement.
+              </p>
             </div>
 
             <div>
-              <h3 className="font-bold mb-2">Accuracy</h3>
-              <p>We do not guarantee the completeness or accuracy of profiles; confirm details with the firm directly.</p>
+              <h3 className="mb-2 font-bold">
+                Accuracy
+              </h3>
+              <p>
+                We do not guarantee the
+                completeness or accuracy
+                of profiles; confirm
+                details with the firm
+                directly.
+              </p>
             </div>
 
             <div>
-              <h3 className="font-bold mb-2">Texas-Specific</h3>
-              <p>Texas law changes over time; consult a licensed Texas attorney for advice about your situation.</p>
+              <h3 className="mb-2 font-bold">
+                Texas-Specific
+              </h3>
+              <p>
+                Texas law changes over
+                time; consult a licensed
+                Texas attorney for advice
+                about your situation.
+              </p>
             </div>
           </div>
         </div>
@@ -352,8 +833,21 @@ const sortedFirms = [...visibleFirms].sort((a: any, b: any) => {
 
       <Footer />
 
-      <FirmModal firm={selectedFirm} open={!!selectedFirm} onClose={() => setSelectedFirm(null)} />
-      <ArticleModal article={selectedArticle} open={!!selectedArticle} onClose={() => setSelectedArticle(null)} />
+      <FirmModal
+        firm={selectedFirm}
+        open={Boolean(selectedFirm)}
+        onClose={() =>
+          setSelectedFirm(null)
+        }
+      />
+
+      <ArticleModal
+        article={selectedArticle}
+        open={Boolean(selectedArticle)}
+        onClose={() =>
+          setSelectedArticle(null)
+        }
+      />
     </div>
   );
 }
