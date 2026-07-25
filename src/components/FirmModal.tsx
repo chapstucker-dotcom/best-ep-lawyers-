@@ -13,11 +13,13 @@ import { Button } from "./ui/button";
 
 import {
   Building2,
+  Crown,
   Globe,
   Mail,
   MapPin,
   MessageSquare,
   Phone,
+  PlayCircle,
   Star,
   UserRound,
 } from "lucide-react";
@@ -56,6 +58,55 @@ type PublicFirm = Firm & {
   featured?: boolean | null;
   is_verified?: boolean | null;
   zip_code?: string | null;
+  plan_key?: string | null;
+  video_url?: string | null;
+};
+
+
+const normalizePlanKey = (value: unknown): string =>
+  String(value ?? "")
+    .trim()
+    .toLowerCase()
+    .replace(/[\s-]+/g, "_");
+
+const getVideoEmbedUrl = (value: string): string | null => {
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+
+  try {
+    const url = new URL(
+      /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`
+    );
+    const host = url.hostname.replace(/^www\./, "").toLowerCase();
+
+    if (host === "youtu.be") {
+      const id = url.pathname.split("/").filter(Boolean)[0];
+      return id ? `https://www.youtube-nocookie.com/embed/${id}` : null;
+    }
+
+    if (
+      host === "youtube.com" ||
+      host === "m.youtube.com" ||
+      host === "music.youtube.com"
+    ) {
+      const id =
+        url.searchParams.get("v") ||
+        url.pathname.match(/\/(?:embed|shorts|live)\/([^/?#]+)/)?.[1];
+      return id ? `https://www.youtube-nocookie.com/embed/${id}` : null;
+    }
+
+    if (host === "vimeo.com" || host === "player.vimeo.com") {
+      const id = url.pathname
+        .split("/")
+        .filter(Boolean)
+        .find((part) => /^\d+$/.test(part));
+      return id ? `https://player.vimeo.com/video/${id}` : null;
+    }
+
+    return null;
+  } catch {
+    return null;
+  }
 };
 
 function FirmModal({
@@ -69,6 +120,23 @@ function FirmModal({
   const [attorneys, setAttorneys] = useState<AttorneyProfile[]>([]);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [loadingAttorneys, setLoadingAttorneys] = useState(false);
+  const [liveFirm, setLiveFirm] = useState<PublicFirm | null>(null);
+
+  const loadLiveFirm = async (firmId: string) => {
+    const { data, error } = await supabase
+      .from("firms")
+      .select("*")
+      .eq("id", firmId)
+      .maybeSingle();
+
+    if (error) {
+      console.error("Failed to refresh firm details:", error);
+      setLiveFirm(null);
+      return;
+    }
+
+    setLiveFirm((data ?? null) as PublicFirm | null);
+  };
 
   const loadReviews = async (firmId: string) => {
     const { data, error } = await supabase
@@ -111,7 +179,8 @@ function FirmModal({
   useEffect(() => {
     if (!firm?.id || !open) return;
 
-    void loadReviews(firm.id);
+    void loadLiveFirm(firm.id);
+    void loadReviews(publicFirm.id);
     void loadAttorneys(firm.id);
   }, [firm?.id, open]);
 
@@ -128,7 +197,10 @@ function FirmModal({
 
   if (!firm) return null;
 
-  const publicFirm = firm as PublicFirm;
+  const publicFirm = {
+    ...(firm as PublicFirm),
+    ...(liveFirm ?? {}),
+  } as PublicFirm;
 
   const firmDescription =
     publicFirm.description?.trim() ||
@@ -146,6 +218,22 @@ function FirmModal({
 
   const isVerified =
     Boolean(publicFirm.is_verified);
+
+  const planKey = normalizePlanKey(
+    publicFirm.plan_key ?? publicFirm.plan
+  );
+
+  const isCategoryFeatured =
+    planKey === "category_featured" || planKey === "featured";
+
+  const isCategoryExclusive =
+    planKey === "category_exclusive" || planKey === "exclusive";
+
+  const videoEmbedUrl =
+    (isCategoryFeatured || isCategoryExclusive) &&
+    publicFirm.video_url
+      ? getVideoEmbedUrl(publicFirm.video_url)
+      : null;
 
   const rawPracticeAreas =
     publicFirm.specialties?.length
@@ -186,24 +274,24 @@ function FirmModal({
 
   const zipCode =
     publicFirm.zip_code ||
-    firm.zip ||
+    publicFirm.zip ||
     "";
 
   const addressParts = [
-    firm.address,
-    firm.city,
-    firm.state,
+    publicFirm.address,
+    publicFirm.city,
+    publicFirm.state,
     zipCode,
   ].filter(Boolean);
 
   const fullAddress = addressParts.join(", ");
 
   const openWebsite = () => {
-    if (!firm.website) return;
+    if (!publicFirm.website) return;
 
-    const websiteUrl = /^https?:\/\//i.test(firm.website)
-      ? firm.website
-      : `https://${firm.website}`;
+    const websiteUrl = /^https?:\/\//i.test(publicFirm.website)
+      ? publicFirm.website
+      : `https://${publicFirm.website}`;
 
     window.open(
       websiteUrl,
@@ -241,17 +329,10 @@ function FirmModal({
     >
       <DialogContent className="max-h-[92vh] max-w-6xl overflow-y-auto p-0">
         <DialogHeader className="sr-only">
-          <DialogTitle>{firm.name}</DialogTitle>
-
+          <DialogTitle>{publicFirm.name}</DialogTitle>
           <DialogDescription>
-            View firm information, attorneys, practice areas,
-            <LeadCaptureForm
-  firmId={firm.id}
-  firmName={firm.name}
-  firmEmail={firm.email}
-  practiceArea={displayedPracticeAreas[0]?.title}
-/>
-            contact options, and client reviews.
+            View firm information, attorneys, practice areas, contact options,
+            introduction video, consultation form, and client reviews.
           </DialogDescription>
         </DialogHeader>
 
@@ -260,7 +341,7 @@ function FirmModal({
             {firmLogo ? (
               <img
                 src={firmLogo}
-                alt={`${firm.name} logo`}
+                alt={`${publicFirm.name} logo`}
                 className="h-28 w-28 shrink-0 rounded-2xl border-4 border-white bg-white object-cover shadow-lg"
               />
             ) : (
@@ -271,9 +352,20 @@ function FirmModal({
 
             <div className="min-w-0 flex-1">
               <div className="mb-3 flex flex-wrap gap-2">
-                {firm.plan && (
+                {(publicFirm.plan_key || publicFirm.plan) && (
                   <Badge className="border border-white/30 bg-white/90 text-[#0F2A43]">
-                    {firm.plan}
+                    {isCategoryExclusive
+                      ? "Category Exclusive"
+                      : isCategoryFeatured
+                        ? "Category Featured"
+                        : publicFirm.plan_key || publicFirm.plan}
+                  </Badge>
+                )}
+
+                {isCategoryExclusive && (
+                  <Badge className="bg-[#F5B800] text-[#0F2A43]">
+                    <Crown className="mr-1 h-3.5 w-3.5 fill-current" />
+                    Category Owner
                   </Badge>
                 )}
 
@@ -292,7 +384,7 @@ function FirmModal({
               </div>
 
               <h2 className="text-3xl font-bold leading-tight sm:text-4xl">
-                {firm.name}
+                {publicFirm.name}
               </h2>
 
               {averageRating && (
@@ -329,12 +421,12 @@ function FirmModal({
 
         <div className="space-y-8 px-6 py-7 sm:px-8">
           <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {firm.phone && (
+            {publicFirm.phone && (
               <Button
                 type="button"
                 className="h-12 bg-[#1FA8A1] text-base hover:bg-[#178D87]"
                 onClick={() =>
-                  window.location.assign(`tel:${firm.phone}`)
+                  window.location.assign(`tel:${publicFirm.phone}`)
                 }
               >
                 <Phone className="mr-2 h-5 w-5" />
@@ -342,13 +434,13 @@ function FirmModal({
               </Button>
             )}
 
-            {firm.email && (
+            {publicFirm.email && (
               <Button
                 type="button"
                 variant="outline"
                 className="h-12 text-base"
                 onClick={() =>
-                  window.location.assign(`mailto:${firm.email}`)
+                  window.location.assign(`mailto:${publicFirm.email}`)
                 }
               >
                 <Mail className="mr-2 h-5 w-5" />
@@ -356,7 +448,7 @@ function FirmModal({
               </Button>
             )}
 
-            {firm.website && (
+            {publicFirm.website && (
               <Button
                 type="button"
                 variant="outline"
@@ -381,6 +473,33 @@ function FirmModal({
             )}
           </section>
 
+          {videoEmbedUrl && (
+            <section className="overflow-hidden rounded-2xl border border-[#D4A62A]/40 bg-[#0F2A43] shadow-lg">
+              <div className="border-b border-white/10 px-6 py-5 text-white">
+                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#D4A62A]">
+                  {isCategoryExclusive
+                    ? "Exclusive Video Introduction"
+                    : "Featured Video Introduction"}
+                </p>
+                <h3 className="mt-2 flex items-center gap-2 text-2xl font-bold">
+                  <PlayCircle className="h-6 w-6 text-[#D4A62A]" />
+                  Meet {publicFirm.name}
+                </h3>
+              </div>
+
+              <div className="aspect-video w-full bg-black">
+                <iframe
+                  src={videoEmbedUrl}
+                  title={`${publicFirm.name} introduction video`}
+                  className="h-full w-full"
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+            </section>
+          )}
+
           <section className="grid gap-6 lg:grid-cols-[1.6fr_0.8fr]">
             <div className="rounded-2xl border bg-white p-6 shadow-sm">
               <h3 className="mb-4 text-2xl font-bold text-[#0F2A43]">
@@ -404,27 +523,27 @@ function FirmModal({
               </h3>
 
               <div className="space-y-4 text-sm">
-                {firm.phone && (
+                {publicFirm.phone && (
                   <a
-                    href={`tel:${firm.phone}`}
+                    href={`tel:${publicFirm.phone}`}
                     className="flex items-start gap-3 text-gray-700 hover:text-[#1FA8A1]"
                   >
                     <Phone className="mt-0.5 h-5 w-5 shrink-0 text-[#1FA8A1]" />
-                    <span>{firm.phone}</span>
+                    <span>{publicFirm.phone}</span>
                   </a>
                 )}
 
-                {firm.email && (
+                {publicFirm.email && (
                   <a
-                    href={`mailto:${firm.email}`}
+                    href={`mailto:${publicFirm.email}`}
                     className="flex items-start gap-3 break-all text-gray-700 hover:text-[#1FA8A1]"
                   >
                     <Mail className="mt-0.5 h-5 w-5 shrink-0 text-[#1FA8A1]" />
-                    <span>{firm.email}</span>
+                    <span>{publicFirm.email}</span>
                   </a>
                 )}
 
-                {firm.website && (
+                {publicFirm.website && (
                   <button
                     type="button"
                     onClick={openWebsite}
@@ -432,7 +551,7 @@ function FirmModal({
                   >
                     <Globe className="mt-0.5 h-5 w-5 shrink-0 text-[#1FA8A1]" />
                     <span className="break-all">
-                      {firm.website}
+                      {publicFirm.website}
                     </span>
                   </button>
                 )}
@@ -611,6 +730,13 @@ function FirmModal({
             )}
           </section>
 
+          <LeadCaptureForm
+            firmId={publicFirm.id}
+            firmName={publicFirm.name}
+            firmEmail={publicFirm.email}
+            practiceArea={displayedPracticeAreas[0]?.title}
+          />
+
           <section className="rounded-2xl border bg-white p-6 shadow-sm">
             <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
               <h3 className="flex items-center gap-2 text-2xl font-bold text-[#0F2A43]">
@@ -631,11 +757,11 @@ function FirmModal({
             {showReviewForm && (
               <div className="mb-6 rounded-xl border bg-gray-50 p-4">
                 <ReviewForm
-                  firmId={firm.id}
-                  firmName={firm.name}
+                  firmId={publicFirm.id}
+                  firmName={publicFirm.name}
                   onSuccess={() => {
                     setShowReviewForm(false);
-                    void loadReviews(firm.id);
+                    void loadReviews(publicFirm.id);
                   }}
                 />
               </div>
