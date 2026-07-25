@@ -12,7 +12,10 @@ import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 
 import {
+  Award,
   Building2,
+  CalendarDays,
+  CheckCircle2,
   Crown,
   Globe,
   Mail,
@@ -20,8 +23,10 @@ import {
   MessageSquare,
   Phone,
   PlayCircle,
+  Scale,
   Star,
   UserRound,
+  Users,
 } from "lucide-react";
 
 import type { Firm } from "../data/types";
@@ -60,6 +65,9 @@ type PublicFirm = Firm & {
   zip_code?: string | null;
   plan_key?: string | null;
   video_url?: string | null;
+  years_experience?: number | string | null;
+  team_size?: number | string | null;
+  consultation_fee?: number | string | null;
 };
 
 
@@ -180,7 +188,7 @@ function FirmModal({
     if (!firm?.id || !open) return;
 
     void loadLiveFirm(firm.id);
-    void loadReviews(publicFirm.id);
+    void loadReviews(firm.id);
     void loadAttorneys(firm.id);
   }, [firm?.id, open]);
 
@@ -320,6 +328,44 @@ function FirmModal({
     navigate(`/attorney/${attorneyId}`);
   };
 
+  const yearsExperience = Number(
+    publicFirm.years_experience ?? 0
+  );
+
+  const teamSize = Number(
+    publicFirm.team_size ?? 0
+  );
+
+  const consultationFee = Number(
+    publicFirm.consultation_fee ?? 0
+  );
+
+  const hasFirmStats =
+    yearsExperience > 0 ||
+    teamSize > 0 ||
+    consultationFee > 0;
+
+  const premiumHighlights = [
+    isCategoryExclusive
+      ? "Category Owner placement"
+      : isCategoryFeatured
+        ? "Premium featured placement"
+        : null,
+    videoEmbedUrl
+      ? "Video introduction"
+      : null,
+    attorneys.length > 0
+      ? `${attorneys.length} attorney profile${
+          attorneys.length === 1 ? "" : "s"
+        }`
+      : null,
+    reviews.length > 0
+      ? `${reviews.length} approved review${
+          reviews.length === 1 ? "" : "s"
+        }`
+      : null,
+  ].filter(Boolean) as string[];
+
   return (
     <Dialog
       open={open}
@@ -327,7 +373,7 @@ function FirmModal({
         if (!nextOpen) onClose();
       }}
     >
-      <DialogContent className="max-h-[92vh] max-w-6xl overflow-y-auto p-0">
+      <DialogContent className="max-h-[94vh] max-w-7xl overflow-y-auto border-0 p-0 shadow-2xl">
         <DialogHeader className="sr-only">
           <DialogTitle>{publicFirm.name}</DialogTitle>
           <DialogDescription>
@@ -419,6 +465,27 @@ function FirmModal({
           </div>
         </section>
 
+        <section className="border-b bg-white px-6 py-4 sm:px-8">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {premiumHighlights.length > 0 ? (
+              premiumHighlights.map((highlight) => (
+                <div
+                  key={highlight}
+                  className="flex items-center gap-2 text-sm font-semibold text-[#0F2A43]"
+                >
+                  <CheckCircle2 className="h-4 w-4 shrink-0 text-[#1FA8A1]" />
+                  <span>{highlight}</span>
+                </div>
+              ))
+            ) : (
+              <div className="flex items-center gap-2 text-sm font-semibold text-[#0F2A43]">
+                <CheckCircle2 className="h-4 w-4 text-[#1FA8A1]" />
+                Professional local firm profile
+              </div>
+            )}
+          </div>
+        </section>
+
         <div className="space-y-8 px-6 py-7 sm:px-8">
           <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {publicFirm.phone && (
@@ -500,6 +567,64 @@ function FirmModal({
             </section>
           )}
 
+          {hasFirmStats && (
+            <section className="grid gap-4 sm:grid-cols-3">
+              {yearsExperience > 0 && (
+                <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0F2A43] text-[#D4A62A]">
+                      <CalendarDays className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold text-[#0F2A43]">
+                        {yearsExperience}+
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        Years of experience
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {teamSize > 0 && (
+                <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0F2A43] text-[#D4A62A]">
+                      <Users className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold text-[#0F2A43]">
+                        {teamSize}
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        Team members
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {consultationFee > 0 && (
+                <div className="rounded-2xl border bg-white p-5 shadow-sm">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0F2A43] text-[#D4A62A]">
+                      <Scale className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold text-[#0F2A43]">
+                        ${consultationFee.toLocaleString("en-US")}
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        Listed consultation fee
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </section>
+          )}
+
           <section className="grid gap-6 lg:grid-cols-[1.6fr_0.8fr]">
             <div className="rounded-2xl border bg-white p-6 shadow-sm">
               <h3 className="mb-4 text-2xl font-bold text-[#0F2A43]">
@@ -514,6 +639,24 @@ function FirmModal({
                 <p className="text-gray-500">
                   This firm has not added a full description yet.
                 </p>
+              )}
+
+              {(isCategoryFeatured || isCategoryExclusive) && (
+                <div className="mt-6 rounded-xl border border-[#D4A62A]/30 bg-[#0F2A43] p-5 text-white">
+                  <div className="flex items-start gap-3">
+                    <Award className="mt-0.5 h-6 w-6 shrink-0 text-[#D4A62A]" />
+                    <div>
+                      <p className="font-bold">
+                        {isCategoryExclusive
+                          ? "Category Owner Profile"
+                          : "Category Featured Profile"}
+                      </p>
+                      <p className="mt-1 text-sm leading-6 text-white/75">
+                        This firm receives premium visibility within the El Paso legal directory.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               )}
             </div>
 
@@ -609,11 +752,11 @@ function FirmModal({
                 No attorney profiles have been added yet.
               </div>
             ) : (
-              <div className="grid gap-5">
+              <div className="grid gap-5 lg:grid-cols-2">
                 {attorneys.map((attorney) => (
                   <article
                     key={attorney.id}
-                    className="rounded-2xl border bg-white p-5 shadow-sm transition hover:border-[#1FA8A1]/50 hover:shadow-md"
+                    className="h-full rounded-2xl border bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#1FA8A1]/50 hover:shadow-md"
                   >
                     <div className="flex flex-col gap-5 sm:flex-row">
                       {attorney.photo_url ? (
@@ -816,6 +959,51 @@ function FirmModal({
                 ))}
               </div>
             )}
+          </section>
+
+          <section className="sticky bottom-0 z-10 -mx-6 border-t bg-white/95 px-6 py-4 shadow-[0_-8px_24px_rgba(15,42,67,0.10)] backdrop-blur sm:-mx-8 sm:px-8">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="font-bold text-[#0F2A43]">
+                  Ready to speak with {publicFirm.name}?
+                </p>
+                <p className="text-sm text-gray-600">
+                  Contact the firm directly or submit a consultation request.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-3">
+                {publicFirm.phone && (
+                  <Button
+                    type="button"
+                    className="bg-[#1FA8A1] hover:bg-[#178D87]"
+                    onClick={() =>
+                      window.location.assign(
+                        `tel:${publicFirm.phone}`
+                      )
+                    }
+                  >
+                    <Phone className="mr-2 h-4 w-4" />
+                    Call Firm
+                  </Button>
+                )}
+
+                {publicFirm.email && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() =>
+                      window.location.assign(
+                        `mailto:${publicFirm.email}`
+                      )
+                    }
+                  >
+                    <Mail className="mr-2 h-4 w-4" />
+                    Email Firm
+                  </Button>
+                )}
+              </div>
+            </div>
           </section>
         </div>
       </DialogContent>
