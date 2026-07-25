@@ -33,6 +33,10 @@ import {
 } from "@/services/storageService";
 
 import { categories } from "@/data/categories";
+import {
+  getPlanRules,
+  type PlanKey,
+} from "@/config/planRules";
 
 type FormState = {
   name: string;
@@ -128,13 +132,6 @@ const optionalNumber = (
     : null;
 };
 
-type PlanKey =
-  | "free"
-  | "pro"
-  | "expert"
-  | "category_featured"
-  | "category_exclusive";
-
 const normalizePlanKey = (value: unknown): PlanKey => {
   const normalized = text(value)
     .trim()
@@ -155,8 +152,13 @@ const normalizePlanKey = (value: unknown): PlanKey => {
     return "category_featured";
   }
 
-  if (normalized === "expert") return "expert";
-  if (normalized === "pro") return "pro";
+  // Preserve older Pro records by treating them as Expert.
+  if (
+    normalized === "expert" ||
+    normalized === "pro"
+  ) {
+    return "expert";
+  }
 
   return "free";
 };
@@ -169,18 +171,6 @@ const videoValue = (value: string): string | null => {
   return /^https?:\/\//i.test(trimmed)
     ? trimmed
     : `https://${trimmed}`;
-};
-
-const planLabel = (plan: PlanKey): string => {
-  const labels: Record<PlanKey, string> = {
-    free: "Free",
-    pro: "Pro",
-    expert: "Expert",
-    category_featured: "Category Featured",
-    category_exclusive: "Category Exclusive",
-  };
-
-  return labels[plan];
 };
 
 /**
@@ -249,9 +239,13 @@ export const ProfileEditor = () => {
   const [planKey, setPlanKey] =
     useState<PlanKey>("free");
 
+  const planRules = getPlanRules(planKey);
+
   const hasVideoAccess =
-    planKey === "category_featured" ||
-    planKey === "category_exclusive";
+    planRules.video;
+
+  const practiceAreaLimit =
+    planRules.practiceAreas;
 
   const setField = (
     field: keyof Omit<
@@ -351,23 +345,45 @@ export const ProfileEditor = () => {
   const togglePracticeArea = (
     categorySlug: string
   ) => {
+    setMessage("");
+    setMessageType("");
+
     setForm((current) => {
       const alreadySelected =
         current.practiceAreas.includes(
           categorySlug
         );
 
-      return {
-        ...current,
-        practiceAreas: alreadySelected
-          ? current.practiceAreas.filter(
+      if (alreadySelected) {
+        return {
+          ...current,
+          practiceAreas:
+            current.practiceAreas.filter(
               (slug) =>
                 slug !== categorySlug
-            )
-          : [
-              ...current.practiceAreas,
-              categorySlug,
-            ],
+            ),
+        };
+      }
+
+      if (
+        current.practiceAreas.length >=
+        practiceAreaLimit
+      ) {
+        setMessage(
+          `${planRules.displayName} allows up to ${practiceAreaLimit} practice area${
+            practiceAreaLimit === 1 ? "" : "s"
+          }. Upgrade your plan to add more.`
+        );
+        setMessageType("error");
+        return current;
+      }
+
+      return {
+        ...current,
+        practiceAreas: [
+          ...current.practiceAreas,
+          categorySlug,
+        ],
       };
     });
   };
@@ -420,6 +436,19 @@ export const ProfileEditor = () => {
     }
 
     if (
+      form.practiceAreas.length >
+      practiceAreaLimit
+    ) {
+      setMessage(
+        `${planRules.displayName} allows up to ${practiceAreaLimit} practice area${
+          practiceAreaLimit === 1 ? "" : "s"
+        }. Remove extra selections before saving.`
+      );
+      setMessageType("error");
+      return;
+    }
+
+    if (
       hasVideoAccess &&
       form.video_url.trim() &&
       !/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\//i.test(
@@ -460,7 +489,10 @@ export const ProfileEditor = () => {
 
         // The database already expects this array.
         specialties:
-          form.practiceAreas,
+          form.practiceAreas.slice(
+            0,
+            practiceAreaLimit
+          ),
 
         years_experience:
           optionalNumber(
@@ -786,6 +818,31 @@ export const ProfileEditor = () => {
             />
           </section>
 
+          {/* Current plan limits */}
+          <section className="rounded-xl border border-[#0F2A43]/10 bg-[#0F2A43] p-5 text-white">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#D4A62A]">
+                  Current Subscription
+                </p>
+
+                <h3 className="mt-1 text-xl font-bold">
+                  {planRules.displayName}
+                </h3>
+
+                <p className="mt-2 text-sm text-white/75">
+                  Up to {planRules.practiceAreas} practice area{planRules.practiceAreas === 1 ? "" : "s"} ·
+                  {" "}{planRules.attorneyLimit} attorney profile{planRules.attorneyLimit === 1 ? "" : "s"} ·
+                  {" "}{planRules.video ? "Video enabled" : "Video locked"}
+                </p>
+              </div>
+
+              <Badge className="w-fit bg-white text-[#0F2A43] hover:bg-white">
+                Plan rules active
+              </Badge>
+            </div>
+          </section>
+
           {/* Practice areas */}
           <section className="rounded-xl border bg-gray-50 p-5">
             <div className="mb-4">
@@ -794,8 +851,7 @@ export const ProfileEditor = () => {
               </h3>
 
               <p className="mt-1 text-sm text-gray-600">
-                Select every practice area
-                offered by your firm.
+                Select up to {practiceAreaLimit} practice area{practiceAreaLimit === 1 ? "" : "s"} with your {planRules.displayName} plan.
               </p>
             </div>
 
@@ -815,8 +871,13 @@ export const ProfileEditor = () => {
                         category.slug
                       )
                     }
+                    disabled={
+                      !isSelected &&
+                      form.practiceAreas.length >=
+                        practiceAreaLimit
+                    }
                     aria-pressed={isSelected}
-                    className={`flex items-center justify-between rounded-lg border px-4 py-3 text-left text-sm font-medium transition ${
+                    className={`flex items-center justify-between rounded-lg border px-4 py-3 text-left text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50 ${
                       isSelected
                         ? "border-[#1FA8A1] bg-[#1FA8A1]/10 text-[#0F2A43]"
                         : "border-gray-200 bg-white text-gray-700 hover:border-[#1FA8A1]/60"
@@ -889,7 +950,7 @@ export const ProfileEditor = () => {
                           : "secondary"
                       }
                     >
-                      {planLabel(planKey)}
+                      {planRules.displayName}
                     </Badge>
                   </div>
 
@@ -897,13 +958,20 @@ export const ProfileEditor = () => {
                     Embed a YouTube or Vimeo introduction video
                     on your public firm profile.
                   </p>
+
+                  <p className="mt-2 text-xs font-medium text-gray-500">
+                    Current plan: {planRules.displayName} ·
+                    {planRules.video
+                      ? " Video enabled"
+                      : " Video locked"}
+                  </p>
                 </div>
               </div>
 
               {!hasVideoAccess && (
                 <div className="flex items-center gap-2 rounded-lg bg-amber-50 px-3 py-2 text-sm font-medium text-amber-800">
                   <LockKeyhole className="h-4 w-4" />
-                  Featured or Exclusive required
+                  Category Featured or Exclusive required
                 </div>
               )}
             </div>
