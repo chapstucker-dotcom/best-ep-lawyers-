@@ -18,6 +18,7 @@ import {
 } from '../data/categories';
 import { articles } from '../data/articles';
 import { plans } from '../data/plans';
+import { getPlanRules } from '@/config/planRules';
 
 import type { Firm, Article } from '../data/types';
 
@@ -77,6 +78,58 @@ const normalizeText = (value: unknown): string =>
     .replace(/[-_/]/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
+
+
+type RankedFirm = Firm & {
+  plan?: string | null;
+  plan_key?: string | null;
+  is_featured?: boolean | null;
+  featured?: boolean | null;
+  created_at?: string | null;
+};
+
+const getFirmPlanKey = (firm: Firm): string => {
+  const rankedFirm = firm as RankedFirm;
+
+  return String(
+    rankedFirm.plan_key ??
+      rankedFirm.plan ??
+      'free'
+  )
+    .trim()
+    .toLowerCase()
+    .replace(/[\s-]+/g, '_');
+};
+
+const getFirmRank = (firm: Firm): number => {
+  const rules = getPlanRules(
+    getFirmPlanKey(firm)
+  );
+
+  if (rules.categoryOwner) return 4;
+  if (rules.featuredPlacement) return 3;
+  if (rules.id === 'expert') return 2;
+
+  return 1;
+};
+
+const rotateFeaturedFirms = (
+  firms: Firm[]
+): Firm[] => {
+  if (firms.length <= 1) return firms;
+
+  // Rotates once per day so Featured firms share exposure
+  // without changing order while a visitor is browsing.
+  const dayNumber = Math.floor(
+    Date.now() / 86_400_000
+  );
+  const offset = dayNumber % firms.length;
+
+  return [
+    ...firms.slice(offset),
+    ...firms.slice(0, offset),
+  ];
+};
 
 export default function AppLayout() {
   const [firms, setFirms] = useState<Firm[]>([]);
@@ -346,45 +399,56 @@ export default function AppLayout() {
 
     if (sortBy === 'relevance') {
       sorted.sort((a, b) => {
-        const aFeatured = Boolean(
-          (
-            a as Firm & {
-              is_featured?: boolean;
-            }
-          ).is_featured
-        );
+        const rankDifference =
+          getFirmRank(b) -
+          getFirmRank(a);
 
-        const bFeatured = Boolean(
-          (
-            b as Firm & {
-              is_featured?: boolean;
-            }
-          ).is_featured
-        );
+        if (rankDifference !== 0) {
+          return rankDifference;
+        }
 
-        return Number(bFeatured) -
-          Number(aFeatured);
+        const aCreatedAt = new Date(
+          (a as RankedFirm).created_at ?? 0
+        ).getTime();
+
+        const bCreatedAt = new Date(
+          (b as RankedFirm).created_at ?? 0
+        ).getTime();
+
+        return bCreatedAt - aCreatedAt;
       });
     }
 
     return sorted;
   }, [filteredFirms, sortBy]);
 
-  const featuredFirms = useMemo(
-    () =>
-      firms
-        .filter((firm) =>
-          Boolean(
-            (
-              firm as Firm & {
-                is_featured?: boolean;
-              }
-            ).is_featured
-          )
-        )
-        .slice(0, 6),
-    [firms]
-  );
+  const featuredFirms = useMemo(() => {
+    const exclusiveFirms = firms.filter(
+      (firm) =>
+        getPlanRules(
+          getFirmPlanKey(firm)
+        ).categoryOwner
+    );
+
+    const rotatingFeatured =
+      rotateFeaturedFirms(
+        firms.filter((firm) => {
+          const rules = getPlanRules(
+            getFirmPlanKey(firm)
+          );
+
+          return (
+            rules.featuredPlacement &&
+            !rules.categoryOwner
+          );
+        })
+      );
+
+    return [
+      ...exclusiveFirms,
+      ...rotatingFeatured,
+    ].slice(0, 6);
+  }, [firms]);
 
   const selectedCategoryTitle =
     selectedCategory === 'all'
@@ -426,9 +490,9 @@ export default function AppLayout() {
               </h2>
 
               <p className="mt-2 text-gray-600">
-                Verified profiles, direct
-                contact, and practice-area
-                visibility.
+                Category Owners appear first.
+                Category Featured firms rotate
+                for premium exposure.
               </p>
             </div>
 
@@ -464,8 +528,9 @@ export default function AppLayout() {
           ) : (
             <div className="rounded-2xl border border-dashed bg-gray-50 px-6 py-12 text-center">
               <p className="font-medium text-gray-600">
-                Premium featured placements
-                are currently available.
+                Category Owner and rotating
+                Featured placements are currently
+                available.
               </p>
 
               <button
