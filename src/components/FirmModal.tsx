@@ -16,6 +16,13 @@ import {
   Building2,
   CalendarDays,
   CheckCircle2,
+  Clock3,
+  ExternalLink,
+  Images,
+  Languages,
+  Linkedin,
+  Facebook,
+  Instagram,
   Crown,
   Globe,
   Mail,
@@ -68,6 +75,14 @@ type PublicFirm = Firm & {
   years_experience?: number | string | null;
   team_size?: number | string | null;
   consultation_fee?: number | string | null;
+  office_hours?: string | null;
+  languages?: string[] | null;
+  awards?: string[] | null;
+  linkedin_url?: string | null;
+  facebook_url?: string | null;
+  instagram_url?: string | null;
+  google_maps_url?: string | null;
+  gallery_urls?: string[] | null;
 };
 
 
@@ -344,6 +359,21 @@ function FirmModal({
     yearsExperience > 0 ||
     teamSize > 0 ||
     consultationFee > 0;
+
+  const languages =
+    Array.isArray(publicFirm.languages)
+      ? publicFirm.languages.filter(Boolean)
+      : [];
+
+  const awards =
+    Array.isArray(publicFirm.awards)
+      ? publicFirm.awards.filter(Boolean)
+      : [];
+
+  const galleryUrls =
+    Array.isArray(publicFirm.gallery_urls)
+      ? publicFirm.gallery_urls.filter(Boolean)
+      : [];
 
   const premiumHighlights = [
     isCategoryExclusive
@@ -872,6 +902,156 @@ function FirmModal({
               </div>
             )}
           </section>
+
+          {(publicFirm.office_hours ||
+            languages.length > 0 ||
+            awards.length > 0) && (
+            <section className="grid gap-6 lg:grid-cols-3">
+              {publicFirm.office_hours && (
+                <div className="rounded-2xl border bg-white p-6 shadow-sm">
+                  <div className="flex items-center gap-3">
+                    <Clock3 className="h-5 w-5 text-[#1FA8A1]" />
+                    <h3 className="text-lg font-bold text-[#0F2A43]">
+                      Office Hours
+                    </h3>
+                  </div>
+                  <p className="mt-4 whitespace-pre-line text-sm leading-7 text-gray-700">
+                    {publicFirm.office_hours}
+                  </p>
+                </div>
+              )}
+
+              {languages.length > 0 && (
+                <div className="rounded-2xl border bg-white p-6 shadow-sm">
+                  <div className="flex items-center gap-3">
+                    <Languages className="h-5 w-5 text-[#1FA8A1]" />
+                    <h3 className="text-lg font-bold text-[#0F2A43]">
+                      Languages Spoken
+                    </h3>
+                  </div>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {languages.map((language) => (
+                      <Badge key={language} variant="secondary">
+                        {language}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {awards.length > 0 && (
+                <div className="rounded-2xl border bg-white p-6 shadow-sm">
+                  <div className="flex items-center gap-3">
+                    <Award className="h-5 w-5 text-[#D4A62A]" />
+                    <h3 className="text-lg font-bold text-[#0F2A43]">
+                      Awards & Recognition
+                    </h3>
+                  </div>
+                  <ul className="mt-4 space-y-3 text-sm text-gray-700">
+                    {awards.map((award) => (
+                      <li key={award} className="flex gap-2">
+                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#1FA8A1]" />
+                        <span>{award}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </section>
+          )}
+
+          {galleryUrls.length > 0 && (
+            <section>
+              <div className="mb-4 flex items-center gap-3">
+                <Images className="h-5 w-5 text-[#1FA8A1]" />
+                <h3 className="text-xl font-bold text-[#0F2A43]">
+                  Firm Gallery
+                </h3>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {galleryUrls.map((url, index) => (
+                  <img
+                    key={`${url}-${index}`}
+                    src={url}
+                    alt={`${publicFirm.name} gallery image ${index + 1}`}
+                    className="aspect-[4/3] w-full rounded-2xl border object-cover shadow-sm"
+                    loading="lazy"
+                  />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {(publicFirm.google_maps_url ||
+            publicFirm.linkedin_url ||
+            publicFirm.facebook_url ||
+            publicFirm.instagram_url) && (
+            <section className="rounded-2xl border bg-gray-50 p-6">
+              <h3 className="text-xl font-bold text-[#0F2A43]">
+                Connect With the Firm
+              </h3>
+
+              <div className="mt-4 flex flex-wrap gap-3">
+                {publicFirm.google_maps_url && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() =>
+                      window.open(
+                        publicFirm.google_maps_url!,
+                        "_blank",
+                        "noopener,noreferrer"
+                      )
+                    }
+                  >
+                    <MapPin className="mr-2 h-4 w-4" />
+                    View on Google Maps
+                    <ExternalLink className="ml-2 h-3.5 w-3.5" />
+                  </Button>
+                )}
+
+                {publicFirm.linkedin_url && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() =>
+                      window.open(publicFirm.linkedin_url!, "_blank", "noopener,noreferrer")
+                    }
+                  >
+                    <Linkedin className="mr-2 h-4 w-4" />
+                    LinkedIn
+                  </Button>
+                )}
+
+                {publicFirm.facebook_url && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() =>
+                      window.open(publicFirm.facebook_url!, "_blank", "noopener,noreferrer")
+                    }
+                  >
+                    <Facebook className="mr-2 h-4 w-4" />
+                    Facebook
+                  </Button>
+                )}
+
+                {publicFirm.instagram_url && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() =>
+                      window.open(publicFirm.instagram_url!, "_blank", "noopener,noreferrer")
+                    }
+                  >
+                    <Instagram className="mr-2 h-4 w-4" />
+                    Instagram
+                  </Button>
+                )}
+              </div>
+            </section>
+          )}
 
           <LeadCaptureForm
             firmId={publicFirm.id}

@@ -54,6 +54,14 @@ type FormState = {
   consultation_fee: string;
   logo_url: string;
   video_url: string;
+  office_hours: string;
+  languages: string;
+  awards: string;
+  linkedin_url: string;
+  facebook_url: string;
+  instagram_url: string;
+  google_maps_url: string;
+  gallery_urls: string;
 };
 
 const EMPTY: FormState = {
@@ -72,6 +80,14 @@ const EMPTY: FormState = {
   consultation_fee: "",
   logo_url: "",
   video_url: "",
+  office_hours: "",
+  languages: "",
+  awards: "",
+  linkedin_url: "",
+  facebook_url: "",
+  instagram_url: "",
+  google_maps_url: "",
+  gallery_urls: "",
 };
 
 const text = (value: unknown): string =>
@@ -161,6 +177,26 @@ const normalizePlanKey = (value: unknown): PlanKey => {
   }
 
   return "free";
+};
+
+const linesToArray = (value: string): string[] =>
+  value
+    .split(/\r?\n|,/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+
+const arrayToLines = (value: unknown): string =>
+  Array.isArray(value)
+    ? value.map(String).filter(Boolean).join("\n")
+    : "";
+
+const optionalUrl = (value: string): string | null => {
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+
+  return /^https?:\/\//i.test(trimmed)
+    ? trimmed
+    : `https://${trimmed}`;
 };
 
 const videoValue = (value: string): string | null => {
@@ -324,6 +360,22 @@ export const ProfileEditor = () => {
           ),
           logo_url: text(data.logo_url),
           video_url: text(data.video_url),
+      office_hours: text(data.office_hours),
+      languages: arrayToLines(data.languages),
+      awards: arrayToLines(data.awards),
+      linkedin_url: text(data.linkedin_url),
+      facebook_url: text(data.facebook_url),
+      instagram_url: text(data.instagram_url),
+      google_maps_url: text(data.google_maps_url),
+      gallery_urls: arrayToLines(data.gallery_urls),
+          office_hours: text(data.office_hours),
+          languages: arrayToLines(data.languages),
+          awards: arrayToLines(data.awards),
+          linkedin_url: text(data.linkedin_url),
+          facebook_url: text(data.facebook_url),
+          instagram_url: text(data.instagram_url),
+          google_maps_url: text(data.google_maps_url),
+          gallery_urls: arrayToLines(data.gallery_urls),
         });
       } else {
         setForm({
@@ -513,6 +565,25 @@ export const ProfileEditor = () => {
         video_url: hasVideoAccess
           ? videoValue(form.video_url)
           : null,
+
+        office_hours:
+          form.office_hours.trim() || null,
+        languages:
+          linesToArray(form.languages),
+        awards:
+          linesToArray(form.awards),
+        linkedin_url:
+          optionalUrl(form.linkedin_url),
+        facebook_url:
+          optionalUrl(form.facebook_url),
+        instagram_url:
+          optionalUrl(form.instagram_url),
+        google_maps_url:
+          optionalUrl(form.google_maps_url),
+        gallery_urls:
+          linesToArray(form.gallery_urls).map(
+            (url) => optionalUrl(url)
+          ).filter(Boolean),
       });
 
     setSaving(false);
@@ -1001,6 +1072,126 @@ export const ProfileEditor = () => {
                 remain hosted by YouTube or Vimeo so profiles stay
                 fast.
               </p>
+            </div>
+          </section>
+
+          {/* Expanded public profile details */}
+          <section className="rounded-xl border bg-white p-5">
+            <div>
+              <h3 className="text-lg font-bold text-gray-900">
+                Public Profile Details
+              </h3>
+              <p className="mt-1 text-sm leading-6 text-gray-600">
+                Add office information, languages, recognitions,
+                social links, map details, and gallery images.
+              </p>
+            </div>
+
+            <div className="mt-5 grid gap-5 md:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="office_hours">Office Hours</Label>
+                <Textarea
+                  id="office_hours"
+                  value={form.office_hours}
+                  onChange={(event) =>
+                    setField("office_hours", event.target.value)
+                  }
+                  rows={5}
+                  placeholder={"Monday-Friday: 8:30 AM-5:30 PM\nSaturday: By appointment"}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="languages">Languages Spoken</Label>
+                <Textarea
+                  id="languages"
+                  value={form.languages}
+                  onChange={(event) =>
+                    setField("languages", event.target.value)
+                  }
+                  rows={5}
+                  placeholder={"English\nSpanish"}
+                />
+                <p className="text-xs text-gray-500">
+                  Enter one language per line.
+                </p>
+              </div>
+
+              <div className="space-y-2 md:col-span-2">
+                <Label htmlFor="awards">
+                  Awards, Memberships & Recognitions
+                </Label>
+                <Textarea
+                  id="awards"
+                  value={form.awards}
+                  onChange={(event) =>
+                    setField("awards", event.target.value)
+                  }
+                  rows={5}
+                  placeholder={"Texas Bar College\nEl Paso Bar Association\nSuper Lawyers selection"}
+                />
+                <p className="text-xs text-gray-500">
+                  Enter one item per line.
+                </p>
+              </div>
+
+              <Field
+                label="Google Maps URL"
+                id="google_maps_url"
+                value={form.google_maps_url}
+                onChange={(value) =>
+                  setField("google_maps_url", value)
+                }
+                type="url"
+              />
+
+              <Field
+                label="LinkedIn URL"
+                id="linkedin_url"
+                value={form.linkedin_url}
+                onChange={(value) =>
+                  setField("linkedin_url", value)
+                }
+                type="url"
+              />
+
+              <Field
+                label="Facebook URL"
+                id="facebook_url"
+                value={form.facebook_url}
+                onChange={(value) =>
+                  setField("facebook_url", value)
+                }
+                type="url"
+              />
+
+              <Field
+                label="Instagram URL"
+                id="instagram_url"
+                value={form.instagram_url}
+                onChange={(value) =>
+                  setField("instagram_url", value)
+                }
+                type="url"
+              />
+
+              <div className="space-y-2 md:col-span-2">
+                <Label htmlFor="gallery_urls">
+                  Firm Gallery Image URLs
+                </Label>
+                <Textarea
+                  id="gallery_urls"
+                  value={form.gallery_urls}
+                  onChange={(event) =>
+                    setField("gallery_urls", event.target.value)
+                  }
+                  rows={5}
+                  placeholder={"https://example.com/office-1.jpg\nhttps://example.com/team.jpg"}
+                />
+                <p className="text-xs text-gray-500">
+                  Enter one publicly accessible image URL per line.
+                </p>
+              </div>
             </div>
           </section>
 
