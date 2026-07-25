@@ -1053,12 +1053,17 @@ function FirmModal({
             </section>
           )}
 
-          <LeadCaptureForm
-            firmId={publicFirm.id}
-            firmName={publicFirm.name}
-            firmEmail={publicFirm.email}
-            practiceArea={displayedPracticeAreas[0]?.title}
-          />
+         <div
+  id={`consultation-form-${publicFirm.id}`}
+  className="scroll-mt-24"
+>
+  <LeadCaptureForm
+    firmId={publicFirm.id}
+    firmName={publicFirm.name}
+    firmEmail={publicFirm.email}
+    practiceArea={displayedPracticeAreas[0]?.title}
+  />
+</div>
 
           <section className="rounded-2xl border bg-white p-6 shadow-sm">
             <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
