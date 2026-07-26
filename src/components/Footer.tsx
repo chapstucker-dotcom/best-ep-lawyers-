@@ -14,6 +14,7 @@ export default function Footer() {
           <div>
             <div className="mb-5 flex items-center gap-3">
               <Scale className="h-8 w-8 text-[#D4A62A]" />
+
               <h2 className="text-2xl font-bold">
                 El Paso&apos;s Best Lawyers
               </h2>
@@ -23,7 +24,9 @@ export default function Footer() {
               Connecting People with El Paso&apos;s Legal Community.
             </p>
 
-            <div className="mt-6 space-y-3 text-sm">
+            <h3 className="mb-4 mt-7 font-bold">Contact</h3>
+
+            <div className="space-y-3 text-sm">
               <a
                 href="https://www.elpasosbestlawyers.com"
                 target="_blank"
@@ -50,10 +53,6 @@ export default function Footer() {
                 (915) 539-2283
               </a>
             </div>
-
-            <p className="mt-8 font-semibold text-[#D4A62A]">
-              Complimentary Law Firm Listings Available
-            </p>
           </div>
 
           <div>
@@ -102,7 +101,7 @@ export default function Footer() {
                   onClick={() => scrollToSection("list-form")}
                   className="transition hover:text-[#D4A62A]"
                 >
-                  Claim Your Complimentary Listing
+                  Claim Your Listing
                 </button>
               </li>
 
