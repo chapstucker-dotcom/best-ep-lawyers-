@@ -570,21 +570,22 @@ function FirmModal({
             )}
           </section>
 
-          {videoEmbedUrl && (
-            <section className="overflow-hidden rounded-2xl border border-[#D4A62A]/40 bg-[#0F2A43] shadow-lg">
-              <div className="border-b border-white/10 px-6 py-5 text-white">
-                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#D4A62A]">
+                    {videoEmbedUrl && (
+            <section className="mx-auto w-full max-w-4xl overflow-hidden rounded-2xl border border-[#D4A62A]/40 bg-[#0F2A43] shadow-lg">
+              <div className="border-b border-white/10 px-6 py-4 text-white">
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#D4A62A]">
                   {isCategoryExclusive
                     ? "Exclusive Video Introduction"
                     : "Featured Video Introduction"}
                 </p>
-                <h3 className="mt-2 flex items-center gap-2 text-2xl font-bold">
-                  <PlayCircle className="h-6 w-6 text-[#D4A62A]" />
+
+                <h3 className="mt-2 flex items-center gap-2 text-xl font-bold">
+                  <PlayCircle className="h-5 w-5 text-[#D4A62A]" />
                   Meet {publicFirm.name}
                 </h3>
               </div>
 
-              <div className="aspect-video w-full bg-black">
+              <div className="aspect-video w-full overflow-hidden bg-black">
                 <iframe
                   src={videoEmbedUrl}
                   title={`${publicFirm.name} introduction video`}
@@ -596,7 +597,6 @@ function FirmModal({
               </div>
             </section>
           )}
-
           {hasFirmStats && (
             <section className="grid gap-4 sm:grid-cols-3">
               {yearsExperience > 0 && (
@@ -1147,46 +1147,83 @@ function FirmModal({
           </section>
 
           <section className="sticky bottom-0 z-10 -mx-6 border-t bg-white/95 px-6 py-4 shadow-[0_-8px_24px_rgba(15,42,67,0.10)] backdrop-blur sm:-mx-8 sm:px-8">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
               <div>
                 <p className="font-bold text-[#0F2A43]">
                   Ready to speak with {publicFirm.name}?
                 </p>
+
                 <p className="text-sm text-gray-600">
-                  Contact the firm directly or submit a consultation request.
+                  Call, email, visit the firm’s website, get directions, or request a consultation.
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-3">
                 {publicFirm.phone && (
                   <Button
-                    type="button"
+                    asChild
                     className="bg-[#1FA8A1] hover:bg-[#178D87]"
-                    onClick={() =>
-                      window.location.assign(
-                        `tel:${publicFirm.phone}`
-                      )
-                    }
                   >
-                    <Phone className="mr-2 h-4 w-4" />
-                    Call Firm
+                    <a
+                      href={`tel:${publicFirm.phone.replace(
+                        /[^\d+]/g,
+                        ""
+                      )}`}
+                    >
+                      <Phone className="mr-2 h-4 w-4" />
+                      Call Firm
+                    </a>
                   </Button>
                 )}
 
                 {publicFirm.email && (
+                  <Button asChild variant="outline">
+                    <a href={`mailto:${publicFirm.email}`}>
+                      <Mail className="mr-2 h-4 w-4" />
+                      Email Firm
+                    </a>
+                  </Button>
+                )}
+
+                {publicFirm.website && (
                   <Button
                     type="button"
                     variant="outline"
-                    onClick={() =>
-                      window.location.assign(
-                        `mailto:${publicFirm.email}`
-                      )
-                    }
+                    onClick={openWebsite}
                   >
-                    <Mail className="mr-2 h-4 w-4" />
-                    Email Firm
+                    <Globe className="mr-2 h-4 w-4" />
+                    Website
                   </Button>
                 )}
+
+                {fullAddress && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={openDirections}
+                  >
+                    <MapPin className="mr-2 h-4 w-4" />
+                    Directions
+                  </Button>
+                )}
+
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => {
+                    document
+                      .getElementById(
+                        `consultation-form-${publicFirm.id}`
+                      )
+                      ?.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                      });
+                  }}
+                >
+                  <CalendarDays className="mr-2 h-4 w-4" />
+                  Request Consultation
+                </Button>
               </div>
             </div>
           </section>
