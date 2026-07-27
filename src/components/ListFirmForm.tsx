@@ -1,202 +1,461 @@
 import { useState } from "react";
 import { createFirm } from "@/services/firmService";
 
+type PlanName =
+  | "Free"
+  | "Expert"
+  | "Category Featured"
+  | "Category Exclusive";
+
+type FormData = {
+  name: string;
+  email: string;
+  phone: string;
+  website: string;
+  address: string;
+  bio: string;
+  plan: PlanName;
+  agreed: boolean;
+};
+
+const STRIPE_LINKS: Record<Exclude<PlanName, "Free">, string> = {
+  Expert:
+    "https://buy.stripe.com/7sY8wOgQU8u65N198SaAw01",
+
+  "Category Featured":
+    "https://buy.stripe.com/fZu6oG0RWeSu2AP98SaAw03",
+
+  "Category Exclusive":
+    "https://buy.stripe.com/8x27sK3046lYb7lgBkaAw04",
+};
+
+const INITIAL_FORM: FormData = {
+  name: "",
+  email: "",
+  phone: "",
+  website: "",
+  address: "",
+  bio: "",
+  plan: "Free",
+  agreed: false,
+};
+
 export default function ListFirmForm() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    website: "",
-    address: "",
-    bio: "",
-    plan: "Free",
-    agreed: false,
-  });
+  const [formData, setFormData] =
+    useState<FormData>(INITIAL_FORM);
 
   const [status, setStatus] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
-  const updateField = (field: string, value: string | boolean) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+  const updateField = <K extends keyof FormData>(
+    field: K,
+    value: FormData[K]
+  ) => {
+    setFormData((previous) => ({
+      ...previous,
+      [field]: value,
+    }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const sendListingEmail = async (
+    website: string
+  ): Promise<boolean> => {
+    try {
+      const response = await fetch("/api/send-lead", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firmName: formData.name.trim(),
+          contactName: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim(),
+          website,
+          address: formData.address.trim(),
+          bio: formData.bio.trim(),
+          city: "El Paso",
+          state: "TX",
+          plan: formData.plan,
+          submissionType:
+            formData.plan === "Free"
+              ? "Free Listing"
+              : "Paid Plan Checkout",
+        }),
+      });
+
+      if (!response.ok) {
+        console.error(
+          "Listing email failed:",
+          await response.text()
+        );
+
+        return false;
+      }
+
+      return true;
+    } catch (error) {
+      console.error("Listing email failed:", error);
+      return false;
+    }
+  };
+
+  const handleSubmit = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+
+    if (submitting) return;
+
     setStatus("");
 
     if (!formData.agreed) {
-      setStatus("Please agree to the attorney advertising notice.");
+      setStatus(
+        "Please agree to the attorney advertising notice."
+      );
       return;
     }
 
-    if (!formData.name || !formData.email || !formData.phone || !formData.address) {
+    if (
+      !formData.name.trim() ||
+      !formData.email.trim() ||
+      !formData.phone.trim() ||
+      !formData.address.trim()
+    ) {
       setStatus("Please fill out all required fields.");
       return;
     }
 
-    const website =
-      formData.website && !formData.website.startsWith("http")
-        ? `https://${formData.website}`
-        : formData.website;
+    setSubmitting(true);
+    setStatus("Processing your submission...");
 
+    const website =
+      formData.website.trim() &&
+      !/^https?:\/\//i.test(formData.website.trim())
+        ? `https://${formData.website.trim()}`
+        : formData.website.trim();
+
+    /*
+     * Send the complete submission before redirecting.
+     * This prevents paid-plan information from being lost.
+     */
+    const emailSent = await sendListingEmail(website);
+
+    /*
+     * PAID PLAN FLOW
+     *
+     * Do not assign premium status in Supabase before Stripe
+     * confirms payment. The submission is preserved locally
+     * and sent by email, then the visitor goes to Checkout.
+     *
+     * After payment appears in Stripe, manually approve the
+     * listing and assign the correct plan in Supabase.
+     */
+    if (formData.plan !== "Free") {
+      const checkoutUrl =
+        STRIPE_LINKS[formData.plan];
+
+      localStorage.setItem(
+        "pending-paid-firm-listing",
+        JSON.stringify({
+          ...formData,
+          website,
+          submittedAt: new Date().toISOString(),
+        })
+      );
+
+      if (!emailSent) {
+        setStatus(
+          "We could not preserve your information. Please try again before continuing to checkout."
+        );
+        setSubmitting(false);
+        return;
+      }
+
+      setStatus("Opening secure Stripe checkout...");
+
+      window.location.assign(checkoutUrl);
+      return;
+    }
+
+    /*
+     * FREE LISTING FLOW
+     */
     const { error } = await createFirm({
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone.trim(),
       website,
-      address: formData.address,
-      bio: formData.bio,
+      address: formData.address.trim(),
+      bio: formData.bio.trim(),
       category: "Pending Review",
-      plan: formData.plan,
+
+      // Always store this as the free plan.
+      plan: "free",
+
       is_featured: false,
       is_exclusive: false,
       is_verified: false,
     });
 
     if (error) {
-      console.error(error);
-      setStatus("Submission received, but there was a database issue. Check Supabase.");
+      console.error("Firm submission failed:", error);
+
+      setStatus(
+        "We could not save the listing. Please try again."
+      );
+      setSubmitting(false);
       return;
     }
 
-    try {
-      await fetch("/api/send-lead", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          firmName: formData.name,
-          contactName: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          website,
-          address: formData.address,
-          city: "El Paso",
-          state: "TX",
-          plan: formData.plan,
-        }),
-      });
-    } catch (emailError) {
-      console.error("Email notification failed:", emailError);
-    }
+    setStatus(
+      emailSent
+        ? "Success! Your complimentary listing was submitted for review."
+        : "Your listing was saved, but the confirmation email could not be sent."
+    );
 
-    setStatus("Success! Your listing was submitted for review.");
-
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      website: "",
-      address: "",
-      bio: "",
-      plan: "Free",
-      agreed: false,
-    });
+    setFormData(INITIAL_FORM);
+    setSubmitting(false);
   };
 
   return (
-    <section id="list-form" className="bg-white py-16">
-      <div className="max-w-4xl mx-auto px-6">
+    <section
+      id="list-form"
+      className="bg-white py-16"
+    >
+      <div className="mx-auto max-w-4xl px-6">
         <form
           onSubmit={handleSubmit}
-          className="bg-gray-50 border rounded-xl p-8 shadow-sm"
+          className="rounded-xl border bg-gray-50 p-8 shadow-sm"
         >
-          <h2 className="text-3xl font-bold text-[#021B45] mb-8">
+          <h2 className="mb-3 text-3xl font-bold text-[#021B45]">
             List Your Law Firm
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <p className="mb-8 text-gray-600">
+            Begin with a complimentary listing or select
+            an enhanced visibility plan.
+          </p>
+
+          <div className="grid gap-6 md:grid-cols-2">
             <div>
-              <label className="block font-medium mb-2">Firm Name *</label>
+              <label
+                htmlFor="firm-name"
+                className="mb-2 block font-medium"
+              >
+                Firm Name *
+              </label>
+
               <input
-                className="w-full border rounded-lg p-3"
+                id="firm-name"
+                required
+                className="w-full rounded-lg border p-3"
                 value={formData.name}
-                onChange={(e) => updateField("name", e.target.value)}
+                onChange={(event) =>
+                  updateField(
+                    "name",
+                    event.target.value
+                  )
+                }
               />
             </div>
 
             <div>
-              <label className="block font-medium mb-2">Email *</label>
+              <label
+                htmlFor="firm-email"
+                className="mb-2 block font-medium"
+              >
+                Email *
+              </label>
+
               <input
+                id="firm-email"
+                required
                 type="email"
-                className="w-full border rounded-lg p-3"
+                className="w-full rounded-lg border p-3"
                 value={formData.email}
-                onChange={(e) => updateField("email", e.target.value)}
+                onChange={(event) =>
+                  updateField(
+                    "email",
+                    event.target.value
+                  )
+                }
               />
             </div>
 
             <div>
-              <label className="block font-medium mb-2">Phone *</label>
+              <label
+                htmlFor="firm-phone"
+                className="mb-2 block font-medium"
+              >
+                Phone *
+              </label>
+
               <input
-                className="w-full border rounded-lg p-3"
+                id="firm-phone"
+                required
+                type="tel"
+                className="w-full rounded-lg border p-3"
                 value={formData.phone}
-                onChange={(e) => updateField("phone", e.target.value)}
+                onChange={(event) =>
+                  updateField(
+                    "phone",
+                    event.target.value
+                  )
+                }
               />
             </div>
 
             <div>
-              <label className="block font-medium mb-2">Website</label>
+              <label
+                htmlFor="firm-website"
+                className="mb-2 block font-medium"
+              >
+                Website
+              </label>
+
               <input
-                className="w-full border rounded-lg p-3"
+                id="firm-website"
+                className="w-full rounded-lg border p-3"
                 placeholder="https://example.com"
                 value={formData.website}
-                onChange={(e) => updateField("website", e.target.value)}
+                onChange={(event) =>
+                  updateField(
+                    "website",
+                    event.target.value
+                  )
+                }
               />
             </div>
           </div>
 
           <div className="mt-6">
-            <label className="block font-medium mb-2">Address *</label>
-            <input
-              className="w-full border rounded-lg p-3"
-              value={formData.address}
-              onChange={(e) => updateField("address", e.target.value)}
-            />
-          </div>
-
-          <div className="mt-6">
-            <label className="block font-medium mb-2">About Your Firm</label>
-            <textarea
-              className="w-full border rounded-lg p-3 min-h-[120px]"
-              value={formData.bio}
-              onChange={(e) => updateField("bio", e.target.value)}
-            />
-          </div>
-
-          <div className="mt-6">
-            <label className="block font-medium mb-2">Select Plan</label>
-            <select
-              className="w-full border rounded-lg p-3"
-              value={formData.plan}
-              onChange={(e) => updateField("plan", e.target.value)}
+            <label
+              htmlFor="firm-address"
+              className="mb-2 block font-medium"
             >
-              <option value="Free">Free</option>
-              <option value="Expert">Expert — $299/mo</option>
-              <option value="Category Featured">Category Featured — $2,000/mo</option>
-              <option value="Category Exclusive">Category Exclusive — $5,000/mo</option>
-            </select>
+              Address *
+            </label>
+
+            <input
+              id="firm-address"
+              required
+              className="w-full rounded-lg border p-3"
+              value={formData.address}
+              onChange={(event) =>
+                updateField(
+                  "address",
+                  event.target.value
+                )
+              }
+            />
           </div>
 
-          <label className="flex items-center gap-3 mt-6">
+          <div className="mt-6">
+            <label
+              htmlFor="firm-bio"
+              className="mb-2 block font-medium"
+            >
+              About Your Firm
+            </label>
+
+            <textarea
+              id="firm-bio"
+              className="min-h-[120px] w-full rounded-lg border p-3"
+              value={formData.bio}
+              onChange={(event) =>
+                updateField(
+                  "bio",
+                  event.target.value
+                )
+              }
+            />
+          </div>
+
+          <div className="mt-6">
+            <label
+              htmlFor="firm-plan"
+              className="mb-2 block font-medium"
+            >
+              Select Plan
+            </label>
+
+            <select
+              id="firm-plan"
+              className="w-full rounded-lg border p-3"
+              value={formData.plan}
+              onChange={(event) =>
+                updateField(
+                  "plan",
+                  event.target.value as PlanName
+                )
+              }
+            >
+              <option value="Free">
+                Free Listing — $0/month
+              </option>
+
+              <option value="Expert">
+                Expert — $299/month
+              </option>
+
+              <option value="Category Featured">
+                Category Featured — $2,000/month
+              </option>
+
+              <option value="Category Exclusive">
+                Category Exclusive — $5,000/month
+              </option>
+            </select>
+
+            {formData.plan !== "Free" && (
+              <p className="mt-3 text-sm text-gray-600">
+                After submitting, you will be taken to
+                Stripe&apos;s secure checkout page.
+              </p>
+            )}
+          </div>
+
+          <label className="mt-6 flex items-start gap-3">
             <input
               type="checkbox"
+              className="mt-1"
               checked={formData.agreed}
-              onChange={(e) => updateField("agreed", e.target.checked)}
+              onChange={(event) =>
+                updateField(
+                  "agreed",
+                  event.target.checked
+                )
+              }
             />
-            <span>I agree this is attorney advertising. *</span>
+
+            <span>
+              I confirm the submitted information is
+              authorized for publication and understand
+              that listings may constitute attorney
+              advertising. *
+            </span>
           </label>
 
           {status && (
-            <p className="mt-4 font-semibold text-[#021B45]">
+            <p
+              aria-live="polite"
+              className="mt-4 font-semibold text-[#021B45]"
+            >
               {status}
             </p>
           )}
 
           <button
             type="submit"
-            className="mt-6 w-full bg-[#1FA8A1] text-white py-4 rounded-lg font-bold hover:opacity-90"
+            disabled={submitting}
+            className="mt-6 w-full rounded-lg bg-[#1FA8A1] py-4 font-bold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Submit Listing
+            {submitting
+              ? "Processing..."
+              : formData.plan === "Free"
+                ? "Submit Complimentary Listing"
+                : "Continue to Secure Checkout"}
           </button>
         </form>
       </div>
