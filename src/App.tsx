@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import Index from "./pages/Index";
 import Login from "./pages/Login";
@@ -10,6 +10,7 @@ import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
 import AdminDashboard from "./pages/AdminDashboard";
 import AttorneyDetails from "./pages/AttorneyDetails";
+import PersonalInjury from "./pages/PersonalInjury";
 
 import { AuthProvider } from "./contexts/AuthContext";
 
@@ -18,6 +19,12 @@ export default function App() {
     <AuthProvider>
       <Routes>
         <Route path="/" element={<Index />} />
+
+        <Route
+          path="/el-paso-personal-injury-lawyers"
+          element={<PersonalInjury />}
+        />
+
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
@@ -26,7 +33,6 @@ export default function App() {
         <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/reset-password" element={<ResetPassword />} />
 
-        {/* Attorney profile page */}
         <Route path="/attorney/:id" element={<AttorneyDetails />} />
 
         <Route path="*" element={<NotFound />} />
