@@ -202,21 +202,20 @@ export default function Hero({
             </div>
 
             <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-[#D4A62A]">
-              Find Counsel. Build Visibility.
-            </p>
+  Compare El Paso Lawyers by Practice Area
+</p>
 
-            <h1 className="max-w-4xl text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl xl:text-7xl">
-              El Paso&apos;s Premier
-              Attorney Directory
-            </h1>
+<h1 className="max-w-4xl text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl xl:text-7xl">
+  Find the Best Lawyer
+  <br />
+  in El Paso, Texas
+</h1>
 
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-white/80 sm:text-xl">
-              Helping El Paso residents find
-              trusted local attorneys while giving
-              law firms the professional profiles,
-              visibility, lead tools, and analytics
-              they need to grow.
-            </p>
+<p className="mt-6 max-w-3xl text-lg leading-8 text-white/80 sm:text-xl">
+  Search El Paso&apos;s Best Lawyers to compare trusted local attorneys,
+  browse law firms by practice area, and connect directly with experienced
+  legal professionals serving El Paso and West Texas.
+</p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <button
