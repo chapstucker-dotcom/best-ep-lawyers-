@@ -2,7 +2,3 @@ User-agent: *
 Allow: /
 
 Sitemap: https://elpasosbestlawyers.com/sitemap.xml
-User-agent: *
-Allow: /
-
-Sitemap: https://elpasosbestlawyers.com/sitemap.xml
