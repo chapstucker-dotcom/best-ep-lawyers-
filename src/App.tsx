@@ -13,6 +13,8 @@ import AttorneyDetails from "./pages/AttorneyDetails";
 import PersonalInjury from "./pages/PersonalInjury";
 import CriminalDefense from "./pages/CriminalDefense";
 import Immigration from "./pages/Immigration";
+import FamilyLaw from "./pages/FamilyLaw";
+import DWI from "./pages/DWI";
 
 import { AuthProvider } from "./contexts/AuthContext";
 
@@ -37,6 +39,11 @@ export default function App() {
           element={<Immigration />}
         />
 
+        <Route
+  path="/el-paso-family-lawyers"
+  element={<FamilyLaw />}
+/>
+
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
@@ -45,6 +52,10 @@ export default function App() {
         <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/attorney/:id" element={<AttorneyDetails />} />
+        <Route
+  path="/el-paso-dwi-lawyers"
+  element={<DWI />}
+/>
 
         <Route path="*" element={<NotFound />} />
       </Routes>
