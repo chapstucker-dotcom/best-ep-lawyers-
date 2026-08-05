@@ -559,23 +559,97 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     shortTitle: "Civil Litigation",
     title: "Best Civil Litigation Lawyers in El Paso, Texas",
     description:
-      "Compare El Paso civil litigation attorneys handling contract disputes, business lawsuits, property claims, injunctions, trials, and appeals.",
+      "Compare El Paso civil litigation attorneys handling contract disputes, business lawsuits, property claims, injunctions, insurance disputes, construction matters, trials, and appeals.",
+    metaDescription:
+      "Compare civil litigation lawyers in El Paso for contract disputes, business lawsuits, property claims, injunctions, insurance disputes, trials, and appeals.",
+    heroText:
+      "Compare El Paso civil litigation attorneys for contract disputes, business lawsuits, property claims, injunctions, insurance disputes, construction matters, trials, and appeals.",
     topics: [
       "Contract Disputes",
       "Business Litigation",
+      "Partnership Disputes",
       "Property Disputes",
+      "Insurance Disputes",
+      "Construction Litigation",
       "Temporary Injunctions",
-      "Trials",
-      "Appeals",
+      "Trials and Appeals",
+      "Mediation and Arbitration",
     ],
-    overview: genericOverview("Civil Litigation"),
-    whenToHire: genericWhenToHire("Civil Litigation"),
-    localContent: genericLocal("Civil Litigation"),
-    faqs: genericFaqs("Civil Litigation"),
+    overview: [
+      "A civil litigation lawyer represents individuals, businesses, property owners, organizations, and other parties in noncriminal disputes. The work may include investigating facts, preserving evidence, preparing pleadings, conducting discovery, negotiating settlements, presenting motions, and trying cases before a judge or jury.",
+      "Civil cases can involve contracts, ownership, fraud, fiduciary duties, unpaid obligations, property damage, insurance coverage, construction defects, business relationships, or requests for emergency court relief. The legal strategy depends on the claims, defenses, available evidence, deadlines, and the client's practical goals.",
+      "Many civil disputes resolve through negotiation, mediation, or arbitration, while others require hearings, trial, or appeal. Early legal analysis can help identify the strengths and risks of a case, preserve important records, and avoid missed deadlines or procedural mistakes.",
+    ],
+    whenToHire: [
+      "You received a demand letter, lawsuit, subpoena, petition, motion, or other court filing.",
+      "A contract, business relationship, property interest, insurance claim, or significant financial interest is in dispute.",
+      "You need emergency relief such as a temporary restraining order or injunction.",
+      "Negotiations have failed and the dispute may require mediation, arbitration, or trial.",
+      "You need help collecting a judgment, defending against a claim, or enforcing a court order.",
+      "You are considering an appeal or need to preserve issues for appellate review.",
+    ],
+    localContent: [
+      "Civil disputes involving El Paso parties may be filed in justice courts, county courts, district courts, or the El Paso Division of the United States District Court for the Western District of Texas, depending on the amount in controversy, claims, and parties.",
+      "Local litigation may involve bilingual witnesses, cross-border contracts, businesses operating in Texas and New Mexico, property near the border, military-connected parties, or evidence located in another jurisdiction. These facts can affect service, discovery, jurisdiction, and enforcement.",
+      "An El Paso civil litigation attorney can help evaluate venue, deadlines, evidence, damages, settlement options, and whether negotiation, mediation, arbitration, trial, or appeal is the most appropriate course.",
+    ],
+    faqs: [
+      {
+        question: "What is civil litigation?",
+        answer:
+          "Civil litigation is the court process used to resolve noncriminal disputes between individuals, businesses, organizations, or government entities.",
+      },
+      {
+        question: "How does a civil lawsuit begin?",
+        answer:
+          "A civil case generally begins when a plaintiff files a petition or complaint and serves the defendant. The defendant then has a deadline to respond.",
+      },
+      {
+        question: "What is discovery?",
+        answer:
+          "Discovery is the process of exchanging information and evidence through written requests, document production, depositions, admissions, subpoenas, and other procedures.",
+      },
+      {
+        question: "What is a temporary injunction?",
+        answer:
+          "A temporary injunction is a court order intended to preserve the status quo and prevent certain conduct while a case is pending. Specific legal requirements must be met.",
+      },
+      {
+        question: "Can a civil case settle before trial?",
+        answer:
+          "Yes. Many civil cases resolve through direct negotiation, mediation, arbitration, or settlement conferences before trial.",
+      },
+      {
+        question: "What damages may be available?",
+        answer:
+          "Available damages depend on the claim and may include actual damages, lost profits, repair costs, attorney fees when authorized, interest, or other relief.",
+      },
+      {
+        question: "How long does civil litigation take?",
+        answer:
+          "Timing varies based on complexity, discovery, court schedules, motions, settlement efforts, trial preparation, and appeals.",
+      },
+      {
+        question: "What is mediation?",
+        answer:
+          "Mediation is a confidential settlement process in which a neutral mediator helps the parties explore a voluntary resolution.",
+      },
+      {
+        question: "What is arbitration?",
+        answer:
+          "Arbitration is a private dispute-resolution process in which an arbitrator or panel decides the case. It may be required by contract or agreed to by the parties.",
+      },
+      {
+        question: "When should I contact a civil litigation lawyer?",
+        answer:
+          "Consider contacting counsel promptly when a dispute involves court deadlines, significant money, property, business operations, emergency relief, or a risk of losing evidence.",
+      },
+    ],
     relatedPages: [
       { label: "Business Law", path: "/el-paso-business-lawyers" },
       { label: "Real Estate", path: "/el-paso-real-estate-lawyers" },
-      { label: "Employment", path: "/el-paso-employment-lawyers" },
+      { label: "Employment Law", path: "/el-paso-employment-lawyers" },
+      { label: "Probate", path: "/el-paso-probate-lawyers" },
     ],
   },
   {
