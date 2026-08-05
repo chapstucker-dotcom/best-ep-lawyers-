@@ -167,23 +167,97 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     shortTitle: "Bankruptcy",
     title: "Best Bankruptcy Lawyers in El Paso, Texas",
     description:
-      "Compare El Paso bankruptcy lawyers for Chapter 7, Chapter 13, debt relief, creditor disputes, foreclosure, and business bankruptcy.",
+      "Compare El Paso bankruptcy attorneys handling Chapter 7, Chapter 13, debt relief, foreclosure concerns, creditor disputes, repossession, wage garnishment, and business bankruptcy matters.",
+    metaDescription:
+      "Compare bankruptcy lawyers in El Paso for Chapter 7, Chapter 13, debt relief, foreclosure concerns, creditor disputes, repossession, and business bankruptcy.",
+    heroText:
+      "Compare El Paso bankruptcy attorneys for Chapter 7, Chapter 13, debt relief, foreclosure concerns, creditor disputes, repossession, wage garnishment, and business bankruptcy matters.",
     topics: [
       "Chapter 7 Bankruptcy",
       "Chapter 13 Bankruptcy",
-      "Business Bankruptcy",
       "Debt Relief",
-      "Foreclosure Issues",
-      "Creditor Disputes",
+      "Foreclosure Concerns",
+      "Repossession",
+      "Wage Garnishment",
+      "Creditor Harassment",
+      "Business Bankruptcy",
+      "Bankruptcy Litigation",
     ],
-    overview: genericOverview("Bankruptcy"),
-    whenToHire: genericWhenToHire("Bankruptcy"),
-    localContent: genericLocal("Bankruptcy"),
-    faqs: genericFaqs("Bankruptcy"),
+    overview: [
+      "A bankruptcy lawyer helps individuals and businesses evaluate whether bankruptcy is appropriate, determine which chapter may apply, prepare required disclosures, identify assets and debts, address exemptions, and guide the case through the federal bankruptcy process.",
+      "Chapter 7 is generally associated with liquidation of nonexempt assets and discharge of eligible debts, while Chapter 13 allows qualifying individuals with regular income to propose a repayment plan that typically lasts three to five years. Chapter 11 is commonly used for business reorganizations and may also be available in some individual cases.",
+      "Filing a bankruptcy petition usually creates an automatic stay that stops many collection efforts, lawsuits, garnishments, and foreclosure actions. The stay has exceptions and may be limited in repeat-filing situations, so legal advice can be important when urgent collection activity is involved.",
+    ],
+    whenToHire: [
+      "You are unable to keep up with credit cards, medical bills, loans, or other debts.",
+      "You are facing foreclosure, repossession, garnishment, lawsuits, or aggressive collection activity.",
+      "You need help deciding between Chapter 7, Chapter 13, Chapter 11, or a non-bankruptcy alternative.",
+      "You own a home, business, retirement account, vehicle, or other property that may require exemption analysis.",
+      "A creditor alleges fraud, challenges dischargeability, or files an adversary proceeding.",
+      "You previously filed bankruptcy or have questions about eligibility, timing, or the automatic stay.",
+    ],
+    localContent: [
+      "Bankruptcy cases for El Paso County are handled in the El Paso Division of the United States Bankruptcy Court for the Western District of Texas. The divisional office is located in the R.E. Thomason Federal Building and United States Courthouse at 511 E. San Antonio Avenue in El Paso.",
+      "Local cases may involve homes near foreclosure, vehicle repossessions, medical debt, small businesses, military income, cross-border assets, or property located in Texas, New Mexico, or Mexico. These facts can affect schedules, exemptions, valuation, jurisdiction, and repayment planning.",
+      "An El Paso bankruptcy attorney can help explain local filing procedures, trustee requirements, document preparation, creditor meetings, plan confirmation, and whether bankruptcy or another debt-relief strategy fits the client's circumstances.",
+    ],
+    faqs: [
+      {
+        question: "What is the difference between Chapter 7 and Chapter 13?",
+        answer:
+          "Chapter 7 generally involves liquidation of nonexempt assets and discharge of eligible debts. Chapter 13 allows qualifying individuals with regular income to keep property while paying debts through a court-approved plan, usually over three to five years.",
+      },
+      {
+        question: "What is the automatic stay?",
+        answer:
+          "The automatic stay usually begins when a bankruptcy petition is filed and stops many collection actions, lawsuits, garnishments, and foreclosure efforts. Exceptions and repeat-filing limitations may apply.",
+      },
+      {
+        question: "Will bankruptcy stop a foreclosure?",
+        answer:
+          "Filing may temporarily stop a foreclosure through the automatic stay, but the long-term result depends on the chapter filed, timing, payment history, equity, and whether the creditor obtains relief from the stay.",
+      },
+      {
+        question: "Can bankruptcy stop wage garnishment?",
+        answer:
+          "The automatic stay generally stops many wage garnishments after filing, although certain obligations and proceedings may be treated differently.",
+      },
+      {
+        question: "Can I keep my house or car?",
+        answer:
+          "Whether property can be kept depends on equity, exemptions, loan status, the bankruptcy chapter, and whether required payments continue. A lawyer can evaluate the specific property and liens involved.",
+      },
+      {
+        question: "Does bankruptcy erase every debt?",
+        answer:
+          "No. Some debts may not be discharged, including certain taxes, domestic-support obligations, and debts arising from specific misconduct. Secured debts and liens also require separate analysis.",
+      },
+      {
+        question: "Do I need an attorney to file bankruptcy?",
+        answer:
+          "Individuals may file without an attorney, but bankruptcy procedure, disclosures, exemptions, deadlines, and creditor issues can be difficult to navigate. The Western District of Texas recommends consulting a competent attorney before filing.",
+      },
+      {
+        question: "How long does a bankruptcy case take?",
+        answer:
+          "Timing depends on the chapter and complexity. A straightforward Chapter 7 case may conclude sooner, while Chapter 13 repayment plans generally continue for three to five years.",
+      },
+      {
+        question: "Will bankruptcy affect my credit?",
+        answer:
+          "A bankruptcy filing can remain on a credit report for years and may affect borrowing. The impact varies, and some debtors begin rebuilding credit after discharge.",
+      },
+      {
+        question: "What information must I disclose?",
+        answer:
+          "Debtors generally must provide complete information about assets, debts, income, expenses, transfers, lawsuits, contracts, and other financial matters. Incomplete or inaccurate disclosures can create serious problems.",
+      },
+    ],
     relatedPages: [
       { label: "Business Law", path: "/el-paso-business-lawyers" },
       { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
       { label: "Real Estate", path: "/el-paso-real-estate-lawyers" },
+      { label: "Employment Law", path: "/el-paso-employment-lawyers" },
     ],
   },
   {
