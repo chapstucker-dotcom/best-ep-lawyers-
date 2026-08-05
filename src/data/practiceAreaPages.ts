@@ -802,23 +802,97 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     shortTitle: "Truck Accident",
     title: "Best Truck Accident Lawyers in El Paso, Texas",
     description:
-      "Compare El Paso truck accident attorneys handling commercial vehicle crashes, catastrophic injuries, trucking companies, and insurance claims.",
+      "Compare El Paso truck accident attorneys handling 18-wheeler crashes, commercial vehicle collisions, catastrophic injuries, driver fatigue, maintenance failures, cargo issues, and wrongful death claims.",
+    metaDescription:
+      "Compare truck accident lawyers in El Paso for 18-wheeler crashes, commercial vehicle collisions, catastrophic injuries, driver fatigue, maintenance failures, and wrongful death claims.",
+    heroText:
+      "Compare El Paso truck accident attorneys for 18-wheeler crashes, commercial vehicle collisions, catastrophic injuries, driver fatigue, maintenance failures, cargo issues, and wrongful death claims.",
     topics: [
       "18-Wheeler Crashes",
-      "Commercial Vehicles",
+      "Commercial Vehicle Collisions",
       "Driver Fatigue",
+      "Hours-of-Service Violations",
       "Maintenance Failures",
-      "Cargo Claims",
+      "Cargo and Loading Issues",
       "Catastrophic Injuries",
+      "Wrongful Death",
+      "Trucking Insurance Claims",
     ],
-    overview: genericOverview("Truck Accident"),
-    whenToHire: genericWhenToHire("Truck Accident"),
-    localContent: genericLocal("Truck Accident"),
-    faqs: genericFaqs("Truck Accident"),
+    overview: [
+      "A truck accident lawyer represents people injured in crashes involving 18-wheelers, tractor-trailers, delivery vehicles, buses, and other commercial vehicles. These cases may involve the driver, trucking company, vehicle owner, maintenance contractor, cargo loader, broker, insurer, or another responsible party.",
+      "Truck accident claims often require rapid evidence preservation. Important records may include driver logs, electronic logging device data, onboard computer information, inspection and maintenance records, dispatch communications, cargo documents, drug and alcohol testing records, dash-camera footage, and company safety policies.",
+      "Because commercial vehicles are larger and heavier than passenger cars, collisions can cause catastrophic injuries, permanent disability, or death. Liability and damages may depend on federal and state safety rules, company practices, driver conduct, vehicle condition, and the conduct of other motorists.",
+    ],
+    whenToHire: [
+      "You or a family member was seriously injured in a crash involving an 18-wheeler, tractor-trailer, delivery truck, bus, or commercial vehicle.",
+      "The trucking company or insurer contacted you for a statement, release, medical authorization, or quick settlement.",
+      "The crash involved death, hospitalization, surgery, permanent impairment, lost income, or significant future medical care.",
+      "You believe driver fatigue, distraction, speeding, improper loading, poor maintenance, or a safety violation contributed to the collision.",
+      "Multiple companies, insurers, drivers, contractors, or vehicle owners may share responsibility.",
+      "You need help preserving electronic data, inspection records, driver logs, video, or other evidence before it is lost.",
+    ],
+    localContent: [
+      "El Paso is a major freight and cross-border transportation corridor connected to Interstate 10, U.S. Highway 54, Loop 375, international ports of entry, warehouses, distribution centers, and commercial routes serving Texas, New Mexico, and Mexico.",
+      "Local truck crashes may involve interstate carriers, cross-border freight, logistics companies, independent drivers, commercial insurers, and evidence maintained outside El Paso or Texas. These facts can affect jurisdiction, discovery, service, and the identification of responsible parties.",
+      "An El Paso truck accident attorney can help investigate the collision, preserve trucking records, evaluate federal and Texas safety requirements, coordinate expert review, document damages, and pursue negotiation or litigation against responsible parties.",
+    ],
+    faqs: [
+      {
+        question: "Who can be responsible for a truck accident?",
+        answer:
+          "Potentially responsible parties may include the driver, motor carrier, vehicle owner, maintenance provider, cargo loader, broker, manufacturer, or another motorist depending on the facts.",
+      },
+      {
+        question: "Why are truck accident cases different from car accident cases?",
+        answer:
+          "Truck cases often involve commercial regulations, multiple companies, larger insurance policies, electronic data, specialized records, and more severe injuries.",
+      },
+      {
+        question: "What evidence should be preserved after a truck crash?",
+        answer:
+          "Evidence may include photographs, video, witness information, police reports, medical records, electronic logging data, onboard computer data, inspection records, maintenance records, dispatch communications, and cargo documents.",
+      },
+      {
+        question: "What are hours-of-service rules?",
+        answer:
+          "Hours-of-service rules limit how long certain commercial drivers may drive and require rest periods. Violations may be relevant when fatigue contributed to a crash.",
+      },
+      {
+        question: "Can the trucking company be liable for the driver's conduct?",
+        answer:
+          "A trucking company may be liable under several legal theories, including responsibility for an employee driver, negligent hiring, training, supervision, retention, maintenance, or company safety practices.",
+      },
+      {
+        question: "What if cargo caused or contributed to the crash?",
+        answer:
+          "Improperly loaded, unsecured, overweight, or shifting cargo can contribute to rollovers, loss of control, falling debris, or braking problems. The loader, carrier, or other parties may be involved.",
+      },
+      {
+        question: "Should I speak with the trucking company's insurer?",
+        answer:
+          "You may provide basic identifying information, but consider legal advice before giving a recorded statement, signing releases, or accepting a settlement.",
+      },
+      {
+        question: "What damages may be available?",
+        answer:
+          "Depending on the case, damages may include medical expenses, lost income, reduced earning capacity, pain, impairment, property damage, and wrongful death or survival damages.",
+      },
+      {
+        question: "How long do I have to file a truck accident claim?",
+        answer:
+          "Texas limitation periods and notice requirements may apply, but the correct deadline depends on the parties and claims. Evidence-preservation needs make prompt action important.",
+      },
+      {
+        question: "When should I contact a truck accident lawyer?",
+        answer:
+          "Contact counsel as soon as possible after a serious commercial-vehicle crash so evidence can be preserved and communication with carriers and insurers can be managed.",
+      },
+    ],
     relatedPages: [
       { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
       { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
       { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
+      { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
     ],
   },
   {
