@@ -265,22 +265,97 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     shortTitle: "Employment",
     title: "Best Employment Lawyers in El Paso, Texas",
     description:
-      "Compare El Paso employment attorneys handling discrimination, retaliation, harassment, wages, contracts, and workplace disputes.",
+      "Compare El Paso employment attorneys handling discrimination, retaliation, harassment, unpaid wages, overtime, misclassification, employment contracts, severance, and workplace disputes.",
+    metaDescription:
+      "Compare employment lawyers in El Paso for discrimination, retaliation, harassment, unpaid wages, overtime, misclassification, contracts, and workplace disputes.",
+    heroText:
+      "Compare El Paso employment attorneys for discrimination, retaliation, harassment, unpaid wages, overtime, employee misclassification, employment agreements, severance, and workplace disputes.",
     topics: [
       "Wrongful Termination",
       "Workplace Discrimination",
       "Retaliation",
       "Harassment",
-      "Wage and Hour Claims",
+      "Unpaid Wages",
+      "Overtime Claims",
+      "Employee Misclassification",
       "Employment Contracts",
+      "Severance Agreements",
     ],
-    overview: genericOverview("Employment"),
-    whenToHire: genericWhenToHire("Employment"),
-    localContent: genericLocal("Employment"),
-    faqs: genericFaqs("Employment"),
+    overview: [
+      "An employment lawyer advises employees and employers about workplace rights, responsibilities, contracts, pay practices, discipline, termination, discrimination, retaliation, and compliance with state and federal law. Depending on the dispute, the attorney may investigate facts, review policies and records, negotiate a resolution, prepare an administrative charge, or represent a client in court.",
+      "Federal equal-employment laws prohibit covered employers from discriminating on protected grounds and also prohibit retaliation against applicants or employees who assert protected workplace rights. Harassment, demotion, termination, reduced hours, or other adverse treatment may require careful review of the facts, timing, policies, and available evidence.",
+      "Wage-and-hour disputes may involve unpaid minimum wages, overtime, off-the-clock work, deductions, commissions, tip practices, or employee classification. Covered nonexempt employees are generally entitled to overtime after more than 40 hours in a workweek, unless a valid exemption applies.",
+    ],
+    whenToHire: [
+      "You were fired, demoted, disciplined, or denied opportunities after reporting discrimination, harassment, wage issues, or another workplace concern.",
+      "You believe you were treated differently because of race, color, religion, sex, pregnancy, national origin, age, disability, or another protected characteristic.",
+      "You were not paid for all hours worked, overtime, commissions, bonuses, or other earned compensation.",
+      "You were classified as an independent contractor or exempt employee and believe the classification may be incorrect.",
+      "You need advice about an employment agreement, noncompete, severance package, confidentiality provision, or workplace policy.",
+      "Your business needs guidance about hiring, discipline, termination, wage practices, investigations, or employment-law compliance.",
+    ],
+    localContent: [
+      "Employment disputes involving El Paso workers and businesses may be governed by a combination of federal law and Texas law. Claims may involve administrative agencies, state courts, or the El Paso Division of the United States District Court for the Western District of Texas, depending on the legal issues and parties involved.",
+      "El Paso's workforce includes healthcare, education, logistics, construction, hospitality, government, military-connected employment, manufacturing, cross-border commerce, and small businesses. These industries can raise distinct questions about scheduling, overtime, language access, classification, workplace safety, and employer policies.",
+      "A local employment attorney can help assess deadlines, preserve documents, review personnel records and communications, evaluate internal complaint procedures, and determine whether negotiation, an agency filing, or litigation may be appropriate.",
+    ],
+    faqs: [
+      {
+        question: "What is workplace discrimination?",
+        answer:
+          "Workplace discrimination generally involves unfavorable treatment because of a legally protected characteristic. Whether the law applies depends on the employer, the facts, and the statute involved.",
+      },
+      {
+        question: "What is retaliation?",
+        answer:
+          "Retaliation may occur when an employer punishes an applicant or employee for protected activity, such as reporting discrimination, participating in an investigation, or filing an administrative charge.",
+      },
+      {
+        question: "What is a hostile work environment?",
+        answer:
+          "A hostile work environment may exist when unwelcome conduct based on a protected characteristic is sufficiently severe or pervasive to alter working conditions. Ordinary disagreements or isolated rude conduct may not meet the legal standard.",
+      },
+      {
+        question: "Can I be fired without warning in Texas?",
+        answer:
+          "Texas generally follows at-will employment, but termination may still be unlawful if it violates a contract, statute, public policy, or other legal protection.",
+      },
+      {
+        question: "Who is entitled to overtime pay?",
+        answer:
+          "Covered nonexempt employees are generally entitled to overtime pay for hours worked over 40 in a workweek. Exemption status depends on legal tests, duties, and pay structure rather than job title alone.",
+      },
+      {
+        question: "What is employee misclassification?",
+        answer:
+          "Misclassification can involve treating a worker as an independent contractor instead of an employee or treating an employee as exempt from overtime when the legal requirements are not met.",
+      },
+      {
+        question: "Can an employer retaliate against me for complaining about unpaid wages?",
+        answer:
+          "Federal and state laws may protect workers who raise wage concerns or participate in wage investigations. The available protection depends on the law involved and the facts.",
+      },
+      {
+        question: "Should I sign a severance agreement immediately?",
+        answer:
+          "A severance agreement may include a release of claims, confidentiality terms, non-disparagement provisions, repayment obligations, or deadlines. Legal review before signing can help identify the rights being waived.",
+      },
+      {
+        question: "What evidence should I preserve?",
+        answer:
+          "Relevant evidence may include emails, text messages, schedules, pay records, evaluations, policies, complaints, witness names, and a timeline of events. Preserve records lawfully and avoid altering or deleting them.",
+      },
+      {
+        question: "Are there deadlines for employment claims?",
+        answer:
+          "Yes. Employment claims can have short and differing deadlines depending on the statute, agency, and type of claim. Prompt legal advice can help determine which deadline may apply.",
+      },
+    ],
     relatedPages: [
       { label: "Business Law", path: "/el-paso-business-lawyers" },
       { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
+      { label: "Bankruptcy", path: "/el-paso-bankruptcy-lawyers" },
+      { label: "Real Estate", path: "/el-paso-real-estate-lawyers" },
     ],
   },
   {
