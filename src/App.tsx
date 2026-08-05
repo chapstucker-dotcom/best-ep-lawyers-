@@ -18,6 +18,7 @@ import FamilyLaw from "./pages/FamilyLaw";
 import DWI from "./pages/DWI";
 import EstatePlanning from "./pages/EstatePlanning";
 import EighteenWheelerAccident from "./pages/EighteenWheelerAccident";
+import SemiTruckAccident from "./pages/SemiTruckAccident";
 import PracticeAreaPage from "./pages/PracticeAreaPage";
 
 import { practiceAreaPages } from "./data/practiceAreaPages";
@@ -35,9 +36,14 @@ export default function App() {
         />
 
         <Route
-  path="/el-paso-18-wheeler-accident-lawyer"
-  element={<EighteenWheelerAccident />}
-/>
+          path="/el-paso-18-wheeler-accident-lawyer"
+          element={<EighteenWheelerAccident />}
+        />
+
+        <Route
+          path="/el-paso-semi-truck-accident-lawyer"
+          element={<SemiTruckAccident />}
+        />
 
         <Route
           path="/el-paso-criminal-defense-lawyers"
