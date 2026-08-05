@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 
 import type { PracticeAreaPageData } from "../data/practiceAreaPages";
+import PracticeAreaFirmDirectory from "./PracticeAreaFirmDirectory";
 
 type Props = {
   page: PracticeAreaPageData;
@@ -435,64 +436,7 @@ export default function PracticeAreaTemplate({ page }: Props) {
         </div>
       </section>
 
-      <section
-        id={firmsId}
-        className="scroll-mt-24 bg-[#07162f] text-white"
-      >
-        <div className="mx-auto max-w-7xl px-6 py-16">
-          <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
-            <div>
-              <p className="font-bold uppercase tracking-widest text-[#d6a928]">
-                Local Directory
-              </p>
-
-              <h2 className="mt-3 text-3xl font-bold sm:text-4xl">
-                Featured El Paso {page.shortTitle} Firms
-              </h2>
-
-              <p className="mt-4 max-w-3xl leading-7 text-slate-300">
-                Featured firms assigned to this practice area will appear here as
-                your Supabase listings are connected.
-              </p>
-            </div>
-
-            <Link
-              to="/pricing"
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#d6a928] px-6 py-3 font-bold text-[#07162f]"
-            >
-              Claim Featured Placement
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-          </div>
-
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {[1, 2, 3].map((item) => (
-              <article
-                key={item}
-                className="rounded-2xl border border-white/15 bg-white/10 p-6"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10">
-                    <Building2 className="h-6 w-6 text-[#d6a928]" />
-                  </div>
-                  <span className="rounded-full bg-[#d6a928]/15 px-3 py-1 text-xs font-bold text-[#f0ca62]">
-                    Listing Space
-                  </span>
-                </div>
-
-                <h3 className="mt-5 text-xl font-bold">
-                  Featured firm profile
-                </h3>
-
-                <p className="mt-3 leading-7 text-slate-300">
-                  Firm name, attorney profiles, phone, website, services, and
-                  premium placement will display here.
-                </p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <PracticeAreaFirmDirectory page={page} />
 
       <section className="border-b border-slate-200 bg-white">
         <div className="mx-auto max-w-7xl px-6 py-16">
