@@ -461,23 +461,97 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     shortTitle: "Real Estate",
     title: "Best Real Estate Lawyers in El Paso, Texas",
     description:
-      "Compare El Paso real estate attorneys for purchases, sales, leases, title disputes, boundaries, development, and litigation.",
+      "Compare El Paso real estate attorneys handling purchases, sales, leases, title disputes, easements, boundary issues, landlord-tenant matters, development, and litigation.",
+    metaDescription:
+      "Compare real estate lawyers in El Paso for purchases, sales, leases, title disputes, easements, landlord-tenant matters, development, and litigation.",
+    heroText:
+      "Compare El Paso real estate attorneys for residential and commercial transactions, leases, title disputes, easements, boundary issues, landlord-tenant matters, development, and litigation.",
     topics: [
+      "Residential Purchases and Sales",
+      "Commercial Real Estate",
       "Purchase and Sale Agreements",
       "Commercial Leases",
       "Title Disputes",
       "Boundary and Easement Issues",
       "Landlord-Tenant Matters",
+      "Development and Construction",
       "Real Estate Litigation",
     ],
-    overview: genericOverview("Real Estate"),
-    whenToHire: genericWhenToHire("Real Estate"),
-    localContent: genericLocal("Real Estate"),
-    faqs: genericFaqs("Real Estate"),
+    overview: [
+      "A real estate lawyer helps buyers, sellers, landlords, tenants, investors, developers, lenders, and property owners address legal issues involving land and buildings. The work may include drafting and reviewing contracts, negotiating leases, examining title concerns, resolving ownership disputes, and representing clients in litigation.",
+      "Real estate transactions can involve financing, inspections, disclosures, surveys, easements, zoning, environmental concerns, title commitments, deed restrictions, and closing documents. Legal review can help identify obligations and risks before a client signs or closes.",
+      "Disputes may involve boundaries, access rights, liens, ownership claims, lease defaults, construction defects, purchase agreements, fraud, specific performance, or partition. Depending on the dispute, counsel may pursue negotiation, mediation, injunctions, declaratory relief, or trial.",
+    ],
+    whenToHire: [
+      "You are buying or selling residential, commercial, industrial, or investment property.",
+      "You need a purchase agreement, lease, deed, easement, option, or other real estate document drafted or reviewed.",
+      "A title company, survey, deed, or public record reveals an ownership, lien, boundary, or access problem.",
+      "You are involved in a landlord-tenant, lease-default, construction, development, or property-management dispute.",
+      "You need help with a partition, quiet-title action, deed dispute, foreclosure-related issue, or claim involving real property.",
+      "You are planning a development, commercial project, or transaction involving multiple owners, entities, lenders, or jurisdictions.",
+    ],
+    localContent: [
+      "El Paso real estate matters may involve residential neighborhoods, downtown properties, commercial corridors, industrial sites, land near Fort Bliss, undeveloped acreage, and cross-border ownership or investment. Property records, surveys, access, utilities, zoning, and development restrictions can vary significantly by location.",
+      "Local disputes may proceed in El Paso County courts or, depending on the parties and claims, in federal court. Transactions may also involve title companies, lenders, surveyors, brokers, homeowners associations, contractors, municipal departments, and county offices.",
+      "An El Paso real estate attorney can help review title and contract issues, coordinate with transaction professionals, identify legal risks, preserve deadlines, and determine whether negotiation, mediation, or litigation is appropriate.",
+    ],
+    faqs: [
+      {
+        question: "Do I need a lawyer to buy or sell property in Texas?",
+        answer:
+          "Texas does not require every buyer or seller to hire a lawyer, but legal review can be valuable when contracts, title issues, financing, leases, unusual terms, or disputes are involved.",
+      },
+      {
+        question: "What is a title dispute?",
+        answer:
+          "A title dispute concerns who owns property or what interests, liens, restrictions, easements, or claims affect it. Resolution may require document review, negotiation, correction instruments, or litigation.",
+      },
+      {
+        question: "What is an easement?",
+        answer:
+          "An easement is a legal right to use another person's land for a specific purpose, such as access, utilities, drainage, or shared facilities.",
+      },
+      {
+        question: "What is a boundary dispute?",
+        answer:
+          "A boundary dispute arises when neighboring owners disagree about the legal property line, fences, encroachments, surveys, or use of disputed land.",
+      },
+      {
+        question: "Should a lawyer review a commercial lease?",
+        answer:
+          "Commercial leases can create long-term obligations involving rent, maintenance, insurance, taxes, repairs, assignment, default, guarantees, and renewal. Legal review can help identify and negotiate those risks.",
+      },
+      {
+        question: "What happens if a party breaches a real estate contract?",
+        answer:
+          "Available remedies may include termination, damages, return or retention of earnest money, specific performance, or other relief depending on the agreement and facts.",
+      },
+      {
+        question: "What is specific performance?",
+        answer:
+          "Specific performance is a court remedy that may require a party to complete a real estate transaction when monetary damages are inadequate and legal requirements are met.",
+      },
+      {
+        question: "Can co-owners force the sale of property?",
+        answer:
+          "A co-owner may seek partition of jointly owned property. Depending on the property and ownership, a court may divide it or order a sale and distribute proceeds.",
+      },
+      {
+        question: "What is a quiet-title action?",
+        answer:
+          "A quiet-title action asks a court to resolve competing claims or remove a cloud affecting ownership of real property.",
+      },
+      {
+        question: "When should I contact a real estate lawyer?",
+        answer:
+          "Consider contacting counsel before signing major documents or as soon as a title, boundary, lease, ownership, construction, or closing problem appears.",
+      },
+    ],
     relatedPages: [
       { label: "Business Law", path: "/el-paso-business-lawyers" },
       { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
       { label: "Probate", path: "/el-paso-probate-lawyers" },
+      { label: "Estate Planning", path: "/el-paso-estate-planning-lawyers" },
     ],
   },
   {
