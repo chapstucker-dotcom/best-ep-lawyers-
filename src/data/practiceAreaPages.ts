@@ -363,23 +363,97 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     shortTitle: "Business",
     title: "Best Business Lawyers in El Paso, Texas",
     description:
-      "Compare El Paso business attorneys for company formation, contracts, transactions, disputes, partnerships, compliance, and succession planning.",
+      "Compare El Paso business attorneys handling company formation, contracts, commercial transactions, partnership disputes, business purchases and sales, governance, compliance, and litigation.",
+    metaDescription:
+      "Compare business lawyers in El Paso for company formation, contracts, commercial transactions, partnership disputes, acquisitions, governance, compliance, and litigation.",
+    heroText:
+      "Compare El Paso business attorneys for company formation, contracts, commercial transactions, partnership disputes, business purchases and sales, corporate governance, compliance, and litigation.",
     topics: [
       "Business Formation",
+      "LLCs and Corporations",
       "Contracts",
       "Partnership Agreements",
       "Commercial Transactions",
-      "Business Disputes",
-      "Mergers and Acquisitions",
+      "Business Purchases and Sales",
+      "Shareholder Disputes",
+      "Corporate Governance",
+      "Business Litigation",
     ],
-    overview: genericOverview("Business"),
-    whenToHire: genericWhenToHire("Business"),
-    localContent: genericLocal("Business"),
-    faqs: genericFaqs("Business"),
+    overview: [
+      "A business lawyer helps entrepreneurs, owners, investors, partnerships, corporations, and nonprofit organizations address legal issues throughout the life of a company. The work may include selecting an entity, preparing organizational documents, negotiating contracts, managing risk, resolving ownership disputes, and advising on purchases, sales, or succession.",
+      "Strong legal planning can help clarify ownership rights, decision-making authority, profit distributions, exit procedures, confidentiality obligations, and what happens if a partner leaves, dies, becomes disabled, or breaches an agreement. These issues are often easier and less expensive to address before a conflict develops.",
+      "Business disputes may involve contracts, unpaid invoices, ownership interests, fiduciary duties, fraud, restrictive covenants, trade secrets, leases, vendors, customers, or former employees. Counsel may assist through negotiation, mediation, arbitration, litigation, or another resolution process.",
+    ],
+    whenToHire: [
+      "You are starting a business and need help choosing or forming an LLC, corporation, partnership, or other entity.",
+      "You need a contract drafted, reviewed, negotiated, renewed, or enforced.",
+      "You are buying, selling, merging, or restructuring a business.",
+      "Owners, partners, members, or shareholders disagree about control, money, duties, or the future of the company.",
+      "Your business faces a lawsuit, demand letter, unpaid account, vendor dispute, or threatened legal action.",
+      "You need guidance about governance, compliance, succession planning, employment policies, or risk management.",
+    ],
+    localContent: [
+      "El Paso businesses operate in a regional economy shaped by international trade, logistics, healthcare, construction, manufacturing, defense, hospitality, professional services, retail, and small family-owned companies. Cross-border transactions and relationships with businesses in New Mexico or Mexico can add contractual, tax, regulatory, and jurisdictional considerations.",
+      "Local business matters may involve Texas entity law, state and federal regulations, commercial leases, El Paso County courts, the El Paso Division of the United States District Court for the Western District of Texas, or private arbitration depending on the agreement and dispute.",
+      "An El Paso business attorney can help owners structure transactions, document agreements, identify legal risks, preserve business relationships, and determine whether negotiation, mediation, arbitration, or litigation is the best path forward.",
+    ],
+    faqs: [
+      {
+        question: "Should I form an LLC or a corporation?",
+        answer:
+          "The best structure depends on ownership, taxes, investment plans, management, liability concerns, and long-term goals. A lawyer and tax professional can help compare the options.",
+      },
+      {
+        question: "Do I need an operating agreement for my LLC?",
+        answer:
+          "An operating agreement can define ownership, management, voting, distributions, transfers, buyouts, and dispute procedures. It is especially important when an LLC has more than one owner.",
+      },
+      {
+        question: "Why should a lawyer review a business contract?",
+        answer:
+          "A lawyer can identify unclear terms, hidden risks, deadlines, indemnity obligations, limits on liability, dispute provisions, termination rights, and other terms that may affect the business.",
+      },
+      {
+        question: "What is a partnership dispute?",
+        answer:
+          "A partnership dispute may involve control, compensation, ownership percentages, access to records, fiduciary duties, misuse of funds, deadlock, withdrawal, or dissolution.",
+      },
+      {
+        question: "What happens when a business owner wants to leave?",
+        answer:
+          "The answer depends on the governing documents, ownership structure, transfer restrictions, valuation terms, buy-sell provisions, and whether the departure is voluntary or disputed.",
+      },
+      {
+        question: "What is due diligence in a business purchase?",
+        answer:
+          "Due diligence involves reviewing financial records, contracts, liabilities, litigation, employees, intellectual property, licenses, taxes, property, and other information before closing a transaction.",
+      },
+      {
+        question: "Can a business contract be enforced if it was not written?",
+        answer:
+          "Some oral agreements may be enforceable, but others must be in writing. Proof, contract terms, performance, and the subject matter can all affect enforceability.",
+      },
+      {
+        question: "What is a fiduciary duty?",
+        answer:
+          "A fiduciary duty is a legal obligation to act with loyalty, care, honesty, or good faith in certain relationships. Whether a duty exists depends on the role, entity, agreement, and circumstances.",
+      },
+      {
+        question: "Should a business dispute go to mediation or court?",
+        answer:
+          "The best forum depends on the contract, urgency, cost, evidence, relationships, available remedies, and whether arbitration or another dispute process is required.",
+      },
+      {
+        question: "When should a business contact a lawyer?",
+        answer:
+          "Early legal advice is useful before signing major agreements, adding owners, borrowing money, hiring key employees, buying or selling assets, or responding to a dispute.",
+      },
+    ],
     relatedPages: [
-      { label: "Employment", path: "/el-paso-employment-lawyers" },
-      { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
+      { label: "Employment Law", path: "/el-paso-employment-lawyers" },
       { label: "Real Estate", path: "/el-paso-real-estate-lawyers" },
+      { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
+      { label: "Bankruptcy", path: "/el-paso-bankruptcy-lawyers" },
     ],
   },
   {
