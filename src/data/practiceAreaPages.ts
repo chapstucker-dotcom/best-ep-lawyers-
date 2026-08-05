@@ -286,7 +286,11 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     shortTitle: "Divorce",
     title: "Best Divorce Lawyers in El Paso, Texas",
     description:
-      "Compare El Paso divorce attorneys handling contested divorce, uncontested divorce, custody, support, property division, and maintenance.",
+      "Compare El Paso divorce attorneys handling contested divorce, uncontested divorce, child custody, child support, property division, spousal maintenance, military divorce, and enforcement matters.",
+    metaDescription:
+      "Compare divorce lawyers in El Paso for contested and uncontested divorce, custody, support, property division, military divorce, and enforcement.",
+    heroText:
+      "Compare El Paso divorce attorneys for contested and uncontested divorce, child custody, child support, property division, spousal maintenance, military divorce, and post-decree disputes.",
     topics: [
       "Contested Divorce",
       "Uncontested Divorce",
@@ -294,14 +298,85 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       "Child Support",
       "Property Division",
       "Spousal Maintenance",
+      "Military Divorce",
+      "Protective Orders",
+      "Modifications and Enforcement",
     ],
-    overview: genericOverview("Divorce"),
-    whenToHire: genericWhenToHire("Divorce"),
-    localContent: genericLocal("Divorce"),
-    faqs: genericFaqs("Divorce"),
+    overview: [
+      "A divorce lawyer helps clients understand their rights, obligations, and options when ending a marriage in Texas. Depending on the circumstances, the attorney may prepare and file the divorce petition, respond to court filings, negotiate temporary orders, address child-related issues, divide marital property, and represent the client in mediation or trial.",
+      "Texas is a community-property state, which means property and debts acquired during the marriage may need to be identified, valued, and divided in a manner the court considers just and right. Separate property claims, retirement accounts, real estate, businesses, reimbursement claims, and hidden assets can make the process more complicated.",
+      "When children are involved, the case may also include conservatorship, possession schedules, child support, medical support, relocation restrictions, and enforcement. Military families in El Paso may face additional issues involving deployment, federal benefits, retirement pay, and jurisdiction.",
+    ],
+    whenToHire: [
+      "You are considering divorce and want to understand your rights before filing.",
+      "Your spouse has filed and you have been served with legal papers.",
+      "You disagree about children, support, property, debts, or the marital home.",
+      "The marriage includes a business, retirement benefits, military service, or significant assets.",
+      "You are concerned about family violence, threats, hidden assets, or financial control.",
+      "You need to modify or enforce an existing divorce or custody order.",
+    ],
+    localContent: [
+      "Divorce cases involving El Paso residents are governed by Texas family law and are generally handled in the district courts serving El Paso County. Local filing procedures, standing orders, mediation practices, and court schedules can affect how the case progresses.",
+      "El Paso divorce cases may involve Fort Bliss military families, bilingual households, property located in Mexico or another state, international travel concerns, or relatives living across the border. These facts can create additional questions about jurisdiction, service, property, and parenting arrangements.",
+      "A local divorce attorney can help explain whether temporary orders may be needed, how community and separate property are treated, what parenting arrangements may be realistic, and whether negotiation, mediation, or litigation is the best next step.",
+    ],
+    faqs: [
+      {
+        question: "How long does a divorce take in Texas?",
+        answer:
+          "Texas generally requires a minimum waiting period after a divorce is filed, but contested cases often take longer depending on disputes, discovery, mediation, court availability, and trial preparation.",
+      },
+      {
+        question: "Do I need a reason to file for divorce?",
+        answer:
+          "Texas allows no-fault divorce based on insupportability, although fault grounds may also be alleged in some cases and can affect certain issues.",
+      },
+      {
+        question: "How is property divided in a Texas divorce?",
+        answer:
+          "The court divides community property in a manner it considers just and right. Separate property is not divided, but the spouse claiming separate property generally must prove that characterization.",
+      },
+      {
+        question: "Who gets custody of the children?",
+        answer:
+          "Texas uses the terms conservatorship, possession, and access. Courts focus on the best interest of the child when determining rights, duties, and parenting time.",
+      },
+      {
+        question: "How is child support calculated?",
+        answer:
+          "Texas child-support guidelines consider net monthly resources, the number of children before the court, and certain other legal obligations, although the result may vary in some cases.",
+      },
+      {
+        question: "Can one spouse receive spousal maintenance?",
+        answer:
+          "Court-ordered maintenance is limited and depends on statutory eligibility requirements. Contractual alimony may also be negotiated as part of a settlement.",
+      },
+      {
+        question: "What happens to the house?",
+        answer:
+          "The marital home may be awarded to one spouse, sold, refinanced, or addressed through another agreement depending on ownership, equity, debt, affordability, and the overall property division.",
+      },
+      {
+        question: "What is an uncontested divorce?",
+        answer:
+          "An uncontested divorce generally means both spouses agree on all major issues and can present agreed documents to the court. Legal review may still help ensure the agreement is complete and enforceable.",
+      },
+      {
+        question: "How does military divorce differ?",
+        answer:
+          "Military cases may involve federal rules, military retirement, survivor benefits, deployment, residency, jurisdiction, and support obligations in addition to Texas family law.",
+      },
+      {
+        question: "Can divorce orders be changed later?",
+        answer:
+          "Certain child-related and support orders may be modified if legal requirements are met. Property division terms are generally not modifiable after the divorce becomes final.",
+      },
+    ],
     relatedPages: [
       { label: "Family Law", path: "/el-paso-family-lawyers" },
       { label: "Child Custody", path: "/el-paso-child-custody-lawyers" },
+      { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
+      { label: "Estate Planning", path: "/el-paso-estate-planning-lawyers" },
     ],
   },
   {
