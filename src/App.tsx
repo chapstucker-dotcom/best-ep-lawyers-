@@ -20,6 +20,7 @@ import EstatePlanning from "./pages/EstatePlanning";
 import EighteenWheelerAccident from "./pages/EighteenWheelerAccident";
 import SemiTruckAccident from "./pages/SemiTruckAccident";
 import SlipAndFall from "./pages/SlipAndFall";
+import MedicalMalpractice from "./pages/MedicalMalpractice";
 import PracticeAreaPage from "./pages/PracticeAreaPage";
 
 import { practiceAreaPages } from "./data/practiceAreaPages";
@@ -76,6 +77,11 @@ export default function App() {
           path="/el-paso-slip-and-fall-lawyers"
           element={<SlipAndFall />}
         />
+
+        <Route
+          path="/el-paso-medical-malpractice-lawyers"
+          element={<MedicalMalpractice />}
+        />
         {practiceAreaPages.map((page) => (
           <Route
             key={page.path}
@@ -98,3 +104,4 @@ export default function App() {
     </AuthProvider>
   );
 }
+
