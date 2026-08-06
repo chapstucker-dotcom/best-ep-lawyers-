@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+﻿import { Route, Routes } from "react-router-dom";
 
 import Index from "./pages/Index";
 import Login from "./pages/Login";
@@ -19,6 +19,7 @@ import DWI from "./pages/DWI";
 import EstatePlanning from "./pages/EstatePlanning";
 import EighteenWheelerAccident from "./pages/EighteenWheelerAccident";
 import SemiTruckAccident from "./pages/SemiTruckAccident";
+import SlipAndFall from "./pages/SlipAndFall";
 import PracticeAreaPage from "./pages/PracticeAreaPage";
 
 import { practiceAreaPages } from "./data/practiceAreaPages";
@@ -70,6 +71,11 @@ export default function App() {
           element={<EstatePlanning />}
         />
 
+
+        <Route
+          path="/el-paso-slip-and-fall-lawyers"
+          element={<SlipAndFall />}
+        />
         {practiceAreaPages.map((page) => (
           <Route
             key={page.path}
