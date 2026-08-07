@@ -22,6 +22,9 @@ import SemiTruckAccident from "./pages/SemiTruckAccident";
 import SlipAndFall from "./pages/SlipAndFall";
 import MedicalMalpractice from "./pages/MedicalMalpractice";
 import BrainInjury from "./pages/BrainInjury";
+import ConstructionAccident from "./pages/ConstructionAccident";
+import DogBite from "./pages/DogBite";
+import TraumaticBrainInjury from "./pages/TraumaticBrainInjury";
 import PracticeAreaPage from "./pages/PracticeAreaPage";
 
 import { practiceAreaPages } from "./data/practiceAreaPages";
@@ -88,6 +91,21 @@ export default function App() {
           path="/el-paso-brain-injury-lawyers"
           element={<BrainInjury />}
         />
+
+        <Route
+          path="/el-paso-construction-accident-lawyers"
+          element={<ConstructionAccident />}
+        />
+
+        <Route
+          path="/el-paso-dog-bite-lawyers"
+          element={<DogBite />}
+        />
+
+        <Route
+          path="/el-paso-traumatic-brain-injury-lawyers"
+          element={<TraumaticBrainInjury />}
+        />
         {practiceAreaPages.map((page) => (
           <Route
             key={page.path}
@@ -110,5 +128,6 @@ export default function App() {
     </AuthProvider>
   );
 }
+
 
 
