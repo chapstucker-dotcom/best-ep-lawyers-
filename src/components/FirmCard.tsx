@@ -3,6 +3,7 @@ import type { MouseEvent } from 'react';
 import {
   Building2,
   CheckCircle2,
+  Crown,
   Globe,
   MapPin,
   Phone,
@@ -20,6 +21,7 @@ import {
 } from '../data/categories';
 
 import { trackEvent } from '@/services/analyticsService';
+import { getPlanRules } from '@/config/planRules';
 
 interface FirmCardProps {
   firm: Firm;
@@ -81,6 +83,12 @@ export default function FirmCard({
 
   const planName =
     publicFirm.plan?.trim() || '';
+
+  const planRules = getPlanRules(planName);
+  const isCategoryOwner = planRules.categoryOwner;
+  const isPremiumFeatured =
+    planRules.featuredPlacement && !isCategoryOwner;
+  const isExpert = planRules.id === 'expert';
 
   const location = [
     firm.city,
@@ -182,20 +190,25 @@ export default function FirmCard({
         )}
 
         <div className="absolute left-3 top-3 flex flex-wrap gap-2">
-          {isFeatured && (
+          {isCategoryOwner && (
             <Badge className="border-0 bg-[#F5B800] text-[#0F2A43] shadow-sm">
-              <Star className="mr-1 h-3.5 w-3.5 fill-current" />
-              Featured
+              <Crown className="mr-1 h-3.5 w-3.5" />
+              Category Owner
             </Badge>
           )}
 
-          {planName &&
-            planName !== 'free' &&
-            planName !== 'basic' && (
-              <Badge className="border border-white/30 bg-white/90 text-[#0F2A43]">
-                {planName}
-              </Badge>
-            )}
+          {!isCategoryOwner && (isPremiumFeatured || isFeatured) && (
+            <Badge className="border-0 bg-[#F5B800] text-[#0F2A43] shadow-sm">
+              <Star className="mr-1 h-3.5 w-3.5 fill-current" />
+              Category Featured
+            </Badge>
+          )}
+
+          {isExpert && (
+            <Badge className="border border-white/30 bg-white/90 text-[#0F2A43]">
+              Expert
+            </Badge>
+          )}
         </div>
       </div>
 
@@ -207,10 +220,11 @@ export default function FirmCard({
 
           {isVerified && (
             <span
-              className="shrink-0"
+              className="inline-flex shrink-0 items-center gap-1 rounded-full bg-emerald-50 px-2 py-1 text-xs font-semibold text-emerald-700"
               title="Verified firm"
             >
-              <CheckCircle2 className="h-5 w-5 text-[#1FA8A1]" />
+              <CheckCircle2 className="h-4 w-4" />
+              Verified
             </span>
           )}
         </div>

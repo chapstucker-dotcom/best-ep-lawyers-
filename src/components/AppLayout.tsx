@@ -1,4 +1,5 @@
 import WhyLawFirmsJoin from "./WhyLawFirmsJoin";
+import LawFirmMarketplace from "./LawFirmMarketplace";
 import { useEffect, useMemo, useState } from 'react';
 
 import Hero from './Hero';
@@ -474,6 +475,10 @@ export default function AppLayout() {
     })
   }
 />
+      <LawFirmMarketplace
+        firmCount={firms.length}
+        categoryCount={categories.length}
+      />
 
       {/* Featured firms */}
       <section className="bg-white py-16">
