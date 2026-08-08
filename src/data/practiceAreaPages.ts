@@ -988,7 +988,8 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       { label: "Immigration", path: "/el-paso-immigration-lawyers" },
       { label: "Green Card", path: "/el-paso-green-card-lawyers" },
     ],
-  },{
+  },
+  {
   path: "/el-paso-pedestrian-accident-lawyers",
   shortTitle: "Pedestrian Accident",
   title: "Best Pedestrian Accident Lawyers in El Paso, Texas",
@@ -1104,6 +1105,124 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     },
   ],
 },
+  {
+    path: "/el-paso-bicycle-accident-lawyers",
+    shortTitle: "Bicycle Accident",
+    title: "Best Bicycle Accident Lawyers in El Paso, Texas",
+    description:
+      "Compare El Paso bicycle accident lawyers handling vehicle collisions, unsafe roadway conditions, serious injuries, hit-and-run crashes, insurance disputes, and wrongful death claims.",
+    metaDescription:
+      "Compare bicycle accident lawyers in El Paso for vehicle collisions, serious injuries, hit-and-run crashes, insurance disputes, and wrongful death claims.",
+    heroText:
+      "Compare El Paso bicycle accident attorneys representing cyclists injured in vehicle collisions, intersection crashes, hit-and-run accidents, unsafe roadway incidents, and serious injury claims throughout the 915.",
+    topics: [
+      "Vehicle and Bicycle Collisions",
+      "Intersection Accidents",
+      "Hit-and-Run Crashes",
+      "Dooring Accidents",
+      "Distracted Drivers",
+      "Unsafe Passing",
+      "Roadway Hazards",
+      "Serious and Catastrophic Injuries",
+      "Uninsured Motorists",
+      "Wrongful Death",
+    ],
+    overview: [
+      "A bicycle accident lawyer represents cyclists injured in crashes involving cars, trucks, motorcycles, rideshare vehicles, commercial vehicles, roadway hazards, or other dangerous conditions. These claims may involve driver negligence, disputed right-of-way, unsafe passing, distracted driving, speeding, failure to yield, or insurance coverage issues.",
+      "Cyclists have limited physical protection when struck by a motor vehicle. Bicycle crashes can result in fractures, head injuries, spinal injuries, road rash, internal injuries, permanent impairment, lost income, rehabilitation needs, and other significant losses.",
+      "Investigating a bicycle crash may involve photographs, bicycle and vehicle damage, surveillance footage, traffic-camera video, witness statements, police reports, roadway conditions, signal timing, medical records, mobile-phone evidence, and insurance information. Preserving evidence early can be important when fault is disputed.",
+    ],
+    whenToHire: [
+      "You or a family member was struck by a car, truck, motorcycle, rideshare vehicle, or commercial vehicle while riding a bicycle.",
+      "The crash happened at an intersection, crosswalk, bike lane, parking lot, neighborhood street, or major roadway.",
+      "A driver passed too closely, turned across your path, opened a vehicle door, or failed to yield.",
+      "The driver left the scene or cannot be identified.",
+      "You suffered hospitalization, surgery, fractures, head trauma, spinal injuries, permanent impairment, or significant lost income.",
+      "An insurance company disputes fault or claims you caused the collision.",
+      "The crash involved an uninsured or underinsured driver.",
+      "A family member died as a result of a bicycle collision.",
+    ],
+    localContent: [
+      "Bicycle crashes in El Paso can occur throughout the 915, including along busy corridors such as Mesa Street, Montana Avenue, Dyer Street, Zaragoza Road, Alameda Avenue, Loop 375 frontage roads, and streets connecting residential neighborhoods, schools, parks, downtown, and commercial areas.",
+      "El Paso cyclists may encounter heavy commuter traffic, commercial vehicles, cross-border traffic, military traffic connected to Fort Bliss, construction zones, changing road conditions, limited visibility, and high-speed arterial roads. The location and design of the roadway can become important when determining how a crash occurred.",
+      "An El Paso bicycle accident attorney can evaluate driver conduct, roadway conditions, available video, witnesses, insurance coverage, bicycle and vehicle damage, medical evidence, and whether one or more parties may share responsibility for the collision.",
+    ],
+    faqs: [
+      {
+        question: "What should I do after a bicycle accident in El Paso?",
+        answer:
+          "Seek medical attention, report the collision when appropriate, preserve photographs and witness information, keep the damaged bicycle and equipment when possible, and save medical, insurance, and expense records.",
+      },
+      {
+        question: "Can a driver be responsible for hitting a cyclist?",
+        answer:
+          "Yes. Liability may depend on factors such as failure to yield, unsafe passing, speeding, distraction, improper turning, traffic-signal violations, or other negligent conduct.",
+      },
+      {
+        question: "What if the driver says the bicycle caused the crash?",
+        answer:
+          "Fault should be evaluated from the evidence rather than one person's statement alone. Video, witnesses, vehicle damage, bicycle damage, roadway markings, traffic signals, and crash-scene photographs may help determine what happened.",
+      },
+      {
+        question: "What is a dooring accident?",
+        answer:
+          "A dooring accident occurs when someone opens a vehicle door into the path of a cyclist. These crashes can cause the cyclist to strike the door, lose control, or be pushed into traffic.",
+      },
+      {
+        question: "What if the driver left the scene?",
+        answer:
+          "A hit-and-run bicycle claim may involve police investigation, surveillance footage, witness information, vehicle identification efforts, and potentially uninsured-motorist coverage depending on the policy and facts.",
+      },
+      {
+        question: "Can I recover damages if the driver was uninsured?",
+        answer:
+          "Potential recovery may depend on available insurance coverage, including uninsured or underinsured motorist coverage, household policies, the driver's assets, or responsibility of another party.",
+      },
+      {
+        question: "What damages may be available in a bicycle accident claim?",
+        answer:
+          "Depending on the case, damages may include medical expenses, lost income, reduced earning capacity, pain, impairment, property damage to the bicycle and equipment, and in fatal cases, wrongful death or survival damages.",
+      },
+      {
+        question: "What evidence is useful in a bicycle accident case?",
+        answer:
+          "Useful evidence may include photographs, video, witness information, police reports, medical records, damaged bicycle components, helmets, clothing, vehicle damage, roadway markings, and insurance documents.",
+      },
+      {
+        question: "What if poor road conditions contributed to the crash?",
+        answer:
+          "Potholes, debris, construction, defective surfaces, inadequate maintenance, or other roadway conditions may require investigation into who controlled or maintained the location and whether special rules or notice requirements apply.",
+      },
+      {
+        question: "When should I contact a bicycle accident lawyer?",
+        answer:
+          "Consider contacting counsel promptly when injuries are serious, fault is disputed, the driver fled, insurance coverage is unclear, roadway conditions may be involved, or video and other evidence need to be preserved.",
+      },
+    ],
+    relatedPages: [
+      {
+        label: "Personal Injury",
+        path: "/el-paso-personal-injury-lawyers",
+      },
+      {
+        label: "Pedestrian Accident",
+        path: "/el-paso-pedestrian-accident-lawyers",
+      },
+      {
+        label: "Car Accident",
+        path: "/el-paso-car-accident-lawyers",
+      },
+      {
+        label: "Motorcycle Accident",
+        path: "/el-paso-motorcycle-accident-lawyers",
+      },
+      {
+        label: "Wrongful Death",
+        path: "/el-paso-wrongful-death-lawyers",
+      },
+    ],
+  },
+
 ];
 
 export const getPracticeAreaPageByPath = (
