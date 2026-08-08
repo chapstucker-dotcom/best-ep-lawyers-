@@ -988,7 +988,122 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       { label: "Immigration", path: "/el-paso-immigration-lawyers" },
       { label: "Green Card", path: "/el-paso-green-card-lawyers" },
     ],
-  },
+  },{
+  path: "/el-paso-pedestrian-accident-lawyers",
+  shortTitle: "Pedestrian Accident",
+  title: "Best Pedestrian Accident Lawyers in El Paso, Texas",
+  description:
+    "Compare El Paso pedestrian accident lawyers handling crosswalk collisions, hit-and-run crashes, serious injuries, uninsured motorists, and wrongful death claims.",
+  metaDescription:
+    "Compare pedestrian accident lawyers in El Paso for crosswalk crashes, hit-and-run collisions, serious injuries, insurance disputes, and wrongful death claims.",
+  heroText:
+    "Compare El Paso pedestrian accident attorneys representing people injured in crosswalk crashes, intersection collisions, hit-and-run accidents, parking-lot incidents, and other serious pedestrian injury claims across the 915.",
+  topics: [
+    "Crosswalk Accidents",
+    "Intersection Collisions",
+    "Hit-and-Run Accidents",
+    "Distracted Driving",
+    "Speeding Drivers",
+    "Uninsured Motorists",
+    "Parking Lot Accidents",
+    "Serious and Catastrophic Injuries",
+    "Wrongful Death",
+  ],
+  overview: [
+    "A pedestrian accident lawyer represents people injured when a car, truck, motorcycle, rideshare vehicle, or other motor vehicle strikes someone who is walking. These cases may involve driver negligence, disputed right-of-way, unsafe turns, speeding, distraction, poor visibility, hit-and-run conduct, or insurance coverage issues.",
+    "Pedestrian crashes can cause severe injuries because a person on foot has little physical protection from the force of a motor vehicle. Claims may involve emergency treatment, surgery, rehabilitation, lost income, reduced earning capacity, long-term impairment, pain, or wrongful death.",
+    "A pedestrian injury claim may require review of photographs, surveillance footage, traffic signals, witness statements, police reports, vehicle damage, medical records, mobile-phone evidence, and insurance information. Early investigation can be important when video or other evidence may be lost.",
+  ],
+  whenToHire: [
+    "You or a family member was struck by a car, truck, motorcycle, rideshare vehicle, or commercial vehicle while walking.",
+    "The collision happened in a crosswalk, intersection, parking lot, school zone, neighborhood, or roadside area.",
+    "The driver left the scene or cannot be identified.",
+    "You suffered hospitalization, surgery, fractures, head trauma, permanent impairment, or significant lost income.",
+    "An insurance company disputes fault or claims you entered the roadway improperly.",
+    "The crash involved an uninsured or underinsured driver.",
+    "A child, elderly pedestrian, or other vulnerable person was seriously injured.",
+    "A family member died as a result of a pedestrian collision.",
+  ],
+  localContent: [
+    "Pedestrian crashes in El Paso may occur along busy corridors such as Interstate 10 frontage roads, U.S. 54, Loop 375, Montana Avenue, Mesa Street, Zaragoza Road, Alameda Avenue, Dyer Street, and César Chávez Border Highway, as well as around schools, shopping centers, transit stops, downtown intersections, and residential neighborhoods.",
+    "The 915 includes areas with heavy commuter traffic, cross-border travel, military traffic connected to Fort Bliss, commercial trucking, and busy arterial roads. Lighting, road design, speed, turning traffic, construction, and pedestrian visibility can all become important facts when investigating a collision.",
+    "Texas law includes specific rules governing pedestrians, traffic signals, and crosswalk right-of-way. An El Paso pedestrian accident attorney can evaluate the location of the crash, available traffic-control devices, witness accounts, video, insurance coverage, and whether one or more parties may share responsibility.",
+  ],
+  faqs: [
+    {
+      question: "Do pedestrians always have the right-of-way in Texas?",
+      answer:
+        "No. Texas law gives pedestrians important protections in crosswalks and at pedestrian signals, but pedestrians also have duties depending on where and how they cross. Fault depends on the specific location, signals, driver conduct, and surrounding facts.",
+    },
+    {
+      question: "What if I was hit while crossing in a crosswalk?",
+      answer:
+        "A crosswalk collision may involve whether the driver failed to stop or yield, whether traffic signals were operating, the pedestrian's position in the roadway, visibility, speed, and other circumstances.",
+    },
+    {
+      question: "What if the driver says I stepped into traffic?",
+      answer:
+        "That allegation does not automatically decide fault. Photographs, video, witnesses, signal timing, vehicle speed, lighting, road layout, and physical evidence may help establish what happened.",
+    },
+    {
+      question: "What should I do after being hit by a vehicle?",
+      answer:
+        "Seek medical attention, report the collision, preserve photographs and witness information when possible, keep medical and expense records, and consider obtaining legal advice before signing releases or giving detailed statements to insurers.",
+    },
+    {
+      question: "What if the driver left the scene?",
+      answer:
+        "A hit-and-run claim may involve police investigation, surveillance footage, witness information, vehicle identification efforts, and potentially uninsured-motorist coverage depending on the insurance policy and facts.",
+    },
+    {
+      question: "Can I bring a claim if the driver was uninsured?",
+      answer:
+        "Possibly. Available recovery may depend on the driver's assets, your own uninsured or underinsured motorist coverage, household policies, and whether another party may share responsibility.",
+    },
+    {
+      question: "What damages may be available after a pedestrian accident?",
+      answer:
+        "Depending on the facts, damages may include medical expenses, lost income, reduced earning capacity, pain, physical impairment, property damage, and in fatal cases, wrongful death or survival damages.",
+    },
+    {
+      question: "How long do I have to file a pedestrian accident lawsuit in Texas?",
+      answer:
+        "Texas generally applies a two-year limitations period to personal-injury claims, but exceptions and shorter notice requirements can apply in some situations. Prompt legal advice can help identify the correct deadline.",
+    },
+    {
+      question: "What if a government vehicle or unsafe public roadway was involved?",
+      answer:
+        "Claims involving a government entity can involve special rules, immunities, and notice requirements. Those cases should be evaluated promptly because the procedures may differ from an ordinary vehicle claim.",
+    },
+    {
+      question: "When should I contact a pedestrian accident lawyer?",
+      answer:
+        "Consider contacting counsel promptly after a serious collision, especially when injuries are significant, fault is disputed, the driver fled, insurance coverage is unclear, or video and other evidence need to be preserved.",
+    },
+  ],
+  relatedPages: [
+    {
+      label: "Personal Injury",
+      path: "/el-paso-personal-injury-lawyers",
+    },
+    {
+      label: "Car Accident",
+      path: "/el-paso-car-accident-lawyers",
+    },
+    {
+      label: "Truck Accident",
+      path: "/el-paso-truck-accident-lawyers",
+    },
+    {
+      label: "Motorcycle Accident",
+      path: "/el-paso-motorcycle-accident-lawyers",
+    },
+    {
+      label: "Wrongful Death",
+      path: "/el-paso-wrongful-death-lawyers",
+    },
+  ],
+},
 ];
 
 export const getPracticeAreaPageByPath = (
