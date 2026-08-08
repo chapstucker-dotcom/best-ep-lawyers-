@@ -1223,6 +1223,124 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     ],
   },
 
+  {
+    path: "/el-paso-uber-lyft-accident-lawyers",
+    shortTitle: "Uber & Lyft Accident",
+    title: "Best Uber & Lyft Accident Lawyers in El Paso, Texas",
+    description:
+      "Compare El Paso rideshare accident lawyers handling Uber and Lyft crashes, passenger injuries, driver claims, insurance disputes, uninsured motorists, and serious injury cases.",
+    metaDescription:
+      "Compare Uber and Lyft accident lawyers in El Paso for passenger injuries, rideshare crashes, insurance disputes, uninsured motorists, and serious injury claims.",
+    heroText:
+      "Compare El Paso Uber and Lyft accident attorneys representing passengers, drivers, pedestrians, cyclists, and other motorists injured in rideshare crashes throughout the 915.",
+    topics: [
+      "Uber Accidents",
+      "Lyft Accidents",
+      "Passenger Injuries",
+      "Rideshare Driver Claims",
+      "Other Motorist Claims",
+      "Pedestrian and Bicycle Crashes",
+      "Insurance Coverage Disputes",
+      "Uninsured and Underinsured Motorists",
+      "Serious and Catastrophic Injuries",
+      "Wrongful Death",
+    ],
+    overview: [
+      "A rideshare accident lawyer represents people injured in crashes involving Uber, Lyft, or another transportation network company. Depending on the circumstances, an injured person may be a passenger, rideshare driver, pedestrian, cyclist, or occupant of another vehicle.",
+      "Rideshare cases can be more complicated than an ordinary car accident because insurance coverage may depend on what the driver was doing when the crash occurred, whether the rideshare app was active, whether a ride had been accepted, and which insurance policies apply.",
+      "Investigating a rideshare collision may involve police reports, photographs, witness statements, app records, trip information, driver status, vehicle damage, medical records, mobile-phone evidence, surveillance footage, and communications with personal or commercial insurers.",
+    ],
+    whenToHire: [
+      "You were injured while riding as an Uber or Lyft passenger.",
+      "You were driving for a rideshare service and another vehicle caused the crash.",
+      "An Uber or Lyft driver struck your vehicle, bicycle, or you as a pedestrian.",
+      "The rideshare company, driver, or insurer disputes which policy applies.",
+      "You suffered hospitalization, surgery, fractures, head trauma, spinal injuries, permanent impairment, or substantial lost income.",
+      "The crash involved an uninsured or underinsured motorist.",
+      "Multiple drivers or insurers may share responsibility.",
+      "A family member died in a collision involving a rideshare vehicle.",
+    ],
+    localContent: [
+      "Rideshare vehicles operate throughout El Paso and the 915, including Downtown, the East Side, West Side, Northeast, UTEP, Fort Bliss, the airport area, entertainment districts, shopping centers, and major corridors such as Interstate 10, Loop 375, U.S. 54, Mesa Street, Montana Avenue, Zaragoza Road, and Dyer Street.",
+      "El Paso rideshare crashes may involve airport trips, late-night transportation, cross-town travel, military-connected passengers, special events, border-area traffic, and busy pickup or drop-off locations. Driver status and app activity can become important when determining available insurance coverage.",
+      "An El Paso Uber or Lyft accident attorney can help identify potentially applicable insurance policies, preserve app and trip information, evaluate driver and third-party responsibility, document injuries and losses, and communicate with insurers when coverage or liability is disputed.",
+    ],
+    faqs: [
+      {
+        question: "What should I do after an Uber or Lyft accident in El Paso?",
+        answer:
+          "Seek medical attention, report the crash when appropriate, save screenshots and trip information from the rideshare app, preserve photographs and witness information, and keep medical, insurance, and expense records.",
+      },
+      {
+        question: "Who may be responsible for a rideshare accident?",
+        answer:
+          "Responsibility may involve the rideshare driver, another motorist, a vehicle owner, or another party depending on how the crash happened. Insurance coverage and the driver's app status may also affect the claim.",
+      },
+      {
+        question: "Does Uber or Lyft provide insurance in Texas?",
+        answer:
+          "Transportation network companies generally maintain or arrange insurance for rideshare activity, but the coverage that applies can depend on the driver's app status and the circumstances of the crash.",
+      },
+      {
+        question: "What if I was injured as an Uber or Lyft passenger?",
+        answer:
+          "A passenger may have claims against one or more responsible drivers and potentially applicable insurance policies. Trip records, app information, police reports, and medical documentation can be important.",
+      },
+      {
+        question: "What if the rideshare driver was waiting for a ride request?",
+        answer:
+          "Insurance issues can differ depending on whether the driver was logged into the app, waiting for a request, traveling to pick up a passenger, or transporting a passenger. The exact status should be documented and reviewed.",
+      },
+      {
+        question: "What if another driver caused the crash?",
+        answer:
+          "The at-fault driver's insurance may be involved, and other available coverage may also need to be evaluated depending on the facts, the rideshare driver's status, and the policies that apply.",
+      },
+      {
+        question: "What if the at-fault driver had no insurance?",
+        answer:
+          "Uninsured or underinsured motorist coverage may be relevant depending on the policies involved and the circumstances. Coverage should be reviewed carefully rather than assumed.",
+      },
+      {
+        question: "What damages may be available after a rideshare accident?",
+        answer:
+          "Depending on the case, damages may include medical expenses, lost income, reduced earning capacity, pain, impairment, property damage, and in fatal cases, wrongful death or survival damages.",
+      },
+      {
+        question: "What evidence should I save from the rideshare app?",
+        answer:
+          "Save trip receipts, driver information, pickup and drop-off details, timestamps, screenshots, communications, support messages, and any notices relating to the crash or trip.",
+      },
+      {
+        question: "When should I contact an Uber or Lyft accident lawyer?",
+        answer:
+          "Consider contacting counsel promptly when injuries are serious, fault is disputed, multiple insurers are involved, app status is unclear, or trip and electronic evidence may need to be preserved.",
+      },
+    ],
+    relatedPages: [
+      {
+        label: "Personal Injury",
+        path: "/el-paso-personal-injury-lawyers",
+      },
+      {
+        label: "Car Accident",
+        path: "/el-paso-car-accident-lawyers",
+      },
+      {
+        label: "Pedestrian Accident",
+        path: "/el-paso-pedestrian-accident-lawyers",
+      },
+      {
+        label: "Bicycle Accident",
+        path: "/el-paso-bicycle-accident-lawyers",
+      },
+      {
+        label: "Wrongful Death",
+        path: "/el-paso-wrongful-death-lawyers",
+      },
+    ],
+  },
+
 ];
 
 export const getPracticeAreaPageByPath = (
