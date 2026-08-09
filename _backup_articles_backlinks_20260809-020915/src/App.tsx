@@ -29,9 +29,6 @@ import CarAccident from "./pages/CarAccident";
 import MotorcycleAccident from "./pages/MotorcycleAccident";
 import WrongfulDeath from "./pages/WrongfulDeath";
 import PracticeAreaPage from "./pages/PracticeAreaPage";
-import Guides from "./pages/Guides";
-import GuideArticle from "./pages/GuideArticle";
-import FeaturedBadge from "./pages/FeaturedBadge";
 
 import { practiceAreaPages } from "./data/practiceAreaPages";
 import { AuthProvider } from "./contexts/AuthContext";
@@ -134,10 +131,6 @@ export default function App() {
             element={<PracticeAreaPage />}
           />
         ))}
-
-        <Route path="/guides" element={<Guides />} />
-        <Route path="/guides/:slug" element={<GuideArticle />} />
-        <Route path="/featured-on-el-pasos-best-lawyers" element={<FeaturedBadge />} />
 
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/login" element={<Login />} />

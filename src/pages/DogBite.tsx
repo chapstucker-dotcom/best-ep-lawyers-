@@ -1,106 +1,113 @@
 import PracticeAreaTemplate from "../components/PracticeAreaTemplate";
 import type { PracticeAreaPageData } from "../data/practiceAreaPages";
 
-const dogBitePage: PracticeAreaPageData = {
-  path: "/el-paso-dog-bite-lawyers",
-  shortTitle: "Dog Bite",
-  title: "Best Dog Bite Lawyers in El Paso, Texas",
+const truckAccidentPage: PracticeAreaPageData = {
+  path: "/el-paso-truck-accident-lawyers",
+  shortTitle: "Truck Accident",
+  title: "Best Truck Accident Lawyers in El Paso, Texas",
   description:
-    "Compare El Paso dog bite attorneys handling serious injuries, facial scarring, nerve damage, infections, child injuries, dangerous-dog claims, and wrongful death cases.",
+    "Compare El Paso truck accident attorneys handling commercial vehicle crashes, trucking-company negligence, serious injuries, insurance disputes, and wrongful death claims.",
   metaDescription:
-    "Compare dog bite lawyers in El Paso for serious injuries, facial scarring, infections, child injuries, dangerous-dog claims, and wrongful death.",
+    "Compare truck accident lawyers in El Paso for commercial vehicle crashes, trucking negligence, serious injuries, and wrongful death claims.",
   heroText:
-    "Compare El Paso dog bite attorneys for serious injuries, facial scarring, infections, child injuries, and dangerous-dog claims.",
+    "Compare El Paso truck accident attorneys for commercial vehicle crashes, trucking-company negligence, serious injuries, and wrongful death claims.",
   topics: [
-    "Child Dog Bite Injuries",
-    "Facial Scarring",
-    "Nerve Damage",
-    "Infections",
-    "Dangerous Dogs",
-    "Apartment Complex Attacks",
-    "Neighborhood Attacks",
-    "Owner Negligence",
+    "Commercial Truck Crashes",
+    "Driver Fatigue",
+    "Unsafe Lane Changes",
+    "Overloaded Trucks",
+    "Improper Maintenance",
+    "Brake Failures",
+    "Distracted Driving",
+    "Trucking Company Negligence",
     "Serious Injuries",
     "Wrongful Death",
   ],
   overview: [
-    "A dog bite lawyer represents people injured by dogs when an owner, keeper, property manager, landlord, or another responsible party may be legally liable.",
-    "Dog attacks can cause puncture wounds, torn tissue, infections, nerve damage, broken bones, facial injuries, permanent scarring, psychological trauma, and death.",
-    "Important evidence may include photographs, medical records, animal-control reports, vaccination records, witness statements, prior complaints, lease documents, property records, and communications with the owner or insurer.",
-    "The outcome of a claim depends on the facts, including the dog's history, the owner's knowledge, control of the property, warnings, local ordinances, and the circumstances of the attack.",
+    "A truck accident lawyer represents people injured in crashes involving commercial trucks, delivery vehicles, tractor-trailers, company vehicles, and other large commercial vehicles.",
+    "Truck accident cases may involve the driver, trucking company, vehicle owner, maintenance contractor, cargo company, manufacturer, broker, or insurer.",
+    "Important evidence may include driver logs, electronic vehicle data, maintenance records, inspection reports, dispatch records, company policies, photographs, video, witness statements, and crash reports.",
+    "Commercial truck collisions can cause catastrophic injuries, permanent disability, extensive medical expenses, lost earning capacity, and wrongful death.",
   ],
   whenToHire: [
-    "The bite caused emergency treatment, surgery, infection, scarring, nerve damage, or permanent impairment.",
-    "A child was injured by a dog.",
-    "The dog had previously shown aggression or attacked someone.",
-    "The owner, landlord, property manager, or insurer disputes responsibility.",
-    "The attack occurred at an apartment complex, rental property, business, or public location.",
-    "A loved one died because of a dog attack.",
+    "You were seriously injured in a crash involving a commercial truck or company vehicle.",
+    "The trucking company or insurer contacted you shortly after the crash.",
+    "Driver logs, electronic data, video, inspection records, or maintenance records must be preserved.",
+    "Multiple companies or insurers may share responsibility.",
+    "The crash caused hospitalization, surgery, permanent impairment, or significant lost income.",
+    "A loved one died in a commercial truck collision.",
   ],
   localContent: [
-    "Dog bite claims in El Paso may involve neighborhood attacks, apartment complexes, rental properties, parks, businesses, and other locations throughout El Paso County.",
-    "An El Paso dog bite attorney can help identify responsible parties, obtain animal-control records, preserve photographs and witness information, evaluate insurance coverage, and document medical and emotional harm.",
+    "El Paso truck accident claims may arise from collisions on Interstate 10, Loop 375, U.S. Highway 54, Montana Avenue, Zaragoza Road, and commercial routes throughout El Paso County.",
+    "El Paso's location along major interstate and cross-border freight corridors creates substantial commercial truck traffic involving local, national, and international carriers.",
+    "An El Paso truck accident attorney can help preserve trucking records, identify responsible companies, investigate regulatory violations, evaluate insurance coverage, and document long-term damages.",
   ],
   faqs: [
     {
-      question: "Who may be responsible for a dog bite?",
+      question: "Who may be responsible for a truck accident?",
       answer:
-        "Depending on the facts, responsibility may involve the dog owner, keeper, landlord, property manager, business, or another person who controlled the animal or property.",
+        "Potentially responsible parties may include the driver, trucking company, vehicle owner, maintenance contractor, cargo company, manufacturer, broker, or another business.",
     },
     {
-      question: "What evidence should I preserve?",
+      question: "What evidence should be preserved?",
       answer:
-        "Preserve photographs of the injuries and location, medical records, witness information, animal-control reports, communications, damaged clothing, and insurance information.",
+        "Important evidence may include driver logs, electronic vehicle data, inspection reports, maintenance records, dispatch records, photographs, video, witness information, and crash reports.",
     },
     {
-      question: "What if the dog never bit anyone before?",
+      question: "What is electronic truck data?",
       answer:
-        "A prior bite is not always required. Responsibility may depend on the dog's behavior, the owner's knowledge, negligence, control, and other facts.",
+        "Commercial vehicles may contain systems that record speed, braking, engine activity, hours of operation, location, and other information relevant to a crash.",
     },
     {
-      question: "Can a child bring a dog bite claim?",
+      question: "Can the trucking company be responsible?",
       answer:
-        "Yes. A parent or legal representative may pursue a claim for an injured child.",
+        "A trucking company may be responsible based on employment, supervision, hiring, training, maintenance, company policies, regulatory compliance, or other facts.",
     },
     {
       question: "What damages may be available?",
       answer:
-        "Depending on the facts, damages may include medical expenses, future treatment, lost income, pain, impairment, scarring, disfigurement, and emotional harm.",
+        "Depending on the facts, damages may include medical expenses, future care, lost income, reduced earning capacity, pain, impairment, disfigurement, and wrongful-death damages.",
     },
     {
-      question: "What if the attack happened at an apartment complex?",
+      question: "What if several companies are involved?",
       answer:
-        "The dog owner, landlord, or property manager may be involved depending on notice, control, lease terms, and the circumstances.",
+        "Truck cases often involve multiple businesses and insurers. Identifying every responsible party can be important to the investigation and recovery.",
     },
     {
-      question: "Should I report the attack?",
+      question: "Should I speak with the trucking insurer?",
       answer:
-        "Reporting the incident to appropriate local authorities may help document the attack and address vaccination or public-safety concerns.",
+        "Consider legal advice before giving a recorded statement, signing documents, or accepting a settlement.",
     },
     {
       question: "How long do I have to file?",
       answer:
-        "Texas limitation periods and special rules may apply, so prompt legal review is important.",
+        "Texas limitation periods and special notice requirements may apply. Prompt review is important because trucking evidence may be lost or overwritten.",
     },
     {
-      question: "How long does a dog bite case take?",
+      question: "How long does a truck accident case take?",
       answer:
-        "Timing varies based on medical treatment, insurance coverage, liability disputes, settlement negotiations, and litigation.",
+        "Timing depends on medical treatment, evidence, the number of responsible parties, insurance coverage, negotiations, and litigation.",
     },
     {
       question: "When should I contact a lawyer?",
       answer:
-        "As soon as practical after a serious attack, especially when injuries are significant or responsibility is disputed.",
+        "As soon as practical after a serious truck collision, especially when electronic data, video, and company records must be preserved.",
     },
   ],
   relatedPages: [
     { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-    { label: "Slip and Fall", path: "/el-paso-slip-and-fall-lawyers" },
+    {
+      label: "18 Wheeler Accident",
+      path: "/el-paso-18-wheeler-accident-lawyer",
+    },
+    {
+      label: "Semi Truck Accident",
+      path: "/el-paso-semi-truck-accident-lawyer",
+    },
     { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
-    { label: "Brain Injury", path: "/el-paso-brain-injury-lawyers" },
   ],
 };
 
-export default function DogBite() {
-  return <PracticeAreaTemplate page={dogBitePage} />;
+export default function TruckAccident() {
+  return <PracticeAreaTemplate page={truckAccidentPage} />;
 }

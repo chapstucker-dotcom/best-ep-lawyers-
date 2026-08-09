@@ -1,5 +1,4 @@
 import { Globe, Mail, Phone, Scale } from "lucide-react";
-import { Link } from "react-router-dom";
 
 export default function Footer() {
   const scrollToSection = (id: string) => {
@@ -80,7 +79,15 @@ export default function Footer() {
                 </button>
               </li>
 
-              <li><Link to="/guides" className="transition hover:text-[#D4A62A]">Texas Law Guides</Link></li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => scrollToSection("resources")}
+                  className="transition hover:text-[#D4A62A]"
+                >
+                  Legal Resources
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -99,9 +106,14 @@ export default function Footer() {
               </li>
 
               <li>
-                <button type="button" onClick={() => scrollToSection("pricing")} className="transition hover:text-[#D4A62A]">Membership Options</button>
+                <button
+                  type="button"
+                  onClick={() => scrollToSection("pricing")}
+                  className="transition hover:text-[#D4A62A]"
+                >
+                  Membership Options
+                </button>
               </li>
-              <li><Link to="/featured-on-el-pasos-best-lawyers" className="transition hover:text-[#D4A62A]">Featured Badge</Link></li>
             </ul>
           </div>
 

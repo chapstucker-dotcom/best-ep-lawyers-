@@ -7,6 +7,7 @@ import Hero from './Hero';
 import FirmCard from './FirmCard';
 import FirmModal from './FirmModal';
 import ArticleCard from './ArticleCard';
+import ArticleModal from './ArticleModal';
 import ListFirmForm from './ListFirmForm';
 import PricingCard from './PricingCard';
 import SearchFilters from './SearchFilters';
@@ -21,7 +22,7 @@ import { articles } from '../data/articles';
 import { plans } from '../data/plans';
 import { getPlanRules } from '@/config/planRules';
 
-import type { Firm } from '../data/types';
+import type { Firm, Article } from '../data/types';
 
 import {
   Award,
@@ -146,6 +147,8 @@ export default function AppLayout() {
 
   const [selectedFirm, setSelectedFirm] =
     useState<Firm | null>(null);
+  const [selectedArticle, setSelectedArticle] =
+    useState<Article | null>(null);
 
   const [showAllCategories, setShowAllCategories] =
     useState(false);
@@ -796,12 +799,17 @@ export default function AppLayout() {
           </p>
 
           <div className="grid gap-6 md:grid-cols-2">
-            {articles.slice(0, 6).map((article) => (
-              <ArticleCard key={article.id} article={article} />
+            {articles.map((article) => (
+              <ArticleCard
+                key={article.id}
+                article={article}
+                onClick={() =>
+                  setSelectedArticle(
+                    article
+                  )
+                }
+              />
             ))}
-          </div>
-          <div className="mt-8 text-center">
-            <a href="/guides" className="inline-flex items-center rounded-lg bg-[#0F2A43] px-6 py-3 font-bold text-white transition hover:bg-[#163b5d]">Browse All Texas Law Guides</a>
           </div>
         </div>
       </section>
@@ -921,6 +929,13 @@ export default function AppLayout() {
         }
       />
 
+      <ArticleModal
+        article={selectedArticle}
+        open={Boolean(selectedArticle)}
+        onClose={() =>
+          setSelectedArticle(null)
+        }
+      />
     </div>
   );
 }

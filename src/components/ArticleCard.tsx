@@ -1,36 +1,31 @@
-import { Card } from './ui/card';
-import { Badge } from './ui/badge';
-import { Article } from '../data/types';
-import { BookOpen } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { BookOpen, ArrowRight } from 'lucide-react';
+import type { Article } from '../data/articles';
 
 interface ArticleCardProps {
   article: Article;
-  onClick: () => void;
 }
 
-export default function ArticleCard({ article, onClick }: ArticleCardProps) {
+export default function ArticleCard({ article }: ArticleCardProps) {
   return (
-    <Card 
-      className="p-6 hover:shadow-lg transition-shadow cursor-pointer hover:border-[#1FA8A1]"
-      onClick={onClick}
+    <Link
+      to={`/guides/${article.slug}`}
+      className="block rounded-xl border border-gray-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-[#1FA8A1] hover:shadow-lg"
     >
       <div className="flex items-start gap-4">
-        <div className="w-12 h-12 bg-gradient-to-br from-[#0F2A43] to-[#1FA8A1] rounded-lg flex items-center justify-center flex-shrink-0">
+        <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-[#0F2A43] to-[#1FA8A1]">
           <BookOpen className="h-6 w-6 text-white" />
         </div>
-        <div className="flex-1">
-          <div className="flex items-start justify-between mb-2">
-            <h3 className="text-lg font-bold text-[#0F2A43]">{article.title}</h3>
-            <Badge variant="secondary" className="text-xs">{article.topic}</Badge>
+        <div className="min-w-0 flex-1">
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-[#1FA8A1]">{article.topic}</p>
+          <h3 className="mb-2 text-lg font-bold leading-snug text-[#0F2A43]">{article.title}</h3>
+          <p className="mb-4 text-sm leading-6 text-gray-600">{article.summary}</p>
+          <div className="flex items-center justify-between gap-3 text-xs text-gray-500">
+            <span>{article.readTime}</span>
+            <span className="inline-flex items-center gap-1 font-semibold text-[#0F2A43]">Read guide <ArrowRight className="h-3.5 w-3.5" /></span>
           </div>
-          <p className="text-sm text-gray-600 mb-3">{article.summary}</p>
-          <p className="text-xs text-gray-500">
-            Updated {new Date(article.updatedAt).toLocaleDateString()}
-          </p>
         </div>
       </div>
-    </Card>
+    </Link>
   );
 }
-
-
