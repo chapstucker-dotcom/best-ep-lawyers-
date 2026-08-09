@@ -1,5 +1,6 @@
 import WhyLawFirmsJoin from "./WhyLawFirmsJoin";
 import LawFirmMarketplace from "./LawFirmMarketplace";
+import SeoPracticeAreaLinks from "./SeoPracticeAreaLinks";
 import { useEffect, useMemo, useState } from 'react';
 
 import Hero from './Hero';
@@ -643,6 +644,8 @@ export default function AppLayout() {
           </div>
         </div>
       </section>
+
+      <SeoPracticeAreaLinks />
 
       {/* Search listings */}
       <section

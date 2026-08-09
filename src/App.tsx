@@ -1,4 +1,4 @@
-﻿import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import Index from "./pages/Index";
 import Login from "./pages/Login";
@@ -25,6 +25,9 @@ import BrainInjury from "./pages/BrainInjury";
 import ConstructionAccident from "./pages/ConstructionAccident";
 import DogBite from "./pages/DogBite";
 import TraumaticBrainInjury from "./pages/TraumaticBrainInjury";
+import CarAccident from "./pages/CarAccident";
+import MotorcycleAccident from "./pages/MotorcycleAccident";
+import WrongfulDeath from "./pages/WrongfulDeath";
 import PracticeAreaPage from "./pages/PracticeAreaPage";
 
 import { practiceAreaPages } from "./data/practiceAreaPages";
@@ -105,6 +108,21 @@ export default function App() {
         <Route
           path="/el-paso-traumatic-brain-injury-lawyers"
           element={<TraumaticBrainInjury />}
+        />
+
+        <Route
+          path="/el-paso-car-accident-lawyers"
+          element={<CarAccident />}
+        />
+
+        <Route
+          path="/el-paso-motorcycle-accident-lawyers"
+          element={<MotorcycleAccident />}
+        />
+
+        <Route
+          path="/el-paso-wrongful-death-lawyers"
+          element={<WrongfulDeath />}
         />
         {practiceAreaPages.map((page) => (
           <Route
