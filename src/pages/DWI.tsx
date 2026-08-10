@@ -94,10 +94,15 @@ const dwiPage: PracticeAreaPageData = {
   ],
   relatedPages: [
     { label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" },
+    { label: "Traffic Ticket", path: "/el-paso-traffic-ticket-lawyers" },
     { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
     { label: "Immigration", path: "/el-paso-immigration-lawyers" },
-    { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
   ],
+  resourceLinks: [
+    { label: "Texas DWI Basics for El Paso Drivers", path: "/guides/texas-dwi-basics-el-paso" },
+    { label: "Browse All Texas Law Guides", path: "/guides" },
+  ],
+  lastUpdated: "August 10, 2026",
 };
 
 export default function DWI() {

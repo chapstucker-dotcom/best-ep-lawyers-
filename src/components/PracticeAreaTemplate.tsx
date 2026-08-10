@@ -104,6 +104,7 @@ export default function PracticeAreaTemplate({ page }: Props) {
           url: canonical,
           name: title,
           description,
+          dateModified: page.lastUpdated || undefined,
           isPartOf: {
             "@type": "WebSite",
             name: "El Paso's Best Lawyers",
@@ -217,6 +218,12 @@ export default function PracticeAreaTemplate({ page }: Props) {
             <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-200">
               {page.heroText || page.description}
             </p>
+
+            {page.lastUpdated && (
+              <p className="mt-4 text-sm font-medium text-slate-300">
+                Content reviewed and updated {page.lastUpdated}
+              </p>
+            )}
 
             <div className="mt-8 flex flex-wrap gap-4">
               <button
@@ -448,35 +455,42 @@ export default function PracticeAreaTemplate({ page }: Props) {
             Related legal guides
           </h2>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {[
-              {
-                title: `How to choose an El Paso ${page.shortTitle.toLowerCase()} lawyer`,
-                icon: Users,
-              },
-              {
-                title: `Questions to ask about a ${page.shortTitle.toLowerCase()} matter`,
-                icon: FileText,
-              },
-              {
-                title: `Understanding Texas ${page.shortTitle.toLowerCase()} issues`,
-                icon: BookOpen,
-              },
-            ].map(({ title, icon: Icon }) => (
-              <article
-                key={title}
-                className="rounded-2xl border border-slate-200 bg-slate-50 p-6"
-              >
-                <Icon className="h-8 w-8 text-[#9a7212]" />
-                <h3 className="mt-5 text-xl font-bold text-[#07162f]">
-                  {title}
-                </h3>
-                <p className="mt-3 leading-7 text-slate-600">
-                  Article space ready for your legal guides and internal links.
-                </p>
-              </article>
-            ))}
-          </div>
+          {page.resourceLinks && page.resourceLinks.length > 0 ? (
+            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {page.resourceLinks.map((resource) => (
+                <Link
+                  key={resource.path}
+                  to={resource.path}
+                  className="group rounded-2xl border border-slate-200 bg-slate-50 p-6 transition hover:-translate-y-0.5 hover:border-[#d6a928] hover:shadow-sm"
+                >
+                  <BookOpen className="h-8 w-8 text-[#9a7212]" />
+                  <h3 className="mt-5 text-xl font-bold text-[#07162f]">
+                    {resource.label}
+                  </h3>
+                  <p className="mt-4 inline-flex items-center gap-2 font-semibold text-[#9a7212]">
+                    Read guide
+                    <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                  </p>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="mt-10 grid gap-6 md:grid-cols-3">
+              {[
+                { title: `How to choose an El Paso ${page.shortTitle.toLowerCase()} lawyer`, icon: Users },
+                { title: `Questions to ask about a ${page.shortTitle.toLowerCase()} matter`, icon: FileText },
+                { title: `Understanding Texas ${page.shortTitle.toLowerCase()} issues`, icon: BookOpen },
+              ].map(({ title, icon: Icon }) => (
+                <article key={title} className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+                  <Icon className="h-8 w-8 text-[#9a7212]" />
+                  <h3 className="mt-5 text-xl font-bold text-[#07162f]">{title}</h3>
+                  <p className="mt-3 leading-7 text-slate-600">
+                    Explore our Texas Law Guides for practical information related to this practice area.
+                  </p>
+                </article>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

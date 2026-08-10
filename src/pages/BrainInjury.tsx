@@ -37,8 +37,10 @@ const brainInjuryPage: PracticeAreaPageData = {
     "A loved one suffered severe brain damage or died because of another party's conduct.",
   ],
   localContent: [
-    "El Paso brain injury claims may arise from collisions on Interstate 10, Loop 375, U.S. Highway 54, construction sites, workplaces, medical facilities, apartment complexes, and other locations throughout El Paso County.",
-    "An El Paso brain injury attorney can help preserve evidence, obtain medical records, coordinate expert review, document changes in daily life, evaluate long-term care needs, and pursue negotiation or litigation.",
+    "El Paso brain injury claims may arise from collisions on Interstate 10, Loop 375, U.S. Highway 54, construction sites, workplaces, medical facilities, apartment complexes, sports or recreation incidents, and other locations throughout El Paso County.",
+    "Serious head-injury cases may require records from emergency departments, neurologists, rehabilitation providers, therapists, employers, schools, and family members who observed changes in memory, personality, concentration, balance, sleep, or daily functioning.",
+    "An El Paso brain injury attorney can help preserve crash or incident evidence, obtain medical records, document changes in daily life, evaluate future-care and earning-capacity issues, and coordinate appropriate expert review when the nature or cause of the injury is disputed.",
+    "Texas generally applies a two-year limitations period to personal-injury claims, although exceptions and special rules can apply. Evidence such as video, electronic data, and witness recollections may disappear much sooner, making prompt preservation important.",
   ],
   faqs: [
     {
@@ -95,9 +97,16 @@ const brainInjuryPage: PracticeAreaPageData = {
   relatedPages: [
     { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
     { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
+    { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers" },
     { label: "Medical Malpractice", path: "/el-paso-medical-malpractice-lawyers" },
     { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
   ],
+  resourceLinks: [
+    { label: "What to Do After a Car Accident in El Paso, Texas", path: "/guides/what-to-do-after-car-accident-el-paso" },
+    { label: "How Long Do You Have to File a Car Accident Claim in Texas?", path: "/guides/texas-car-accident-statute-of-limitations" },
+    { label: "What Evidence Matters After a Truck Accident in Texas?", path: "/guides/truck-accident-evidence-texas" },
+  ],
+  lastUpdated: "August 10, 2026",
 };
 
 export default function BrainInjury() {

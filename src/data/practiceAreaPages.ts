@@ -21,6 +21,8 @@ export type PracticeAreaPageData = {
   localContent: string[];
   faqs: PracticeAreaFaq[];
   relatedPages: RelatedPracticeArea[];
+  resourceLinks?: RelatedPracticeArea[];
+  lastUpdated?: string;
 };
 
 const genericFaqs = (shortTitle: string): PracticeAreaFaq[] => [
@@ -657,91 +659,55 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     shortTitle: "Divorce",
     title: "Best Divorce Lawyers in El Paso, Texas",
     description:
-      "Compare El Paso divorce attorneys handling contested divorce, uncontested divorce, child custody, child support, property division, spousal maintenance, military divorce, and enforcement matters.",
+      "Compare El Paso divorce lawyers handling contested and uncontested divorce, child custody, child support, property division, military divorce, spousal maintenance, and enforcement.",
     metaDescription:
-      "Compare divorce lawyers in El Paso for contested and uncontested divorce, custody, support, property division, military divorce, and enforcement.",
+      "Compare divorce lawyers in El Paso, TX for contested divorce, uncontested divorce, custody, support, property division, military divorce, and enforcement.",
     heroText:
-      "Compare El Paso divorce attorneys for contested and uncontested divorce, child custody, child support, property division, spousal maintenance, military divorce, and post-decree disputes.",
+      "Compare El Paso divorce lawyers for contested and uncontested divorce, child custody, child support, property division, spousal maintenance, military divorce, and post-decree disputes throughout the 915.",
     topics: [
       "Contested Divorce",
       "Uncontested Divorce",
-      "Child Custody",
+      "Temporary Orders",
+      "Child Custody and Conservatorship",
       "Child Support",
-      "Property Division",
+      "Property and Debt Division",
       "Spousal Maintenance",
       "Military Divorce",
-      "Protective Orders",
+      "Mediation",
       "Modifications and Enforcement",
     ],
     overview: [
-      "A divorce lawyer helps clients understand their rights, obligations, and options when ending a marriage in Texas. Depending on the circumstances, the attorney may prepare and file the divorce petition, respond to court filings, negotiate temporary orders, address child-related issues, divide marital property, and represent the client in mediation or trial.",
-      "Texas is a community-property state, which means property and debts acquired during the marriage may need to be identified, valued, and divided in a manner the court considers just and right. Separate property claims, retirement accounts, real estate, businesses, reimbursement claims, and hidden assets can make the process more complicated.",
-      "When children are involved, the case may also include conservatorship, possession schedules, child support, medical support, relocation restrictions, and enforcement. Military families in El Paso may face additional issues involving deployment, federal benefits, retirement pay, and jurisdiction.",
+      "A divorce lawyer helps clients understand their rights, obligations, and options when ending a marriage in Texas. Counsel may prepare or respond to divorce filings, address temporary orders, conduct discovery, negotiate settlement terms, prepare final decrees, and represent a client in mediation or trial.",
+      "Texas divorce cases can involve community-property division, separate-property claims, retirement accounts, real estate, business interests, debts, reimbursement issues, and disputes about whether assets were transferred or concealed.",
+      "When children are involved, divorce may also include conservatorship, possession schedules, child support, medical support, travel restrictions, relocation issues, and enforcement. The parenting provisions can be as important as the property division.",
+      "Texas Family Code Section 6.702 generally prevents a court from granting a divorce before the 60th day after the suit is filed, subject to statutory exceptions. That waiting period is a minimum, not a prediction of how long a contested El Paso divorce will take.",
     ],
     whenToHire: [
-      "You are considering divorce and want to understand your rights before filing.",
-      "Your spouse has filed and you have been served with legal papers.",
-      "You disagree about children, support, property, debts, or the marital home.",
-      "The marriage includes a business, retirement benefits, military service, or significant assets.",
-      "You are concerned about family violence, threats, hidden assets, or financial control.",
-      "You need to modify or enforce an existing divorce or custody order.",
+      "You are considering divorce and want to understand property, custody, support, or filing issues before taking action.",
+      "Your spouse filed for divorce and you were served with legal papers.",
+      "You disagree about children, support, property, debts, retirement accounts, a business, or the marital home.",
+      "You need temporary orders addressing possession of children, support, use of property, bills, or other issues while the case is pending.",
+      "The marriage includes military service, federal benefits, property in another state or country, or cross-border assets.",
+      "You are concerned about family violence, threats, hidden assets, financial control, or violations of temporary or final orders.",
+      "You need to modify or enforce an existing divorce, custody, or support order.",
     ],
     localContent: [
-      "Divorce cases involving El Paso residents are governed by Texas family law and are generally handled in the district courts serving El Paso County. Local filing procedures, standing orders, mediation practices, and court schedules can affect how the case progresses.",
-      "El Paso divorce cases may involve Fort Bliss military families, bilingual households, property located in Mexico or another state, international travel concerns, or relatives living across the border. These facts can create additional questions about jurisdiction, service, property, and parenting arrangements.",
-      "A local divorce attorney can help explain whether temporary orders may be needed, how community and separate property are treated, what parenting arrangements may be realistic, and whether negotiation, mediation, or litigation is the best next step.",
+      "Divorce cases involving El Paso residents are governed by Texas family law and are generally handled in district courts serving El Paso County. Local filing requirements, standing orders, court schedules, discovery, and mediation practices can affect how a case progresses.",
+      "El Paso divorces may involve Fort Bliss military families, bilingual households, retirement benefits, property in New Mexico or Mexico, international travel, or relatives living across the border.",
+      "An El Paso divorce lawyer can help identify community and separate property, evaluate temporary-order needs, prepare for mediation, develop a parenting plan, document financial issues, and decide whether settlement or trial is the best route.",
+      "For parents, the exact wording of conservatorship, possession, access, geographic restrictions, and decision-making provisions matters. Review related family-law and child-custody resources instead of treating every parenting dispute as identical.",
     ],
     faqs: [
-      {
-        question: "How long does a divorce take in Texas?",
-        answer:
-          "Texas generally requires a minimum waiting period after a divorce is filed, but contested cases often take longer depending on disputes, discovery, mediation, court availability, and trial preparation.",
-      },
-      {
-        question: "Do I need a reason to file for divorce?",
-        answer:
-          "Texas allows no-fault divorce based on insupportability, although fault grounds may also be alleged in some cases and can affect certain issues.",
-      },
-      {
-        question: "How is property divided in a Texas divorce?",
-        answer:
-          "The court divides community property in a manner it considers just and right. Separate property is not divided, but the spouse claiming separate property generally must prove that characterization.",
-      },
-      {
-        question: "Who gets custody of the children?",
-        answer:
-          "Texas uses the terms conservatorship, possession, and access. Courts focus on the best interest of the child when determining rights, duties, and parenting time.",
-      },
-      {
-        question: "How is child support calculated?",
-        answer:
-          "Texas child-support guidelines consider net monthly resources, the number of children before the court, and certain other legal obligations, although the result may vary in some cases.",
-      },
-      {
-        question: "Can one spouse receive spousal maintenance?",
-        answer:
-          "Court-ordered maintenance is limited and depends on statutory eligibility requirements. Contractual alimony may also be negotiated as part of a settlement.",
-      },
-      {
-        question: "What happens to the house?",
-        answer:
-          "The marital home may be awarded to one spouse, sold, refinanced, or addressed through another agreement depending on ownership, equity, debt, affordability, and the overall property division.",
-      },
-      {
-        question: "What is an uncontested divorce?",
-        answer:
-          "An uncontested divorce generally means both spouses agree on all major issues and can present agreed documents to the court. Legal review may still help ensure the agreement is complete and enforceable.",
-      },
-      {
-        question: "How does military divorce differ?",
-        answer:
-          "Military cases may involve federal rules, military retirement, survivor benefits, deployment, residency, jurisdiction, and support obligations in addition to Texas family law.",
-      },
-      {
-        question: "Can divorce orders be changed later?",
-        answer:
-          "Certain child-related and support orders may be modified if legal requirements are met. Property division terms are generally not modifiable after the divorce becomes final.",
-      },
+      { question: "How long does a divorce take in Texas?", answer: "Texas law generally includes a 60-day waiting period after a divorce is filed, subject to statutory exceptions. Contested cases often take longer because of service, temporary orders, discovery, mediation, court availability, and trial preparation." },
+      { question: "Do I need a reason to file for divorce?", answer: "Texas permits no-fault divorce based on insupportability. Fault grounds can also be alleged in appropriate cases and may matter to particular issues depending on the facts." },
+      { question: "How is property divided in a Texas divorce?", answer: "A Texas court divides community property in a manner it considers just and right. Separate property is not divided as community property, but the spouse asserting separate ownership generally must establish that characterization." },
+      { question: "What happens to retirement accounts?", answer: "Retirement benefits may contain community and separate components. Division can require plan-specific language and, for some plans, a separate order such as a qualified domestic relations order." },
+      { question: "Who gets custody of the children?", answer: "Texas uses the terms conservatorship, possession, and access. Courts focus on the child's best interest when determining parental rights, duties, and parenting time." },
+      { question: "Can temporary orders be entered before the divorce is final?", answer: "Yes. Courts can enter temporary orders addressing children, support, property, bills, use of assets, and other issues while a divorce is pending." },
+      { question: "What is an uncontested divorce?", answer: "An uncontested divorce generally means the spouses agree on all issues necessary for a final decree. Legal review can still be important when children, real estate, retirement, businesses, or significant debt are involved." },
+      { question: "How is military divorce different in El Paso?", answer: "Military cases can involve federal rules, military retirement, survivor benefits, deployment, residency, jurisdiction, and support obligations in addition to Texas family law." },
+      { question: "Can a divorce agreement be reached in mediation?", answer: "Many divorce cases resolve through mediation. Whether mediation is appropriate and what terms should be accepted depend on the facts, safety concerns, financial information, and legal issues." },
+      { question: "When should I contact an El Paso divorce lawyer?", answer: "Consider obtaining legal advice before filing or responding when the case involves children, property, support, military benefits, a business, family violence, cross-border issues, or disputed financial information." },
     ],
     relatedPages: [
       { label: "Family Law", path: "/el-paso-family-lawyers" },
@@ -749,6 +715,11 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
       { label: "Estate Planning", path: "/el-paso-estate-planning-lawyers" },
     ],
+    resourceLinks: [
+      { label: "Texas Child Custody: Conservatorship, Possession, and Access Basics", path: "/guides/texas-child-custody-conservatorship-basics" },
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "August 10, 2026",
   },
   {
     path: "/el-paso-child-custody-lawyers",
@@ -990,121 +961,72 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     ],
   },
   {
-  path: "/el-paso-pedestrian-accident-lawyers",
-  shortTitle: "Pedestrian Accident",
-  title: "Best Pedestrian Accident Lawyers in El Paso, Texas",
-  description:
-    "Compare El Paso pedestrian accident lawyers handling crosswalk collisions, hit-and-run crashes, serious injuries, uninsured motorists, and wrongful death claims.",
-  metaDescription:
-    "Compare pedestrian accident lawyers in El Paso for crosswalk crashes, hit-and-run collisions, serious injuries, insurance disputes, and wrongful death claims.",
-  heroText:
-    "Compare El Paso pedestrian accident attorneys representing people injured in crosswalk crashes, intersection collisions, hit-and-run accidents, parking-lot incidents, and other serious pedestrian injury claims across the 915.",
-  topics: [
-    "Crosswalk Accidents",
-    "Intersection Collisions",
-    "Hit-and-Run Accidents",
-    "Distracted Driving",
-    "Speeding Drivers",
-    "Uninsured Motorists",
-    "Parking Lot Accidents",
-    "Serious and Catastrophic Injuries",
-    "Wrongful Death",
-  ],
-  overview: [
-    "A pedestrian accident lawyer represents people injured when a car, truck, motorcycle, rideshare vehicle, or other motor vehicle strikes someone who is walking. These cases may involve driver negligence, disputed right-of-way, unsafe turns, speeding, distraction, poor visibility, hit-and-run conduct, or insurance coverage issues.",
-    "Pedestrian crashes can cause severe injuries because a person on foot has little physical protection from the force of a motor vehicle. Claims may involve emergency treatment, surgery, rehabilitation, lost income, reduced earning capacity, long-term impairment, pain, or wrongful death.",
-    "A pedestrian injury claim may require review of photographs, surveillance footage, traffic signals, witness statements, police reports, vehicle damage, medical records, mobile-phone evidence, and insurance information. Early investigation can be important when video or other evidence may be lost.",
-  ],
-  whenToHire: [
-    "You or a family member was struck by a car, truck, motorcycle, rideshare vehicle, or commercial vehicle while walking.",
-    "The collision happened in a crosswalk, intersection, parking lot, school zone, neighborhood, or roadside area.",
-    "The driver left the scene or cannot be identified.",
-    "You suffered hospitalization, surgery, fractures, head trauma, permanent impairment, or significant lost income.",
-    "An insurance company disputes fault or claims you entered the roadway improperly.",
-    "The crash involved an uninsured or underinsured driver.",
-    "A child, elderly pedestrian, or other vulnerable person was seriously injured.",
-    "A family member died as a result of a pedestrian collision.",
-  ],
-  localContent: [
-    "Pedestrian crashes in El Paso may occur along busy corridors such as Interstate 10 frontage roads, U.S. 54, Loop 375, Montana Avenue, Mesa Street, Zaragoza Road, Alameda Avenue, Dyer Street, and César Chávez Border Highway, as well as around schools, shopping centers, transit stops, downtown intersections, and residential neighborhoods.",
-    "The 915 includes areas with heavy commuter traffic, cross-border travel, military traffic connected to Fort Bliss, commercial trucking, and busy arterial roads. Lighting, road design, speed, turning traffic, construction, and pedestrian visibility can all become important facts when investigating a collision.",
-    "Texas law includes specific rules governing pedestrians, traffic signals, and crosswalk right-of-way. An El Paso pedestrian accident attorney can evaluate the location of the crash, available traffic-control devices, witness accounts, video, insurance coverage, and whether one or more parties may share responsibility.",
-  ],
-  faqs: [
-    {
-      question: "Do pedestrians always have the right-of-way in Texas?",
-      answer:
-        "No. Texas law gives pedestrians important protections in crosswalks and at pedestrian signals, but pedestrians also have duties depending on where and how they cross. Fault depends on the specific location, signals, driver conduct, and surrounding facts.",
-    },
-    {
-      question: "What if I was hit while crossing in a crosswalk?",
-      answer:
-        "A crosswalk collision may involve whether the driver failed to stop or yield, whether traffic signals were operating, the pedestrian's position in the roadway, visibility, speed, and other circumstances.",
-    },
-    {
-      question: "What if the driver says I stepped into traffic?",
-      answer:
-        "That allegation does not automatically decide fault. Photographs, video, witnesses, signal timing, vehicle speed, lighting, road layout, and physical evidence may help establish what happened.",
-    },
-    {
-      question: "What should I do after being hit by a vehicle?",
-      answer:
-        "Seek medical attention, report the collision, preserve photographs and witness information when possible, keep medical and expense records, and consider obtaining legal advice before signing releases or giving detailed statements to insurers.",
-    },
-    {
-      question: "What if the driver left the scene?",
-      answer:
-        "A hit-and-run claim may involve police investigation, surveillance footage, witness information, vehicle identification efforts, and potentially uninsured-motorist coverage depending on the insurance policy and facts.",
-    },
-    {
-      question: "Can I bring a claim if the driver was uninsured?",
-      answer:
-        "Possibly. Available recovery may depend on the driver's assets, your own uninsured or underinsured motorist coverage, household policies, and whether another party may share responsibility.",
-    },
-    {
-      question: "What damages may be available after a pedestrian accident?",
-      answer:
-        "Depending on the facts, damages may include medical expenses, lost income, reduced earning capacity, pain, physical impairment, property damage, and in fatal cases, wrongful death or survival damages.",
-    },
-    {
-      question: "How long do I have to file a pedestrian accident lawsuit in Texas?",
-      answer:
-        "Texas generally applies a two-year limitations period to personal-injury claims, but exceptions and shorter notice requirements can apply in some situations. Prompt legal advice can help identify the correct deadline.",
-    },
-    {
-      question: "What if a government vehicle or unsafe public roadway was involved?",
-      answer:
-        "Claims involving a government entity can involve special rules, immunities, and notice requirements. Those cases should be evaluated promptly because the procedures may differ from an ordinary vehicle claim.",
-    },
-    {
-      question: "When should I contact a pedestrian accident lawyer?",
-      answer:
-        "Consider contacting counsel promptly after a serious collision, especially when injuries are significant, fault is disputed, the driver fled, insurance coverage is unclear, or video and other evidence need to be preserved.",
-    },
-  ],
-  relatedPages: [
-    {
-      label: "Personal Injury",
-      path: "/el-paso-personal-injury-lawyers",
-    },
-    {
-      label: "Car Accident",
-      path: "/el-paso-car-accident-lawyers",
-    },
-    {
-      label: "Truck Accident",
-      path: "/el-paso-truck-accident-lawyers",
-    },
-    {
-      label: "Motorcycle Accident",
-      path: "/el-paso-motorcycle-accident-lawyers",
-    },
-    {
-      label: "Wrongful Death",
-      path: "/el-paso-wrongful-death-lawyers",
-    },
-  ],
-},
+    path: "/el-paso-pedestrian-accident-lawyers",
+    shortTitle: "Pedestrian Accident",
+    title: "Best Pedestrian Accident Lawyers in El Paso, Texas",
+    description:
+      "Compare El Paso pedestrian accident lawyers handling crosswalk collisions, hit-and-run crashes, serious injuries, uninsured motorists, and wrongful death claims.",
+    metaDescription:
+      "Compare pedestrian accident lawyers in El Paso for crosswalk crashes, hit-and-run collisions, serious injuries, insurance disputes, and wrongful death claims.",
+    heroText:
+      "Compare El Paso pedestrian accident attorneys representing people injured in crosswalk crashes, intersection collisions, hit-and-run accidents, parking-lot incidents, and other serious pedestrian injury claims across the 915.",
+    topics: [
+      "Crosswalk Collisions",
+      "Intersection Accidents",
+      "Failure to Yield",
+      "Hit-and-Run Crashes",
+      "Distracted Driving",
+      "School-Zone and Neighborhood Crashes",
+      "Serious and Catastrophic Injuries",
+      "Uninsured and Underinsured Motorists",
+      "Wrongful Death",
+    ],
+    overview: [
+      "A pedestrian accident lawyer represents people injured when a car, truck, motorcycle, rideshare vehicle, or other motor vehicle strikes someone who is walking. These claims often require close analysis of right-of-way, traffic signals, visibility, turning movements, speed, distraction, and the pedestrian's location.",
+      "Texas Transportation Code Chapter 552 contains rules governing pedestrian signals, crosswalks, and right-of-way. Section 552.003 generally requires a driver to stop and yield in specified crosswalk circumstances when no traffic signal is in place or operating, while also imposing duties on pedestrians.",
+      "Pedestrian crashes can cause brain injuries, spinal injuries, fractures, internal injuries, permanent impairment, lost income, and wrongful death. The absence of a vehicle around the pedestrian makes medical and long-term damage documentation especially important.",
+      "Evidence may include photographs, surveillance or dash-camera footage, traffic-signal information, witness statements, police reports, vehicle damage, medical records, mobile-phone evidence, and insurance information. Video can disappear quickly, so early preservation can matter.",
+    ],
+    whenToHire: [
+      "You were struck while crossing at an intersection or crosswalk.",
+      "A turning driver, distracted driver, speeding driver, or rideshare vehicle hit you.",
+      "The driver left the scene or was uninsured or underinsured.",
+      "Fault is disputed or the driver claims you entered the roadway unexpectedly.",
+      "You suffered hospitalization, surgery, fractures, head trauma, spinal injury, permanent impairment, or substantial lost income.",
+      "A child, elderly pedestrian, or other vulnerable person was seriously injured.",
+      "A family member died as a result of a pedestrian collision.",
+    ],
+    localContent: [
+      "Pedestrian crashes in El Paso may occur along Interstate 10 frontage roads, Loop 375, U.S. 54, Mesa Street, Montana Avenue, Alameda Avenue, Dyer Street, Zaragoza Road, Downtown streets, school zones, shopping areas, and neighborhood intersections.",
+      "The 915 includes heavy commuter traffic, cross-border travel, Fort Bliss traffic, commercial vehicles, and busy arterial roads. Lighting, roadway design, speed, turning traffic, construction, and pedestrian visibility can all become important facts.",
+      "An El Paso pedestrian accident attorney can evaluate the exact crash location, traffic-control devices, available video, witness accounts, insurance coverage, and whether one or more parties may share responsibility.",
+      "Texas generally applies a two-year limitations period to personal-injury claims, but exceptions and special notice rules can change the analysis. Evidence-preservation needs may create practical urgency long before any filing deadline.",
+    ],
+    faqs: [
+      { question: "Do pedestrians always have the right-of-way in Texas?", answer: "No. Texas law gives pedestrians important protections in crosswalks and at pedestrian signals, but pedestrians also have duties. Fault depends on the location, signals, driver conduct, pedestrian conduct, and surrounding facts." },
+      { question: "What does Texas law say about crosswalks?", answer: "Texas Transportation Code Chapter 552 addresses pedestrian signals and crosswalk right-of-way. The exact rule depends on whether a traffic-control signal is present or operating and where the pedestrian is located." },
+      { question: "What evidence is important after a pedestrian collision?", answer: "Photographs, video, traffic signals, witness information, police reports, vehicle damage, medical records, phone evidence, and insurance information can all matter." },
+      { question: "What if the driver says I caused the accident?", answer: "That allegation does not decide fault. Signal timing, right-of-way, speed, visibility, witness accounts, video, road design, and physical evidence may help establish what occurred." },
+      { question: "What if the driver left the scene?", answer: "A hit-and-run claim may involve police investigation, surveillance footage, witness information, vehicle identification efforts, and potentially uninsured-motorist coverage." },
+      { question: "Can I bring a claim if the driver was uninsured?", answer: "Possibly. Available recovery may depend on insurance policies, the driver's assets, household coverage, and whether another party shares responsibility." },
+      { question: "What damages may be available?", answer: "Depending on the facts, damages may include medical expenses, lost income, reduced earning capacity, pain, physical impairment, property damage, and in fatal cases wrongful-death or survival damages." },
+      { question: "How long do I have to file a pedestrian accident lawsuit in Texas?", answer: "Texas generally uses a two-year limitations period for personal-injury claims, but exceptions and special rules can apply. A specific deadline should be evaluated based on the facts." },
+      { question: "What if a government vehicle or public roadway was involved?", answer: "Government-related claims can involve special rules and notice requirements, so those cases should be evaluated promptly." },
+      { question: "When should I contact a pedestrian accident lawyer?", answer: "Consider legal advice promptly when injuries are serious, fault is disputed, a hit-and-run occurred, government involvement is possible, or video and other evidence may need to be preserved." },
+    ],
+    relatedPages: [
+      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
+      { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
+      { label: "Brain Injury", path: "/el-paso-brain-injury-lawyers" },
+      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
+    ],
+    resourceLinks: [
+      { label: "What to Do After a Car Accident in El Paso, Texas", path: "/guides/what-to-do-after-car-accident-el-paso" },
+      { label: "How Long Do You Have to File a Car Accident Claim in Texas?", path: "/guides/texas-car-accident-statute-of-limitations" },
+      { label: "What Happens if the Driver Who Hit You Is Uninsured in Texas?", path: "/guides/uninsured-driver-texas-car-accident" },
+    ],
+    lastUpdated: "August 10, 2026",
+  },
   {
     path: "/el-paso-bicycle-accident-lawyers",
     shortTitle: "Bicycle Accident",
@@ -1240,107 +1162,59 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       "Rideshare Driver Claims",
       "Other Motorist Claims",
       "Pedestrian and Bicycle Crashes",
+      "App and Trip Records",
       "Insurance Coverage Disputes",
       "Uninsured and Underinsured Motorists",
-      "Serious and Catastrophic Injuries",
-      "Wrongful Death",
+      "Serious Injuries and Wrongful Death",
     ],
     overview: [
-      "A rideshare accident lawyer represents people injured in crashes involving Uber, Lyft, or another transportation network company. Depending on the circumstances, an injured person may be a passenger, rideshare driver, pedestrian, cyclist, or occupant of another vehicle.",
-      "Rideshare cases can be more complicated than an ordinary car accident because insurance coverage may depend on what the driver was doing when the crash occurred, whether the rideshare app was active, whether a ride had been accepted, and which insurance policies apply.",
-      "Investigating a rideshare collision may involve police reports, photographs, witness statements, app records, trip information, driver status, vehicle damage, medical records, mobile-phone evidence, surveillance footage, and communications with personal or commercial insurers.",
+      "A rideshare accident lawyer represents people injured in crashes involving Uber, Lyft, or another transportation network company. The injured person may be a passenger, rideshare driver, pedestrian, cyclist, or occupant of another vehicle.",
+      "Rideshare cases can be more complicated than ordinary car-accident claims because responsibility and insurance may depend on what each driver was doing, whether the rideshare app was active, whether a ride had been accepted, whether a passenger was being transported, and which personal or commercial policies apply.",
+      "Texas regulates transportation network companies under Occupations Code Chapter 2402. The legal and insurance analysis can therefore involve state TNC requirements in addition to ordinary negligence and insurance rules.",
+      "Investigation may require police reports, photographs, witness statements, app records, trip receipts, pickup and drop-off information, driver status, vehicle damage, medical records, mobile-phone evidence, surveillance footage, and communications with multiple insurers.",
     ],
     whenToHire: [
       "You were injured while riding as an Uber or Lyft passenger.",
       "You were driving for a rideshare service and another vehicle caused the crash.",
       "An Uber or Lyft driver struck your vehicle, bicycle, or you as a pedestrian.",
       "The rideshare company, driver, or insurer disputes which policy applies.",
-      "You suffered hospitalization, surgery, fractures, head trauma, spinal injuries, permanent impairment, or substantial lost income.",
-      "The crash involved an uninsured or underinsured motorist.",
-      "Multiple drivers or insurers may share responsibility.",
+      "The driver's app status or trip status is unclear.",
+      "You suffered hospitalization, surgery, fractures, head trauma, spinal injury, permanent impairment, or substantial lost income.",
+      "The crash involved an uninsured or underinsured motorist or multiple potentially responsible drivers.",
       "A family member died in a collision involving a rideshare vehicle.",
     ],
     localContent: [
-      "Rideshare vehicles operate throughout El Paso and the 915, including Downtown, the East Side, West Side, Northeast, UTEP, Fort Bliss, the airport area, entertainment districts, shopping centers, and major corridors such as Interstate 10, Loop 375, U.S. 54, Mesa Street, Montana Avenue, Zaragoza Road, and Dyer Street.",
-      "El Paso rideshare crashes may involve airport trips, late-night transportation, cross-town travel, military-connected passengers, special events, border-area traffic, and busy pickup or drop-off locations. Driver status and app activity can become important when determining available insurance coverage.",
+      "Rideshare vehicles operate throughout El Paso, including Downtown, the East Side, West Side, Northeast, UTEP, Fort Bliss, El Paso International Airport, entertainment districts, shopping centers, and major corridors such as Interstate 10, Loop 375, U.S. 54, Mesa Street, Montana Avenue, Zaragoza Road, and Dyer Street.",
+      "Airport trips, late-night transportation, special events, military-connected passengers, border-area traffic, and busy pickup or drop-off locations can create fact patterns that differ from an ordinary two-car collision.",
       "An El Paso Uber or Lyft accident attorney can help identify potentially applicable insurance policies, preserve app and trip information, evaluate driver and third-party responsibility, document injuries and losses, and communicate with insurers when coverage or liability is disputed.",
+      "Save rideshare receipts, screenshots, driver details, timestamps, route information, support messages, and trip-history information as soon as possible. Electronic records can become important in establishing the driver's status at the time of the crash.",
     ],
     faqs: [
-      {
-        question: "What should I do after an Uber or Lyft accident in El Paso?",
-        answer:
-          "Seek medical attention, report the crash when appropriate, save screenshots and trip information from the rideshare app, preserve photographs and witness information, and keep medical, insurance, and expense records.",
-      },
-      {
-        question: "Who may be responsible for a rideshare accident?",
-        answer:
-          "Responsibility may involve the rideshare driver, another motorist, a vehicle owner, or another party depending on how the crash happened. Insurance coverage and the driver's app status may also affect the claim.",
-      },
-      {
-        question: "Does Uber or Lyft provide insurance in Texas?",
-        answer:
-          "Transportation network companies generally maintain or arrange insurance for rideshare activity, but the coverage that applies can depend on the driver's app status and the circumstances of the crash.",
-      },
-      {
-        question: "What if I was injured as an Uber or Lyft passenger?",
-        answer:
-          "A passenger may have claims against one or more responsible drivers and potentially applicable insurance policies. Trip records, app information, police reports, and medical documentation can be important.",
-      },
-      {
-        question: "What if the rideshare driver was waiting for a ride request?",
-        answer:
-          "Insurance issues can differ depending on whether the driver was logged into the app, waiting for a request, traveling to pick up a passenger, or transporting a passenger. The exact status should be documented and reviewed.",
-      },
-      {
-        question: "What if another driver caused the crash?",
-        answer:
-          "The at-fault driver's insurance may be involved, and other available coverage may also need to be evaluated depending on the facts, the rideshare driver's status, and the policies that apply.",
-      },
-      {
-        question: "What if the at-fault driver had no insurance?",
-        answer:
-          "Uninsured or underinsured motorist coverage may be relevant depending on the policies involved and the circumstances. Coverage should be reviewed carefully rather than assumed.",
-      },
-      {
-        question: "What damages may be available after a rideshare accident?",
-        answer:
-          "Depending on the case, damages may include medical expenses, lost income, reduced earning capacity, pain, impairment, property damage, and in fatal cases, wrongful death or survival damages.",
-      },
-      {
-        question: "What evidence should I save from the rideshare app?",
-        answer:
-          "Save trip receipts, driver information, pickup and drop-off details, timestamps, screenshots, communications, support messages, and any notices relating to the crash or trip.",
-      },
-      {
-        question: "When should I contact an Uber or Lyft accident lawyer?",
-        answer:
-          "Consider contacting counsel promptly when injuries are serious, fault is disputed, multiple insurers are involved, app status is unclear, or trip and electronic evidence may need to be preserved.",
-      },
+      { question: "What should I do after an Uber or Lyft accident in El Paso?", answer: "Seek medical attention, report the crash when appropriate, save screenshots and trip information from the rideshare app, preserve photographs and witness information, and keep medical, insurance, and expense records." },
+      { question: "Who may be responsible for a rideshare accident?", answer: "Responsibility may involve the rideshare driver, another motorist, a vehicle owner, or another party. Insurance coverage and the driver's app status may also affect the claim." },
+      { question: "Why does the driver's app status matter?", answer: "The driver's status can affect which insurance provisions may apply. Whether the driver was offline, waiting for a request, heading to a pickup, or transporting a passenger should be documented." },
+      { question: "What if I was injured as a passenger?", answer: "A passenger may have claims involving one or more responsible drivers and potentially applicable insurance policies. Trip records, app information, police reports, and medical documentation can be important." },
+      { question: "What if another driver caused the crash?", answer: "The other driver's insurance may be involved, and additional available coverage may need evaluation depending on the rideshare driver's status and the policies that apply." },
+      { question: "What if the at-fault driver had no insurance?", answer: "Uninsured or underinsured motorist coverage may be relevant depending on the policies and circumstances. Coverage should be reviewed rather than assumed." },
+      { question: "What evidence should I save from the rideshare app?", answer: "Save trip receipts, driver information, pickup and drop-off details, timestamps, screenshots, communications, support messages, and any notices relating to the crash or trip." },
+      { question: "Can Uber or Lyft trip records be important evidence?", answer: "Yes. Trip status, timing, route data, driver information, and app communications may help clarify what the driver was doing and which coverage questions need to be investigated." },
+      { question: "What damages may be available?", answer: "Depending on the case, damages may include medical expenses, lost income, reduced earning capacity, pain, impairment, property damage, and in fatal cases wrongful-death or survival damages." },
+      { question: "When should I contact an Uber or Lyft accident lawyer?", answer: "Consider legal advice promptly when injuries are serious, fault is disputed, multiple insurers are involved, app status is unclear, or trip and electronic evidence may need to be preserved." },
     ],
     relatedPages: [
-      {
-        label: "Personal Injury",
-        path: "/el-paso-personal-injury-lawyers",
-      },
-      {
-        label: "Car Accident",
-        path: "/el-paso-car-accident-lawyers",
-      },
-      {
-        label: "Pedestrian Accident",
-        path: "/el-paso-pedestrian-accident-lawyers",
-      },
-      {
-        label: "Bicycle Accident",
-        path: "/el-paso-bicycle-accident-lawyers",
-      },
-      {
-        label: "Wrongful Death",
-        path: "/el-paso-wrongful-death-lawyers",
-      },
+      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
+      { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
+      { label: "Pedestrian Accident", path: "/el-paso-pedestrian-accident-lawyers" },
+      { label: "Bicycle Accident", path: "/el-paso-bicycle-accident-lawyers" },
+      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
     ],
+    resourceLinks: [
+      { label: "What to Do After a Car Accident in El Paso, Texas", path: "/guides/what-to-do-after-car-accident-el-paso" },
+      { label: "What Happens if the Driver Who Hit You Is Uninsured in Texas?", path: "/guides/uninsured-driver-texas-car-accident" },
+      { label: "How to Get a Texas Crash Report After an El Paso Accident", path: "/guides/texas-crash-report-el-paso" },
+    ],
+    lastUpdated: "August 10, 2026",
   },
-
 ];
 
 export const getPracticeAreaPageByPath = (
