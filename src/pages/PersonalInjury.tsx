@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+﻿import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
@@ -438,6 +438,22 @@ export default function PersonalInjury() {
           </Link>
         </div>
       </section>
+        {/* ACCIDENT_CLUSTER_INTERNAL_LINKS */}
+        <section className="py-10 border-t bg-background">
+          <div className="container mx-auto px-4">
+            <h2 className="text-2xl font-bold mb-3">Related El Paso Personal Injury Resources</h2>
+            <p className="text-muted-foreground mb-5">Explore related El Paso legal resources and compare lawyers by accident or injury type.</p>
+            <div className="flex flex-wrap gap-x-6 gap-y-3">
+              <a href="/el-paso-car-accident-lawyers" className="text-primary hover:underline">Car Accident Lawyers</a>
+              <a href="/el-paso-truck-accident-lawyers" className="text-primary hover:underline">Truck Accident Lawyers</a>
+              <a href="/el-paso-motorcycle-accident-lawyers" className="text-primary hover:underline">Motorcycle Accident Lawyers</a>
+              <a href="/el-paso-bicycle-accident-lawyers" className="text-primary hover:underline">Bicycle Accident Lawyers</a>
+              <a href="/el-paso-uber-lyft-accident-lawyers" className="text-primary hover:underline">Uber/Lyft Accident Lawyers</a>
+              <a href="/el-paso-wrongful-death-lawyers" className="text-primary hover:underline">Wrongful Death Lawyers</a>
+            </div>
+          </div>
+        </section>
+
     </main>
   );
 }

@@ -1,4 +1,4 @@
-import PracticeAreaTemplate from "../components/PracticeAreaTemplate";
+﻿import PracticeAreaTemplate from "../components/PracticeAreaTemplate";
 import type { PracticeAreaPageData } from "../data/practiceAreaPages";
 
 const truckAccidentPage: PracticeAreaPageData = {
@@ -96,14 +96,12 @@ const truckAccidentPage: PracticeAreaPageData = {
   ],
   relatedPages: [
     { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-    {
-      label: "18 Wheeler Accident",
-      path: "/el-paso-18-wheeler-accident-lawyer",
-    },
-    {
-      label: "Semi Truck Accident",
-      path: "/el-paso-semi-truck-accident-lawyer",
-    },
+    { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
+    { label: "18 Wheeler Accident", path: "/el-paso-18-wheeler-accident-lawyer" },
+    { label: "Semi Truck Accident", path: "/el-paso-semi-truck-accident-lawyer" },
+    { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
+    { label: "Bicycle Accident", path: "/el-paso-bicycle-accident-lawyers" },
+    { label: "Uber/Lyft Accident", path: "/el-paso-uber-lyft-accident-lawyers" },
     { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
   ],
 };

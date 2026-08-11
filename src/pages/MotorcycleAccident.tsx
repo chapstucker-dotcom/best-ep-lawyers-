@@ -1,4 +1,4 @@
-import PracticeAreaTemplate from "../components/PracticeAreaTemplate";
+﻿import PracticeAreaTemplate from "../components/PracticeAreaTemplate";
 import type { PracticeAreaPageData } from "../data/practiceAreaPages";
 
 const motorcyclePage: PracticeAreaPageData = {
@@ -76,6 +76,8 @@ const motorcyclePage: PracticeAreaPageData = {
     { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
     { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
     { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers" },
+    { label: "Bicycle Accident", path: "/el-paso-bicycle-accident-lawyers" },
+    { label: "Uber/Lyft Accident", path: "/el-paso-uber-lyft-accident-lawyers" },
     { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
   ],
 };
@@ -83,3 +85,4 @@ const motorcyclePage: PracticeAreaPageData = {
 export default function MotorcycleAccident() {
   return <PracticeAreaTemplate page={motorcyclePage} />;
 }
+
