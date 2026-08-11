@@ -748,166 +748,67 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     path: "/el-paso-car-accident-lawyers",
     shortTitle: "Car Accident",
     title: "Best Car Accident Lawyers in El Paso, TX | Compare Local Firms",
-    description: "Compare El Paso car accident lawyers for serious injury crashes, uninsured motorists, insurance disputes, hit-and-run collisions, and wrongful death claims.",
-    metaDescription: "Compare car accident lawyers in El Paso, TX for serious injury crashes, insurance disputes, uninsured motorists, hit-and-runs, and wrongful death claims.",
-    heroText: "Compare El Paso car accident lawyers handling serious injury collisions, insurance disputes, uninsured motorists, hit-and-run crashes, intersection accidents, and wrongful death claims.",
-    topics: ["Serious Injury Crashes","Intersection Accidents","Rear-End Collisions","Uninsured Motorists","Hit-and-Run Crashes","Insurance Disputes","Commercial Vehicle Collisions","Wrongful Death"],
-    overview: [
-      "A car accident lawyer helps injured drivers, passengers, pedestrians, and families evaluate liability, insurance coverage, medical damages, lost income, and other losses after a collision. The attorney may investigate the crash, preserve evidence, communicate with insurers, negotiate a settlement, or file a lawsuit when necessary.",
-      "Evidence can include police reports, photographs, video, witness statements, vehicle damage, medical records, phone records, event-data information, and insurance documents. Early preservation can matter when fault is disputed or injuries are serious.",
-      "Claims involving commercial vehicles, uninsured or underinsured motorists, multiple vehicles, catastrophic injuries, or a death may involve additional policies, defendants, and legal issues beyond a routine property-damage claim."
+    description:
+      "Compare El Paso car accident lawyers for serious injury crashes, uninsured motorists, hit-and-run collisions, insurance disputes, rideshare crashes, bicycle collisions, and wrongful death claims.",
+    metaDescription:
+      "Compare car accident lawyers in El Paso, TX for serious injuries, uninsured motorists, hit-and-runs, insurance disputes, rideshare crashes, and wrongful death claims.",
+    heroText:
+      "Compare El Paso car accident lawyers handling serious injury collisions, uninsured motorists, hit-and-run crashes, insurance disputes, rideshare collisions, bicycle accidents, and wrongful death claims.",
+    topics: [
+      "Serious Injury Crashes",
+      "Intersection Accidents",
+      "Rear-End Collisions",
+      "Uninsured Motorists",
+      "Hit-and-Run Crashes",
+      "Insurance Disputes",
+      "Rideshare Collisions",
+      "Bicycle and Pedestrian Crashes",
+      "Wrongful Death",
     ],
-    whenToHire: ["You were hospitalized, needed surgery, or suffered a serious or lasting injury.","The other driver or insurer disputes fault or the value of your claim.","The crash involved an uninsured driver, hit-and-run, commercial vehicle, or multiple vehicles.","An insurer asks for a recorded statement, broad medical authorization, release, or quick settlement.","You lost income or expect substantial future medical care.","A family member died in the collision."],
+    overview: [
+      "A car accident lawyer helps injured drivers, passengers, cyclists, pedestrians, and families evaluate fault, insurance coverage, medical damages, lost income, and other losses after a collision. Counsel may investigate the crash, preserve evidence, communicate with insurers, negotiate a settlement, or file suit when necessary.",
+      "Evidence can include police reports, photographs, surveillance or dash-camera video, witness statements, vehicle damage, medical records, phone records, event-data information, rideshare trip records, and insurance documents. Early preservation can matter when fault is disputed or injuries are serious.",
+      "Claims involving commercial vehicles, Uber or Lyft drivers, bicycles, uninsured motorists, multiple vehicles, catastrophic injuries, or a death may involve additional policies, defendants, and legal issues beyond a routine property-damage claim.",
+    ],
+    whenToHire: [
+      "You were hospitalized, needed surgery, or suffered a serious or lasting injury.",
+      "The other driver or insurer disputes fault or the value of your claim.",
+      "The crash involved an uninsured driver, hit-and-run, rideshare vehicle, commercial vehicle, bicycle, pedestrian, or multiple vehicles.",
+      "An insurer asks for a recorded statement, broad medical authorization, release, or quick settlement.",
+      "You lost income or expect substantial future medical care.",
+      "A family member died in the collision.",
+    ],
     localContent: [
       "El Paso traffic includes Interstate 10, Loop 375, U.S. 54, major east-west arterials, international ports of entry, commercial freight traffic, and daily travel between El Paso, Fort Bliss, New Mexico, and surrounding communities.",
-      "Local crashes may involve Texas drivers, out-of-state motorists, commercial carriers, rideshare vehicles, uninsured drivers, and insurers located outside El Paso. Those facts can affect evidence, coverage, jurisdiction, and the parties involved.",
-      "An El Paso car accident attorney can help investigate the collision, identify available insurance, document injuries and financial losses, preserve evidence, and evaluate settlement or litigation options under Texas law."
+      "Local crashes may involve Texas drivers, out-of-state motorists, commercial carriers, rideshare vehicles, cyclists, pedestrians, uninsured drivers, and insurers located outside El Paso. Those facts can affect evidence, coverage, jurisdiction, and the parties involved.",
+      "An El Paso car accident attorney can help investigate the collision, identify available insurance, document injuries and financial losses, preserve evidence, and evaluate settlement or litigation options under Texas law.",
     ],
     faqs: [
       { question: "How do I choose a car accident lawyer in El Paso?", answer: "Compare experience with similar crashes, communication, fee structure, trial readiness, resources for investigating serious injuries, and whether the lawyer clearly explains the strategy for your case." },
       { question: "What should I do after a serious car accident?", answer: "Seek appropriate medical care, report the collision, preserve photographs and witness information, keep insurance and medical records, and avoid destroying evidence. Consider legal advice before signing releases or giving detailed recorded statements." },
       { question: "What if the other driver is uninsured?", answer: "Your own uninsured or underinsured motorist coverage may be relevant, along with other potential sources of recovery. Coverage depends on the policy and facts." },
-      { question: "What if the crash was a hit-and-run?", answer: "Report the crash promptly and preserve video, witness information, vehicle descriptions, and insurance records. Uninsured-motorist coverage may be relevant in some cases." },
+      { question: "What if the crash involved Uber or Lyft?", answer: "Rideshare crashes can involve app status, trip records, the rideshare driver's personal coverage, company-provided coverage, and other drivers' policies. Preserve screenshots and trip information when possible." },
+      { question: "What if a cyclist or pedestrian was hit?", answer: "These cases can involve right-of-way, visibility, turning movements, traffic controls, roadway conditions, and serious injury damages. Video and witness evidence can be especially important." },
       { question: "Can more than one person be responsible?", answer: "Yes. Multi-vehicle crashes and commercial-vehicle cases may involve multiple drivers, companies, vehicle owners, or other responsible parties." },
       { question: "What damages may be available?", answer: "Depending on the claim, damages may include medical expenses, lost income, reduced earning capacity, pain, impairment, property damage, and in fatal cases wrongful death or survival damages." },
       { question: "Should I accept the insurance company's first offer?", answer: "A quick offer may not account for the full extent of injuries, future treatment, lost income, or disputed liability. Review the facts and terms before signing a release." },
-      { question: "How long do I have to file a claim?", answer: "Texas limitation periods and notice requirements may apply. The correct deadline depends on the parties and claims, so prompt review is important." }
+      { question: "How long do I have to file a claim?", answer: "Texas limitation periods and notice requirements may apply. The correct deadline depends on the parties and claims, so prompt review is important." },
     ],
     relatedPages: [
+      { label: "Bicycle Accident", path: "/el-paso-bicycle-accident-lawyers" },
+      { label: "Uber & Lyft Accident", path: "/el-paso-uber-lyft-accident-lawyers" },
       { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers" },
       { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
       { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" }
+      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
     ],
+    resourceLinks: [
+      { label: "What to Do After a Car Accident in El Paso, Texas", path: "/guides/what-to-do-after-car-accident-el-paso" },
+      { label: "What Happens if the Driver Who Hit You Is Uninsured in Texas?", path: "/guides/uninsured-driver-texas-car-accident" },
+      { label: "How to Get a Texas Crash Report After an El Paso Accident", path: "/guides/texas-crash-report-el-paso" },
+    ],
+    lastUpdated: "August 11, 2026",
   },  {
-    path: "/el-paso-truck-accident-lawyers",
-    shortTitle: "Truck Accident",
-    title: "Best Truck Accident Lawyers in El Paso, TX | 18-Wheeler Claims",
-    description: "Compare El Paso truck accident lawyers handling 18-wheeler and commercial vehicle crashes, catastrophic injuries, trucking companies, insurance claims, and wrongful death.",
-    metaDescription: "Compare truck accident lawyers in El Paso, TX for 18-wheeler crashes, commercial vehicle collisions, catastrophic injuries, insurance claims, and wrongful death.",
-    heroText: "Compare El Paso truck accident attorneys for 18-wheeler crashes, commercial trucking collisions, catastrophic injuries, driver fatigue, maintenance failures, cargo issues, and wrongful death claims.",
-    topics: ["18-Wheeler Crashes","Commercial Truck Accidents","Tractor-Trailer Collisions","Driver Fatigue","Hours-of-Service Violations","Maintenance Failures","Cargo and Loading Issues","Catastrophic Injuries","Wrongful Death"],
-    overview: [
-      "A truck accident lawyer represents people injured in crashes involving 18-wheelers, tractor-trailers, delivery trucks, buses, and other commercial vehicles. Responsibility may extend beyond the driver to a motor carrier, vehicle owner, maintenance provider, cargo loader, broker, manufacturer, or another party.",
-      "Commercial truck cases can depend on evidence that may not exist in an ordinary car crash, including electronic logging data, onboard computer information, inspection and maintenance records, dispatch communications, cargo documents, driver qualification files, safety records, and available camera footage.",
-      "Serious truck crashes can involve multiple insurers and defendants. Identifying the companies involved and preserving electronic and business records early can be important when investigating liability and damages."
-    ],
-    whenToHire: ["You or a family member suffered serious injuries in an 18-wheeler, tractor-trailer, delivery-truck, bus, or commercial-vehicle crash.","The carrier or insurer contacted you for a statement, release, medical authorization, or quick settlement.","The collision caused hospitalization, surgery, permanent impairment, lost income, or substantial future medical care.","Driver fatigue, speeding, distraction, poor maintenance, unsafe loading, or another safety issue may have contributed.","Multiple companies, contractors, vehicle owners, or insurers may share responsibility.","Electronic logs, onboard data, inspection records, dispatch messages, or video need to be preserved."],
-    localContent: [
-      "El Paso is a major freight and cross-border transportation corridor served by Interstate 10, U.S. 54, Loop 375, international ports of entry, warehouses, distribution centers, and commercial routes connecting Texas, New Mexico, and Mexico.",
-      "Truck crashes in the region may involve interstate carriers, cross-border freight, logistics companies, independent drivers, commercial insurers, and records maintained outside El Paso. Those facts can affect investigation, jurisdiction, discovery, and identification of responsible parties.",
-      "An El Paso truck accident attorney can investigate the collision, preserve trucking records, evaluate federal and Texas safety requirements, identify potentially responsible companies, document damages, and pursue settlement or litigation."
-    ],
-    faqs: [
-      { question: "Who can be responsible for an 18-wheeler accident?", answer: "Potential parties may include the driver, motor carrier, vehicle owner, maintenance provider, cargo loader, broker, manufacturer, or another motorist depending on the facts." },
-      { question: "Why are truck accident cases different from car accidents?", answer: "Truck cases often involve commercial regulations, multiple companies, specialized electronic and business records, larger vehicles, and severe injuries." },
-      { question: "What evidence should be preserved after a truck crash?", answer: "Potential evidence includes photographs, video, witness information, police reports, electronic logging data, onboard computer data, inspection and maintenance records, dispatch communications, cargo documents, and driver records." },
-      { question: "What are hours-of-service rules?", answer: "Federal rules limit driving time and require rest periods for many commercial drivers. Violations may be relevant when fatigue contributed to a collision." },
-      { question: "Can a trucking company be liable for its driver?", answer: "Depending on the facts, claims may involve responsibility for a driver as well as hiring, training, supervision, retention, maintenance, or company safety practices." },
-      { question: "What if cargo contributed to the crash?", answer: "Improperly loaded, unsecured, overweight, or shifting cargo can contribute to rollovers, loss of control, debris, or braking problems and may involve additional responsible parties." },
-      { question: "What damages may be available?", answer: "Depending on the case, damages may include medical expenses, lost income, reduced earning capacity, pain, impairment, property damage, and wrongful death or survival damages." },
-      { question: "When should I contact a truck accident lawyer?", answer: "Prompt contact can help preserve commercial records and electronic data before routine retention practices or other events make evidence harder to obtain." }
-    ],
-    relatedPages: [
-      { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
-      { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
-      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" }
-    ],
-  },  {
-    path: "/el-paso-motorcycle-accident-lawyers",
-    shortTitle: "Motorcycle Accident",
-    title: "Best Motorcycle Accident Lawyers in El Paso, TX | Compare Firms",
-    description: "Compare El Paso motorcycle accident lawyers handling serious rider injuries, left-turn collisions, road hazards, uninsured drivers, insurance disputes, and wrongful death claims.",
-    metaDescription: "Compare motorcycle accident lawyers in El Paso, TX for serious rider injuries, left-turn crashes, road hazards, insurance disputes, and wrongful death claims.",
-    heroText: "Compare El Paso motorcycle accident attorneys for serious rider injuries, left-turn collisions, unsafe lane changes, road hazards, uninsured motorists, insurance disputes, and fatal crashes.",
-    topics: ["Serious Rider Injuries","Left-Turn Collisions","Unsafe Lane Changes","Road Hazards","Uninsured Drivers","Insurance Claims","Catastrophic Injuries","Wrongful Death"],
-    overview: [
-      "A motorcycle accident lawyer represents riders and families after collisions involving cars, trucks, roadway hazards, or other causes. Motorcycle cases often involve significant injuries and disputes about visibility, right of way, speed, lane position, and the conduct of other drivers.",
-      "Useful evidence may include helmet or camera footage, nearby surveillance video, photographs, witness statements, police reports, vehicle damage, medical records, roadway conditions, and electronic information from involved vehicles or phones when legally obtainable.",
-      "Because riders have less physical protection than occupants of passenger vehicles, motorcycle crashes can cause fractures, traumatic brain injuries, spinal injuries, road rash, amputations, permanent impairment, or death even when the collision occurs at moderate speed."
-    ],
-    whenToHire: ["You suffered a serious injury while riding a motorcycle.","A driver turned left in front of you, changed lanes into you, rear-ended you, or claims not to have seen you.","The insurer disputes fault or relies on assumptions about motorcycle riders.","The crash involved an uninsured or hit-and-run driver.","Road design, debris, construction, or a vehicle defect may have contributed.","A family member died in a motorcycle collision."],
-    localContent: [
-      "El Paso riders travel on Interstate 10, Loop 375, U.S. 54, Transmountain Road, Mesa Street, Montana Avenue, Zaragoza Road, and other high-speed or heavily traveled corridors. Traffic volume, lane changes, construction, and desert roadway conditions can all become relevant in a crash investigation.",
-      "Motorcycle collisions may involve local commuters, military-connected riders, visitors, commercial vehicles, uninsured drivers, or motorists traveling between Texas and New Mexico. Insurance and jurisdiction questions depend on the specific facts.",
-      "An El Paso motorcycle accident attorney can investigate fault, preserve video and witness evidence, review insurance coverage, document injuries and lost income, and evaluate settlement or litigation options."
-    ],
-    faqs: [
-      { question: "How do I choose a motorcycle accident lawyer in El Paso?", answer: "Look for experience with serious motorcycle injury claims, disputed liability, insurance coverage, evidence preservation, and litigation, and compare communication and fee terms." },
-      { question: "What are common causes of motorcycle crashes?", answer: "Common issues include left-turn collisions, unsafe lane changes, rear-end impacts, speeding, distracted driving, impaired driving, road hazards, and failure to yield." },
-      { question: "What if the driver says they did not see the motorcycle?", answer: "Visibility is often disputed in motorcycle cases. Witnesses, video, roadway layout, lighting, vehicle damage, and other evidence can help reconstruct what happened." },
-      { question: "What if I was not wearing a helmet?", answer: "Helmet use may affect issues in a case depending on the injuries and facts, but it does not automatically determine who caused the collision." },
-      { question: "What if the driver was uninsured?", answer: "Uninsured or underinsured motorist coverage and other potential sources of recovery may be relevant depending on the policy and circumstances." },
-      { question: "What damages may be available?", answer: "Depending on the case, damages may include medical expenses, lost income, reduced earning capacity, pain, impairment, property damage, and wrongful death or survival damages." },
-      { question: "How long do I have to bring a motorcycle accident claim?", answer: "Texas limitation periods and notice rules may apply, and the correct deadline depends on the parties and claims. Prompt review also helps preserve evidence." },
-      { question: "When should I contact a motorcycle accident lawyer?", answer: "Consider prompt legal advice after a serious injury, disputed-fault collision, commercial-vehicle crash, uninsured-driver incident, or fatal accident." }
-    ],
-    relatedPages: [
-      { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
-      { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers" },
-      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" }
-    ],
-  },  {
-    path: "/el-paso-wrongful-death-lawyers",
-    shortTitle: "Wrongful Death",
-    title: "Best Wrongful Death Lawyers in El Paso, TX | Compare Local Firms",
-    description: "Compare El Paso wrongful death lawyers representing families after fatal car and truck crashes, workplace incidents, unsafe property conditions, and other negligence claims.",
-    metaDescription: "Compare wrongful death lawyers in El Paso, TX for fatal car and truck crashes, workplace incidents, negligence claims, and representation for surviving families.",
-    heroText: "Compare El Paso wrongful death attorneys representing families after fatal car crashes, 18-wheeler collisions, workplace incidents, unsafe property conditions, and other negligence claims.",
-    topics: ["Fatal Car Accidents","18-Wheeler Deaths","Motorcycle Fatalities","Workplace Deaths","Premises Liability","Medical Negligence","Wrongful Death Damages","Survival Claims"],
-    overview: [
-      "A wrongful death lawyer represents eligible surviving family members after a death allegedly caused by another person's or company's wrongful act, neglect, carelessness, unskillfulness, or default. The lawyer investigates responsibility, identifies available insurance and defendants, documents losses, negotiates claims, and may file suit when necessary.",
-      "Texas wrongful death and survival claims address different losses. A wrongful death claim focuses on losses suffered by qualifying surviving family members, while a survival claim generally preserves certain claims the deceased person could have pursued had they lived.",
-      "Fatal accident cases may require rapid evidence preservation, expert analysis, insurance investigation, probate coordination, and careful evaluation of damages. Commercial truck crashes and workplace incidents can involve multiple companies and overlapping legal issues."
-    ],
-    whenToHire: ["A spouse, parent, or child died because of a traffic collision or other suspected negligence.","The death involved an 18-wheeler, commercial vehicle, workplace incident, unsafe property condition, or other complex event.","An insurer or company requests statements, releases, authorizations, or a quick settlement.","Important video, electronic data, company records, vehicle evidence, or witness information needs to be preserved.","Multiple companies or insurers may be involved.","The family needs help understanding the relationship between wrongful death, survival, probate, and insurance issues."],
-    localContent: [
-      "Fatal incidents in El Paso may arise from crashes on Interstate 10, Loop 375, U.S. 54, local arterials, commercial freight routes, workplaces, construction sites, or other locations throughout El Paso County.",
-      "Cases can involve local defendants, interstate trucking companies, employers, property owners, insurers, and evidence located in Texas, New Mexico, Mexico, or elsewhere. The facts can affect jurisdiction, preservation, discovery, and available claims.",
-      "An El Paso wrongful death attorney can help identify potentially responsible parties, preserve evidence, investigate insurance coverage, coordinate necessary estate issues, document family losses, and evaluate settlement or litigation options."
-    ],
-    faqs: [
-      { question: "Who can bring a wrongful death claim in Texas?", answer: "Texas law generally identifies the surviving spouse, children, and parents as the family members who may bring a wrongful death action. Specific circumstances should be reviewed with counsel." },
-      { question: "What is the difference between wrongful death and a survival claim?", answer: "Wrongful death addresses certain losses suffered by qualifying survivors. A survival claim generally preserves claims the deceased person could have pursued before death." },
-      { question: "What damages may be available in a wrongful death case?", answer: "Available damages depend on the claim and facts and may include certain financial losses, loss of companionship and society, mental anguish, and other damages permitted by Texas law." },
-      { question: "Can a fatal truck crash involve several defendants?", answer: "Yes. Depending on the facts, a driver, motor carrier, vehicle owner, maintenance provider, cargo company, broker, manufacturer, or other party may be involved." },
-      { question: "What evidence should a family preserve?", answer: "Potential evidence includes photographs, video, witness information, police or incident reports, medical records, employment and income records, insurance documents, electronic data, and communications with companies or insurers." },
-      { question: "Does a wrongful death case require probate?", answer: "Wrongful death and estate issues can overlap, particularly with survival claims and estate representatives. Whether probate action is necessary depends on the circumstances." },
-      { question: "How long do families have to file?", answer: "Texas limitation periods and special notice rules may apply. The correct deadline depends on the parties and claims, and evidence may need preservation well before a filing deadline." },
-      { question: "When should a family contact a wrongful death lawyer?", answer: "Prompt contact can be important when evidence may disappear, multiple companies are involved, or insurers request statements, releases, or settlement discussions." }
-    ],
-    relatedPages: [
-      { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
-      { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers" },
-      { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" }
-    ],
-  },  {
-    path: "/el-paso-green-card-lawyers",
-    shortTitle: "Green Card",
-    title: "Best Green Card Lawyers in El Paso, Texas",
-    description:
-      "Compare El Paso green card attorneys handling family petitions, adjustment of status, consular processing, waivers, and permanent residence.",
-    topics: [
-      "Family Petitions",
-      "Adjustment of Status",
-      "Consular Processing",
-      "Employment-Based Cases",
-      "Waivers",
-      "Renewals",
-    ],
-    overview: genericOverview("Green Card"),
-    whenToHire: genericWhenToHire("Green Card"),
-    localContent: genericLocal("Green Card"),
-    faqs: genericFaqs("Green Card"),
-    relatedPages: [
-      { label: "Immigration", path: "/el-paso-immigration-lawyers" },
-      { label: "Citizenship", path: "/el-paso-citizenship-lawyers" },
-    ],
-  },
-  {
     path: "/el-paso-citizenship-lawyers",
     shortTitle: "Citizenship",
     title: "Best Citizenship Lawyers in El Paso, Texas",
@@ -1000,29 +901,29 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
   {
     path: "/el-paso-bicycle-accident-lawyers",
     shortTitle: "Bicycle Accident",
-    title: "Best Bicycle Accident Lawyers in El Paso, Texas",
+    title: "Best Bicycle Accident Lawyers in El Paso, TX | Compare Local Firms",
     description:
-      "Compare El Paso bicycle accident lawyers handling vehicle collisions, unsafe roadway conditions, serious injuries, hit-and-run crashes, insurance disputes, and wrongful death claims.",
+      "Compare El Paso bicycle accident lawyers handling vehicle collisions, unsafe passing, hit-and-run crashes, serious injuries, insurance disputes, and wrongful death claims.",
     metaDescription:
-      "Compare bicycle accident lawyers in El Paso for vehicle collisions, serious injuries, hit-and-run crashes, insurance disputes, and wrongful death claims.",
+      "Compare bicycle accident lawyers in El Paso, TX for vehicle collisions, hit-and-runs, unsafe passing, serious injuries, insurance disputes, and wrongful death.",
     heroText:
-      "Compare El Paso bicycle accident attorneys representing cyclists injured in vehicle collisions, intersection crashes, hit-and-run accidents, unsafe roadway incidents, and serious injury claims throughout the 915.",
+      "Compare El Paso bicycle accident attorneys representing cyclists injured in vehicle collisions, intersection crashes, hit-and-run accidents, unsafe passing incidents, roadway hazards, and serious injury claims.",
     topics: [
       "Vehicle and Bicycle Collisions",
       "Intersection Accidents",
       "Hit-and-Run Crashes",
+      "Unsafe Passing",
       "Dooring Accidents",
       "Distracted Drivers",
-      "Unsafe Passing",
       "Roadway Hazards",
       "Serious and Catastrophic Injuries",
       "Uninsured Motorists",
       "Wrongful Death",
     ],
     overview: [
-      "A bicycle accident lawyer represents cyclists injured in crashes involving cars, trucks, motorcycles, rideshare vehicles, commercial vehicles, roadway hazards, or other dangerous conditions. These claims may involve driver negligence, disputed right-of-way, unsafe passing, distracted driving, speeding, failure to yield, or insurance coverage issues.",
-      "Cyclists have limited physical protection when struck by a motor vehicle. Bicycle crashes can result in fractures, head injuries, spinal injuries, road rash, internal injuries, permanent impairment, lost income, rehabilitation needs, and other significant losses.",
-      "Investigating a bicycle crash may involve photographs, bicycle and vehicle damage, surveillance footage, traffic-camera video, witness statements, police reports, roadway conditions, signal timing, medical records, mobile-phone evidence, and insurance information. Preserving evidence early can be important when fault is disputed.",
+      "A bicycle accident lawyer represents cyclists injured in crashes involving cars, trucks, motorcycles, rideshare vehicles, commercial vehicles, roadway hazards, or other dangerous conditions. Claims may involve failure to yield, unsafe passing, distracted driving, speeding, improper turning, or insurance disputes.",
+      "Cyclists have little physical protection when struck by a motor vehicle. Bicycle crashes can result in fractures, head injuries, spinal injuries, internal injuries, permanent impairment, lost income, rehabilitation needs, and other significant losses.",
+      "Investigation may involve photographs, bicycle and vehicle damage, surveillance footage, traffic-camera video, witness statements, police reports, roadway conditions, signal timing, medical records, mobile-phone evidence, and insurance information. Preserving evidence early can be important when fault is disputed.",
     ],
     whenToHire: [
       "You or a family member was struck by a car, truck, motorcycle, rideshare vehicle, or commercial vehicle while riding a bicycle.",
@@ -1035,94 +936,42 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       "A family member died as a result of a bicycle collision.",
     ],
     localContent: [
-      "Bicycle crashes in El Paso can occur throughout the 915, including along busy corridors such as Mesa Street, Montana Avenue, Dyer Street, Zaragoza Road, Alameda Avenue, Loop 375 frontage roads, and streets connecting residential neighborhoods, schools, parks, downtown, and commercial areas.",
-      "El Paso cyclists may encounter heavy commuter traffic, commercial vehicles, cross-border traffic, military traffic connected to Fort Bliss, construction zones, changing road conditions, limited visibility, and high-speed arterial roads. The location and design of the roadway can become important when determining how a crash occurred.",
-      "An El Paso bicycle accident attorney can evaluate driver conduct, roadway conditions, available video, witnesses, insurance coverage, bicycle and vehicle damage, medical evidence, and whether one or more parties may share responsibility for the collision.",
+      "Bicycle crashes in El Paso can occur along Mesa Street, Montana Avenue, Dyer Street, Zaragoza Road, Alameda Avenue, Loop 375 frontage roads, Downtown streets, and roads connecting neighborhoods, schools, parks, UTEP, Fort Bliss, and commercial areas.",
+      "El Paso cyclists may encounter heavy commuter traffic, commercial vehicles, construction zones, high-speed arterials, changing road conditions, limited visibility, and drivers traveling between Texas and New Mexico. The roadway design and exact collision location can become important evidence.",
+      "An El Paso bicycle accident attorney can evaluate driver conduct, roadway conditions, available video, witness accounts, insurance coverage, bicycle and vehicle damage, medical evidence, and whether one or more parties may share responsibility.",
     ],
     faqs: [
-      {
-        question: "What should I do after a bicycle accident in El Paso?",
-        answer:
-          "Seek medical attention, report the collision when appropriate, preserve photographs and witness information, keep the damaged bicycle and equipment when possible, and save medical, insurance, and expense records.",
-      },
-      {
-        question: "Can a driver be responsible for hitting a cyclist?",
-        answer:
-          "Yes. Liability may depend on factors such as failure to yield, unsafe passing, speeding, distraction, improper turning, traffic-signal violations, or other negligent conduct.",
-      },
-      {
-        question: "What if the driver says the bicycle caused the crash?",
-        answer:
-          "Fault should be evaluated from the evidence rather than one person's statement alone. Video, witnesses, vehicle damage, bicycle damage, roadway markings, traffic signals, and crash-scene photographs may help determine what happened.",
-      },
-      {
-        question: "What is a dooring accident?",
-        answer:
-          "A dooring accident occurs when someone opens a vehicle door into the path of a cyclist. These crashes can cause the cyclist to strike the door, lose control, or be pushed into traffic.",
-      },
-      {
-        question: "What if the driver left the scene?",
-        answer:
-          "A hit-and-run bicycle claim may involve police investigation, surveillance footage, witness information, vehicle identification efforts, and potentially uninsured-motorist coverage depending on the policy and facts.",
-      },
-      {
-        question: "Can I recover damages if the driver was uninsured?",
-        answer:
-          "Potential recovery may depend on available insurance coverage, including uninsured or underinsured motorist coverage, household policies, the driver's assets, or responsibility of another party.",
-      },
-      {
-        question: "What damages may be available in a bicycle accident claim?",
-        answer:
-          "Depending on the case, damages may include medical expenses, lost income, reduced earning capacity, pain, impairment, property damage to the bicycle and equipment, and in fatal cases, wrongful death or survival damages.",
-      },
-      {
-        question: "What evidence is useful in a bicycle accident case?",
-        answer:
-          "Useful evidence may include photographs, video, witness information, police reports, medical records, damaged bicycle components, helmets, clothing, vehicle damage, roadway markings, and insurance documents.",
-      },
-      {
-        question: "What if poor road conditions contributed to the crash?",
-        answer:
-          "Potholes, debris, construction, defective surfaces, inadequate maintenance, or other roadway conditions may require investigation into who controlled or maintained the location and whether special rules or notice requirements apply.",
-      },
-      {
-        question: "When should I contact a bicycle accident lawyer?",
-        answer:
-          "Consider contacting counsel promptly when injuries are serious, fault is disputed, the driver fled, insurance coverage is unclear, roadway conditions may be involved, or video and other evidence need to be preserved.",
-      },
+      { question: "How do I choose a bicycle accident attorney in El Paso?", answer: "Compare experience with cyclist injury claims, disputed fault, serious injuries, hit-and-run cases, uninsured motorists, evidence preservation, communication, and fee terms." },
+      { question: "What should I do after a bicycle accident?", answer: "Seek medical attention, report the crash when appropriate, preserve photos and witness information, keep the damaged bicycle and equipment when possible, and save medical, insurance, and expense records." },
+      { question: "Can a driver be responsible for hitting a cyclist?", answer: "Yes. Liability may depend on failure to yield, unsafe passing, speeding, distraction, improper turning, traffic-control violations, or other negligent conduct." },
+      { question: "What if the driver says the cyclist caused the crash?", answer: "Fault should be evaluated from the evidence rather than one statement alone. Video, witnesses, vehicle damage, bicycle damage, roadway markings, signals, and scene photos may help." },
+      { question: "What is a dooring accident?", answer: "A dooring accident occurs when someone opens a vehicle door into the path of a cyclist, causing a collision, loss of control, or movement into traffic." },
+      { question: "What if the driver left the scene?", answer: "A hit-and-run bicycle claim may involve police investigation, surveillance footage, witness information, vehicle identification efforts, and potentially uninsured-motorist coverage." },
+      { question: "What damages may be available?", answer: "Depending on the case, damages may include medical expenses, lost income, reduced earning capacity, pain, impairment, property damage to the bicycle and equipment, and wrongful death or survival damages." },
+      { question: "What if poor road conditions contributed?", answer: "Potholes, debris, construction, defective surfaces, inadequate maintenance, or other roadway conditions may require investigation into who controlled or maintained the location." },
+      { question: "When should I contact a bicycle accident lawyer?", answer: "Consider prompt legal advice when injuries are serious, fault is disputed, the driver fled, insurance is unclear, roadway conditions may be involved, or video needs to be preserved." },
     ],
     relatedPages: [
-      {
-        label: "Personal Injury",
-        path: "/el-paso-personal-injury-lawyers",
-      },
-      {
-        label: "Pedestrian Accident",
-        path: "/el-paso-pedestrian-accident-lawyers",
-      },
-      {
-        label: "Car Accident",
-        path: "/el-paso-car-accident-lawyers",
-      },
-      {
-        label: "Motorcycle Accident",
-        path: "/el-paso-motorcycle-accident-lawyers",
-      },
-      {
-        label: "Wrongful Death",
-        path: "/el-paso-wrongful-death-lawyers",
-      },
+      { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
+      { label: "Uber & Lyft Accident", path: "/el-paso-uber-lyft-accident-lawyers" },
+      { label: "Pedestrian Accident", path: "/el-paso-pedestrian-accident-lawyers" },
+      { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
+      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
+      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
     ],
-  },
-
-  {
+    resourceLinks: [
+      { label: "What to Do After a Car Accident in El Paso, Texas", path: "/guides/what-to-do-after-car-accident-el-paso" },
+      { label: "What Happens if the Driver Who Hit You Is Uninsured in Texas?", path: "/guides/uninsured-driver-texas-car-accident" },
+    ],
+    lastUpdated: "August 11, 2026",
+  },  {
     path: "/el-paso-uber-lyft-accident-lawyers",
     shortTitle: "Uber & Lyft Accident",
-    title: "Best Uber & Lyft Accident Lawyers in El Paso, Texas",
+    title: "Uber & Lyft Accident Lawyers in El Paso, TX | Compare Local Firms",
     description:
-      "Compare El Paso rideshare accident lawyers handling Uber and Lyft crashes, passenger injuries, driver claims, insurance disputes, uninsured motorists, and serious injury cases.",
+      "Compare El Paso Uber and Lyft accident lawyers for passenger injuries, rideshare crashes, driver claims, insurance disputes, uninsured motorists, and serious injury cases.",
     metaDescription:
-      "Compare Uber and Lyft accident lawyers in El Paso for passenger injuries, rideshare crashes, insurance disputes, uninsured motorists, and serious injury claims.",
+      "Compare Uber and Lyft accident lawyers in El Paso, TX for passenger injuries, rideshare crashes, app-status disputes, insurance claims, and uninsured motorists.",
     heroText:
       "Compare El Paso Uber and Lyft accident attorneys representing passengers, drivers, pedestrians, cyclists, and other motorists injured in rideshare crashes throughout the 915.",
     topics: [
@@ -1130,17 +979,16 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       "Lyft Accidents",
       "Passenger Injuries",
       "Rideshare Driver Claims",
-      "Other Motorist Claims",
-      "Pedestrian and Bicycle Crashes",
       "App and Trip Records",
       "Insurance Coverage Disputes",
+      "Other Motorist Claims",
+      "Pedestrian and Bicycle Crashes",
       "Uninsured and Underinsured Motorists",
       "Serious Injuries and Wrongful Death",
     ],
     overview: [
       "A rideshare accident lawyer represents people injured in crashes involving Uber, Lyft, or another transportation network company. The injured person may be a passenger, rideshare driver, pedestrian, cyclist, or occupant of another vehicle.",
       "Rideshare cases can be more complicated than ordinary car-accident claims because responsibility and insurance may depend on what each driver was doing, whether the rideshare app was active, whether a ride had been accepted, whether a passenger was being transported, and which personal or commercial policies apply.",
-      "Texas regulates transportation network companies under Occupations Code Chapter 2402. The legal and insurance analysis can therefore involve state TNC requirements in addition to ordinary negligence and insurance rules.",
       "Investigation may require police reports, photographs, witness statements, app records, trip receipts, pickup and drop-off information, driver status, vehicle damage, medical records, mobile-phone evidence, surveillance footage, and communications with multiple insurers.",
     ],
     whenToHire: [
@@ -1160,22 +1008,20 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       "Save rideshare receipts, screenshots, driver details, timestamps, route information, support messages, and trip-history information as soon as possible. Electronic records can become important in establishing the driver's status at the time of the crash.",
     ],
     faqs: [
-      { question: "What should I do after an Uber or Lyft accident in El Paso?", answer: "Seek medical attention, report the crash when appropriate, save screenshots and trip information from the rideshare app, preserve photographs and witness information, and keep medical, insurance, and expense records." },
+      { question: "What should I do if my Uber or Lyft crashes in El Paso?", answer: "Seek medical care, report the crash when appropriate, save screenshots and trip information, preserve photos and witness information, and keep medical, insurance, and expense records." },
       { question: "Who may be responsible for a rideshare accident?", answer: "Responsibility may involve the rideshare driver, another motorist, a vehicle owner, or another party. Insurance coverage and the driver's app status may also affect the claim." },
       { question: "Why does the driver's app status matter?", answer: "The driver's status can affect which insurance provisions may apply. Whether the driver was offline, waiting for a request, heading to a pickup, or transporting a passenger should be documented." },
       { question: "What if I was injured as a passenger?", answer: "A passenger may have claims involving one or more responsible drivers and potentially applicable insurance policies. Trip records, app information, police reports, and medical documentation can be important." },
       { question: "What if another driver caused the crash?", answer: "The other driver's insurance may be involved, and additional available coverage may need evaluation depending on the rideshare driver's status and the policies that apply." },
       { question: "What if the at-fault driver had no insurance?", answer: "Uninsured or underinsured motorist coverage may be relevant depending on the policies and circumstances. Coverage should be reviewed rather than assumed." },
       { question: "What evidence should I save from the rideshare app?", answer: "Save trip receipts, driver information, pickup and drop-off details, timestamps, screenshots, communications, support messages, and any notices relating to the crash or trip." },
-      { question: "Can Uber or Lyft trip records be important evidence?", answer: "Yes. Trip status, timing, route data, driver information, and app communications may help clarify what the driver was doing and which coverage questions need to be investigated." },
-      { question: "What damages may be available?", answer: "Depending on the case, damages may include medical expenses, lost income, reduced earning capacity, pain, impairment, property damage, and in fatal cases wrongful-death or survival damages." },
       { question: "When should I contact an Uber or Lyft accident lawyer?", answer: "Consider legal advice promptly when injuries are serious, fault is disputed, multiple insurers are involved, app status is unclear, or trip and electronic evidence may need to be preserved." },
     ],
     relatedPages: [
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
       { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
-      { label: "Pedestrian Accident", path: "/el-paso-pedestrian-accident-lawyers" },
       { label: "Bicycle Accident", path: "/el-paso-bicycle-accident-lawyers" },
+      { label: "Pedestrian Accident", path: "/el-paso-pedestrian-accident-lawyers" },
+      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
       { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
     ],
     resourceLinks: [
@@ -1183,11 +1029,13 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       { label: "What Happens if the Driver Who Hit You Is Uninsured in Texas?", path: "/guides/uninsured-driver-texas-car-accident" },
       { label: "How to Get a Texas Crash Report After an El Paso Accident", path: "/guides/texas-crash-report-el-paso" },
     ],
-    lastUpdated: "August 10, 2026",
+    lastUpdated: "August 11, 2026",
   },
+
 ];
 
 export const getPracticeAreaPageByPath = (
   path: string
 ): PracticeAreaPageData | undefined =>
   practiceAreaPages.find((page) => page.path === path);
+
