@@ -1,4 +1,4 @@
-export type PracticeAreaFaq = {
+﻿export type PracticeAreaFaq = {
   question: string;
   answer: string;
 };
@@ -747,174 +747,144 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
   {
     path: "/el-paso-car-accident-lawyers",
     shortTitle: "Car Accident",
-    title: "Best Car Accident Lawyers in El Paso, Texas",
-    description:
-      "Compare El Paso car accident lawyers handling insurance claims, serious injuries, property damage, uninsured motorists, and collision disputes.",
-    topics: [
-      "Rear-End Collisions",
-      "Intersection Crashes",
-      "Uninsured Motorists",
-      "Serious Injuries",
-      "Insurance Disputes",
-      "Property Damage",
-    ],
-    overview: genericOverview("Car Accident"),
-    whenToHire: genericWhenToHire("Car Accident"),
-    localContent: genericLocal("Car Accident"),
-    faqs: genericFaqs("Car Accident"),
-    relatedPages: [
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-      { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers" },
-      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
-    ],
-  },
-  {
-    path: "/el-paso-truck-accident-lawyers",
-    shortTitle: "Truck Accident",
-    title: "Best Truck Accident Lawyers in El Paso, Texas",
-    description:
-      "Compare El Paso truck accident attorneys handling 18-wheeler crashes, commercial vehicle collisions, catastrophic injuries, driver fatigue, maintenance failures, cargo issues, and wrongful death claims.",
-    metaDescription:
-      "Compare truck accident lawyers in El Paso for 18-wheeler crashes, commercial vehicle collisions, catastrophic injuries, driver fatigue, maintenance failures, and wrongful death claims.",
-    heroText:
-      "Compare El Paso truck accident attorneys for 18-wheeler crashes, commercial vehicle collisions, catastrophic injuries, driver fatigue, maintenance failures, cargo issues, and wrongful death claims.",
-    topics: [
-      "18-Wheeler Crashes",
-      "Commercial Vehicle Collisions",
-      "Driver Fatigue",
-      "Hours-of-Service Violations",
-      "Maintenance Failures",
-      "Cargo and Loading Issues",
-      "Catastrophic Injuries",
-      "Wrongful Death",
-      "Trucking Insurance Claims",
-    ],
+    title: "Best Car Accident Lawyers in El Paso, TX | Compare Local Firms",
+    description: "Compare El Paso car accident lawyers for serious injury crashes, uninsured motorists, insurance disputes, hit-and-run collisions, and wrongful death claims.",
+    metaDescription: "Compare car accident lawyers in El Paso, TX for serious injury crashes, insurance disputes, uninsured motorists, hit-and-runs, and wrongful death claims.",
+    heroText: "Compare El Paso car accident lawyers handling serious injury collisions, insurance disputes, uninsured motorists, hit-and-run crashes, intersection accidents, and wrongful death claims.",
+    topics: ["Serious Injury Crashes","Intersection Accidents","Rear-End Collisions","Uninsured Motorists","Hit-and-Run Crashes","Insurance Disputes","Commercial Vehicle Collisions","Wrongful Death"],
     overview: [
-      "A truck accident lawyer represents people injured in crashes involving 18-wheelers, tractor-trailers, delivery vehicles, buses, and other commercial vehicles. These cases may involve the driver, trucking company, vehicle owner, maintenance contractor, cargo loader, broker, insurer, or another responsible party.",
-      "Truck accident claims often require rapid evidence preservation. Important records may include driver logs, electronic logging device data, onboard computer information, inspection and maintenance records, dispatch communications, cargo documents, drug and alcohol testing records, dash-camera footage, and company safety policies.",
-      "Because commercial vehicles are larger and heavier than passenger cars, collisions can cause catastrophic injuries, permanent disability, or death. Liability and damages may depend on federal and state safety rules, company practices, driver conduct, vehicle condition, and the conduct of other motorists.",
+      "A car accident lawyer helps injured drivers, passengers, pedestrians, and families evaluate liability, insurance coverage, medical damages, lost income, and other losses after a collision. The attorney may investigate the crash, preserve evidence, communicate with insurers, negotiate a settlement, or file a lawsuit when necessary.",
+      "Evidence can include police reports, photographs, video, witness statements, vehicle damage, medical records, phone records, event-data information, and insurance documents. Early preservation can matter when fault is disputed or injuries are serious.",
+      "Claims involving commercial vehicles, uninsured or underinsured motorists, multiple vehicles, catastrophic injuries, or a death may involve additional policies, defendants, and legal issues beyond a routine property-damage claim."
     ],
-    whenToHire: [
-      "You or a family member was seriously injured in a crash involving an 18-wheeler, tractor-trailer, delivery truck, bus, or commercial vehicle.",
-      "The trucking company or insurer contacted you for a statement, release, medical authorization, or quick settlement.",
-      "The crash involved death, hospitalization, surgery, permanent impairment, lost income, or significant future medical care.",
-      "You believe driver fatigue, distraction, speeding, improper loading, poor maintenance, or a safety violation contributed to the collision.",
-      "Multiple companies, insurers, drivers, contractors, or vehicle owners may share responsibility.",
-      "You need help preserving electronic data, inspection records, driver logs, video, or other evidence before it is lost.",
-    ],
+    whenToHire: ["You were hospitalized, needed surgery, or suffered a serious or lasting injury.","The other driver or insurer disputes fault or the value of your claim.","The crash involved an uninsured driver, hit-and-run, commercial vehicle, or multiple vehicles.","An insurer asks for a recorded statement, broad medical authorization, release, or quick settlement.","You lost income or expect substantial future medical care.","A family member died in the collision."],
     localContent: [
-      "El Paso is a major freight and cross-border transportation corridor connected to Interstate 10, U.S. Highway 54, Loop 375, international ports of entry, warehouses, distribution centers, and commercial routes serving Texas, New Mexico, and Mexico.",
-      "Local truck crashes may involve interstate carriers, cross-border freight, logistics companies, independent drivers, commercial insurers, and evidence maintained outside El Paso or Texas. These facts can affect jurisdiction, discovery, service, and the identification of responsible parties.",
-      "An El Paso truck accident attorney can help investigate the collision, preserve trucking records, evaluate federal and Texas safety requirements, coordinate expert review, document damages, and pursue negotiation or litigation against responsible parties.",
+      "El Paso traffic includes Interstate 10, Loop 375, U.S. 54, major east-west arterials, international ports of entry, commercial freight traffic, and daily travel between El Paso, Fort Bliss, New Mexico, and surrounding communities.",
+      "Local crashes may involve Texas drivers, out-of-state motorists, commercial carriers, rideshare vehicles, uninsured drivers, and insurers located outside El Paso. Those facts can affect evidence, coverage, jurisdiction, and the parties involved.",
+      "An El Paso car accident attorney can help investigate the collision, identify available insurance, document injuries and financial losses, preserve evidence, and evaluate settlement or litigation options under Texas law."
     ],
     faqs: [
-      {
-        question: "Who can be responsible for a truck accident?",
-        answer:
-          "Potentially responsible parties may include the driver, motor carrier, vehicle owner, maintenance provider, cargo loader, broker, manufacturer, or another motorist depending on the facts.",
-      },
-      {
-        question: "Why are truck accident cases different from car accident cases?",
-        answer:
-          "Truck cases often involve commercial regulations, multiple companies, larger insurance policies, electronic data, specialized records, and more severe injuries.",
-      },
-      {
-        question: "What evidence should be preserved after a truck crash?",
-        answer:
-          "Evidence may include photographs, video, witness information, police reports, medical records, electronic logging data, onboard computer data, inspection records, maintenance records, dispatch communications, and cargo documents.",
-      },
-      {
-        question: "What are hours-of-service rules?",
-        answer:
-          "Hours-of-service rules limit how long certain commercial drivers may drive and require rest periods. Violations may be relevant when fatigue contributed to a crash.",
-      },
-      {
-        question: "Can the trucking company be liable for the driver's conduct?",
-        answer:
-          "A trucking company may be liable under several legal theories, including responsibility for an employee driver, negligent hiring, training, supervision, retention, maintenance, or company safety practices.",
-      },
-      {
-        question: "What if cargo caused or contributed to the crash?",
-        answer:
-          "Improperly loaded, unsecured, overweight, or shifting cargo can contribute to rollovers, loss of control, falling debris, or braking problems. The loader, carrier, or other parties may be involved.",
-      },
-      {
-        question: "Should I speak with the trucking company's insurer?",
-        answer:
-          "You may provide basic identifying information, but consider legal advice before giving a recorded statement, signing releases, or accepting a settlement.",
-      },
-      {
-        question: "What damages may be available?",
-        answer:
-          "Depending on the case, damages may include medical expenses, lost income, reduced earning capacity, pain, impairment, property damage, and wrongful death or survival damages.",
-      },
-      {
-        question: "How long do I have to file a truck accident claim?",
-        answer:
-          "Texas limitation periods and notice requirements may apply, but the correct deadline depends on the parties and claims. Evidence-preservation needs make prompt action important.",
-      },
-      {
-        question: "When should I contact a truck accident lawyer?",
-        answer:
-          "Contact counsel as soon as possible after a serious commercial-vehicle crash so evidence can be preserved and communication with carriers and insurers can be managed.",
-      },
+      { question: "How do I choose a car accident lawyer in El Paso?", answer: "Compare experience with similar crashes, communication, fee structure, trial readiness, resources for investigating serious injuries, and whether the lawyer clearly explains the strategy for your case." },
+      { question: "What should I do after a serious car accident?", answer: "Seek appropriate medical care, report the collision, preserve photographs and witness information, keep insurance and medical records, and avoid destroying evidence. Consider legal advice before signing releases or giving detailed recorded statements." },
+      { question: "What if the other driver is uninsured?", answer: "Your own uninsured or underinsured motorist coverage may be relevant, along with other potential sources of recovery. Coverage depends on the policy and facts." },
+      { question: "What if the crash was a hit-and-run?", answer: "Report the crash promptly and preserve video, witness information, vehicle descriptions, and insurance records. Uninsured-motorist coverage may be relevant in some cases." },
+      { question: "Can more than one person be responsible?", answer: "Yes. Multi-vehicle crashes and commercial-vehicle cases may involve multiple drivers, companies, vehicle owners, or other responsible parties." },
+      { question: "What damages may be available?", answer: "Depending on the claim, damages may include medical expenses, lost income, reduced earning capacity, pain, impairment, property damage, and in fatal cases wrongful death or survival damages." },
+      { question: "Should I accept the insurance company's first offer?", answer: "A quick offer may not account for the full extent of injuries, future treatment, lost income, or disputed liability. Review the facts and terms before signing a release." },
+      { question: "How long do I have to file a claim?", answer: "Texas limitation periods and notice requirements may apply. The correct deadline depends on the parties and claims, so prompt review is important." }
     ],
     relatedPages: [
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-      { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
-      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
+      { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers" },
       { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
+      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
+      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" }
     ],
-  },
-  {
+  },  {
+    path: "/el-paso-truck-accident-lawyers",
+    shortTitle: "Truck Accident",
+    title: "Best Truck Accident Lawyers in El Paso, TX | 18-Wheeler Claims",
+    description: "Compare El Paso truck accident lawyers handling 18-wheeler and commercial vehicle crashes, catastrophic injuries, trucking companies, insurance claims, and wrongful death.",
+    metaDescription: "Compare truck accident lawyers in El Paso, TX for 18-wheeler crashes, commercial vehicle collisions, catastrophic injuries, insurance claims, and wrongful death.",
+    heroText: "Compare El Paso truck accident attorneys for 18-wheeler crashes, commercial trucking collisions, catastrophic injuries, driver fatigue, maintenance failures, cargo issues, and wrongful death claims.",
+    topics: ["18-Wheeler Crashes","Commercial Truck Accidents","Tractor-Trailer Collisions","Driver Fatigue","Hours-of-Service Violations","Maintenance Failures","Cargo and Loading Issues","Catastrophic Injuries","Wrongful Death"],
+    overview: [
+      "A truck accident lawyer represents people injured in crashes involving 18-wheelers, tractor-trailers, delivery trucks, buses, and other commercial vehicles. Responsibility may extend beyond the driver to a motor carrier, vehicle owner, maintenance provider, cargo loader, broker, manufacturer, or another party.",
+      "Commercial truck cases can depend on evidence that may not exist in an ordinary car crash, including electronic logging data, onboard computer information, inspection and maintenance records, dispatch communications, cargo documents, driver qualification files, safety records, and available camera footage.",
+      "Serious truck crashes can involve multiple insurers and defendants. Identifying the companies involved and preserving electronic and business records early can be important when investigating liability and damages."
+    ],
+    whenToHire: ["You or a family member suffered serious injuries in an 18-wheeler, tractor-trailer, delivery-truck, bus, or commercial-vehicle crash.","The carrier or insurer contacted you for a statement, release, medical authorization, or quick settlement.","The collision caused hospitalization, surgery, permanent impairment, lost income, or substantial future medical care.","Driver fatigue, speeding, distraction, poor maintenance, unsafe loading, or another safety issue may have contributed.","Multiple companies, contractors, vehicle owners, or insurers may share responsibility.","Electronic logs, onboard data, inspection records, dispatch messages, or video need to be preserved."],
+    localContent: [
+      "El Paso is a major freight and cross-border transportation corridor served by Interstate 10, U.S. 54, Loop 375, international ports of entry, warehouses, distribution centers, and commercial routes connecting Texas, New Mexico, and Mexico.",
+      "Truck crashes in the region may involve interstate carriers, cross-border freight, logistics companies, independent drivers, commercial insurers, and records maintained outside El Paso. Those facts can affect investigation, jurisdiction, discovery, and identification of responsible parties.",
+      "An El Paso truck accident attorney can investigate the collision, preserve trucking records, evaluate federal and Texas safety requirements, identify potentially responsible companies, document damages, and pursue settlement or litigation."
+    ],
+    faqs: [
+      { question: "Who can be responsible for an 18-wheeler accident?", answer: "Potential parties may include the driver, motor carrier, vehicle owner, maintenance provider, cargo loader, broker, manufacturer, or another motorist depending on the facts." },
+      { question: "Why are truck accident cases different from car accidents?", answer: "Truck cases often involve commercial regulations, multiple companies, specialized electronic and business records, larger vehicles, and severe injuries." },
+      { question: "What evidence should be preserved after a truck crash?", answer: "Potential evidence includes photographs, video, witness information, police reports, electronic logging data, onboard computer data, inspection and maintenance records, dispatch communications, cargo documents, and driver records." },
+      { question: "What are hours-of-service rules?", answer: "Federal rules limit driving time and require rest periods for many commercial drivers. Violations may be relevant when fatigue contributed to a collision." },
+      { question: "Can a trucking company be liable for its driver?", answer: "Depending on the facts, claims may involve responsibility for a driver as well as hiring, training, supervision, retention, maintenance, or company safety practices." },
+      { question: "What if cargo contributed to the crash?", answer: "Improperly loaded, unsecured, overweight, or shifting cargo can contribute to rollovers, loss of control, debris, or braking problems and may involve additional responsible parties." },
+      { question: "What damages may be available?", answer: "Depending on the case, damages may include medical expenses, lost income, reduced earning capacity, pain, impairment, property damage, and wrongful death or survival damages." },
+      { question: "When should I contact a truck accident lawyer?", answer: "Prompt contact can help preserve commercial records and electronic data before routine retention practices or other events make evidence harder to obtain." }
+    ],
+    relatedPages: [
+      { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
+      { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
+      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
+      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" }
+    ],
+  },  {
     path: "/el-paso-motorcycle-accident-lawyers",
     shortTitle: "Motorcycle Accident",
-    title: "Best Motorcycle Accident Lawyers in El Paso, Texas",
-    description:
-      "Compare El Paso motorcycle accident lawyers handling serious injuries, insurance disputes, road hazards, and collision claims.",
-    topics: [
-      "Serious Injuries",
-      "Road Hazards",
-      "Left-Turn Collisions",
-      "Insurance Claims",
-      "Uninsured Drivers",
-      "Wrongful Death",
+    title: "Best Motorcycle Accident Lawyers in El Paso, TX | Compare Firms",
+    description: "Compare El Paso motorcycle accident lawyers handling serious rider injuries, left-turn collisions, road hazards, uninsured drivers, insurance disputes, and wrongful death claims.",
+    metaDescription: "Compare motorcycle accident lawyers in El Paso, TX for serious rider injuries, left-turn crashes, road hazards, insurance disputes, and wrongful death claims.",
+    heroText: "Compare El Paso motorcycle accident attorneys for serious rider injuries, left-turn collisions, unsafe lane changes, road hazards, uninsured motorists, insurance disputes, and fatal crashes.",
+    topics: ["Serious Rider Injuries","Left-Turn Collisions","Unsafe Lane Changes","Road Hazards","Uninsured Drivers","Insurance Claims","Catastrophic Injuries","Wrongful Death"],
+    overview: [
+      "A motorcycle accident lawyer represents riders and families after collisions involving cars, trucks, roadway hazards, or other causes. Motorcycle cases often involve significant injuries and disputes about visibility, right of way, speed, lane position, and the conduct of other drivers.",
+      "Useful evidence may include helmet or camera footage, nearby surveillance video, photographs, witness statements, police reports, vehicle damage, medical records, roadway conditions, and electronic information from involved vehicles or phones when legally obtainable.",
+      "Because riders have less physical protection than occupants of passenger vehicles, motorcycle crashes can cause fractures, traumatic brain injuries, spinal injuries, road rash, amputations, permanent impairment, or death even when the collision occurs at moderate speed."
     ],
-    overview: genericOverview("Motorcycle Accident"),
-    whenToHire: genericWhenToHire("Motorcycle Accident"),
-    localContent: genericLocal("Motorcycle Accident"),
-    faqs: genericFaqs("Motorcycle Accident"),
+    whenToHire: ["You suffered a serious injury while riding a motorcycle.","A driver turned left in front of you, changed lanes into you, rear-ended you, or claims not to have seen you.","The insurer disputes fault or relies on assumptions about motorcycle riders.","The crash involved an uninsured or hit-and-run driver.","Road design, debris, construction, or a vehicle defect may have contributed.","A family member died in a motorcycle collision."],
+    localContent: [
+      "El Paso riders travel on Interstate 10, Loop 375, U.S. 54, Transmountain Road, Mesa Street, Montana Avenue, Zaragoza Road, and other high-speed or heavily traveled corridors. Traffic volume, lane changes, construction, and desert roadway conditions can all become relevant in a crash investigation.",
+      "Motorcycle collisions may involve local commuters, military-connected riders, visitors, commercial vehicles, uninsured drivers, or motorists traveling between Texas and New Mexico. Insurance and jurisdiction questions depend on the specific facts.",
+      "An El Paso motorcycle accident attorney can investigate fault, preserve video and witness evidence, review insurance coverage, document injuries and lost income, and evaluate settlement or litigation options."
+    ],
+    faqs: [
+      { question: "How do I choose a motorcycle accident lawyer in El Paso?", answer: "Look for experience with serious motorcycle injury claims, disputed liability, insurance coverage, evidence preservation, and litigation, and compare communication and fee terms." },
+      { question: "What are common causes of motorcycle crashes?", answer: "Common issues include left-turn collisions, unsafe lane changes, rear-end impacts, speeding, distracted driving, impaired driving, road hazards, and failure to yield." },
+      { question: "What if the driver says they did not see the motorcycle?", answer: "Visibility is often disputed in motorcycle cases. Witnesses, video, roadway layout, lighting, vehicle damage, and other evidence can help reconstruct what happened." },
+      { question: "What if I was not wearing a helmet?", answer: "Helmet use may affect issues in a case depending on the injuries and facts, but it does not automatically determine who caused the collision." },
+      { question: "What if the driver was uninsured?", answer: "Uninsured or underinsured motorist coverage and other potential sources of recovery may be relevant depending on the policy and circumstances." },
+      { question: "What damages may be available?", answer: "Depending on the case, damages may include medical expenses, lost income, reduced earning capacity, pain, impairment, property damage, and wrongful death or survival damages." },
+      { question: "How long do I have to bring a motorcycle accident claim?", answer: "Texas limitation periods and notice rules may apply, and the correct deadline depends on the parties and claims. Prompt review also helps preserve evidence." },
+      { question: "When should I contact a motorcycle accident lawyer?", answer: "Consider prompt legal advice after a serious injury, disputed-fault collision, commercial-vehicle crash, uninsured-driver incident, or fatal accident." }
+    ],
     relatedPages: [
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-      { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
-      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
-    ],
-  },
-  {
-    path: "/el-paso-wrongful-death-lawyers",
-    shortTitle: "Wrongful Death",
-    title: "Best Wrongful Death Lawyers in El Paso, Texas",
-    description:
-      "Compare El Paso wrongful death attorneys handling fatal accidents, negligence claims, damages, and representation for surviving families.",
-    topics: [
-      "Fatal Car Accidents",
-      "Truck Crashes",
-      "Workplace Deaths",
-      "Premises Liability",
-      "Medical Negligence",
-      "Survival Claims",
-    ],
-    overview: genericOverview("Wrongful Death"),
-    whenToHire: genericWhenToHire("Wrongful Death"),
-    localContent: genericLocal("Wrongful Death"),
-    faqs: genericFaqs("Wrongful Death"),
-    relatedPages: [
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
       { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
       { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers" },
+      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
+      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" }
     ],
-  },
-  {
+  },  {
+    path: "/el-paso-wrongful-death-lawyers",
+    shortTitle: "Wrongful Death",
+    title: "Best Wrongful Death Lawyers in El Paso, TX | Compare Local Firms",
+    description: "Compare El Paso wrongful death lawyers representing families after fatal car and truck crashes, workplace incidents, unsafe property conditions, and other negligence claims.",
+    metaDescription: "Compare wrongful death lawyers in El Paso, TX for fatal car and truck crashes, workplace incidents, negligence claims, and representation for surviving families.",
+    heroText: "Compare El Paso wrongful death attorneys representing families after fatal car crashes, 18-wheeler collisions, workplace incidents, unsafe property conditions, and other negligence claims.",
+    topics: ["Fatal Car Accidents","18-Wheeler Deaths","Motorcycle Fatalities","Workplace Deaths","Premises Liability","Medical Negligence","Wrongful Death Damages","Survival Claims"],
+    overview: [
+      "A wrongful death lawyer represents eligible surviving family members after a death allegedly caused by another person's or company's wrongful act, neglect, carelessness, unskillfulness, or default. The lawyer investigates responsibility, identifies available insurance and defendants, documents losses, negotiates claims, and may file suit when necessary.",
+      "Texas wrongful death and survival claims address different losses. A wrongful death claim focuses on losses suffered by qualifying surviving family members, while a survival claim generally preserves certain claims the deceased person could have pursued had they lived.",
+      "Fatal accident cases may require rapid evidence preservation, expert analysis, insurance investigation, probate coordination, and careful evaluation of damages. Commercial truck crashes and workplace incidents can involve multiple companies and overlapping legal issues."
+    ],
+    whenToHire: ["A spouse, parent, or child died because of a traffic collision or other suspected negligence.","The death involved an 18-wheeler, commercial vehicle, workplace incident, unsafe property condition, or other complex event.","An insurer or company requests statements, releases, authorizations, or a quick settlement.","Important video, electronic data, company records, vehicle evidence, or witness information needs to be preserved.","Multiple companies or insurers may be involved.","The family needs help understanding the relationship between wrongful death, survival, probate, and insurance issues."],
+    localContent: [
+      "Fatal incidents in El Paso may arise from crashes on Interstate 10, Loop 375, U.S. 54, local arterials, commercial freight routes, workplaces, construction sites, or other locations throughout El Paso County.",
+      "Cases can involve local defendants, interstate trucking companies, employers, property owners, insurers, and evidence located in Texas, New Mexico, Mexico, or elsewhere. The facts can affect jurisdiction, preservation, discovery, and available claims.",
+      "An El Paso wrongful death attorney can help identify potentially responsible parties, preserve evidence, investigate insurance coverage, coordinate necessary estate issues, document family losses, and evaluate settlement or litigation options."
+    ],
+    faqs: [
+      { question: "Who can bring a wrongful death claim in Texas?", answer: "Texas law generally identifies the surviving spouse, children, and parents as the family members who may bring a wrongful death action. Specific circumstances should be reviewed with counsel." },
+      { question: "What is the difference between wrongful death and a survival claim?", answer: "Wrongful death addresses certain losses suffered by qualifying survivors. A survival claim generally preserves claims the deceased person could have pursued before death." },
+      { question: "What damages may be available in a wrongful death case?", answer: "Available damages depend on the claim and facts and may include certain financial losses, loss of companionship and society, mental anguish, and other damages permitted by Texas law." },
+      { question: "Can a fatal truck crash involve several defendants?", answer: "Yes. Depending on the facts, a driver, motor carrier, vehicle owner, maintenance provider, cargo company, broker, manufacturer, or other party may be involved." },
+      { question: "What evidence should a family preserve?", answer: "Potential evidence includes photographs, video, witness information, police or incident reports, medical records, employment and income records, insurance documents, electronic data, and communications with companies or insurers." },
+      { question: "Does a wrongful death case require probate?", answer: "Wrongful death and estate issues can overlap, particularly with survival claims and estate representatives. Whether probate action is necessary depends on the circumstances." },
+      { question: "How long do families have to file?", answer: "Texas limitation periods and special notice rules may apply. The correct deadline depends on the parties and claims, and evidence may need preservation well before a filing deadline." },
+      { question: "When should a family contact a wrongful death lawyer?", answer: "Prompt contact can be important when evidence may disappear, multiple companies are involved, or insurers request statements, releases, or settlement discussions." }
+    ],
+    relatedPages: [
+      { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
+      { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers" },
+      { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
+      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" }
+    ],
+  },  {
     path: "/el-paso-green-card-lawyers",
     shortTitle: "Green Card",
     title: "Best Green Card Lawyers in El Paso, Texas",
