@@ -168,7 +168,7 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     path: "/el-paso-bankruptcy-lawyers",
     shortTitle: "Bankruptcy",
     title: "Best Bankruptcy Lawyers in El Paso, TX | Compare Local Attorneys",
-    
+
     description:
       "Compare El Paso bankruptcy attorneys handling Chapter 7, Chapter 13, debt relief, foreclosure concerns, creditor disputes, repossession, wage garnishment, and business bankruptcy matters.",
     metaDescription:
@@ -256,13 +256,20 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
           "Debtors generally must provide complete information about assets, debts, income, expenses, transfers, lawsuits, contracts, and other financial matters. Incomplete or inaccurate disclosures can create serious problems.",
       },
     ],
-    relatedPages: [
+     relatedPages: [
       { label: "Business Law", path: "/el-paso-business-lawyers" },
       { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
       { label: "Real Estate", path: "/el-paso-real-estate-lawyers" },
       { label: "Employment Law", path: "/el-paso-employment-lawyers" },
     ],
+
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+
+    lastUpdated: "August 12, 2026",
   },
+  
   {
     path: "/el-paso-employment-lawyers",
     shortTitle: "Employment Law",
@@ -1032,17 +1039,117 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     lastUpdated: "August 11, 2026",
   },
 
+
+  {
+    path: "/el-paso-citizenship-lawyers",
+    shortTitle: "Citizenship",
+    title: "Best Citizenship Lawyers in El Paso, TX | Compare Local Attorneys",
+    description:
+      "Compare El Paso citizenship lawyers handling naturalization, citizenship applications, certificates of citizenship, derivative citizenship, military naturalization, and related immigration matters.",
+    metaDescription:
+      "Compare citizenship lawyers in El Paso, TX for naturalization, citizenship applications, certificates of citizenship, derivative citizenship, military naturalization, and related immigration issues.",
+    heroText:
+      "Compare El Paso citizenship attorneys helping clients with naturalization, citizenship applications, certificates of citizenship, derivative citizenship, military naturalization, and related U.S. immigration matters.",
+    topics: [
+      "Naturalization",
+      "U.S. Citizenship Applications",
+      "Form N-400",
+      "Certificates of Citizenship",
+      "Derivative Citizenship",
+      "Acquired Citizenship",
+      "Military Naturalization",
+      "Citizenship Interviews",
+      "Citizenship Test Issues",
+      "Complex Naturalization Cases",
+    ],
+    overview: [
+      "An El Paso citizenship lawyer can help lawful permanent residents and other eligible individuals evaluate whether they qualify for U.S. citizenship, prepare naturalization applications, gather supporting documents, respond to requests for evidence, prepare for interviews, and address legal issues that may affect eligibility.",
+      "Naturalization commonly involves questions about lawful permanent residence, continuous residence, physical presence, good moral character, English and civics requirements, selective service, taxes, travel history, criminal history, prior immigration filings, and other background information.",
+      "Citizenship may also arise through a U.S. citizen parent rather than through the standard naturalization process. Depending on the circumstances, a person may need to evaluate acquired citizenship, derivative citizenship, or eligibility for a certificate of citizenship.",
+      "Citizenship cases can become more complicated when the applicant has lengthy travel outside the United States, prior arrests or convictions, tax problems, past immigration violations, inconsistencies in earlier applications, military service, or uncertainty about whether citizenship was already acquired through a parent.",
+    ],
+    whenToHire: [
+      "You are a lawful permanent resident and want to determine whether you are eligible to apply for naturalization.",
+      "You need help preparing or reviewing Form N-400 and supporting documentation.",
+      "You have extensive travel outside the United States and are concerned about continuous residence or physical-presence requirements.",
+      "You have a criminal history, arrest, citation, immigration violation, tax issue, or other background concern that may affect eligibility.",
+      "USCIS has requested additional evidence or raised questions about your application.",
+      "You believe you may already be a U.S. citizen through a parent or prior family history.",
+      "You need help with a certificate of citizenship or another citizenship-related filing.",
+      "Your case involves military service, deployment, or military-related naturalization provisions.",
+    ],
+    localContent: [
+      "Citizenship matters in El Paso often involve families with long-standing ties to both the United States and Mexico, frequent international travel, bilingual households, and immigration histories that may span several generations.",
+      "Because El Paso sits directly on the international border, citizenship applicants may have extensive travel records, cross-border family relationships, foreign birth records, prior immigration documents, or other evidence that should be reviewed carefully before filing.",
+      "Fort Bliss also makes military naturalization and citizenship issues particularly relevant in the El Paso region. Service members, veterans, and military families may face rules or procedures that differ from ordinary civilian naturalization cases.",
+      "An El Paso citizenship attorney can help review immigration history, residence and travel records, family relationships, prior filings, criminal or tax concerns, and supporting documents before an application is submitted or an interview takes place.",
+    ],
+    faqs: [
+      {
+        question: "How do I become a U.S. citizen through naturalization?",
+        answer:
+          "Naturalization generally requires meeting statutory eligibility requirements involving permanent residence, residence and physical presence, good moral character, English and civics testing, and other qualifications. The exact requirements depend on the applicant's circumstances.",
+      },
+      {
+        question: "How long do I need to have a green card before applying for citizenship?",
+        answer:
+          "Many applicants apply after five years as lawful permanent residents, while some spouses of U.S. citizens may qualify under a three-year rule if additional requirements are satisfied.",
+      },
+      {
+        question: "Can travel outside the United States affect naturalization?",
+        answer:
+          "Yes. Extended or frequent travel can affect continuous residence and physical-presence requirements. Applicants should review their travel history carefully before filing.",
+      },
+      {
+        question: "Can a criminal record affect my citizenship application?",
+        answer:
+          "It can. Arrests, convictions, probation, dismissed charges, and other criminal history may affect eligibility or require additional documentation and legal analysis.",
+      },
+      {
+        question: "What happens at a naturalization interview?",
+        answer:
+          "A USCIS officer generally reviews the application, asks questions about the applicant's background and eligibility, and administers applicable English and civics testing unless an exception applies.",
+      },
+      {
+        question: "What if USCIS asks for more evidence?",
+        answer:
+          "USCIS may issue a request for evidence or another notice asking for additional documents or clarification. The response should address the specific issues raised and comply with the stated deadline.",
+      },
+      {
+        question: "Can I already be a U.S. citizen through my parents?",
+        answer:
+          "Possibly. Some people acquire or derive citizenship through a U.S. citizen parent depending on the law in effect, the parent's citizenship and residence history, the child's age, and other facts.",
+      },
+      {
+        question: "What is a certificate of citizenship?",
+        answer:
+          "A certificate of citizenship is a document issued by USCIS to certain individuals who acquired or derived U.S. citizenship and need formal proof of that status.",
+      },
+      {
+        question: "Are there special citizenship rules for military members?",
+        answer:
+          "Federal law provides certain naturalization provisions for qualifying service members and veterans. Eligibility depends on the type and period of service and other requirements.",
+      },
+      {
+        question: "When should I contact an El Paso citizenship lawyer?",
+        answer:
+          "Consider legal advice when eligibility is unclear, travel history is extensive, criminal or tax issues exist, prior immigration filings contain inconsistencies, citizenship through a parent may apply, or USCIS has raised concerns about the case.",
+      },
+    ],
+    relatedPages: [
+      { label: "Immigration", path: "/el-paso-immigration-lawyers" },
+      { label: "Family Law", path: "/el-paso-family-lawyers" },
+    ],
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "August 12, 2026",
+  },
+
 ];
 
 export const getPracticeAreaPageByPath = (
   path: string
 ): PracticeAreaPageData | undefined =>
   practiceAreaPages.find((page) => page.path === path);
-
-
-
-
-
-
-
 
