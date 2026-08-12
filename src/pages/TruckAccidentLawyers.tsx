@@ -1,4 +1,4 @@
-# Full `src/pages/TruckAccidentLawyers.tsx`
+﻿# Full `src/pages/TruckAccidentLawyers.tsx`
 import TruckAccidentLawyers from "./pages/TruckAccidentLawyers";
 
 ```tsx
@@ -140,7 +140,7 @@ if (path === "/el-paso-truck-accident-lawyers") {
                   fontWeight: "bold",
                 }}
               >
-                ⭐ 5.0 • 214 Reviews
+                â­ 5.0 â€¢ 214 Reviews
               </p>
 
               <p
@@ -359,6 +359,7 @@ git push
 
 # Live URL
 
-[https://elpasosbestlawyers.com/el-paso-truck-accident-lawyers](https://elpasosbestlawyers.com/el-paso-truck-accident-lawyers)
+[https://www.elpasosbestlawyers.com/el-paso-truck-accident-lawyers](https://www.elpasosbestlawyers.com/el-paso-truck-accident-lawyers)
+
 
 

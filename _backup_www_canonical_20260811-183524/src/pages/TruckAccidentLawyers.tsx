@@ -1,8 +1,16 @@
-﻿# Full `src/pages/DivorceLawyers.tsx`
+# Full `src/pages/TruckAccidentLawyers.tsx`
+import TruckAccidentLawyers from "./pages/TruckAccidentLawyers";
 
 ```tsx
-export default function DivorceLawyers() {
-  document.title = "Best Divorce Lawyers in El Paso, TX";
+export default function TruckAccidentLawyers() {
+  document.title = "Best Truck Accident Lawyers in El Paso, TX";
+if (path === "/el-paso-truck-accident-lawyers") {
+  return <TruckAccidentLawyers />;
+}
+import TruckAccidentLawyers from "./pages/TruckAccidentLawyers";
+if (path === "/el-paso-truck-accident-lawyers") {
+  return <TruckAccidentLawyers />;
+}
 
   return (
     <main
@@ -36,7 +44,7 @@ export default function DivorceLawyers() {
               marginBottom: "24px",
             }}
           >
-            EL PASO FAMILY LAW
+            EL PASO TRUCK ACCIDENT LAWYERS
           </div>
 
           <h1
@@ -47,7 +55,7 @@ export default function DivorceLawyers() {
               lineHeight: 1.1,
             }}
           >
-            Best Divorce Lawyers in El Paso, TX
+            Best Truck Accident Lawyers in El Paso, TX
           </h1>
 
           <p
@@ -58,9 +66,10 @@ export default function DivorceLawyers() {
               maxWidth: "900px",
             }}
           >
-            Compare experienced El Paso divorce lawyers handling contested
-            divorces, child custody disputes, property division, child support,
-            and complex family law matters throughout El Paso County.
+            Compare experienced El Paso truck accident lawyers handling
+            commercial trucking collisions, catastrophic injury claims,
+            wrongful death lawsuits, and insurance disputes throughout
+            El Paso County.
           </p>
         </div>
       </section>
@@ -83,7 +92,7 @@ export default function DivorceLawyers() {
               marginBottom: "30px",
             }}
           >
-            Featured Divorce Attorneys
+            Featured Truck Accident Attorneys
           </h2>
 
           <div
@@ -112,7 +121,7 @@ export default function DivorceLawyers() {
                   marginBottom: "18px",
                 }}
               >
-                CATEGORY FEATURED
+                CATEGORY EXCLUSIVE
               </div>
 
               <h3
@@ -121,7 +130,7 @@ export default function DivorceLawyers() {
                   marginBottom: "12px",
                 }}
               >
-                El Paso Family Law Group
+                Johnson Injury Lawyers
               </h3>
 
               <p
@@ -131,7 +140,7 @@ export default function DivorceLawyers() {
                   fontWeight: "bold",
                 }}
               >
-                â­ 4.9 â€¢ 132 Reviews
+                ⭐ 5.0 • 214 Reviews
               </p>
 
               <p
@@ -141,9 +150,9 @@ export default function DivorceLawyers() {
                   marginBottom: "24px",
                 }}
               >
-                Trusted El Paso divorce attorneys assisting clients with
-                contested divorces, custody disputes, support modifications,
-                mediation, and complex family law litigation.
+                Experienced trucking accident attorneys handling serious
+                collisions involving 18-wheelers, commercial carriers,
+                freight companies, and catastrophic highway accidents.
               </p>
 
               <div
@@ -154,7 +163,7 @@ export default function DivorceLawyers() {
                 }}
               >
                 <a
-                  href="/attorneys/el-paso-family-law-group"
+                  href="/attorneys/johnson-injury-lawyers"
                   style={{
                     background: "#fbbf24",
                     color: "#0f172a",
@@ -168,7 +177,7 @@ export default function DivorceLawyers() {
                 </a>
 
                 <a
-                  href="tel:9155552000"
+                  href="tel:9155551000"
                   style={{
                     border: "1px solid #fbbf24",
                     color: "#fbbf24",
@@ -204,7 +213,7 @@ export default function DivorceLawyers() {
               marginBottom: "30px",
             }}
           >
-            Divorce & Family Law Cases in El Paso
+            Truck Accident Cases in El Paso
           </h2>
 
           <div
@@ -215,25 +224,23 @@ export default function DivorceLawyers() {
             }}
           >
             <p style={{ marginBottom: "28px" }}>
-              Divorce and family law cases in El Paso often involve complex
-              disputes related to child custody, visitation rights, property
-              division, retirement accounts, and spousal support. Texas family
-              law courts evaluate issues involving the best interests of the
-              child, financial stability, and equitable property distribution.
+              El Paso sees heavy commercial trucking traffic along Interstate 10,
+              Loop 375, Zaragoza Road, and major freight corridors connected to
+              cross-border transportation routes. Truck accidents often involve
+              serious injuries due to the size and weight of commercial vehicles.
             </p>
 
             <p style={{ marginBottom: "28px" }}>
-              Family law disputes can become emotionally difficult and financially
-              stressful. Experienced divorce lawyers may help clients negotiate
-              settlements, pursue mediation, protect parental rights, and handle
-              contested courtroom litigation when necessary.
+              Truck accident litigation may involve multiple parties including
+              trucking companies, commercial insurers, freight operators,
+              maintenance contractors, and vehicle manufacturers. These cases are
+              often more complex than standard car accident claims.
             </p>
 
             <p style={{ marginBottom: "28px" }}>
-              El Paso divorce attorneys commonly assist clients throughout East
-              El Paso, Horizon City, Socorro, West El Paso, and surrounding
-              communities in family law matters involving custody modifications,
-              enforcement actions, and complex marital asset division.
+              Victims injured in trucking collisions may pursue compensation for
+              medical expenses, lost wages, rehabilitation costs, permanent
+              disability, pain and suffering, and wrongful death damages.
             </p>
           </div>
         </div>
@@ -268,16 +275,16 @@ export default function DivorceLawyers() {
           >
             {[
               {
-                q: "How long does a divorce take in Texas?",
-                a: "Texas has a mandatory 60-day waiting period, but contested divorces can take significantly longer depending on disputes and court schedules.",
+                q: "What makes truck accident cases different from car accident cases?",
+                a: "Truck accident cases often involve federal regulations, commercial insurance policies, driver logbooks, and multiple liable parties.",
               },
               {
-                q: "How is child custody determined in Texas?",
-                a: "Texas courts evaluate the best interests of the child, including parental involvement, stability, and the child's welfare.",
+                q: "How much is a truck accident case worth?",
+                a: "Every case is different, but severe trucking accidents may involve substantial compensation depending on injuries, liability, and damages.",
               },
               {
-                q: "Do I need a lawyer for a divorce in El Paso?",
-                a: "Although not legally required, many individuals hire divorce attorneys to protect their rights, negotiate settlements, and handle court procedures.",
+                q: "How long do I have to file a truck accident lawsuit in Texas?",
+                a: "Texas generally applies a two-year statute of limitations for personal injury claims, although exceptions may apply.",
               },
             ].map((faq) => (
               <div
@@ -320,68 +327,38 @@ export default function DivorceLawyers() {
 
 # Add To `src/App.tsx`
 
-Add this import:
+Add this import near the top:
 
 ```tsx
-import DivorceLawyers from "./pages/DivorceLawyers";
+import TruckAccidentLawyers from "./pages/TruckAccidentLawyers";
 ```
 
 Then add this route inside `App()` BEFORE the homepage return:
 
 ```tsx
-if (path === "/el-paso-divorce-lawyers") {
-  return <DivorceLawyers />;
+if (path === "/el-paso-truck-accident-lawyers") {
+  return <TruckAccidentLawyers />;
 }
 ```
 
-# Build
+# Then Build + Push
 
 ```powershell
 cd "C:\Users\PC\Projects\best-ep-lawyers-\EP BEST LAWYERS"
 npm run build
 ```
 
-# Push
+If successful:
 
 ```powershell
 cd "C:\Users\PC\Projects\best-ep-lawyers-"
 git add -A
-git commit -m "add divorce lawyers SEO page"
+git commit -m "add truck accident SEO page"
 git push
 ```
 
 # Live URL
 
-[https://www.elpasosbestlawyers.com/el-paso-divorce-lawyers](https://www.elpasosbestlawyers.com/el-paso-divorce-lawyers)
-
-      </p>
-
-      <form
-        style={{
-          display: "grid",
-          gap: "20px",
-        }}
-      >
-        <input
-          type="text"
-          placeholder="Full Name"
-          style={{
-            padding: "18px",
-            borderRadius: "12px",
-            border: "1px solid #334155",
-            background: "#0f172a",
-            color: "white",
-            fontSize: "16px",
-          }}
-        />
-
-        <input
-          type="email"
-          placeholder="Email Address"
-          style={{
-            padding: "18px",
-            borderRadius: "12px",
-            border: "1px solid #334155",
-}
+[https://elpasosbestlawyers.com/el-paso-truck-accident-lawyers](https://elpasosbestlawyers.com/el-paso-truck-accident-lawyers)
 
 

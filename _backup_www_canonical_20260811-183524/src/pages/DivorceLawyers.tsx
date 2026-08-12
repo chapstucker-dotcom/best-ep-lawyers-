@@ -1,4 +1,4 @@
-﻿# Full `src/pages/DivorceLawyers.tsx`
+# Full `src/pages/DivorceLawyers.tsx`
 
 ```tsx
 export default function DivorceLawyers() {
@@ -131,7 +131,7 @@ export default function DivorceLawyers() {
                   fontWeight: "bold",
                 }}
               >
-                â­ 4.9 â€¢ 132 Reviews
+                ⭐ 4.9 • 132 Reviews
               </p>
 
               <p
@@ -352,7 +352,7 @@ git push
 
 # Live URL
 
-[https://www.elpasosbestlawyers.com/el-paso-divorce-lawyers](https://www.elpasosbestlawyers.com/el-paso-divorce-lawyers)
+[https://elpasosbestlawyers.com/el-paso-divorce-lawyers](https://elpasosbestlawyers.com/el-paso-divorce-lawyers)
 
       </p>
 
@@ -383,5 +383,4 @@ git push
             borderRadius: "12px",
             border: "1px solid #334155",
 }
-
 

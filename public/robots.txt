@@ -1,4 +1,4 @@
-User-agent: *
+﻿User-agent: *
 Allow: /
 
-Sitemap: https://elpasosbestlawyers.com/sitemap.xml
+Sitemap: https://www.elpasosbestlawyers.com/sitemap.xml
