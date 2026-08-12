@@ -27,6 +27,7 @@ import DogBite from "./pages/DogBite";
 import TraumaticBrainInjury from "./pages/TraumaticBrainInjury";
 import CarAccident from "./pages/CarAccident";
 import MotorcycleAccident from "./pages/MotorcycleAccident";
+import TruckAccidentLawyers from "./pages/TruckAccidentLawyers";
 import WrongfulDeath from "./pages/WrongfulDeath";
 import PracticeAreaPage from "./pages/PracticeAreaPage";
 import Guides from "./pages/Guides";
@@ -82,7 +83,6 @@ export default function App() {
           element={<EstatePlanning />}
         />
 
-
         <Route
           path="/el-paso-slip-and-fall-lawyers"
           element={<SlipAndFall />}
@@ -119,6 +119,11 @@ export default function App() {
         />
 
         <Route
+          path="/el-paso-truck-accident-lawyers"
+          element={<TruckAccidentLawyers />}
+        />
+
+        <Route
           path="/el-paso-motorcycle-accident-lawyers"
           element={<MotorcycleAccident />}
         />
@@ -127,6 +132,7 @@ export default function App() {
           path="/el-paso-wrongful-death-lawyers"
           element={<WrongfulDeath />}
         />
+
         {practiceAreaPages.map((page) => (
           <Route
             key={page.path}
@@ -137,7 +143,10 @@ export default function App() {
 
         <Route path="/guides" element={<Guides />} />
         <Route path="/guides/:slug" element={<GuideArticle />} />
-        <Route path="/featured-on-el-pasos-best-lawyers" element={<FeaturedBadge />} />
+        <Route
+          path="/featured-on-el-pasos-best-lawyers"
+          element={<FeaturedBadge />}
+        />
 
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/login" element={<Login />} />
@@ -153,6 +162,3 @@ export default function App() {
     </AuthProvider>
   );
 }
-
-
-
