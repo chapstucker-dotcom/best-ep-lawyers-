@@ -712,120 +712,124 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     ],
     lastUpdated: "August 12, 2026",
   },
-  {
-    path: "/el-paso-child-custody-lawyers",
-    shortTitle: "Child Custody",
-    title: "Best Child Custody Lawyers in El Paso, Texas",
-    description:
-      "Compare El Paso child custody attorneys handling conservatorship, visitation, parenting plans, modifications, enforcement, and relocation.",
-    topics: [
-      "Conservatorship",
-      "Visitation",
-      "Parenting Plans",
-      "Modifications",
-      "Enforcement",
-      "Relocation",
-    ],
-    overview: genericOverview("Child Custody"),
-    whenToHire: genericWhenToHire("Child Custody"),
-    localContent: genericLocal("Child Custody"),
-    faqs: genericFaqs("Child Custody"),
-    relatedPages: [
-      { label: "Divorce", path: "/el-paso-divorce-lawyers" },
-      { label: "Family Law", path: "/el-paso-family-lawyers" },
-    ],
-  },
-  {
-    path: "/el-paso-car-accident-lawyers",
-    shortTitle: "Car Accident",
-    title: "Best Car Accident Lawyers in El Paso, TX | Compare Local Firms",
-    description:
-      "Compare El Paso car accident lawyers for serious injury crashes, uninsured motorists, hit-and-run collisions, insurance disputes, rideshare crashes, bicycle collisions, and wrongful death claims.",
-    metaDescription:
-      "Compare car accident lawyers in El Paso, TX for serious injuries, uninsured motorists, hit-and-runs, insurance disputes, rideshare crashes, and wrongful death claims.",
-    heroText:
-      "Compare El Paso car accident lawyers handling serious injury collisions, uninsured motorists, hit-and-run crashes, insurance disputes, rideshare collisions, bicycle accidents, and wrongful death claims.",
-    topics: [
-      "Serious Injury Crashes",
-      "Intersection Accidents",
-      "Rear-End Collisions",
-      "Uninsured Motorists",
-      "Hit-and-Run Crashes",
-      "Insurance Disputes",
-      "Rideshare Collisions",
-      "Bicycle and Pedestrian Crashes",
-      "Wrongful Death",
-    ],
-    overview: [
-      "A car accident lawyer helps injured drivers, passengers, cyclists, pedestrians, and families evaluate fault, insurance coverage, medical damages, lost income, and other losses after a collision. Counsel may investigate the crash, preserve evidence, communicate with insurers, negotiate a settlement, or file suit when necessary.",
-      "Evidence can include police reports, photographs, surveillance or dash-camera video, witness statements, vehicle damage, medical records, phone records, event-data information, rideshare trip records, and insurance documents. Early preservation can matter when fault is disputed or injuries are serious.",
-      "Claims involving commercial vehicles, Uber or Lyft drivers, bicycles, uninsured motorists, multiple vehicles, catastrophic injuries, or a death may involve additional policies, defendants, and legal issues beyond a routine property-damage claim.",
-    ],
-    whenToHire: [
-      "You were hospitalized, needed surgery, or suffered a serious or lasting injury.",
-      "The other driver or insurer disputes fault or the value of your claim.",
-      "The crash involved an uninsured driver, hit-and-run, rideshare vehicle, commercial vehicle, bicycle, pedestrian, or multiple vehicles.",
-      "An insurer asks for a recorded statement, broad medical authorization, release, or quick settlement.",
-      "You lost income or expect substantial future medical care.",
-      "A family member died in the collision.",
-    ],
-    localContent: [
-      "El Paso traffic includes Interstate 10, Loop 375, U.S. 54, major east-west arterials, international ports of entry, commercial freight traffic, and daily travel between El Paso, Fort Bliss, New Mexico, and surrounding communities.",
-      "Local crashes may involve Texas drivers, out-of-state motorists, commercial carriers, rideshare vehicles, cyclists, pedestrians, uninsured drivers, and insurers located outside El Paso. Those facts can affect evidence, coverage, jurisdiction, and the parties involved.",
-      "An El Paso car accident attorney can help investigate the collision, identify available insurance, document injuries and financial losses, preserve evidence, and evaluate settlement or litigation options under Texas law.",
-    ],
-    faqs: [
-      { question: "How do I choose a car accident lawyer in El Paso?", answer: "Compare experience with similar crashes, communication, fee structure, trial readiness, resources for investigating serious injuries, and whether the lawyer clearly explains the strategy for your case." },
-      { question: "What should I do after a serious car accident?", answer: "Seek appropriate medical care, report the collision, preserve photographs and witness information, keep insurance and medical records, and avoid destroying evidence. Consider legal advice before signing releases or giving detailed recorded statements." },
-      { question: "What if the other driver is uninsured?", answer: "Your own uninsured or underinsured motorist coverage may be relevant, along with other potential sources of recovery. Coverage depends on the policy and facts." },
-      { question: "What if the crash involved Uber or Lyft?", answer: "Rideshare crashes can involve app status, trip records, the rideshare driver's personal coverage, company-provided coverage, and other drivers' policies. Preserve screenshots and trip information when possible." },
-      { question: "What if a cyclist or pedestrian was hit?", answer: "These cases can involve right-of-way, visibility, turning movements, traffic controls, roadway conditions, and serious injury damages. Video and witness evidence can be especially important." },
-      { question: "Can more than one person be responsible?", answer: "Yes. Multi-vehicle crashes and commercial-vehicle cases may involve multiple drivers, companies, vehicle owners, or other responsible parties." },
-      { question: "What damages may be available?", answer: "Depending on the claim, damages may include medical expenses, lost income, reduced earning capacity, pain, impairment, property damage, and in fatal cases wrongful death or survival damages." },
-      { question: "Should I accept the insurance company's first offer?", answer: "A quick offer may not account for the full extent of injuries, future treatment, lost income, or disputed liability. Review the facts and terms before signing a release." },
-      { question: "How long do I have to file a claim?", answer: "Texas limitation periods and notice requirements may apply. The correct deadline depends on the parties and claims, so prompt review is important." },
-    ],
-    relatedPages: [
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-      { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers" },
-      { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
-      { label: "Bicycle Accident", path: "/el-paso-bicycle-accident-lawyers" },
-      { label: "Uber/Lyft Accident", path: "/el-paso-uber-lyft-accident-lawyers" },
-      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
-    ],
-    resourceLinks: [
-      { label: "What to Do After a Car Accident in El Paso, Texas", path: "/guides/what-to-do-after-car-accident-el-paso" },
-      { label: "What Happens if the Driver Who Hit You Is Uninsured in Texas?", path: "/guides/uninsured-driver-texas-car-accident" },
-      { label: "How to Get a Texas Crash Report After an El Paso Accident", path: "/guides/texas-crash-report-el-paso" },
-    ],
-    lastUpdated: "August 11, 2026",
-  },  {
-    path: "/el-paso-citizenship-lawyers",
-    shortTitle: "Citizenship",
-    title: "Best Citizenship Lawyers in El Paso, Texas",
-    description:
-      "Compare El Paso citizenship attorneys handling naturalization, interviews, eligibility, prior immigration issues, and citizenship applications.",
-    topics: [
-      "Naturalization Applications",
-      "Interview Preparation",
-      "Eligibility Review",
-      "Prior Immigration Issues",
-      "Military Naturalization",
-      "Citizenship Evidence",
-    ],
-    overview: genericOverview("Citizenship"),
-    whenToHire: genericWhenToHire("Citizenship"),
-    localContent: genericLocal("Citizenship"),
-    faqs: genericFaqs("Citizenship"),
-    relatedPages: [
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-      { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers" },
-      { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
-      { label: "Bicycle Accident", path: "/el-paso-bicycle-accident-lawyers" },
-      { label: "Uber/Lyft Accident", path: "/el-paso-uber-lyft-accident-lawyers" },
-      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
-    ],
-  },
+  
+    {
+  path: "/el-paso-child-custody-lawyers",
+  shortTitle: "Child Custody",
+  title: "Best Child Custody Lawyers in El Paso, TX | Compare Local Attorneys",
+  description:
+    "Compare El Paso child custody lawyers handling conservatorship, possession and access, parenting plans, modifications, enforcement, relocation, and parental-rights disputes.",
+  metaDescription:
+    "Compare child custody lawyers in El Paso, TX for conservatorship, possession schedules, visitation, modifications, enforcement, relocation, and parenting disputes.",
+  heroText:
+    "Compare El Paso child custody attorneys handling conservatorship, possession and access, parenting schedules, modifications, enforcement, relocation, and other Texas custody disputes.",
+  topics: [
+    "Child Custody Attorney",
+    "Conservatorship",
+    "Possession and Access",
+    "Parenting Plans",
+    "Visitation",
+    "Custody Modifications",
+    "Enforcement",
+    "Relocation",
+    "Geographic Restrictions",
+    "Parental Rights",
+  ],
+  overview: [
+    "An El Paso child custody lawyer can help parents and other eligible parties address conservatorship, possession and access, decision-making rights, parenting schedules, geographic restrictions, relocation disputes, modifications, and enforcement under Texas family law.",
+    "Texas generally uses the terms conservatorship, possession, and access rather than relying only on the word custody. Conservatorship addresses parental rights and duties, while possession and access address when a parent has physical possession of or access to the child.",
+    "Under Texas Family Code Section 153.002, the best interest of the child is the primary consideration when a court determines conservatorship and possession-and-access issues. The outcome depends on the facts of the family, the child's needs, the parents' circumstances, and other legally relevant considerations.",
+    "Custody disputes may arise during divorce, after separation, in suits affecting the parent-child relationship, or after an existing order is already in place. Cases can involve disagreements about school, medical decisions, parenting schedules, transportation, holidays, travel, relocation, communication, safety concerns, and compliance with prior court orders.",
+  ],
+  whenToHire: [
+    "You and the other parent cannot agree on conservatorship, possession schedules, decision-making rights, or parenting responsibilities.",
+    "You are going through a divorce involving children and need temporary or final custody orders.",
+    "The other parent is denying or interfering with court-ordered possession or access.",
+    "You need to modify an existing custody or possession order because circumstances have materially changed.",
+    "A parent plans to move, relocate, or take the child outside an existing geographic restriction.",
+    "There are concerns involving family violence, substance abuse, neglect, unsafe conditions, threats, or the child's physical or emotional well-being.",
+    "You need to enforce an existing conservatorship, possession, access, or parenting order.",
+    "Your case involves military service, deployment, cross-border travel, or family members living in New Mexico or Mexico.",
+  ],
+  localContent: [
+    "El Paso child custody cases are governed by Texas family law and are generally handled by courts serving El Paso County. Local procedures, standing orders, temporary-order hearings, mediation practices, court schedules, and existing family-law orders can affect how a case progresses.",
+    "El Paso families may face custody issues involving Fort Bliss military service, deployment, bilingual households, relatives in New Mexico or Mexico, international travel, school districts across the county, and parents who live in different communities within the Borderland.",
+    "An El Paso child custody attorney can help evaluate existing orders, prepare proposed parenting terms, gather relevant evidence, address temporary-order issues, negotiate parenting arrangements, prepare for mediation, and present disputed conservatorship or possession issues to the court when necessary.",
+    "The wording of a custody order matters. Conservatorship rights, possession schedules, holiday provisions, transportation responsibilities, geographic restrictions, passport and travel provisions, school decisions, medical decisions, and communication requirements should be reviewed carefully because they can affect a family for years.",
+  ],
+  faqs: [
+    {
+      question: "What does child custody mean in Texas?",
+      answer:
+        "Texas law generally uses the terms conservatorship, possession, and access. Conservatorship addresses parental rights and duties, while possession and access govern when a parent has possession of or time with the child.",
+    },
+    {
+      question: "How does a Texas court decide child custody?",
+      answer:
+        "Texas Family Code Section 153.002 provides that the best interest of the child is the primary consideration in determining conservatorship and possession-and-access issues. Courts evaluate the facts and circumstances of each family.",
+    },
+    {
+      question: "What is joint managing conservatorship?",
+      answer:
+        "Joint managing conservatorship generally means both parents share certain parental rights and duties, although those rights do not necessarily have to be identical and joint managing conservatorship does not automatically mean equal parenting time.",
+    },
+    {
+      question: "Does joint custody mean 50/50 time in Texas?",
+      answer:
+        "Not necessarily. Conservatorship and possession schedules are separate concepts. Parents may share managing-conservator status while having a possession schedule that is not an equal division of time.",
+    },
+    {
+      question: "Can a child custody order be changed?",
+      answer:
+        "Yes. Texas courts with continuing jurisdiction can modify conservatorship, support, or possession-and-access orders when the legal requirements for modification are satisfied. The required showing depends on the requested change and the facts of the case.",
+    },
+    {
+      question: "What if the other parent will not follow the custody order?",
+      answer:
+        "A parent may seek enforcement when another party fails to comply with an existing possession, access, or conservatorship order. The appropriate remedy depends on the wording of the order and the alleged violation.",
+    },
+    {
+      question: "Can a parent move away with the child?",
+      answer:
+        "Relocation can become a significant custody issue when an existing order contains a geographic restriction or when the proposed move affects possession, school, travel, or the child's relationship with the other parent. The existing order should be reviewed before relocating.",
+    },
+    {
+      question: "Can temporary custody orders be entered?",
+      answer:
+        "Yes. Texas courts can enter temporary orders addressing conservatorship, possession, support, use of property, and other issues while a family-law case is pending.",
+    },
+    {
+      question: "How can military service affect an El Paso custody case?",
+      answer:
+        "Military service can create issues involving deployment, temporary duty, relocation, parenting schedules, communication, jurisdiction, and travel. These issues are especially relevant for families connected to Fort Bliss.",
+    },
+    {
+      question: "What evidence may matter in a child custody dispute?",
+      answer:
+        "Depending on the issues, relevant information may include existing court orders, school records, medical information, parenting communications, calendars, travel records, witness information, evidence of compliance or noncompliance with prior orders, and documentation concerning the child's needs and daily care.",
+    },
+    {
+      question: "When should I contact an El Paso child custody lawyer?",
+      answer:
+        "Consider speaking with a custody attorney when parents cannot agree, an existing order is not being followed, relocation is proposed, modification may be necessary, safety concerns exist, or the case involves military or cross-border issues.",
+    },
+  ],
+  relatedPages: [
+    { label: "Divorce", path: "/el-paso-divorce-lawyers" },
+    { label: "Family Law", path: "/el-paso-family-lawyers" },
+    { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
+    { label: "Estate Planning", path: "/el-paso-estate-planning-lawyers" },
+  ],
+  resourceLinks: [
+    {
+      label:
+        "Texas Child Custody: Conservatorship, Possession, and Access Basics",
+      path: "/guides/texas-child-custody-conservatorship-basics",
+    },
+    { label: "Browse All Texas Law Guides", path: "/guides" },
+  ],
+  lastUpdated: "August 12, 2026",
+},
   {
     path: "/el-paso-pedestrian-accident-lawyers",
     shortTitle: "Pedestrian Accident",
