@@ -167,7 +167,8 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
   {
     path: "/el-paso-bankruptcy-lawyers",
     shortTitle: "Bankruptcy",
-    title: "Best Bankruptcy Lawyers in El Paso, Texas",
+    title: "Best Bankruptcy Lawyers in El Paso, TX | Compare Local Attorneys",
+    
     description:
       "Compare El Paso bankruptcy attorneys handling Chapter 7, Chapter 13, debt relief, foreclosure concerns, creditor disputes, repossession, wage garnishment, and business bankruptcy matters.",
     metaDescription:
