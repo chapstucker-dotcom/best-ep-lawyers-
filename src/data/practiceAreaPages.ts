@@ -795,12 +795,12 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       { question: "How long do I have to file a claim?", answer: "Texas limitation periods and notice requirements may apply. The correct deadline depends on the parties and claims, so prompt review is important." },
     ],
     relatedPages: [
-      { label: "Bicycle Accident", path: "/el-paso-bicycle-accident-lawyers" },
-      { label: "Uber & Lyft Accident", path: "/el-paso-uber-lyft-accident-lawyers" },
+      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
       { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers" },
       { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
+      { label: "Bicycle Accident", path: "/el-paso-bicycle-accident-lawyers" },
+      { label: "Uber/Lyft Accident", path: "/el-paso-uber-lyft-accident-lawyers" },
       { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
     ],
     resourceLinks: [
       { label: "What to Do After a Car Accident in El Paso, Texas", path: "/guides/what-to-do-after-car-accident-el-paso" },
@@ -827,8 +827,12 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     localContent: genericLocal("Citizenship"),
     faqs: genericFaqs("Citizenship"),
     relatedPages: [
-      { label: "Immigration", path: "/el-paso-immigration-lawyers" },
-      { label: "Green Card", path: "/el-paso-green-card-lawyers" },
+      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
+      { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers" },
+      { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
+      { label: "Bicycle Accident", path: "/el-paso-bicycle-accident-lawyers" },
+      { label: "Uber/Lyft Accident", path: "/el-paso-uber-lyft-accident-lawyers" },
+      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
     ],
   },
   {
@@ -901,11 +905,11 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
   {
     path: "/el-paso-bicycle-accident-lawyers",
     shortTitle: "Bicycle Accident",
-    title: "Best Bicycle Accident Lawyers in El Paso, TX | Compare Local Firms",
+    title: "Best Bicycle Accident Lawyers in El Paso, TX | Compare Local Attorneys",
     description:
       "Compare El Paso bicycle accident lawyers handling vehicle collisions, unsafe passing, hit-and-run crashes, serious injuries, insurance disputes, and wrongful death claims.",
     metaDescription:
-      "Compare bicycle accident lawyers in El Paso, TX for vehicle collisions, hit-and-runs, unsafe passing, serious injuries, insurance disputes, and wrongful death.",
+      "Compare bicycle accident attorneys in El Paso, TX for vehicle collisions, hit-and-runs, unsafe passing, serious injuries, insurance disputes, and wrongful death.",
     heroText:
       "Compare El Paso bicycle accident attorneys representing cyclists injured in vehicle collisions, intersection crashes, hit-and-run accidents, unsafe passing incidents, roadway hazards, and serious injury claims.",
     topics: [
@@ -952,11 +956,10 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       { question: "When should I contact a bicycle accident lawyer?", answer: "Consider prompt legal advice when injuries are serious, fault is disputed, the driver fled, insurance is unclear, roadway conditions may be involved, or video needs to be preserved." },
     ],
     relatedPages: [
-      { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
-      { label: "Uber & Lyft Accident", path: "/el-paso-uber-lyft-accident-lawyers" },
-      { label: "Pedestrian Accident", path: "/el-paso-pedestrian-accident-lawyers" },
-      { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
       { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
+      { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
+      { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
+      { label: "Uber/Lyft Accident", path: "/el-paso-uber-lyft-accident-lawyers" },
       { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
     ],
     resourceLinks: [
@@ -967,13 +970,13 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
   },  {
     path: "/el-paso-uber-lyft-accident-lawyers",
     shortTitle: "Uber & Lyft Accident",
-    title: "Uber & Lyft Accident Lawyers in El Paso, TX | Compare Local Firms",
+    title: "Uber & Lyft Accident Lawyers in El Paso, TX | Compare Local Attorneys",
     description:
       "Compare El Paso Uber and Lyft accident lawyers for passenger injuries, rideshare crashes, driver claims, insurance disputes, uninsured motorists, and serious injury cases.",
     metaDescription:
-      "Compare Uber and Lyft accident lawyers in El Paso, TX for passenger injuries, rideshare crashes, app-status disputes, insurance claims, and uninsured motorists.",
+      "Compare Uber and Lyft accident attorneys in El Paso, TX for passenger injuries, rideshare crashes, app-status disputes, insurance claims, and uninsured motorists.",
     heroText:
-      "Compare El Paso Uber and Lyft accident attorneys representing passengers, drivers, pedestrians, cyclists, and other motorists injured in rideshare crashes throughout the 915.",
+      "Compare El Paso rideshare lawyers handling Uber and Lyft crashes involving passengers, drivers, pedestrians, cyclists, serious injuries, and disputed insurance coverage.",
     topics: [
       "Uber Accidents",
       "Lyft Accidents",
@@ -1018,10 +1021,11 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       { question: "When should I contact an Uber or Lyft accident lawyer?", answer: "Consider legal advice promptly when injuries are serious, fault is disputed, multiple insurers are involved, app status is unclear, or trip and electronic evidence may need to be preserved." },
     ],
     relatedPages: [
-      { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
-      { label: "Bicycle Accident", path: "/el-paso-bicycle-accident-lawyers" },
-      { label: "Pedestrian Accident", path: "/el-paso-pedestrian-accident-lawyers" },
       { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
+      { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
+      { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers" },
+      { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
+      { label: "Bicycle Accident", path: "/el-paso-bicycle-accident-lawyers" },
       { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
     ],
     resourceLinks: [
@@ -1038,4 +1042,10 @@ export const getPracticeAreaPageByPath = (
   path: string
 ): PracticeAreaPageData | undefined =>
   practiceAreaPages.find((page) => page.path === path);
+
+
+
+
+
+
 
