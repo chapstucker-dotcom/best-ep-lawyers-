@@ -88,9 +88,9 @@ export default function PersonalInjury() {
     document.title =
       "Best Personal Injury Lawyers in El Paso, TX | El Paso's Best Lawyers";
 
-    const description =
-      "Compare personal injury lawyers in El Paso, Texas. Browse local law firm profiles, explore common injury cases, and connect directly with experienced attorneys.";
-
+    
+      const description =
+  "Compare personal injury lawyers in El Paso, TX for car accidents, truck accidents, wrongful death, slip and fall, and other serious injury claims. Browse local attorney and law firm profiles.";
     let metaDescription = document.querySelector<HTMLMetaElement>(
       'meta[name="description"]'
     );
