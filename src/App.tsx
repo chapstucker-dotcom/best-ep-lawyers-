@@ -12,7 +12,6 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AttorneyDetails from "./pages/AttorneyDetails";
 
 import PersonalInjury from "./pages/PersonalInjury";
-import CriminalDefense from "./pages/CriminalDefense";
 import Immigration from "./pages/Immigration";
 import FamilyLaw from "./pages/FamilyLaw";
 import DWI from "./pages/DWI";
@@ -56,11 +55,6 @@ export default function App() {
         <Route
           path="/el-paso-semi-truck-accident-lawyer"
           element={<SemiTruckAccident />}
-        />
-
-        <Route
-          path="/el-paso-criminal-defense-lawyers"
-          element={<CriminalDefense />}
         />
 
         <Route
