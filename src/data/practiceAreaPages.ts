@@ -334,156 +334,72 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     path: "/el-paso-wrongful-termination-lawyers",
     shortTitle: "Wrongful Termination",
     title: "Best Wrongful Termination Lawyers in El Paso, TX | Compare Attorneys",
-    description:
-      "Compare El Paso wrongful termination lawyers handling retaliation, discrimination-related termination, protected leave issues, employment contracts, wage disputes, severance matters, and other workplace firing claims.",
-    metaDescription:
-      "Compare wrongful termination lawyers in El Paso, TX for retaliation, discrimination, protected leave, employment contracts, wage disputes, and workplace firing claims.",
-    heroText:
-      "Compare El Paso wrongful termination attorneys helping employees evaluate firings involving retaliation, discrimination, protected activity, contracts, compensation disputes, and other workplace issues.",
+    description: "Compare El Paso wrongful termination lawyers handling retaliation, discrimination-related firing, protected leave, wage complaints, employment contracts, severance disputes, and other unlawful termination claims.",
+    metaDescription: "Compare wrongful termination lawyers in El Paso, TX for retaliation, discrimination, protected leave, wage complaints, contracts, severance, and unlawful firing claims.",
+    heroText: "Compare El Paso wrongful termination lawyers and employment attorneys helping workers evaluate firings involving retaliation, discrimination, protected activity, leave, wages, contracts, severance, and other workplace rights.",
     topics: [
-      "Wrongful Termination El Paso",
       "Wrongful Termination Lawyer",
+      "Wrongful Termination Attorney",
+      "Wrongful Termination El Paso",
       "Retaliatory Termination",
+      "Workplace Retaliation",
       "Discrimination and Termination",
       "Protected Workplace Complaints",
+      "Wage Complaint Retaliation",
+      "Protected Leave and Termination",
       "Employment Contracts",
       "Severance Agreements",
-      "Wage and Overtime Disputes",
-      "Workplace Investigations",
-      "Termination Documentation",
+      "Whistleblower Retaliation",
+      "Constructive Discharge",
+      "Unlawful Firing Claims"
     ],
     overview: [
-      "A wrongful termination lawyer evaluates whether a firing may violate employment protections, contractual rights, or other applicable legal rules. A termination can feel unfair without necessarily being unlawful, so the reason for the decision and the surrounding facts matter.",
-      "The analysis may involve the timing of complaints or protected activity, performance reviews, disciplinary records, attendance and leave records, pay disputes, workplace policies, emails, text messages, witness information, contracts, and statements made before or after the termination.",
-      "Some disputes involve allegations that an employee was fired after reporting discrimination, harassment, wage issues, safety concerns, leave needs, or other workplace problems. Others involve employment agreements, compensation disputes, severance terms, or inconsistent explanations for the firing.",
-      "Preserving records early can be important because workplace accounts, messages, schedules, personnel documents, and other evidence may become harder to obtain over time.",
+      "A wrongful termination lawyer evaluates whether a firing may violate an employment law, contract, or other legal protection. Texas generally permits at-will employment, which means an employer can often end employment for a lawful reason or no stated reason, but a termination can still raise legal issues when the reason is prohibited by law or violates an enforceable agreement.",
+      "Potential wrongful termination disputes can involve allegations of retaliation after a protected complaint, discrimination based on a legally protected characteristic, interference with protected leave or workplace rights, retaliation connected to wage issues, breach of an employment agreement, or other unlawful reasons for ending employment.",
+      "The timing and documentation surrounding a termination can be important. Emails, text messages, performance reviews, disciplinary records, complaints, human-resources communications, schedules, pay records, leave requests, policies, contracts, and severance documents may help explain what happened before and after the firing.",
+      "A lawyer reviewing a termination can help identify possible claims, applicable deadlines, administrative filing requirements, relevant evidence, potential damages, and whether negotiation, an agency process, arbitration, or litigation may be appropriate."
     ],
     whenToHire: [
-      "You were fired shortly after reporting discrimination, harassment, wage issues, safety concerns, or other workplace misconduct.",
-      "You believe your termination was connected to race, sex, disability, age, religion, national origin, pregnancy, protected leave, or another protected circumstance.",
-      "Your employer's stated reason for firing you conflicts with your records, reviews, communications, or prior treatment.",
-      "You had an employment agreement, compensation agreement, severance proposal, commission arrangement, or other contract that may affect the termination.",
-      "You were terminated after asking about unpaid wages, overtime, commissions, bonuses, or compensation.",
-      "You received a severance agreement or release and want it reviewed before signing.",
+      "You were fired shortly after reporting discrimination, harassment, wage problems, safety concerns, fraud, or other workplace misconduct.",
+      "You believe your termination was connected to race, color, religion, sex, pregnancy, national origin, age, disability, or another legally protected characteristic.",
+      "You were terminated after requesting or using potentially protected medical, family, military, disability-related, or other leave.",
+      "You complained about unpaid wages, overtime, commissions, compensation, or another pay issue and were then fired or disciplined.",
+      "Your employer gave a reason for termination that conflicts with your reviews, records, communications, or the sequence of events.",
+      "You have an employment contract, offer letter, compensation agreement, policy, or other document that may affect the employer's ability to terminate you.",
+      "You received a severance agreement or release and want to understand the rights and claims you may be giving up.",
+      "You have already received an agency notice, demand, arbitration filing, lawsuit, or deadline connected to the termination."
     ],
     localContent: [
-      "Wrongful termination disputes in El Paso can arise across healthcare, logistics, transportation, construction, retail, hospitality, professional offices, manufacturing, government contracting, and other local industries.",
-      "A local attorney may review the employer's stated reason for termination against the employee's timeline, performance history, workplace complaints, pay records, policies, attendance or leave records, and relevant communications.",
-      "Useful records may include termination paperwork, emails, text messages, employee handbooks, paystubs, schedules, performance reviews, disciplinary notices, complaints, witness information, contracts, commission plans, and severance documents.",
-      "Because workplace disputes can involve time-sensitive procedures, employees should consider preserving records and seeking legal guidance promptly rather than waiting for documents or accounts to disappear.",
+      "Wrongful termination disputes in El Paso can arise in healthcare, logistics and transportation, construction, manufacturing, retail, hospitality, professional services, government contracting, education, and other workplaces throughout El Paso County.",
+      "Because El Paso's workforce includes local employers, national companies, federal contractors, cross-border businesses, and multistate operations, a termination dispute may involve company policies and decision-makers located outside Texas as well as records maintained in multiple systems or locations.",
+      "An El Paso wrongful termination attorney can review the employment timeline, stated reason for discharge, complaints, performance history, disciplinary actions, pay records, leave records, contracts, policies, communications, witnesses, and any severance or release documents.",
+      "Workers considering a claim should preserve relevant emails, texts, paystubs, schedules, reviews, complaints, disciplinary notices, leave documents, contracts, termination notices, severance papers, and a chronology of important events. Employment claims can have different filing periods and procedural requirements, so prompt review can matter."
     ],
     faqs: [
-      { question: "What counts as wrongful termination in El Paso?", answer: "A termination may raise legal issues when the firing is connected to prohibited discrimination, retaliation, protected activity or leave, contractual rights, wage issues, or another legally protected circumstance. The specific facts matter." },
-      { question: "Is every unfair firing wrongful termination?", answer: "No. A termination can be unfair or poorly handled without necessarily violating the law. An attorney can compare the employer's reason with the available evidence and applicable employment protections." },
-      { question: "What evidence can help in a wrongful termination case?", answer: "Relevant evidence can include emails, texts, performance reviews, disciplinary records, policies, complaints, schedules, pay records, contracts, witness information, termination papers, and a clear timeline of events." },
-      { question: "Can retaliation lead to a wrongful termination claim?", answer: "Retaliation may create legal issues when an employee is fired or otherwise penalized after engaging in certain protected complaints, reports, requests, or proceedings." },
-      { question: "Should I sign a severance agreement after being fired?", answer: "A severance agreement may include a release of claims and other obligations. Consider having the terms reviewed before signing if you have questions about what rights you may be giving up." },
-      { question: "What if my employer gave a false reason for firing me?", answer: "An inconsistent or unsupported explanation may be relevant, but the full timeline and evidence should be reviewed to determine whether the termination raises a legal issue." },
-      { question: "What should I do immediately after being terminated?", answer: "Keep your termination documents, preserve relevant communications and records you lawfully possess, write down important dates and events, identify potential witnesses, and consider legal advice if you believe protected rights may be involved." },
+      { question: "What counts as wrongful termination in Texas?", answer: "A firing is not automatically unlawful simply because it seems unfair. A termination may raise legal issues when it violates an applicable discrimination, retaliation, leave, wage, contract, public-policy, or other employment protection." },
+      { question: "Is Texas an at-will employment state?", answer: "Texas generally follows at-will employment, but at-will status does not authorize a termination for a reason prohibited by applicable law or in violation of an enforceable contractual obligation." },
+      { question: "How do I choose a wrongful termination lawyer in El Paso?", answer: "Compare experience with the type of termination issue involved, including retaliation, discrimination, leave, wage disputes, contracts, severance agreements, administrative proceedings, negotiation, and litigation." },
+      { question: "What evidence should I save after being fired?", answer: "Preserve termination notices, emails, texts, performance reviews, disciplinary records, complaints, pay records, schedules, leave documents, policies, contracts, severance documents, and notes identifying witnesses and important dates." },
+      { question: "Can I have a wrongful termination claim if my employer says I was fired for performance?", answer: "Possibly. The stated reason is one part of the analysis. Records, timing, comparable treatment, prior reviews, communications, complaints, and other evidence may be relevant when evaluating whether the stated explanation is accurate or whether another unlawful reason may have influenced the decision." },
+      { question: "Can retaliation after a workplace complaint be illegal?", answer: "Certain complaints, reports, requests, and participation in protected processes can be legally protected. Whether retaliation is prohibited depends on what activity occurred, the applicable law, the employer's actions, timing, and other facts." },
+      { question: "Should I sign a severance agreement after being terminated?", answer: "A severance agreement may include a release of legal claims, confidentiality terms, restrictive covenants, payment conditions, and other obligations. Reviewing the agreement before signing can help you understand what you would receive and what rights you may waive." },
+      { question: "Do wrongful termination claims have deadlines?", answer: "Yes. Different claims can involve different statutes of limitation, administrative filing periods, contractual deadlines, or notice requirements. The correct deadline depends on the legal theory and facts." },
+      { question: "What damages may be available in a wrongful termination case?", answer: "Potential remedies depend on the claim and applicable law and may include lost wages, lost benefits, other economic losses, reinstatement, compensatory damages, statutory damages, attorney fees, or other relief when legally available." }
     ],
     relatedPages: [
       { label: "Employment Law", path: "/el-paso-employment-lawyers" },
-      { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
-      { label: "Business Law", path: "/el-paso-business-lawyers" },
+      { label: "Workplace Discrimination", path: "/el-paso-workplace-discrimination-lawyers" },
+      { label: "Retaliation", path: "/el-paso-retaliation-lawyers" },
+      { label: "Sexual Harassment", path: "/el-paso-sexual-harassment-lawyers" },
+      { label: "Wage and Hour", path: "/el-paso-wage-hour-lawyers" },
+      { label: "Employment Contracts", path: "/el-paso-employment-contract-lawyers" },
+      { label: "Severance Agreements", path: "/el-paso-severance-agreement-lawyers" },
+      { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" }
+    ],
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" }
     ],
     lastUpdated: "August 14, 2026",
-  },  {
-    path: "/el-paso-business-lawyers",
-    shortTitle: "Business",
-    title: "Best Business Lawyers in El Paso, Texas",
-    description:
-      "Compare El Paso business attorneys handling company formation, contracts, commercial transactions, partnership disputes, business purchases and sales, governance, compliance, and litigation.",
-    metaDescription:
-      "Compare business lawyers in El Paso for company formation, contracts, commercial transactions, partnership disputes, acquisitions, governance, compliance, and litigation.",
-    heroText:
-      "Compare El Paso business attorneys for company formation, contracts, commercial transactions, partnership disputes, business purchases and sales, corporate governance, compliance, and litigation.",
-    topics: [
-      "Business Formation",
-      "LLCs and Corporations",
-      "Contracts",
-      "Partnership Agreements",
-      "Commercial Transactions",
-      "Business Purchases and Sales",
-      "Shareholder Disputes",
-      "Corporate Governance",
-      "Business Litigation",
-    ],
-    overview: [
-      "A business lawyer helps entrepreneurs, owners, investors, partnerships, corporations, and nonprofit organizations address legal issues throughout the life of a company. The work may include selecting an entity, preparing organizational documents, negotiating contracts, managing risk, resolving ownership disputes, and advising on purchases, sales, or succession.",
-      "Strong legal planning can help clarify ownership rights, decision-making authority, profit distributions, exit procedures, confidentiality obligations, and what happens if a partner leaves, dies, becomes disabled, or breaches an agreement. These issues are often easier and less expensive to address before a conflict develops.",
-      "Business disputes may involve contracts, unpaid invoices, ownership interests, fiduciary duties, fraud, restrictive covenants, trade secrets, leases, vendors, customers, or former employees. Counsel may assist through negotiation, mediation, arbitration, litigation, or another resolution process.",
-    ],
-    whenToHire: [
-      "You are starting a business and need help choosing or forming an LLC, corporation, partnership, or other entity.",
-      "You need a contract drafted, reviewed, negotiated, renewed, or enforced.",
-      "You are buying, selling, merging, or restructuring a business.",
-      "Owners, partners, members, or shareholders disagree about control, money, duties, or the future of the company.",
-      "Your business faces a lawsuit, demand letter, unpaid account, vendor dispute, or threatened legal action.",
-      "You need guidance about governance, compliance, succession planning, employment policies, or risk management.",
-    ],
-    localContent: [
-      "El Paso businesses operate in a regional economy shaped by international trade, logistics, healthcare, construction, manufacturing, defense, hospitality, professional services, retail, and small family-owned companies. Cross-border transactions and relationships with businesses in New Mexico or Mexico can add contractual, tax, regulatory, and jurisdictional considerations.",
-      "Local business matters may involve Texas entity law, state and federal regulations, commercial leases, El Paso County courts, the El Paso Division of the United States District Court for the Western District of Texas, or private arbitration depending on the agreement and dispute.",
-      "An El Paso business attorney can help owners structure transactions, document agreements, identify legal risks, preserve business relationships, and determine whether negotiation, mediation, arbitration, or litigation is the best path forward.",
-    ],
-    faqs: [
-      {
-        question: "Should I form an LLC or a corporation?",
-        answer:
-          "The best structure depends on ownership, taxes, investment plans, management, liability concerns, and long-term goals. A lawyer and tax professional can help compare the options.",
-      },
-      {
-        question: "Do I need an operating agreement for my LLC?",
-        answer:
-          "An operating agreement can define ownership, management, voting, distributions, transfers, buyouts, and dispute procedures. It is especially important when an LLC has more than one owner.",
-      },
-      {
-        question: "Why should a lawyer review a business contract?",
-        answer:
-          "A lawyer can identify unclear terms, hidden risks, deadlines, indemnity obligations, limits on liability, dispute provisions, termination rights, and other terms that may affect the business.",
-      },
-      {
-        question: "What is a partnership dispute?",
-        answer:
-          "A partnership dispute may involve control, compensation, ownership percentages, access to records, fiduciary duties, misuse of funds, deadlock, withdrawal, or dissolution.",
-      },
-      {
-        question: "What happens when a business owner wants to leave?",
-        answer:
-          "The answer depends on the governing documents, ownership structure, transfer restrictions, valuation terms, buy-sell provisions, and whether the departure is voluntary or disputed.",
-      },
-      {
-        question: "What is due diligence in a business purchase?",
-        answer:
-          "Due diligence involves reviewing financial records, contracts, liabilities, litigation, employees, intellectual property, licenses, taxes, property, and other information before closing a transaction.",
-      },
-      {
-        question: "Can a business contract be enforced if it was not written?",
-        answer:
-          "Some oral agreements may be enforceable, but others must be in writing. Proof, contract terms, performance, and the subject matter can all affect enforceability.",
-      },
-      {
-        question: "What is a fiduciary duty?",
-        answer:
-          "A fiduciary duty is a legal obligation to act with loyalty, care, honesty, or good faith in certain relationships. Whether a duty exists depends on the role, entity, agreement, and circumstances.",
-      },
-      {
-        question: "Should a business dispute go to mediation or court?",
-        answer:
-          "The best forum depends on the contract, urgency, cost, evidence, relationships, available remedies, and whether arbitration or another dispute process is required.",
-      },
-      {
-        question: "When should a business contact a lawyer?",
-        answer:
-          "Early legal advice is useful before signing major agreements, adding owners, borrowing money, hiring key employees, buying or selling assets, or responding to a dispute.",
-      },
-    ],
-    relatedPages: [
-      { label: "Employment Law", path: "/el-paso-employment-lawyers" },
-      { label: "Real Estate", path: "/el-paso-real-estate-lawyers" },
-      { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
-      { label: "Bankruptcy", path: "/el-paso-bankruptcy-lawyers" },
-    ],
   },
   {
     path: "/el-paso-real-estate-lawyers",
