@@ -1554,160 +1554,155 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     lastUpdated: "August 13, 2026",
   },
   {
-    path: "/el-paso-traumatic-brain-injury-lawyers",
-    shortTitle: "Traumatic Brain Injury",
-    title: "Best Traumatic Brain Injury Lawyers in El Paso, Texas",
+    path: "/el-paso-construction-accident-lawyers",
+    shortTitle: "Construction Accident",
+    title: "Best Construction Accident Lawyers in El Paso, Texas",
     description:
-      "Compare El Paso traumatic brain injury attorneys handling concussions, memory loss, cognitive impairment, permanent disability, future care, and wrongful death claims.",
+      "Compare El Paso construction accident attorneys handling falls, equipment injuries, electrocution, unsafe worksites, contractor negligence, serious injuries, and wrongful death claims.",
     metaDescription:
-      "Compare traumatic brain injury lawyers in El Paso for concussions, memory loss, cognitive impairment, permanent disability, and wrongful death.",
+      "Compare construction accident lawyers in El Paso for falls, equipment injuries, unsafe worksites, contractor negligence, and wrongful death claims.",
     heroText:
-      "Compare El Paso traumatic brain injury attorneys for concussions, memory loss, cognitive impairment, permanent disability, and wrongful death claims.",
+      "Compare El Paso construction accident attorneys for falls, equipment injuries, unsafe worksites, serious injuries, and wrongful death claims.",
     topics: [
-      "Concussions",
-      "Memory Loss",
-      "Cognitive Impairment",
-      "Loss of Consciousness",
-      "Personality Changes",
-      "Speech Problems",
-      "Permanent Disability",
-      "Future Medical Care",
-      "Lost Earning Capacity",
-      "Wrongful Death",
-    ],
-    overview: [
-      "A traumatic brain injury lawyer represents people harmed by head trauma caused by vehicle crashes, falls, workplace incidents, medical negligence, assaults, defective products, and other events.",
-      "Traumatic brain injuries can affect memory, concentration, judgment, speech, balance, mood, sleep, behavior, and the ability to work or live independently.",
-      "Important evidence may include emergency records, neurological evaluations, imaging, rehabilitation records, witness statements, employment records, and documentation of changes in daily functioning.",
-      "Serious claims may involve extensive treatment, rehabilitation, future care, lost income, reduced earning capacity, pain, impairment, and permanent disability.",
-    ],
-    whenToHire: [
-      "You experienced loss of consciousness, confusion, memory problems, headaches, dizziness, or cognitive changes after an incident.",
-      "The injury required hospitalization, neurological care, therapy, or rehabilitation.",
-      "The insurer disputes the seriousness or cause of the injury.",
-      "You cannot return to work or need long-term assistance.",
-      "A loved one suffered severe brain damage or died because of another party's conduct.",
-    ],
-    localContent: [
-      "Traumatic brain injury claims in El Paso may arise from crashes on Interstate 10, Loop 375, U.S. Highway 54, construction sites, workplaces, medical facilities, apartment complexes, and other locations throughout El Paso County.",
-      "An El Paso traumatic brain injury attorney can help preserve evidence, obtain records, coordinate expert review, document long-term needs, and pursue negotiation or litigation.",
-    ],
-    faqs: [
-      {
-        question: "What is a traumatic brain injury?",
-        answer:
-          "A traumatic brain injury is damage to the brain caused by a blow, jolt, penetration, or other force.",
-      },
-      {
-        question: "Can a concussion support a legal claim?",
-        answer:
-          "Yes, when another party caused the injury and the symptoms and losses are properly documented.",
-      },
-      {
-        question: "What symptoms can occur?",
-        answer:
-          "Symptoms may include headaches, dizziness, memory loss, confusion, mood changes, sleep problems, speech difficulties, and reduced concentration.",
-      },
-      {
-        question: "What evidence is important?",
-        answer:
-          "Medical records, imaging, neurological testing, rehabilitation notes, witness statements, and employment records may all be important.",
-      },
-      {
-        question: "What damages may be available?",
-        answer:
-          "Damages may include medical expenses, rehabilitation, future care, lost income, reduced earning capacity, pain, and impairment.",
-      },
-      {
-        question: "What if imaging appears normal?",
-        answer:
-          "Some brain injuries may not appear clearly on routine imaging, so medical evaluation and documentation remain important.",
-      },
-      {
-        question: "Can family observations matter?",
-        answer:
-          "Yes. Family members and coworkers may help document changes in memory, behavior, mood, and daily functioning.",
-      },
-      {
-        question: "How long do I have to file?",
-        answer:
-          "Texas limitation periods and special notice requirements may apply, so prompt legal review is important.",
-      },
-      {
-        question: "How long does a case take?",
-        answer:
-          "Timing depends on medical treatment, recovery, expert review, fault disputes, negotiations, and litigation.",
-      },
-      {
-        question: "When should I contact a lawyer?",
-        answer:
-          "As soon as practical after a serious head injury, especially when symptoms persist or future care may be necessary.",
-      },
-    ],
-    relatedPages: [
-      { label: "Brain Injury", path: "/el-paso-brain-injury-lawyers" },
-      { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
-      {
-        label: "Construction Accident",
-        path: "/el-paso-construction-accident-lawyers",
-      },
-      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
-    ],
-  },
-  {
-    path: "/el-paso-slip-and-fall-lawyers",
-    shortTitle: "Slip and Fall",
-    title: "Best Slip and Fall Lawyers in El Paso, TX | Compare Local Attorneys",
-    description:
-      "Compare El Paso slip and fall lawyers handling unsafe property conditions, premises liability, wet floors, broken stairs, negligent maintenance, serious injuries, and insurance disputes.",
-    metaDescription:
-      "Compare slip and fall attorneys in El Paso, TX for unsafe property conditions, premises liability, wet floors, serious injuries, and insurance disputes.",
-    heroText:
-      "Compare El Paso slip and fall attorneys handling premises liability claims involving unsafe floors, broken stairs, poor lighting, negligent maintenance, and serious injuries.",
-    topics: [
-      "Slip and Fall Lawyer",
-      "Slip and Fall Attorney",
-      "Premises Liability",
-      "Wet Floors",
-      "Broken Stairs",
-      "Uneven Walkways",
-      "Poor Lighting",
-      "Negligent Maintenance",
-      "Apartment Complex Injuries",
-      "Retail Store Injuries",
+      "Falls from Heights",
+      "Scaffolding Accidents",
+      "Equipment Injuries",
+      "Electrocution",
+      "Falling Objects",
+      "Unsafe Worksites",
+      "Contractor Negligence",
+      "Crane Accidents",
       "Serious Injuries",
       "Wrongful Death",
     ],
     overview: [
-      "A slip and fall lawyer represents people injured because of unsafe conditions on property owned, occupied, or controlled by another person or business.",
-      "Important evidence may include photographs, surveillance video, incident reports, maintenance records, inspection logs, witness statements, medical records, and proof concerning how long the dangerous condition existed.",
-      "Property owners and insurers may dispute whether a condition was dangerous, whether there was notice of the hazard, or whether the injured person was partly responsible. Prompt evidence preservation can be important.",
-      "Claims may arise at stores, apartment complexes, hotels, restaurants, offices, parking lots, sidewalks, and other public or private property.",
+      "A construction accident lawyer represents workers and others injured because of unsafe conditions, defective equipment, negligent contractors, or dangerous work practices.",
+      "Construction sites often involve multiple employers, contractors, subcontractors, property owners, equipment companies, and insurers.",
+      "Important evidence may include incident reports, photographs, video, safety records, training documents, maintenance logs, witness statements, medical records, and employment information.",
+      "Compensation may depend on workers' compensation coverage, third-party liability, insurance, fault, and the full extent of the injury.",
     ],
     whenToHire: [
-      "You were seriously injured at a store, apartment complex, hotel, restaurant, parking lot, office, or other property.",
-      "The property owner or insurer disputes responsibility.",
-      "Surveillance video, maintenance records, incident reports, or witness information must be preserved.",
-      "The injury caused hospitalization, surgery, missed work, or permanent limitations.",
-      "A loved one died because of an unsafe property condition.",
+      "You suffered a serious injury on a construction site.",
+      "The accident involved a fall, scaffolding, machinery, electricity, a crane, or falling materials.",
+      "A contractor, subcontractor, property owner, or equipment company may be responsible.",
+      "The injury caused hospitalization, surgery, missed work, permanent limitations, or future care needs.",
+      "A loved one died in a construction accident.",
     ],
     localContent: [
-      "Slip and fall claims in El Paso may involve retail stores, apartment complexes, hotels, restaurants, offices, parking areas, sidewalks, and other public or private property.",
-      "An El Paso slip and fall attorney can investigate notice, maintenance practices, property control, insurance coverage, incident history, available video, and the full extent of the injury.",
-      "Because surveillance footage and maintenance records can be overwritten or lost, prompt preservation requests may be important in disputed premises-liability cases.",
+      "Construction accident claims in El Paso may involve residential, commercial, highway, industrial, and infrastructure projects throughout El Paso County.",
+      "An El Paso attorney can help investigate responsibility, preserve evidence, identify insurance coverage, evaluate third-party claims, and document damages.",
     ],
     faqs: [
-      { question: "How do I choose a slip and fall lawyer in El Paso?", answer: "Compare experience with premises-liability claims, evidence preservation, serious injuries, disputed notice, insurance negotiations, litigation readiness, communication, and fee terms." },
-      { question: "What must be proven in a slip and fall case?", answer: "The required proof depends on the facts, but often includes a dangerous condition, responsibility for the property, notice or knowledge, and a connection between the condition and the injury." },
-      { question: "What evidence should I preserve?", answer: "Preserve photographs, video, witness names, incident reports, clothing and shoes, medical records, bills, and communications with the property owner or insurer." },
-      { question: "What if there was no warning sign?", answer: "The absence of a warning may be relevant, but the full circumstances, including notice and the nature of the hazard, still matter." },
-      { question: "What if I was partly at fault?", answer: "Texas proportionate-responsibility rules may affect recovery. The facts should be evaluated carefully rather than assuming the claim is barred." },
-      { question: "How long do I have to file?", answer: "Texas limitation periods and special notice requirements may apply, so prompt legal review is important." },
-      { question: "When should I contact a slip and fall attorney?", answer: "Consider prompt advice when injuries are serious, the property owner disputes responsibility, or video, maintenance records, or witness evidence may need to be preserved." },
+      {
+        question: "Can I bring a claim if I receive workers' compensation?",
+        answer:
+          "You may still have a claim against a responsible third party depending on the facts.",
+      },
+      {
+        question: "Who may be responsible for a construction accident?",
+        answer:
+          "Potentially responsible parties may include contractors, subcontractors, property owners, equipment companies, manufacturers, and others.",
+      },
+      {
+        question: "What evidence should be preserved?",
+        answer:
+          "Preserve photographs, video, witness information, incident reports, safety records, medical records, employment records, and communications.",
+      },
+      {
+        question: "What damages may be available?",
+        answer:
+          "Depending on the facts, damages may include medical expenses, lost income, reduced earning capacity, pain, impairment, and future care.",
+      },
+      {
+        question: "What if defective equipment caused the accident?",
+        answer:
+          "The manufacturer, seller, rental company, maintenance company, or another party may be involved.",
+      },
+      {
+        question: "What if I was partly at fault?",
+        answer:
+          "Texas proportionate-responsibility rules may affect recovery depending on the facts.",
+      },
+      {
+        question: "How long do I have to file?",
+        answer:
+          "Texas deadlines and notice requirements may apply, so prompt legal review is important.",
+      },
+      {
+        question: "Can a family bring a wrongful death claim?",
+        answer:
+          "Eligible family members may have wrongful death and survival claims depending on the circumstances.",
+      },
+      {
+        question: "How long does a construction accident case take?",
+        answer:
+          "Timing varies based on medical treatment, investigation, insurance, fault disputes, negotiations, and litigation.",
+      },
+      {
+        question: "When should I contact a lawyer?",
+        answer:
+          "As soon as practical after a serious construction accident, especially when evidence may disappear.",
+      },
     ],
     relatedPages: [
       { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-      { label: "Dog Bite", path: "/el-paso-dog-bite-lawyers" },
+      { label: "Brain Injury", path: "/el-paso-brain-injury-lawyers" },
+      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
+      { label: "Slip and Fall", path: "/el-paso-slip-and-fall-lawyers" },
+    ],
+  },
+  {
+    path: "/el-paso-dog-bite-lawyers",
+    shortTitle: "Dog Bite",
+    title: "Best Dog Bite Lawyers in El Paso, TX | Compare Local Attorneys",
+    description:
+      "Compare El Paso dog bite lawyers handling serious bites, animal attacks, scarring, infection, child injuries, disputed responsibility, and insurance claims.",
+    metaDescription:
+      "Compare dog bite attorneys in El Paso, TX for serious bites, animal attacks, scarring, child injuries, insurance claims, and disputed responsibility.",
+    heroText:
+      "Compare El Paso dog bite attorneys representing adults and children injured in serious dog attacks, bite injuries, scarring cases, infection claims, and disputed insurance matters.",
+    topics: [
+      "Dog Bite Attorney",
+      "Dog Bite Lawyer",
+      "Serious Dog Attacks",
+      "Child Dog Bite Injuries",
+      "Facial Scarring",
+      "Infections",
+      "Nerve Damage",
+      "Disputed Responsibility",
+      "Homeowners Insurance",
+      "Wrongful Death",
+    ],
+    overview: [
+      "A dog bite lawyer represents people injured in dog attacks and other animal-related incidents. Claims can involve bites, knockdowns, scarring, infection, nerve damage, psychological trauma, and serious injuries to children.",
+      "Important evidence may include photographs of the injuries and animal, medical records, witness statements, animal-control records, vaccination information, prior-incident evidence, ownership or control information, and applicable homeowners or renters insurance.",
+      "Responsibility can depend on the facts surrounding the animal, prior behavior, control, warnings, location of the attack, and other legal issues. Early investigation may help preserve evidence and identify available insurance.",
+    ],
+    whenToHire: [
+      "The bite caused significant wounds, stitches, surgery, infection, scarring, nerve damage, or permanent impairment.",
+      "A child was bitten or attacked.",
+      "The dog's owner, keeper, landlord, or insurer disputes responsibility.",
+      "The animal had prior aggressive behavior or previous incidents that need investigation.",
+      "You need help identifying insurance coverage or preserving animal-control and medical records.",
+      "A family member died as a result of an animal attack.",
+    ],
+    localContent: [
+      "Dog bite incidents in El Paso may occur in neighborhoods, apartment complexes, parks, sidewalks, homes, rental properties, businesses, and other public or private locations.",
+      "An El Paso dog bite attorney can help investigate ownership and control, animal-control records, prior incidents, insurance coverage, medical damages, scarring, lost income, and other losses.",
+      "Photographing injuries as they heal and preserving records from medical providers and animal-control agencies can be especially important in dog bite cases.",
+    ],
+    faqs: [
+      { question: "How do I choose a dog bite attorney in El Paso?", answer: "Compare experience with animal-attack claims, scarring and child injuries, insurance coverage, evidence preservation, disputed responsibility, communication, and fee terms." },
+      { question: "What should I do after a dog bite?", answer: "Get appropriate medical care, document the injuries, identify the dog and owner when possible, preserve witness information, and report the incident to the appropriate authority when required or appropriate." },
+      { question: "What evidence can matter in a dog bite case?", answer: "Photos, medical records, witness statements, animal-control records, vaccination history, prior incidents, ownership information, and insurance records can all be important." },
+      { question: "What if a child was bitten?", answer: "Child dog bite cases may involve facial injuries, scarring, emotional trauma, future treatment, and other long-term consequences that should be carefully documented." },
+      { question: "What if the owner says the dog never bit anyone before?", answer: "Prior incidents can matter, but responsibility is fact-specific. The circumstances of the attack, control of the animal, warnings, location, and other evidence should be reviewed." },
+      { question: "Does homeowners or renters insurance cover dog bites?", answer: "Some policies may provide coverage, but exclusions and limits vary. The applicable policy should be reviewed rather than assumed." },
+      { question: "When should I contact a dog bite lawyer?", answer: "Consider prompt advice when injuries are significant, a child was attacked, responsibility is disputed, or insurance and animal-control evidence need to be investigated." },
+    ],
+    relatedPages: [
+      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
+      { label: "Slip and Fall", path: "/el-paso-slip-and-fall-lawyers" },
       { label: "Brain Injury", path: "/el-paso-brain-injury-lawyers" },
       { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
     ],
@@ -1932,208 +1927,94 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     ],
   },
   {
-    path: "/el-paso-car-accident-lawyers",
-    shortTitle: "Car Accident",
-    title: "Best Car Accident Lawyers in El Paso, Texas",
+    path: "/el-paso-18-wheeler-accident-lawyer",
+    shortTitle: "18 Wheeler Accident",
+    title: "Best 18 Wheeler Accident Lawyers in El Paso, Texas",
     description:
-      "Compare El Paso car accident attorneys handling serious injury claims, uninsured motorists, hit-and-run crashes, insurance disputes, lost income, catastrophic injuries, and wrongful death cases.",
+      "Compare El Paso 18 wheeler accident attorneys handling interstate trucking crashes, FMCSA regulations, black-box evidence, driver fatigue, cargo issues, catastrophic injuries, and wrongful death claims.",
     metaDescription:
-      "Compare car accident lawyers in El Paso for injury claims, uninsured motorists, hit-and-run crashes, insurance disputes, lost wages, and wrongful death.",
+      "Compare El Paso 18 wheeler accident lawyers for commercial trucking crashes, driver log violations, black-box evidence, catastrophic injuries, and wrongful death.",
     heroText:
-      "Compare El Paso car accident attorneys for serious injury claims, insurance disputes, uninsured motorists, hit-and-run crashes, catastrophic injuries, and wrongful death cases.",
+      "Compare El Paso 18 wheeler accident attorneys for commercial trucking crashes, federal safety violations, catastrophic injuries, and wrongful death claims.",
     topics: [
-      "Rear-End Collisions",
-      "T-Bone Accidents",
-      "Head-On Collisions",
-      "Multi-Vehicle Crashes",
-      "Hit-and-Run Accidents",
-      "Uninsured Motorists",
-      "Drunk Driving Accidents",
-      "Distracted Driving",
+      "18-Wheeler Crashes",
+      "FMCSA Regulations",
+      "Driver Logbooks",
+      "Electronic Logging Devices",
+      "Black Box Data",
+      "Cargo Loading",
       "Catastrophic Injuries",
       "Wrongful Death",
+      "Interstate Trucking"
     ],
     overview: [
-      "A car accident lawyer represents people injured in collisions caused by negligent, reckless, or impaired drivers. The attorney may investigate the crash, preserve evidence, communicate with insurers, document injuries and financial losses, negotiate a settlement, and file a lawsuit when necessary.",
-      "Important evidence may include police reports, photographs, video, witness statements, vehicle damage, medical records, traffic-camera footage, phone records, event-data-recorder information, insurance documents, and proof of lost income. Prompt preservation can be especially important after serious or disputed crashes.",
-      "Texas follows proportionate-responsibility rules. A claimant's recovery may be reduced by an assigned percentage of responsibility, and recovery may be barred when the claimant's percentage exceeds the statutory limit. Insurance companies may use fault disputes, treatment gaps, prior injuries, or recorded statements to reduce what they pay.",
-      "A serious collision can create immediate medical expenses and long-term consequences involving rehabilitation, surgery, reduced earning capacity, permanent impairment, pain, disfigurement, property damage, and family disruption. The value and strategy of a claim depend on the evidence, available coverage, legal responsibility, and documented losses.",
+      "18-wheeler accident cases often involve federal trucking regulations, multiple insurance policies, electronic evidence, and commercial carriers.",
+      "Evidence may include driver qualification files, electronic logging device records, onboard engine data, maintenance records, dispatch communications, dash-camera footage, and cargo documentation.",
+      "Because tractor-trailers can weigh up to 80,000 pounds, collisions frequently result in severe injuries requiring extensive medical treatment."
     ],
     whenToHire: [
-      "You or a passenger suffered injuries requiring emergency treatment, hospitalization, surgery, rehabilitation, or ongoing care.",
-      "The insurance company disputes fault, questions your injuries, delays the claim, or offers a settlement that does not cover your losses.",
-      "The crash involved an uninsured or underinsured driver, hit-and-run vehicle, drunk driver, rideshare vehicle, government vehicle, or commercial vehicle.",
-      "You missed work, lost income, cannot return to your prior job, or may need future medical treatment.",
-      "The collision caused catastrophic injury, permanent impairment, disfigurement, or death.",
-      "Important evidence, video, vehicle data, or witness information needs to be preserved quickly.",
+      "You were injured in a crash involving a tractor-trailer or 18-wheeler.",
+      "The trucking company or insurer contacted you shortly after the collision.",
+      "The crash caused hospitalization, surgery, permanent impairment, or death.",
+      "You believe fatigue, speeding, distracted driving, or maintenance failures contributed.",
+      "Multiple companies may share responsibility.",
+      "Electronic trucking evidence needs immediate preservation."
     ],
     localContent: [
-      "El Paso drivers regularly travel Interstate 10, Loop 375, U.S. Highway 54, Montana Avenue, Mesa Street, Dyer Street, Zaragoza Road, and the Gateway boulevards. Heavy commuter traffic, construction zones, commercial vehicles, international travel, and high-speed roadways can all contribute to serious collisions.",
-      "Local claims may involve the El Paso Police Department, El Paso County Sheriff's Office, Texas Department of Public Safety, municipal agencies, hospitals, repair facilities, insurers, and courts serving El Paso County. Crashes near New Mexico or involving out-of-state drivers can add jurisdictional and insurance questions.",
-      "An El Paso car accident attorney can help investigate fault, identify all available insurance coverage, preserve evidence, calculate past and future losses, manage insurer communications, and determine whether negotiation or litigation is appropriate.",
+      "El Paso sits on Interstate 10 and serves as a major freight gateway between Texas, New Mexico, and Mexico, making commercial trucking traffic especially common.",
+      "Truck collisions may involve interstate carriers, cross-border logistics companies, and evidence maintained outside Texas.",
+      "An El Paso attorney can help preserve trucking records and investigate federal safety compliance."
     ],
     faqs: [
-      {
-        question: "What should I do immediately after a car accident?",
-        answer:
-          "Call for emergency assistance, seek medical care, exchange identifying and insurance information, photograph the scene when safe, identify witnesses, and avoid admitting fault. Report the collision as required and preserve all related records.",
-      },
-      {
-        question: "When should I hire a car accident lawyer?",
-        answer:
-          "Consider contacting counsel promptly when injuries are serious, fault is disputed, multiple vehicles are involved, coverage is unclear, or an insurer requests a recorded statement or release.",
-      },
-      {
-        question: "How much does a car accident lawyer cost?",
-        answer:
-          "Many injury lawyers use contingency fees, meaning the fee is based on a percentage of the recovery. Fee terms, case expenses, and responsibility for costs should be explained in a written agreement.",
-      },
-      {
-        question: "What damages may be recovered after a car accident?",
-        answer:
-          "Depending on the facts, recoverable damages may include medical expenses, lost income, reduced earning capacity, pain, impairment, disfigurement, property damage, and other losses allowed by law.",
-      },
-      {
-        question: "What if the other driver has no insurance?",
-        answer:
-          "Your own uninsured or underinsured motorist coverage, personal injury protection, health insurance, or claims against other responsible parties may be relevant. Coverage depends on the policies and facts.",
-      },
-      {
-        question: "What if I was partly at fault?",
-        answer:
-          "Texas proportionate-responsibility rules may reduce recovery according to the claimant's percentage of responsibility and may bar recovery when that percentage is greater than 50 percent.",
-      },
-      {
-        question: "Should I give the insurance company a recorded statement?",
-        answer:
-          "Consider legal advice before giving a recorded statement, signing a medical authorization, or accepting a settlement. Statements may later be used to dispute fault or damages.",
-      },
-      {
-        question: "How long do I have to file a car accident claim?",
-        answer:
-          "Texas limitation periods and special notice requirements may apply. The correct deadline depends on the parties and claims, so prompt legal review is important.",
-      },
-      {
-        question: "How long does a car accident settlement take?",
-        answer:
-          "Timing varies based on medical treatment, fault disputes, available insurance, evidence, negotiations, litigation, and whether future losses can be evaluated.",
-      },
-      {
-        question: "What evidence should I preserve?",
-        answer:
-          "Preserve photographs, video, witness information, police reports, medical records, bills, repair estimates, insurance correspondence, wage records, receipts, and a written account of symptoms and limitations.",
-      },
+      {"question":"What makes an 18-wheeler case different?","answer":"These cases frequently involve federal regulations, commercial carriers, electronic data, and multiple potentially responsible parties."},
+      {"question":"What is black-box data?","answer":"Commercial trucks may record speed, braking, engine, and operational information that can become important evidence."},
+      {"question":"What are FMCSA regulations?","answer":"The Federal Motor Carrier Safety Administration establishes many safety rules governing interstate commercial trucking."},
+      {"question":"Can driver fatigue cause crashes?","answer":"Yes. Hours-of-service violations and fatigue can become significant issues in commercial trucking cases."},
+      {"question":"Should evidence be preserved quickly?","answer":"Yes. Electronic data and company records may not remain available indefinitely."},
+      {"question":"Who can be liable?","answer":"The driver, motor carrier, maintenance provider, cargo loader, broker, manufacturer, or others depending on the facts."},
+      {"question":"Can wrongful death claims arise?","answer":"Yes. Fatal commercial trucking collisions may give rise to wrongful death and related claims under applicable law."},
+      {"question":"Should I give a recorded statement?","answer":"Consider obtaining legal advice before providing recorded statements or signing releases."},
+      {"question":"What damages may be available?","answer":"Depending on the facts, damages may include medical expenses, lost income, pain, impairment, and other legally recoverable losses."},
+      {"question":"When should I contact a lawyer?","answer":"As soon as practical after a serious truck crash so evidence can be preserved."}
     ],
     relatedPages: [
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-      { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers" },
-      { label: "18 Wheeler Accident", path: "/el-paso-18-wheeler-accident-lawyer" },
-      { label: "Semi Truck Accident", path: "/el-paso-semi-truck-accident-lawyer" },
-      { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
-      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
-    ],
+      { label:"Truck Accident", path:"/el-paso-truck-accident-lawyers"},
+      { label:"Wrongful Death", path:"/el-paso-wrongful-death-lawyers"},
+      { label:"Personal Injury", path:"/el-paso-personal-injury-lawyers"}
+    ]
   },
   {
-    path: "/el-paso-car-accident-lawyers",
-    shortTitle: "Car Accident",
-    title: "Best Car Accident Lawyers in El Paso, Texas",
-    description:
-      "Compare El Paso car accident attorneys handling serious injury claims, uninsured motorists, hit-and-run crashes, insurance disputes, lost income, catastrophic injuries, and wrongful death cases.",
-    metaDescription:
-      "Compare car accident lawyers in El Paso for injury claims, uninsured motorists, hit-and-run crashes, insurance disputes, lost wages, and wrongful death.",
-    heroText:
-      "Compare El Paso car accident attorneys for serious injury claims, insurance disputes, uninsured motorists, hit-and-run crashes, catastrophic injuries, and wrongful death cases.",
-    topics: [
-      "Rear-End Collisions",
-      "T-Bone Accidents",
-      "Head-On Collisions",
-      "Multi-Vehicle Crashes",
-      "Hit-and-Run Accidents",
-      "Uninsured Motorists",
-      "Drunk Driving Accidents",
-      "Distracted Driving",
-      "Catastrophic Injuries",
-      "Wrongful Death",
+    path: "/el-paso-semi-truck-accident-lawyer",
+    shortTitle: "Semi Truck Accident",
+    title: "Best Semi Truck Accident Lawyers in El Paso, Texas",
+    description: "Compare El Paso semi-truck accident attorneys for commercial truck crashes, FMCSA compliance, driver fatigue, maintenance failures, cargo issues, catastrophic injuries, and wrongful death claims.",
+    metaDescription: "Compare El Paso semi-truck accident lawyers for serious commercial vehicle crashes.",
+    heroText: "Compare El Paso semi-truck accident attorneys for catastrophic commercial vehicle collisions.",
+    topics:["Semi-Truck Crashes","Commercial Carriers","FMCSA Rules","Driver Fatigue","Electronic Logging Devices","Maintenance Failures","Cargo Securement","Wrongful Death","Catastrophic Injury"],
+    overview:[
+      "Semi-truck accident cases often involve federal trucking regulations and multiple insurance carriers.",
+      "Evidence may include electronic logging data, maintenance records, dispatch communications, and onboard vehicle data.",
+      "Commercial truck collisions frequently cause severe injuries and complex litigation."
     ],
-    overview: [
-      "A car accident lawyer represents people injured in collisions caused by negligent, reckless, or impaired drivers. The attorney may investigate the crash, preserve evidence, communicate with insurers, document injuries and financial losses, negotiate a settlement, and file a lawsuit when necessary.",
-      "Important evidence may include police reports, photographs, video, witness statements, vehicle damage, medical records, traffic-camera footage, phone records, event-data-recorder information, insurance documents, and proof of lost income. Prompt preservation can be especially important after serious or disputed crashes.",
-      "Texas follows proportionate-responsibility rules. A claimant's recovery may be reduced by an assigned percentage of responsibility, and recovery may be barred when the claimant's percentage exceeds the statutory limit. Insurance companies may use fault disputes, treatment gaps, prior injuries, or recorded statements to reduce what they pay.",
-      "A serious collision can create immediate medical expenses and long-term consequences involving rehabilitation, surgery, reduced earning capacity, permanent impairment, pain, disfigurement, property damage, and family disruption. The value and strategy of a claim depend on the evidence, available coverage, legal responsibility, and documented losses.",
+    whenToHire:[
+      "You were injured in a semi-truck collision.",
+      "The trucking company contacted you.",
+      "The crash caused serious injuries.",
+      "You believe safety violations contributed.",
+      "Evidence must be preserved quickly."
     ],
-    whenToHire: [
-      "You or a passenger suffered injuries requiring emergency treatment, hospitalization, surgery, rehabilitation, or ongoing care.",
-      "The insurance company disputes fault, questions your injuries, delays the claim, or offers a settlement that does not cover your losses.",
-      "The crash involved an uninsured or underinsured driver, hit-and-run vehicle, drunk driver, rideshare vehicle, government vehicle, or commercial vehicle.",
-      "You missed work, lost income, cannot return to your prior job, or may need future medical treatment.",
-      "The collision caused catastrophic injury, permanent impairment, disfigurement, or death.",
-      "Important evidence, video, vehicle data, or witness information needs to be preserved quickly.",
+    localContent:[
+      "El Paso is a major freight corridor with heavy Interstate 10 commercial traffic.",
+      "Cross-border trucking can add complexity to investigations."
     ],
-    localContent: [
-      "El Paso drivers regularly travel Interstate 10, Loop 375, U.S. Highway 54, Montana Avenue, Mesa Street, Dyer Street, Zaragoza Road, and the Gateway boulevards. Heavy commuter traffic, construction zones, commercial vehicles, international travel, and high-speed roadways can all contribute to serious collisions.",
-      "Local claims may involve the El Paso Police Department, El Paso County Sheriff's Office, Texas Department of Public Safety, municipal agencies, hospitals, repair facilities, insurers, and courts serving El Paso County. Crashes near New Mexico or involving out-of-state drivers can add jurisdictional and insurance questions.",
-      "An El Paso car accident attorney can help investigate fault, identify all available insurance coverage, preserve evidence, calculate past and future losses, manage insurer communications, and determine whether negotiation or litigation is appropriate.",
+    faqs:[
+      {question:"What makes semi-truck cases different?",answer:"They often involve federal trucking rules, electronic evidence, and multiple responsible parties."},
+      {question:"When should I contact a lawyer?",answer:"As soon as possible after a serious commercial vehicle collision."}
     ],
-    faqs: [
-      {
-        question: "What should I do immediately after a car accident?",
-        answer:
-          "Call for emergency assistance, seek medical care, exchange identifying and insurance information, photograph the scene when safe, identify witnesses, and avoid admitting fault. Report the collision as required and preserve all related records.",
-      },
-      {
-        question: "When should I hire a car accident lawyer?",
-        answer:
-          "Consider contacting counsel promptly when injuries are serious, fault is disputed, multiple vehicles are involved, coverage is unclear, or an insurer requests a recorded statement or release.",
-      },
-      {
-        question: "How much does a car accident lawyer cost?",
-        answer:
-          "Many injury lawyers use contingency fees, meaning the fee is based on a percentage of the recovery. Fee terms, case expenses, and responsibility for costs should be explained in a written agreement.",
-      },
-      {
-        question: "What damages may be recovered after a car accident?",
-        answer:
-          "Depending on the facts, recoverable damages may include medical expenses, lost income, reduced earning capacity, pain, impairment, disfigurement, property damage, and other losses allowed by law.",
-      },
-      {
-        question: "What if the other driver has no insurance?",
-        answer:
-          "Your own uninsured or underinsured motorist coverage, personal injury protection, health insurance, or claims against other responsible parties may be relevant. Coverage depends on the policies and facts.",
-      },
-      {
-        question: "What if I was partly at fault?",
-        answer:
-          "Texas proportionate-responsibility rules may reduce recovery according to the claimant's percentage of responsibility and may bar recovery when that percentage is greater than 50 percent.",
-      },
-      {
-        question: "Should I give the insurance company a recorded statement?",
-        answer:
-          "Consider legal advice before giving a recorded statement, signing a medical authorization, or accepting a settlement. Statements may later be used to dispute fault or damages.",
-      },
-      {
-        question: "How long do I have to file a car accident claim?",
-        answer:
-          "Texas limitation periods and special notice requirements may apply. The correct deadline depends on the parties and claims, so prompt legal review is important.",
-      },
-      {
-        question: "How long does a car accident settlement take?",
-        answer:
-          "Timing varies based on medical treatment, fault disputes, available insurance, evidence, negotiations, litigation, and whether future losses can be evaluated.",
-      },
-      {
-        question: "What evidence should I preserve?",
-        answer:
-          "Preserve photographs, video, witness information, police reports, medical records, bills, repair estimates, insurance correspondence, wage records, receipts, and a written account of symptoms and limitations.",
-      },
-    ],
-    relatedPages: [
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-      { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers" },
-      { label: "18 Wheeler Accident", path: "/el-paso-18-wheeler-accident-lawyer" },
-      { label: "Semi Truck Accident", path: "/el-paso-semi-truck-accident-lawyer" },
-      { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
-      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
-    ],
+    relatedPages:[
+      {label:"Truck Accident",path:"/el-paso-truck-accident-lawyers"},
+      {label:"18 Wheeler Accident",path:"/el-paso-18-wheeler-accident-lawyer"}
+    ]
   },
 ];
 
