@@ -1,4 +1,4 @@
-export type PracticeAreaFaq = {
+﻿export type PracticeAreaFaq = {
   question: string;
   answer: string;
 };
@@ -1146,1431 +1146,54 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     lastUpdated: "August 12, 2026",
   },
 
-  {
-    path: "/el-paso-criminal-defense-lawyers",
-    shortTitle: "Criminal Defense",
-    title: "Best Criminal Defense Lawyers in El Paso, Texas",
-    description:
-      "Compare El Paso criminal defense attorneys handling DWI, assault, drug charges, theft, family violence, weapons allegations, juvenile matters, federal cases, expunctions, and appeals.",
-    metaDescription:
-      "Compare criminal defense lawyers in El Paso for DWI, assault, drug charges, theft, family violence, weapons allegations, juvenile cases, federal matters, and appeals.",
-    heroText:
-      "Compare El Paso criminal defense attorneys for DWI, assault, drug charges, theft, family violence, weapons allegations, juvenile matters, federal cases, expunctions, and appeals.",
-    topics: [
-      "DWI and DUI",
-      "Assault Charges",
-      "Drug Offenses",
-      "Theft and Property Crimes",
-      "Family Violence",
-      "Weapons Charges",
-      "Juvenile Defense",
-      "Federal Criminal Defense",
-      "Expunctions and Nondisclosures",
-    ],
-    overview: [
-      "A criminal defense lawyer represents people accused of misdemeanors, felonies, and federal offenses. The work may include reviewing probable cause, examining evidence, challenging unlawful searches or statements, negotiating with prosecutors, preparing pretrial motions, and representing the client at hearings, trial, sentencing, or appeal.",
-      "A criminal case can affect freedom, employment, professional licensing, immigration status, driving privileges, housing, and reputation. The available strategy depends on the charge, evidence, criminal history, court, deadlines, and whether diversion, dismissal, plea negotiations, trial, or another resolution may be available.",
-      "Texas criminal cases may involve arrest warrants, bond conditions, protective orders, laboratory evidence, body-camera footage, witness statements, digital records, and forensic testing. Early legal review can help preserve evidence, identify defenses, and avoid statements or decisions that may harm the case.",
-    ],
-    whenToHire: [
-      "You were arrested, cited, questioned, or told that you are under investigation.",
-      "You received a complaint, information, indictment, warrant, bond condition, protective order, or court date.",
-      "The case involves DWI, assault, family violence, drugs, theft, weapons, probation, or a felony allegation.",
-      "You believe evidence was obtained through an unlawful search, seizure, stop, interrogation, or identification procedure.",
-      "You need help with bond, pretrial release, probation, revocation, expunction, nondisclosure, appeal, or post-conviction relief.",
-      "A criminal case may affect immigration status, military service, employment, licensing, education, or professional credentials.",
-    ],
-    localContent: [
-      "El Paso criminal cases may be handled in municipal courts, county criminal courts at law, district courts, juvenile courts, or the El Paso Division of the United States District Court for the Western District of Texas, depending on the charge and jurisdiction.",
-      "El Paso County maintains county criminal courts for misdemeanor matters and district courts for felony and other criminal cases. Local procedures, bond practices, prosecutor policies, diversion programs, and court schedules can affect how a case moves forward.",
-      "An El Paso criminal defense attorney can help evaluate the charge, court, bond conditions, evidence, collateral consequences, and whether negotiation, dismissal, diversion, trial, appeal, expunction, or another strategy may be appropriate.",
-    ],
-    faqs: [
-      {
-        question: "What should I do after an arrest?",
-        answer:
-          "Remain calm, avoid discussing the facts of the case with anyone other than your lawyer, comply with lawful booking procedures, and contact criminal defense counsel as soon as possible.",
-      },
-      {
-        question: "What is the difference between a misdemeanor and a felony?",
-        answer:
-          "Misdemeanors are generally less serious offenses than felonies, but both can lead to jail, fines, probation, and lasting consequences. Felonies carry the possibility of prison and more severe collateral effects.",
-      },
-      {
-        question: "What is bail or bond?",
-        answer:
-          "Bond is a financial or legal condition intended to help ensure a defendant appears in court. Conditions may also restrict travel, contact, alcohol use, weapons, or other activity.",
-      },
-      {
-        question: "Can criminal charges be dismissed?",
-        answer:
-          "Some cases may be dismissed because of insufficient evidence, legal defects, suppression of evidence, witness issues, diversion, negotiations, or other circumstances. Dismissal is never guaranteed.",
-      },
-      {
-        question: "What happens at an arraignment?",
-        answer:
-          "An arraignment or initial court setting may involve notice of the charge, a plea, bond issues, appointment of counsel, scheduling, or other preliminary matters depending on the court.",
-      },
-      {
-        question: "What is a plea bargain?",
-        answer:
-          "A plea bargain is an agreement in which the defendant resolves the case by pleading guilty or no contest in exchange for negotiated terms. A lawyer can explain the risks, benefits, and consequences.",
-      },
-      {
-        question: "Can evidence be suppressed?",
-        answer:
-          "A court may exclude evidence obtained in violation of constitutional or statutory protections. Whether suppression applies depends on the facts and legal issues.",
-      },
-      {
-        question: "What is an expunction?",
-        answer:
-          "An expunction is a court process that may allow eligible arrest and case records to be destroyed or removed from public access. Eligibility is limited and depends on the disposition and statute.",
-      },
-      {
-        question: "What is an order of nondisclosure?",
-        answer:
-          "An order of nondisclosure may restrict public access to eligible criminal history records, but it does not erase every record and is not available in every case.",
-      },
-      {
-        question: "When should I contact a criminal defense lawyer?",
-        answer:
-          "Contact counsel as early as possible after an arrest, accusation, investigation, warrant, court notice, bond restriction, or request for questioning.",
-      },
-    ],
-    relatedPages: [
-      { label: "DWI / DUI", path: "/el-paso-dwi-lawyers" },
-      { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
-      { label: "Immigration", path: "/el-paso-immigration-lawyers" },
-      { label: "Family Law", path: "/el-paso-family-lawyers" },
-    ],
-    lastUpdated: "August 13, 2026",
-  },
 
-  {
-    path: "/el-paso-immigration-lawyers",
-    shortTitle: "Immigration",
-    title: "Best Immigration Lawyers in El Paso, Texas",
-    description:
-      "Compare El Paso immigration attorneys handling family petitions, green cards, adjustment of status, consular processing, citizenship, asylum, waivers, removal defense, and appeals.",
-    metaDescription:
-      "Compare immigration lawyers in El Paso for family petitions, green cards, adjustment of status, citizenship, asylum, waivers, removal defense, and appeals.",
-    heroText:
-      "Compare El Paso immigration attorneys for family-based immigration, green cards, adjustment of status, consular processing, citizenship, asylum, waivers, removal defense, and appeals.",
-    topics: [
-      "Family-Based Immigration",
-      "Green Cards",
-      "Adjustment of Status",
-      "Consular Processing",
-      "Naturalization and Citizenship",
-      "Asylum",
-      "Waivers of Inadmissibility",
-      "Removal Defense",
-      "Immigration Appeals",
-    ],
-    overview: [
-      "An immigration lawyer helps individuals, families, employers, and businesses understand and navigate U.S. immigration law. The work may include preparing petitions and applications, gathering supporting evidence, responding to government requests, preparing clients for interviews, and representing people in removal proceedings or appeals.",
-      "Immigration matters can involve family relationships, employment, humanitarian protection, prior immigration history, criminal records, unlawful presence, admissibility concerns, and changing federal procedures. Small errors or missed deadlines can create serious consequences, so careful preparation is important.",
-      "Depending on the case, counsel may assist with family petitions, adjustment of status, consular processing, work authorization, naturalization, asylum, waivers, cancellation of removal, motions to reopen, or appeals before immigration authorities and federal courts.",
-    ],
-    whenToHire: [
-      "You want to sponsor a spouse, child, parent, sibling, fiancé, or another qualifying family member.",
-      "You need help applying for a green card, adjustment of status, consular processing, or work authorization.",
-      "You are applying for naturalization or have concerns about prior immigration history, travel, taxes, arrests, or good moral character.",
-      "You or a family member received a notice to appear, removal order, detention notice, request for evidence, denial, or other immigration document.",
-      "You may need asylum, humanitarian protection, a waiver, cancellation of removal, or another form of relief.",
-      "Your business needs help with employment-based immigration, work visas, compliance, or sponsorship.",
-    ],
-    localContent: [
-      "El Paso immigration matters are shaped by the city's location on the U.S.-Mexico border, its international families, Fort Bliss, regional employers, and frequent cross-border travel. Cases may involve relatives, records, or property in Mexico and may require coordination with consulates, federal agencies, or courts in different jurisdictions.",
-      "Local immigration matters may involve U.S. Citizenship and Immigration Services, the Department of State, U.S. Customs and Border Protection, U.S. Immigration and Customs Enforcement, the Executive Office for Immigration Review, or the El Paso Division of the United States District Court for the Western District of Texas.",
-      "An El Paso immigration attorney can help identify eligibility, organize evidence, prepare for interviews or hearings, respond to government notices, preserve deadlines, and evaluate whether an application, waiver, motion, appeal, or defense strategy may be appropriate.",
-    ],
-    faqs: [
-      {
-        question: "What is family-based immigration?",
-        answer:
-          "Family-based immigration allows certain U.S. citizens and lawful permanent residents to petition for qualifying relatives. Eligibility, wait times, and available categories depend on the relationship and immigration status involved.",
-      },
-      {
-        question: "What is adjustment of status?",
-        answer:
-          "Adjustment of status is the process of applying for lawful permanent residence from inside the United States when legal requirements are met.",
-      },
-      {
-        question: "What is consular processing?",
-        answer:
-          "Consular processing is the procedure for applying for an immigrant visa through a U.S. embassy or consulate outside the United States.",
-      },
-      {
-        question: "How long does it take to get a green card?",
-        answer:
-          "Processing times vary based on the category, agency workload, country of chargeability, background checks, evidence, and whether additional review is required.",
-      },
-      {
-        question: "What are the requirements for naturalization?",
-        answer:
-          "Requirements may include lawful permanent residence for the required period, continuous residence, physical presence, English and civics testing, good moral character, and an oath of allegiance, subject to exceptions.",
-      },
-      {
-        question: "What is asylum?",
-        answer:
-          "Asylum is a form of protection for people who meet the legal definition of a refugee and cannot safely return to their country because of persecution or a well-founded fear of persecution on a protected ground.",
-      },
-      {
-        question: "What is a waiver of inadmissibility?",
-        answer:
-          "A waiver may forgive certain grounds that would otherwise prevent admission or immigration benefits. Eligibility depends on the specific ground, qualifying relatives, hardship, and other legal requirements.",
-      },
-      {
-        question: "What happens in removal proceedings?",
-        answer:
-          "Removal proceedings are held before an immigration judge. The government presents the charges, and the respondent may contest removability or apply for available relief.",
-      },
-      {
-        question: "Can an immigration decision be appealed?",
-        answer:
-          "Some immigration decisions may be appealed or challenged through motions to reopen, motions to reconsider, administrative appeals, or federal court review. Deadlines can be short.",
-      },
-      {
-        question: "When should I contact an immigration lawyer?",
-        answer:
-          "Consider contacting counsel before filing a complex application or immediately after receiving a denial, request for evidence, notice to appear, detention notice, or other time-sensitive immigration document.",
-      },
-    ],
-    relatedPages: [
-      { label: "Green Card", path: "/el-paso-green-card-lawyers" },
-      { label: "Citizenship", path: "/el-paso-citizenship-lawyers" },
-      { label: "Family Law", path: "/el-paso-family-lawyers" },
-      { label: "Employment Law", path: "/el-paso-employment-lawyers" },
-    ],
-  },
-
-  {
-    path: "/el-paso-family-lawyers",
-    shortTitle: "Family Law",
-    title: "Best Family Lawyers in El Paso, Texas",
-    description:
-      "Compare El Paso family lawyers handling divorce, child custody, child support, modifications, enforcement, protective orders, adoption, and other Texas family-law matters.",
-    metaDescription:
-      "Compare family lawyers in El Paso, TX for divorce, custody, child support, modifications, enforcement, protective orders, adoption, and family court matters.",
-    heroText:
-      "Compare El Paso family law attorneys for divorce, conservatorship and custody, child support, modifications, enforcement, protective orders, adoption, and other family court matters throughout the 915.",
-    topics: ["Divorce","Child Custody and Conservatorship","Possession and Access","Child Support","Modifications","Enforcement","Protective Orders","Adoption","Paternity and Parentage","Military Family Law"],
-    overview: [
-      "Family law covers legal issues involving marriage, divorce, parents, children, support, safety, and enforcement of family-court orders. An El Paso family lawyer may represent a client in an initial case, a modification, an enforcement action, mediation, or trial.",
-      "Texas uses specific legal terms in cases involving children. Conservatorship generally addresses parental rights and duties, while possession and access address parenting time. Texas Family Code Section 153.002 states that the best interest of the child is always the primary consideration in determining conservatorship and possession issues.",
-      "Family cases can become more complex when they involve temporary orders, allegations of family violence, relocation, military deployment, hidden income, self-employment, retirement benefits, property in another jurisdiction, or repeated violations of existing orders.",
-      "A strong family-law strategy starts with the exact court orders, pleadings, financial information, parenting history, communications, and deadlines involved in the case rather than treating every dispute as the same.",
-    ],
-    whenToHire: [
-      "You are considering divorce, separation, or a custody filing and want to understand your options first.",
-      "You were served with a divorce, custody, support, modification, enforcement, or protective-order case.",
-      "You need temporary orders governing children, support, property, bills, or safety while a case is pending.",
-      "A parent wants to relocate, change the possession schedule, or modify conservatorship.",
-      "The other party is violating an existing custody, support, or divorce order.",
-      "The case involves family violence, threats, substance-abuse allegations, safety concerns, or emergency relief.",
-      "Your family is connected to Fort Bliss, another state, Mexico, or another country and jurisdiction may be an issue.",
-    ],
-    localContent: [
-      "El Paso family-law cases are governed by Texas law and are generally handled in district courts serving El Paso County. Local court procedures, standing orders, mediation requirements, temporary-order settings, and scheduling can affect how a case moves forward.",
-      "El Paso families may have ties to Fort Bliss, New Mexico, Ciudad Juárez, or relatives and property in Mexico. Military service, deployment, international travel, and cross-border residence can create additional jurisdiction and enforcement questions.",
-      "An El Paso family lawyer can review the existing orders, identify immediate deadlines, organize financial and parenting evidence, prepare for mediation or hearings, and help a client evaluate practical settlement terms before trial.",
-      "When children are involved, the exact language of conservatorship, possession, access, geographic restrictions, and decision-making rights matters. A generic idea of custody may not capture what the actual order allows or requires.",
-    ],
-    faqs: [
-      { question: "What does a family lawyer handle in El Paso?", answer: "Family lawyers may handle divorce, child custody and conservatorship, possession and access, child support, modifications, enforcement, protective orders, adoption, parentage, and related family-court matters." },
-      { question: "What does child custody mean in Texas?", answer: "Texas generally uses the terms conservatorship, possession, and access. Conservatorship addresses parental rights and duties, while possession and access address parenting time." },
-      { question: "How does a court decide custody issues?", answer: "Texas law makes the child's best interest the primary consideration in determining conservatorship and possession. The outcome depends on the evidence and circumstances of the case." },
-      { question: "Can an existing custody order be changed?", answer: "Texas law provides procedures for modification when the statutory requirements are met. The existing order and the facts supporting the requested change should be reviewed carefully." },
-      { question: "What if the other parent is not following the order?", answer: "Enforcement remedies may be available. The exact language of the order, the alleged violations, and the evidence documenting them are important." },
-      { question: "Can family cases be resolved through mediation?", answer: "Many family cases resolve through mediation or negotiated agreements. Whether an agreement is appropriate depends on the legal issues, financial information, parenting concerns, and any safety issues." },
-      { question: "What are temporary orders?", answer: "Temporary orders can address children, support, property, bills, conduct, and other issues while a family case is pending." },
-      { question: "Does Fort Bliss or military service affect family-law cases?", answer: "Military service can affect deployment, parenting schedules, federal benefits, retirement, jurisdiction, and support issues. Military-connected families should evaluate both Texas family law and applicable federal rules." },
-      { question: "What if one parent wants to move?", answer: "Relocation can be affected by geographic restrictions and other terms in the current order. A move may require agreement or court action depending on the circumstances." },
-      { question: "When should I contact an El Paso family lawyer?", answer: "Consider legal advice early when you are about to file, were served, need temporary relief, face a hearing, have safety concerns, or need to modify or enforce an existing order." },
-    ],
-    relatedPages: [
-      { label: "Divorce", path: "/el-paso-divorce-lawyers" },
-      { label: "Child Custody", path: "/el-paso-child-custody-lawyers" },
-      { label: "Estate Planning", path: "/el-paso-estate-planning-lawyers" },
-      { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
-    ],
-    resourceLinks: [
-      { label: "Texas Child Custody: Conservatorship, Possession, and Access Basics", path: "/guides/texas-child-custody-conservatorship-basics" },
-      { label: "Browse All Texas Law Guides", path: "/guides" },
-    ],
-    lastUpdated: "August 10, 2026",
-  },
-
-  {
-    path: "/el-paso-dwi-lawyers",
-    shortTitle: "DWI / DUI",
-    title: "Best DWI Lawyers in El Paso, Texas",
-    description:
-      "Compare El Paso DWI attorneys handling first offenses, repeat offenses, felony DWI, breath and blood testing, license suspension, refusal cases, underage charges, and ignition interlock issues.",
-    metaDescription:
-      "Compare DWI lawyers in El Paso for first and repeat offenses, felony DWI, breath and blood tests, license suspension, refusals, underage cases, and interlock issues.",
-    heroText:
-      "Compare El Paso DWI attorneys for first offenses, repeat offenses, felony DWI, breath and blood testing, license suspension, refusal cases, underage charges, and ignition interlock matters.",
-    topics: [
-      "First-Offense DWI",
-      "Repeat DWI Charges",
-      "Felony DWI",
-      "Breath and Blood Tests",
-      "License Suspension",
-      "ALR Hearings",
-      "Refusal Cases",
-      "Underage DWI",
-      "Ignition Interlock",
-    ],
-    overview: [
-      "A DWI lawyer represents people accused of operating a vehicle while intoxicated or impaired. The work may include reviewing the traffic stop, field sobriety testing, breath or blood evidence, body-camera footage, probable cause, search warrants, and whether police followed required procedures.",
-      "A DWI case can create both criminal and driver's-license consequences. Depending on the facts, a person may face bond conditions, fines, probation, jail exposure, ignition-interlock requirements, surcharges or fees, insurance consequences, and suspension of driving privileges.",
-      "The available defense strategy depends on the reason for the stop, the officer's observations, test administration, laboratory procedures, medical conditions, timing, prior history, and whether constitutional or statutory violations occurred.",
-    ],
-    whenToHire: [
-      "You were arrested or cited for DWI, DUI, intoxication assault, or intoxication manslaughter.",
-      "You refused a breath or blood test or received paperwork about a driver's-license suspension.",
-      "The case involves a prior DWI, felony allegation, accident, injury, child passenger, commercial license, or underage driver.",
-      "You believe the traffic stop, detention, field sobriety testing, breath test, blood draw, or search warrant was improper.",
-      "You need help with bond conditions, ignition interlock, occupational licensing, probation, appeal, or record consequences.",
-      "A DWI charge may affect your job, military service, immigration status, professional license, commercial driving privileges, or insurance.",
-    ],
-    localContent: [
-      "El Paso DWI cases may be handled in county criminal courts at law or district courts depending on the charge and prior history. Driver's-license issues may proceed separately through the Texas administrative process.",
-      "Local cases may involve traffic stops by the El Paso Police Department, El Paso County Sheriff's Office, Texas Department of Public Safety, or other agencies. Evidence can include dashboard video, body-camera footage, breath-test records, hospital records, laboratory reports, and search-warrant materials.",
-      "An El Paso DWI attorney can help evaluate criminal charges, driver's-license deadlines, bond restrictions, testing evidence, prior convictions, and whether dismissal, suppression, negotiation, trial, appeal, or another strategy may be appropriate.",
-    ],
-    faqs: [
-      {
-        question: "What is the difference between DWI and DUI in Texas?",
-        answer:
-          "Texas commonly uses DWI for driving while intoxicated. DUI is generally associated with underage drivers who have any detectable amount of alcohol, although terminology is often used loosely.",
-      },
-      {
-        question: "What happens after a first DWI arrest?",
-        answer:
-          "A first arrest may involve booking, bond conditions, a criminal case, possible license suspension, and court appearances. The exact consequences depend on the facts and testing.",
-      },
-      {
-        question: "Can I lose my driver's license?",
-        answer:
-          "Yes. A license may be suspended through an administrative process after a failed or refused test, and additional consequences may follow from a criminal conviction.",
-      },
-      {
-        question: "What is an ALR hearing?",
-        answer:
-          "An Administrative License Revocation hearing is the process used to challenge certain driver's-license suspensions related to breath or blood testing or refusal.",
-      },
-      {
-        question: "Can a DWI charge become a felony?",
-        answer:
-          "Yes. Certain prior convictions, serious injury, death, or other aggravating circumstances can increase a DWI-related charge to a felony.",
-      },
-      {
-        question: "Can breath-test results be challenged?",
-        answer:
-          "Breath evidence may be challenged based on calibration, maintenance, operator procedure, observation period, medical factors, or other reliability concerns.",
-      },
-      {
-        question: "Can blood-test results be challenged?",
-        answer:
-          "Blood evidence may be challenged based on the warrant, collection, storage, chain of custody, laboratory methods, contamination, or interpretation.",
-      },
-      {
-        question: "What happens if I refused testing?",
-        answer:
-          "A refusal can create driver's-license consequences and may still be used as evidence. Police may also seek a warrant for a blood draw in some circumstances.",
-      },
-      {
-        question: "Will I need an ignition interlock device?",
-        answer:
-          "An ignition interlock may be required as a bond condition, license condition, or part of sentencing depending on the case and prior history.",
-      },
-      {
-        question: "When should I contact a DWI lawyer?",
-        answer:
-          "Contact counsel as soon as possible because driver's-license deadlines can be short and video, testing, and other evidence should be reviewed promptly.",
-      },
-    ],
-    relatedPages: [
-      { label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" },
-      { label: "Traffic Ticket", path: "/el-paso-traffic-ticket-lawyers" },
-      { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
-      { label: "Immigration", path: "/el-paso-immigration-lawyers" },
-    ],
-    resourceLinks: [
-      { label: "Texas DWI Basics for El Paso Drivers", path: "/guides/texas-dwi-basics-el-paso" },
-      { label: "Browse All Texas Law Guides", path: "/guides" },
-    ],
-    lastUpdated: "August 10, 2026",
-  },
-
-  {
-    path: "/el-paso-estate-planning-lawyers",
-    shortTitle: "Estate Planning",
-    title: "Best Estate Planning Lawyers in El Paso, Texas",
-    description:
-      "Compare El Paso estate planning attorneys handling wills, trusts, powers of attorney, advance directives, probate avoidance, guardianship planning, business succession, and asset-transfer strategies.",
-    metaDescription:
-      "Compare estate planning lawyers in El Paso for wills, trusts, powers of attorney, advance directives, probate avoidance, guardianship planning, and succession planning.",
-    heroText:
-      "Compare El Paso estate planning attorneys for wills, trusts, powers of attorney, advance directives, probate avoidance, guardianship planning, business succession, and asset-transfer strategies.",
-    topics: [
-      "Wills",
-      "Revocable Living Trusts",
-      "Durable Powers of Attorney",
-      "Medical Powers of Attorney",
-      "Advance Directives",
-      "Probate Avoidance",
-      "Guardianship Planning",
-      "Business Succession",
-      "Trust Administration",
-    ],
-    overview: [
-      "An estate planning lawyer helps individuals and families prepare for the management and transfer of property during life, incapacity, and death. A plan may include a will, trusts, beneficiary designations, powers of attorney, advance directives, and documents addressing guardianship or succession.",
-      "Estate planning is not limited to wealthy families. A clear plan can help identify who should receive property, who should manage financial and medical decisions during incapacity, who should care for minor children, and how family members should handle important responsibilities.",
-      "The best structure depends on family relationships, property ownership, retirement accounts, insurance, business interests, real estate, debts, tax concerns, and whether assets or relatives are located in another state or country.",
-    ],
-    whenToHire: [
-      "You do not have a will or your existing documents are outdated.",
-      "You recently married, divorced, had a child, lost a family member, or experienced another major life change.",
-      "You own real estate, a business, retirement accounts, life insurance, or property in more than one jurisdiction.",
-      "You want to name agents for financial and medical decisions if you become unable to act.",
-      "You need planning for minor children, a family member with disabilities, a blended family, or a vulnerable beneficiary.",
-      "You want to reduce probate complications, coordinate beneficiary designations, or prepare a business-succession plan.",
-    ],
-    localContent: [
-      "El Paso estate plans may involve Texas property law, community property, military benefits connected to Fort Bliss, family members living in Mexico or New Mexico, and real estate or financial accounts located in more than one jurisdiction.",
-      "Texas recognizes several planning tools, including wills, statutory durable powers of attorney, medical powers of attorney, advance directives, survivorship arrangements, beneficiary designations, and transfer-on-death deeds when legal requirements are satisfied.",
-      "An El Paso estate planning attorney can help coordinate these documents, identify conflicts between them, review signing requirements, and explain how the plan may affect probate, incapacity, family decision-making, and property transfers.",
-    ],
-    faqs: [
-      {
-        question: "What documents are commonly included in a Texas estate plan?",
-        answer:
-          "A plan may include a will, statutory durable power of attorney, medical power of attorney, directive to physicians, HIPAA authorization, beneficiary designations, trusts, and property-transfer documents depending on the person's needs.",
-      },
-      {
-        question: "Do I need a will if I do not own much property?",
-        answer:
-          "A will can still identify beneficiaries, name an executor, nominate guardians for minor children, and reduce uncertainty even when the estate is modest.",
-      },
-      {
-        question: "What happens if I die without a will in Texas?",
-        answer:
-          "Texas intestacy law determines who inherits. The result may differ from what the person would have chosen, particularly in blended families or when children from prior relationships are involved.",
-      },
-      {
-        question: "What is a revocable living trust?",
-        answer:
-          "A revocable living trust is an arrangement in which a trustee manages property under written terms. It may help with management during incapacity and can avoid probate for assets properly transferred into the trust.",
-      },
-      {
-        question: "What does a durable power of attorney do?",
-        answer:
-          "A statutory durable power of attorney can authorize an agent to handle specified financial and property matters. It does not authorize medical decision-making.",
-      },
-      {
-        question: "What does a medical power of attorney do?",
-        answer:
-          "A medical power of attorney allows a named agent to make healthcare decisions when the person is no longer capable of making those decisions, subject to the document and Texas law.",
-      },
-      {
-        question: "What is an advance directive?",
-        answer:
-          "An advance directive communicates healthcare wishes for a future time when the person cannot make or express those decisions.",
-      },
-      {
-        question: "Can a transfer-on-death deed avoid probate?",
-        answer:
-          "A properly prepared and recorded transfer-on-death deed may transfer Texas real property to a named beneficiary at death without probate for that property, but it must satisfy statutory requirements and may not fit every situation.",
-      },
-      {
-        question: "How often should I update my estate plan?",
-        answer:
-          "Review the plan after major life, family, financial, health, or legal changes and periodically to confirm that agents, beneficiaries, property, and documents still reflect current wishes.",
-      },
-      {
-        question: "When should I contact an estate planning lawyer?",
-        answer:
-          "Consider contacting counsel before signing important documents or whenever family circumstances, assets, health, business ownership, or beneficiary goals become more complex.",
-      },
-    ],
-    relatedPages: [
-      { label: "Probate", path: "/el-paso-probate-lawyers" },
-      { label: "Real Estate", path: "/el-paso-real-estate-lawyers" },
-      { label: "Business Law", path: "/el-paso-business-lawyers" },
-      { label: "Family Law", path: "/el-paso-family-lawyers" },
-    ],
-  },
-
-  {
-    path: "/el-paso-car-accident-lawyers",
-    shortTitle: "Car Accident",
-    title: "Best Car Accident Lawyers in El Paso, Texas",
-    description:
-      "Compare El Paso car accident attorneys handling serious injury claims, uninsured motorists, hit-and-run crashes, insurance disputes, lost income, catastrophic injuries, and wrongful death cases.",
-    metaDescription:
-      "Compare car accident lawyers in El Paso for injury claims, uninsured motorists, hit-and-run crashes, insurance disputes, lost wages, and wrongful death.",
-    heroText:
-      "Compare El Paso car accident attorneys for serious injury claims, insurance disputes, uninsured motorists, hit-and-run crashes, catastrophic injuries, and wrongful death cases.",
-    topics: [
-      "Rear-End Collisions",
-      "T-Bone Accidents",
-      "Head-On Collisions",
-      "Multi-Vehicle Crashes",
-      "Hit-and-Run Accidents",
-      "Uninsured Motorists",
-      "Drunk Driving Accidents",
-      "Distracted Driving",
-      "Catastrophic Injuries",
-      "Wrongful Death",
-    ],
-    overview: [
-      "A car accident lawyer represents people injured in collisions caused by negligent, reckless, or impaired drivers. The attorney may investigate the crash, preserve evidence, communicate with insurers, document injuries and financial losses, negotiate a settlement, and file a lawsuit when necessary.",
-      "Important evidence may include police reports, photographs, video, witness statements, vehicle damage, medical records, traffic-camera footage, phone records, event-data-recorder information, insurance documents, and proof of lost income. Prompt preservation can be especially important after serious or disputed crashes.",
-      "Texas follows proportionate-responsibility rules. A claimant's recovery may be reduced by an assigned percentage of responsibility, and recovery may be barred when the claimant's percentage exceeds the statutory limit. Insurance companies may use fault disputes, treatment gaps, prior injuries, or recorded statements to reduce what they pay.",
-      "A serious collision can create immediate medical expenses and long-term consequences involving rehabilitation, surgery, reduced earning capacity, permanent impairment, pain, disfigurement, property damage, and family disruption. The value and strategy of a claim depend on the evidence, available coverage, legal responsibility, and documented losses.",
-    ],
-    whenToHire: [
-      "You or a passenger suffered injuries requiring emergency treatment, hospitalization, surgery, rehabilitation, or ongoing care.",
-      "The insurance company disputes fault, questions your injuries, delays the claim, or offers a settlement that does not cover your losses.",
-      "The crash involved an uninsured or underinsured driver, hit-and-run vehicle, drunk driver, rideshare vehicle, government vehicle, or commercial vehicle.",
-      "You missed work, lost income, cannot return to your prior job, or may need future medical treatment.",
-      "The collision caused catastrophic injury, permanent impairment, disfigurement, or death.",
-      "Important evidence, video, vehicle data, or witness information needs to be preserved quickly.",
-    ],
-    localContent: [
-      "El Paso drivers regularly travel Interstate 10, Loop 375, U.S. Highway 54, Montana Avenue, Mesa Street, Dyer Street, Zaragoza Road, and the Gateway boulevards. Heavy commuter traffic, construction zones, commercial vehicles, international travel, and high-speed roadways can all contribute to serious collisions.",
-      "Local claims may involve the El Paso Police Department, El Paso County Sheriff's Office, Texas Department of Public Safety, municipal agencies, hospitals, repair facilities, insurers, and courts serving El Paso County. Crashes near New Mexico or involving out-of-state drivers can add jurisdictional and insurance questions.",
-      "An El Paso car accident attorney can help investigate fault, identify all available insurance coverage, preserve evidence, calculate past and future losses, manage insurer communications, and determine whether negotiation or litigation is appropriate.",
-    ],
-    faqs: [
-      {
-        question: "What should I do immediately after a car accident?",
-        answer:
-          "Call for emergency assistance, seek medical care, exchange identifying and insurance information, photograph the scene when safe, identify witnesses, and avoid admitting fault. Report the collision as required and preserve all related records.",
-      },
-      {
-        question: "When should I hire a car accident lawyer?",
-        answer:
-          "Consider contacting counsel promptly when injuries are serious, fault is disputed, multiple vehicles are involved, coverage is unclear, or an insurer requests a recorded statement or release.",
-      },
-      {
-        question: "How much does a car accident lawyer cost?",
-        answer:
-          "Many injury lawyers use contingency fees, meaning the fee is based on a percentage of the recovery. Fee terms, case expenses, and responsibility for costs should be explained in a written agreement.",
-      },
-      {
-        question: "What damages may be recovered after a car accident?",
-        answer:
-          "Depending on the facts, recoverable damages may include medical expenses, lost income, reduced earning capacity, pain, impairment, disfigurement, property damage, and other losses allowed by law.",
-      },
-      {
-        question: "What if the other driver has no insurance?",
-        answer:
-          "Your own uninsured or underinsured motorist coverage, personal injury protection, health insurance, or claims against other responsible parties may be relevant. Coverage depends on the policies and facts.",
-      },
-      {
-        question: "What if I was partly at fault?",
-        answer:
-          "Texas proportionate-responsibility rules may reduce recovery according to the claimant's percentage of responsibility and may bar recovery when that percentage is greater than 50 percent.",
-      },
-      {
-        question: "Should I give the insurance company a recorded statement?",
-        answer:
-          "Consider legal advice before giving a recorded statement, signing a medical authorization, or accepting a settlement. Statements may later be used to dispute fault or damages.",
-      },
-      {
-        question: "How long do I have to file a car accident claim?",
-        answer:
-          "Texas limitation periods and special notice requirements may apply. The correct deadline depends on the parties and claims, so prompt legal review is important.",
-      },
-      {
-        question: "How long does a car accident settlement take?",
-        answer:
-          "Timing varies based on medical treatment, fault disputes, available insurance, evidence, negotiations, litigation, and whether future losses can be evaluated.",
-      },
-      {
-        question: "What evidence should I preserve?",
-        answer:
-          "Preserve photographs, video, witness information, police reports, medical records, bills, repair estimates, insurance correspondence, wage records, receipts, and a written account of symptoms and limitations.",
-      },
-    ],
-    relatedPages: [
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-      { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers" },
-      { label: "18 Wheeler Accident", path: "/el-paso-18-wheeler-accident-lawyer" },
-      { label: "Semi Truck Accident", path: "/el-paso-semi-truck-accident-lawyer" },
-      { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
-      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
-    ],
-  },
-
-  {
-    path: "/el-paso-motorcycle-accident-lawyers",
-    shortTitle: "Motorcycle Accident",
-    title: "Best Motorcycle Accident Lawyers in El Paso, Texas",
-    description:
-      "Compare El Paso motorcycle accident attorneys handling serious injuries, left-turn crashes, road hazards, uninsured drivers, insurance disputes, and wrongful death claims.",
-    metaDescription:
-      "Compare motorcycle accident lawyers in El Paso for serious injury claims, left-turn crashes, road hazards, uninsured drivers, insurance disputes, and wrongful death.",
-    heroText:
-      "Compare El Paso motorcycle accident attorneys for serious injury claims, insurance disputes, unsafe road conditions, and fatal motorcycle crashes.",
-    topics: [
-      "Left-Turn Collisions",
-      "Distracted Driving Crashes",
-      "Unsafe Lane Changes",
-      "Road Hazards",
-      "Brain Injuries",
-      "Spinal Cord Injuries",
-      "Uninsured Drivers",
-      "Insurance Disputes",
-      "Wrongful Death",
-    ],
-    overview: [
-      "Motorcycle crashes often cause severe injuries because riders have less physical protection than occupants of passenger vehicles. A motorcycle accident attorney may investigate fault, preserve evidence, communicate with insurers, document injuries and lost income, negotiate a settlement, and file suit when necessary.",
-      "Common evidence includes crash reports, scene photographs, witness statements, helmet and protective-gear information, medical records, traffic-camera or business video, vehicle damage, phone records, and electronic vehicle data. Prompt investigation can matter when fault is disputed or evidence may disappear.",
-      "Insurance companies may argue that a rider was speeding, difficult to see, improperly positioned, or partly responsible for the collision. Texas proportionate-responsibility rules can affect recovery, so the specific evidence about how the crash occurred is important.",
-    ],
-    whenToHire: [
-      "You suffered injuries requiring emergency treatment, surgery, hospitalization, rehabilitation, or ongoing care.",
-      "The other driver or insurer disputes fault or claims you contributed to the crash.",
-      "The collision involved an uninsured driver, hit-and-run vehicle, commercial vehicle, dangerous roadway condition, or multiple parties.",
-      "You missed work, lost income, or may have permanent impairment or future medical needs.",
-      "A family member died in a motorcycle collision.",
-      "Video, witness information, vehicle data, or other evidence needs to be preserved quickly.",
-    ],
-    localContent: [
-      "El Paso motorcycle riders regularly travel Interstate 10, Loop 375, U.S. Highway 54, Montana Avenue, Mesa Street, Dyer Street, Zaragoza Road, Transmountain Road, and other high-speed local routes.",
-      "Local claims can involve city streets, construction zones, interstate traffic, cross-border travel, and collisions near New Mexico. The investigating agency, available insurance, roadway ownership, and location of the crash can affect the claim.",
-      "An El Paso motorcycle accident attorney can help evaluate fault, preserve evidence, identify available insurance coverage, document damages, and determine whether negotiation or litigation is appropriate.",
-    ],
-    faqs: [
-      {
-        question: "When should I contact a motorcycle accident lawyer?",
-        answer:
-          "Consider contacting counsel promptly after a serious crash, especially when fault is disputed, injuries are significant, insurance coverage is unclear, or important evidence may disappear.",
-      },
-      {
-        question: "What damages may be available after a motorcycle crash?",
-        answer:
-          "Depending on the facts, damages may include medical expenses, lost income, reduced earning capacity, pain, impairment, disfigurement, property damage, and other losses allowed by law.",
-      },
-      {
-        question: "What if the insurance company says I was partly at fault?",
-        answer:
-          "Texas proportionate-responsibility rules may reduce recovery according to a claimant's percentage of responsibility and may bar recovery when that percentage is greater than 50 percent.",
-      },
-      {
-        question: "What evidence should I preserve?",
-        answer:
-          "Preserve photographs, video, witness information, police reports, medical records, repair records, insurance correspondence, damaged gear, wage-loss documents, and any available traffic or business-camera footage.",
-      },
-      {
-        question: "What if the driver who hit me had no insurance?",
-        answer:
-          "Uninsured or underinsured motorist coverage and other insurance may be relevant depending on the policies and facts. A lawyer can review potential sources of coverage.",
-      },
-      {
-        question: "Can a motorcycle crash support a wrongful death claim?",
-        answer:
-          "A fatal motorcycle collision caused by another party's wrongful conduct may support wrongful death and survival claims, subject to Texas law and the facts of the case.",
-      },
-    ],
-    relatedPages: [
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-      { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
-      { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers" },
-      { label: "Bicycle Accident", path: "/el-paso-bicycle-accident-lawyers" },
-      { label: "Uber/Lyft Accident", path: "/el-paso-uber-lyft-accident-lawyers" },
-      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
-    ],
-  },
-
-  {
-    path: "/el-paso-wrongful-death-lawyers",
-    shortTitle: "Wrongful Death",
-    title: "Best Wrongful Death Lawyers in El Paso, Texas",
-    description:
-      "Compare El Paso wrongful death attorneys handling fatal car crashes, truck collisions, motorcycle accidents, workplace deaths, unsafe property claims, medical negligence, and survival actions.",
-    metaDescription:
-      "Compare wrongful death lawyers in El Paso for fatal crashes, workplace deaths, unsafe property claims, medical negligence, and survival actions.",
-    heroText:
-      "Compare El Paso wrongful death attorneys for fatal accidents, negligence claims, survival actions, and representation for surviving families.",
-    topics: [
-      "Fatal Car Accidents",
-      "Truck and 18-Wheeler Deaths",
-      "Motorcycle Fatalities",
-      "Workplace Deaths",
-      "Unsafe Property Claims",
-      "Medical Negligence",
-      "Defective Products",
-      "Survival Actions",
-      "Funeral and Burial Expenses",
-      "Loss of Companionship",
-    ],
-    overview: [
-      "A wrongful death lawyer represents eligible surviving family members after a death caused by another person's or company's wrongful act, neglect, carelessness, unskillfulness, or default. The attorney may investigate the incident, preserve evidence, identify responsible parties, document the family's losses, negotiate with insurers, and file suit when necessary.",
-      "Wrongful death claims are distinct from survival claims. A wrongful death claim focuses on losses suffered by eligible survivors, while a survival action may seek damages the deceased person could have pursued if they had lived. Depending on the facts, both types of claims may arise from the same event.",
-      "These cases may involve motor vehicle crashes, commercial trucks, unsafe premises, workplace incidents, defective products, medical negligence, or other fatal events. Early investigation can be critical because vehicles may be repaired, electronic data may be overwritten, video may be deleted, and witnesses' memories may fade.",
-      "The value and strategy of a wrongful death case depend on liability, available insurance, the relationship of the survivors to the deceased, financial support, household services, companionship, mental anguish, funeral expenses, and other legally recoverable losses.",
-    ],
-    whenToHire: [
-      "A spouse, parent, or child died because of a car, truck, motorcycle, pedestrian, workplace, medical, or premises-related incident.",
-      "An insurer, trucking company, employer, hospital, property owner, or other organization contacted the family after the death.",
-      "The cause of death is disputed or multiple individuals, businesses, contractors, or insurers may share responsibility.",
-      "Important evidence such as video, electronic vehicle data, maintenance records, medical records, or witness statements must be preserved quickly.",
-      "The family needs help understanding both wrongful death and survival claims.",
-      "The death created funeral expenses, lost financial support, lost household services, or severe emotional and family consequences.",
-    ],
-    localContent: [
-      "El Paso wrongful death cases may arise from collisions on Interstate 10, Loop 375, U.S. Highway 54, Montana Avenue, Mesa Street, Zaragoza Road, and other heavily traveled local routes, as well as workplace, medical, property, and commercial incidents throughout El Paso County.",
-      "Local cases may involve the El Paso Police Department, El Paso County Sheriff's Office, Texas Department of Public Safety, hospitals, employers, commercial carriers, insurers, medical examiners, and courts serving El Paso County. Cross-border families or evidence located in New Mexico or Mexico can add jurisdictional and practical issues.",
-      "An El Paso wrongful death attorney can help identify eligible claimants, preserve evidence, investigate responsibility, coordinate expert review, document financial and personal losses, and determine whether negotiation or litigation is appropriate.",
-    ],
-    faqs: [
-      {
-        question: "Who may bring a wrongful death claim in Texas?",
-        answer:
-          "Texas law generally allows the surviving spouse, children, and parents of the deceased to bring a wrongful death action, subject to statutory requirements and the facts of the case.",
-      },
-      {
-        question: "What is the difference between wrongful death and a survival action?",
-        answer:
-          "A wrongful death claim seeks damages suffered by eligible surviving family members. A survival action continues certain claims the deceased person could have pursued if they had survived.",
-      },
-      {
-        question: "What damages may be available?",
-        answer:
-          "Depending on the facts, damages may include lost earning capacity, lost care and support, lost household services, loss of companionship, mental anguish, inheritance-related losses, funeral expenses, and other amounts allowed by law.",
-      },
-      {
-        question: "Can a wrongful death claim arise from a car or truck crash?",
-        answer:
-          "Yes. Fatal crashes involving negligent drivers, commercial carriers, unsafe vehicles, or other responsible parties may support wrongful death and survival claims.",
-      },
-      {
-        question: "What evidence should be preserved?",
-        answer:
-          "Important evidence may include police reports, photographs, video, witness information, electronic vehicle data, maintenance records, medical records, employment information, insurance documents, and funeral expenses.",
-      },
-      {
-        question: "What if several parties may be responsible?",
-        answer:
-          "A claim may involve multiple defendants, insurers, employers, contractors, manufacturers, property owners, or medical providers depending on how the death occurred.",
-      },
-      {
-        question: "Should the family speak with the insurance company?",
-        answer:
-          "Consider legal advice before giving detailed statements, signing releases, or accepting a settlement. Early offers may not account for all available claims or long-term losses.",
-      },
-      {
-        question: "How long does a wrongful death case take?",
-        answer:
-          "Timing varies based on investigation, liability disputes, available insurance, expert review, settlement negotiations, litigation, and the complexity of damages.",
-      },
-      {
-        question: "How long do families have to file?",
-        answer:
-          "Texas limitation periods and special notice rules may apply. The correct deadline depends on the parties and claims, so prompt legal review is important.",
-      },
-      {
-        question: "When should a family contact a wrongful death lawyer?",
-        answer:
-          "As soon as practical after the death, especially when evidence may disappear, multiple parties may be involved, or an insurer or company has already contacted the family.",
-      },
-    ],
-    relatedPages: [
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-      { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
-      { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers" },
-      { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
-      { label: "Bicycle Accident", path: "/el-paso-bicycle-accident-lawyers" },
-      { label: "Uber/Lyft Accident", path: "/el-paso-uber-lyft-accident-lawyers" },
-    ],
-  },
-
-  {
-    path: "/el-paso-slip-and-fall-lawyers",
-    shortTitle: "Slip and Fall",
-    title: "Best Slip and Fall Lawyers in El Paso, TX | Compare Local Attorneys",
-    description:
-      "Compare El Paso slip and fall lawyers handling unsafe property conditions, premises liability, wet floors, broken stairs, negligent maintenance, serious injuries, and insurance disputes.",
-    metaDescription:
-      "Compare slip and fall attorneys in El Paso, TX for unsafe property conditions, premises liability, wet floors, serious injuries, and insurance disputes.",
-    heroText:
-      "Compare El Paso slip and fall attorneys handling premises liability claims involving unsafe floors, broken stairs, poor lighting, negligent maintenance, and serious injuries.",
-    topics: [
-      "Slip and Fall Lawyer",
-      "Slip and Fall Attorney",
-      "Premises Liability",
-      "Wet Floors",
-      "Broken Stairs",
-      "Uneven Walkways",
-      "Poor Lighting",
-      "Negligent Maintenance",
-      "Apartment Complex Injuries",
-      "Retail Store Injuries",
-      "Serious Injuries",
-      "Wrongful Death",
-    ],
-    overview: [
-      "A slip and fall lawyer represents people injured because of unsafe conditions on property owned, occupied, or controlled by another person or business.",
-      "Important evidence may include photographs, surveillance video, incident reports, maintenance records, inspection logs, witness statements, medical records, and proof concerning how long the dangerous condition existed.",
-      "Property owners and insurers may dispute whether a condition was dangerous, whether there was notice of the hazard, or whether the injured person was partly responsible. Prompt evidence preservation can be important.",
-      "Claims may arise at stores, apartment complexes, hotels, restaurants, offices, parking lots, sidewalks, and other public or private property.",
-    ],
-    whenToHire: [
-      "You were seriously injured at a store, apartment complex, hotel, restaurant, parking lot, office, or other property.",
-      "The property owner or insurer disputes responsibility.",
-      "Surveillance video, maintenance records, incident reports, or witness information must be preserved.",
-      "The injury caused hospitalization, surgery, missed work, or permanent limitations.",
-      "A loved one died because of an unsafe property condition.",
-    ],
-    localContent: [
-      "Slip and fall claims in El Paso may involve retail stores, apartment complexes, hotels, restaurants, offices, parking areas, sidewalks, and other public or private property.",
-      "An El Paso slip and fall attorney can investigate notice, maintenance practices, property control, insurance coverage, incident history, available video, and the full extent of the injury.",
-      "Because surveillance footage and maintenance records can be overwritten or lost, prompt preservation requests may be important in disputed premises-liability cases.",
-    ],
-    faqs: [
-      { question: "How do I choose a slip and fall lawyer in El Paso?", answer: "Compare experience with premises-liability claims, evidence preservation, serious injuries, disputed notice, insurance negotiations, litigation readiness, communication, and fee terms." },
-      { question: "What must be proven in a slip and fall case?", answer: "The required proof depends on the facts, but often includes a dangerous condition, responsibility for the property, notice or knowledge, and a connection between the condition and the injury." },
-      { question: "What evidence should I preserve?", answer: "Preserve photographs, video, witness names, incident reports, clothing and shoes, medical records, bills, and communications with the property owner or insurer." },
-      { question: "What if there was no warning sign?", answer: "The absence of a warning may be relevant, but the full circumstances, including notice and the nature of the hazard, still matter." },
-      { question: "What if I was partly at fault?", answer: "Texas proportionate-responsibility rules may affect recovery. The facts should be evaluated carefully rather than assuming the claim is barred." },
-      { question: "How long do I have to file?", answer: "Texas limitation periods and special notice requirements may apply, so prompt legal review is important." },
-      { question: "When should I contact a slip and fall attorney?", answer: "Consider prompt advice when injuries are serious, the property owner disputes responsibility, or video, maintenance records, or witness evidence may need to be preserved." },
-    ],
-    relatedPages: [
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-      { label: "Dog Bite", path: "/el-paso-dog-bite-lawyers" },
-      { label: "Brain Injury", path: "/el-paso-brain-injury-lawyers" },
-      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
-    ],
-    lastUpdated: "August 11, 2026",
-  },
-
-  {
-    path: "/el-paso-medical-malpractice-lawyers",
-    shortTitle: "Medical Malpractice",
-    title: "Best Medical Malpractice Lawyers in El Paso, Texas",
-    description:
-      "Compare El Paso medical malpractice attorneys handling surgical errors, delayed diagnosis, birth injuries, medication mistakes, hospital negligence, emergency-room errors, and wrongful death claims.",
-    metaDescription:
-      "Compare medical malpractice lawyers in El Paso for surgical errors, delayed diagnosis, birth injuries, medication mistakes, hospital negligence, and wrongful death.",
-    heroText:
-      "Compare El Paso medical malpractice attorneys for surgical errors, delayed diagnosis, birth injuries, medication mistakes, hospital negligence, and wrongful death claims.",
-    topics: [
-      "Surgical Errors",
-      "Delayed Diagnosis",
-      "Misdiagnosis",
-      "Birth Injuries",
-      "Medication Errors",
-      "Hospital Negligence",
-      "Emergency Room Errors",
-      "Anesthesia Errors",
-      "Serious Injuries",
-      "Wrongful Death",
-    ],
-    overview: [
-      "A medical malpractice lawyer represents patients and families harmed by healthcare that may have fallen below the applicable standard of care.",
-      "Medical malpractice claims usually require careful review of records, treatment decisions, informed-consent issues, and expert medical opinions.",
-      "Important evidence may include hospital records, physician notes, imaging, laboratory results, medication records, consent forms, monitoring data, and billing records.",
-      "These cases may involve permanent disability, additional surgery, loss of earning capacity, extensive future care, disfigurement, pain, or death.",
-    ],
-    whenToHire: [
-      "A patient suffered a serious injury after surgery, treatment, medication, childbirth, anesthesia, or emergency care.",
-      "A diagnosis was missed or delayed and the condition became significantly worse.",
-      "A hospital, doctor, or insurer will not explain what happened or disputes responsibility.",
-      "The injury caused additional treatment, permanent impairment, loss of income, or extensive future care.",
-      "A family member died after suspected medical negligence.",
-    ],
-    localContent: [
-      "El Paso medical malpractice matters may involve hospitals, emergency departments, surgical centers, clinics, pharmacies, laboratories, military healthcare facilities, and individual providers throughout El Paso County.",
-      "An El Paso medical malpractice attorney can help obtain records, evaluate deadlines, identify potentially responsible providers, coordinate expert review, document damages, and determine whether negotiation or litigation is appropriate.",
-    ],
-    faqs: [
-      { question: "What is medical malpractice?", answer: "Medical malpractice generally involves healthcare that fell below the applicable standard of care and caused injury. A bad result alone does not automatically prove negligence." },
-      { question: "Do these cases require expert testimony?", answer: "Many cases require qualified expert opinions regarding the standard of care, breach, and causation." },
-      { question: "What is a delayed-diagnosis claim?", answer: "It may arise when a condition should have been identified earlier and the delay caused additional harm." },
-      { question: "Can medication errors support a claim?", answer: "Yes. Prescribing, dispensing, dosing, administration, allergy, and interaction errors may be relevant when they cause injury." },
-      { question: "What records should I preserve?", answer: "Preserve medical records, test results, imaging, prescriptions, discharge instructions, bills, and insurance correspondence." },
-      { question: "How long do I have to bring a claim?", answer: "Texas medical-malpractice deadlines can be strict, so prompt legal review is important." },
-      { question: "What damages may be available?", answer: "Depending on the facts, damages may include medical expenses, lost income, pain, impairment, future care, and wrongful-death damages." },
-      { question: "Can a hospital be responsible?", answer: "A hospital may be involved based on employees, policies, staffing, credentialing, supervision, equipment, or other facts." },
-      { question: "How long does a case take?", answer: "These cases often take longer because they require extensive records, expert review, and complex litigation." },
-      { question: "When should I contact a lawyer?", answer: "As soon as practical after a serious unexplained medical injury, delayed diagnosis, medication error, birth injury, or death." },
-    ],
-    relatedPages: [
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
-      { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
-      { label: "Brain Injury", path: "/el-paso-brain-injury-lawyers" },
-    ],
-  },
-
-  {
-    path: "/el-paso-brain-injury-lawyers",
-    shortTitle: "Brain Injury",
-    title: "Best Brain Injury Lawyers in El Paso, Texas",
-    description:
-      "Compare El Paso brain injury attorneys handling traumatic brain injuries, concussions, memory loss, cognitive impairment, permanent disability, accident claims, and wrongful death.",
-    metaDescription:
-      "Compare brain injury lawyers in El Paso for traumatic brain injuries, concussions, cognitive impairment, permanent disability, and wrongful death claims.",
-    heroText:
-      "Compare El Paso brain injury attorneys for traumatic brain injuries, concussions, cognitive impairment, permanent disability, and wrongful death claims.",
-    topics: [
-      "Traumatic Brain Injuries",
-      "Concussions",
-      "Memory Loss",
-      "Cognitive Impairment",
-      "Loss of Consciousness",
-      "Personality Changes",
-      "Permanent Disability",
-      "Future Medical Care",
-      "Lost Earning Capacity",
-      "Wrongful Death",
-    ],
-    overview: [
-      "A brain injury lawyer represents people who suffered traumatic brain injuries because of car crashes, truck collisions, motorcycle accidents, falls, workplace incidents, medical negligence, assaults, defective products, or other events.",
-      "Brain injuries can affect memory, concentration, speech, balance, mood, judgment, sleep, behavior, and the ability to work or live independently. Symptoms may not always appear immediately after the incident.",
-      "Important evidence may include emergency records, neurological testing, imaging, rehabilitation records, witness statements, employment records, expert evaluations, and documentation of changes in daily functioning.",
-      "Serious brain injury claims may involve extensive medical treatment, rehabilitation, future care, lost income, reduced earning capacity, pain, impairment, and permanent disability.",
-    ],
-    whenToHire: [
-      "You suffered a concussion, loss of consciousness, memory problems, confusion, or cognitive changes after an accident.",
-      "The injury caused hospitalization, neurological treatment, rehabilitation, or an inability to return to work.",
-      "The insurance company disputes the seriousness or cause of the brain injury.",
-      "You need help documenting future medical care, reduced earning capacity, or permanent impairment.",
-      "A loved one suffered severe brain damage or died because of another party's conduct.",
-    ],
-    localContent: [
-      "El Paso brain injury claims may arise from collisions on Interstate 10, Loop 375, U.S. Highway 54, construction sites, workplaces, medical facilities, apartment complexes, sports or recreation incidents, and other locations throughout El Paso County.",
-      "Serious head-injury cases may require records from emergency departments, neurologists, rehabilitation providers, therapists, employers, schools, and family members who observed changes in memory, personality, concentration, balance, sleep, or daily functioning.",
-      "An El Paso brain injury attorney can help preserve crash or incident evidence, obtain medical records, document changes in daily life, evaluate future-care and earning-capacity issues, and coordinate appropriate expert review when the nature or cause of the injury is disputed.",
-      "Texas generally applies a two-year limitations period to personal-injury claims, although exceptions and special rules can apply. Evidence such as video, electronic data, and witness recollections may disappear much sooner, making prompt preservation important.",
-    ],
-    faqs: [
-      {
-        question: "What is a traumatic brain injury?",
-        answer:
-          "A traumatic brain injury is damage to the brain caused by a blow, jolt, penetration, or other force. The severity can range from a mild concussion to permanent disability.",
-      },
-      {
-        question: "Can a concussion support a legal claim?",
-        answer:
-          "Yes. A concussion may support a claim when another party caused the injury and the symptoms and losses are properly documented.",
-      },
-      {
-        question: "What symptoms can a brain injury cause?",
-        answer:
-          "Symptoms may include headaches, dizziness, memory loss, confusion, mood changes, sleep problems, speech difficulties, balance issues, and reduced concentration.",
-      },
-      {
-        question: "What evidence is important?",
-        answer:
-          "Medical records, imaging, neurological testing, rehabilitation notes, witness statements, employment records, and documentation of daily limitations may all be important.",
-      },
-      {
-        question: "What damages may be available?",
-        answer:
-          "Depending on the case, damages may include medical expenses, rehabilitation costs, future care, lost income, reduced earning capacity, pain, impairment, and other legally recoverable losses.",
-      },
-      {
-        question: "What if the insurance company says the injury is minor?",
-        answer:
-          "Brain injuries can be difficult to see and may not appear clearly on routine imaging. Medical evaluation and consistent documentation can be critical.",
-      },
-      {
-        question: "Can family observations matter?",
-        answer:
-          "Yes. Family members, coworkers, and friends may help document changes in memory, behavior, personality, mood, and daily functioning.",
-      },
-      {
-        question: "How long do I have to file?",
-        answer:
-          "Texas limitation periods and special notice requirements may apply, so prompt legal review is important.",
-      },
-      {
-        question: "How long does a brain injury case take?",
-        answer:
-          "Timing depends on medical treatment, recovery, expert review, fault disputes, negotiations, and litigation.",
-      },
-      {
-        question: "When should I contact a lawyer?",
-        answer:
-          "As soon as practical after a serious head injury, especially when symptoms persist, work is affected, or future care may be necessary.",
-      },
-    ],
-    relatedPages: [
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-      { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
-      { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers" },
-      { label: "Medical Malpractice", path: "/el-paso-medical-malpractice-lawyers" },
-      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
-    ],
-    resourceLinks: [
-      { label: "What to Do After a Car Accident in El Paso, Texas", path: "/guides/what-to-do-after-car-accident-el-paso" },
-      { label: "How Long Do You Have to File a Car Accident Claim in Texas?", path: "/guides/texas-car-accident-statute-of-limitations" },
-      { label: "What Evidence Matters After a Truck Accident in Texas?", path: "/guides/truck-accident-evidence-texas" },
-    ],
-    lastUpdated: "August 10, 2026",
-  },
-
-  {
-    path: "/el-paso-traumatic-brain-injury-lawyers",
-    shortTitle: "Traumatic Brain Injury",
-    title: "Best Traumatic Brain Injury Lawyers in El Paso, Texas",
-    description:
-      "Compare El Paso traumatic brain injury attorneys handling concussions, memory loss, cognitive impairment, permanent disability, future care, and wrongful death claims.",
-    metaDescription:
-      "Compare traumatic brain injury lawyers in El Paso for concussions, memory loss, cognitive impairment, permanent disability, and wrongful death.",
-    heroText:
-      "Compare El Paso traumatic brain injury attorneys for concussions, memory loss, cognitive impairment, permanent disability, and wrongful death claims.",
-    topics: [
-      "Concussions",
-      "Memory Loss",
-      "Cognitive Impairment",
-      "Loss of Consciousness",
-      "Personality Changes",
-      "Speech Problems",
-      "Permanent Disability",
-      "Future Medical Care",
-      "Lost Earning Capacity",
-      "Wrongful Death",
-    ],
-    overview: [
-      "A traumatic brain injury lawyer represents people harmed by head trauma caused by vehicle crashes, falls, workplace incidents, medical negligence, assaults, defective products, and other events.",
-      "Traumatic brain injuries can affect memory, concentration, judgment, speech, balance, mood, sleep, behavior, and the ability to work or live independently.",
-      "Important evidence may include emergency records, neurological evaluations, imaging, rehabilitation records, witness statements, employment records, and documentation of changes in daily functioning.",
-      "Serious claims may involve extensive treatment, rehabilitation, future care, lost income, reduced earning capacity, pain, impairment, and permanent disability.",
-    ],
-    whenToHire: [
-      "You experienced loss of consciousness, confusion, memory problems, headaches, dizziness, or cognitive changes after an incident.",
-      "The injury required hospitalization, neurological care, therapy, or rehabilitation.",
-      "The insurer disputes the seriousness or cause of the injury.",
-      "You cannot return to work or need long-term assistance.",
-      "A loved one suffered severe brain damage or died because of another party's conduct.",
-    ],
-    localContent: [
-      "Traumatic brain injury claims in El Paso may arise from crashes on Interstate 10, Loop 375, U.S. Highway 54, construction sites, workplaces, medical facilities, apartment complexes, and other locations throughout El Paso County.",
-      "An El Paso traumatic brain injury attorney can help preserve evidence, obtain records, coordinate expert review, document long-term needs, and pursue negotiation or litigation.",
-    ],
-    faqs: [
-      {
-        question: "What is a traumatic brain injury?",
-        answer:
-          "A traumatic brain injury is damage to the brain caused by a blow, jolt, penetration, or other force.",
-      },
-      {
-        question: "Can a concussion support a legal claim?",
-        answer:
-          "Yes, when another party caused the injury and the symptoms and losses are properly documented.",
-      },
-      {
-        question: "What symptoms can occur?",
-        answer:
-          "Symptoms may include headaches, dizziness, memory loss, confusion, mood changes, sleep problems, speech difficulties, and reduced concentration.",
-      },
-      {
-        question: "What evidence is important?",
-        answer:
-          "Medical records, imaging, neurological testing, rehabilitation notes, witness statements, and employment records may all be important.",
-      },
-      {
-        question: "What damages may be available?",
-        answer:
-          "Damages may include medical expenses, rehabilitation, future care, lost income, reduced earning capacity, pain, and impairment.",
-      },
-      {
-        question: "What if imaging appears normal?",
-        answer:
-          "Some brain injuries may not appear clearly on routine imaging, so medical evaluation and documentation remain important.",
-      },
-      {
-        question: "Can family observations matter?",
-        answer:
-          "Yes. Family members and coworkers may help document changes in memory, behavior, mood, and daily functioning.",
-      },
-      {
-        question: "How long do I have to file?",
-        answer:
-          "Texas limitation periods and special notice requirements may apply, so prompt legal review is important.",
-      },
-      {
-        question: "How long does a case take?",
-        answer:
-          "Timing depends on medical treatment, recovery, expert review, fault disputes, negotiations, and litigation.",
-      },
-      {
-        question: "When should I contact a lawyer?",
-        answer:
-          "As soon as practical after a serious head injury, especially when symptoms persist or future care may be necessary.",
-      },
-    ],
-    relatedPages: [
-      { label: "Brain Injury", path: "/el-paso-brain-injury-lawyers" },
-      { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
-      {
-        label: "Construction Accident",
-        path: "/el-paso-construction-accident-lawyers",
-      },
-      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
-    ],
-  },
-
-  {
-    path: "/el-paso-construction-accident-lawyers",
-    shortTitle: "Construction Accident",
-    title: "Best Construction Accident Lawyers in El Paso, Texas",
-    description:
-      "Compare El Paso construction accident attorneys handling falls, equipment injuries, electrocution, unsafe worksites, contractor negligence, serious injuries, and wrongful death claims.",
-    metaDescription:
-      "Compare construction accident lawyers in El Paso for falls, equipment injuries, unsafe worksites, contractor negligence, and wrongful death claims.",
-    heroText:
-      "Compare El Paso construction accident attorneys for falls, equipment injuries, unsafe worksites, serious injuries, and wrongful death claims.",
-    topics: [
-      "Falls from Heights",
-      "Scaffolding Accidents",
-      "Equipment Injuries",
-      "Electrocution",
-      "Falling Objects",
-      "Unsafe Worksites",
-      "Contractor Negligence",
-      "Crane Accidents",
-      "Serious Injuries",
-      "Wrongful Death",
-    ],
-    overview: [
-      "A construction accident lawyer represents workers and others injured because of unsafe conditions, defective equipment, negligent contractors, or dangerous work practices.",
-      "Construction sites often involve multiple employers, contractors, subcontractors, property owners, equipment companies, and insurers.",
-      "Important evidence may include incident reports, photographs, video, safety records, training documents, maintenance logs, witness statements, medical records, and employment information.",
-      "Compensation may depend on workers' compensation coverage, third-party liability, insurance, fault, and the full extent of the injury.",
-    ],
-    whenToHire: [
-      "You suffered a serious injury on a construction site.",
-      "The accident involved a fall, scaffolding, machinery, electricity, a crane, or falling materials.",
-      "A contractor, subcontractor, property owner, or equipment company may be responsible.",
-      "The injury caused hospitalization, surgery, missed work, permanent limitations, or future care needs.",
-      "A loved one died in a construction accident.",
-    ],
-    localContent: [
-      "Construction accident claims in El Paso may involve residential, commercial, highway, industrial, and infrastructure projects throughout El Paso County.",
-      "An El Paso attorney can help investigate responsibility, preserve evidence, identify insurance coverage, evaluate third-party claims, and document damages.",
-    ],
-    faqs: [
-      {
-        question: "Can I bring a claim if I receive workers' compensation?",
-        answer:
-          "You may still have a claim against a responsible third party depending on the facts.",
-      },
-      {
-        question: "Who may be responsible for a construction accident?",
-        answer:
-          "Potentially responsible parties may include contractors, subcontractors, property owners, equipment companies, manufacturers, and others.",
-      },
-      {
-        question: "What evidence should be preserved?",
-        answer:
-          "Preserve photographs, video, witness information, incident reports, safety records, medical records, employment records, and communications.",
-      },
-      {
-        question: "What damages may be available?",
-        answer:
-          "Depending on the facts, damages may include medical expenses, lost income, reduced earning capacity, pain, impairment, and future care.",
-      },
-      {
-        question: "What if defective equipment caused the accident?",
-        answer:
-          "The manufacturer, seller, rental company, maintenance company, or another party may be involved.",
-      },
-      {
-        question: "What if I was partly at fault?",
-        answer:
-          "Texas proportionate-responsibility rules may affect recovery depending on the facts.",
-      },
-      {
-        question: "How long do I have to file?",
-        answer:
-          "Texas deadlines and notice requirements may apply, so prompt legal review is important.",
-      },
-      {
-        question: "Can a family bring a wrongful death claim?",
-        answer:
-          "Eligible family members may have wrongful death and survival claims depending on the circumstances.",
-      },
-      {
-        question: "How long does a construction accident case take?",
-        answer:
-          "Timing varies based on medical treatment, investigation, insurance, fault disputes, negotiations, and litigation.",
-      },
-      {
-        question: "When should I contact a lawyer?",
-        answer:
-          "As soon as practical after a serious construction accident, especially when evidence may disappear.",
-      },
-    ],
-    relatedPages: [
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-      { label: "Brain Injury", path: "/el-paso-brain-injury-lawyers" },
-      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
-      { label: "Slip and Fall", path: "/el-paso-slip-and-fall-lawyers" },
-    ],
-  },
-
-  {
-    path: "/el-paso-dog-bite-lawyers",
-    shortTitle: "Dog Bite",
-    title: "Best Dog Bite Lawyers in El Paso, TX | Compare Local Attorneys",
-    description:
-      "Compare El Paso dog bite lawyers handling serious bites, animal attacks, scarring, infection, child injuries, disputed responsibility, and insurance claims.",
-    metaDescription:
-      "Compare dog bite attorneys in El Paso, TX for serious bites, animal attacks, scarring, child injuries, insurance claims, and disputed responsibility.",
-    heroText:
-      "Compare El Paso dog bite attorneys representing adults and children injured in serious dog attacks, bite injuries, scarring cases, infection claims, and disputed insurance matters.",
-    topics: [
-      "Dog Bite Attorney",
-      "Dog Bite Lawyer",
-      "Serious Dog Attacks",
-      "Child Dog Bite Injuries",
-      "Facial Scarring",
-      "Infections",
-      "Nerve Damage",
-      "Disputed Responsibility",
-      "Homeowners Insurance",
-      "Wrongful Death",
-    ],
-    overview: [
-      "A dog bite lawyer represents people injured in dog attacks and other animal-related incidents. Claims can involve bites, knockdowns, scarring, infection, nerve damage, psychological trauma, and serious injuries to children.",
-      "Important evidence may include photographs of the injuries and animal, medical records, witness statements, animal-control records, vaccination information, prior-incident evidence, ownership or control information, and applicable homeowners or renters insurance.",
-      "Responsibility can depend on the facts surrounding the animal, prior behavior, control, warnings, location of the attack, and other legal issues. Early investigation may help preserve evidence and identify available insurance.",
-    ],
-    whenToHire: [
-      "The bite caused significant wounds, stitches, surgery, infection, scarring, nerve damage, or permanent impairment.",
-      "A child was bitten or attacked.",
-      "The dog's owner, keeper, landlord, or insurer disputes responsibility.",
-      "The animal had prior aggressive behavior or previous incidents that need investigation.",
-      "You need help identifying insurance coverage or preserving animal-control and medical records.",
-      "A family member died as a result of an animal attack.",
-    ],
-    localContent: [
-      "Dog bite incidents in El Paso may occur in neighborhoods, apartment complexes, parks, sidewalks, homes, rental properties, businesses, and other public or private locations.",
-      "An El Paso dog bite attorney can help investigate ownership and control, animal-control records, prior incidents, insurance coverage, medical damages, scarring, lost income, and other losses.",
-      "Photographing injuries as they heal and preserving records from medical providers and animal-control agencies can be especially important in dog bite cases.",
-    ],
-    faqs: [
-      { question: "How do I choose a dog bite attorney in El Paso?", answer: "Compare experience with animal-attack claims, scarring and child injuries, insurance coverage, evidence preservation, disputed responsibility, communication, and fee terms." },
-      { question: "What should I do after a dog bite?", answer: "Get appropriate medical care, document the injuries, identify the dog and owner when possible, preserve witness information, and report the incident to the appropriate authority when required or appropriate." },
-      { question: "What evidence can matter in a dog bite case?", answer: "Photos, medical records, witness statements, animal-control records, vaccination history, prior incidents, ownership information, and insurance records can all be important." },
-      { question: "What if a child was bitten?", answer: "Child dog bite cases may involve facial injuries, scarring, emotional trauma, future treatment, and other long-term consequences that should be carefully documented." },
-      { question: "What if the owner says the dog never bit anyone before?", answer: "Prior incidents can matter, but responsibility is fact-specific. The circumstances of the attack, control of the animal, warnings, location, and other evidence should be reviewed." },
-      { question: "Does homeowners or renters insurance cover dog bites?", answer: "Some policies may provide coverage, but exclusions and limits vary. The applicable policy should be reviewed rather than assumed." },
-      { question: "When should I contact a dog bite lawyer?", answer: "Consider prompt advice when injuries are significant, a child was attacked, responsibility is disputed, or insurance and animal-control evidence need to be investigated." },
-    ],
-    relatedPages: [
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-      { label: "Slip and Fall", path: "/el-paso-slip-and-fall-lawyers" },
-      { label: "Brain Injury", path: "/el-paso-brain-injury-lawyers" },
-      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
-    ],
-    lastUpdated: "August 11, 2026",
-  },
-
-  {
-    path: "/el-paso-18-wheeler-accident-lawyer",
-    shortTitle: "18 Wheeler Accident",
-    title: "Best 18 Wheeler Accident Lawyers in El Paso, Texas",
-    description:
-      "Compare El Paso 18 wheeler accident attorneys handling interstate trucking crashes, FMCSA regulations, black-box evidence, driver fatigue, cargo issues, catastrophic injuries, and wrongful death claims.",
-    metaDescription:
-      "Compare El Paso 18 wheeler accident lawyers for commercial trucking crashes, driver log violations, black-box evidence, catastrophic injuries, and wrongful death.",
-    heroText:
-      "Compare El Paso 18 wheeler accident attorneys for commercial trucking crashes, federal safety violations, catastrophic injuries, and wrongful death claims.",
-    topics: [
-      "18-Wheeler Crashes",
-      "FMCSA Regulations",
-      "Driver Logbooks",
-      "Electronic Logging Devices",
-      "Black Box Data",
-      "Cargo Loading",
-      "Catastrophic Injuries",
-      "Wrongful Death",
-      "Interstate Trucking"
-    ],
-    overview: [
-      "18-wheeler accident cases often involve federal trucking regulations, multiple insurance policies, electronic evidence, and commercial carriers.",
-      "Evidence may include driver qualification files, electronic logging device records, onboard engine data, maintenance records, dispatch communications, dash-camera footage, and cargo documentation.",
-      "Because tractor-trailers can weigh up to 80,000 pounds, collisions frequently result in severe injuries requiring extensive medical treatment."
-    ],
-    whenToHire: [
-      "You were injured in a crash involving a tractor-trailer or 18-wheeler.",
-      "The trucking company or insurer contacted you shortly after the collision.",
-      "The crash caused hospitalization, surgery, permanent impairment, or death.",
-      "You believe fatigue, speeding, distracted driving, or maintenance failures contributed.",
-      "Multiple companies may share responsibility.",
-      "Electronic trucking evidence needs immediate preservation."
-    ],
-    localContent: [
-      "El Paso sits on Interstate 10 and serves as a major freight gateway between Texas, New Mexico, and Mexico, making commercial trucking traffic especially common.",
-      "Truck collisions may involve interstate carriers, cross-border logistics companies, and evidence maintained outside Texas.",
-      "An El Paso attorney can help preserve trucking records and investigate federal safety compliance."
-    ],
-    faqs: [
-      {"question":"What makes an 18-wheeler case different?","answer":"These cases frequently involve federal regulations, commercial carriers, electronic data, and multiple potentially responsible parties."},
-      {"question":"What is black-box data?","answer":"Commercial trucks may record speed, braking, engine, and operational information that can become important evidence."},
-      {"question":"What are FMCSA regulations?","answer":"The Federal Motor Carrier Safety Administration establishes many safety rules governing interstate commercial trucking."},
-      {"question":"Can driver fatigue cause crashes?","answer":"Yes. Hours-of-service violations and fatigue can become significant issues in commercial trucking cases."},
-      {"question":"Should evidence be preserved quickly?","answer":"Yes. Electronic data and company records may not remain available indefinitely."},
-      {"question":"Who can be liable?","answer":"The driver, motor carrier, maintenance provider, cargo loader, broker, manufacturer, or others depending on the facts."},
-      {"question":"Can wrongful death claims arise?","answer":"Yes. Fatal commercial trucking collisions may give rise to wrongful death and related claims under applicable law."},
-      {"question":"Should I give a recorded statement?","answer":"Consider obtaining legal advice before providing recorded statements or signing releases."},
-      {"question":"What damages may be available?","answer":"Depending on the facts, damages may include medical expenses, lost income, pain, impairment, and other legally recoverable losses."},
-      {"question":"When should I contact a lawyer?","answer":"As soon as practical after a serious truck crash so evidence can be preserved."}
-    ],
-    relatedPages: [
-      { label:"Truck Accident", path:"/el-paso-truck-accident-lawyers"},
-      { label:"Wrongful Death", path:"/el-paso-wrongful-death-lawyers"},
-      { label:"Personal Injury", path:"/el-paso-personal-injury-lawyers"}
-    ]
-  },
-
-  {
-    path: "/el-paso-semi-truck-accident-lawyer",
-    shortTitle: "Semi Truck Accident",
-    title: "Best Semi Truck Accident Lawyers in El Paso, Texas",
-    description: "Compare El Paso semi-truck accident attorneys for commercial truck crashes, FMCSA compliance, driver fatigue, maintenance failures, cargo issues, catastrophic injuries, and wrongful death claims.",
-    metaDescription: "Compare El Paso semi-truck accident lawyers for serious commercial vehicle crashes.",
-    heroText: "Compare El Paso semi-truck accident attorneys for catastrophic commercial vehicle collisions.",
-    topics:["Semi-Truck Crashes","Commercial Carriers","FMCSA Rules","Driver Fatigue","Electronic Logging Devices","Maintenance Failures","Cargo Securement","Wrongful Death","Catastrophic Injury"],
-    overview:[
-      "Semi-truck accident cases often involve federal trucking regulations and multiple insurance carriers.",
-      "Evidence may include electronic logging data, maintenance records, dispatch communications, and onboard vehicle data.",
-      "Commercial truck collisions frequently cause severe injuries and complex litigation."
-    ],
-    whenToHire:[
-      "You were injured in a semi-truck collision.",
-      "The trucking company contacted you.",
-      "The crash caused serious injuries.",
-      "You believe safety violations contributed.",
-      "Evidence must be preserved quickly."
-    ],
-    localContent:[
-      "El Paso is a major freight corridor with heavy Interstate 10 commercial traffic.",
-      "Cross-border trucking can add complexity to investigations."
-    ],
-    faqs:[
-      {question:"What makes semi-truck cases different?",answer:"They often involve federal trucking rules, electronic evidence, and multiple responsible parties."},
-      {question:"When should I contact a lawyer?",answer:"As soon as possible after a serious commercial vehicle collision."}
-    ],
-    relatedPages:[
-      {label:"Truck Accident",path:"/el-paso-truck-accident-lawyers"},
-      {label:"18 Wheeler Accident",path:"/el-paso-18-wheeler-accident-lawyer"}
-    ]
-  },
-
-  {
-    path: "/el-paso-truck-accident-lawyers",
-    shortTitle: "Truck Accident",
-    title: "Best Truck Accident Lawyers in El Paso, Texas",
-    description:
-      "Compare El Paso truck accident lawyers handling 18-wheeler collisions, commercial trucking crashes, catastrophic injuries, wrongful death claims, and commercial insurance disputes throughout El Paso County.",
-    metaDescription:
-      "Compare truck accident lawyers in El Paso for 18-wheeler crashes, commercial vehicle collisions, serious injuries, wrongful death, and trucking insurance disputes.",
-    heroText:
-      "Compare El Paso truck accident lawyers handling 18-wheeler collisions, commercial trucking crashes, catastrophic injuries, wrongful death claims, and commercial insurance disputes throughout El Paso County.",
-    topics: [
-      "18-Wheeler Accidents",
-      "Semi-Truck Collisions",
-      "Commercial Vehicle Crashes",
-      "Driver Fatigue Cases",
-      "Unsafe Lane Changes",
-      "Rear-End Truck Collisions",
-      "Jackknife Accidents",
-      "Cargo and Load Accidents",
-      "Truck Maintenance Failures",
-      "Wrongful Death Claims",
-    ],
-    overview: [
-      "El Paso is a major commercial transportation corridor with significant truck traffic traveling Interstate 10, Loop 375, Zaragoza Road, and routes connecting Texas with New Mexico and international trade crossings. Collisions involving tractor trailers and other commercial vehicles can cause severe and life-changing injuries.",
-      "Truck accident cases can be more complicated than ordinary passenger-vehicle collisions. An investigation may involve the truck driver, motor carrier, commercial insurer, maintenance contractors, freight companies, cargo companies, and other parties involved in operating or maintaining the vehicle.",
-      "Important evidence can include electronic logging information, driver qualification records, inspection and maintenance records, photographs, video, witness statements, police reports, electronic vehicle data, medical records, and insurance information.",
-      "People injured in serious commercial truck crashes may face hospitalization, surgery, rehabilitation, lost income, permanent impairment, and substantial future medical needs. Fatal trucking collisions may also result in wrongful death claims by eligible surviving family members.",
-    ],
-    whenToHire: [
-      "The crash involved an 18-wheeler, semi-truck, commercial carrier, freight vehicle, or another large commercial vehicle.",
-      "You suffered serious injuries, hospitalization, surgery, permanent impairment, or substantial lost income.",
-      "Multiple companies, insurers, contractors, or other parties may share responsibility for the collision.",
-      "Electronic logs, maintenance records, dash-camera footage, vehicle data, or other trucking evidence needs to be preserved quickly.",
-      "The trucking company or commercial insurer disputes fault, minimizes the injuries, or requests a statement or release.",
-      "The collision resulted in catastrophic injury or death.",
-    ],
-    localContent: [
-      "El Paso is a major commercial transportation corridor with heavy truck traffic on Interstate 10, Loop 375, Zaragoza Road, and routes serving regional and international trade.",
-      "Truck accident investigations may involve commercial carriers, federal and state trucking requirements, driver records, maintenance records, electronic logging data, cargo information, and commercial insurance policies.",
-      "An El Paso truck accident attorney can help identify potentially responsible parties, preserve trucking evidence, evaluate insurance coverage, document damages, and determine whether negotiation or litigation is appropriate.",
-    ],
-    faqs: [
-      {
-        question: "What makes truck accident cases different from car accident cases?",
-        answer:
-          "Truck accident cases can involve commercial carriers, federal and state trucking regulations, commercial insurance policies, driver records, vehicle maintenance records, electronic logging data, and multiple potentially responsible parties.",
-      },
-      {
-        question: "Who may be responsible for an El Paso truck accident?",
-        answer:
-          "Depending on the facts, potentially responsible parties may include the truck driver, trucking company, freight carrier, maintenance contractor, cargo company, or another business involved in the operation of the commercial vehicle.",
-      },
-      {
-        question: "What evidence can be important after a commercial truck crash?",
-        answer:
-          "Evidence may include police reports, photographs, witness statements, electronic logging information, driver qualification records, maintenance records, inspection records, dash-camera footage, electronic vehicle data, medical records, and insurance information.",
-      },
-      {
-        question: "How much is a truck accident case worth?",
-        answer:
-          "There is no standard value for a truck accident claim. Potential compensation depends on factors such as liability, the severity of the injuries, medical expenses, lost income, long-term impairment, available insurance coverage, and other damages.",
-      },
-      {
-        question: "How long do I have to file a truck accident lawsuit in Texas?",
-        answer:
-          "Texas generally applies a two-year limitations period to many personal injury claims, but exceptions and other deadlines may apply. A lawyer can evaluate the deadline that applies to a particular case.",
-      },
-    ],
-    relatedPages: [
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-      { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
-      { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
-      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
-      { label: "18 Wheeler Accident", path: "/el-paso-18-wheeler-accident-lawyer" },
-      { label: "Semi Truck Accident", path: "/el-paso-semi-truck-accident-lawyer" },
-    ],
-    lastUpdated: "August 13, 2026",
-  },
   {
     path: "/el-paso-green-card-lawyers",
     shortTitle: "Green Card",
     title: "Best Green Card Lawyers in El Paso, TX | Compare Local Attorneys",
-    description: "Compare El Paso green card lawyers handling family-based immigration, adjustment of status, consular processing, employment-based residence, waivers, and permanent-residence issues.",
-    metaDescription: "Compare green card lawyers in El Paso, TX for adjustment of status, family petitions, consular processing, employment-based residence, and waivers.",
-    heroText: "Compare El Paso green card attorneys helping families, workers, and other applicants pursue lawful permanent residence through U.S. immigration processes.",
-    topics: ["Adjustment of Status", "Family-Based Green Cards", "Marriage-Based Green Cards", "Consular Processing", "Employment-Based Green Cards", "Form I-485", "Form I-130", "Immigrant Visas", "Waivers", "Permanent Residence"],
+    description:
+      "Compare El Paso green card lawyers handling family-based permanent residence, adjustment of status, consular processing, marriage-based cases, and related immigration matters.",
+    metaDescription:
+      "Compare green card lawyers in El Paso, TX for adjustment of status, family petitions, marriage-based cases, consular processing, and permanent residence.",
+    heroText:
+      "Compare El Paso green card attorneys for family-based permanent residence, adjustment of status, consular processing, marriage-based applications, and related immigration issues.",
+    topics: [
+      "Adjustment of status",
+      "Family-based green cards",
+      "Marriage-based green cards",
+      "Consular processing",
+      "Permanent residence eligibility",
+      "Green card interviews",
+      "Requests for evidence",
+      "Removal of conditions",
+    ],
     overview: [
-      "A green card lawyer helps people evaluate and pursue lawful permanent residence through family relationships, employment, humanitarian programs, or other immigration categories.",
-      "The correct process may involve adjustment of status inside the United States or consular processing abroad. Eligibility, filing sequence, visa availability, prior immigration history, criminal history, and admissibility issues can affect the case.",
-      "Legal counsel can help organize petitions and supporting evidence, prepare for interviews, respond to government requests, and identify issues that may require a waiver or a different immigration strategy."
+      "Green card attorneys help people evaluate paths to lawful permanent residence and prepare applications, petitions, supporting evidence, and responses to immigration agencies.",
+      "The appropriate process can depend on family relationships, immigration history, current status, prior entries or departures, criminal history, and whether processing occurs in the United States or through a U.S. consulate.",
     ],
-    whenToHire: ["You want to apply for permanent residence through a spouse, parent, child, employer, or another qualifying category.", "You are unsure whether to use adjustment of status or consular processing.", "USCIS requested additional evidence or scheduled an interview.", "Prior immigration violations, arrests, removals, misrepresentation, or unlawful presence may affect eligibility.", "A petition or green card application has been delayed or denied."],
-    localContent: ["Green card matters in El Paso often involve families and employers with ties to both the United States and Mexico, making travel history, consular processing, and cross-border documentation especially important.", "An El Paso immigration attorney can help evaluate the appropriate filing process, supporting records, interview preparation, and potential admissibility issues."],
+    whenToHire: [
+      "You are applying for permanent residence through a spouse or family member.",
+      "You are unsure whether adjustment of status or consular processing applies.",
+      "USCIS requested additional evidence or scheduled an interview.",
+      "Prior immigration, criminal, or travel history may affect eligibility.",
+      "You need help removing conditions from permanent residence.",
+    ],
+    localContent: [
+      "El Paso green card cases can involve families with significant cross-border ties to Ciudad Juárez and other communities in Mexico.",
+      "Local immigration counsel may help clients understand how USCIS processing, consular procedures, travel, and immigration history interact in a permanent-residence case.",
+    ],
     faqs: [
-      { question: "What is a green card?", answer: "A green card documents lawful permanent resident status in the United States and generally allows a person to live and work permanently in the country, subject to applicable immigration law." },
-      { question: "Can I get a green card through marriage?", answer: "A qualifying marriage to a U.S. citizen or lawful permanent resident may provide a basis for permanent residence, but the process and visa availability depend on the circumstances." },
-      { question: "What is adjustment of status?", answer: "Adjustment of status is the process some eligible applicants use to seek permanent residence while physically present in the United States." },
-      { question: "What is consular processing?", answer: "Consular processing generally involves completing the immigrant-visa process through a U.S. embassy or consulate outside the United States." },
-      { question: "When should I contact a green card lawyer?", answer: "Consider legal advice when eligibility is uncertain, the case involves prior immigration or criminal issues, a waiver may be needed, or a petition has been delayed or denied." }
+      { question: "What is a green card?", answer: "A green card documents lawful permanent resident status in the United States. Eligibility and the application process depend on the immigration category and individual circumstances." },
+      { question: "Can marriage qualify someone for a green card?", answer: "A qualifying marriage to a U.S. citizen or lawful permanent resident may provide a family-based path, but the required process and eligibility depend on the facts." },
+      { question: "What is adjustment of status?", answer: "Adjustment of status is a process through which certain eligible applicants seek permanent residence from within the United States rather than completing immigrant-visa processing abroad." },
+      { question: "What is consular processing?", answer: "Consular processing generally involves applying for an immigrant visa through a U.S. embassy or consulate outside the United States after the required petition and processing steps." },
+      { question: "When should I speak with a green card lawyer?", answer: "Legal advice may be useful when eligibility is uncertain, immigration history is complicated, prior violations or criminal issues exist, a request for evidence is issued, or the case involves cross-border processing." },
     ],
-    relatedPages: [{ label: "Immigration", path: "/el-paso-immigration-lawyers" }, { label: "Citizenship", path: "/el-paso-citizenship-lawyers" }, { label: "Family Law", path: "/el-paso-family-lawyers" }],
+    relatedPages: [
+      { label: "Immigration", path: "/el-paso-immigration-lawyers" },
+      { label: "Citizenship", path: "/el-paso-citizenship-lawyers" },
+      { label: "Family Law", path: "/el-paso-family-lawyers" },
+    ],
     resourceLinks: [{ label: "Browse All Texas Law Guides", path: "/guides" }],
     lastUpdated: "August 13, 2026",
   },
@@ -2578,44 +1201,89 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     path: "/el-paso-traffic-ticket-lawyers",
     shortTitle: "Traffic Ticket",
     title: "Best Traffic Ticket Lawyers in El Paso, TX | Compare Local Attorneys",
-    description: "Compare El Paso traffic ticket lawyers handling speeding citations, license issues, commercial-driver citations, warrants, moving violations, and municipal or justice-court cases.",
-    metaDescription: "Compare traffic ticket lawyers in El Paso, TX for speeding tickets, moving violations, warrants, CDL citations, license issues, and traffic court.",
-    heroText: "Compare El Paso traffic ticket attorneys handling speeding citations, moving violations, warrants, license consequences, and commercial-driver cases.",
-    topics: ["Speeding Tickets", "Moving Violations", "Traffic Warrants", "CDL Citations", "Driver License Issues", "Failure to Appear", "No Insurance Citations", "Reckless Driving", "Municipal Court", "Justice Court"],
-    overview: ["A traffic ticket lawyer represents drivers facing citations and related court matters that may affect fines, driving records, insurance costs, warrants, or driving privileges.", "The available options depend on the alleged violation, the court, the driver's history, license type, deadlines, and whether dismissal, defensive driving, deferred disposition, negotiation, or a contested hearing may be available.", "Commercial drivers can face additional consequences because traffic convictions may affect a CDL and employment."],
-    whenToHire: ["You received a serious or repeat traffic citation.", "You have a commercial driver's license or drive for work.", "A warrant or failure-to-appear issue exists.", "The citation may affect your license or insurance.", "You want to contest the allegation or understand available resolution options."],
-    localContent: ["Traffic citations in the El Paso area may be filed in municipal or justice courts depending on where the alleged violation occurred and which agency issued the citation.", "An El Paso traffic attorney can review the citation, court deadline, driving record, license status, and available options before a plea or payment is entered."],
-    faqs: [{ question: "Should I just pay a traffic ticket?", answer: "Paying a citation may be treated as a conviction and can have consequences. Review the available options before deciding how to resolve it." }, { question: "Can a traffic ticket be dismissed?", answer: "Some citations may be dismissed or resolved through other procedures when legal and court requirements are satisfied, but dismissal is not guaranteed." }, { question: "Can a ticket affect my CDL?", answer: "Yes. Certain traffic convictions can have significant consequences for commercial drivers, so CDL holders should evaluate a citation carefully." }, { question: "What happens if I miss my court date?", answer: "A missed deadline can lead to additional consequences, including a warrant or other enforcement action depending on the court and case." }, { question: "When should I contact a traffic ticket lawyer?", answer: "Consider counsel when the citation is serious, you hold a CDL, a warrant exists, your license is at risk, or you want to contest the allegation." }],
-    relatedPages: [{ label: "DWI / DUI", path: "/el-paso-dwi-lawyers" }, { label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" }, { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" }],
+    description:
+      "Compare El Paso traffic ticket lawyers handling speeding citations, moving violations, license issues, commercial-driver citations, warrants, and municipal or justice court matters.",
+    metaDescription:
+      "Compare traffic ticket lawyers in El Paso, TX for speeding tickets, moving violations, license issues, CDL citations, warrants, and traffic court matters.",
+    heroText:
+      "Compare El Paso traffic ticket attorneys for speeding citations, moving violations, driver-license consequences, commercial-driver cases, warrants, and related traffic matters.",
+    topics: ["Speeding tickets", "Moving violations", "Traffic warrants", "Driver-license issues", "CDL citations", "Failure to appear", "Municipal court cases", "Justice court cases"],
+    overview: [
+      "Traffic ticket attorneys represent drivers facing citations and related court matters and may evaluate available defenses, plea options, dismissal requirements, and possible consequences.",
+      "A citation can matter beyond the fine when a driver's record, license, insurance, employment, or commercial driving privileges may be affected.",
+    ],
+    whenToHire: ["You received a citation you want to contest.", "A warrant or failure-to-appear issue may exist.", "You hold a commercial driver's license.", "Multiple violations may affect your driving record.", "A license-related consequence is possible."],
+    localContent: [
+      "Traffic cases in the El Paso area may be handled in municipal or justice courts depending on where the citation was issued.",
+      "Local counsel can help identify the correct court, deadlines, appearance requirements, and options available for the particular citation.",
+    ],
+    faqs: [
+      { question: "Do I have to pay a traffic ticket immediately?", answer: "A citation normally provides instructions and a deadline for responding. Paying may have legal consequences, so drivers who want to contest a citation should review their options before acting." },
+      { question: "Can a traffic lawyer get a ticket dismissed?", answer: "Dismissal may be possible in some cases, but no result is guaranteed. Options depend on the alleged violation, evidence, court procedures, driving history, and other facts." },
+      { question: "Can traffic tickets affect a CDL?", answer: "Some traffic violations can have significant consequences for commercial drivers. CDL holders should consider the potential licensing and employment effects before resolving a citation." },
+      { question: "What happens if I missed my court date?", answer: "Missing a required appearance can create additional problems, potentially including a warrant or other court action. The specific status should be checked with the court." },
+      { question: "When should I contact a traffic ticket lawyer?", answer: "Consider legal advice when you want to contest the citation, a warrant may exist, your license or CDL could be affected, or you face multiple or serious violations." },
+    ],
+    relatedPages: [{ label: "DWI / DUI", path: "/el-paso-dwi-lawyers" }, { label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" }],
     lastUpdated: "August 13, 2026",
   },
   {
-    path: "/el-paso-drug-crime-lawyers",
+    path: "/el-paso-drug-crimes-lawyers",
     shortTitle: "Drug Crimes",
-    title: "Best Drug Crime Lawyers in El Paso, TX | Compare Local Attorneys",
-    description: "Compare El Paso drug crime lawyers handling possession, distribution, trafficking, prescription-drug allegations, search-and-seizure issues, and state or federal charges.",
-    metaDescription: "Compare drug crime lawyers in El Paso, TX for possession, distribution, trafficking, prescription cases, search issues, and federal drug charges.",
-    heroText: "Compare El Paso drug crime attorneys defending possession, distribution, trafficking, prescription-drug, and state or federal narcotics allegations.",
-    topics: ["Drug Possession", "Possession With Intent", "Drug Distribution", "Drug Trafficking", "Controlled Substances", "Prescription Drug Charges", "Search and Seizure", "Vehicle Searches", "Federal Drug Charges", "Drug Conspiracy"],
-    overview: ["Drug crime defense may involve allegations of possession, manufacture, delivery, distribution, trafficking, conspiracy, or unlawful prescription activity under Texas or federal law.", "These cases often turn on the legality of a stop or search, who possessed or controlled the substance, laboratory testing, confidential-source evidence, digital communications, and statements made during an investigation.", "Penalties and strategy can vary significantly based on the substance, amount, alleged conduct, prior history, and whether state or federal authorities are involved."],
-    whenToHire: ["You were arrested or investigated for a drug offense.", "Police searched your vehicle, home, phone, or property.", "The case involves allegations of distribution, trafficking, or conspiracy.", "Federal agents or prosecutors are involved.", "You believe evidence was obtained unlawfully."],
-    localContent: ["El Paso drug cases can involve local police, county authorities, state agencies, and federal law-enforcement activity associated with the border and interstate transportation corridors.", "An El Paso drug defense attorney can evaluate jurisdiction, search-and-seizure issues, laboratory evidence, statements, charging decisions, and potential defenses."],
-    faqs: [{ question: "Can drug evidence be suppressed?", answer: "A court may exclude evidence obtained through an unlawful search or seizure when the legal requirements for suppression are met." }, { question: "What if the drugs were not mine?", answer: "Possession generally requires proof connecting a person to the substance. Ownership and possession are not always the same question, and the surrounding facts matter." }, { question: "Can a drug case be federal?", answer: "Yes. Some drug investigations and prosecutions are brought in federal court, particularly when interstate or international conduct, larger quantities, or federal agencies are involved." }, { question: "Does the amount of a controlled substance matter?", answer: "Yes. The substance, weight, alleged conduct, and other circumstances can affect the level of the charge and potential penalties." }, { question: "When should I contact a drug crime lawyer?", answer: "Contact counsel promptly after an arrest, search, seizure, request for questioning, or notice of a state or federal drug investigation." }],
-    relatedPages: [{ label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" }, { label: "DWI / DUI", path: "/el-paso-dwi-lawyers" }, { label: "Traffic Ticket", path: "/el-paso-traffic-ticket-lawyers" }],
+    title: "Best Drug Crime Lawyers in El Paso, TX | Compare Defense Attorneys",
+    description:
+      "Compare El Paso drug crime lawyers defending possession, delivery, manufacture, controlled-substance, prescription-drug, and related criminal charges.",
+    metaDescription:
+      "Compare drug crime lawyers in El Paso, TX for possession, delivery, manufacture, controlled substances, prescription-drug cases, and criminal defense.",
+    heroText:
+      "Compare El Paso drug crime defense attorneys handling possession, delivery, manufacture, controlled-substance allegations, prescription-drug cases, searches, and related charges.",
+    topics: ["Drug possession", "Possession with intent", "Delivery allegations", "Manufacture charges", "Controlled substances", "Prescription-drug cases", "Search and seizure", "Felony and misdemeanor defense"],
+    overview: [
+      "Drug crime defense attorneys represent people accused of offenses involving controlled substances and evaluate the prosecution's evidence, the legality of searches, possession issues, laboratory evidence, statements, and possible defenses.",
+      "Potential consequences vary based on the substance, quantity, alleged conduct, criminal history, location, and whether state or federal law is involved.",
+    ],
+    whenToHire: ["You were arrested or charged with a drug offense.", "Police searched your vehicle, home, belongings, or electronic devices.", "You are accused of possessing drugs that belonged to someone else.", "The case involves alleged delivery or manufacture.", "Federal authorities may be involved."],
+    localContent: [
+      "El Paso's border location can make some drug investigations involve local, state, and federal agencies.",
+      "Defense counsel can evaluate which agency investigated the case, where charges are pending, and whether search, seizure, possession, or evidentiary issues may be important.",
+    ],
+    faqs: [
+      { question: "What does the prosecution have to prove in a drug possession case?", answer: "The required elements depend on the charged offense, but possession cases generally involve questions about whether the accused knowingly possessed the alleged controlled substance." },
+      { question: "Can an illegal search affect a drug case?", answer: "Search-and-seizure issues can be important. Whether evidence may be challenged depends on the circumstances, warrants, exceptions, and applicable law." },
+      { question: "What if the drugs belonged to someone else?", answer: "Ownership and possession are not always the same question. A defense attorney can evaluate where the substance was found, who had access, and what evidence allegedly connects a person to it." },
+      { question: "Are all drug charges felonies?", answer: "No. Classification and punishment depend on the substance, amount, alleged conduct, and applicable law." },
+      { question: "When should I contact a drug crime lawyer?", answer: "Consider speaking with defense counsel as soon as possible after an arrest, search, investigation, or notice of charges, particularly before making statements about the allegations." },
+    ],
+    relatedPages: [{ label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" }, { label: "DWI / DUI", path: "/el-paso-dwi-lawyers" }, { label: "Assault", path: "/el-paso-assault-lawyers" }],
     lastUpdated: "August 13, 2026",
   },
   {
     path: "/el-paso-assault-lawyers",
     shortTitle: "Assault",
-    title: "Best Assault Lawyers in El Paso, TX | Compare Local Attorneys",
-    description: "Compare El Paso assault lawyers handling assault, aggravated assault, bodily-injury allegations, threats, self-defense claims, and related misdemeanor or felony charges.",
-    metaDescription: "Compare assault lawyers in El Paso, TX for assault, aggravated assault, bodily injury, threats, self-defense, and related criminal charges.",
-    heroText: "Compare El Paso assault defense attorneys handling misdemeanor and felony assault allegations, aggravated assault, bodily injury, threats, and self-defense issues.",
-    topics: ["Assault", "Aggravated Assault", "Bodily Injury", "Threats", "Self-Defense", "Deadly Weapon Allegations", "Felony Assault", "Misdemeanor Assault", "Protective Orders", "Witness Evidence"],
-    overview: ["An assault defense lawyer represents people accused of intentionally or knowingly causing injury, threatening injury, or engaging in conduct charged as assault under Texas law.", "The facts may involve self-defense, defense of another person, conflicting witness accounts, video, medical evidence, weapons allegations, or questions about intent and identity.", "The classification and potential consequences depend on the alleged conduct, injuries, relationship between the parties, prior history, weapon allegations, and other statutory factors."],
-    whenToHire: ["You were arrested, cited, or investigated for assault.", "The allegation involves serious injury or a deadly weapon.", "You acted in self-defense or defense of another person.", "A protective order or bond restriction affects contact or residence.", "Witness statements, video, messages, or medical evidence may need to be preserved."],
-    localContent: ["Assault cases in El Paso may proceed in county or district court depending on the charge and alleged circumstances.", "An El Paso assault attorney can review witness accounts, recordings, medical evidence, self-defense issues, bond conditions, and possible collateral consequences."],
-    faqs: [{ question: "Can self-defense apply to an assault charge?", answer: "Texas law recognizes self-defense in qualifying circumstances. Whether it applies depends on the facts, the perceived threat, the force used, and other legal requirements." }, { question: "What is aggravated assault?", answer: "Aggravated assault generally involves specified serious bodily injury or use or exhibition of a deadly weapon, subject to the statutory elements and facts." }, { question: "What if the alleged victim does not want charges?", answer: "The prosecutor, not the complaining witness, generally controls whether a criminal case proceeds after charges are filed." }, { question: "Can video or text messages help my defense?", answer: "Yes. Recordings, messages, photographs, witness information, and other evidence can provide important context and should be preserved." }, { question: "When should I contact an assault lawyer?", answer: "Contact counsel promptly after an arrest, accusation, protective order, or request for questioning." }],
+    title: "Best Assault Lawyers in El Paso, TX | Compare Defense Attorneys",
+    description:
+      "Compare El Paso assault lawyers defending misdemeanor and felony assault allegations, aggravated assault, bodily injury cases, threats, and related criminal charges.",
+    metaDescription:
+      "Compare assault lawyers in El Paso, TX for misdemeanor assault, aggravated assault, bodily injury allegations, threats, and criminal defense.",
+    heroText:
+      "Compare El Paso assault defense attorneys handling bodily-injury allegations, threats, aggravated assault, disputed incidents, self-defense claims, and related criminal cases.",
+    topics: ["Assault bodily injury", "Aggravated assault", "Threat allegations", "Self-defense", "Felony assault", "Misdemeanor assault", "Protective orders", "Criminal investigations"],
+    overview: [
+      "Assault defense attorneys represent people accused of causing or threatening bodily injury and investigate witness accounts, physical evidence, recordings, injuries, intent, and possible defenses.",
+      "The seriousness of an assault allegation can depend on the alleged conduct, injuries, weapon allegations, relationship between the parties, prior history, and other statutory factors.",
+    ],
+    whenToHire: ["You were arrested or charged with assault.", "Police want to question you about an alleged altercation.", "You believe you acted in self-defense or defense of another person.", "The allegation involves a weapon or serious injury.", "A protective order or related family-violence allegation exists."],
+    localContent: [
+      "Assault allegations in El Paso may lead to criminal proceedings and, depending on the circumstances, related protective-order issues.",
+      "Local defense counsel can review police reports, recordings, witness evidence, court conditions, and the specific charge filed in the case.",
+    ],
+    faqs: [
+      { question: "Can self-defense apply to an assault charge?", answer: "Self-defense may be relevant in some cases. Whether it applies depends on the circumstances and Texas law governing the use of force." },
+      { question: "What is aggravated assault?", answer: "Texas law can elevate certain assault allegations based on factors such as serious bodily injury or use or exhibition of a deadly weapon. The precise charge depends on the alleged facts." },
+      { question: "What if the other person does not want to press charges?", answer: "The government, not the complaining witness, generally decides whether a criminal prosecution continues. A witness's position may matter but does not automatically end a case." },
+      { question: "Can assault charges affect employment or firearm rights?", answer: "A conviction or certain court orders may carry consequences beyond the immediate criminal penalties. The effect depends on the offense and individual circumstances." },
+      { question: "When should I contact an assault lawyer?", answer: "Consider defense counsel promptly after an arrest, accusation, police contact, protective-order filing, or notice that charges may be pursued." },
+    ],
     relatedPages: [{ label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" }, { label: "Domestic Violence", path: "/el-paso-domestic-violence-lawyers" }, { label: "DWI / DUI", path: "/el-paso-dwi-lawyers" }],
     lastUpdated: "August 13, 2026",
   },
@@ -2623,258 +1291,90 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     path: "/el-paso-domestic-violence-lawyers",
     shortTitle: "Domestic Violence",
     title: "Best Domestic Violence Lawyers in El Paso, TX | Compare Local Attorneys",
-    description: "Compare El Paso domestic violence lawyers handling family-violence allegations, assault cases, protective orders, bond conditions, custody implications, and related criminal matters.",
-    metaDescription: "Compare domestic violence lawyers in El Paso, TX for family-violence allegations, assault, protective orders, bond conditions, and related cases.",
-    heroText: "Compare El Paso attorneys handling family-violence allegations, domestic assault cases, protective orders, bond restrictions, and related criminal and family-law issues.",
-    topics: ["Family Violence", "Domestic Assault", "Protective Orders", "Emergency Protective Orders", "Bond Conditions", "No-Contact Orders", "Self-Defense", "Repeat Family Violence", "Custody Consequences", "Criminal Defense"],
-    overview: ["Domestic violence and family-violence matters can involve criminal charges, protective orders, emergency restrictions, and related family-law consequences.", "Evidence may include 911 calls, body-camera video, photographs, medical records, witness statements, text messages, social media, and prior court orders.", "Because criminal and family proceedings can overlap, allegations may affect residence, contact with family members, firearm possession, employment, immigration, and child-custody disputes."],
-    whenToHire: ["You were arrested or accused of family violence.", "A protective order or emergency order has been requested or entered.", "Bond conditions restrict contact, residence, travel, or firearms.", "The allegation may affect a divorce or child-custody case.", "You need to preserve messages, video, witness information, or other evidence."],
-    localContent: ["Family-violence cases in El Paso can involve criminal courts as well as separate protective-order or family-law proceedings.", "An El Paso attorney can help identify which proceedings are pending, review restrictions and evidence, and address the criminal and family-law consequences of the allegations."],
-    faqs: [{ question: "What is family violence in Texas?", answer: "Texas law defines family violence by statute and can cover qualifying acts or threats involving family or household relationships and certain dating relationships." }, { question: "What is a protective order?", answer: "A protective order is a civil court order that can impose restrictions intended to protect an applicant from qualifying conduct." }, { question: "Can a domestic violence allegation affect child custody?", answer: "Yes. Family-violence allegations and findings can be relevant to conservatorship, possession, access, and safety-related decisions in a family case." }, { question: "What if I acted in self-defense?", answer: "Self-defense may be relevant when the legal requirements are satisfied. Evidence concerning the circumstances should be preserved and reviewed." }, { question: "When should I contact a domestic violence lawyer?", answer: "Seek legal advice promptly after an arrest, accusation, protective-order filing, or bond restriction because multiple proceedings and deadlines may be involved." }],
-    relatedPages: [{ label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" }, { label: "Assault", path: "/el-paso-assault-lawyers" }, { label: "Family Law", path: "/el-paso-family-lawyers" }, { label: "Child Custody", path: "/el-paso-child-custody-lawyers" }],
+    description:
+      "Compare El Paso domestic violence lawyers handling family-violence allegations, assault cases, protective orders, custody-related issues, and criminal defense.",
+    metaDescription:
+      "Compare domestic violence lawyers in El Paso, TX for family-violence allegations, assault defense, protective orders, and related family-law matters.",
+    heroText:
+      "Compare El Paso attorneys handling family-violence allegations, criminal defense, protective orders, custody implications, and related legal proceedings.",
+    topics: ["Family violence allegations", "Assault defense", "Protective orders", "Emergency orders", "No-contact conditions", "Custody implications", "Criminal cases", "Family-law proceedings"],
+    overview: [
+      "Domestic violence matters can involve criminal allegations, protective orders, release conditions, family-law disputes, and significant consequences for housing, employment, firearms, and parenting issues.",
+      "Because criminal and family proceedings may overlap, the appropriate legal strategy depends on the allegations, existing orders, relationship between the parties, and pending cases.",
+    ],
+    whenToHire: ["You were arrested or accused of family violence.", "A protective order has been requested or issued.", "You need legal protection from alleged family violence.", "Custody or visitation may be affected by allegations.", "Criminal and family-law cases are proceeding at the same time."],
+    localContent: [
+      "El Paso family-violence matters may involve criminal courts, protective-order proceedings, and family courts depending on the circumstances.",
+      "An attorney can help identify which orders apply, what hearings are pending, and how one proceeding may affect another.",
+    ],
+    faqs: [
+      { question: "What is family violence under Texas law?", answer: "Texas law defines family violence through specific statutes and relationships. Whether conduct falls within that definition depends on the alleged acts and relationship of the people involved." },
+      { question: "What is a protective order?", answer: "A protective order is a court order that can impose restrictions intended to protect an applicant from certain alleged conduct. Requirements and available relief depend on the type of proceeding." },
+      { question: "Can domestic violence allegations affect child custody?", answer: "Family-violence allegations and findings can be relevant in conservatorship, possession, and access decisions. The effect depends on the evidence and applicable law." },
+      { question: "Can the complaining witness make criminal charges disappear?", answer: "Criminal charging decisions are generally controlled by prosecutors rather than the complaining witness alone." },
+      { question: "When should I contact a domestic violence lawyer?", answer: "Prompt legal advice may be important after an arrest, protective-order application, emergency order, custody dispute involving violence allegations, or other court notice." },
+    ],
+    relatedPages: [{ label: "Assault", path: "/el-paso-assault-lawyers" }, { label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" }, { label: "Family Law", path: "/el-paso-family-lawyers" }, { label: "Child Custody", path: "/el-paso-child-custody-lawyers" }],
     lastUpdated: "August 13, 2026",
   },
   {
     path: "/el-paso-child-support-lawyers",
     shortTitle: "Child Support",
     title: "Best Child Support Lawyers in El Paso, TX | Compare Local Attorneys",
-    description: "Compare El Paso child support lawyers handling support calculations, modifications, enforcement, arrears, medical support, income disputes, and Texas family-law orders.",
-    metaDescription: "Compare child support lawyers in El Paso, TX for calculations, modifications, enforcement, arrears, medical support, and income disputes.",
-    heroText: "Compare El Paso child support attorneys handling Texas support calculations, modifications, enforcement, arrears, medical support, and disputed income issues.",
-    topics: ["Child Support", "Support Calculations", "Child Support Modification", "Enforcement", "Arrears", "Medical Support", "Income Withholding", "Self-Employment Income", "Military Pay", "Paternity"],
-    overview: ["A child support lawyer helps parents address the establishment, calculation, modification, and enforcement of support obligations under Texas family law.", "Support issues may involve income, number of children, health insurance, medical support, prior obligations, self-employment, bonuses, commissions, military compensation, and other financial information.", "Existing support orders generally remain enforceable unless modified through the appropriate legal process, so changes in income or parenting arrangements should be addressed through the court when required."],
-    whenToHire: ["Child support is being established for the first time.", "Income, self-employment, bonuses, commissions, or military pay are disputed.", "A substantial change may justify modification.", "Support has not been paid and enforcement is being considered.", "You received an enforcement motion, withholding notice, or other court filing."],
-    localContent: ["El Paso child support matters may arise in divorce cases, suits affecting the parent-child relationship, paternity cases, modification proceedings, and enforcement actions.", "For families connected to Fort Bliss or cross-border employment, determining income and enforcing orders may require careful review of compensation and jurisdictional facts."],
-    faqs: [{ question: "How is child support calculated in Texas?", answer: "Texas uses statutory guidelines in many cases, but the calculation depends on net resources, the number of children, other support obligations, and case-specific factors." }, { question: "Can child support be modified?", answer: "A support order may be modified when statutory requirements are met. A change in circumstances does not automatically change the existing order." }, { question: "What happens if child support is not paid?", answer: "Enforcement remedies may be available, including income withholding and court proceedings, depending on the facts and existing order." }, { question: "Does child support include health insurance?", answer: "Texas orders can address medical and dental support in addition to periodic child support." }, { question: "When should I contact a child support lawyer?", answer: "Consider counsel when support is being established, income is disputed, modification is needed, or enforcement proceedings are pending." }],
+    description:
+      "Compare El Paso child support lawyers handling support orders, calculations, modifications, enforcement, arrears, income disputes, and related family-law matters.",
+    metaDescription:
+      "Compare child support lawyers in El Paso, TX for support calculations, modifications, enforcement, arrears, income disputes, and family-law cases.",
+    heroText:
+      "Compare El Paso child support attorneys handling support calculations, establishment, modifications, enforcement, arrears, income disputes, and related parenting cases.",
+    topics: ["Child support calculations", "Establishing support", "Support modifications", "Enforcement", "Arrears", "Income disputes", "Medical support", "Parentage issues"],
+    overview: [
+      "Child support attorneys help parents address the establishment, calculation, modification, and enforcement of support obligations and related medical-support requirements.",
+      "The amount and procedure can depend on income, number of children, existing obligations, possession arrangements, health coverage, parentage, and other circumstances recognized by Texas law.",
+    ],
+    whenToHire: ["A child support order needs to be established.", "Income or circumstances have materially changed.", "Support is not being paid as ordered.", "You are accused of owing arrears.", "Income, parentage, medical support, or other calculation issues are disputed."],
+    localContent: [
+      "El Paso child support cases may arise in divorce, parentage, modification, or enforcement proceedings.",
+      "Local family-law counsel can review existing orders, payment records, income information, and the court procedure applicable to the case.",
+    ],
+    faqs: [
+      { question: "How is child support calculated in Texas?", answer: "Texas uses statutory guidelines in many cases, but the calculation depends on the facts, including net resources, number of children, other support obligations, and potentially other relevant factors." },
+      { question: "Can child support be modified?", answer: "Modification may be available when statutory requirements are met. A change in income or circumstances does not automatically change an existing court order." },
+      { question: "What if child support has not been paid?", answer: "Enforcement remedies may be available for unpaid court-ordered support. The appropriate procedure depends on the existing order and payment history." },
+      { question: "Can parents privately agree to a different amount?", answer: "Parents may reach agreements in some circumstances, but an informal agreement does not necessarily modify an existing court order. Court approval may be required." },
+      { question: "When should I contact a child support lawyer?", answer: "Consider legal advice when support is being established, modification is needed, enforcement is threatened or necessary, arrears are disputed, or financial information is contested." },
+    ],
     relatedPages: [{ label: "Family Law", path: "/el-paso-family-lawyers" }, { label: "Divorce", path: "/el-paso-divorce-lawyers" }, { label: "Child Custody", path: "/el-paso-child-custody-lawyers" }, { label: "Adoption", path: "/el-paso-adoption-lawyers" }],
-    resourceLinks: [{ label: "Texas Child Custody: Conservatorship, Possession, and Access Basics", path: "/guides/texas-child-custody-conservatorship-basics" }],
     lastUpdated: "August 13, 2026",
   },
   {
     path: "/el-paso-adoption-lawyers",
     shortTitle: "Adoption",
     title: "Best Adoption Lawyers in El Paso, TX | Compare Local Attorneys",
-    description: "Compare El Paso adoption lawyers handling stepparent, relative, private, agency, adult, and interstate adoptions, termination issues, and adoption finalization.",
-    metaDescription: "Compare adoption lawyers in El Paso, TX for stepparent, relative, private, agency, adult, and interstate adoptions and finalization.",
-    heroText: "Compare El Paso adoption attorneys helping families with stepparent, relative, private, agency, adult, and interstate adoption matters.",
-    topics: ["Stepparent Adoption", "Relative Adoption", "Private Adoption", "Agency Adoption", "Adult Adoption", "Interstate Adoption", "Termination of Parental Rights", "Adoption Finalization", "Home Studies", "Birth Parent Consent"],
-    overview: ["An adoption lawyer helps prospective parents and families navigate the legal steps required to establish a permanent parent-child relationship through adoption.", "The process varies depending on whether the matter involves a stepparent, relative, private placement, agency, adult adoptee, or parties in different states or countries.", "Adoption cases may require consent, termination of parental rights, background checks, home studies, required reports, notice, and a final court hearing depending on the circumstances."],
-    whenToHire: ["You are considering a stepparent, relative, private, agency, or adult adoption.", "Consent or parental-rights issues need to be resolved.", "The child or another party lives in another state or country.", "You need help understanding home-study, notice, or court requirements.", "An adoption is ready for finalization or a complication has arisen."],
-    localContent: ["El Paso adoption matters can involve local families, military families connected to Fort Bliss, relatives in New Mexico, and cross-border family relationships.", "An El Paso adoption attorney can help determine the required Texas procedure, coordinate necessary records and consents, and prepare the case for finalization."],
-    faqs: [{ question: "Do I need a lawyer for a stepparent adoption?", answer: "Adoption changes legal parentage and can involve consent or termination issues, so legal guidance can help ensure the required Texas procedures are followed." }, { question: "Can an adult be adopted in Texas?", answer: "Texas law permits adult adoption through a court process, subject to applicable statutory requirements." }, { question: "What if a biological parent will not consent?", answer: "Whether an adoption can proceed without consent depends on the facts and whether legal grounds and procedures concerning parental rights are satisfied." }, { question: "What is an interstate adoption?", answer: "An adoption involving parties in different states may require compliance with additional interstate procedures before placement or finalization." }, { question: "When should I contact an adoption lawyer?", answer: "Consider counsel early so consent, parental rights, placement, required studies, notices, and filing requirements can be evaluated before finalization." }],
-    relatedPages: [{ label: "Family Law", path: "/el-paso-family-lawyers" }, { label: "Child Custody", path: "/el-paso-child-custody-lawyers" }, { label: "Child Support", path: "/el-paso-child-support-lawyers" }, { label: "Estate Planning", path: "/el-paso-estate-planning-lawyers" }],
-    lastUpdated: "August 13, 2026",
-  },
-
-  {
-    path: "/el-paso-federal-criminal-defense-lawyers",
-    shortTitle: "Federal Criminal Defense",
-    title: "Best Federal Criminal Defense Lawyers in El Paso, TX | Compare Attorneys",
-    description: "Compare El Paso federal criminal defense lawyers handling federal investigations, indictments, drug cases, firearms allegations, fraud, conspiracy, and sentencing matters.",
-    metaDescription: "Compare federal criminal defense lawyers in El Paso, TX for investigations, indictments, drug cases, fraud, conspiracy, firearms allegations, and sentencing.",
-    heroText: "Compare El Paso federal criminal defense attorneys representing clients in federal investigations, indictments, complex prosecutions, plea negotiations, trials, and sentencing.",
-    topics: ["Federal Criminal Defense", "Federal Investigations", "Grand Jury Matters", "Federal Drug Charges", "Conspiracy", "Fraud", "Firearms Charges", "Federal Sentencing", "White Collar Defense", "Appeals"],
-    overview: ["Federal criminal cases are prosecuted under federal law and can involve investigations by federal agencies, grand juries, indictments, detention hearings, extensive discovery, plea negotiations, trials, and sentencing under federal statutes and guidelines.", "These cases often involve different procedures, charging practices, discovery issues, and sentencing considerations than state prosecutions.", "Early representation can be especially important when a person has been contacted by investigators, served with a subpoena, identified as a target, arrested, or indicted."],
-    whenToHire: ["Federal agents contacted you or executed a search warrant.", "You received a federal subpoena, target letter, complaint, or indictment.", "The allegations involve federal drug, fraud, firearms, conspiracy, immigration, or financial offenses.", "A detention or bond hearing is approaching.", "You need representation for plea negotiations, trial, sentencing, or appeal."],
-    localContent: ["Federal criminal matters arising in El Paso may be heard in the El Paso Division of the United States District Court for the Western District of Texas.", "El Paso's location on the U.S.-Mexico border can result in federal investigations involving transportation, controlled substances, immigration, customs, financial transactions, and interstate activity."],
-    faqs: [{ question: "How is federal court different from Texas state court?", answer: "Federal cases are governed by federal statutes and procedures and are prosecuted by federal authorities. Charging, discovery, detention, plea, trial, and sentencing procedures can differ substantially from state court." }, { question: "What should I do if federal agents want to interview me?", answer: "Consider speaking with defense counsel before answering substantive questions or providing documents so you understand your rights and status in the investigation." }, { question: "What is a federal indictment?", answer: "An indictment is a formal charging document returned by a federal grand jury alleging that one or more federal crimes were committed." }, { question: "Can someone be detained before a federal trial?", answer: "Yes. Federal courts may address release or detention based on statutory factors and the circumstances of the case." }, { question: "When should I contact a federal defense lawyer?", answer: "As early as possible after learning of an investigation, subpoena, search warrant, arrest, complaint, or indictment." }],
-    relatedPages: [{ label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" }, { label: "Drug Crimes", path: "/el-paso-drug-crime-lawyers" }, { label: "DWI / DUI", path: "/el-paso-dwi-lawyers" }, { label: "Immigration", path: "/el-paso-immigration-lawyers" }],
-    lastUpdated: "August 13, 2026",
-  },
-  {
-    path: "/el-paso-expunction-lawyers",
-    shortTitle: "Expunction",
-    title: "Best Expunction Lawyers in El Paso, TX | Compare Local Attorneys",
-    description: "Compare El Paso expunction lawyers handling eligible arrest records, dismissals, acquittals, identity-related arrests, and Texas record-clearing matters.",
-    metaDescription: "Compare expunction lawyers in El Paso, TX for eligible arrests, dismissals, acquittals, and Texas criminal record-clearing matters.",
-    heroText: "Compare El Paso expunction attorneys helping eligible clients seek removal of qualifying Texas arrest and criminal records.",
-    topics: ["Expunction", "Record Clearing", "Dismissed Charges", "Acquittals", "Arrest Records", "Identity Theft Arrests", "Waiting Periods", "Petitions for Expunction", "Nondisclosure", "Background Checks"],
-    overview: ["Texas expunction law allows certain eligible arrest and criminal records to be removed through a court process.", "Eligibility depends on the charge, disposition, waiting periods, related offenses, and other statutory requirements; not every dismissal or completed case qualifies.", "When expunction is unavailable, an order of nondisclosure may sometimes provide a different form of record restriction."],
-    whenToHire: ["A criminal charge was dismissed and you want to determine eligibility.", "You were acquitted or pardoned.", "An arrest resulted from identity theft or another qualifying circumstance.", "A background check is affecting employment, housing, licensing, or other opportunities.", "You need to compare expunction with nondisclosure."],
-    localContent: ["El Paso expunction matters can involve records held by courts, law-enforcement agencies, prosecutors, detention facilities, and other governmental entities.", "An El Paso attorney can review the arrest, charge, disposition, dates, and court records to determine which Texas record-clearing procedure may apply."],
-    faqs: [{ question: "Does a dismissal automatically erase my record?", answer: "No. A dismissal does not automatically remove arrest or court records. Eligibility for expunction depends on Texas law and the circumstances of the case." }, { question: "What is the difference between expunction and nondisclosure?", answer: "Expunction can require eligible records to be destroyed or removed, while nondisclosure generally restricts public access to qualifying records without erasing every record." }, { question: "Can every arrest be expunged?", answer: "No. Texas limits expunction to specified circumstances and eligibility must be evaluated case by case." }, { question: "How long does expunction take?", answer: "Timing varies with the court, required notice, agencies involved, objections, and the complexity of the record." }, { question: "When should I contact an expunction lawyer?", answer: "After a dismissal, acquittal, qualifying arrest, or other disposition when you want to know whether Texas law permits record clearing." }],
-    relatedPages: [{ label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" }, { label: "DWI / DUI", path: "/el-paso-dwi-lawyers" }, { label: "Traffic Ticket", path: "/el-paso-traffic-ticket-lawyers" }, { label: "Probation Violation", path: "/el-paso-probation-violation-lawyers" }],
-    lastUpdated: "August 13, 2026",
-  },
-  {
-    path: "/el-paso-probation-violation-lawyers",
-    shortTitle: "Probation Violation",
-    title: "Best Probation Violation Lawyers in El Paso, TX | Compare Attorneys",
-    description: "Compare El Paso probation violation lawyers handling motions to revoke, motions to adjudicate, alleged condition violations, new arrests, and revocation hearings.",
-    metaDescription: "Compare probation violation lawyers in El Paso, TX for revocation motions, adjudication, alleged condition violations, new arrests, and hearings.",
-    heroText: "Compare El Paso probation violation attorneys representing clients facing revocation, adjudication, alleged violations, and related court hearings.",
-    topics: ["Probation Violations", "Community Supervision", "Motion to Revoke", "Motion to Adjudicate", "Revocation Hearings", "New Arrests", "Failed Drug Tests", "Missed Reporting", "Unpaid Fees", "Bond Issues"],
-    overview: ["A probation or community-supervision violation can place a person's liberty and original criminal case back before the court.", "Alleged violations may involve a new arrest, failed testing, missed reporting, unpaid obligations, travel, treatment, classes, community service, or other conditions.", "The available response depends on the original case, type of supervision, alleged violation, evidence, compliance history, and court."],
-    whenToHire: ["A motion to revoke or motion to adjudicate has been filed.", "A warrant was issued for an alleged probation violation.", "You were arrested for a new offense while on supervision.", "Your probation officer alleges missed reporting, testing, treatment, payment, or another violation.", "A revocation or adjudication hearing is scheduled."],
-    localContent: ["Probation matters in El Paso can arise from misdemeanor and felony cases and may involve local courts, supervision departments, treatment providers, and testing requirements.", "Counsel can review the alleged violation, supervision records, underlying judgment, available evidence, and possible alternatives to revocation."],
-    faqs: [{ question: "Can probation be revoked for one violation?", answer: "A court may consider alleged violations under the applicable law and order, but the result depends on the type of supervision, evidence, history, and circumstances." }, { question: "What is a motion to adjudicate?", answer: "It is a request asking the court to proceed on an offense after an alleged violation of deferred-adjudication community supervision." }, { question: "Can a new arrest violate probation?", answer: "A new arrest or alleged offense can trigger violation proceedings, although an arrest itself is not the same as a conviction." }, { question: "Can the court continue probation instead of revoking it?", answer: "Depending on the case, the court may have options other than full revocation, but outcomes are fact-specific." }, { question: "When should I contact a lawyer?", answer: "Promptly after learning of an alleged violation, warrant, motion, arrest, or scheduled hearing." }],
-    relatedPages: [{ label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" }, { label: "DWI / DUI", path: "/el-paso-dwi-lawyers" }, { label: "Drug Crimes", path: "/el-paso-drug-crime-lawyers" }, { label: "Expunction", path: "/el-paso-expunction-lawyers" }],
-    lastUpdated: "August 13, 2026",
-  },
-  {
-    path: "/el-paso-uncontested-divorce-lawyers",
-    shortTitle: "Uncontested Divorce",
-    title: "Best Uncontested Divorce Lawyers in El Paso, TX | Compare Attorneys",
-    description: "Compare El Paso uncontested divorce lawyers helping spouses resolve agreed divorces involving property, debts, children, support, and final Texas divorce decrees.",
-    metaDescription: "Compare uncontested divorce lawyers in El Paso, TX for agreed divorces, property, debts, children, support, and final divorce decrees.",
-    heroText: "Compare El Paso uncontested divorce attorneys helping spouses complete agreed Texas divorces efficiently and accurately.",
-    topics: ["Uncontested Divorce", "Agreed Divorce", "Divorce Decree", "Property Division", "Debt Division", "Parenting Plans", "Child Support", "Spousal Support", "Military Divorce", "Final Hearing"],
-    overview: ["An uncontested divorce generally means the spouses can agree on the issues necessary to complete the divorce, although the required documents and procedures still must satisfy Texas law.", "Agreements may address property, debts, conservatorship, possession schedules, child support, medical support, spousal maintenance, retirement benefits, and other issues.", "Legal review can help ensure that the written decree accurately reflects the agreement and addresses assets, obligations, and parenting terms that might otherwise create later disputes."],
-    whenToHire: ["You and your spouse agree to divorce and want help preparing the paperwork.", "You agree generally but need to resolve specific wording or financial details.", "The marriage involves children, a home, retirement accounts, military benefits, a business, or significant debt.", "You received proposed divorce documents and want them reviewed.", "You want help completing the final decree and court process."],
-    localContent: ["El Paso uncontested divorces are still subject to Texas filing, notice or waiver, waiting-period, and final-decree requirements.", "Military families connected to Fort Bliss may need particular attention to retirement, benefits, deployment, residency, and parenting provisions even when the divorce is agreed."],
-    faqs: [{ question: "What makes a divorce uncontested?", answer: "Generally, the spouses are able to agree on the issues required to finalize the divorce rather than asking the court to decide disputed matters at trial." }, { question: "Do we still need a court order?", answer: "Yes. An agreed divorce is completed through a final divorce decree signed by the court." }, { question: "Can an uncontested divorce involve children?", answer: "Yes, if the parents can reach acceptable agreements addressing conservatorship, possession, support, and related issues." }, { question: "Should I have an agreed decree reviewed?", answer: "Legal review can help identify provisions affecting property, debt, retirement, support, parenting, and future enforcement before the decree is signed." }, { question: "When should I contact a lawyer?", answer: "Early enough to review the agreement and prepare or evaluate the documents before signing or presenting them to the court." }],
-    relatedPages: [{ label: "Divorce", path: "/el-paso-divorce-lawyers" }, { label: "Family Law", path: "/el-paso-family-lawyers" }, { label: "Child Custody", path: "/el-paso-child-custody-lawyers" }, { label: "Child Support", path: "/el-paso-child-support-lawyers" }],
-    lastUpdated: "August 13, 2026",
-  },
-  {
-    path: "/el-paso-spousal-support-lawyers",
-    shortTitle: "Spousal Support",
-    title: "Best Spousal Support Lawyers in El Paso, TX | Compare Local Attorneys",
-    description: "Compare El Paso spousal support lawyers handling Texas spousal maintenance, contractual alimony, temporary support, enforcement, and divorce-related financial disputes.",
-    metaDescription: "Compare spousal support lawyers in El Paso, TX for maintenance, contractual alimony, temporary support, enforcement, and divorce financial issues.",
-    heroText: "Compare El Paso spousal support attorneys handling Texas maintenance, contractual alimony, temporary support, enforcement, and related divorce issues.",
-    topics: ["Spousal Maintenance", "Contractual Alimony", "Temporary Spousal Support", "Divorce", "Support Eligibility", "Support Amount", "Support Duration", "Enforcement", "Modification", "Military Divorce"],
-    overview: ["Texas distinguishes statutory spousal maintenance from contractual arrangements sometimes referred to as alimony.", "Eligibility, amount, duration, and enforcement can depend on statutory requirements, the length of the marriage, earning ability, disability, family violence, agreements, and other circumstances.", "Temporary support may also become an issue while a divorce is pending, particularly when spouses have unequal access to income or marital resources."],
-    whenToHire: ["You are seeking or opposing spousal maintenance in a divorce.", "Temporary financial support is disputed while the case is pending.", "A proposed settlement includes contractual alimony.", "An existing support obligation may need enforcement or review.", "The divorce involves substantial income differences, disability, family violence, military benefits, or a long marriage."],
-    localContent: ["El Paso spousal-support disputes may arise in agreed divorces, contested divorces, temporary-order proceedings, enforcement matters, and settlement negotiations.", "For Fort Bliss families, military compensation, retirement benefits, relocation, and employment history can affect the broader financial analysis."],
-    faqs: [{ question: "Does Texas have alimony?", answer: "Texas law provides for statutory spousal maintenance in qualifying circumstances, and divorcing spouses may also negotiate contractual support arrangements." }, { question: "Is spousal support automatic after a long marriage?", answer: "No. Eligibility for court-ordered maintenance depends on statutory requirements and the facts of the case." }, { question: "Can spouses agree to alimony?", answer: "Spouses may negotiate contractual support terms as part of a divorce settlement, subject to the agreement and applicable law." }, { question: "Can support be enforced?", answer: "Enforcement options depend on whether the obligation is statutory maintenance, contractual support, or another type of order or agreement." }, { question: "When should I contact a lawyer?", answer: "When support is requested, disputed, negotiated, modified, or enforced as part of a divorce or post-divorce matter." }],
-    relatedPages: [{ label: "Divorce", path: "/el-paso-divorce-lawyers" }, { label: "Uncontested Divorce", path: "/el-paso-uncontested-divorce-lawyers" }, { label: "Family Law", path: "/el-paso-family-lawyers" }, { label: "Child Support", path: "/el-paso-child-support-lawyers" }],
-    lastUpdated: "August 13, 2026",
-  },
-  {
-    path: "/el-paso-deportation-defense-lawyers",
-    shortTitle: "Deportation Defense",
-    title: "Best Deportation Defense Lawyers in El Paso, TX | Compare Attorneys",
-    description: "Compare El Paso deportation defense lawyers handling removal proceedings, immigration court, detention, bond, asylum defenses, cancellation, and related relief.",
-    metaDescription: "Compare deportation defense lawyers in El Paso, TX for removal proceedings, detention, bond, asylum defenses, cancellation, and immigration court.",
-    heroText: "Compare El Paso deportation defense attorneys representing people in removal proceedings, detention matters, immigration court, and applications for available relief.",
-    topics: ["Deportation Defense", "Removal Proceedings", "Immigration Court", "Immigration Detention", "Bond Hearings", "Asylum", "Cancellation of Removal", "Adjustment of Status", "Criminal Immigration Issues", "Appeals"],
-    overview: ["Removal proceedings can determine whether a noncitizen may remain in the United States and may involve immigration court hearings, detention, bond, applications for relief, evidentiary submissions, and appeals.", "Potential defenses or forms of relief depend on immigration history, family relationships, prior applications, criminal history, fear of return, length of residence, and other facts.", "Because criminal cases and immigration consequences can overlap, coordinated review may be especially important when an arrest, plea, or conviction is involved."],
-    whenToHire: ["You received a Notice to Appear or immigration-court hearing notice.", "You or a family member is in immigration detention.", "Removal proceedings have started or an old removal order may exist.", "You may qualify for asylum, cancellation, adjustment, or another form of relief.", "A criminal arrest, charge, plea, or conviction may affect immigration status."],
-    localContent: ["El Paso's border location means removal and detention matters may involve immigration courts, federal agencies, ports of entry, detention facilities, and families with ties to both the United States and Mexico.", "An El Paso immigration attorney can review court notices, immigration history, criminal records, family relationships, prior filings, and possible forms of relief."],
-    faqs: [{ question: "What is removal or deportation?", answer: "Removal is the legal process through which the federal government seeks an order requiring a noncitizen to leave the United States." }, { question: "What is a Notice to Appear?", answer: "A Notice to Appear is a charging document used to begin removal proceedings in immigration court." }, { question: "Can someone fight deportation?", answer: "Depending on the facts, a person may have defenses or may qualify to apply for one or more forms of relief from removal." }, { question: "Can a criminal case affect immigration status?", answer: "Yes. Arrests, charges, pleas, and convictions can have serious immigration consequences depending on the offense and immigration status." }, { question: "When should I contact a deportation lawyer?", answer: "As soon as possible after detention, receipt of immigration-court papers, discovery of a removal order, or a criminal matter that may affect status." }],
-    relatedPages: [{ label: "Immigration", path: "/el-paso-immigration-lawyers" }, { label: "Green Card", path: "/el-paso-green-card-lawyers" }, { label: "Citizenship", path: "/el-paso-citizenship-lawyers" }, { label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" }],
-    lastUpdated: "August 13, 2026",
-  },
-  {
-    path: "/el-paso-visa-lawyers",
-    shortTitle: "Visa",
-    title: "Best Visa Lawyers in El Paso, TX | Compare Immigration Attorneys",
-    description: "Compare El Paso visa lawyers helping with family, employment, fiancé, student, visitor, and other temporary or immigrant visa matters.",
-    metaDescription: "Compare visa lawyers in El Paso, TX for family, employment, fiancé, student, visitor, and other U.S. immigration visa matters.",
-    heroText: "Compare El Paso visa attorneys helping individuals, families, workers, employers, and businesses navigate U.S. visa applications and related immigration issues.",
-    topics: ["Family Visas", "Employment Visas", "Fiancé Visas", "Student Visas", "Visitor Visas", "Immigrant Visas", "Nonimmigrant Visas", "Consular Processing", "Visa Denials", "Waivers"],
-    overview: ["Visa matters can involve temporary nonimmigrant classifications, immigrant visa processing, family relationships, employment, study, travel, investment, or other qualifying purposes.", "The appropriate process depends on the applicant's goals, eligibility, immigration history, location, sponsoring relative or employer, and whether processing occurs inside or outside the United States.", "Applications may require petitions, supporting evidence, interviews, consular processing, waivers, responses to government requests, and careful attention to status and deadlines."],
-    whenToHire: ["You are unsure which visa category fits your circumstances.", "A family member, employer, or business will sponsor an immigration filing.", "A visa was denied or additional evidence was requested.", "Prior immigration history, unlawful presence, or another issue may affect eligibility.", "You need help coordinating a petition with consular processing or another immigration step."],
-    localContent: ["El Paso visa matters frequently involve families, employers, students, professionals, and businesses with close ties to Mexico and other countries.", "Local immigration counsel can help evaluate how visa processing, ports of entry, consular procedures, family relationships, employment, and prior immigration history fit together."],
-    faqs: [{ question: "What type of visa do I need?", answer: "The correct category depends on the purpose of travel or immigration, eligibility, sponsorship, intended duration, and other facts." }, { question: "What is the difference between an immigrant and nonimmigrant visa?", answer: "Immigrant visas are generally associated with permanent residence, while nonimmigrant visas generally authorize temporary entry for a specified purpose." }, { question: "Can a visa denial be challenged?", answer: "Options depend on the reason for the denial, the visa category, and whether a new application, waiver, additional evidence, or another procedure is available." }, { question: "What is consular processing?", answer: "Consular processing generally refers to completing an immigrant or nonimmigrant visa process through a U.S. embassy or consulate abroad." }, { question: "When should I contact a visa lawyer?", answer: "Before filing when eligibility is uncertain, the case is complex, prior immigration issues exist, or a denial or government request has already occurred." }],
-    relatedPages: [{ label: "Immigration", path: "/el-paso-immigration-lawyers" }, { label: "Green Card", path: "/el-paso-green-card-lawyers" }, { label: "Citizenship", path: "/el-paso-citizenship-lawyers" }, { label: "Deportation Defense", path: "/el-paso-deportation-defense-lawyers" }],
-    lastUpdated: "August 13, 2026",
-  },
-
-  {
-    path: "/el-paso-felony-lawyers",
-    shortTitle: "Felony Defense",
-    title: "Best Felony Defense Lawyers in El Paso, TX | Compare Attorneys",
-    description: "Compare El Paso felony defense lawyers handling serious Texas criminal charges, investigations, indictments, bond matters, plea negotiations, trials, and sentencing.",
-    metaDescription: "Compare felony defense lawyers in El Paso, TX for serious criminal charges, indictments, bond matters, negotiations, trials, and sentencing.",
-    heroText: "Compare El Paso felony defense attorneys representing clients facing serious Texas criminal charges, investigations, indictments, and court proceedings.",
-    topics: ["Felony Charges", "Indictments", "Bond Hearings", "Aggravated Offenses", "Drug Felonies", "Violent Offenses", "Property Crimes", "Plea Negotiations", "Jury Trials", "Sentencing"],
-    overview: ["Felony allegations are among the most serious criminal charges under Texas law and can expose a defendant to imprisonment, fines, supervision, and significant long-term consequences.", "Felony defense can involve reviewing the charging instrument, police reports, recordings, forensic evidence, searches, statements, witnesses, and possible constitutional or evidentiary challenges.", "The available strategy depends on the alleged offense, evidence, criminal history, court, and circumstances of the case."],
-    whenToHire: ["You were arrested or indicted for a felony.", "Police or investigators say you are a suspect in a serious offense.", "A warrant or bond condition has been issued.", "The allegation involves drugs, violence, theft, weapons, fraud, or another felony-level offense.", "You need representation for negotiations, motions, trial, sentencing, or appeal."],
-    localContent: ["Felony prosecutions in El Paso County may proceed in district court and can involve local law enforcement, prosecutors, forensic evidence, witnesses, and pretrial proceedings.", "An El Paso felony defense attorney can evaluate the charge, evidence, bond conditions, potential defenses, collateral consequences, and available resolutions."],
-    faqs: [{ question: "What is a felony in Texas?", answer: "A felony is a serious criminal offense classified under Texas law into different levels with varying punishment ranges." }, { question: "Can a felony charge be reduced or dismissed?", answer: "Some cases may be reduced, dismissed, or otherwise resolved depending on the evidence, legal issues, negotiations, and circumstances, but no outcome is guaranteed." }, { question: "What happens after a felony arrest?", answer: "The process may include booking, bond proceedings, charging decisions, indictment, discovery, pretrial hearings, negotiations, and potentially trial." }, { question: "Should I talk to investigators?", answer: "Consider consulting defense counsel before giving substantive statements about an investigation or accusation." }, { question: "When should I hire a felony lawyer?", answer: "As early as possible after learning of an investigation, warrant, arrest, indictment, or felony accusation." }],
-    relatedPages: [{ label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" }, { label: "Federal Criminal Defense", path: "/el-paso-federal-criminal-defense-lawyers" }, { label: "Drug Crimes", path: "/el-paso-drug-crime-lawyers" }, { label: "Probation Violation", path: "/el-paso-probation-violation-lawyers" }],
-    lastUpdated: "August 13, 2026",
-  },
-  {
-    path: "/el-paso-theft-crime-lawyers",
-    shortTitle: "Theft Crimes",
-    title: "Best Theft Crime Lawyers in El Paso, TX | Compare Attorneys",
-    description: "Compare El Paso theft crime lawyers handling shoplifting, property theft, fraud-related allegations, burglary-related charges, and other Texas theft offenses.",
-    metaDescription: "Compare theft crime lawyers in El Paso, TX for shoplifting, property theft, fraud-related allegations, and other Texas theft charges.",
-    heroText: "Compare El Paso theft defense attorneys representing clients accused of shoplifting, property theft, and other theft-related offenses.",
-    topics: ["Theft Charges", "Shoplifting", "Property Theft", "Burglary-Related Charges", "Fraud Allegations", "Stolen Property", "Employee Theft", "Felony Theft", "Misdemeanor Theft", "Restitution"],
-    overview: ["Texas theft cases can range from lower-level allegations to serious felony charges depending on the property, alleged value, circumstances, and criminal history.", "Evidence may include surveillance footage, receipts, witness statements, electronic records, ownership records, communications, or statements attributed to the accused.", "A defense lawyer can evaluate intent, identification, ownership, value, admissibility of evidence, and other issues affecting the charge."],
-    whenToHire: ["You were arrested, cited, or questioned about alleged theft.", "A store, employer, business, or individual accuses you of taking property.", "The allegation involves valuable property or a felony-level charge.", "Police want a statement or access to records or devices.", "A theft case could affect employment, licensing, immigration status, or your record."],
-    localContent: ["Theft allegations in El Paso may be filed as misdemeanor or felony cases depending on the circumstances and applicable Texas law.", "Local counsel can review the accusation, evidence, alleged value, witnesses, criminal history, and possible resolutions."],
-    faqs: [{ question: "Is shoplifting considered theft?", answer: "Shoplifting allegations are generally prosecuted under Texas theft law, although the specific charge depends on the facts." }, { question: "Does the value of property matter?", answer: "Yes. The alleged value of property can affect the classification and potential punishment of a Texas theft charge." }, { question: "Can theft charges be dismissed?", answer: "Dismissal may be possible in some cases based on evidence, legal issues, negotiations, or other circumstances, but it is not guaranteed." }, { question: "Can a theft conviction affect employment?", answer: "It can. Theft-related records may create employment, licensing, housing, immigration, or reputational consequences." }, { question: "When should I contact a theft lawyer?", answer: "As soon as you learn you are being investigated, accused, cited, arrested, or charged." }],
-    relatedPages: [{ label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" }, { label: "Felony Defense", path: "/el-paso-felony-lawyers" }, { label: "Expunction", path: "/el-paso-expunction-lawyers" }, { label: "Federal Criminal Defense", path: "/el-paso-federal-criminal-defense-lawyers" }],
-    lastUpdated: "August 13, 2026",
-  },
-  {
-    path: "/el-paso-weapons-charge-lawyers",
-    shortTitle: "Weapons Charges",
-    title: "Best Weapons Charge Lawyers in El Paso, TX | Compare Attorneys",
-    description: "Compare El Paso weapons charge lawyers handling unlawful carrying, prohibited possession, firearm allegations, and weapons-related criminal cases.",
-    metaDescription: "Compare weapons charge lawyers in El Paso, TX for firearm allegations, unlawful carrying, prohibited possession, and related criminal charges.",
-    heroText: "Compare El Paso weapons defense attorneys representing clients facing firearm and other weapons-related criminal allegations.",
-    topics: ["Weapons Charges", "Firearm Allegations", "Unlawful Carrying", "Prohibited Possession", "Felon in Possession", "Vehicle Searches", "Search and Seizure", "Federal Firearm Cases", "Bond Conditions", "Criminal Defense"],
-    overview: ["Weapons cases can arise under Texas or federal law and may involve possession, carrying, prohibited status, location restrictions, or allegations connected to another offense.", "The legal issues can depend on where the weapon was found, who allegedly possessed it, the circumstances of a search, prior criminal history, and whether state or federal authorities are involved.", "Defense review may focus on possession, knowledge, search and seizure, statements, ownership, identification, and the elements of the charged offense."],
-    whenToHire: ["You were arrested or investigated for a firearm or weapons offense.", "A weapon was found during a traffic stop, vehicle search, home search, or arrest.", "You are accused of possessing a weapon while legally prohibited.", "The case may involve federal authorities or another felony allegation.", "A protective order, bond condition, or prior conviction may affect firearm possession."],
-    localContent: ["El Paso weapons cases can involve local, state, or federal authorities depending on the facts and alleged offense.", "An El Paso defense attorney can review possession issues, searches, prior records, charging jurisdiction, bond restrictions, and possible defenses."],
-    faqs: [{ question: "Can a weapons case become a federal case?", answer: "Yes. Certain firearm and weapons allegations may fall under federal law depending on the conduct, status of the accused, and other circumstances." }, { question: "Can a gun found in a vehicle lead to charges?", answer: "Potential charges depend on the circumstances, applicable law, possession issues, and whether another restriction or offense is alleged." }, { question: "Can a search be challenged?", answer: "A lawyer may examine whether a stop, detention, search, or seizure complied with constitutional and statutory requirements." }, { question: "Do prior convictions matter?", answer: "Yes. Certain prior convictions or legal statuses can affect firearm possession and the seriousness of potential charges." }, { question: "When should I contact a lawyer?", answer: "Promptly after a weapons investigation, search, arrest, charge, or notice of firearm-related restrictions." }],
-    relatedPages: [{ label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" }, { label: "Felony Defense", path: "/el-paso-felony-lawyers" }, { label: "Federal Criminal Defense", path: "/el-paso-federal-criminal-defense-lawyers" }, { label: "Protective Orders", path: "/el-paso-protective-order-lawyers" }],
-    lastUpdated: "August 13, 2026",
-  },
-  {
-    path: "/el-paso-family-violence-lawyers",
-    shortTitle: "Family Violence Defense",
-    title: "Best Family Violence Lawyers in El Paso, TX | Compare Attorneys",
-    description: "Compare El Paso family violence defense lawyers handling assault allegations, domestic violence cases, protective orders, bond conditions, and related criminal matters.",
-    metaDescription: "Compare family violence defense lawyers in El Paso, TX for assault allegations, protective orders, bond conditions, and domestic violence cases.",
-    heroText: "Compare El Paso family violence defense attorneys representing clients facing domestic assault allegations and related criminal proceedings.",
-    topics: ["Family Violence", "Domestic Assault", "Assault Charges", "Protective Orders", "Bond Conditions", "No-Contact Orders", "Witness Issues", "Emergency Protective Orders", "Felony Allegations", "Criminal Defense"],
-    overview: ["Family violence allegations can lead to criminal charges, arrest, bond restrictions, protective orders, firearm consequences, and effects on family-law proceedings.", "Cases may involve statements from family or household members, photographs, recordings, body-camera footage, medical evidence, emergency calls, digital communications, and witness credibility issues.", "Because criminal and family-law consequences can overlap, early review can help identify immediate restrictions and longer-term risks."],
-    whenToHire: ["You were arrested or accused of assault involving a family or household member.", "A protective order or emergency protective order has been requested or issued.", "Bond conditions restrict contact with your home, spouse, partner, or children.", "The allegation may affect custody, employment, firearms, immigration status, or licensing.", "Police or prosecutors want additional statements or evidence."],
-    localContent: ["El Paso family violence matters can involve criminal courts as well as separate protective-order or family-law proceedings.", "Local defense counsel can review the criminal allegation, bond conditions, protective orders, evidence, witnesses, and collateral consequences."],
-    faqs: [{ question: "What is family violence in Texas?", answer: "Texas law defines family violence by statute and can include qualifying conduct involving family members, household members, or certain dating relationships." }, { question: "Can the complaining witness drop the charge?", answer: "A criminal charge is controlled by the prosecuting authority, not solely by the complaining witness." }, { question: "Can a family violence case affect gun rights?", answer: "Certain orders, convictions, or legal statuses may restrict firearm possession under state or federal law." }, { question: "Can it affect a custody case?", answer: "Family violence allegations or findings can be relevant in Texas family-law proceedings depending on the circumstances." }, { question: "When should I contact a defense lawyer?", answer: "Immediately after an accusation, arrest, protective order, bond restriction, or request for questioning." }],
-    relatedPages: [{ label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" }, { label: "Protective Orders", path: "/el-paso-protective-order-lawyers" }, { label: "Family Law", path: "/el-paso-family-lawyers" }, { label: "Child Custody", path: "/el-paso-child-custody-lawyers" }],
-    lastUpdated: "August 13, 2026",
-  },
-  {
-    path: "/el-paso-protective-order-lawyers",
-    shortTitle: "Protective Orders",
-    title: "Best Protective Order Lawyers in El Paso, TX | Compare Attorneys",
-    description: "Compare El Paso protective order lawyers handling applications, hearings, emergency orders, family violence allegations, restrictions, and enforcement issues.",
-    metaDescription: "Compare protective order lawyers in El Paso, TX for applications, hearings, emergency orders, family violence allegations, and enforcement.",
-    heroText: "Compare El Paso protective order attorneys representing people seeking or responding to Texas protective orders and related hearings.",
-    topics: ["Protective Orders", "Emergency Orders", "Family Violence", "Protective Order Hearings", "No-Contact Restrictions", "Firearm Restrictions", "Child Custody", "Order Enforcement", "Order Violations", "Domestic Violence"],
-    overview: ["Protective orders can impose significant restrictions involving contact, residence, family members, children, firearms, locations, and other conduct.", "A person may seek a protective order for qualifying circumstances, while a respondent may need to prepare for hearings and understand the allegations and requested restrictions.", "Protective-order proceedings can overlap with criminal cases, divorce, custody disputes, and other family-law matters."],
-    whenToHire: ["You need to seek protection from alleged family violence or qualifying conduct.", "You were served with a protective-order application or hearing notice.", "A temporary or emergency order restricts contact, residence, travel, or firearms.", "A protective-order matter overlaps with divorce, custody, or criminal charges.", "An existing order is allegedly being violated or requires enforcement."],
-    localContent: ["Protective-order proceedings in El Paso may involve local courts, law enforcement, family-law matters, and related criminal allegations.", "An El Paso attorney can help review the application, evidence, hearing requirements, requested restrictions, and interaction with other pending cases."],
-    faqs: [{ question: "What can a protective order restrict?", answer: "Depending on the order and applicable law, restrictions may involve contact, locations, residence, family members, firearms, and other conduct." }, { question: "What should I do if I am served with a protective-order application?", answer: "Read the documents carefully, comply with any existing temporary restrictions, note the hearing date, and consider obtaining legal advice promptly." }, { question: "Can protective orders affect custody?", answer: "They can overlap with custody and possession issues, and allegations or findings may be relevant in family-law proceedings." }, { question: "Can violating an order lead to criminal consequences?", answer: "Violating certain protective-order provisions can create serious legal consequences, including potential criminal charges." }, { question: "When should I contact a lawyer?", answer: "As soon as you need protection, receive an application or order, or face an allegation involving an existing order." }],
-    relatedPages: [{ label: "Family Violence Defense", path: "/el-paso-family-violence-lawyers" }, { label: "Family Law", path: "/el-paso-family-lawyers" }, { label: "Divorce", path: "/el-paso-divorce-lawyers" }, { label: "Child Custody", path: "/el-paso-child-custody-lawyers" }],
-    lastUpdated: "August 13, 2026",
-  },
-  {
-    path: "/el-paso-prenuptial-agreement-lawyers",
-    shortTitle: "Prenuptial Agreements",
-    title: "Best Prenuptial Agreement Lawyers in El Paso, TX | Compare Attorneys",
-    description: "Compare El Paso prenuptial agreement lawyers helping couples address property, debts, businesses, inheritance, financial rights, and marital agreements.",
-    metaDescription: "Compare prenuptial agreement lawyers in El Paso, TX for property, debt, business, inheritance, and marital agreement planning.",
-    heroText: "Compare El Paso prenuptial agreement attorneys helping couples define financial rights and obligations before marriage.",
-    topics: ["Prenuptial Agreements", "Premarital Agreements", "Property Rights", "Separate Property", "Community Property", "Business Interests", "Debt Allocation", "Inheritance Planning", "Financial Disclosure", "Marital Agreements"],
-    overview: ["A prenuptial or premarital agreement allows prospective spouses to address certain financial and property rights before marriage.", "Agreements may address separate and community property, businesses, debts, income, estate-planning considerations, financial obligations, and how specified assets may be treated if the marriage ends.", "Careful drafting, disclosure, timing, and independent legal review can help reduce uncertainty and future disputes."],
-    whenToHire: ["You or your future spouse owns a business, home, investments, or substantial assets.", "Either person has significant debt or financial obligations.", "You want to preserve separate property or address inheritance expectations.", "One party has children from a prior relationship.", "You received a proposed agreement and want independent review before signing."],
-    localContent: ["El Paso couples may use premarital agreements to address Texas community-property rules and financial circumstances involving businesses, real estate, retirement assets, family property, or cross-border interests.", "Separate legal review can help each party understand the proposed terms and the effect of the agreement before marriage."],
-    faqs: [{ question: "What is a prenuptial agreement?", answer: "It is an agreement made before marriage that can address specified property and financial rights subject to Texas law." }, { question: "Are prenups only for wealthy couples?", answer: "No. Couples may use them to address businesses, debt, prior children, separate property, inheritance, or simply to establish financial expectations." }, { question: "Should each person have a lawyer?", answer: "Independent legal advice can help each person understand the agreement, rights being affected, and potential legal consequences." }, { question: "Can a prenup address child custody or child support?", answer: "Agreements cannot necessarily control issues that courts must determine under applicable law and the child's best interests." }, { question: "When should we start the process?", answer: "Starting well before the wedding allows time for disclosure, negotiation, independent review, and careful drafting without last-minute pressure." }],
-    relatedPages: [{ label: "Family Law", path: "/el-paso-family-lawyers" }, { label: "Divorce", path: "/el-paso-divorce-lawyers" }, { label: "Spousal Support", path: "/el-paso-spousal-support-lawyers" }, { label: "Estate Planning", path: "/el-paso-estate-planning-lawyers" }],
-    lastUpdated: "August 13, 2026",
-  },
-  {
-    path: "/el-paso-business-immigration-lawyers",
-    shortTitle: "Business Immigration",
-    title: "Best Business Immigration Lawyers in El Paso, TX | Compare Attorneys",
-    description: "Compare El Paso business immigration lawyers helping employers, professionals, investors, entrepreneurs, and workers with employment-based immigration matters.",
-    metaDescription: "Compare business immigration lawyers in El Paso, TX for employers, professionals, investors, entrepreneurs, workers, and employment-based immigration.",
-    heroText: "Compare El Paso business immigration attorneys helping employers, professionals, investors, entrepreneurs, and workers navigate U.S. immigration processes.",
-    topics: ["Business Immigration", "Employment Visas", "Employer Sponsorship", "Professional Workers", "Investors", "Entrepreneurs", "Employment-Based Green Cards", "Work Authorization", "Consular Processing", "Immigration Compliance"],
-    overview: ["Business immigration involves U.S. immigration processes connected to employment, professional services, investment, entrepreneurship, employer sponsorship, and workforce needs.", "The appropriate strategy depends on the worker's qualifications, employer, job, nationality, immigration history, timing, and whether temporary or permanent status is sought.", "Matters can require coordination among employers, employees, government agencies, consulates, and supporting documentation."],
-    whenToHire: ["An employer wants to sponsor a foreign national for work authorization or permanent residence.", "A professional or worker needs to evaluate employment-based visa options.", "An investor or entrepreneur is considering immigration options connected to a business.", "A company needs help with immigration documentation or compliance.", "A petition, application, consular case, or government request has become complicated."],
-    localContent: ["El Paso businesses operate in a binational regional economy with close commercial ties to Mexico, making employment and business immigration particularly relevant to local employers, professionals, investors, and cross-border enterprises.", "Local immigration counsel can help coordinate employer needs, worker eligibility, immigration filings, consular processing, and related documentation."],
-    faqs: [{ question: "What is business immigration?", answer: "Business immigration generally refers to immigration processes involving employment, employers, professionals, investors, entrepreneurs, and other business-related immigration needs." }, { question: "Can an employer sponsor a worker?", answer: "Certain immigration categories permit employer sponsorship when the employer, worker, position, and other requirements qualify." }, { question: "Are there immigration options for investors or entrepreneurs?", answer: "Potential options depend on nationality, investment, business structure, role, qualifications, and other immigration requirements." }, { question: "Can employment lead to a green card?", answer: "Some employment-based categories can provide a path toward permanent residence when the applicable requirements are satisfied." }, { question: "When should a business contact an immigration lawyer?", answer: "Before hiring or sponsoring a foreign national when possible, and promptly when deadlines, compliance issues, denials, or government requests arise." }],
-    relatedPages: [{ label: "Immigration", path: "/el-paso-immigration-lawyers" }, { label: "Visa", path: "/el-paso-visa-lawyers" }, { label: "Green Card", path: "/el-paso-green-card-lawyers" }, { label: "Citizenship", path: "/el-paso-citizenship-lawyers" }],
+    description:
+      "Compare El Paso adoption lawyers handling stepparent, relative, private, adult, agency, and other adoption matters, including termination and parental-rights issues.",
+    metaDescription:
+      "Compare adoption lawyers in El Paso, TX for stepparent, relative, private, adult, and agency adoptions and related parental-rights matters.",
+    heroText:
+      "Compare El Paso adoption attorneys handling stepparent, relative, private, adult, and agency adoptions, parental-rights issues, and related family-law proceedings.",
+    topics: ["Stepparent adoption", "Relative adoption", "Private adoption", "Adult adoption", "Agency adoption", "Parental consent", "Termination of parental rights", "Adoption finalization"],
+    overview: [
+      "Adoption attorneys guide families through the legal steps required to establish a permanent parent-child relationship, including petitions, consents, background requirements, hearings, and finalization.",
+      "Some cases also involve termination of an existing parent's rights, contested consent, interstate issues, or other legal requirements that should be evaluated carefully.",
+    ],
+    whenToHire: ["A stepparent wants to adopt a child.", "A relative or other caregiver seeks adoption.", "Consent or parental-rights issues may be disputed.", "You are pursuing a private or agency adoption.", "You need to understand the requirements for an adult adoption."],
+    localContent: [
+      "Adoptions involving El Paso families may include local court proceedings as well as interstate or cross-border family circumstances.",
+      "Local family-law counsel can help identify required filings, consents, investigations, hearings, and any related parental-rights proceedings.",
+    ],
+    faqs: [
+      { question: "Can a stepparent adopt a stepchild in Texas?", answer: "Stepparent adoption is possible in appropriate circumstances, but the legal status and rights of the child's other parent must be addressed as required by law." },
+      { question: "Does adoption require the biological parent's consent?", answer: "Consent requirements depend on the circumstances. Some cases involve voluntary consent while others may require a separate legal basis for terminating parental rights." },
+      { question: "Can an adult be adopted in Texas?", answer: "Texas law permits adult adoption. The process differs from adoption of a minor and should be evaluated based on the parties' circumstances." },
+      { question: "How long does an adoption take?", answer: "Timing varies depending on the type of adoption, required consents, investigations, court scheduling, and whether any issue is contested." },
+      { question: "When should I contact an adoption lawyer?", answer: "Legal advice is useful early when planning an adoption, particularly when parental consent, termination, interstate issues, agency requirements, or contested matters may be involved." },
+    ],
+    relatedPages: [{ label: "Family Law", path: "/el-paso-family-lawyers" }, { label: "Child Custody", path: "/el-paso-child-custody-lawyers" }, { label: "Child Support", path: "/el-paso-child-support-lawyers" }, { label: "Divorce", path: "/el-paso-divorce-lawyers" }],
     lastUpdated: "August 13, 2026",
   },
 
