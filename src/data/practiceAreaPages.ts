@@ -2070,6 +2070,64 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       { label:"Personal Injury", path:"/el-paso-personal-injury-lawyers"}
     ]
   },
+
+  {
+    path: "/el-paso-truck-accident-lawyers",
+    shortTitle: "Truck Accident",
+    title: "Best Truck Accident Lawyers in El Paso, TX | Compare Truck Accident Attorneys",
+    description: "Compare El Paso truck accident lawyers handling commercial truck, tractor-trailer, semi-truck, 18-wheeler, delivery truck, and serious trucking collision claims.",
+    metaDescription: "Compare truck accident lawyers and attorneys in El Paso, TX for semi-truck, 18-wheeler, tractor-trailer, commercial vehicle, and serious trucking accident claims.",
+    heroText: "Compare El Paso truck accident lawyers and attorneys representing people injured in semi-truck, tractor-trailer, 18-wheeler, commercial vehicle, delivery truck, and other serious trucking crashes.",
+    topics: ["Truck Accident Lawyer","Truck Accident Attorney","18-Wheeler Accidents","Semi-Truck Accidents","Tractor-Trailer Crashes","Commercial Vehicle Accidents","Delivery Truck Accidents","Interstate Trucking Accidents","Driver Fatigue","Distracted Truck Drivers","Truck Maintenance and Equipment Failures","Cargo and Loading Issues","Trucking Company Liability","Catastrophic Injuries","Wrongful Death"],
+    overview: [
+      "A truck accident lawyer represents people injured in collisions involving commercial trucks, tractor-trailers, semi-trucks, 18-wheelers, delivery vehicles, and other large commercial vehicles. Trucking crashes can involve severe injuries, multiple vehicles, substantial insurance coverage, and several potentially responsible parties.",
+      "Truck accident cases may differ from ordinary passenger-vehicle crashes because the evidence can include driver qualification records, hours-of-service information, electronic logging data, vehicle inspection and maintenance records, dispatch communications, cargo documents, onboard electronic data, dash-camera footage, and company safety policies.",
+      "Responsibility may extend beyond the individual truck driver. Depending on the facts, a trucking company, motor carrier, vehicle owner, maintenance provider, loading company, broker, contractor, manufacturer, or another business may need to be investigated.",
+      "Commercial trucking evidence can be time-sensitive. Early preservation efforts may be important when electronic data, video, logs, inspection records, dispatch records, or damaged equipment could help establish how a crash occurred."
+    ],
+    whenToHire: [
+      "You or a family member was injured in a collision with an 18-wheeler, semi-truck, tractor-trailer, delivery truck, or other commercial vehicle.",
+      "The crash caused hospitalization, surgery, fractures, traumatic brain injury, spinal injury, permanent impairment, or substantial lost income.",
+      "A trucking company or commercial insurer contacted you shortly after the collision.",
+      "The truck driver may have been fatigued, distracted, speeding, following too closely, making an unsafe lane change, or violating traffic or safety rules.",
+      "Vehicle maintenance, brakes, tires, cargo loading, equipment failure, or mechanical condition may have contributed to the crash.",
+      "The collision involved multiple vehicles or there is disagreement about which driver or company was responsible.",
+      "Electronic logging data, dash-camera footage, onboard data, dispatch communications, maintenance records, or other evidence may need to be preserved.",
+      "A family member died in a commercial trucking collision."
+    ],
+    localContent: [
+      "El Paso is a major freight and logistics corridor with commercial truck traffic moving through Interstate 10, Loop 375, US 54, US 62/180, Montana Avenue, Zaragoza Road, Americas Avenue, and routes serving industrial areas, distribution facilities, border crossings, and nearby communities.",
+      "The region's location on the Texas-New Mexico border and its connection to international trade can mean truck crashes involve interstate carriers, cross-border freight, multiple businesses, commercial insurers, and records maintained outside El Paso.",
+      "A collision location can affect the investigation. Interstate ramps, frontage roads, construction zones, high-speed corridors, intersections, warehouse districts, and border-related freight routes may present different visibility, traffic-flow, lane-change, braking, and roadway issues.",
+      "An El Paso truck accident attorney can evaluate the police report, commercial vehicle information, driver and carrier records, available video, electronic data, inspection and maintenance records, cargo information, witness accounts, insurance coverage, medical evidence, and the roles of potentially responsible companies."
+    ],
+    faqs: [
+      { question: "How do I choose a truck accident lawyer in El Paso?", answer: "Compare experience with commercial trucking crashes, serious injuries, disputed liability, trucking-company evidence, electronic data, multiple defendants, commercial insurance, litigation, communication, and fee terms." },
+      { question: "Who can be responsible for an 18-wheeler accident?", answer: "Depending on the facts, potentially responsible parties can include the truck driver, motor carrier, trucking company, vehicle owner, maintenance provider, cargo or loading company, contractor, manufacturer, or another entity connected to the crash." },
+      { question: "What evidence is important after a truck accident?", answer: "Evidence may include photographs, video, witness information, police reports, electronic logging information, onboard vehicle data, dash-camera footage, inspection and maintenance records, driver records, dispatch communications, cargo documents, and medical records." },
+      { question: "What if the trucking company's insurer contacts me?", answer: "Commercial insurers may begin investigating quickly. Before providing extensive statements or signing documents, it can be useful to understand what is being requested and how the information may affect a claim." },
+      { question: "Can driver fatigue cause a truck accident?", answer: "Fatigue can affect reaction time, attention, judgment, and vehicle control. Driver schedules, electronic logs, dispatch information, receipts, communications, and other records may be relevant when fatigue is suspected." },
+      { question: "Can a trucking company be liable even if its driver caused the crash?", answer: "Potential company responsibility depends on the facts and applicable law. Issues may include the driver's work relationship, company conduct, hiring or supervision, maintenance, safety practices, dispatch decisions, or other circumstances." },
+      { question: "What if bad maintenance or equipment failure caused the crash?", answer: "Inspection records, repair history, maintenance records, component condition, post-crash examinations, and expert analysis may help determine whether brakes, tires, lights, steering, coupling equipment, or other components contributed." },
+      { question: "What compensation may be available after a truck accident?", answer: "Depending on the facts and applicable law, a claim may involve medical expenses, lost income, reduced earning capacity, pain, impairment, property damage, and in fatal cases potentially wrongful-death or survival damages." },
+      { question: "When should I contact a truck accident attorney?", answer: "Prompt review may be useful after a serious commercial trucking crash because electronic data, video, logs, maintenance information, and other evidence can be important to preserve and evaluate." }
+    ],
+    relatedPages: [
+      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
+      { label: "18-Wheeler Accident", path: "/el-paso-18-wheeler-accident-lawyers" },
+      { label: "Semi Truck Accident", path: "/el-paso-semi-truck-accident-lawyer" },
+      { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
+      { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
+      { label: "Bicycle Accident", path: "/el-paso-bicycle-accident-lawyers" },
+      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" }
+    ],
+    resourceLinks: [
+      { label: "What to Do After a Car Accident in El Paso, Texas", path: "/guides/what-to-do-after-car-accident-el-paso" },
+      { label: "How to Get a Texas Crash Report After an El Paso Accident", path: "/guides/texas-crash-report-el-paso" },
+      { label: "What Happens if the Driver Who Hit You Is Uninsured in Texas?", path: "/guides/uninsured-driver-texas-car-accident" }
+    ],
+    lastUpdated: "August 14, 2026",
+  },
   {
     path: "/el-paso-semi-truck-accident-lawyer",
     shortTitle: "Semi Truck Accident",
