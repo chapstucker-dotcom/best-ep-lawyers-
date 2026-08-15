@@ -12,6 +12,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AttorneyDetails from "./pages/AttorneyDetails";
 
 import PersonalInjury from "./pages/PersonalInjury";
+import WageHour from "./pages/WageHour";
 import PracticeAreaPage from "./pages/PracticeAreaPage";
 import Guides from "./pages/Guides";
 import GuideArticle from "./pages/GuideArticle";
@@ -31,6 +32,8 @@ export default function App() {
           path="/el-paso-personal-injury-lawyers"
           element={<PersonalInjury />}
         />
+
+        <Route path="/el-paso-wage-hour-lawyers" element={<WageHour />} />
 
         {/* All other practice-area routes come from one master data file. */}
         {practiceAreaPages.map((page) => (
@@ -62,3 +65,4 @@ export default function App() {
     </AuthProvider>
   );
 }
+
