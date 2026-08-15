@@ -1,105 +1,405 @@
-import PracticeAreaTemplate from "../components/PracticeAreaTemplate";
-import type { PracticeAreaPageData } from "../data/practiceAreaPages";
+import { useEffect } from "react";
+import LeadCaptureForm from "../components/LeadCaptureForm";
 
-const criminalDefensePage: PracticeAreaPageData = {
-  path: "/el-paso-criminal-defense-lawyers",
-  shortTitle: "Criminal Defense",
-  title: "Best Criminal Defense Lawyers in El Paso, Texas",
-  description:
-    "Compare El Paso criminal defense attorneys handling DWI, assault, drug charges, theft, family violence, weapons allegations, juvenile matters, federal cases, expunctions, and appeals.",
-  metaDescription:
-    "Compare criminal defense lawyers in El Paso for DWI, assault, drug charges, theft, family violence, weapons allegations, juvenile cases, federal matters, and appeals.",
-  heroText:
-    "Compare El Paso criminal defense attorneys for DWI, assault, drug charges, theft, family violence, weapons allegations, juvenile matters, federal cases, expunctions, and appeals.",
-  topics: [
-    "DWI and DUI",
-    "Assault Charges",
-    "Drug Offenses",
-    "Theft and Property Crimes",
-    "Family Violence",
-    "Weapons Charges",
-    "Juvenile Defense",
-    "Federal Criminal Defense",
-    "Expunctions and Nondisclosures",
-  ],
-  overview: [
-    "A criminal defense lawyer represents people accused of misdemeanors, felonies, and federal offenses. The work may include reviewing probable cause, examining evidence, challenging unlawful searches or statements, negotiating with prosecutors, preparing pretrial motions, and representing the client at hearings, trial, sentencing, or appeal.",
-    "A criminal case can affect freedom, employment, professional licensing, immigration status, driving privileges, housing, and reputation. The available strategy depends on the charge, evidence, criminal history, court, deadlines, and whether diversion, dismissal, plea negotiations, trial, or another resolution may be available.",
-    "Texas criminal cases may involve arrest warrants, bond conditions, protective orders, laboratory evidence, body-camera footage, witness statements, digital records, and forensic testing. Early legal review can help preserve evidence, identify defenses, and avoid statements or decisions that may harm the case.",
-  ],
-  whenToHire: [
-    "You were arrested, cited, questioned, or told that you are under investigation.",
-    "You received a complaint, information, indictment, warrant, bond condition, protective order, or court date.",
-    "The case involves DWI, assault, family violence, drugs, theft, weapons, probation, or a felony allegation.",
-    "You believe evidence was obtained through an unlawful search, seizure, stop, interrogation, or identification procedure.",
-    "You need help with bond, pretrial release, probation, revocation, expunction, nondisclosure, appeal, or post-conviction relief.",
-    "A criminal case may affect immigration status, military service, employment, licensing, education, or professional credentials.",
-  ],
-  localContent: [
-    "El Paso criminal cases may be handled in municipal courts, county criminal courts at law, district courts, juvenile courts, or the El Paso Division of the United States District Court for the Western District of Texas, depending on the charge and jurisdiction.",
-    "El Paso County maintains county criminal courts for misdemeanor matters and district courts for felony and other criminal cases. Local procedures, bond practices, prosecutor policies, diversion programs, and court schedules can affect how a case moves forward.",
-    "An El Paso criminal defense attorney can help evaluate the charge, court, bond conditions, evidence, collateral consequences, and whether negotiation, dismissal, diversion, trial, appeal, expunction, or another strategy may be appropriate.",
-  ],
-  faqs: [
-    {
-      question: "What should I do after an arrest?",
-      answer:
-        "Remain calm, avoid discussing the facts of the case with anyone other than your lawyer, comply with lawful booking procedures, and contact criminal defense counsel as soon as possible.",
-    },
-    {
-      question: "What is the difference between a misdemeanor and a felony?",
-      answer:
-        "Misdemeanors are generally less serious offenses than felonies, but both can lead to jail, fines, probation, and lasting consequences. Felonies carry the possibility of prison and more severe collateral effects.",
-    },
-    {
-      question: "What is bail or bond?",
-      answer:
-        "Bond is a financial or legal condition intended to help ensure a defendant appears in court. Conditions may also restrict travel, contact, alcohol use, weapons, or other activity.",
-    },
-    {
-      question: "Can criminal charges be dismissed?",
-      answer:
-        "Some cases may be dismissed because of insufficient evidence, legal defects, suppression of evidence, witness issues, diversion, negotiations, or other circumstances. Dismissal is never guaranteed.",
-    },
-    {
-      question: "What happens at an arraignment?",
-      answer:
-        "An arraignment or initial court setting may involve notice of the charge, a plea, bond issues, appointment of counsel, scheduling, or other preliminary matters depending on the court.",
-    },
-    {
-      question: "What is a plea bargain?",
-      answer:
-        "A plea bargain is an agreement in which the defendant resolves the case by pleading guilty or no contest in exchange for negotiated terms. A lawyer can explain the risks, benefits, and consequences.",
-    },
-    {
-      question: "Can evidence be suppressed?",
-      answer:
-        "A court may exclude evidence obtained in violation of constitutional or statutory protections. Whether suppression applies depends on the facts and legal issues.",
-    },
-    {
-      question: "What is an expunction?",
-      answer:
-        "An expunction is a court process that may allow eligible arrest and case records to be destroyed or removed from public access. Eligibility is limited and depends on the disposition and statute.",
-    },
-    {
-      question: "What is an order of nondisclosure?",
-      answer:
-        "An order of nondisclosure may restrict public access to eligible criminal history records, but it does not erase every record and is not available in every case.",
-    },
-    {
-      question: "When should I contact a criminal defense lawyer?",
-      answer:
-        "Contact counsel as early as possible after an arrest, accusation, investigation, warrant, court notice, bond restriction, or request for questioning.",
-    },
-  ],
-  relatedPages: [
-    { label: "DWI / DUI", path: "/el-paso-dwi-lawyers" },
-    { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
-    { label: "Immigration", path: "/el-paso-immigration-lawyers" },
-    { label: "Family Law", path: "/el-paso-family-lawyers" },
-  ],
-};
+const relatedPages = [
+  ["DWI / DUI", "/el-paso-dwi-lawyers"],
+  ["Drug Crimes", "/el-paso-drug-crimes-lawyers"],
+  ["Felony Defense", "/el-paso-felony-lawyers"],
+  ["Theft", "/el-paso-theft-lawyers"],
+  ["Assault", "/el-paso-assault-lawyers"],
+  ["Domestic Violence", "/el-paso-domestic-violence-lawyers"],
+  ["Expunction", "/el-paso-expunction-lawyers"],
+  ["Civil Litigation", "/el-paso-civil-litigation-lawyers"],
+];
+
+const faqs = [
+  {
+    q: "How do I choose a criminal defense lawyer in El Paso?",
+    a: "Compare experience with the type of charge involved, courtroom and trial experience, familiarity with local procedures, communication, fee structure, and whether the attorney regularly handles cases at the misdemeanor, felony, state, or federal level relevant to your matter.",
+  },
+  {
+    q: "When should I contact a criminal defense attorney?",
+    a: "Prompt legal advice can be important after an arrest, investigation, search, citation, indictment, bond issue, or request for questioning. Early review may help identify deadlines, preserve evidence, and address conditions of release or other immediate concerns.",
+  },
+  {
+    q: "Can a criminal lawyer help before charges are filed?",
+    a: "Sometimes. If a person knows they are under investigation or expects charges, counsel may be able to review the situation, communicate with investigators or prosecutors when appropriate, advise on interviews, and help preserve relevant evidence.",
+  },
+  {
+    q: "What is the difference between a misdemeanor and a felony in Texas?",
+    a: "Texas classifies criminal offenses at different levels, with felonies generally carrying more serious potential penalties than misdemeanors. The exact classification and sentencing range depend on the charged offense and circumstances.",
+  },
+  {
+    q: "Can a criminal record be cleared in Texas?",
+    a: "Some records may qualify for expunction or an order of nondisclosure, while others may not. Eligibility depends on the charge, disposition, prior history, waiting periods, and other statutory requirements.",
+  },
+  {
+    q: "What should I bring to a criminal-defense consultation?",
+    a: "Bring charging papers, bond documents, court notices, police reports if available, photos or videos, witness information, relevant messages, prior case information, and a written timeline of important events.",
+  },
+  {
+    q: "Can criminal charges affect immigration status?",
+    a: "Potentially. Certain arrests, pleas, convictions, or dispositions can create immigration consequences. When immigration status is involved, criminal-defense and immigration issues may need to be evaluated together.",
+  },
+  {
+    q: "Do criminal cases have deadlines?",
+    a: "Yes. Court dates, filing deadlines, discovery issues, bond conditions, preservation requests, appeal periods, and other time-sensitive requirements can arise throughout a criminal case.",
+  },
+];
 
 export default function CriminalDefense() {
-  return <PracticeAreaTemplate page={criminalDefensePage} />;
+  useEffect(() => {
+    const previousTitle = document.title;
+    document.title =
+      "Best Criminal Defense Lawyers in El Paso, TX | Compare Attorneys";
+
+    const existingMeta = document.querySelector('meta[name="description"]');
+    const previousContent = existingMeta?.getAttribute("content") ?? null;
+    const meta =
+      existingMeta ?? document.head.appendChild(document.createElement("meta"));
+
+    meta.setAttribute("name", "description");
+    meta.setAttribute(
+      "content",
+      "Compare criminal defense lawyers in El Paso, TX for DWI, drug charges, assault, domestic violence, theft, felonies, misdemeanors, and other criminal cases."
+    );
+
+    return () => {
+      document.title = previousTitle;
+      if (existingMeta && previousContent !== null) {
+        existingMeta.setAttribute("content", previousContent);
+      } else if (!existingMeta) {
+        meta.remove();
+      }
+    };
+  }, []);
+
+  return (
+    <main
+      style={{
+        minHeight: "100vh",
+        background: "#0f172a",
+        color: "white",
+        padding: "60px 24px",
+        fontFamily: "Arial, sans-serif",
+      }}
+    >
+      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+        <section style={{ marginBottom: "48px" }}>
+          <p
+            style={{
+              color: "#fbbf24",
+              fontWeight: 700,
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
+              marginBottom: "12px",
+            }}
+          >
+            El Paso Criminal Defense Lawyer Directory
+          </p>
+
+          <h1
+            style={{
+              color: "#fbbf24",
+              fontSize: "56px",
+              marginBottom: "24px",
+              lineHeight: 1.1,
+            }}
+          >
+            Best Criminal Defense Lawyers in El Paso, TX
+          </h1>
+
+          <p
+            style={{
+              color: "#cbd5e1",
+              fontSize: "21px",
+              lineHeight: 1.75,
+              marginBottom: "18px",
+              maxWidth: "930px",
+            }}
+          >
+            Compare El Paso criminal defense lawyers and attorneys handling DWI
+            and DUI charges, drug crimes, assault, domestic violence, theft,
+            felonies, misdemeanors, probation issues, expunctions, and other
+            criminal cases.
+          </p>
+
+          <p
+            style={{
+              color: "#94a3b8",
+              fontSize: "17px",
+              lineHeight: 1.75,
+              maxWidth: "930px",
+            }}
+          >
+            If you are searching for a criminal attorney in El Paso, use this
+            directory to compare participating local firms, review related
+            practice areas, and learn what information may matter at the
+            beginning of a criminal case.
+          </p>
+        </section>
+
+        <section style={{ marginBottom: "52px" }}>
+          <h2 style={{ fontSize: "32px", marginBottom: "14px" }}>
+            Criminal Cases Handled by El Paso Defense Attorneys
+          </h2>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+              gap: "16px",
+            }}
+          >
+            {[
+              "DWI / DUI",
+              "Drug Possession & Distribution",
+              "Assault Charges",
+              "Domestic Violence",
+              "Theft & Property Crimes",
+              "Felony Charges",
+              "Misdemeanor Charges",
+              "Probation Violations",
+              "Weapons Charges",
+              "Expunctions",
+              "Orders of Nondisclosure",
+              "Federal Criminal Cases",
+            ].map((item) => (
+              <div
+                key={item}
+                style={{
+                  background: "#111827",
+                  border: "1px solid #1e293b",
+                  borderRadius: "14px",
+                  padding: "18px",
+                  color: "#f8fafc",
+                  fontWeight: 700,
+                }}
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gap: "24px",
+            marginBottom: "52px",
+          }}
+        >
+          <div
+            style={{
+              background: "#111827",
+              padding: "28px",
+              borderRadius: "16px",
+              border: "1px solid #1e293b",
+            }}
+          >
+            <h2 style={{ marginBottom: "14px", fontSize: "26px" }}>
+              How to Compare Criminal Defense Attorneys
+            </h2>
+            <ul
+              style={{
+                color: "#cbd5e1",
+                lineHeight: 1.8,
+                paddingLeft: "20px",
+                margin: 0,
+              }}
+            >
+              <li>Experience with the specific charge involved</li>
+              <li>Trial, motion, and negotiation experience</li>
+              <li>Familiarity with El Paso courts and procedures</li>
+              <li>Communication and availability</li>
+              <li>Clear explanation of fees and representation scope</li>
+              <li>Experience with collateral issues such as immigration</li>
+            </ul>
+          </div>
+
+          <div
+            style={{
+              background: "#111827",
+              padding: "28px",
+              borderRadius: "16px",
+              border: "1px solid #1e293b",
+            }}
+          >
+            <h2 style={{ marginBottom: "14px", fontSize: "26px" }}>
+              What a Criminal Defense Lawyer Can Help With
+            </h2>
+            <ul
+              style={{
+                color: "#cbd5e1",
+                lineHeight: 1.8,
+                paddingLeft: "20px",
+                margin: 0,
+              }}
+            >
+              <li>Reviewing the arrest, charge, and available evidence</li>
+              <li>Evaluating searches, statements, and constitutional issues</li>
+              <li>Addressing bond and release conditions</li>
+              <li>Obtaining and reviewing discovery</li>
+              <li>Negotiating with prosecutors when appropriate</li>
+              <li>Preparing motions, hearings, trial, or appeal issues</li>
+            </ul>
+          </div>
+        </section>
+
+        <section
+          style={{
+            background: "#111827",
+            padding: "30px",
+            borderRadius: "16px",
+            border: "1px solid #1e293b",
+            marginBottom: "52px",
+          }}
+        >
+          <h2 style={{ marginBottom: "14px", fontSize: "30px" }}>
+            Criminal Defense in El Paso
+          </h2>
+
+          <p style={{ color: "#cbd5e1", lineHeight: 1.75, marginBottom: "16px" }}>
+            Criminal cases in El Paso may involve municipal courts, El Paso
+            County courts, district courts, state agencies, or the federal court
+            system depending on the charge and circumstances. Cases may begin
+            with a traffic stop, arrest, warrant, investigation, indictment, or
+            other law-enforcement action.
+          </p>
+
+          <p style={{ color: "#cbd5e1", lineHeight: 1.75, marginBottom: "16px" }}>
+            El Paso's border location can also create additional issues in some
+            criminal cases, including federal investigations, immigration
+            consequences, cross-border evidence, or charges involving ports of
+            entry, controlled substances, firearms, or interstate activity.
+          </p>
+
+          <p style={{ color: "#cbd5e1", lineHeight: 1.75, margin: 0 }}>
+            An El Paso criminal defense attorney can review the allegations,
+            police reports, body-camera or dash-camera video, witness accounts,
+            search and seizure issues, statements, forensic evidence, prior
+            record, court documents, and other information that may affect the
+            defense strategy.
+          </p>
+        </section>
+
+        <section style={{ marginBottom: "52px" }}>
+          <h2 style={{ fontSize: "32px", marginBottom: "18px" }}>
+            Explore Criminal Defense Practice Areas
+          </h2>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+              gap: "16px",
+            }}
+          >
+            {relatedPages.map(([label, href]) => (
+              <a
+                key={href}
+                href={href}
+                style={{
+                  display: "block",
+                  background: "#111827",
+                  border: "1px solid #1e293b",
+                  borderRadius: "14px",
+                  padding: "18px",
+                  color: "#f8fafc",
+                  textDecoration: "none",
+                  fontWeight: 700,
+                }}
+              >
+                {label} Lawyers
+                <span
+                  style={{
+                    display: "block",
+                    color: "#fbbf24",
+                    fontSize: "14px",
+                    marginTop: "8px",
+                  }}
+                >
+                  Compare El Paso attorneys →
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <section style={{ marginBottom: "52px" }}>
+          <h2 style={{ fontSize: "32px", marginBottom: "20px" }}>
+            Frequently Asked Questions
+          </h2>
+
+          <div style={{ display: "grid", gap: "16px" }}>
+            {faqs.map((faq) => (
+              <div
+                key={faq.q}
+                style={{
+                  background: "#111827",
+                  border: "1px solid #1e293b",
+                  borderRadius: "14px",
+                  padding: "22px",
+                }}
+              >
+                <h3
+                  style={{
+                    marginTop: 0,
+                    marginBottom: "10px",
+                    fontSize: "20px",
+                  }}
+                >
+                  {faq.q}
+                </h3>
+                <p style={{ color: "#cbd5e1", lineHeight: 1.7, margin: 0 }}>
+                  {faq.a}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section
+          style={{
+            background: "#111827",
+            border: "1px solid #1e293b",
+            borderRadius: "16px",
+            padding: "28px",
+            marginBottom: "40px",
+          }}
+        >
+          <h2 style={{ marginTop: 0, marginBottom: "12px", fontSize: "28px" }}>
+            Connect With an El Paso Criminal Defense Lawyer
+          </h2>
+          <p
+            style={{
+              color: "#cbd5e1",
+              lineHeight: 1.7,
+              marginBottom: "24px",
+            }}
+          >
+            Use the form below to submit your information and connect with a
+            participating law firm.
+          </p>
+          <LeadCaptureForm />
+        </section>
+
+        <a
+          href="/"
+          style={{
+            display: "inline-block",
+            background: "#fbbf24",
+            color: "#0f172a",
+            padding: "16px 24px",
+            borderRadius: "12px",
+            textDecoration: "none",
+            fontWeight: "bold",
+          }}
+        >
+          ← Back Home
+        </a>
+      </div>
+    </main>
+  );
 }
