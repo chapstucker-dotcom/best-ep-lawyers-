@@ -14,6 +14,12 @@ import AttorneyDetails from "./pages/AttorneyDetails";
 import PersonalInjury from "./pages/PersonalInjury";
 import WageHour from "./pages/WageHour";
 import WorkplaceDiscrimination from "./pages/WorkplaceDiscrimination";
+import CriminalDefense from "./pages/CriminalDefense";
+import Immigration from "./pages/Immigration";
+import CarAccidentLawyers from "./pages/CarAccidentLawyers";
+import DogBite from "./pages/DogBite";
+import SlipAndFall from "./pages/SlipAndFall";
+import TruckAccidentLawyers from "./pages/TruckAccidentLawyers";
 import PracticeAreaPage from "./pages/PracticeAreaPage";
 import Guides from "./pages/Guides";
 import GuideArticle from "./pages/GuideArticle";
@@ -37,8 +43,15 @@ export default function App() {
         <Route path="/el-paso-wage-hour-lawyers" element={<WageHour />} />
         <Route path="/el-paso-workplace-discrimination-lawyers" element={<WorkplaceDiscrimination />} />
 
+        <Route path="/el-paso-criminal-defense-lawyers" element={<CriminalDefense />} />
+        <Route path="/el-paso-immigration-lawyers" element={<Immigration />} />
+        <Route path="/el-paso-car-accident-lawyers" element={<CarAccidentLawyers />} />
+        <Route path="/el-paso-dog-bite-lawyers" element={<DogBite />} />
+        <Route path="/el-paso-slip-and-fall-lawyers" element={<SlipAndFall />} />
+        <Route path="/el-paso-truck-accident-lawyers" element={<TruckAccidentLawyers />} />
+
         {/* All other practice-area routes come from one master data file. */}
-        {practiceAreaPages.map((page) => (
+        {practiceAreaPages.filter((page) => !["/el-paso-dog-bite-lawyers", "/el-paso-slip-and-fall-lawyers", "/el-paso-truck-accident-lawyers"].includes(page.path)).map((page) => (
           <Route
             key={page.path}
             path={page.path}
@@ -67,5 +80,6 @@ export default function App() {
     </AuthProvider>
   );
 }
+
 
 
