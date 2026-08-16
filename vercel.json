@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/category/immigration",
+      "destination": "/el-paso-immigration-lawyers",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",
