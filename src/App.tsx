@@ -20,6 +20,7 @@ import CarAccidentLawyers from "./pages/CarAccidentLawyers";
 import DogBite from "./pages/DogBite";
 import SlipAndFall from "./pages/SlipAndFall";
 import TruckAccidentLawyers from "./pages/TruckAccidentLawyers";
+import MotorcycleAccident from "./pages/MotorcycleAccident";
 import BicycleAccident from "./pages/BicycleAccident";
 import WrongfulTermination from "./pages/WrongfulTermination";
 import EmploymentLaw from "./pages/EmploymentLaw";
@@ -31,6 +32,7 @@ import PracticeAreaPage from "./pages/PracticeAreaPage";
 import Guides from "./pages/Guides";
 import GuideArticle from "./pages/GuideArticle";
 import FeaturedBadge from "./pages/FeaturedBadge";
+
 
 import { practiceAreaPages } from "./data/practiceAreaPages";
 import { AuthProvider } from "./contexts/AuthContext";
@@ -56,6 +58,7 @@ export default function App() {
         <Route path="/el-paso-dog-bite-lawyers" element={<DogBite />} />
         <Route path="/el-paso-slip-and-fall-lawyers" element={<SlipAndFall />} />
         <Route path="/el-paso-truck-accident-lawyers" element={<TruckAccidentLawyers />} />
+        <Route path="/el-paso-motorcycle-accident-lawyers" element={<MotorcycleAccident />} />
         <Route path="/el-paso-bicycle-accident-lawyers" element={<BicycleAccident />} />
         <Route path="/el-paso-wrongful-termination-lawyers" element={<WrongfulTermination />} />
         <Route path="/el-paso-employment-lawyers" element={<EmploymentLaw />} />
