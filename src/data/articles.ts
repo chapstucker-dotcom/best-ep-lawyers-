@@ -219,6 +219,150 @@ export const articles: Article[] = [
     sources: [
       { name: 'Texas Family Code Chapter 153', url: 'https://statutes.capitol.texas.gov/Docs/FA/htm/FA.153.htm' },
     ],
+  },  {
+    id: 'uber-lyft-accident-el-paso',
+    slug: 'what-to-do-after-uber-lyft-accident-el-paso',
+    title: 'What to Do After an Uber or Lyft Accident in El Paso, Texas',
+    metaDescription:
+      'What should you do if your Uber or Lyft crashes in El Paso? Learn what information to save, how rideshare insurance may matter, crash-report basics, and when to consider legal help.',
+    summary:
+      'A practical El Paso guide for passengers, drivers, pedestrians, cyclists, and other motorists involved in an Uber or Lyft crash.',
+    topic: 'Uber & Lyft Accidents',
+    readTime: '7 min read',
+    updatedAt: '2026-08-16',
+    relatedPracticeArea: {
+      label: 'Compare El Paso Uber & Lyft Accident Lawyers',
+      path: '/el-paso-uber-lyft-accident-lawyers',
+    },
+
+    sections: [
+      {
+        heading: 'Start with safety and medical care',
+        paragraphs: [
+          'If an Uber or Lyft is involved in a crash in El Paso, address immediate safety first. Call 911 when someone may be injured, traffic conditions are dangerous, or emergency assistance is needed. If you are able to move safely out of active traffic, do so without putting yourself or others at additional risk.',
+          'Some injuries are not obvious immediately after a collision. Seek appropriate medical attention and keep copies of medical records, discharge instructions, bills, prescriptions, and follow-up recommendations.',
+        ],
+      },
+
+      {
+        heading: 'Save your Uber or Lyft trip information immediately',
+        paragraphs: [
+          'Rideshare crashes can involve electronic information that does not exist in an ordinary two-car collision. Save the trip receipt, driver name, vehicle information, pickup and drop-off locations, route information, timestamps, screenshots, support messages, and any notices you receive through the rideshare app.',
+          'If you were a passenger, take screenshots before information becomes harder to locate in the app. If you were a rideshare driver, preserve information showing your app and trip status at the time of the collision.',
+        ],
+        bullets: [
+          'Save screenshots of the active or completed trip.',
+          'Save the driver name, vehicle, and license-plate information.',
+          'Keep pickup, destination, route, and timestamp information.',
+          'Preserve messages with Uber, Lyft, the driver, or customer support.',
+          'Save photographs and videos from the crash scene.',
+        ],
+      },
+
+      {
+        heading: 'Document the crash like any other serious collision',
+        paragraphs: [
+          'When it is safe, photograph the vehicles, damage, license plates, roadway, traffic controls, debris, visible injuries, and the surrounding scene. Obtain witness names and contact information when possible.',
+          'Also save insurance information for the drivers involved. A rideshare company being involved does not eliminate the importance of ordinary crash evidence such as photographs, witnesses, police information, vehicle damage, medical records, and communications with insurers.',
+        ],
+      },
+
+      {
+        heading: 'Understand why rideshare insurance can be different',
+        paragraphs: [
+          'Insurance questions can become more complicated in an Uber or Lyft crash because coverage may depend on the driver’s status when the collision occurred. Relevant facts can include whether the driver was offline, logged into the rideshare network, waiting for a ride request, traveling to pick up a passenger, or transporting a passenger.',
+          'The Texas Department of Insurance explains that personal automobile policies may not provide the same coverage while a vehicle is being used for ridesharing and that rideshare companies are subject to insurance requirements. The actual policies and facts of the crash should be reviewed rather than assuming a particular policy applies.',
+        ],
+      },
+
+      {
+        heading: 'Get the Texas crash report when one exists',
+        paragraphs: [
+          'TxDOT is the state custodian of Texas crash reports. For qualifying crashes investigated by law enforcement, the investigating officer submits a Texas Peace Officer’s Crash Report, commonly called a CR-3, to TxDOT.',
+          'A crash report can identify drivers, vehicles, insurers, witnesses, roadway information, and recorded observations, but it may not contain every fact needed to evaluate responsibility or insurance coverage. App data, trip records, photographs, video, witnesses, medical records, and other evidence can also be important.',
+        ],
+      },
+
+      {
+        heading: 'Be careful before signing releases or giving detailed statements',
+        paragraphs: [
+          'A rideshare collision can involve the rideshare driver, another motorist, more than one insurer, and potentially different coverage depending on the driver’s status. Keep copies of every insurance letter, email, claim number, recorded-statement request, medical authorization, settlement offer, and release you receive.',
+          'If injuries are significant, fault is disputed, multiple insurers are involved, or coverage is unclear, consider getting legal advice before signing a broad release or accepting a settlement that may resolve claims permanently.',
+        ],
+      },
+
+      {
+        heading: 'What if another driver caused the Uber or Lyft crash?',
+        paragraphs: [
+          'The fact that you were riding in an Uber or Lyft does not necessarily mean the rideshare driver caused the collision. Another driver may be responsible, or responsibility may be disputed among multiple drivers.',
+          'When another motorist caused the crash, that driver’s liability insurance may be relevant, while other potentially applicable coverage may also need to be evaluated based on the circumstances and policy terms.',
+        ],
+      },
+
+      {
+        heading: 'What if the driver who caused the crash was uninsured?',
+        paragraphs: [
+          'Uninsured or underinsured motorist coverage may become important when the responsible driver has no insurance or insufficient liability limits. Which policy or policies may apply depends on the circumstances, the rideshare driver’s status, and the relevant insurance contracts.',
+          'Preserve all coverage documents and insurance communications rather than assuming that no recovery is available simply because one driver lacked sufficient insurance.',
+        ],
+      },
+
+      {
+        heading: 'When an El Paso rideshare accident lawyer may help',
+        paragraphs: [
+          'Consider speaking with an attorney when the crash caused serious injuries, hospitalization, lost income, permanent impairment, disputed fault, a death, or significant insurance complications.',
+          'An attorney reviewing an Uber or Lyft crash may examine police records, trip and app information, insurance policies, photographs, video, medical evidence, witness statements, vehicle information, and communications with the companies and insurers involved.',
+        ],
+      },
+    ],
+
+    faqs: [
+      {
+        question: 'What should I do if my Uber crashes in El Paso?',
+        answer:
+          'Address immediate safety and medical needs, report the crash when appropriate, photograph the scene, save witness information, preserve your Uber trip receipt and screenshots, and keep medical and insurance records.',
+      },
+      {
+        question: 'What should I save from the Uber or Lyft app after a crash?',
+        answer:
+          'Save the trip receipt, driver information, vehicle details, pickup and destination information, timestamps, route information, screenshots, support messages, and any crash-related notices.',
+      },
+      {
+        question: 'Does Uber or Lyft insurance automatically cover every rideshare crash?',
+        answer:
+          'Do not assume a particular policy automatically applies. Coverage can depend on the driver’s app and trip status, the parties involved, available personal and rideshare policies, and the facts of the collision.',
+      },
+      {
+        question: 'What if another driver caused the rideshare crash?',
+        answer:
+          'The other driver’s liability insurance may be relevant. Depending on the circumstances, additional coverage may also need to be evaluated.',
+      },
+      {
+        question: 'Can I get a Texas crash report after an Uber or Lyft accident?',
+        answer:
+          'When law enforcement investigates a qualifying Texas crash, a CR-3 peace officer crash report may be available to eligible requesters through the TxDOT crash-records system.',
+      },
+      {
+        question: 'When should I contact an Uber or Lyft accident lawyer in El Paso?',
+        answer:
+          'Consider legal advice promptly when injuries are serious, responsibility is disputed, multiple insurers are involved, the rideshare driver’s status is unclear, or electronic trip evidence may need to be preserved.',
+      },
+    ],
+
+    sources: [
+      {
+        name: 'Texas Department of Insurance — Ride sharing: 3 questions to ask',
+        url: 'https://www.tdi.texas.gov/tips/ride-sharing.html',
+      },
+      {
+        name: 'Texas Occupations Code Chapter 2402 — Transportation Network Companies',
+        url: 'https://statutes.capitol.texas.gov/Docs/OC/htm/OC.2402.htm',
+      },
+      {
+        name: 'Texas Department of Transportation — Crash reports and records',
+        url: 'https://www.txdot.gov/data-maps/crash-reports-records.html',
+      },
+    ],
   },
 ];
 
