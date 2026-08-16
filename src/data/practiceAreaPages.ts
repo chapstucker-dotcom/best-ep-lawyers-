@@ -971,7 +971,7 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       { label: "What to Do After a Car Accident in El Paso, Texas", path: "/guides/what-to-do-after-car-accident-el-paso" },
       { label: "What Happens if the Driver Who Hit You Is Uninsured in Texas?", path: "/guides/uninsured-driver-texas-car-accident" },
       { label: "How to Get a Texas Crash Report After an El Paso Accident", path: "/guides/texas-crash-report-el-paso" },
-    ],{ label: "What to Do After an Uber or Lyft Accident in El Paso, Texas", path: "/guides/what-to-do-after-uber-lyft-accident-el-paso" },
+    ],
     lastUpdated: "August 14, 2026",
   },  {
     path: "/el-paso-uber-lyft-accident-lawyers",
