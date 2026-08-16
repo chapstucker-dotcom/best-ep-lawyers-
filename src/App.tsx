@@ -26,6 +26,7 @@ import EmploymentLaw from "./pages/EmploymentLaw";
 import AgeDiscrimination from "./pages/AgeDiscrimination";
 import SexDiscrimination from "./pages/SexDiscrimination";
 import WrongfulDeath from "./pages/WrongfulDeath";
+import OvertimePayDisputes from "./pages/OvertimePayDisputes";
 import PracticeAreaPage from "./pages/PracticeAreaPage";
 import Guides from "./pages/Guides";
 import GuideArticle from "./pages/GuideArticle";
@@ -61,6 +62,7 @@ export default function App() {
         <Route path="/el-paso-age-discrimination-lawyers" element={<AgeDiscrimination />} />
         <Route path="/el-paso-sex-discrimination-lawyers" element={<SexDiscrimination />} />
         <Route path="/el-paso-wrongful-death-lawyers" element={<WrongfulDeath />} />
+        <Route path="/el-paso-overtime-pay-disputes-lawyers" element={<OvertimePayDisputes />} />
 
         {/* All other practice-area routes come from one master data file. */}
         {practiceAreaPages.filter((page) => !["/el-paso-dog-bite-lawyers", "/el-paso-slip-and-fall-lawyers", "/el-paso-truck-accident-lawyers", "/el-paso-bicycle-accident-lawyers", "/el-paso-wrongful-termination-lawyers", "/el-paso-employment-lawyers"].includes(page.path)).map((page) => (
@@ -92,6 +94,7 @@ export default function App() {
     </AuthProvider>
   );
 }
+
 
 
 
