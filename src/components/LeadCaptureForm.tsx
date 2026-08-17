@@ -174,31 +174,32 @@ export default function LeadCaptureForm({
 
   const sendLeadNotification = async () => {
     try {
-      const response = await fetch(
-        '/api/send-lead',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type':
-              'application/json',
-          },
-          body: JSON.stringify({
-            fullName: form.fullName.trim(),
-            email: form.email.trim(),
-            phone: form.phone.trim(),
-            legalIssue:
-              form.legalIssue.trim(),
-            firmId: firmId || null,
-            firmName: firmName || null,
-            firmEmail:
-              firmEmail || null,
-            practiceArea:
-              practiceArea || null,
-          }),
-        }
-      );
+     const response = await fetch(
+  '/api/send-lead',
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      fullName: form.fullName.trim(),
+      email: form.email.trim(),
+      phone: form.phone.trim(),
+      legalIssue: form.legalIssue.trim(),
+      firmId: firmId || null,
+      firmName: firmName || null,
+      firmEmail: firmEmail || null,
+      practiceArea: practiceArea || null,
+      sourceUrl:
+        typeof window !== 'undefined'
+          ? window.location.href
+          : null,
+    }),
+  }
+);
 
-      if (!response.ok) {
+if (!response.ok) {
+
         console.warn(
           'Lead saved, but email notification was not delivered.',
           response.status

@@ -61,7 +61,7 @@ export default function ListFirmForm() {
     website: string
   ): Promise<boolean> => {
     try {
-      const response = await fetch("/api/send-lead", {
+const response = await fetch("/api/submit-listing", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
