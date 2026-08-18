@@ -19,6 +19,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+
 import {
   Alert,
   AlertDescription,
@@ -46,6 +47,111 @@ const EMPTY_FORM: FormState = {
   email: '',
   phone: '',
   legalIssue: '',
+};
+
+const PRACTICE_AREA_NAMES: Record<string, string> = {
+  'personal-injury': 'Personal Injury',
+  'car-accident': 'Car Accident',
+  'truck-accident': 'Truck Accident',
+  'motorcycle-accident': 'Motorcycle Accident',
+  'construction-accident': 'Construction Accident',
+  'slip-and-fall': 'Slip and Fall',
+  'wrongful-death': 'Wrongful Death',
+  'workers-compensation': "Workers' Compensation",
+  'workplace-discrimination': 'Workplace Discrimination',
+  'wage-hour': 'Wage and Hour',
+  'traffic-ticket': 'Traffic Ticket',
+  'criminal-defense': 'Criminal Defense',
+  immigration: 'Immigration',
+  'family-law': 'Family Law',
+  divorce: 'Divorce',
+  'estate-planning': 'Estate Planning',
+  probate: 'Probate',
+  'business-law': 'Business Law',
+  business: 'Business Law',
+  'real-estate': 'Real Estate',
+  'employment-law': 'Employment Law',
+  employment: 'Employment Law',
+  bankruptcy: 'Bankruptcy',
+  'civil-litigation': 'Civil Litigation',
+  dwi: 'DWI / DUI',
+  dui: 'DWI / DUI',
+  'dwi-dui': 'DWI / DUI',
+};
+
+const formatPracticeAreaSlug = (
+  slug: string
+): string => {
+  if (PRACTICE_AREA_NAMES[slug]) {
+    return PRACTICE_AREA_NAMES[slug];
+  }
+
+  return slug
+    .split('-')
+    .filter(Boolean)
+    .map((word) => {
+      const lower = word.toLowerCase();
+
+      if (lower === 'dwi' || lower === 'dui') {
+        return lower.toUpperCase();
+      }
+
+      return (
+        lower.charAt(0).toUpperCase() +
+        lower.slice(1)
+      );
+    })
+    .join(' ');
+};
+
+const inferPracticeAreaFromUrl = (): string => {
+  if (typeof window === 'undefined') {
+    return 'General Legal Inquiry';
+  }
+
+  let pathname = window.location.pathname
+    .toLowerCase()
+    .replace(/^\/+/, '')
+    .replace(/\/+$/, '');
+
+  if (!pathname) {
+    return 'General Legal Inquiry';
+  }
+
+  /*
+   * Handles URLs such as:
+   * /el-paso-personal-injury-lawyers
+   * /el-paso-workers-compensation-lawyers
+   */
+  if (pathname.startsWith('el-paso-')) {
+    pathname = pathname.replace(
+      /^el-paso-/,
+      ''
+    );
+
+    pathname = pathname.replace(
+      /-lawyers?$/,
+      ''
+    );
+
+    return formatPracticeAreaSlug(pathname);
+  }
+
+  /*
+   * Handles category URLs such as:
+   * /category/immigration
+   */
+  if (pathname.startsWith('category/')) {
+    const slug =
+      pathname.split('/').filter(Boolean).pop() ||
+      '';
+
+    if (slug) {
+      return formatPracticeAreaSlug(slug);
+    }
+  }
+
+  return 'General Legal Inquiry';
 };
 
 const isMissingColumnError = (
@@ -88,6 +194,15 @@ export default function LeadCaptureForm({
   const [errorMessage, setErrorMessage] =
     useState('');
 
+  /*
+   * Prefer a practice area explicitly supplied by a
+   * firm/profile page. Otherwise determine it from
+   * the URL automatically.
+   */
+  const effectivePracticeArea =
+    practiceArea?.trim() ||
+    inferPracticeAreaFromUrl();
+
   const updateField = (
     field: keyof FormState,
     value: string
@@ -116,7 +231,7 @@ export default function LeadCaptureForm({
     }
 
     if (form.legalIssue.trim().length < 10) {
-      return 'Please briefly describe how the firm can help.';
+      return 'Please briefly describe how a lawyer may be able to help.';
     }
 
     return '';
@@ -131,37 +246,37 @@ export default function LeadCaptureForm({
     };
 
     /*
-     * First try the complete lead record.
-     * This connects the inquiry to the selected firm.
+     * First try to save the complete lead record.
      */
     const enrichedLead = {
       ...baseLead,
       firm_id: firmId || null,
       firm_name: firmName || null,
       practice_area:
-        practiceArea || null,
+        effectivePracticeArea ||
+        'General Legal Inquiry',
       status: 'new',
     };
-const firstAttempt = await supabase
-  .from('leads')
-  .insert([enrichedLead]);
+
+    const firstAttempt = await supabase
+      .from('leads')
+      .insert([enrichedLead]);
 
     if (!firstAttempt.error) {
       return firstAttempt;
     }
 
     /*
-     * Older lead tables may not yet contain
-     * firm_id, firm_name, practice_area, or status.
-     * Fall back to the original working columns
-     * instead of losing the inquiry.
+     * If the existing Supabase table does not yet
+     * contain the newer tracking columns, keep the
+     * lead instead of losing it.
      */
     if (
       isMissingColumnError(firstAttempt.error)
     ) {
-     return supabase
-  .from('leads')
-  .insert([baseLead]);
+      return supabase
+        .from('leads')
+        .insert([baseLead]);
     }
 
     return firstAttempt;
@@ -169,32 +284,50 @@ const firstAttempt = await supabase
 
   const sendLeadNotification = async () => {
     try {
-     const response = await fetch(
-  '/api/send-lead',
-  {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      fullName: form.fullName.trim(),
-      email: form.email.trim(),
-      phone: form.phone.trim(),
-      legalIssue: form.legalIssue.trim(),
-      firmId: firmId || null,
-      firmName: firmName || null,
-      firmEmail: firmEmail || null,
-      practiceArea: practiceArea || null,
-      sourceUrl:
-        typeof window !== 'undefined'
-          ? window.location.href
-          : null,
-    }),
-  }
-);
+      const response = await fetch(
+        '/api/send-lead',
+        {
+          method: 'POST',
 
-if (!response.ok) {
+          headers: {
+            'Content-Type':
+              'application/json',
+          },
 
+          body: JSON.stringify({
+            fullName:
+              form.fullName.trim(),
+
+            email:
+              form.email.trim(),
+
+            phone:
+              form.phone.trim(),
+
+            legalIssue:
+              form.legalIssue.trim(),
+
+            firmId:
+              firmId || null,
+
+            firmName:
+              firmName || null,
+
+            firmEmail:
+              firmEmail || null,
+
+            practiceArea:
+              effectivePracticeArea,
+
+            sourceUrl:
+              typeof window !== 'undefined'
+                ? window.location.href
+                : null,
+          }),
+        }
+      );
+
+      if (!response.ok) {
         console.warn(
           'Lead saved, but email notification was not delivered.',
           response.status
@@ -202,9 +335,8 @@ if (!response.ok) {
       }
     } catch (error) {
       /*
-       * The database lead is already saved.
-       * Email failure should not show the visitor
-       * that their request failed.
+       * The lead is already stored.
+       * Email failure must not lose it.
        */
       console.warn(
         'Lead notification request failed:',
@@ -241,13 +373,17 @@ if (!response.ok) {
 
       await sendLeadNotification();
 
+      /*
+       * Do not claim that a specific firm has
+       * received the inquiry. The platform captures
+       * the lead first.
+       */
       setSuccessMessage(
-        firmName
-          ? `Your request was sent to ${firmName}. The firm may contact you using the information provided.`
-          : 'Your consultation request was submitted successfully.'
+        "Your consultation request was submitted successfully. El Paso's Best Lawyers has received your request."
       );
 
       setForm(EMPTY_FORM);
+
       onSuccess?.();
     } catch (error) {
       console.error(
@@ -406,7 +542,7 @@ if (!response.ok) {
 
           <div className="space-y-2">
             <Label htmlFor="lead-legal-issue">
-              How can the firm help? *
+              How can a lawyer help? *
             </Label>
 
             <Textarea
@@ -426,8 +562,8 @@ if (!response.ok) {
             />
 
             <p className="text-xs text-gray-500">
-              Do not include confidential or
-              highly sensitive information.
+              Do not include confidential or highly
+              sensitive information.
             </p>
           </div>
 
@@ -450,9 +586,9 @@ if (!response.ok) {
           </Button>
 
           <p className="text-center text-xs leading-5 text-gray-500">
-            Submission does not guarantee
-            representation and does not create an
-            attorney-client relationship.
+            Submission does not guarantee representation
+            and does not create an attorney-client
+            relationship.
           </p>
         </form>
       </div>
