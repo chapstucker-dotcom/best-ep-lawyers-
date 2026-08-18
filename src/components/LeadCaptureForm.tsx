@@ -347,7 +347,7 @@ if (!response.ok) {
                   }
                   placeholder="Your full name"
                   autoComplete="name"
-                  className="pl-10"
+                  className="pl-10 text-slate-900"
                   disabled={loading}
                   required
                 />
@@ -374,7 +374,7 @@ if (!response.ok) {
                   }
                   placeholder="you@example.com"
                   autoComplete="email"
-                  className="pl-10"
+                  className="pl-10 text-slate-900"
                   disabled={loading}
                   required
                 />
@@ -401,7 +401,7 @@ if (!response.ok) {
                   }
                   placeholder="(915) 555-1234"
                   autoComplete="tel"
-                  className="pl-10"
+                  className="pl-10 text-slate-900"
                   disabled={loading}
                   required
                 />
@@ -425,6 +425,7 @@ if (!response.ok) {
               }
               placeholder="Briefly describe your legal issue, important dates, and the type of help you are seeking."
               rows={6}
+              className="text-slate-900"
               disabled={loading}
               required
             />
