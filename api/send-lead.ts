@@ -48,21 +48,23 @@ export default async function handler(req: any, res: any) {
     }
 
     const area =
-      practiceArea?.trim() || "General Legal Inquiry";
+      String(practiceArea ?? "").trim() ||
+      "General Legal Inquiry";
 
     const viewedFirm =
-      firmName?.trim() || "No specific firm selected";
+      String(firmName ?? "").trim() ||
+      "No specific firm selected";
 
     /*
      * ADMIN NOTIFICATION
      *
-     * The lead comes to El Paso's Best Lawyers.
-     * It is NOT automatically forwarded to the law firm.
+     * The lead is captured by El Paso's Best Lawyers.
+     * It is not automatically forwarded to the law firm.
      */
     const { error: adminEmailError } =
       await resend.emails.send({
         from:
-          "El Paso's Best Lawyers <onboarding@resend.dev>",
+          "El Paso's Best Lawyers <support@elpasosbestlawyers.com>",
 
         to: ["support@elpasosbestlawyers.com"],
 
@@ -104,7 +106,6 @@ export default async function handler(req: any, res: any) {
               padding:24px;
               border-radius:0 0 10px 10px;
             ">
-
               <h2>Consumer</h2>
 
               <table
@@ -207,13 +208,13 @@ export default async function handler(req: any, res: any) {
     /*
      * CONSUMER ACKNOWLEDGEMENT
      *
-     * This confirms receipt without telling the consumer
-     * that the selected firm has received the inquiry.
+     * Confirms receipt without claiming that a law firm
+     * has received or accepted the inquiry.
      */
     const { error: consumerEmailError } =
       await resend.emails.send({
         from:
-          "El Paso's Best Lawyers <onboarding@resend.dev>",
+          "El Paso's Best Lawyers <support@elpasosbestlawyers.com>",
 
         to: [email],
 
@@ -278,9 +279,9 @@ export default async function handler(req: any, res: any) {
       });
 
     /*
-     * The lead itself is already stored in Supabase.
-     * A failure of the consumer acknowledgement should
-     * not lose the lead.
+     * The lead is already stored in Supabase.
+     * A consumer-confirmation email failure should not
+     * cause the captured lead to be lost.
      */
     if (consumerEmailError) {
       console.warn(
@@ -291,8 +292,7 @@ export default async function handler(req: any, res: any) {
 
     return res.status(200).json({
       success: true,
-      capturedBy:
-        "El Paso's Best Lawyers",
+      capturedBy: "El Paso's Best Lawyers",
       routedToFirm: false,
     });
   } catch (err: any) {
