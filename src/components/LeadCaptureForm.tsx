@@ -142,12 +142,9 @@ export default function LeadCaptureForm({
         practiceArea || null,
       status: 'new',
     };
-
-    const firstAttempt = await supabase
-      .from('leads')
-      .insert([enrichedLead])
-      .select('id')
-      .maybeSingle();
+const firstAttempt = await supabase
+  .from('leads')
+  .insert([enrichedLead]);
 
     if (!firstAttempt.error) {
       return firstAttempt;
@@ -162,11 +159,9 @@ export default function LeadCaptureForm({
     if (
       isMissingColumnError(firstAttempt.error)
     ) {
-      return supabase
-        .from('leads')
-        .insert([baseLead])
-        .select('id')
-        .maybeSingle();
+     return supabase
+  .from('leads')
+  .insert([baseLead]);
     }
 
     return firstAttempt;
