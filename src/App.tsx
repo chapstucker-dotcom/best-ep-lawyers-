@@ -157,7 +157,14 @@ export default function App() {
 <Route
   path="/el-paso-product-liability-lawyers"
   element={<ProductLiability />}
+
 />
+<Route
+  path="/el-paso-pedestrian-accident-lawyers"
+  element={<PedestrianAccident />}
+/>
+import PedestrianAccident from "./pages/PedestrianAccident";
+
         {practiceAreaPages
           .filter(
             (page) =>
