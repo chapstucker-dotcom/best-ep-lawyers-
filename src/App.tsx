@@ -36,6 +36,7 @@ import MedicalMalpractice from "./pages/MedicalMalpractice";
 import PremisesLiability from "./pages/PremisesLiability";
 import ProductLiability from "./pages/ProductLiability";
 import PedestrianAccident from "./pages/PedestrianAccident";
+import RideshareAccident from "./pages/RideshareAccident";
 import Guides from "./pages/Guides";
 import GuideArticle from "./pages/GuideArticle";
 import FeaturedBadge from "./pages/FeaturedBadge";
@@ -54,7 +55,10 @@ export default function App() {
           element={<PersonalInjury />}
         />
 
-        <Route path="/el-paso-wage-hour-lawyers" element={<WageHour />} />
+        <Route
+          path="/el-paso-wage-hour-lawyers"
+          element={<WageHour />}
+        />
 
         <Route
           path="/el-paso-workplace-discrimination-lawyers"
@@ -164,6 +168,11 @@ export default function App() {
         <Route
           path="/el-paso-pedestrian-accident-lawyers"
           element={<PedestrianAccident />}
+        />
+
+        <Route
+          path="/el-paso-rideshare-accident-lawyers"
+          element={<RideshareAccident />}
         />
 
         {practiceAreaPages
