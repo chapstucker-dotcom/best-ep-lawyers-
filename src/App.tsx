@@ -34,6 +34,7 @@ import BrainInjury from "./pages/BrainInjury";
 import ConstructionAccident from "./pages/ConstructionAccident";
 import MedicalMalpractice from "./pages/MedicalMalpractice";
 import PremisesLiability from "./pages/PremisesLiability";
+import ProductLiability from "./pages/ProductLiability";
 import Guides from "./pages/Guides";
 import GuideArticle from "./pages/GuideArticle";
 import FeaturedBadge from "./pages/FeaturedBadge";
@@ -153,7 +154,10 @@ export default function App() {
           path="/el-paso-premises-liability-lawyers"
           element={<PremisesLiability />}
         />
-
+<Route
+  path="/el-paso-product-liability-lawyers"
+  element={<ProductLiability />}
+/>
         {practiceAreaPages
           .filter(
             (page) =>
