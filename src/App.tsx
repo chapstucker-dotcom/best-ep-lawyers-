@@ -31,6 +31,7 @@ import OvertimePayDisputes from "./pages/OvertimePayDisputes";
 import PracticeAreaPage from "./pages/PracticeAreaPage";
 import WorkersCompensation from "./pages/WorkersCompensation";
 import BrainInjury from "./pages/BrainInjury";
+import MedicalMalpractice from "./pages/MedicalMalpractice";
 import Guides from "./pages/Guides";
 import GuideArticle from "./pages/GuideArticle";
 import FeaturedBadge from "./pages/FeaturedBadge";
@@ -134,6 +135,11 @@ export default function App() {
         <Route
           path="/el-paso-brain-injury-lawyers"
           element={<BrainInjury />}
+        />
+
+        <Route
+          path="/el-paso-medical-malpractice-lawyers"
+          element={<MedicalMalpractice />}
         />
 
         {practiceAreaPages

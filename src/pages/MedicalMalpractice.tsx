@@ -6,58 +6,124 @@ const medicalMalpracticePage: PracticeAreaPageData = {
   shortTitle: "Medical Malpractice",
   title: "Best Medical Malpractice Lawyers in El Paso, Texas",
   description:
-    "Compare El Paso medical malpractice attorneys handling surgical errors, delayed diagnosis, birth injuries, medication mistakes, hospital negligence, emergency-room errors, and wrongful death claims.",
+    "Compare El Paso medical malpractice attorneys handling surgical errors, delayed diagnoses, medication errors, birth injuries, hospital negligence, and other serious medical injury claims.",
   metaDescription:
-    "Compare medical malpractice lawyers in El Paso for surgical errors, delayed diagnosis, birth injuries, medication mistakes, hospital negligence, and wrongful death.",
+    "Compare medical malpractice lawyers in El Paso for surgical errors, misdiagnosis, medication errors, birth injuries, hospital negligence, and serious medical injuries.",
   heroText:
-    "Compare El Paso medical malpractice attorneys for surgical errors, delayed diagnosis, birth injuries, medication mistakes, hospital negligence, and wrongful death claims.",
+    "Compare El Paso medical malpractice attorneys for serious injuries involving doctors, hospitals, clinics, nurses, and other healthcare providers.",
+
   topics: [
     "Surgical Errors",
-    "Delayed Diagnosis",
     "Misdiagnosis",
-    "Birth Injuries",
+    "Delayed Diagnosis",
     "Medication Errors",
+    "Birth Injuries",
     "Hospital Negligence",
     "Emergency Room Errors",
     "Anesthesia Errors",
-    "Serious Injuries",
+    "Failure to Treat",
     "Wrongful Death",
   ],
+
   overview: [
-    "A medical malpractice lawyer represents patients and families harmed by healthcare that may have fallen below the applicable standard of care.",
-    "Medical malpractice claims usually require careful review of records, treatment decisions, informed-consent issues, and expert medical opinions.",
-    "Important evidence may include hospital records, physician notes, imaging, laboratory results, medication records, consent forms, monitoring data, and billing records.",
-    "These cases may involve permanent disability, additional surgery, loss of earning capacity, extensive future care, disfigurement, pain, or death.",
+    "A medical malpractice lawyer represents patients and families who believe negligent medical care caused serious injury, complications, disability, or death.",
+    "Medical malpractice cases can involve doctors, hospitals, nurses, clinics, surgeons, emergency departments, pharmacies, and other healthcare providers.",
+    "These cases often require detailed review of medical records, treatment timelines, diagnostic testing, hospital records, and expert medical opinions.",
+    "A poor medical outcome does not automatically mean malpractice occurred. A claim generally requires evidence that the applicable standard of care was breached and that the breach caused legally compensable harm.",
   ],
+
   whenToHire: [
-    "A patient suffered a serious injury after surgery, treatment, medication, childbirth, anesthesia, or emergency care.",
-    "A diagnosis was missed or delayed and the condition became significantly worse.",
-    "A hospital, doctor, or insurer will not explain what happened or disputes responsibility.",
-    "The injury caused additional treatment, permanent impairment, loss of income, or extensive future care.",
-    "A family member died after suspected medical negligence.",
+    "A medical error caused a serious or permanent injury.",
+    "A condition was allegedly misdiagnosed or diagnosed too late.",
+    "You suffered complications after surgery or another medical procedure.",
+    "A medication or treatment error caused significant harm.",
+    "A child suffered a serious injury during pregnancy, labor, or delivery.",
+    "A loved one died and you believe negligent medical treatment contributed to the death.",
   ],
+
   localContent: [
-    "El Paso medical malpractice matters may involve hospitals, emergency departments, surgical centers, clinics, pharmacies, laboratories, military healthcare facilities, and individual providers throughout El Paso County.",
-    "An El Paso medical malpractice attorney can help obtain records, evaluate deadlines, identify potentially responsible providers, coordinate expert review, document damages, and determine whether negotiation or litigation is appropriate.",
+    "El Paso medical malpractice claims may involve treatment provided at hospitals, emergency departments, surgical centers, clinics, physician offices, rehabilitation facilities, and other healthcare facilities throughout El Paso County.",
+    "Evaluating a potential claim may require obtaining records from multiple healthcare providers and reconstructing the sequence of diagnosis, treatment, testing, medication, surgery, and follow-up care.",
+    "Medical malpractice litigation can involve complex questions about the applicable medical standard of care, causation, preexisting conditions, future treatment, disability, lost earning capacity, and long-term medical needs.",
+    "Texas medical liability claims are subject to specialized statutes, deadlines, procedural requirements, and limitations. Because the applicable deadline can depend on the circumstances, potential claims should be evaluated promptly.",
   ],
+
   faqs: [
-    { question: "What is medical malpractice?", answer: "Medical malpractice generally involves healthcare that fell below the applicable standard of care and caused injury. A bad result alone does not automatically prove negligence." },
-    { question: "Do these cases require expert testimony?", answer: "Many cases require qualified expert opinions regarding the standard of care, breach, and causation." },
-    { question: "What is a delayed-diagnosis claim?", answer: "It may arise when a condition should have been identified earlier and the delay caused additional harm." },
-    { question: "Can medication errors support a claim?", answer: "Yes. Prescribing, dispensing, dosing, administration, allergy, and interaction errors may be relevant when they cause injury." },
-    { question: "What records should I preserve?", answer: "Preserve medical records, test results, imaging, prescriptions, discharge instructions, bills, and insurance correspondence." },
-    { question: "How long do I have to bring a claim?", answer: "Texas medical-malpractice deadlines can be strict, so prompt legal review is important." },
-    { question: "What damages may be available?", answer: "Depending on the facts, damages may include medical expenses, lost income, pain, impairment, future care, and wrongful-death damages." },
-    { question: "Can a hospital be responsible?", answer: "A hospital may be involved based on employees, policies, staffing, credentialing, supervision, equipment, or other facts." },
-    { question: "How long does a case take?", answer: "These cases often take longer because they require extensive records, expert review, and complex litigation." },
-    { question: "When should I contact a lawyer?", answer: "As soon as practical after a serious unexplained medical injury, delayed diagnosis, medication error, birth injury, or death." },
+    {
+      question: "What is medical malpractice?",
+      answer:
+        "Medical malpractice generally involves a healthcare provider's failure to meet the applicable standard of care when that failure causes legally compensable injury.",
+    },
+    {
+      question: "Does a bad medical result mean malpractice occurred?",
+      answer:
+        "No. An unexpected or poor outcome alone does not necessarily establish negligence. The medical care and circumstances must be evaluated.",
+    },
+    {
+      question: "What types of cases do medical malpractice lawyers handle?",
+      answer:
+        "Cases may involve surgical errors, misdiagnosis, delayed diagnosis, medication mistakes, birth injuries, emergency-room errors, anesthesia complications, failure to treat, and other alleged medical negligence.",
+    },
+    {
+      question: "What evidence is important in a medical malpractice case?",
+      answer:
+        "Medical records, diagnostic tests, imaging, medication records, surgical reports, hospital records, treatment timelines, witness information, and expert medical analysis may be important.",
+    },
+    {
+      question: "Are expert witnesses needed?",
+      answer:
+        "Medical malpractice cases frequently involve expert medical review because questions about the standard of care and causation often require specialized knowledge.",
+    },
+    {
+      question: "Can a hospital be responsible for medical negligence?",
+      answer:
+        "Potential responsibility depends on the facts, the individuals or entities involved, their relationships, and applicable Texas law.",
+    },
+    {
+      question: "Can medical malpractice cause a wrongful death claim?",
+      answer:
+        "Potentially. When alleged medical negligence causes a patient's death, surviving family members or the estate may have claims depending on the circumstances and Texas law.",
+    },
+    {
+      question: "What damages may be available?",
+      answer:
+        "Depending on the claim, legally recoverable damages may involve medical expenses, lost income, impairment, pain, future care, and other losses, subject to Texas law and applicable limitations.",
+    },
+    {
+      question: "How long do I have to bring a medical malpractice claim in Texas?",
+      answer:
+        "Texas medical liability claims have specific limitation rules and procedural requirements. The applicable deadline can depend on the facts, so prompt legal review is important.",
+    },
+    {
+      question: "When should I contact a medical malpractice lawyer?",
+      answer:
+        "Promptly when you believe a serious injury or death may have resulted from negligent medical treatment, particularly because medical records and legal deadlines can become important early in the evaluation.",
+    },
   ],
+
   relatedPages: [
-    { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-    { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
-    { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
-    { label: "Brain Injury", path: "/el-paso-brain-injury-lawyers" },
+    {
+      label: "Personal Injury",
+      path: "/el-paso-personal-injury-lawyers",
+    },
+    {
+      label: "Brain Injury",
+      path: "/el-paso-brain-injury-lawyers",
+    },
+    {
+      label: "Wrongful Death",
+      path: "/el-paso-wrongful-death-lawyers",
+    },
   ],
+
+  resourceLinks: [
+    {
+      label: "El Paso Legal Guides",
+      path: "/guides",
+    },
+  ],
+
+  lastUpdated: "August 19, 2026",
 };
 
 export default function MedicalMalpractice() {
