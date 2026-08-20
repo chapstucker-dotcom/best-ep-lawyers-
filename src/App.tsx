@@ -40,6 +40,8 @@ import RideshareAccident from "./pages/RideshareAccident";
 import UninsuredMotorist from "./pages/UninsuredMotorist";
 import DrunkDrivingAccident from "./pages/DrunkDrivingAccident";
 import DistractedDrivingAccident from "./pages/DistractedDrivingAccident";
+import RearEndAccident from "./pages/RearEndAccident";
+
 import Guides from "./pages/Guides";
 import GuideArticle from "./pages/GuideArticle";
 import FeaturedBadge from "./pages/FeaturedBadge";
@@ -187,10 +189,17 @@ export default function App() {
           path="/el-paso-drunk-driving-accident-lawyers"
           element={<DrunkDrivingAccident />}
         />
-<Route
-  path="/el-paso-distracted-driving-accident-lawyers"
-  element={<DistractedDrivingAccident />}
-/>
+
+        <Route
+          path="/el-paso-distracted-driving-accident-lawyers"
+          element={<DistractedDrivingAccident />}
+        />
+
+        <Route
+          path="/el-paso-rear-end-accident-lawyers"
+          element={<RearEndAccident />}
+        />
+
         {practiceAreaPages
           .filter(
             (page) =>
