@@ -41,6 +41,7 @@ import UninsuredMotorist from "./pages/UninsuredMotorist";
 import DrunkDrivingAccident from "./pages/DrunkDrivingAccident";
 import DistractedDrivingAccident from "./pages/DistractedDrivingAccident";
 import RearEndAccident from "./pages/RearEndAccident";
+import HitAndRunAccident from "./pages/HitAndRunAccident";
 import IntersectionAccident from "./pages/IntersectionAccident";
 
 import Guides from "./pages/Guides";
@@ -200,7 +201,10 @@ export default function App() {
           path="/el-paso-rear-end-accident-lawyers"
           element={<RearEndAccident />}
         />
-
+<Route
+  path="/el-paso-hit-and-run-accident-lawyers"
+  element={<HitAndRunAccident />}
+/>
         <Route
           path="/el-paso-intersection-accident-lawyers"
           element={<IntersectionAccident />}
