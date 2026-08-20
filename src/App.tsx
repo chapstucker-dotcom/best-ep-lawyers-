@@ -43,6 +43,7 @@ import DistractedDrivingAccident from "./pages/DistractedDrivingAccident";
 import RearEndAccident from "./pages/RearEndAccident";
 import HitAndRunAccident from "./pages/HitAndRunAccident";
 import IntersectionAccident from "./pages/IntersectionAccident";
+import HighwayAccident from "./pages/HighwayAccident";
 
 import Guides from "./pages/Guides";
 import GuideArticle from "./pages/GuideArticle";
@@ -201,13 +202,20 @@ export default function App() {
           path="/el-paso-rear-end-accident-lawyers"
           element={<RearEndAccident />}
         />
-<Route
-  path="/el-paso-hit-and-run-accident-lawyers"
-  element={<HitAndRunAccident />}
-/>
+
+        <Route
+          path="/el-paso-hit-and-run-accident-lawyers"
+          element={<HitAndRunAccident />}
+        />
+
         <Route
           path="/el-paso-intersection-accident-lawyers"
           element={<IntersectionAccident />}
+        />
+
+        <Route
+          path="/el-paso-highway-accident-lawyers"
+          element={<HighwayAccident />}
         />
 
         {practiceAreaPages
