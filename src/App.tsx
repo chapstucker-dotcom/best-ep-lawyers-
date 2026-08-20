@@ -37,6 +37,7 @@ import PremisesLiability from "./pages/PremisesLiability";
 import ProductLiability from "./pages/ProductLiability";
 import PedestrianAccident from "./pages/PedestrianAccident";
 import RideshareAccident from "./pages/RideshareAccident";
+import UninsuredMotorist from "./pages/UninsuredMotorist";
 import Guides from "./pages/Guides";
 import GuideArticle from "./pages/GuideArticle";
 import FeaturedBadge from "./pages/FeaturedBadge";
@@ -173,6 +174,11 @@ export default function App() {
         <Route
           path="/el-paso-rideshare-accident-lawyers"
           element={<RideshareAccident />}
+        />
+
+        <Route
+          path="/el-paso-uninsured-motorist-lawyers"
+          element={<UninsuredMotorist />}
         />
 
         {practiceAreaPages
