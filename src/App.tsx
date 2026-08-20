@@ -38,6 +38,7 @@ import ProductLiability from "./pages/ProductLiability";
 import PedestrianAccident from "./pages/PedestrianAccident";
 import RideshareAccident from "./pages/RideshareAccident";
 import UninsuredMotorist from "./pages/UninsuredMotorist";
+import DrunkDrivingAccident from "./pages/DrunkDrivingAccident";
 import Guides from "./pages/Guides";
 import GuideArticle from "./pages/GuideArticle";
 import FeaturedBadge from "./pages/FeaturedBadge";
@@ -179,6 +180,11 @@ export default function App() {
         <Route
           path="/el-paso-uninsured-motorist-lawyers"
           element={<UninsuredMotorist />}
+        />
+
+        <Route
+          path="/el-paso-drunk-driving-accident-lawyers"
+          element={<DrunkDrivingAccident />}
         />
 
         {practiceAreaPages
