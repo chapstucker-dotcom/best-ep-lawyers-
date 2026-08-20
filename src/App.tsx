@@ -46,6 +46,7 @@ import IntersectionAccident from "./pages/IntersectionAccident";
 import HighwayAccident from "./pages/HighwayAccident";
 import MultiVehicleAccident from "./pages/MultiVehicleAccident";
 import HeadOnCollision from "./pages/HeadOnCollision";
+import WrongWayAccident from "./pages/WrongWayAccident";
 
 import Guides from "./pages/Guides";
 import GuideArticle from "./pages/GuideArticle";
@@ -89,6 +90,7 @@ const customPracticeAreaPaths = [
   "/el-paso-highway-accident-lawyers",
   "/el-paso-multi-vehicle-accident-lawyers",
   "/el-paso-head-on-collision-lawyers",
+  "/el-paso-wrong-way-accident-lawyers",
 ];
 
 export default function App() {
@@ -226,6 +228,10 @@ export default function App() {
         <Route
           path="/el-paso-head-on-collision-lawyers"
           element={<HeadOnCollision />}
+        />
+        <Route
+          path="/el-paso-wrong-way-accident-lawyers"
+          element={<WrongWayAccident />}
         />
 
         {practiceAreaPages
