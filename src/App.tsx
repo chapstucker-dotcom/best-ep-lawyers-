@@ -53,6 +53,7 @@ import SideswipeAccident from "./pages/SideswipeAccident";
 import LaneChangeAccident from "./pages/LaneChangeAccident";
 import MergingAccident from "./pages/MergingAccident";
 import FailureToYieldAccident from "./pages/FailureToYieldAccident";
+import RedLightAccident from "./pages/RedLightAccident";
 
 import Guides from "./pages/Guides";
 import GuideArticle from "./pages/GuideArticle";
@@ -103,6 +104,7 @@ const customPracticeAreaPaths = [
   "/el-paso-lane-change-accident-lawyers",
   "/el-paso-merging-accident-lawyers",
   "/el-paso-failure-to-yield-accident-lawyers",
+  "/el-paso-red-light-accident-lawyers",
 ];
 
 
@@ -265,6 +267,10 @@ export default function App() {
         <Route
   path="/el-paso-failure-to-yield-accident-lawyers"
   element={<FailureToYieldAccident />}
+/>
+<Route
+  path="/el-paso-red-light-accident-lawyers"
+  element={<RedLightAccident />}
 />
         {practiceAreaPages
           .filter((page) => !customPracticeAreaPaths.includes(page.path))
