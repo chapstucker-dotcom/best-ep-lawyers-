@@ -51,6 +51,7 @@ import TBoneAccident from "./pages/TBoneAccident";
 import RolloverAccident from "./pages/RolloverAccident";
 import SideswipeAccident from "./pages/SideswipeAccident";
 import LaneChangeAccident from "./pages/LaneChangeAccident";
+import MergingAccident from "./pages/MergingAccident";
 
 import Guides from "./pages/Guides";
 import GuideArticle from "./pages/GuideArticle";
@@ -99,6 +100,7 @@ const customPracticeAreaPaths = [
   "/el-paso-rollover-accident-lawyers",
   "/el-paso-sideswipe-accident-lawyers",
   "/el-paso-lane-change-accident-lawyers",
+  "/el-paso-merging-accident-lawyers",
 ];
 
 
