@@ -49,6 +49,7 @@ import HeadOnCollision from "./pages/HeadOnCollision";
 import WrongWayAccident from "./pages/WrongWayAccident";
 import TBoneAccident from "./pages/TBoneAccident";
 import RolloverAccident from "./pages/RolloverAccident";
+import SideswipeAccident from "./pages/SideswipeAccident";
 
 import Guides from "./pages/Guides";
 import GuideArticle from "./pages/GuideArticle";
@@ -244,6 +245,10 @@ export default function App() {
         <Route
           path="/el-paso-rollover-accident-lawyers"
           element={<RolloverAccident />}
+        />
+            <Route
+          path="/el-paso-sideswipe-accident-lawyers"
+          element={<SideswipeAccident />}
         />
 
         {practiceAreaPages
