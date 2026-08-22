@@ -29,8 +29,10 @@ export const getAllFirms = async (): Promise<{
   data: Firm[] | null;
   error: any;
 }> => {
+  const local = fallbackFirms();
+
   if (!isSupabaseConfigured || !supabase) {
-    return { data: fallbackFirms(), error: null };
+    return { data: local, error: null };
   }
 
   const { data, error } = await supabase
@@ -38,8 +40,30 @@ export const getAllFirms = async (): Promise<{
     .select("*")
     .order("created_at", { ascending: false });
 
+  const remote = (data ?? []) as Firm[];
+
+  const normalizeName = (value: string) =>
+    value
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, "")
+      .trim();
+
+  const merged = [...remote];
+
+  for (const localFirm of local) {
+    const alreadyExists = remote.some(
+      (remoteFirm) =>
+        normalizeName(remoteFirm.name ?? "") ===
+        normalizeName(localFirm.name ?? "")
+    );
+
+    if (!alreadyExists) {
+      merged.push(localFirm);
+    }
+  }
+
   return {
-    data: data && data.length > 0 ? (data as Firm[]) : fallbackFirms(),
+    data: merged,
     error,
   };
 };

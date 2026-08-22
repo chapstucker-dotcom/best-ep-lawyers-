@@ -126,8 +126,7 @@ function getFirmSearchText(firm: PublicFirm): string {
     [
       firm.name,
       firm.category,
-      firm.description,
-      firm.bio,
+  
       ...(firm.specialties ?? []),
       ...(firm.categories ?? []),
     ].join(" ")
@@ -267,15 +266,17 @@ export default function PracticeAreaFirmDirectory({ page }: Props) {
             {matchingFirms.map((firm, index) => {
               const tier = planLabel(firm);
               const verified = Boolean(firm.is_verified ?? firm.verified);
-              const address = [
-                firm.address,
-                firm.city,
-                firm.state,
-                firm.zip_code ?? firm.zip,
-              ]
-                .filter(Boolean)
-                .join(", ");
+              const rawAddress = String(firm.address ?? "").trim();
+const city = String(firm.city ?? "").trim();
+const state = String(firm.state ?? "").trim();
+const zip = String(firm.zip_code ?? firm.zip ?? "").trim();
 
+const address =
+  rawAddress &&
+  city &&
+  rawAddress.toLowerCase().includes(city.toLowerCase())
+    ? rawAddress
+    : [rawAddress, city, state, zip].filter(Boolean).join(", ");
               return (
                 <article
                   key={String(firm.id ?? `${firm.name}-${index}`)}
