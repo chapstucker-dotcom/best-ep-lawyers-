@@ -459,20 +459,6 @@ export default function AppLayout() {
   return (
     <div className="min-h-screen bg-[#F8FAFC]">
       <Hero onSearch={handleSearch} />
-      <WhyLawFirmsJoin
-  onListFirm={() =>
-    document.getElementById("list-form")?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    })
-  }
-  onViewPricing={() =>
-    document.getElementById("pricing")?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    })
-  }
-/>
       <LawFirmMarketplace
         firmCount={firms.length}
         categoryCount={categories.length}
@@ -488,14 +474,11 @@ export default function AppLayout() {
               </p>
 
               <h2 className="text-3xl font-bold text-[#0F2A43]">
-                Top-Rated El Paso Lawyers
-                You Can Trust
+                Compare Featured El Paso Law Firms
               </h2>
 
               <p className="mt-2 text-gray-600">
-                Category Owners appear first.
-                Category Featured firms rotate
-                for premium exposure.
+                Explore local law firms, compare their practice areas and profiles, and contact the firm that fits your legal needs.
               </p>
             </div>
 
@@ -750,8 +733,7 @@ export default function AppLayout() {
                 Compare
               </h3>
               <p className="text-sm opacity-90">
-                View profiles, reviews and
-                credentials
+                Compare profiles, practice areas and firm information
               </p>
             </div>
 
@@ -806,6 +788,21 @@ export default function AppLayout() {
         </div>
       </section>
 
+      {/* For El Paso law firms */}
+      <WhyLawFirmsJoin
+        onListFirm={() =>
+          document.getElementById("list-form")?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          })
+        }
+        onViewPricing={() =>
+          document.getElementById("pricing")?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          })
+        }
+      />
       {/* Pricing */}
       <section
         id="pricing"
