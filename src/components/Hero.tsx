@@ -1,13 +1,9 @@
 import {
   ArrowRight,
-  Building2,
-  CheckCircle2,
   MapPin,
-  PlayCircle,
   Scale,
   Search,
   ShieldCheck,
-  TrendingUp,
   Users,
 } from "lucide-react";
 
@@ -41,6 +37,25 @@ const practiceAreas = [
   "Civil Litigation",
   "Bankruptcy",
   "Real Estate Law",
+];
+
+const popularLegalNeeds = [
+  {
+    label: "Personal Injury",
+    path: "/el-paso-personal-injury-lawyers",
+  },
+  {
+    label: "Criminal Defense",
+    path: "/el-paso-criminal-defense-lawyers",
+  },
+  {
+    label: "Family Law",
+    path: "/el-paso-family-lawyers",
+  },
+  {
+    label: "Immigration",
+    path: "/el-paso-immigration-lawyers",
+  },
 ];
 
 export default function Hero({
@@ -131,8 +146,7 @@ export default function Hero({
               </span>
 
               <span className="hidden text-sm text-white/70 sm:block">
-                El Paso&apos;s Trusted Legal
-                Directory
+                Find and Compare Local Lawyers
               </span>
             </span>
           </button>
@@ -161,11 +175,21 @@ export default function Hero({
             <button
               type="button"
               onClick={() =>
-                scrollToSection("pricing")
+                scrollToSection("resources")
               }
               className="font-medium text-white/85 transition hover:text-[#D4A62A]"
             >
-              Pricing
+              Legal Guides
+            </button>
+
+            <button
+              type="button"
+              onClick={() =>
+                scrollToSection("for-law-firms")
+              }
+              className="font-medium text-white/70 transition hover:text-[#D4A62A]"
+            >
+              For Law Firms
             </button>
 
             <Link
@@ -174,16 +198,6 @@ export default function Hero({
             >
               Login
             </Link>
-
-            <button
-              type="button"
-              onClick={() =>
-                scrollToSection("list-form")
-              }
-              className="rounded-lg bg-[#D4A62A] px-5 py-3 font-bold text-[#021B45] shadow-lg transition hover:bg-[#E3B53A]"
-            >
-              List Your Firm
-            </button>
           </nav>
         </header>
 
@@ -192,7 +206,7 @@ export default function Hero({
             <div className="mb-6 flex flex-wrap gap-3">
               <span className="inline-flex items-center gap-2 rounded-full border border-[#D4A62A]/40 bg-[#D4A62A]/15 px-4 py-2 text-sm font-medium">
                 <MapPin className="h-4 w-4 text-[#D4A62A]" />
-                Built Exclusively for El Paso
+                El Paso, Texas
               </span>
 
               <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium">
@@ -202,20 +216,21 @@ export default function Hero({
             </div>
 
             <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-[#D4A62A]">
-  Compare El Paso Lawyers by Practice Area
-</p>
+              Find Legal Help in El Paso
+            </p>
 
-<h1 className="max-w-4xl text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl xl:text-7xl">
-  Find the Best Lawyer
-  <br />
-  in El Paso, Texas
-</h1>
+            <h1 className="max-w-4xl text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl xl:text-7xl">
+              Find the Right Lawyer
+              <br />
+              in El Paso, Texas
+            </h1>
 
-<p className="mt-6 max-w-3xl text-lg leading-8 text-white/80 sm:text-xl">
-  Search El Paso&apos;s Best Lawyers to compare trusted local attorneys,
-  browse law firms by practice area, and connect directly with experienced
-  legal professionals serving El Paso and West Texas.
-</p>
+            <p className="mt-6 max-w-3xl text-lg leading-8 text-white/80 sm:text-xl">
+              Search local attorneys by practice
+              area, compare law firms, explore
+              legal resources, and contact a
+              lawyer directly.
+            </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <button
@@ -232,100 +247,58 @@ export default function Hero({
               <button
                 type="button"
                 onClick={() =>
-                  scrollToSection("list-form")
+                  scrollToSection("categories")
                 }
                 className="inline-flex h-13 items-center justify-center rounded-lg border border-white/30 bg-white/10 px-7 py-4 font-bold text-white backdrop-blur transition hover:bg-white hover:text-[#021B45]"
               >
-                List Your Firm
+                Browse Practice Areas
                 <ArrowRight className="ml-2 h-5 w-5" />
-              </button>
-
-              <button
-                type="button"
-                onClick={() =>
-                  scrollToSection("demo")
-                }
-                className="inline-flex h-13 items-center justify-center rounded-lg px-5 py-4 font-semibold text-white/90 transition hover:text-[#D4A62A]"
-              >
-                <PlayCircle className="mr-2 h-5 w-5" />
-                Watch How It Works
               </button>
             </div>
 
             <p className="mt-4 text-sm text-white/65">
-              Free firm listings available.
-              Premium category placements are
-              limited.
+              Browse local firm profiles and
+              contact law firms directly.
             </p>
           </div>
 
           <aside className="rounded-2xl border border-white/20 bg-white/10 p-6 backdrop-blur-md lg:p-7">
             <p className="text-sm font-bold uppercase tracking-widest text-[#D4A62A]">
-              For El Paso Law Firms
+              Not Sure Where to Start?
             </p>
 
             <h2 className="mt-3 text-2xl font-bold">
-              Build Your Firm&apos;s Local
-              Presence
+              Start with your legal issue
             </h2>
 
             <p className="mt-3 leading-7 text-white/75">
-              Create a professional listing,
-              showcase your attorneys, receive
-              consultation requests, and track
-              visitor engagement from one
-              dashboard.
+              Choose a common legal need to
+              browse El Paso attorneys and firms
+              handling that type of matter.
             </p>
 
-            <div className="mt-6 space-y-4">
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#D4A62A]" />
-                <div>
-                  <p className="font-semibold">
-                    Professional Firm Profile
-                  </p>
-                  <p className="text-sm text-white/65">
-                    Present your practice,
-                    attorneys, and services.
-                  </p>
-                </div>
-              </div>
+            <div className="mt-6 grid gap-3">
+              {popularLegalNeeds.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className="group flex items-center justify-between rounded-xl border border-white/15 bg-white/10 px-4 py-4 font-semibold text-white transition hover:border-[#D4A62A]/60 hover:bg-white hover:text-[#021B45]"
+                >
+                  <span>{item.label}</span>
 
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#D4A62A]" />
-                <div>
-                  <p className="font-semibold">
-                    Consultation Requests
-                  </p>
-                  <p className="text-sm text-white/65">
-                    Connect with potential clients
-                    searching for legal help.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#D4A62A]" />
-                <div>
-                  <p className="font-semibold">
-                    Premium Category Placement
-                  </p>
-                  <p className="text-sm text-white/65">
-                    Secure prominent visibility in
-                    high-value practice areas.
-                  </p>
-                </div>
-              </div>
+                  <ArrowRight className="h-5 w-5 text-[#D4A62A] transition group-hover:translate-x-1" />
+                </Link>
+              ))}
             </div>
 
             <button
               type="button"
               onClick={() =>
-                scrollToSection("pricing")
+                scrollToSection("categories")
               }
-              className="mt-7 inline-flex w-full items-center justify-center rounded-lg bg-white px-5 py-3 font-bold text-[#021B45] transition hover:bg-[#D4A62A]"
+              className="mt-5 inline-flex w-full items-center justify-center rounded-lg bg-white px-5 py-3 font-bold text-[#021B45] transition hover:bg-[#D4A62A]"
             >
-              View Firm Plans
+              View All Practice Areas
               <ArrowRight className="ml-2 h-5 w-5" />
             </button>
           </aside>
@@ -416,48 +389,56 @@ export default function Hero({
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <div className="flex items-center gap-3 rounded-xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
             <MapPin className="h-6 w-6 text-[#D4A62A]" />
+
             <div>
               <p className="font-bold">
                 El Paso Focused
               </p>
+
               <p className="text-sm text-white/60">
-                Built for the local market
+                Local lawyers and law firms
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-3 rounded-xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
             <Users className="h-6 w-6 text-[#D4A62A]" />
+
             <div>
               <p className="font-bold">
-                Attorney Profiles
+                Compare Law Firms
               </p>
+
               <p className="text-sm text-white/60">
-                Showcase your legal team
+                Review profiles and practice areas
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-3 rounded-xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
-            <Building2 className="h-6 w-6 text-[#D4A62A]" />
+            <Scale className="h-6 w-6 text-[#D4A62A]" />
+
             <div>
               <p className="font-bold">
-                Professional Listings
+                Explore Legal Services
               </p>
+
               <p className="text-sm text-white/60">
-                Build trust with clients
+                Find the right practice area
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-3 rounded-xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
-            <TrendingUp className="h-6 w-6 text-[#D4A62A]" />
+            <ShieldCheck className="h-6 w-6 text-[#D4A62A]" />
+
             <div>
               <p className="font-bold">
-                Growth Tools
+                Contact Firms Directly
               </p>
+
               <p className="text-sm text-white/60">
-                Leads and engagement data
+                Call or visit a firm&apos;s website
               </p>
             </div>
           </div>
