@@ -39,6 +39,7 @@ type PublicFirm = Firm & {
   plan_key?: string;
   is_featured?: boolean;
   featured?: boolean;
+  exclusive?: boolean;
   is_verified?: boolean;
   verified?: boolean;
 };
@@ -53,12 +54,14 @@ const PRACTICE_ALIASES: Record<string, string[]> = {
     "guardianship",
     "elder law",
   ],
+
   bankruptcy: [
     "bankruptcy",
     "chapter 7",
     "chapter 13",
     "debt relief",
   ],
+
   employment: [
     "employment",
     "labor",
@@ -66,6 +69,7 @@ const PRACTICE_ALIASES: Record<string, string[]> = {
     "discrimination",
     "wage",
   ],
+
   business: [
     "business",
     "corporate",
@@ -73,6 +77,7 @@ const PRACTICE_ALIASES: Record<string, string[]> = {
     "contract",
     "partnership",
   ],
+
   "real estate": [
     "real estate",
     "property",
@@ -80,62 +85,73 @@ const PRACTICE_ALIASES: Record<string, string[]> = {
     "tenant",
     "title",
   ],
+
   "civil litigation": [
     "civil litigation",
     "litigation",
     "contract dispute",
     "business dispute",
   ],
+
   divorce: [
     "divorce",
     "family law",
     "custody",
     "child support",
   ],
+
   "child custody": [
     "child custody",
     "family law",
     "divorce",
     "visitation",
   ],
+
   "car accident": [
     "car accident",
     "auto accident",
     "personal injury",
     "motor vehicle",
   ],
+
   "truck accident": [
     "truck accident",
     "18-wheeler",
     "commercial vehicle",
     "personal injury",
   ],
+
   "motorcycle accident": [
     "motorcycle accident",
     "personal injury",
     "motor vehicle",
   ],
+
   "wrongful death": [
     "wrongful death",
     "personal injury",
     "fatal accident",
   ],
+
   "green card": [
     "green card",
     "immigration",
     "adjustment of status",
   ],
+
   citizenship: [
     "citizenship",
     "naturalization",
     "immigration",
   ],
+
   immigration: [
     "immigration",
     "green card",
     "citizenship",
     "deportation",
   ],
+
   "personal injury": [
     "personal injury",
     "car accident",
@@ -143,24 +159,28 @@ const PRACTICE_ALIASES: Record<string, string[]> = {
     "wrongful death",
     "injury",
   ],
+
   "criminal defense": [
     "criminal defense",
     "criminal law",
     "dwi",
     "dui",
   ],
+
   dwi: [
     "dwi",
     "dui",
     "criminal defense",
     "criminal law",
   ],
+
   "family law": [
     "family law",
     "divorce",
     "custody",
     "child support",
   ],
+
   "estate planning": [
     "estate planning",
     "probate",
@@ -193,7 +213,9 @@ function getPlanKey(
   firm: PublicFirm
 ): string {
   return normalize(
-    firm.plan_key ?? firm.plan
+    firm.plan_key ??
+      firm.plan ??
+      "free"
   );
 }
 
@@ -210,13 +232,13 @@ function getPlanRank(
   return 0;
 }
 
-function planLabel(
+function getPlanLabel(
   firm: PublicFirm
 ): string | null {
   const plan = getPlanKey(firm);
 
   if (plan.includes("exclusive")) {
-    return "Category Owner";
+    return "Category Exclusive";
   }
 
   if (plan.includes("featured")) {
@@ -256,7 +278,9 @@ function matchesPracticeArea(
     PRACTICE_ALIASES[key] ?? [key];
 
   return aliases.some((alias) =>
-    firmText.includes(normalize(alias))
+    firmText.includes(
+      normalize(alias)
+    )
   );
 }
 
@@ -342,9 +366,23 @@ export default function PracticeAreaFirmDirectory({
             )
           );
 
-          return bFeatured - aFeatured;
+          if (
+            bFeatured !==
+            aFeatured
+          ) {
+            return (
+              bFeatured -
+              aFeatured
+            );
+          }
+
+          return String(
+            a.name ?? ""
+          ).localeCompare(
+            String(b.name ?? "")
+          );
         })
-        .slice(0, 6),
+        .slice(0, 12),
     [firms, page]
   );
 
@@ -363,8 +401,8 @@ export default function PracticeAreaFirmDirectory({
             </p>
 
             <h2 className="mt-3 text-3xl font-bold sm:text-4xl">
-              El Paso {page.shortTitle}{" "}
-              Law Firms
+              El Paso{" "}
+              {page.shortTitle} Law Firms
             </h2>
 
             <p className="mt-4 max-w-3xl leading-7 text-slate-300">
@@ -372,9 +410,9 @@ export default function PracticeAreaFirmDirectory({
               serving El Paso. Review
               practice information,
               contact details and firm
-              websites to help find a
-              lawyer for your legal
-              needs.
+              websites before deciding
+              which firm may fit your
+              legal needs.
             </p>
           </div>
 
@@ -406,7 +444,7 @@ export default function PracticeAreaFirmDirectory({
                   getPlanRank(firm);
 
                 const tier =
-                  planLabel(firm);
+                  getPlanLabel(firm);
 
                 const verified =
                   Boolean(
@@ -428,13 +466,17 @@ export default function PracticeAreaFirmDirectory({
                 const isExpert =
                   !isExclusive &&
                   !isFeatured &&
-                  plan.includes("expert");
+                  plan.includes(
+                    "expert"
+                  );
 
                 const isPro =
                   !isExclusive &&
                   !isFeatured &&
                   !isExpert &&
-                  plan.includes("pro");
+                  plan.includes(
+                    "pro"
+                  );
 
                 const rawAddress =
                   String(
@@ -478,14 +520,14 @@ export default function PracticeAreaFirmDirectory({
 
                 const cardClass =
                   isExclusive
-                    ? "relative flex h-full flex-col overflow-hidden rounded-2xl border-2 border-[#d6a928] bg-[#0b2348] p-6 text-white shadow-2xl ring-1 ring-[#d6a928]/30"
+                    ? "relative flex h-full flex-col overflow-hidden rounded-2xl border-2 border-[#d6a928] bg-[#0b2348] p-6 text-white shadow-2xl ring-1 ring-[#d6a928]/40"
                     : isFeatured
                     ? "relative flex h-full flex-col overflow-hidden rounded-2xl border-2 border-[#d6a928] bg-white p-6 text-slate-900 shadow-2xl"
                     : isExpert
-                    ? "relative flex h-full flex-col rounded-2xl border border-[#d6a928]/60 bg-white p-6 text-slate-900 shadow-xl"
+                    ? "relative flex h-full flex-col rounded-2xl border-2 border-[#d6a928]/55 bg-white p-6 text-slate-900 shadow-xl"
                     : isPro
-                    ? "flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 text-slate-900 shadow-xl"
-                    : "flex h-full flex-col rounded-2xl border border-white/15 bg-white p-6 text-slate-900 shadow-xl";
+                    ? "relative flex h-full flex-col rounded-2xl border border-slate-300 bg-white p-6 text-slate-900 shadow-lg"
+                    : "relative flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 text-slate-900 shadow-md";
 
                 const headingClass =
                   isExclusive
@@ -494,7 +536,7 @@ export default function PracticeAreaFirmDirectory({
 
                 const bodyClass =
                   isExclusive
-                    ? "text-slate-300"
+                    ? "text-slate-200"
                     : "text-slate-600";
 
                 const detailClass =
@@ -511,16 +553,16 @@ export default function PracticeAreaFirmDirectory({
                     className={cardClass}
                   >
                     {isExclusive && (
-                      <div className="-mx-6 -mt-6 mb-6 flex items-center justify-center gap-2 bg-[#d6a928] px-4 py-2.5 text-sm font-extrabold uppercase tracking-wider text-[#07162f]">
+                      <div className="-mx-6 -mt-6 mb-6 flex items-center justify-center gap-2 bg-[#d6a928] px-4 py-3 text-sm font-extrabold uppercase tracking-wider text-[#07162f]">
                         <Crown className="h-4 w-4" />
                         Category Owner
                       </div>
                     )}
 
                     {isFeatured && (
-                      <div className="-mx-6 -mt-6 mb-6 flex items-center justify-center gap-2 bg-[#d6a928] px-4 py-2.5 text-sm font-extrabold uppercase tracking-wider text-[#07162f]">
+                      <div className="-mx-6 -mt-6 mb-6 flex items-center justify-center gap-2 bg-[#d6a928] px-4 py-3 text-sm font-extrabold uppercase tracking-wider text-[#07162f]">
                         <Star className="h-4 w-4 fill-current" />
-                        Featured Firm
+                        Category Featured
                       </div>
                     )}
 
@@ -529,6 +571,10 @@ export default function PracticeAreaFirmDirectory({
                         className={
                           isExclusive
                             ? "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#d6a928] text-[#07162f]"
+                            : isFeatured
+                            ? "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#07162f] text-[#d6a928] ring-2 ring-[#d6a928]/30"
+                            : isExpert
+                            ? "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#07162f] text-[#d6a928]"
                             : "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#07162f] text-[#d6a928]"
                         }
                       >
@@ -546,7 +592,13 @@ export default function PracticeAreaFirmDirectory({
                         {tier &&
                           !isExclusive &&
                           !isFeatured && (
-                            <span className="rounded-full bg-[#d6a928]/20 px-3 py-1 text-xs font-bold text-[#7a5800]">
+                            <span
+                              className={
+                                isExpert
+                                  ? "rounded-full bg-[#d6a928]/20 px-3 py-1 text-xs font-bold text-[#7a5800]"
+                                  : "rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-700"
+                              }
+                            >
                               {tier}
                             </span>
                           )}
@@ -561,7 +613,7 @@ export default function PracticeAreaFirmDirectory({
                     </div>
 
                     <h3
-                      className={`mt-5 text-2xl font-bold ${headingClass}`}
+                      className={`mt-5 text-2xl font-bold leading-tight ${headingClass}`}
                     >
                       {firm.name}
                     </h3>
@@ -579,7 +631,7 @@ export default function PracticeAreaFirmDirectory({
                     )}
 
                     <p
-                      className={`mt-4 line-clamp-4 leading-7 ${bodyClass}`}
+                      className={`mt-4 line-clamp-5 min-h-[7rem] leading-7 ${bodyClass}`}
                     >
                       {firm.description ||
                         firm.bio ||
@@ -591,7 +643,7 @@ export default function PracticeAreaFirmDirectory({
                         className={
                           isExclusive
                             ? "mt-5 rounded-xl border border-white/15 bg-white/5 px-4 py-3"
-                            : "mt-5 rounded-xl bg-[#f8f4e8] px-4 py-3"
+                            : "mt-5 rounded-xl border border-[#d6a928]/20 bg-[#f8f4e8] px-4 py-3"
                         }
                       >
                         <p
@@ -605,13 +657,28 @@ export default function PracticeAreaFirmDirectory({
                         </p>
 
                         <p
-                          className={`mt-1 text-sm ${bodyClass}`}
+                          className={`mt-1 text-sm leading-6 ${bodyClass}`}
                         >
-                          Expanded visibility
-                          and profile features
+                          Expanded firm
+                          presentation and
+                          enhanced visibility
                           for consumers comparing
-                          local firms.
+                          El Paso lawyers.
                         </p>
+                      </div>
+                    )}
+
+                    {isFeatured && (
+                      <div className="mt-4 flex items-center gap-2 text-sm font-bold text-[#7a5800]">
+                        <Star className="h-4 w-4 fill-current" />
+                        Premium category placement
+                      </div>
+                    )}
+
+                    {isExclusive && (
+                      <div className="mt-4 flex items-center gap-2 text-sm font-bold text-[#d6a928]">
+                        <Crown className="h-4 w-4" />
+                        Top category placement
                       </div>
                     )}
 
@@ -621,7 +688,7 @@ export default function PracticeAreaFirmDirectory({
                       {firm.phone && (
                         <a
                           href={`tel:${firm.phone}`}
-                          className="flex items-center gap-3 font-semibold hover:text-[#d6a928]"
+                          className="flex items-center gap-3 font-semibold transition hover:text-[#d6a928]"
                         >
                           <Phone className="h-4 w-4 shrink-0 text-[#d6a928]" />
                           {firm.phone}
@@ -631,6 +698,7 @@ export default function PracticeAreaFirmDirectory({
                       {address && (
                         <div className="flex items-start gap-3">
                           <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#d6a928]" />
+
                           <span>
                             {address}
                           </span>
@@ -687,10 +755,10 @@ export default function PracticeAreaFirmDirectory({
             <p className="mx-auto mt-3 max-w-2xl leading-7 text-slate-300">
               We are continuing to
               expand this El Paso legal
-              directory. You can also
-              browse other practice
-              areas to find local legal
-              help.
+              directory. Browse other
+              practice areas to find
+              additional local legal
+              resources and law firms.
             </p>
 
             <Link
