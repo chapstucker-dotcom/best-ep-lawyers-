@@ -1,5 +1,8 @@
 import { useEffect } from "react";
+
 import LeadCaptureForm from "../components/LeadCaptureForm";
+import PracticeAreaFirmDirectory from "../components/PracticeAreaFirmDirectory";
+import type { PracticeAreaPageData } from "../data/practiceAreaPages";
 
 const relatedPages = [
   ["DWI / DUI", "/el-paso-dwi-lawyers"],
@@ -47,18 +50,52 @@ const faqs = [
   },
 ];
 
+const criminalDefenseDirectoryPage = {
+  path: "/el-paso-criminal-defense-lawyers",
+  shortTitle: "Criminal Defense",
+  title: "Best Criminal Defense Lawyers in El Paso, TX",
+  description:
+    "Compare El Paso criminal defense law firms handling DWI, drug charges, assault, domestic violence, theft, felonies, misdemeanors, federal matters, and other criminal cases.",
+  metaDescription:
+    "Compare criminal defense lawyers in El Paso, Texas for DWI, drug charges, assault, theft, felonies, misdemeanors, and other criminal cases.",
+  heroText:
+    "Compare El Paso criminal defense attorneys and law firms by practice focus, firm information, and contact details.",
+  topics: [
+    "DWI / DUI",
+    "Drug Crimes",
+    "Felony Defense",
+    "Assault",
+    "Domestic Violence",
+    "Theft",
+    "Federal Criminal Defense",
+  ],
+  overview: [],
+  whenToHire: [],
+  localContent: [],
+} as PracticeAreaPageData;
+
 export default function CriminalDefense() {
   useEffect(() => {
     const previousTitle = document.title;
+
     document.title =
       "Best Criminal Defense Lawyers in El Paso, TX | Compare Attorneys";
 
-    const existingMeta = document.querySelector('meta[name="description"]');
-    const previousContent = existingMeta?.getAttribute("content") ?? null;
+    const existingMeta = document.querySelector(
+      'meta[name="description"]'
+    );
+
+    const previousContent =
+      existingMeta?.getAttribute("content") ?? null;
+
     const meta =
-      existingMeta ?? document.head.appendChild(document.createElement("meta"));
+      existingMeta ??
+      document.head.appendChild(
+        document.createElement("meta")
+      );
 
     meta.setAttribute("name", "description");
+
     meta.setAttribute(
       "content",
       "Compare criminal defense lawyers in El Paso, TX for DWI, drug charges, assault, domestic violence, theft, felonies, misdemeanors, and other criminal cases."
@@ -66,8 +103,15 @@ export default function CriminalDefense() {
 
     return () => {
       document.title = previousTitle;
-      if (existingMeta && previousContent !== null) {
-        existingMeta.setAttribute("content", previousContent);
+
+      if (
+        existingMeta &&
+        previousContent !== null
+      ) {
+        existingMeta.setAttribute(
+          "content",
+          previousContent
+        );
       } else if (!existingMeta) {
         meta.remove();
       }
@@ -84,8 +128,17 @@ export default function CriminalDefense() {
         fontFamily: "Arial, sans-serif",
       }}
     >
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-        <section style={{ marginBottom: "48px" }}>
+      <div
+        style={{
+          maxWidth: "1100px",
+          margin: "0 auto",
+        }}
+      >
+        <section
+          style={{
+            marginBottom: "48px",
+          }}
+        >
           <p
             style={{
               color: "#fbbf24",
@@ -118,10 +171,10 @@ export default function CriminalDefense() {
               maxWidth: "930px",
             }}
           >
-            Compare El Paso criminal defense lawyers and attorneys handling DWI
-            and DUI charges, drug crimes, assault, domestic violence, theft,
-            felonies, misdemeanors, probation issues, expunctions, and other
-            criminal cases.
+            Compare El Paso criminal defense lawyers and attorneys handling
+            DWI and DUI charges, drug crimes, assault, domestic violence,
+            theft, felonies, misdemeanors, probation issues, expunctions,
+            and other criminal cases.
           </p>
 
           <p
@@ -132,22 +185,32 @@ export default function CriminalDefense() {
               maxWidth: "930px",
             }}
           >
-            If you are searching for a criminal attorney in El Paso, use this
-            directory to compare participating local firms, review related
-            practice areas, and learn what information may matter at the
-            beginning of a criminal case.
+            If you are searching for a criminal attorney in El Paso, use
+            this directory to compare participating local firms, review
+            related practice areas, and learn what information may matter
+            at the beginning of a criminal case.
           </p>
         </section>
 
-        <section style={{ marginBottom: "52px" }}>
-          <h2 style={{ fontSize: "32px", marginBottom: "14px" }}>
+        <section
+          style={{
+            marginBottom: "52px",
+          }}
+        >
+          <h2
+            style={{
+              fontSize: "32px",
+              marginBottom: "14px",
+            }}
+          >
             Criminal Cases Handled by El Paso Defense Attorneys
           </h2>
 
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+              gridTemplateColumns:
+                "repeat(auto-fit, minmax(250px, 1fr))",
               gap: "16px",
             }}
           >
@@ -185,7 +248,8 @@ export default function CriminalDefense() {
         <section
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gridTemplateColumns:
+              "repeat(auto-fit, minmax(320px, 1fr))",
             gap: "24px",
             marginBottom: "52px",
           }}
@@ -198,9 +262,15 @@ export default function CriminalDefense() {
               border: "1px solid #1e293b",
             }}
           >
-            <h2 style={{ marginBottom: "14px", fontSize: "26px" }}>
+            <h2
+              style={{
+                marginBottom: "14px",
+                fontSize: "26px",
+              }}
+            >
               How to Compare Criminal Defense Attorneys
             </h2>
+
             <ul
               style={{
                 color: "#cbd5e1",
@@ -214,7 +284,9 @@ export default function CriminalDefense() {
               <li>Familiarity with El Paso courts and procedures</li>
               <li>Communication and availability</li>
               <li>Clear explanation of fees and representation scope</li>
-              <li>Experience with collateral issues such as immigration</li>
+              <li>
+                Experience with collateral issues such as immigration
+              </li>
             </ul>
           </div>
 
@@ -226,9 +298,15 @@ export default function CriminalDefense() {
               border: "1px solid #1e293b",
             }}
           >
-            <h2 style={{ marginBottom: "14px", fontSize: "26px" }}>
+            <h2
+              style={{
+                marginBottom: "14px",
+                fontSize: "26px",
+              }}
+            >
               What a Criminal Defense Lawyer Can Help With
             </h2>
+
             <ul
               style={{
                 color: "#cbd5e1",
@@ -237,12 +315,20 @@ export default function CriminalDefense() {
                 margin: 0,
               }}
             >
-              <li>Reviewing the arrest, charge, and available evidence</li>
-              <li>Evaluating searches, statements, and constitutional issues</li>
+              <li>
+                Reviewing the arrest, charge, and available evidence
+              </li>
+              <li>
+                Evaluating searches, statements, and constitutional issues
+              </li>
               <li>Addressing bond and release conditions</li>
               <li>Obtaining and reviewing discovery</li>
-              <li>Negotiating with prosecutors when appropriate</li>
-              <li>Preparing motions, hearings, trial, or appeal issues</li>
+              <li>
+                Negotiating with prosecutors when appropriate
+              </li>
+              <li>
+                Preparing motions, hearings, trial, or appeal issues
+              </li>
             </ul>
           </div>
         </section>
@@ -256,43 +342,92 @@ export default function CriminalDefense() {
             marginBottom: "52px",
           }}
         >
-          <h2 style={{ marginBottom: "14px", fontSize: "30px" }}>
+          <h2
+            style={{
+              marginBottom: "14px",
+              fontSize: "30px",
+            }}
+          >
             Criminal Defense in El Paso
           </h2>
 
-          <p style={{ color: "#cbd5e1", lineHeight: 1.75, marginBottom: "16px" }}>
-            Criminal cases in El Paso may involve municipal courts, El Paso
-            County courts, district courts, state agencies, or the federal court
-            system depending on the charge and circumstances. Cases may begin
-            with a traffic stop, arrest, warrant, investigation, indictment, or
-            other law-enforcement action.
+          <p
+            style={{
+              color: "#cbd5e1",
+              lineHeight: 1.75,
+              marginBottom: "16px",
+            }}
+          >
+            Criminal cases in El Paso may involve municipal courts, El
+            Paso County courts, district courts, state agencies, or the
+            federal court system depending on the charge and
+            circumstances. Cases may begin with a traffic stop, arrest,
+            warrant, investigation, indictment, or other law-enforcement
+            action.
           </p>
 
-          <p style={{ color: "#cbd5e1", lineHeight: 1.75, marginBottom: "16px" }}>
-            El Paso's border location can also create additional issues in some
-            criminal cases, including federal investigations, immigration
-            consequences, cross-border evidence, or charges involving ports of
-            entry, controlled substances, firearms, or interstate activity.
+          <p
+            style={{
+              color: "#cbd5e1",
+              lineHeight: 1.75,
+              marginBottom: "16px",
+            }}
+          >
+            El Paso&apos;s border location can also create additional
+            issues in some criminal cases, including federal
+            investigations, immigration consequences, cross-border
+            evidence, or charges involving ports of entry, controlled
+            substances, firearms, or interstate activity.
           </p>
 
-          <p style={{ color: "#cbd5e1", lineHeight: 1.75, margin: 0 }}>
-            An El Paso criminal defense attorney can review the allegations,
-            police reports, body-camera or dash-camera video, witness accounts,
-            search and seizure issues, statements, forensic evidence, prior
-            record, court documents, and other information that may affect the
-            defense strategy.
+          <p
+            style={{
+              color: "#cbd5e1",
+              lineHeight: 1.75,
+              margin: 0,
+            }}
+          >
+            An El Paso criminal defense attorney can review the
+            allegations, police reports, body-camera or dash-camera
+            video, witness accounts, search and seizure issues,
+            statements, forensic evidence, prior record, court
+            documents, and other information that may affect the defense
+            strategy.
           </p>
         </section>
+      </div>
 
-        <section style={{ marginBottom: "52px" }}>
-          <h2 style={{ fontSize: "32px", marginBottom: "18px" }}>
+      {/* LIVE CRIMINAL DEFENSE DIRECTORY */}
+      <PracticeAreaFirmDirectory
+        page={criminalDefenseDirectoryPage}
+      />
+
+      <div
+        style={{
+          maxWidth: "1100px",
+          margin: "0 auto",
+        }}
+      >
+        <section
+          style={{
+            marginTop: "52px",
+            marginBottom: "52px",
+          }}
+        >
+          <h2
+            style={{
+              fontSize: "32px",
+              marginBottom: "18px",
+            }}
+          >
             Explore Criminal Defense Practice Areas
           </h2>
 
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+              gridTemplateColumns:
+                "repeat(auto-fit, minmax(240px, 1fr))",
               gap: "16px",
             }}
           >
@@ -312,6 +447,7 @@ export default function CriminalDefense() {
                 }}
               >
                 {label} Lawyers
+
                 <span
                   style={{
                     display: "block",
@@ -327,12 +463,26 @@ export default function CriminalDefense() {
           </div>
         </section>
 
-        <section style={{ marginBottom: "52px" }}>
-          <h2 style={{ fontSize: "32px", marginBottom: "20px" }}>
+        <section
+          style={{
+            marginBottom: "52px",
+          }}
+        >
+          <h2
+            style={{
+              fontSize: "32px",
+              marginBottom: "20px",
+            }}
+          >
             Frequently Asked Questions
           </h2>
 
-          <div style={{ display: "grid", gap: "16px" }}>
+          <div
+            style={{
+              display: "grid",
+              gap: "16px",
+            }}
+          >
             {faqs.map((faq) => (
               <div
                 key={faq.q}
@@ -352,7 +502,14 @@ export default function CriminalDefense() {
                 >
                   {faq.q}
                 </h3>
-                <p style={{ color: "#cbd5e1", lineHeight: 1.7, margin: 0 }}>
+
+                <p
+                  style={{
+                    color: "#cbd5e1",
+                    lineHeight: 1.7,
+                    margin: 0,
+                  }}
+                >
                   {faq.a}
                 </p>
               </div>
@@ -369,9 +526,16 @@ export default function CriminalDefense() {
             marginBottom: "40px",
           }}
         >
-          <h2 style={{ marginTop: 0, marginBottom: "12px", fontSize: "28px" }}>
+          <h2
+            style={{
+              marginTop: 0,
+              marginBottom: "12px",
+              fontSize: "28px",
+            }}
+          >
             Connect With an El Paso Criminal Defense Lawyer
           </h2>
+
           <p
             style={{
               color: "#cbd5e1",
@@ -379,9 +543,10 @@ export default function CriminalDefense() {
               marginBottom: "24px",
             }}
           >
-            Use the form below to submit your information and connect with a
-            participating law firm.
+            Use the form below to submit your information and connect with
+            a participating law firm.
           </p>
+
           <LeadCaptureForm />
         </section>
 
