@@ -1,13 +1,21 @@
-import { useMemo, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import {
   useNavigate,
   Link,
   useSearchParams,
 } from "react-router-dom";
+
 import { useAuth } from "@/contexts/AuthContext";
+import { saveFirmProfile } from "@/services/firmService";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+
 import {
   Card,
   CardContent,
@@ -15,15 +23,51 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
 import {
   Alert,
   AlertDescription,
 } from "@/components/ui/alert";
-import { useToast } from "@/hooks/use-toast";
+
 import {
   Scale,
   AlertTriangle,
+  CheckCircle2,
 } from "lucide-react";
+
+type PendingFirmProfile = {
+  firmName?: string;
+  contactName?: string;
+  phone?: string;
+  email?: string;
+  practiceArea?: string;
+  requestedPlan?: string;
+};
+
+const readPendingFirmProfile =
+  (): PendingFirmProfile | null => {
+    try {
+      const raw =
+        localStorage.getItem(
+          "pending-firm-profile"
+        );
+
+      if (!raw) {
+        return null;
+      }
+
+      return JSON.parse(
+        raw
+      ) as PendingFirmProfile;
+    } catch (error) {
+      console.error(
+        "Could not read pending firm profile:",
+        error
+      );
+
+      return null;
+    }
+  };
 
 export default function Login() {
   const [searchParams] =
@@ -38,14 +82,29 @@ export default function Login() {
   const [loading, setLoading] =
     useState(false);
 
+  const [
+    finalizingFirm,
+    setFinalizingFirm,
+  ] = useState(false);
+
+  const [
+    formError,
+    setFormError,
+  ] = useState("");
+
+  const [
+    successMessage,
+    setSuccessMessage,
+  ] = useState("");
+
   const {
+    user,
     signIn,
     signInWithGoogle,
     isConfigured,
   } = useAuth();
 
   const navigate = useNavigate();
-  const { toast } = useToast();
 
   const storedPlan =
     localStorage.getItem(
@@ -63,7 +122,9 @@ export default function Login() {
     "";
 
   const requestedPracticeArea =
-    searchParams.get("practiceArea") ||
+    searchParams.get(
+      "practiceArea"
+    ) ||
     storedPracticeArea ||
     "";
 
@@ -98,29 +159,253 @@ export default function Login() {
     requestedPracticeArea,
   ]);
 
-  const goToDashboard = () => {
-    navigate("/dashboard");
+  const preserveSelections = () => {
+    if (requestedPlan) {
+      localStorage.setItem(
+        "selected-firm-plan",
+        requestedPlan
+      );
+    }
+
+    if (
+      requestedPracticeArea
+    ) {
+      localStorage.setItem(
+        "selected-firm-practice-area",
+        requestedPracticeArea
+      );
+    }
   };
+
+  const finalizePendingFirm =
+    async (
+      userId: string,
+      authenticatedEmail?: string | null
+    ): Promise<boolean> => {
+      const pending =
+        readPendingFirmProfile();
+
+      /*
+       * Existing accounts that do not
+       * have a pending signup profile
+       * can simply continue to dashboard.
+       */
+      if (!pending) {
+        return true;
+      }
+
+      const firmName =
+        pending.firmName?.trim();
+
+      const practiceArea =
+        pending.practiceArea?.trim();
+
+      if (!firmName) {
+        setFormError(
+          "Your account is signed in, but the pending firm profile is missing the firm name."
+        );
+
+        return false;
+      }
+
+      if (!practiceArea) {
+        setFormError(
+          "Your account is signed in, but the pending firm profile is missing its practice area."
+        );
+
+        return false;
+      }
+
+      setFinalizingFirm(true);
+
+      /*
+       * IMPORTANT:
+       *
+       * The firm begins on FREE.
+       * The selected premium plan is
+       * activated only after Stripe
+       * payment succeeds.
+       */
+      const {
+        data,
+        error,
+      } = await saveFirmProfile(
+        userId,
+        {
+          name: firmName,
+
+          phone:
+            pending.phone?.trim() ||
+            null,
+
+          email:
+            pending.email?.trim() ||
+            authenticatedEmail ||
+            "",
+
+          city: "El Paso",
+          state: "TX",
+
+          category:
+            practiceArea,
+
+          categories: [
+            practiceArea,
+          ],
+
+          specialties: [
+            practiceArea,
+          ],
+
+          plan: "free",
+          plan_key: "free",
+
+          is_featured: false,
+          featured: false,
+
+          exclusive: false,
+
+          is_verified: false,
+          verified: false,
+        }
+      );
+
+      setFinalizingFirm(false);
+
+      if (error || !data) {
+        console.error(
+          "Firm profile finalization failed:",
+          error
+        );
+
+        setFormError(
+          error?.message
+            ? `You signed in successfully, but your firm profile could not be completed: ${error.message}`
+            : "You signed in successfully, but your firm profile could not be completed."
+        );
+
+        return false;
+      }
+
+      /*
+       * Preserve the paid plan request.
+       * Stripe will activate it later.
+       */
+      if (
+        pending.requestedPlan
+      ) {
+        localStorage.setItem(
+          "pending-checkout-plan",
+          pending.requestedPlan
+        );
+
+        localStorage.setItem(
+          "selected-firm-plan",
+          pending.requestedPlan
+        );
+      }
+
+      localStorage.setItem(
+        "pending-checkout-practice-area",
+        practiceArea
+      );
+
+      localStorage.setItem(
+        "selected-firm-practice-area",
+        practiceArea
+      );
+
+      /*
+       * Firm row now exists and is
+       * connected to the authenticated
+       * Supabase user.
+       */
+      localStorage.removeItem(
+        "pending-firm-profile"
+      );
+
+      localStorage.removeItem(
+        "pending-firm-name"
+      );
+
+      localStorage.removeItem(
+        "pending-firm-phone"
+      );
+
+      return true;
+    };
+
+  /*
+   * This also handles a user returning
+   * from an OAuth / confirmed session.
+   *
+   * If an authenticated user lands on
+   * Login and still has a pending firm
+   * profile, connect it automatically.
+   */
+  useEffect(() => {
+    if (
+      !user ||
+      finalizingFirm ||
+      loading
+    ) {
+      return;
+    }
+
+    const pending =
+      readPendingFirmProfile();
+
+    if (!pending) {
+      return;
+    }
+
+    let active = true;
+
+    const finish =
+      async () => {
+        setFormError("");
+
+        const completed =
+          await finalizePendingFirm(
+            user.id,
+            user.email
+          );
+
+        if (
+          active &&
+          completed
+        ) {
+          setSuccessMessage(
+            "Your firm account is ready."
+          );
+
+          navigate(
+            "/dashboard"
+          );
+        }
+      };
+
+    void finish();
+
+    return () => {
+      active = false;
+    };
+  }, [user]);
 
   const handleGoogle =
     async () => {
-      if (
-        requestedPlan
-      ) {
-        localStorage.setItem(
-          "selected-firm-plan",
-          requestedPlan
+      setFormError("");
+      setSuccessMessage("");
+
+      if (!isConfigured) {
+        setFormError(
+          "Authentication is currently unavailable."
         );
+
+        return;
       }
 
-      if (
-        requestedPracticeArea
-      ) {
-        localStorage.setItem(
-          "selected-firm-practice-area",
-          requestedPracticeArea
-        );
-      }
+      preserveSelections();
 
       setLoading(true);
 
@@ -128,13 +413,10 @@ export default function Login() {
         await signInWithGoogle();
 
       if (error) {
-        toast({
-          title: "Error",
-          description:
-            error.message,
-          variant:
-            "destructive",
-        });
+        setFormError(
+          error.message ||
+            "Google sign-in could not be started."
+        );
 
         setLoading(false);
       }
@@ -142,70 +424,126 @@ export default function Login() {
 
   const handleSubmit =
     async (
-      e: React.FormEvent
+      event: React.FormEvent
     ) => {
-      e.preventDefault();
+      event.preventDefault();
+
+      setFormError("");
+      setSuccessMessage("");
 
       if (!isConfigured) {
-        toast({
-          title:
-            "Authentication unavailable",
-          description:
-            "Supabase is not configured.",
-          variant:
-            "destructive",
-        });
+        setFormError(
+          "Authentication is currently unavailable."
+        );
 
         return;
       }
 
-      if (
-        requestedPlan
-      ) {
-        localStorage.setItem(
-          "selected-firm-plan",
-          requestedPlan
+      if (!email.trim()) {
+        setFormError(
+          "Enter your email address."
         );
+
+        return;
       }
 
-      if (
-        requestedPracticeArea
-      ) {
-        localStorage.setItem(
-          "selected-firm-practice-area",
-          requestedPracticeArea
+      if (!password) {
+        setFormError(
+          "Enter your password."
         );
+
+        return;
       }
+
+      preserveSelections();
 
       setLoading(true);
 
-      const { error } =
-        await signIn(
-          email,
-          password
-        );
+      const {
+        data,
+        error,
+      } = await signIn(
+        email.trim(),
+        password
+      );
 
       if (error) {
-        toast({
-          title:
-            "Sign-in failed",
-          description:
-            error.message,
-          variant:
-            "destructive",
-        });
-      } else {
-        toast({
-          title: "Success",
-          description:
-            "Logged in successfully.",
-        });
+        setLoading(false);
 
-        goToDashboard();
+        const message =
+          String(
+            error.message || ""
+          ).toLowerCase();
+
+        if (
+          message.includes(
+            "email not confirmed"
+          )
+        ) {
+          setFormError(
+            "Please confirm your email address before signing in. Check your inbox for the confirmation email."
+          );
+
+          return;
+        }
+
+        if (
+          message.includes(
+            "invalid login credentials"
+          )
+        ) {
+          setFormError(
+            "The email address or password is incorrect."
+          );
+
+          return;
+        }
+
+        setFormError(
+          error.message ||
+            "Sign-in failed. Please try again."
+        );
+
+        return;
       }
 
+      const signedInUser =
+        data?.user;
+
+      if (
+        !signedInUser?.id
+      ) {
+        setLoading(false);
+
+        setFormError(
+          "You were signed in, but your account information could not be loaded. Please try again."
+        );
+
+        return;
+      }
+
+      const completed =
+        await finalizePendingFirm(
+          signedInUser.id,
+          signedInUser.email
+        );
+
       setLoading(false);
+
+      if (!completed) {
+        return;
+      }
+
+      setSuccessMessage(
+        "Signed in successfully."
+      );
+
+      navigate("/dashboard");
     };
+
+  const busy =
+    loading ||
+    finalizingFirm;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
@@ -235,9 +573,41 @@ export default function Login() {
 
               <AlertDescription>
                 Authentication is
-                currently unavailable
-                because Supabase is not
-                configured.
+                currently unavailable.
+              </AlertDescription>
+            </Alert>
+          )}
+
+          {formError && (
+            <Alert
+              variant="destructive"
+              className="mb-4"
+            >
+              <AlertTriangle className="h-4 w-4" />
+
+              <AlertDescription>
+                {formError}
+              </AlertDescription>
+            </Alert>
+          )}
+
+          {successMessage && (
+            <Alert className="mb-4 border-emerald-300 bg-emerald-50 text-emerald-800">
+              <CheckCircle2 className="h-4 w-4" />
+
+              <AlertDescription>
+                {successMessage}
+              </AlertDescription>
+            </Alert>
+          )}
+
+          {finalizingFirm && (
+            <Alert className="mb-4">
+              <CheckCircle2 className="h-4 w-4" />
+
+              <AlertDescription>
+                Finishing your firm
+                profile...
               </AlertDescription>
             </Alert>
           )}
@@ -251,10 +621,10 @@ export default function Login() {
                   onClick={
                     handleGoogle
                   }
-                  disabled={loading}
+                  disabled={busy}
                 >
-                  {loading
-                    ? "Redirecting..."
+                  {busy
+                    ? "Please wait..."
                     : "Continue with Google"}
                 </Button>
               </div>
@@ -278,6 +648,7 @@ export default function Login() {
               handleSubmit
             }
             className="space-y-4"
+            noValidate
           >
             <div className="space-y-2">
               <Label htmlFor="email">
@@ -288,11 +659,15 @@ export default function Login() {
                 id="email"
                 type="email"
                 value={email}
-                onChange={(e) =>
+                onChange={(event) => {
                   setEmail(
-                    e.target.value
-                  )
-                }
+                    event.target.value
+                  );
+
+                  setFormError(
+                    ""
+                  );
+                }}
                 required
               />
             </div>
@@ -306,11 +681,15 @@ export default function Login() {
                 id="password"
                 type="password"
                 value={password}
-                onChange={(e) =>
+                onChange={(event) => {
                   setPassword(
-                    e.target.value
-                  )
-                }
+                    event.target.value
+                  );
+
+                  setFormError(
+                    ""
+                  );
+                }}
                 required
               />
             </div>
@@ -319,13 +698,15 @@ export default function Login() {
               type="submit"
               className="w-full"
               disabled={
-                loading ||
+                busy ||
                 !isConfigured
               }
             >
-              {loading
-                ? "Signing in..."
-                : "Sign In"}
+              {finalizingFirm
+                ? "Finishing Firm Profile..."
+                : loading
+                  ? "Signing in..."
+                  : "Sign In"}
             </Button>
           </form>
 
