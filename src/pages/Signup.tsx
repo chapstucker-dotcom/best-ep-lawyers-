@@ -1,13 +1,13 @@
 import { useMemo, useState } from "react";
 import {
   Link,
-  useNavigate,
   useSearchParams,
 } from "react-router-dom";
 import {
   AlertTriangle,
   ArrowRight,
   CheckCircle2,
+  CheckCircle,
   Scale,
   ShieldCheck,
 } from "lucide-react";
@@ -21,7 +21,6 @@ import {
   AlertDescription,
 } from "@/components/ui/alert";
 import { plans } from "@/data/plans";
-import { saveFirmProfile } from "@/services/firmService";
 
 const PRACTICE_AREAS = [
   "Personal Injury",
@@ -39,6 +38,15 @@ const PRACTICE_AREAS = [
 ];
 
 const MIN_PASSWORD_LENGTH = 6;
+
+type PendingFirmProfile = {
+  firmName: string;
+  contactName: string;
+  phone: string;
+  email: string;
+  practiceArea: string;
+  requestedPlan: string;
+};
 
 const getFriendlyAuthError = (
   error: any
@@ -98,6 +106,14 @@ const getFriendlyAuthError = (
 
   if (
     message.includes(
+      "confirmation email"
+    )
+  ) {
+    return "We could not send your confirmation email. Please try again.";
+  }
+
+  if (
+    message.includes(
       "api key"
     )
   ) {
@@ -135,8 +151,7 @@ export default function Signup() {
       () =>
         plans.find(
           (plan) =>
-            plan.id ===
-            requestedPlan
+            plan.id === requestedPlan
         ) ?? plans[0],
       [requestedPlan]
     );
@@ -166,13 +181,21 @@ export default function Signup() {
     setAvailabilityError,
   ] = useState("");
 
+  const [
+    signupComplete,
+    setSignupComplete,
+  ] = useState(false);
+
+  const [
+    confirmationEmail,
+    setConfirmationEmail,
+  ] = useState("");
+
   const {
     signUp,
     signInWithGoogle,
     isConfigured,
   } = useAuth();
-
-  const navigate = useNavigate();
 
   const isLimitedPlan =
     selectedPlan.name ===
@@ -275,58 +298,46 @@ export default function Signup() {
     );
   };
 
-  const createFirmProfile = async (
-    userId: string
-  ): Promise<boolean> => {
-    const { data, error } =
-      await saveFirmProfile(
-        userId,
-        {
-          name:
+  const storePendingFirmProfile =
+    () => {
+      const pendingProfile:
+        PendingFirmProfile = {
+          firmName:
             formData.firmName.trim(),
 
+          contactName:
+            formData.contactName.trim(),
+
           phone:
-            formData.phone.trim() ||
-            null,
+            formData.phone.trim(),
 
           email:
             formData.email.trim(),
 
-          city: "El Paso",
-          state: "TX",
-
-          specialties: [
+          practiceArea:
             formData.practiceArea,
-          ],
 
-          plan: "free",
-          plan_key: "free",
+          requestedPlan:
+            selectedPlan.id,
+        };
 
-          is_featured: false,
-          featured: false,
-          exclusive: false,
-          is_verified: false,
-          verified: false,
-        }
+      localStorage.setItem(
+        "pending-firm-profile",
+        JSON.stringify(
+          pendingProfile
+        )
       );
 
-    if (error || !data) {
-      console.error(
-        "Firm profile creation failed:",
-        error
+      localStorage.setItem(
+        "pending-checkout-plan",
+        selectedPlan.id
       );
 
-      setFormError(
-        error?.message
-          ? `Your account was created, but the firm profile could not be completed: ${error.message}`
-          : "Your account was created, but the firm profile could not be completed. Please sign in and try again."
+      localStorage.setItem(
+        "pending-checkout-practice-area",
+        formData.practiceArea
       );
-
-      return false;
-    }
-
-    return true;
-  };
+    };
 
   const validateEmailSignup =
     (): boolean => {
@@ -352,7 +363,9 @@ export default function Signup() {
         return false;
       }
 
-      if (!formData.phone.trim()) {
+      if (
+        !formData.phone.trim()
+      ) {
         setFormError(
           "Enter a phone number."
         );
@@ -360,7 +373,9 @@ export default function Signup() {
         return false;
       }
 
-      if (!formData.email.trim()) {
+      if (
+        !formData.email.trim()
+      ) {
         setFormError(
           "Enter an email address."
         );
@@ -435,6 +450,16 @@ export default function Signup() {
         return;
       }
 
+      if (
+        !formData.firmName.trim()
+      ) {
+        setFormError(
+          "Enter the law firm name before continuing with Google."
+        );
+
+        return;
+      }
+
       setLoading(true);
 
       const available =
@@ -447,16 +472,7 @@ export default function Signup() {
       }
 
       storeSelections();
-
-      localStorage.setItem(
-        "pending-firm-name",
-        formData.firmName.trim()
-      );
-
-      localStorage.setItem(
-        "pending-firm-phone",
-        formData.phone.trim()
-      );
+      storePendingFirmProfile();
 
       const { error } =
         await signInWithGoogle();
@@ -502,9 +518,9 @@ export default function Signup() {
       }
 
       storeSelections();
+      storePendingFirmProfile();
 
       const {
-        data: authData,
         error: authError,
       } = await signUp(
         formData.email.trim(),
@@ -524,6 +540,9 @@ export default function Signup() {
 
           practice_area:
             formData.practiceArea,
+
+          pending_firm_profile:
+            true,
         }
       );
 
@@ -544,48 +563,107 @@ export default function Signup() {
         return;
       }
 
-      const newUserId =
-        authData?.user?.id;
+      /*
+       * IMPORTANT:
+       *
+       * Do NOT require authData.user.id here.
+       *
+       * When email confirmation is enabled,
+       * signup and authentication are separate
+       * steps.
+       *
+       * The firm profile will be created after
+       * the user confirms their email and signs
+       * in successfully.
+       */
 
-      if (!newUserId) {
-        setFormError(
-          "Your account could not be completed because no user ID was returned. Please try again."
-        );
-
-        setLoading(false);
-
-        return;
-      }
-
-      const firmCreated =
-        await createFirmProfile(
-          newUserId
-        );
-
-      if (!firmCreated) {
-        setLoading(false);
-
-        return;
-      }
-
-      localStorage.setItem(
-        "pending-checkout-plan",
-        selectedPlan.id
+      setConfirmationEmail(
+        formData.email.trim()
       );
 
-      localStorage.setItem(
-        "pending-checkout-practice-area",
-        formData.practiceArea
-      );
-
-      navigate(
-        `/login?plan=${encodeURIComponent(
-          selectedPlan.id
-        )}&practiceArea=${encodeURIComponent(
-          formData.practiceArea
-        )}`
-      );
+      setSignupComplete(true);
+      setLoading(false);
     };
+
+  if (signupComplete) {
+    return (
+      <main className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-10">
+        <div className="w-full max-w-xl rounded-3xl border border-slate-200 bg-white p-8 shadow-xl sm:p-10">
+          <div className="flex justify-center">
+            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
+              <CheckCircle className="h-9 w-9" />
+            </span>
+          </div>
+
+          <div className="mt-6 text-center">
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#B88900]">
+              Almost Finished
+            </p>
+
+            <h1 className="mt-2 text-3xl font-extrabold text-[#06224A]">
+              Check your email
+            </h1>
+
+            <p className="mt-4 leading-7 text-slate-600">
+              We sent a confirmation
+              link to:
+            </p>
+
+            <p className="mt-2 font-bold text-[#06224A]">
+              {confirmationEmail}
+            </p>
+
+            <p className="mt-5 leading-7 text-slate-600">
+              Click the confirmation
+              link in that email to
+              activate your account.
+              After confirmation, sign
+              in to finish setting up
+              your firm profile.
+            </p>
+          </div>
+
+          <div className="mt-7 rounded-xl bg-slate-50 p-4 text-sm leading-6 text-slate-600">
+            <div className="flex items-start gap-3">
+              <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
+
+              <span>
+                Your selected{" "}
+                <strong>
+                  {selectedPlan.name}
+                </strong>{" "}
+                plan and{" "}
+                <strong>
+                  {formData.practiceArea}
+                </strong>{" "}
+                practice area have
+                been saved for the
+                next step.
+              </span>
+            </div>
+          </div>
+
+          <Link
+            to={`/login?plan=${encodeURIComponent(
+              selectedPlan.id
+            )}&practiceArea=${encodeURIComponent(
+              formData.practiceArea
+            )}`}
+            className="mt-7 flex h-12 w-full items-center justify-center rounded-xl bg-[#D4A62A] font-extrabold text-[#06224A] hover:bg-[#E3B53A]"
+          >
+            Go to Sign In
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
+
+          <p className="mt-5 text-center text-xs leading-5 text-slate-500">
+            If you do not see the
+            email, check your spam or
+            junk folder.
+          </p>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-slate-50 lg:grid lg:grid-cols-[0.9fr_1.1fr]">
@@ -632,7 +710,6 @@ export default function Signup() {
                 className="flex items-center gap-3"
               >
                 <CheckCircle2 className="h-5 w-5 text-[#D4A62A]" />
-
                 {item}
               </div>
             ))}
