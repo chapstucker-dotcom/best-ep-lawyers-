@@ -14,11 +14,30 @@ type FormData = {
   website: string;
   address: string;
   bio: string;
+  practiceArea: string;
   plan: PlanName;
   agreed: boolean;
 };
 
-const STRIPE_LINKS: Record<Exclude<PlanName, "Free">, string> = {
+const PRACTICE_AREAS = [
+  "Personal Injury",
+  "Family Law",
+  "Criminal Defense",
+  "Immigration",
+  "Estate Planning",
+  "Business Law",
+  "Real Estate",
+  "Employment Law",
+  "Bankruptcy",
+  "DWI / DUI",
+  "Probate",
+  "Civil Litigation",
+];
+
+const STRIPE_LINKS: Record<
+  Exclude<PlanName, "Free">,
+  string
+> = {
   Expert:
     "https://buy.stripe.com/7sY8wOgQU8u65N198SaAw01",
 
@@ -36,6 +55,7 @@ const INITIAL_FORM: FormData = {
   website: "",
   address: "",
   bio: "",
+  practiceArea: "",
   plan: "Free",
   agreed: false,
 };
@@ -44,10 +64,15 @@ export default function ListFirmForm() {
   const [formData, setFormData] =
     useState<FormData>(INITIAL_FORM);
 
-  const [status, setStatus] = useState("");
-  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] =
+    useState("");
 
-  const updateField = <K extends keyof FormData>(
+  const [submitting, setSubmitting] =
+    useState(false);
+
+  const updateField = <
+    K extends keyof FormData,
+  >(
     field: K,
     value: FormData[K]
   ) => {
@@ -61,28 +86,40 @@ export default function ListFirmForm() {
     website: string
   ): Promise<boolean> => {
     try {
-const response = await fetch("/api/submit-listing", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          firmName: formData.name.trim(),
-          contactName: formData.name.trim(),
-          email: formData.email.trim(),
-          phone: formData.phone.trim(),
-          website,
-          address: formData.address.trim(),
-          bio: formData.bio.trim(),
-          city: "El Paso",
-          state: "TX",
-          plan: formData.plan,
-          submissionType:
-            formData.plan === "Free"
-              ? "Free Listing"
-              : "Paid Plan Checkout",
-        }),
-      });
+      const response = await fetch(
+        "/api/submit-listing",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+          body: JSON.stringify({
+            firmName:
+              formData.name.trim(),
+            contactName:
+              formData.name.trim(),
+            email:
+              formData.email.trim(),
+            phone:
+              formData.phone.trim(),
+            website,
+            address:
+              formData.address.trim(),
+            bio:
+              formData.bio.trim(),
+            city: "El Paso",
+            state: "TX",
+            practiceArea:
+              formData.practiceArea,
+            plan: formData.plan,
+            submissionType:
+              formData.plan === "Free"
+                ? "Free Listing"
+                : "Paid Plan Checkout",
+          }),
+        }
+      );
 
       if (!response.ok) {
         console.error(
@@ -95,10 +132,78 @@ const response = await fetch("/api/submit-listing", {
 
       return true;
     } catch (error) {
-      console.error("Listing email failed:", error);
+      console.error(
+        "Listing email failed:",
+        error
+      );
+
       return false;
     }
   };
+
+  const checkPlanAvailability =
+    async (): Promise<{
+      available: boolean;
+      reason?: string;
+    }> => {
+      if (
+        formData.plan !==
+          "Category Featured" &&
+        formData.plan !==
+          "Category Exclusive"
+      ) {
+        return {
+          available: true,
+        };
+      }
+
+      try {
+        const response = await fetch(
+          "/api/check-plan-availability",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+            body: JSON.stringify({
+              plan: formData.plan,
+              category:
+                formData.practiceArea,
+            }),
+          }
+        );
+
+        const result =
+          await response.json();
+
+        if (!response.ok) {
+          return {
+            available: false,
+            reason:
+              result?.error ||
+              "We could not verify availability. Please try again.",
+          };
+        }
+
+        return {
+          available:
+            result?.available === true,
+          reason: result?.reason,
+        };
+      } catch (error) {
+        console.error(
+          "Availability check failed:",
+          error
+        );
+
+        return {
+          available: false,
+          reason:
+            "We could not verify availability. Please try again.",
+        };
+      }
+    };
 
   const handleSubmit = async (
     event: React.FormEvent<HTMLFormElement>
@@ -120,36 +225,73 @@ const response = await fetch("/api/submit-listing", {
       !formData.name.trim() ||
       !formData.email.trim() ||
       !formData.phone.trim() ||
-      !formData.address.trim()
+      !formData.address.trim() ||
+      !formData.practiceArea
     ) {
-      setStatus("Please fill out all required fields.");
+      setStatus(
+        "Please fill out all required fields."
+      );
       return;
     }
 
     setSubmitting(true);
-    setStatus("Processing your submission...");
 
     const website =
       formData.website.trim() &&
-      !/^https?:\/\//i.test(formData.website.trim())
+      !/^https?:\/\//i.test(
+        formData.website.trim()
+      )
         ? `https://${formData.website.trim()}`
         : formData.website.trim();
 
     /*
-     * Send the complete submission before redirecting.
-     * This prevents paid-plan information from being lost.
+     * LIMITED INVENTORY CHECK
+     *
+     * Featured and Exclusive plans must
+     * pass the server-side availability
+     * check before checkout.
      */
-    const emailSent = await sendListingEmail(website);
+    if (
+      formData.plan ===
+        "Category Featured" ||
+      formData.plan ===
+        "Category Exclusive"
+    ) {
+      setStatus(
+        "Checking category availability..."
+      );
+
+      const availability =
+        await checkPlanAvailability();
+
+      if (!availability.available) {
+        setStatus(
+          availability.reason ||
+            "This position is no longer available."
+        );
+
+        setSubmitting(false);
+        return;
+      }
+    }
+
+    setStatus(
+      "Processing your submission..."
+    );
+
+    /*
+     * Preserve the submission before
+     * redirecting to Stripe.
+     */
+    const emailSent =
+      await sendListingEmail(website);
 
     /*
      * PAID PLAN FLOW
      *
-     * Do not assign premium status in Supabase before Stripe
-     * confirms payment. The submission is preserved locally
-     * and sent by email, then the visitor goes to Checkout.
-     *
-     * After payment appears in Stripe, manually approve the
-     * listing and assign the correct plan in Supabase.
+     * Premium status is not assigned until
+     * payment has been confirmed and the
+     * listing is approved.
      */
     if (formData.plan !== "Free") {
       const checkoutUrl =
@@ -160,7 +302,8 @@ const response = await fetch("/api/submit-listing", {
         JSON.stringify({
           ...formData,
           website,
-          submittedAt: new Date().toISOString(),
+          submittedAt:
+            new Date().toISOString(),
         })
       );
 
@@ -168,42 +311,55 @@ const response = await fetch("/api/submit-listing", {
         setStatus(
           "We could not preserve your information. Please try again before continuing to checkout."
         );
+
         setSubmitting(false);
         return;
       }
 
-      setStatus("Opening secure Stripe checkout...");
+      setStatus(
+        "Opening secure Stripe checkout..."
+      );
 
-      window.location.assign(checkoutUrl);
+      window.location.assign(
+        checkoutUrl
+      );
+
       return;
     }
 
     /*
      * FREE LISTING FLOW
      */
-    const { error } = await createFirm({
-      name: formData.name.trim(),
-      email: formData.email.trim(),
-      phone: formData.phone.trim(),
-      website,
-      address: formData.address.trim(),
-      bio: formData.bio.trim(),
-      category: "Pending Review",
+    const { error } =
+      await createFirm({
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        website,
+        address:
+          formData.address.trim(),
+        bio: formData.bio.trim(),
 
-      // Always store this as the free plan.
-      plan: "free",
+        category:
+          formData.practiceArea,
 
-      is_featured: false,
-      is_exclusive: false,
-      is_verified: false,
-    });
+        plan: "free",
+
+        is_featured: false,
+        is_exclusive: false,
+        is_verified: false,
+      });
 
     if (error) {
-      console.error("Firm submission failed:", error);
+      console.error(
+        "Firm submission failed:",
+        error
+      );
 
       setStatus(
         "We could not save the listing. Please try again."
       );
+
       setSubmitting(false);
       return;
     }
@@ -233,8 +389,9 @@ const response = await fetch("/api/submit-listing", {
           </h2>
 
           <p className="mb-8 text-gray-600">
-            Begin with a complimentary listing or select
-            an enhanced visibility plan.
+            Begin with a complimentary
+            listing or select an enhanced
+            visibility plan.
           </p>
 
           <div className="grid gap-6 md:grid-cols-2">
@@ -353,6 +510,51 @@ const response = await fetch("/api/submit-listing", {
 
           <div className="mt-6">
             <label
+              htmlFor="practice-area"
+              className="mb-2 block font-medium"
+            >
+              Primary Practice Area *
+            </label>
+
+            <select
+              id="practice-area"
+              required
+              className="w-full rounded-lg border bg-white p-3"
+              value={
+                formData.practiceArea
+              }
+              onChange={(event) =>
+                updateField(
+                  "practiceArea",
+                  event.target.value
+                )
+              }
+            >
+              <option value="">
+                Select a practice area
+              </option>
+
+              {PRACTICE_AREAS.map(
+                (area) => (
+                  <option
+                    key={area}
+                    value={area}
+                  >
+                    {area}
+                  </option>
+                )
+              )}
+            </select>
+
+            <p className="mt-2 text-sm text-gray-500">
+              Featured and Exclusive
+              availability is based on the
+              selected practice area.
+            </p>
+          </div>
+
+          <div className="mt-6">
+            <label
               htmlFor="firm-bio"
               className="mb-2 block font-medium"
             >
@@ -382,12 +584,13 @@ const response = await fetch("/api/submit-listing", {
 
             <select
               id="firm-plan"
-              className="w-full rounded-lg border p-3"
+              className="w-full rounded-lg border bg-white p-3"
               value={formData.plan}
               onChange={(event) =>
                 updateField(
                   "plan",
-                  event.target.value as PlanName
+                  event.target
+                    .value as PlanName
                 )
               }
             >
@@ -408,10 +611,31 @@ const response = await fetch("/api/submit-listing", {
               </option>
             </select>
 
-            {formData.plan !== "Free" && (
-              <p className="mt-3 text-sm text-gray-600">
-                After submitting, you will be taken to
-                Stripe&apos;s secure checkout page.
+            {formData.plan ===
+              "Category Featured" && (
+              <p className="mt-3 text-sm font-medium text-[#021B45]">
+                Limited to 2 Featured
+                firms per practice area
+                and 10 total positions.
+              </p>
+            )}
+
+            {formData.plan ===
+              "Category Exclusive" && (
+              <p className="mt-3 text-sm font-medium text-[#021B45]">
+                Limited to 1 Exclusive
+                firm per practice area
+                and 5 total positions.
+              </p>
+            )}
+
+            {formData.plan !==
+              "Free" && (
+              <p className="mt-2 text-sm text-gray-600">
+                After submitting, you
+                will be taken to
+                Stripe&apos;s secure
+                checkout page.
               </p>
             )}
           </div>
@@ -430,9 +654,11 @@ const response = await fetch("/api/submit-listing", {
             />
 
             <span>
-              I confirm the submitted information is
-              authorized for publication and understand
-              that listings may constitute attorney
+              I confirm the submitted
+              information is authorized
+              for publication and
+              understand that listings
+              may constitute attorney
               advertising. *
             </span>
           </label>
@@ -453,7 +679,8 @@ const response = await fetch("/api/submit-listing", {
           >
             {submitting
               ? "Processing..."
-              : formData.plan === "Free"
+              : formData.plan ===
+                  "Free"
                 ? "Submit Complimentary Listing"
                 : "Continue to Secure Checkout"}
           </button>
