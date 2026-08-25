@@ -20,7 +20,6 @@ import {
   Alert,
   AlertDescription,
 } from "@/components/ui/alert";
-import { useToast } from "@/hooks/use-toast";
 import { plans } from "@/data/plans";
 import { saveFirmProfile } from "@/services/firmService";
 
@@ -38,6 +37,78 @@ const PRACTICE_AREAS = [
   "Probate",
   "Civil Litigation",
 ];
+
+const MIN_PASSWORD_LENGTH = 6;
+
+const getFriendlyAuthError = (
+  error: any
+): string => {
+  const message = String(
+    error?.message ?? ""
+  ).toLowerCase();
+
+  const code = String(
+    error?.code ?? ""
+  ).toLowerCase();
+
+  if (
+    code === "weak_password" ||
+    message.includes(
+      "password should be at least"
+    )
+  ) {
+    return `Password must be at least ${MIN_PASSWORD_LENGTH} characters.`;
+  }
+
+  if (
+    message.includes(
+      "already registered"
+    ) ||
+    message.includes(
+      "already been registered"
+    ) ||
+    message.includes(
+      "user already exists"
+    )
+  ) {
+    return "An account already exists for this email address. Please sign in instead.";
+  }
+
+  if (
+    message.includes(
+      "invalid email"
+    ) ||
+    message.includes(
+      "email address is invalid"
+    )
+  ) {
+    return "Enter a valid email address.";
+  }
+
+  if (
+    message.includes(
+      "rate limit"
+    ) ||
+    message.includes(
+      "too many requests"
+    )
+  ) {
+    return "Too many signup attempts were made. Please wait a few minutes and try again.";
+  }
+
+  if (
+    message.includes(
+      "api key"
+    )
+  ) {
+    return "Account registration is temporarily unavailable. Please try again shortly.";
+  }
+
+  return (
+    error?.message ||
+    "We could not create your account. Please review your information and try again."
+  );
+};
 
 export default function Signup() {
   const [searchParams] =
@@ -86,6 +157,11 @@ export default function Signup() {
     useState(false);
 
   const [
+    formError,
+    setFormError,
+  ] = useState("");
+
+  const [
     availabilityError,
     setAvailabilityError,
   ] = useState("");
@@ -97,13 +173,29 @@ export default function Signup() {
   } = useAuth();
 
   const navigate = useNavigate();
-  const { toast } = useToast();
 
   const isLimitedPlan =
     selectedPlan.name ===
       "Category Featured" ||
     selectedPlan.name ===
       "Category Exclusive";
+
+  const clearErrors = () => {
+    setFormError("");
+    setAvailabilityError("");
+  };
+
+  const updateField = (
+    field: keyof typeof formData,
+    value: string
+  ) => {
+    setFormData((current) => ({
+      ...current,
+      [field]: value,
+    }));
+
+    clearErrors();
+  };
 
   const checkAvailability =
     async (): Promise<boolean> => {
@@ -115,6 +207,7 @@ export default function Signup() {
         setAvailabilityError(
           "Please select a primary practice area."
         );
+
         return false;
       }
 
@@ -154,6 +247,7 @@ export default function Signup() {
         }
 
         setAvailabilityError("");
+
         return true;
       } catch (error) {
         console.error(
@@ -184,17 +278,6 @@ export default function Signup() {
   const createFirmProfile = async (
     userId: string
   ): Promise<boolean> => {
-    /*
-     * IMPORTANT:
-     * Every new account begins on FREE.
-     *
-     * A paid plan is activated only after
-     * Stripe payment confirmation.
-     *
-     * The requested paid plan remains saved
-     * in localStorage so the dashboard knows
-     * which checkout the firm selected.
-     */
     const { data, error } =
       await saveFirmProfile(
         userId,
@@ -233,15 +316,11 @@ export default function Signup() {
         error
       );
 
-      toast({
-        title:
-          "Account created, but firm profile setup failed",
-        description:
-          error?.message ||
-          "Your account exists, but we could not create the matching firm profile.",
-        variant:
-          "destructive",
-      });
+      setFormError(
+        error?.message
+          ? `Your account was created, but the firm profile could not be completed: ${error.message}`
+          : "Your account was created, but the firm profile could not be completed. Please sign in and try again."
+      );
 
       return false;
     }
@@ -249,9 +328,100 @@ export default function Signup() {
     return true;
   };
 
+  const validateEmailSignup =
+    (): boolean => {
+      clearErrors();
+
+      if (
+        !formData.firmName.trim()
+      ) {
+        setFormError(
+          "Enter the law firm name."
+        );
+
+        return false;
+      }
+
+      if (
+        !formData.contactName.trim()
+      ) {
+        setFormError(
+          "Enter a contact name."
+        );
+
+        return false;
+      }
+
+      if (!formData.phone.trim()) {
+        setFormError(
+          "Enter a phone number."
+        );
+
+        return false;
+      }
+
+      if (!formData.email.trim()) {
+        setFormError(
+          "Enter an email address."
+        );
+
+        return false;
+      }
+
+      if (
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+          formData.email.trim()
+        )
+      ) {
+        setFormError(
+          "Enter a valid email address."
+        );
+
+        return false;
+      }
+
+      if (!formData.practiceArea) {
+        setAvailabilityError(
+          "Please select a primary practice area."
+        );
+
+        return false;
+      }
+
+      if (
+        formData.password.length <
+        MIN_PASSWORD_LENGTH
+      ) {
+        setFormError(
+          `Password must be at least ${MIN_PASSWORD_LENGTH} characters.`
+        );
+
+        return false;
+      }
+
+      if (
+        formData.password !==
+        formData.confirmPassword
+      ) {
+        setFormError(
+          "Passwords do not match. Please enter the same password in both fields."
+        );
+
+        return false;
+      }
+
+      return true;
+    };
+
   const handleGoogle =
     async () => {
+      clearErrors();
+
       if (!isConfigured) {
+        setFormError(
+          "Registration is currently unavailable."
+        );
+
         return;
       }
 
@@ -261,25 +431,21 @@ export default function Signup() {
         setAvailabilityError(
           "Please select a primary practice area before continuing."
         );
+
         return;
       }
 
       setLoading(true);
-      setAvailabilityError("");
 
       const available =
         await checkAvailability();
 
       if (!available) {
         setLoading(false);
+
         return;
       }
 
-      /*
-       * Google OAuth leaves the site before
-       * the callback completes, so preserve
-       * everything needed for the dashboard.
-       */
       storeSelections();
 
       localStorage.setItem(
@@ -296,14 +462,11 @@ export default function Signup() {
         await signInWithGoogle();
 
       if (error) {
-        toast({
-          title:
-            "Could not continue with Google",
-          description:
-            error.message,
-          variant:
-            "destructive",
-        });
+        setFormError(
+          getFriendlyAuthError(
+            error
+          )
+        );
 
         setLoading(false);
       }
@@ -316,76 +479,30 @@ export default function Signup() {
       event.preventDefault();
 
       if (!isConfigured) {
-        toast({
-          title:
-            "Registration unavailable",
-          description:
-            "The account system is not configured for this environment.",
-          variant:
-            "destructive",
-        });
-
-        return;
-      }
-
-      if (
-        !formData.firmName.trim()
-      ) {
-        toast({
-          title:
-            "Firm name required",
-          description:
-            "Enter the name of the law firm.",
-          variant:
-            "destructive",
-        });
-
-        return;
-      }
-
-      if (
-        !formData.practiceArea
-      ) {
-        setAvailabilityError(
-          "Please select a primary practice area."
+        setFormError(
+          "Registration is currently unavailable. Please try again later."
         );
 
         return;
       }
 
-      if (
-        formData.password !==
-        formData.confirmPassword
-      ) {
-        toast({
-          title:
-            "Passwords do not match",
-          description:
-            "Please enter the same password in both fields.",
-          variant:
-            "destructive",
-        });
-
+      if (!validateEmailSignup()) {
         return;
       }
 
       setLoading(true);
-      setAvailabilityError("");
 
       const available =
         await checkAvailability();
 
       if (!available) {
         setLoading(false);
+
         return;
       }
 
       storeSelections();
 
-      /*
-       * STEP 1:
-       * Create Supabase Auth user.
-       */
       const {
         data: authData,
         error: authError,
@@ -411,47 +528,35 @@ export default function Signup() {
       );
 
       if (authError) {
-        toast({
-          title:
-            "Account could not be created",
-          description:
-            authError.message,
-          variant:
-            "destructive",
-        });
+        console.error(
+          "Signup failed:",
+          authError
+        );
+
+        setFormError(
+          getFriendlyAuthError(
+            authError
+          )
+        );
 
         setLoading(false);
+
         return;
       }
 
-      /*
-       * Supabase signUp returns the Auth user
-       * even when email confirmation is enabled.
-       */
       const newUserId =
         authData?.user?.id;
 
       if (!newUserId) {
-        toast({
-          title:
-            "Account setup incomplete",
-          description:
-            "The authentication account was created, but no user ID was returned.",
-          variant:
-            "destructive",
-        });
+        setFormError(
+          "Your account could not be completed because no user ID was returned. Please try again."
+        );
 
         setLoading(false);
+
         return;
       }
 
-      /*
-       * STEP 2:
-       * Create matching firms row.
-       *
-       * firms.user_id will now equal the
-       * Supabase Auth user's UID.
-       */
       const firmCreated =
         await createFirmProfile(
           newUserId
@@ -459,14 +564,10 @@ export default function Signup() {
 
       if (!firmCreated) {
         setLoading(false);
+
         return;
       }
 
-      /*
-       * STEP 3:
-       * Keep requested paid-plan information
-       * ready for the dashboard/Stripe flow.
-       */
       localStorage.setItem(
         "pending-checkout-plan",
         selectedPlan.id
@@ -477,16 +578,13 @@ export default function Signup() {
         formData.practiceArea
       );
 
-      toast({
-        title:
-          "Firm account created",
-        description:
-          "Check your email for verification, then sign in to continue setting up your firm.",
-      });
-
-      navigate("/login");
-
-      setLoading(false);
+      navigate(
+        `/login?plan=${encodeURIComponent(
+          selectedPlan.id
+        )}&practiceArea=${encodeURIComponent(
+          formData.practiceArea
+        )}`
+      );
     };
 
   return (
@@ -534,6 +632,7 @@ export default function Signup() {
                 className="flex items-center gap-3"
               >
                 <CheckCircle2 className="h-5 w-5 text-[#D4A62A]" />
+
                 {item}
               </div>
             ))}
@@ -593,10 +692,20 @@ export default function Signup() {
 
                 <AlertDescription>
                   Registration is
-                  unavailable because
-                  the account system is
-                  not configured in this
-                  environment.
+                  currently unavailable.
+                </AlertDescription>
+              </Alert>
+            )}
+
+            {formError && (
+              <Alert
+                variant="destructive"
+                className="mb-6"
+              >
+                <AlertTriangle className="h-4 w-4" />
+
+                <AlertDescription>
+                  {formError}
                 </AlertDescription>
               </Alert>
             )}
@@ -626,21 +735,17 @@ export default function Signup() {
                   formData.practiceArea
                 }
                 onChange={(event) => {
-                  const practiceArea =
+                  const value =
                     event.target.value;
 
-                  setFormData({
-                    ...formData,
-                    practiceArea,
-                  });
-
-                  setAvailabilityError(
-                    ""
+                  updateField(
+                    "practiceArea",
+                    value
                   );
 
                   localStorage.setItem(
                     "selected-firm-practice-area",
-                    practiceArea
+                    value
                   );
                 }}
                 required
@@ -704,6 +809,7 @@ export default function Signup() {
                 handleSubmit
               }
               className="space-y-4"
+              noValidate
             >
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
@@ -717,12 +823,11 @@ export default function Signup() {
                     value={
                       formData.firmName
                     }
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        firmName:
-                          e.target.value,
-                      })
+                    onChange={(event) =>
+                      updateField(
+                        "firmName",
+                        event.target.value
+                      )
                     }
                     required
                   />
@@ -739,12 +844,11 @@ export default function Signup() {
                     value={
                       formData.contactName
                     }
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        contactName:
-                          e.target.value,
-                      })
+                    onChange={(event) =>
+                      updateField(
+                        "contactName",
+                        event.target.value
+                      )
                     }
                     required
                   />
@@ -763,12 +867,11 @@ export default function Signup() {
                   value={
                     formData.phone
                   }
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      phone:
-                        e.target.value,
-                    })
+                  onChange={(event) =>
+                    updateField(
+                      "phone",
+                      event.target.value
+                    )
                   }
                   required
                 />
@@ -786,12 +889,11 @@ export default function Signup() {
                   value={
                     formData.email
                   }
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      email:
-                        e.target.value,
-                    })
+                  onChange={(event) =>
+                    updateField(
+                      "email",
+                      event.target.value
+                    )
                   }
                   required
                 />
@@ -807,18 +909,28 @@ export default function Signup() {
                     id="password"
                     className="h-11"
                     type="password"
+                    minLength={
+                      MIN_PASSWORD_LENGTH
+                    }
                     value={
                       formData.password
                     }
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        password:
-                          e.target.value,
-                      })
+                    onChange={(event) =>
+                      updateField(
+                        "password",
+                        event.target.value
+                      )
                     }
                     required
                   />
+
+                  <p className="text-xs text-slate-500">
+                    Use at least{" "}
+                    {
+                      MIN_PASSWORD_LENGTH
+                    }{" "}
+                    characters.
+                  </p>
                 </div>
 
                 <div className="space-y-2">
@@ -830,15 +942,17 @@ export default function Signup() {
                     id="confirmPassword"
                     className="h-11"
                     type="password"
+                    minLength={
+                      MIN_PASSWORD_LENGTH
+                    }
                     value={
                       formData.confirmPassword
                     }
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        confirmPassword:
-                          e.target.value,
-                      })
+                    onChange={(event) =>
+                      updateField(
+                        "confirmPassword",
+                        event.target.value
+                      )
                     }
                     required
                   />
@@ -879,7 +993,11 @@ export default function Signup() {
               account?{" "}
 
               <Link
-                to="/login"
+                to={`/login?plan=${encodeURIComponent(
+                  selectedPlan.id
+                )}&practiceArea=${encodeURIComponent(
+                  formData.practiceArea
+                )}`}
                 className="font-bold text-[#0F5E7A] hover:underline"
               >
                 Sign in
