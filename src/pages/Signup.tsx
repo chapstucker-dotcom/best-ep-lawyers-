@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/alert";
 import { useToast } from "@/hooks/use-toast";
 import { plans } from "@/data/plans";
+import { saveFirmProfile } from "@/services/firmService";
 
 const PRACTICE_AREAS = [
   "Personal Injury",
@@ -96,7 +97,6 @@ export default function Signup() {
   } = useAuth();
 
   const navigate = useNavigate();
-
   const { toast } = useToast();
 
   const isLimitedPlan =
@@ -115,7 +115,6 @@ export default function Signup() {
         setAvailabilityError(
           "Please select a primary practice area."
         );
-
         return false;
       }
 
@@ -154,10 +153,7 @@ export default function Signup() {
           return false;
         }
 
-        setAvailabilityError(
-          ""
-        );
-
+        setAvailabilityError("");
         return true;
       } catch (error) {
         console.error(
@@ -185,6 +181,74 @@ export default function Signup() {
     );
   };
 
+  const createFirmProfile = async (
+    userId: string
+  ): Promise<boolean> => {
+    /*
+     * IMPORTANT:
+     * Every new account begins on FREE.
+     *
+     * A paid plan is activated only after
+     * Stripe payment confirmation.
+     *
+     * The requested paid plan remains saved
+     * in localStorage so the dashboard knows
+     * which checkout the firm selected.
+     */
+    const { data, error } =
+      await saveFirmProfile(
+        userId,
+        {
+          name:
+            formData.firmName.trim(),
+
+          phone:
+            formData.phone.trim() ||
+            null,
+
+          email:
+            formData.email.trim(),
+
+          city: "El Paso",
+          state: "TX",
+
+          specialties: [
+            formData.practiceArea,
+          ],
+
+          plan: "free",
+          plan_key: "free",
+
+          is_featured: false,
+          featured: false,
+          exclusive: false,
+          is_verified: false,
+          verified: false,
+        }
+      );
+
+    if (error || !data) {
+      console.error(
+        "Firm profile creation failed:",
+        error
+      );
+
+      toast({
+        title:
+          "Account created, but firm profile setup failed",
+        description:
+          error?.message ||
+          "Your account exists, but we could not create the matching firm profile.",
+        variant:
+          "destructive",
+      });
+
+      return false;
+    }
+
+    return true;
+  };
+
   const handleGoogle =
     async () => {
       if (!isConfigured) {
@@ -197,7 +261,6 @@ export default function Signup() {
         setAvailabilityError(
           "Please select a primary practice area before continuing."
         );
-
         return;
       }
 
@@ -212,7 +275,22 @@ export default function Signup() {
         return;
       }
 
+      /*
+       * Google OAuth leaves the site before
+       * the callback completes, so preserve
+       * everything needed for the dashboard.
+       */
       storeSelections();
+
+      localStorage.setItem(
+        "pending-firm-name",
+        formData.firmName.trim()
+      );
+
+      localStorage.setItem(
+        "pending-firm-phone",
+        formData.phone.trim()
+      );
 
       const { error } =
         await signInWithGoogle();
@@ -251,6 +329,21 @@ export default function Signup() {
       }
 
       if (
+        !formData.firmName.trim()
+      ) {
+        toast({
+          title:
+            "Firm name required",
+          description:
+            "Enter the name of the law firm.",
+          variant:
+            "destructive",
+        });
+
+        return;
+      }
+
+      if (
         !formData.practiceArea
       ) {
         setAvailabilityError(
@@ -268,7 +361,7 @@ export default function Signup() {
           title:
             "Passwords do not match",
           description:
-            "Please re-enter the same password in both fields.",
+            "Please enter the same password in both fields.",
           variant:
             "destructive",
         });
@@ -289,43 +382,109 @@ export default function Signup() {
 
       storeSelections();
 
-      const { error } =
-        await signUp(
-          formData.email,
-          formData.password,
-          {
-            firm_name:
-              formData.firmName,
-            contact_name:
-              formData.contactName,
-            phone:
-              formData.phone,
-            selected_plan:
-              selectedPlan.id,
-            practice_area:
-              formData.practiceArea,
-          }
-        );
+      /*
+       * STEP 1:
+       * Create Supabase Auth user.
+       */
+      const {
+        data: authData,
+        error: authError,
+      } = await signUp(
+        formData.email.trim(),
+        formData.password,
+        {
+          firm_name:
+            formData.firmName.trim(),
 
-      if (error) {
+          contact_name:
+            formData.contactName.trim(),
+
+          phone:
+            formData.phone.trim(),
+
+          selected_plan:
+            selectedPlan.id,
+
+          practice_area:
+            formData.practiceArea,
+        }
+      );
+
+      if (authError) {
         toast({
           title:
             "Account could not be created",
           description:
-            error.message,
+            authError.message,
           variant:
             "destructive",
         });
-      } else {
+
+        setLoading(false);
+        return;
+      }
+
+      /*
+       * Supabase signUp returns the Auth user
+       * even when email confirmation is enabled.
+       */
+      const newUserId =
+        authData?.user?.id;
+
+      if (!newUserId) {
         toast({
           title:
-            "Account created",
+            "Account setup incomplete",
           description:
-            "Check your email for verification, then sign in to complete your firm profile.",
+            "The authentication account was created, but no user ID was returned.",
+          variant:
+            "destructive",
         });
 
-        navigate("/login");
+        setLoading(false);
+        return;
       }
+
+      /*
+       * STEP 2:
+       * Create matching firms row.
+       *
+       * firms.user_id will now equal the
+       * Supabase Auth user's UID.
+       */
+      const firmCreated =
+        await createFirmProfile(
+          newUserId
+        );
+
+      if (!firmCreated) {
+        setLoading(false);
+        return;
+      }
+
+      /*
+       * STEP 3:
+       * Keep requested paid-plan information
+       * ready for the dashboard/Stripe flow.
+       */
+      localStorage.setItem(
+        "pending-checkout-plan",
+        selectedPlan.id
+      );
+
+      localStorage.setItem(
+        "pending-checkout-practice-area",
+        formData.practiceArea
+      );
+
+      toast({
+        title:
+          "Firm account created",
+        description:
+          "Check your email for verification, then sign in to continue setting up your firm.",
+      });
+
+      navigate("/login");
 
       setLoading(false);
     };
@@ -375,7 +534,6 @@ export default function Signup() {
                 className="flex items-center gap-3"
               >
                 <CheckCircle2 className="h-5 w-5 text-[#D4A62A]" />
-
                 {item}
               </div>
             ))}
@@ -422,7 +580,7 @@ export default function Signup() {
 
                 {selectedPlan.priceMonth >
                   0 &&
-                  ` — $${selectedPlan.priceMonth.toLocaleString()}/month`}
+                  ` - $${selectedPlan.priceMonth.toLocaleString()}/month`}
               </p>
             </div>
 
@@ -697,7 +855,7 @@ export default function Signup() {
                 }
               >
                 {loading
-                  ? "Checking availability..."
+                  ? "Creating firm account..."
                   : "Create Firm Account"}
 
                 {!loading && (
