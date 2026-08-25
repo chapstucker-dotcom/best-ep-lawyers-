@@ -44,7 +44,19 @@ export default function Signup() {
 
   const requestedPlan =
     searchParams.get("plan") ||
+    localStorage.getItem(
+      "selected-firm-plan"
+    ) ||
     "free";
+
+  const requestedPracticeArea =
+    searchParams.get(
+      "practiceArea"
+    ) ||
+    localStorage.getItem(
+      "selected-firm-practice-area"
+    ) ||
+    "";
 
   const selectedPlan =
     useMemo(
@@ -65,14 +77,17 @@ export default function Signup() {
       firmName: "",
       contactName: "",
       phone: "",
-      practiceArea: "",
+      practiceArea:
+        requestedPracticeArea,
     });
 
   const [loading, setLoading] =
     useState(false);
 
-  const [availabilityError, setAvailabilityError] =
-    useState("");
+  const [
+    availabilityError,
+    setAvailabilityError,
+  ] = useState("");
 
   const {
     signUp,
@@ -139,7 +154,10 @@ export default function Signup() {
           return false;
         }
 
-        setAvailabilityError("");
+        setAvailabilityError(
+          ""
+        );
+
         return true;
       } catch (error) {
         console.error(
@@ -332,7 +350,9 @@ export default function Signup() {
           </p>
 
           <h1 className="mt-4 text-5xl font-extrabold leading-tight">
-            Put your firm in front of people searching for legal help in El Paso.
+            Put your firm in front of
+            people searching for legal
+            help in El Paso.
           </h1>
 
           <p className="mt-6 text-lg leading-8 text-white/70">
@@ -390,7 +410,8 @@ export default function Signup() {
               </p>
 
               <h2 className="mt-2 text-3xl font-extrabold text-[#06224A]">
-                Start your law firm profile
+                Start your law firm
+                profile
               </h2>
 
               <p className="mt-3 leading-7 text-slate-600">
@@ -447,14 +468,21 @@ export default function Signup() {
                   formData.practiceArea
                 }
                 onChange={(event) => {
+                  const practiceArea =
+                    event.target.value;
+
                   setFormData({
                     ...formData,
-                    practiceArea:
-                      event.target.value,
+                    practiceArea,
                   });
 
                   setAvailabilityError(
                     ""
+                  );
+
+                  localStorage.setItem(
+                    "selected-firm-practice-area",
+                    practiceArea
                   );
                 }}
                 required
@@ -689,7 +717,8 @@ export default function Signup() {
             </div>
 
             <p className="mt-6 text-center text-sm text-slate-600">
-              Already have an account?{" "}
+              Already have an
+              account?{" "}
 
               <Link
                 to="/login"

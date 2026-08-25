@@ -1,5 +1,9 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useMemo, useState } from "react";
+import {
+  useNavigate,
+  Link,
+  useSearchParams,
+} from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,66 +15,197 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import {
+  Alert,
+  AlertDescription,
+} from "@/components/ui/alert";
 import { useToast } from "@/hooks/use-toast";
-import { Scale, AlertTriangle } from "lucide-react";
+import {
+  Scale,
+  AlertTriangle,
+} from "lucide-react";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [searchParams] =
+    useSearchParams();
 
-  const { signIn, signInWithGoogle, isConfigured } = useAuth();
+  const [email, setEmail] =
+    useState("");
+
+  const [password, setPassword] =
+    useState("");
+
+  const [loading, setLoading] =
+    useState(false);
+
+  const {
+    signIn,
+    signInWithGoogle,
+    isConfigured,
+  } = useAuth();
+
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const handleGoogle = async () => {
-    setLoading(true);
+  const storedPlan =
+    localStorage.getItem(
+      "selected-firm-plan"
+    ) || "";
 
-    const { error } = await signInWithGoogle();
+  const storedPracticeArea =
+    localStorage.getItem(
+      "selected-firm-practice-area"
+    ) || "";
 
-    if (error) {
-      toast({
-        title: "Error",
-        description: error.message,
-        variant: "destructive",
-      });
+  const requestedPlan =
+    searchParams.get("plan") ||
+    storedPlan ||
+    "";
+
+  const requestedPracticeArea =
+    searchParams.get("practiceArea") ||
+    storedPracticeArea ||
+    "";
+
+  const signupUrl = useMemo(() => {
+    const params =
+      new URLSearchParams();
+
+    if (requestedPlan) {
+      params.set(
+        "plan",
+        requestedPlan
+      );
+    }
+
+    if (
+      requestedPracticeArea
+    ) {
+      params.set(
+        "practiceArea",
+        requestedPracticeArea
+      );
+    }
+
+    const query =
+      params.toString();
+
+    return query
+      ? `/signup?${query}`
+      : "/signup";
+  }, [
+    requestedPlan,
+    requestedPracticeArea,
+  ]);
+
+  const goToDashboard = () => {
+    navigate("/dashboard");
+  };
+
+  const handleGoogle =
+    async () => {
+      if (
+        requestedPlan
+      ) {
+        localStorage.setItem(
+          "selected-firm-plan",
+          requestedPlan
+        );
+      }
+
+      if (
+        requestedPracticeArea
+      ) {
+        localStorage.setItem(
+          "selected-firm-practice-area",
+          requestedPracticeArea
+        );
+      }
+
+      setLoading(true);
+
+      const { error } =
+        await signInWithGoogle();
+
+      if (error) {
+        toast({
+          title: "Error",
+          description:
+            error.message,
+          variant:
+            "destructive",
+        });
+
+        setLoading(false);
+      }
+    };
+
+  const handleSubmit =
+    async (
+      e: React.FormEvent
+    ) => {
+      e.preventDefault();
+
+      if (!isConfigured) {
+        toast({
+          title:
+            "Authentication unavailable",
+          description:
+            "Supabase is not configured.",
+          variant:
+            "destructive",
+        });
+
+        return;
+      }
+
+      if (
+        requestedPlan
+      ) {
+        localStorage.setItem(
+          "selected-firm-plan",
+          requestedPlan
+        );
+      }
+
+      if (
+        requestedPracticeArea
+      ) {
+        localStorage.setItem(
+          "selected-firm-practice-area",
+          requestedPracticeArea
+        );
+      }
+
+      setLoading(true);
+
+      const { error } =
+        await signIn(
+          email,
+          password
+        );
+
+      if (error) {
+        toast({
+          title:
+            "Sign-in failed",
+          description:
+            error.message,
+          variant:
+            "destructive",
+        });
+      } else {
+        toast({
+          title: "Success",
+          description:
+            "Logged in successfully.",
+        });
+
+        goToDashboard();
+      }
+
       setLoading(false);
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!isConfigured) {
-      toast({
-        title: "Authentication unavailable",
-        description: "Supabase is not configured.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setLoading(true);
-
-    const { error } = await signIn(email, password);
-
-    if (error) {
-      toast({
-        title: "Sign-in failed",
-        description: error.message,
-        variant: "destructive",
-      });
-    } else {
-      toast({
-        title: "Success",
-        description: "Logged in successfully.",
-      });
-      navigate("/dashboard");
-    }
-
-    setLoading(false);
-  };
+    };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
@@ -85,16 +220,24 @@ export default function Login() {
           </CardTitle>
 
           <CardDescription>
-            Sign in to manage your law firm profile
+            Sign in to manage your
+            law firm profile
           </CardDescription>
         </CardHeader>
 
         <CardContent>
           {!isConfigured && (
-            <Alert variant="destructive" className="mb-4">
+            <Alert
+              variant="destructive"
+              className="mb-4"
+            >
               <AlertTriangle className="h-4 w-4" />
+
               <AlertDescription>
-                Authentication is currently unavailable because Supabase is not configured.
+                Authentication is
+                currently unavailable
+                because Supabase is not
+                configured.
               </AlertDescription>
             </Alert>
           )}
@@ -105,10 +248,14 @@ export default function Login() {
                 <Button
                   type="button"
                   className="w-full"
-                  onClick={handleGoogle}
+                  onClick={
+                    handleGoogle
+                  }
                   disabled={loading}
                 >
-                  {loading ? "Redirecting..." : "Continue with Google"}
+                  {loading
+                    ? "Redirecting..."
+                    : "Continue with Google"}
                 </Button>
               </div>
 
@@ -118,31 +265,52 @@ export default function Login() {
                 </div>
 
                 <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-white px-2 text-gray-500">or</span>
+                  <span className="bg-white px-2 text-gray-500">
+                    or
+                  </span>
                 </div>
               </div>
             </>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form
+            onSubmit={
+              handleSubmit
+            }
+            className="space-y-4"
+          >
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">
+                Email
+              </Label>
+
               <Input
                 id="email"
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) =>
+                  setEmail(
+                    e.target.value
+                  )
+                }
                 required
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">
+                Password
+              </Label>
+
               <Input
                 id="password"
                 type="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) =>
+                  setPassword(
+                    e.target.value
+                  )
+                }
                 required
               />
             </div>
@@ -150,9 +318,14 @@ export default function Login() {
             <Button
               type="submit"
               className="w-full"
-              disabled={loading || !isConfigured}
+              disabled={
+                loading ||
+                !isConfigured
+              }
             >
-              {loading ? "Signing in..." : "Sign In"}
+              {loading
+                ? "Signing in..."
+                : "Sign In"}
             </Button>
           </form>
 
@@ -165,9 +338,11 @@ export default function Login() {
             </Link>
 
             <p className="text-sm text-gray-600">
-              Don&apos;t have an account?{" "}
+              Don&apos;t have an
+              account?{" "}
+
               <Link
-                to="/signup"
+                to={signupUrl}
                 className="text-blue-600 hover:underline"
               >
                 Sign up
