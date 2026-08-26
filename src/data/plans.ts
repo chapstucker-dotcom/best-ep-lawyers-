@@ -10,12 +10,13 @@ export const plans: Plan[] = [
       'Address display',
       'Phone number',
       'Website link',
-      'One practice area focus',
+      '1 practice area',
       'Basic profile page',
     ],
     stripePriceId: '',
     attorneyProfileLimit: 0,
   },
+
   {
     id: 'expert',
     name: 'Expert',
@@ -23,7 +24,7 @@ export const plans: Plan[] = [
     features: [
       'Everything in Free',
       'Enhanced firm profile',
-      'Multiple practice areas',
+      'Up to 5 practice areas',
       'Lead capture form',
       'Analytics dashboard',
       'Up to 5 attorney profiles',
@@ -31,12 +32,14 @@ export const plans: Plan[] = [
     stripePriceId: 'price_expert_monthly',
     attorneyProfileLimit: 5,
   },
+
   {
     id: 'category-featured',
     name: 'Category Featured',
     priceMonth: 2000,
     features: [
       'Everything in Expert',
+      'Up to 10 practice areas',
       'Premium placement under Exclusive',
       'Rotating homepage exposure',
       'Max 2 firms per category',
@@ -48,12 +51,14 @@ export const plans: Plan[] = [
     attorneyProfileLimit: 10,
     popular: true,
   },
+
   {
     id: 'category-exclusive',
     name: 'Category Exclusive',
     priceMonth: 5000,
     features: [
       'Everything in Category Featured',
+      'Up to 20 practice areas',
       '1 firm per category hard limit',
       'Top placement in category',
       'Category Owner badge',
