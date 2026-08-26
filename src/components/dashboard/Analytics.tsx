@@ -163,15 +163,14 @@ export const Analytics = () => {
     void loadAnalytics();
   }, [loadAnalytics]);
 
-  const actionRate = useMemo(() => {
+  const actionsPer100Views = useMemo(() => {
     if (summary.total_views === 0) {
       return 0;
     }
 
-    return Math.min(
+    return (
       (summary.total_clicks /
         summary.total_views) *
-        100,
       100
     );
   }, [
@@ -361,13 +360,14 @@ export const Analytics = () => {
                 </CardTitle>
 
                 <p className="mt-1 text-sm text-gray-500">
-                  How often profile views generate a phone, email, or website action.
+                  How often profile visitors take
+                  a direct action.
                 </p>
               </div>
 
               <Badge variant="secondary">
-                {actionRate.toFixed(1)}%
-                action rate
+                {actionsPer100Views.toFixed(0)}
+                engagement
               </Badge>
             </div>
           </CardHeader>
@@ -389,7 +389,7 @@ export const Analytics = () => {
                 <div
                   className="h-full rounded-full bg-[#1FA8A1] transition-all duration-500"
                   style={{
-                    width: `${actionRate}%`,
+                    width: `${Math.min(actionsPer100Views, 100)}%`,
                   }}
                 />
               </div>
@@ -468,11 +468,11 @@ export const Analytics = () => {
             <div className="rounded-xl border bg-gray-50 p-4">
               <div className="flex items-center gap-2 text-sm text-gray-500">
                 <TrendingUp className="h-4 w-4 text-[#1FA8A1]" />
-                Action Rate
+                Actions per 100 Views
               </div>
 
               <p className="mt-2 text-2xl font-bold text-[#0F2A43]">
-                {actionRate.toFixed(1)}%
+                {actionsPer100Views.toFixed(0)}
               </p>
             </div>
           </CardContent>
@@ -501,7 +501,10 @@ export const Analytics = () => {
       )}
 
       <p className="text-xs text-gray-500">
-        Analytics reflect button clicks recorded through your public firm listing. A click shows visitor intent; it does not confirm a completed call, email, website visit, consultation, or new client.
+        Analytics reflect button clicks recorded through
+        your public firm listing. Clicks show visitor
+        actions and do not confirm completed calls,
+        emails, consultations, or new clients.
       </p>
     </div>
   );
