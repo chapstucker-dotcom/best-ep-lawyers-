@@ -43,6 +43,7 @@ import { categories } from "../data/categories";
 import { ReviewForm } from "./ReviewForm";
 import LeadCaptureForm from "./LeadCaptureForm";
 import { supabase } from "@/lib/supabase";
+import { getPlanRules } from "@/config/planRules";
 
 interface Review {
   id: string;
