@@ -163,7 +163,7 @@ export const Analytics = () => {
     void loadAnalytics();
   }, [loadAnalytics]);
 
-  const engagementRate = useMemo(() => {
+  const actionRate = useMemo(() => {
     if (summary.total_views === 0) {
       return 0;
     }
@@ -357,18 +357,17 @@ export const Analytics = () => {
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
                 <CardTitle>
-                  Engagement Overview
+                  Visitor Actions
                 </CardTitle>
 
                 <p className="mt-1 text-sm text-gray-500">
-                  How often profile visitors take
-                  a direct action.
+                  How often profile views generate a phone, email, or website action.
                 </p>
               </div>
 
               <Badge variant="secondary">
-                {engagementRate.toFixed(1)}%
-                engagement
+                {actionRate.toFixed(1)}%
+                action rate
               </Badge>
             </div>
           </CardHeader>
@@ -377,7 +376,7 @@ export const Analytics = () => {
             <div>
               <div className="mb-2 flex items-center justify-between text-sm">
                 <span className="font-medium text-gray-700">
-                  Total engagement rate
+                  Actions per profile view
                 </span>
 
                 <span className="font-semibold text-[#0F2A43]">
@@ -390,7 +389,7 @@ export const Analytics = () => {
                 <div
                   className="h-full rounded-full bg-[#1FA8A1] transition-all duration-500"
                   style={{
-                    width: `${engagementRate}%`,
+                    width: `${actionRate}%`,
                   }}
                 />
               </div>
@@ -469,11 +468,11 @@ export const Analytics = () => {
             <div className="rounded-xl border bg-gray-50 p-4">
               <div className="flex items-center gap-2 text-sm text-gray-500">
                 <TrendingUp className="h-4 w-4 text-[#1FA8A1]" />
-                Visitor Conversion
+                Action Rate
               </div>
 
               <p className="mt-2 text-2xl font-bold text-[#0F2A43]">
-                {engagementRate.toFixed(1)}%
+                {actionRate.toFixed(1)}%
               </p>
             </div>
           </CardContent>
@@ -502,10 +501,7 @@ export const Analytics = () => {
       )}
 
       <p className="text-xs text-gray-500">
-        Analytics reflect activity recorded through
-        your public firm listing. Browser privacy
-        settings and blocked scripts may affect
-        totals.
+        Analytics reflect button clicks recorded through your public firm listing. A click shows visitor intent; it does not confirm a completed call, email, website visit, consultation, or new client.
       </p>
     </div>
   );
