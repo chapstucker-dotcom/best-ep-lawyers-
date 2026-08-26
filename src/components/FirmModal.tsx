@@ -44,6 +44,7 @@ import { ReviewForm } from "./ReviewForm";
 import LeadCaptureForm from "./LeadCaptureForm";
 import { supabase } from "@/lib/supabase";
 import { getPlanRules } from "@/config/planRules";
+import { trackEvent } from "@/services/analyticsService";
 
 interface Review {
   id: string;
@@ -247,6 +248,9 @@ function FirmModal({
     publicFirm.plan_key ?? publicFirm.plan
   );
 
+  const planRules = getPlanRules(planKey);
+  const hasLeadFormAccess = planRules.leadForm;
+
   const isCategoryFeatured =
     planKey === "category_featured" || planKey === "featured";
 
@@ -310,8 +314,28 @@ function FirmModal({
 
   const fullAddress = addressParts.join(", ");
 
+  const recordContactClick = (
+    eventType: "click_phone" | "click_email" | "click_website"
+  ) => {
+    void trackEvent(publicFirm.id, eventType).catch((error) => {
+      console.error(`Failed to track ${eventType}:`, error);
+    });
+  };
+
+  const callFirm = (phone: string) => {
+    recordContactClick("click_phone");
+    window.location.href = `tel:${phone.replace(/[^\d+]/g, "")}`;
+  };
+
+  const emailFirm = (email: string) => {
+    recordContactClick("click_email");
+    window.location.href = `mailto:${email}`;
+  };
+
   const openWebsite = () => {
     if (!publicFirm.website) return;
+
+    recordContactClick("click_website");
 
     const websiteUrl = /^https?:\/\//i.test(publicFirm.website)
       ? publicFirm.website
@@ -523,9 +547,7 @@ function FirmModal({
               <Button
                 type="button"
                 className="h-12 bg-[#1FA8A1] text-base hover:bg-[#178D87]"
-                onClick={() =>
-                  window.location.assign(`tel:${publicFirm.phone}`)
-                }
+                onClick={() => callFirm(publicFirm.phone)}
               >
                 <Phone className="mr-2 h-5 w-5" />
                 Call Firm
@@ -537,9 +559,7 @@ function FirmModal({
                 type="button"
                 variant="outline"
                 className="h-12 text-base"
-                onClick={() =>
-                  window.location.assign(`mailto:${publicFirm.email}`)
-                }
+                onClick={() => emailFirm(publicFirm.email)}
               >
                 <Mail className="mr-2 h-5 w-5" />
                 Email Firm
@@ -700,6 +720,7 @@ function FirmModal({
                 {publicFirm.phone && (
                   <a
                     href={`tel:${publicFirm.phone}`}
+                    onClick={() => recordContactClick("click_phone")}
                     className="flex items-start gap-3 text-gray-700 hover:text-[#1FA8A1]"
                   >
                     <Phone className="mt-0.5 h-5 w-5 shrink-0 text-[#1FA8A1]" />
@@ -710,6 +731,7 @@ function FirmModal({
                 {publicFirm.email && (
                   <a
                     href={`mailto:${publicFirm.email}`}
+                    onClick={() => recordContactClick("click_email")}
                     className="flex items-start gap-3 break-all text-gray-700 hover:text-[#1FA8A1]"
                   >
                     <Mail className="mt-0.5 h-5 w-5 shrink-0 text-[#1FA8A1]" />
@@ -843,7 +865,7 @@ function FirmModal({
                               size="sm"
                               asChild
                             >
-                              <a href={`mailto:${attorney.email}`}>
+                              <a href={`mailto:${attorney.email}`} onClick={() => recordContactClick("click_email")}>
                                 <Mail className="mr-2 h-4 w-4" />
                                 Email
                               </a>
@@ -857,7 +879,7 @@ function FirmModal({
                               size="sm"
                               asChild
                             >
-                              <a href={`tel:${attorney.phone}`}>
+                              <a href={`tel:${attorney.phone}`} onClick={() => recordContactClick("click_phone")}>
                                 <Phone className="mr-2 h-4 w-4" />
                                 Call
                               </a>
@@ -1054,17 +1076,19 @@ function FirmModal({
             </section>
           )}
 
-         <div
-  id={`consultation-form-${publicFirm.id}`}
-  className="scroll-mt-24"
->
-  <LeadCaptureForm
-    firmId={publicFirm.id}
-    firmName={publicFirm.name}
-    firmEmail={publicFirm.email}
-    practiceArea={displayedPracticeAreas[0]?.title}
-  />
-</div>
+         {hasLeadFormAccess && (
+            <div
+              id={`consultation-form-${publicFirm.id}`}
+              className="scroll-mt-24"
+            >
+              <LeadCaptureForm
+                firmId={publicFirm.id}
+                firmName={publicFirm.name}
+                firmEmail={publicFirm.email}
+                practiceArea={displayedPracticeAreas[0]?.title}
+              />
+            </div>
+          )}
 
           <section className="rounded-2xl border bg-white p-6 shadow-sm">
             <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
@@ -1155,7 +1179,9 @@ function FirmModal({
                 </p>
 
                 <p className="text-sm text-gray-600">
-                  Call, email, visit the firm’s website, get directions, or request a consultation.
+                  {hasLeadFormAccess
+                    ? "Call, email, visit the firm's website, get directions, or request a consultation."
+                    : "Call, email, visit the firm's website, or get directions."}
                 </p>
               </div>
 
@@ -1179,7 +1205,7 @@ function FirmModal({
 
                 {publicFirm.email && (
                   <Button asChild variant="outline">
-                    <a href={`mailto:${publicFirm.email}`}>
+                    <a href={`mailto:${publicFirm.email}`} onClick={() => recordContactClick("click_email")}>
                       <Mail className="mr-2 h-4 w-4" />
                       Email Firm
                     </a>
@@ -1208,23 +1234,25 @@ function FirmModal({
                   </Button>
                 )}
 
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => {
-                    document
-                      .getElementById(
-                        `consultation-form-${publicFirm.id}`
-                      )
-                      ?.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start",
-                      });
-                  }}
-                >
-                  <CalendarDays className="mr-2 h-4 w-4" />
-                  Request Consultation
-                </Button>
+                {hasLeadFormAccess && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => {
+                      document
+                        .getElementById(
+                          `consultation-form-${publicFirm.id}`
+                        )
+                        ?.scrollIntoView({
+                          behavior: "smooth",
+                          block: "start",
+                        });
+                    }}
+                  >
+                    <CalendarDays className="mr-2 h-4 w-4" />
+                    Request Consultation
+                  </Button>
+                )}
               </div>
             </div>
           </section>
