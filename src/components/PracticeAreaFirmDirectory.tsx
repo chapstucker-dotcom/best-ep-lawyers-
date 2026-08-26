@@ -7,6 +7,7 @@ import {
   Globe2,
   Loader2,
   MapPin,
+  Mail,
   Phone,
   Scale,
   Sparkles,
@@ -17,6 +18,8 @@ import { Link } from "react-router-dom";
 import type { Firm } from "../data/types";
 import type { PracticeAreaPageData } from "../data/practiceAreaPages";
 import { getAllFirms } from "../services/firmService";
+import FirmModal from "./FirmModal";
+import { trackEvent } from "@/services/analyticsService";
 
 type Props = {
   page: PracticeAreaPageData;
@@ -29,6 +32,7 @@ type PublicFirm = Firm & {
   description?: string;
   bio?: string;
   phone?: string;
+  email?: string;
   website?: string;
   address?: string;
   city?: string;
@@ -293,6 +297,9 @@ export default function PracticeAreaFirmDirectory({
   const [loading, setLoading] =
     useState(true);
 
+  const [selectedFirm, setSelectedFirm] =
+    useState<PublicFirm | null>(null);
+
   useEffect(() => {
     let active = true;
 
@@ -386,8 +393,35 @@ export default function PracticeAreaFirmDirectory({
     [firms, page]
   );
 
+  const recordEvent = async (
+    firmId: string,
+    eventType: "view" | "click_phone" | "click_email" | "click_website"
+  ) => {
+    const { error } = await trackEvent(
+      firmId,
+      eventType
+    );
+
+    if (error) {
+      console.error(
+        `Unable to track ${eventType}:`,
+        error
+      );
+    }
+  };
+
+  const openFirmProfile = (firm: PublicFirm) => {
+    void recordEvent(
+      String(firm.id),
+      "view"
+    );
+
+    setSelectedFirm(firm);
+  };
+
   return (
-    <section
+    <>
+      <section
       id={`${normalize(
         page.shortTitle
       ).replace(/\s+/g, "-")}-firms`}
@@ -626,7 +660,7 @@ export default function PracticeAreaFirmDirectory({
                         {firm.category ??
                           firm.specialties
                             ?.slice(0, 2)
-                            .join(" · ")}
+                            .join(" Â· ")}
                       </p>
                     )}
 
@@ -688,6 +722,12 @@ export default function PracticeAreaFirmDirectory({
                       {firm.phone && (
                         <a
                           href={`tel:${firm.phone}`}
+                          onClick={() =>
+                            void recordEvent(
+                              String(firm.id),
+                              "click_phone"
+                            )
+                          }
                           className="flex items-center gap-3 font-semibold transition hover:text-[#d6a928]"
                         >
                           <Phone className="h-4 w-4 shrink-0 text-[#d6a928]" />
@@ -712,6 +752,12 @@ export default function PracticeAreaFirmDirectory({
                           href={externalUrl(
                             firm.website
                           )}
+                          onClick={() =>
+                            void recordEvent(
+                              String(firm.id),
+                              "click_website"
+                            )
+                          }
                           target="_blank"
                           rel="noreferrer"
                           className={
@@ -728,6 +774,12 @@ export default function PracticeAreaFirmDirectory({
                       {firm.phone && (
                         <a
                           href={`tel:${firm.phone}`}
+                          onClick={() =>
+                            void recordEvent(
+                              String(firm.id),
+                              "click_phone"
+                            )
+                          }
                           className={
                             isExclusive
                               ? "inline-flex items-center gap-2 rounded-lg border border-white/30 px-4 py-2.5 font-bold text-white transition hover:bg-white hover:text-[#07162f]"
@@ -738,6 +790,40 @@ export default function PracticeAreaFirmDirectory({
                           Call
                         </a>
                       )}
+
+                      {firm.email && (
+                        <a
+                          href={`mailto:${firm.email}`}
+                          onClick={() =>
+                            void recordEvent(
+                              String(firm.id),
+                              "click_email"
+                            )
+                          }
+                          className={
+                            isExclusive
+                              ? "inline-flex items-center gap-2 rounded-lg border border-white/30 px-4 py-2.5 font-bold text-white transition hover:bg-white hover:text-[#07162f]"
+                              : "inline-flex items-center gap-2 rounded-lg border border-slate-300 px-4 py-2.5 font-bold text-[#07162f] transition hover:border-[#d6a928]"
+                          }
+                        >
+                          <Mail className="h-4 w-4" />
+                          Email
+                        </a>
+                      )}
+
+                      <button
+                        type="button"
+                        onClick={() =>
+                          openFirmProfile(firm)
+                        }
+                        className={
+                          isExclusive
+                            ? "inline-flex items-center gap-2 rounded-lg border border-white/30 px-4 py-2.5 font-bold text-white transition hover:bg-white hover:text-[#07162f]"
+                            : "inline-flex items-center gap-2 rounded-lg border border-slate-300 px-4 py-2.5 font-bold text-[#07162f] transition hover:border-[#d6a928]"
+                        }
+                      >
+                        View Profile
+                      </button>
                     </div>
                   </article>
                 );
@@ -771,6 +857,15 @@ export default function PracticeAreaFirmDirectory({
           </div>
         )}
       </div>
-    </section>
+      </section>
+
+      <FirmModal
+        firm={selectedFirm}
+        open={Boolean(selectedFirm)}
+        onClose={() =>
+          setSelectedFirm(null)
+        }
+      />
+    </>
   );
 }
