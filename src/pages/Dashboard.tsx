@@ -206,20 +206,6 @@ export default function Dashboard() {
           return;
         }
 
-        console.log(
-          "Logged-in user ID:",
-          user.id
-        );
-
-        console.log(
-          "Logged-in user email:",
-          user.email
-        );
-
-        /*
-         * STEP 1:
-         * Look for an existing firm row.
-         */
         let {
           data,
           error,
@@ -254,18 +240,6 @@ export default function Dashboard() {
           return;
         }
 
-        /*
-         * STEP 2:
-         * If the firm row does not exist,
-         * rebuild it from either:
-         *
-         * 1. pending signup data in localStorage
-         * 2. Supabase Auth user metadata
-         *
-         * This makes signup work even if the
-         * confirmation email was opened in a
-         * separate tab/browser flow.
-         */
         if (!data) {
           const pending =
             readPendingFirmProfile();
@@ -310,7 +284,7 @@ export default function Dashboard() {
           if (!firmName) {
             if (active) {
               setFirmLoadError(
-                "Your account is confirmed, but the firm name could not be recovered from signup. Please contact support."
+                "Your account is confirmed, but the firm name could not be recovered from signup."
               );
 
               setIsLoadingFirm(
@@ -324,7 +298,7 @@ export default function Dashboard() {
           if (!practiceArea) {
             if (active) {
               setFirmLoadError(
-                "Your account is confirmed, but the selected practice area could not be recovered from signup. Please contact support."
+                "Your account is confirmed, but the selected practice area could not be recovered from signup."
               );
 
               setIsLoadingFirm(
@@ -334,11 +308,6 @@ export default function Dashboard() {
 
             return;
           }
-
-          console.log(
-            "Creating missing firm profile for:",
-            firmName
-          );
 
           const {
             data: createdFirm,
@@ -365,7 +334,10 @@ export default function Dashboard() {
                 category:
                   practiceArea,
 
-                categories: [
+                primary_category:
+                  practiceArea,
+
+                practice_areas: [
                   practiceArea,
                 ],
 
@@ -373,14 +345,6 @@ export default function Dashboard() {
                   practiceArea,
                 ],
 
-                /*
-                 * IMPORTANT:
-                 *
-                 * Firm begins on FREE.
-                 * Premium access is granted
-                 * only after Stripe payment
-                 * confirmation.
-                 */
                 plan:
                   "free",
 
@@ -390,10 +354,7 @@ export default function Dashboard() {
                 is_featured:
                   false,
 
-                featured:
-                  false,
-
-                exclusive:
+                is_exclusive:
                   false,
 
                 is_verified:
@@ -401,6 +362,18 @@ export default function Dashboard() {
 
                 verified:
                   false,
+
+                approved:
+                  false,
+
+                is_active:
+                  true,
+
+                payment_status:
+                  "unpaid",
+
+                status:
+                  "pending",
               }
             );
 
@@ -428,10 +401,6 @@ export default function Dashboard() {
             return;
           }
 
-          /*
-           * Keep the selected paid plan queued
-           * for the Stripe checkout step.
-           */
           if (
             requestedPlan &&
             requestedPlan !==
