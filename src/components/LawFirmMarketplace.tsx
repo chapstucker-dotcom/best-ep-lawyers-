@@ -43,15 +43,14 @@ export default function LawFirmMarketplace({
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
-                to="/lawyers"
-                className="inline-flex items-center justify-center rounded-xl bg-slate-950 px-6 py-4 font-bold text-white transition hover:bg-slate-800"
+               to="/#search"                className="inline-flex items-center justify-center rounded-xl bg-slate-950 px-6 py-4 font-bold text-white transition hover:bg-slate-800"
               >
                 Find a Lawyer
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
 
               <Link
-                to="/practice-areas"
+                to="/#categories"
                 className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-4 font-bold text-slate-950 transition hover:border-amber-400 hover:bg-amber-50"
               >
                 Browse Practice Areas
