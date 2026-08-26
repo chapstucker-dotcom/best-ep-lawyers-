@@ -49,7 +49,7 @@ export const PLAN_RULES: Record<PlanKey, PlanRules> = {
     id: "expert",
     displayName: "Expert",
 
-    practiceAreas: 20,
+    practiceAreas: 5,
     attorneyLimit: 5,
 
     video: false,
@@ -69,7 +69,7 @@ export const PLAN_RULES: Record<PlanKey, PlanRules> = {
     id: "category_featured",
     displayName: "Category Featured",
 
-    practiceAreas: 20,
+    practiceAreas: 10,
     attorneyLimit: 10,
 
     video: true,
