@@ -6,7 +6,6 @@ import {
   Search,
   Sparkles,
 } from "lucide-react";
-import { Link } from "react-router-dom";
 
 interface LawFirmMarketplaceProps {
   firmCount: number;
@@ -17,9 +16,32 @@ export default function LawFirmMarketplace({
   firmCount,
   categoryCount,
 }: LawFirmMarketplaceProps) {
-  const firmLabel = firmCount === 1 ? "firm" : "firms";
+  const firmLabel =
+    firmCount === 1 ? "firm" : "firms";
+
   const categoryLabel =
-    categoryCount === 1 ? "practice area" : "practice areas";
+    categoryCount === 1
+      ? "practice area"
+      : "practice areas";
+
+  const scrollToSection = (
+    sectionId: string
+  ) => {
+    const section =
+      document.getElementById(sectionId);
+
+    if (!section) {
+      console.error(
+        `Homepage section not found: ${sectionId}`
+      );
+      return;
+    }
+
+    section.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
 
   return (
     <section className="border-y border-slate-200 bg-white py-16 sm:py-20">
@@ -32,29 +54,40 @@ export default function LawFirmMarketplace({
             </div>
 
             <h2 className="mt-5 max-w-2xl text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
-              Find an El Paso lawyer for your legal needs.
+              Find an El Paso lawyer for your
+              legal needs.
             </h2>
 
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
-              Compare local law firms by practice area, explore firm
-              profiles, and connect directly with attorneys serving
-              El Paso and the surrounding community.
+              Compare local law firms by
+              practice area, explore firm
+              profiles, and connect directly
+              with attorneys serving El Paso
+              and the surrounding community.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link
-               to="/#search"                className="inline-flex items-center justify-center rounded-xl bg-slate-950 px-6 py-4 font-bold text-white transition hover:bg-slate-800"
+              <button
+                type="button"
+                onClick={() =>
+                  scrollToSection("search")
+                }
+                className="inline-flex items-center justify-center rounded-xl bg-slate-950 px-6 py-4 font-bold text-white transition hover:bg-slate-800"
               >
                 Find a Lawyer
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
 
-              <Link
-                to="/#categories"
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </button>
+
+              <button
+                type="button"
+                onClick={() =>
+                  scrollToSection("categories")
+                }
                 className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-4 font-bold text-slate-950 transition hover:border-amber-400 hover:bg-amber-50"
               >
                 Browse Practice Areas
-              </Link>
+              </button>
             </div>
           </div>
 
@@ -73,7 +106,8 @@ export default function LawFirmMarketplace({
               </p>
 
               <p className="mt-2 text-sm leading-6 text-slate-600">
-                Explore law firms serving El Paso and surrounding
+                Explore law firms serving El
+                Paso and surrounding
                 communities.
               </p>
             </div>
@@ -92,8 +126,8 @@ export default function LawFirmMarketplace({
               </p>
 
               <p className="mt-2 text-sm leading-6 text-slate-600">
-                Find attorneys based on the type of legal help you
-                need.
+                Find attorneys based on the
+                type of legal help you need.
               </p>
             </div>
 
@@ -111,8 +145,9 @@ export default function LawFirmMarketplace({
               </p>
 
               <p className="mt-2 text-sm leading-6 text-slate-600">
-                Call firms or visit their websites directly from
-                their profiles.
+                Call firms or visit their
+                websites directly from their
+                profiles.
               </p>
             </div>
 
@@ -130,8 +165,10 @@ export default function LawFirmMarketplace({
               </p>
 
               <p className="mt-2 text-sm leading-6 text-slate-300">
-                A legal directory organized around the firms and
-                practice areas El Paso residents search for.
+                A legal directory organized
+                around the firms and practice
+                areas El Paso residents search
+                for.
               </p>
             </div>
           </div>
