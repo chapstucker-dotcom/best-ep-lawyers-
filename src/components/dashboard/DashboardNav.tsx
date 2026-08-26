@@ -1,6 +1,7 @@
 import {
   BarChart3,
   CreditCard,
+  Lock,
   LogOut,
   MessageSquare,
   Scale,
@@ -9,10 +10,12 @@ import {
 } from 'lucide-react';
 
 import { supabase } from '@/lib/supabase';
+import { getPlanRules } from '@/config/planRules';
 
 interface DashboardNavProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
+  currentPlan?: string;
 }
 
 const navigationItems = [
@@ -46,16 +49,36 @@ const navigationItems = [
 export function DashboardNav({
   activeTab,
   setActiveTab,
+  currentPlan = 'free',
 }: DashboardNavProps) {
+  const planRules = getPlanRules(currentPlan);
+
   const handleSignOut = async () => {
-    const { error } = await supabase.auth.signOut();
+    const { error } =
+      await supabase.auth.signOut();
 
     if (error) {
-      console.error('Unable to sign out:', error);
+      console.error(
+        'Unable to sign out:',
+        error
+      );
       return;
     }
 
     window.location.href = '/';
+  };
+
+  const handleNavigation = (
+    itemId: string
+  ) => {
+    if (
+      itemId === 'analytics' &&
+      !planRules.analytics
+    ) {
+      return;
+    }
+
+    setActiveTab(itemId);
   };
 
   return (
@@ -90,26 +113,52 @@ export function DashboardNav({
           </div>
 
           <nav className="flex flex-wrap gap-2">
-            {navigationItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = activeTab === item.id;
+            {navigationItems.map(
+              (item) => {
+                const Icon = item.icon;
 
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => setActiveTab(item.id)}
-                  className={`inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition ${
-                    isActive
-                      ? 'bg-[#1FA8A1] text-white'
-                      : 'text-gray-700 hover:bg-gray-100'
-                  }`}
-                >
-                  <Icon className="h-4 w-4" />
-                  {item.label}
-                </button>
-              );
-            })}
+                const isActive =
+                  activeTab === item.id;
+
+                const isLocked =
+                  item.id ===
+                    'analytics' &&
+                  !planRules.analytics;
+
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() =>
+                      handleNavigation(
+                        item.id
+                      )
+                    }
+                    disabled={isLocked}
+                    title={
+                      isLocked
+                        ? 'Analytics is available with Expert, Category Featured, and Category Exclusive.'
+                        : undefined
+                    }
+                    className={`inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition ${
+                      isLocked
+                        ? 'cursor-not-allowed bg-gray-50 text-gray-400'
+                        : isActive
+                          ? 'bg-[#1FA8A1] text-white'
+                          : 'text-gray-700 hover:bg-gray-100'
+                    }`}
+                  >
+                    <Icon className="h-4 w-4" />
+
+                    {item.label}
+
+                    {isLocked && (
+                      <Lock className="h-3.5 w-3.5" />
+                    )}
+                  </button>
+                );
+              }
+            )}
           </nav>
         </div>
       </div>
