@@ -519,14 +519,17 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <DashboardNav
-        activeTab={
-          activeTab
-        }
-        setActiveTab={
-          setActiveTab
-        }
-      />
+<DashboardNav
+  activeTab={
+    activeTab
+  }
+  setActiveTab={
+    setActiveTab
+  }
+  currentPlan={
+    currentPlan
+  }
+/>
 
       <div className="container mx-auto px-4 py-8">
         {!isConfigured && (
