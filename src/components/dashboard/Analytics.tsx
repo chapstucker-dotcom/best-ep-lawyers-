@@ -367,7 +367,7 @@ export const Analytics = () => {
 
               <Badge variant="secondary">
                 {actionsPer100Views.toFixed(0)}
-                engagement
+                actions / 100 views
               </Badge>
             </div>
           </CardHeader>
