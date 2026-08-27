@@ -288,6 +288,31 @@ function matchesPracticeArea(
   );
 }
 
+function getDailyRotationKey(): number {
+  const now = new Date();
+  return Math.floor(
+    Date.UTC(
+      now.getUTCFullYear(),
+      now.getUTCMonth(),
+      now.getUTCDate()
+    ) / 86400000
+  );
+}
+
+function rotateFirmsDaily(
+  firms: PublicFirm[]
+): PublicFirm[] {
+  if (firms.length <= 1) return firms;
+
+  const offset =
+    getDailyRotationKey() % firms.length;
+
+  return [
+    ...firms.slice(offset),
+    ...firms.slice(0, offset),
+  ];
+}
+
 export default function PracticeAreaFirmDirectory({
   page,
 }: Props) {
@@ -339,59 +364,74 @@ export default function PracticeAreaFirmDirectory({
     };
   }, []);
 
-  const matchingFirms = useMemo(
-    () =>
-      firms
-        .filter(
-          (firm) =>
-            firm?.name &&
-            matchesPracticeArea(
-              firm,
-              page
-            )
-        )
-        .sort((a, b) => {
-          const rankDifference =
-            getPlanRank(b) -
-            getPlanRank(a);
+  const matchingFirms = useMemo(() => {
+    const matched = firms.filter(
+      (firm) =>
+        firm?.name &&
+        matchesPracticeArea(firm, page)
+    );
 
-          if (rankDifference !== 0) {
-            return rankDifference;
-          }
+    const alphabetical = (
+      a: PublicFirm,
+      b: PublicFirm
+    ) =>
+      String(a.name ?? "").localeCompare(
+        String(b.name ?? "")
+      );
 
-          const bFeatured = Number(
-            Boolean(
-              b.is_featured ??
-                b.featured
-            )
-          );
+    const exclusiveFirms = matched
+      .filter((firm) =>
+        getPlanKey(firm).includes("exclusive")
+      )
+      .sort(alphabetical);
 
-          const aFeatured = Number(
-            Boolean(
-              a.is_featured ??
-                a.featured
-            )
-          );
-
-          if (
-            bFeatured !==
-            aFeatured
-          ) {
-            return (
-              bFeatured -
-              aFeatured
-            );
-          }
-
-          return String(
-            a.name ?? ""
-          ).localeCompare(
-            String(b.name ?? "")
+    const featuredFirms = rotateFirmsDaily(
+      matched
+        .filter((firm) => {
+          const plan = getPlanKey(firm);
+          return (
+            !plan.includes("exclusive") &&
+            plan.includes("featured")
           );
         })
-        .slice(0, 12),
-    [firms, page]
-  );
+        .sort(alphabetical)
+    );
+
+    const expertFirms = matched
+      .filter((firm) => {
+        const plan = getPlanKey(firm);
+        return (
+          !plan.includes("exclusive") &&
+          !plan.includes("featured") &&
+          plan.includes("expert")
+        );
+      })
+      .sort(alphabetical);
+
+    const proFirms = matched
+      .filter((firm) => {
+        const plan = getPlanKey(firm);
+        return (
+          !plan.includes("exclusive") &&
+          !plan.includes("featured") &&
+          !plan.includes("expert") &&
+          plan.includes("pro")
+        );
+      })
+      .sort(alphabetical);
+
+    const freeFirms = matched
+      .filter((firm) => getPlanRank(firm) === 0)
+      .sort(alphabetical);
+
+    return [
+      ...exclusiveFirms,
+      ...featuredFirms,
+      ...expertFirms,
+      ...proFirms,
+      ...freeFirms,
+    ].slice(0, 12);
+  }, [firms, page]);
 
   const recordEvent = async (
     firmId: string,
