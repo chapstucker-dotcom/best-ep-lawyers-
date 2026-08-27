@@ -520,82 +520,68 @@ export const Subscription =
       <div className="space-y-6">
         <div>
           <div className="flex flex-wrap items-center gap-3">
-            <h2 className="text-2xl font-bold">Subscription Management</h2>
+            <h2 className="text-2xl font-bold">
+              Subscription Management
+            </h2>
+
             {SANDBOX_MODE && (
               <Badge className="bg-amber-100 text-amber-900 hover:bg-amber-100">
                 <TestTube2 className="mr-1 h-3.5 w-3.5" />
+
                 Stripe Sandbox
               </Badge>
             )}
           </div>
 
-          <div className="mt-4 rounded-lg border bg-white p-4">
-            <p className="text-sm text-gray-500">Current Plan</p>
-            <p className="mt-1 text-lg font-semibold text-gray-900">
-              {PLAN_LABELS[currentPlan] || currentPlan}
+          <div className="mt-4 rounded-xl border bg-white p-4">
+            <p className="text-sm text-gray-500">
+              Current Plan
             </p>
 
-            {(currentPlan === "category-featured" || currentPlan === "category-exclusive") && selectedPracticeArea && (
-              <div className="mt-4 border-t pt-4">
-                <p className="text-sm font-semibold text-gray-900">
-                  {currentPlan === "category-exclusive" ? "Exclusive Category" : "Featured Category"}
-                </p>
-                <div className="mt-2">
-                  <Badge className="bg-[#1FA8A1] text-white hover:bg-[#1FA8A1]">
+            <div className="mt-1">
+              <Badge className="bg-[#1FA8A1] text-white hover:bg-[#1FA8A1]">
+                {PLAN_LABELS[currentPlan] || currentPlan}
+              </Badge>
+            </div>
+
+            {(currentPlan === "category-featured" ||
+              currentPlan === "category-exclusive") &&
+              selectedPracticeArea && (
+                <div className="mt-4 border-t pt-4">
+                  <p className="text-sm font-semibold text-gray-900">
+                    {currentPlan === "category-exclusive"
+                      ? "Exclusive Category"
+                      : "Featured Category"}
+                  </p>
+
+                  <p className="mt-1 text-lg font-bold text-[#0F2A43]">
                     {selectedPracticeArea}
-                  </Badge>
+                  </p>
+
+                  <p className="mt-2 text-sm leading-6 text-gray-600">
+                    Your{" "}
+                    {PLAN_LABELS[currentPlan] || currentPlan} placement
+                    applies to this category only. Other practice areas
+                    listed on your firm profile are profile practice areas
+                    and do not receive this premium category placement.
+                  </p>
                 </div>
-                <p className="mt-2 text-sm text-gray-600">
-                  Your {PLAN_LABELS[currentPlan] || currentPlan} placement applies to this category only. Other practice areas listed on your firm profile do not receive this premium category placement.
-                </p>
-              </div>
-            )}
+              )}
 
-            {currentPlan !== "category-featured" && currentPlan !== "category-exclusive" && selectedPracticeArea && (
-              <div className="mt-4 border-t pt-4">
-                <p className="text-sm text-gray-500">Primary Practice Area</p>
-                <p className="mt-1 font-semibold text-gray-900">{selectedPracticeArea}</p>
-              </div>
-            )}
+            {currentPlan !== "category-featured" &&
+              currentPlan !== "category-exclusive" &&
+              selectedPracticeArea && (
+                <div className="mt-4 border-t pt-4">
+                  <p className="text-sm text-gray-500">
+                    Primary Practice Area
+                  </p>
+
+                  <p className="mt-1 font-semibold text-gray-900">
+                    {selectedPracticeArea}
+                  </p>
+                </div>
+              )}
           </div>
-        </div>
-
-        {SANDBOX_MODE && (
-              <Badge className="bg-amber-100 text-amber-900 hover:bg-amber-100">
-                <TestTube2 className="mr-1 h-3.5 w-3.5" />
-
-                Stripe Sandbox
-              </Badge>
-            )}
-          </div>
-
-          <p className="mt-2 text-gray-600">
-            Current Plan:{" "}
-
-            <Badge className="bg-[#1FA8A1]">
-              {currentPlan}
-            </Badge>
-          </p>
-
-          {firmId && (
-            <p className="mt-2 text-xs text-gray-500">
-              Firm ID:{" "}
-              {firmId}
-            </p>
-          )}
-
-          {selectedPracticeArea && (
-            <p className="mt-2 text-sm text-gray-600">
-              Selected Practice
-              Area:{" "}
-
-              <strong>
-                {
-                  selectedPracticeArea
-                }
-              </strong>
-            </p>
-          )}
         </div>
 
         {SANDBOX_MODE && (
