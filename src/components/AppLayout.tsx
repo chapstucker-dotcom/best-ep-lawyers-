@@ -422,31 +422,58 @@ export default function AppLayout() {
   }, [filteredFirms, sortBy]);
 
   const featuredFirms = useMemo(() => {
-    const exclusiveFirms = firms.filter(
-      (firm) =>
-        getPlanRules(
-          getFirmPlanKey(firm)
-        ).categoryOwner
-    );
+    /*
+     * Homepage premium-placement rules:
+     *
+     * 1. Category Exclusive firms have constant homepage presence.
+     * 2. Category Featured firms share ONE rotating homepage slot.
+     * 3. Featured rotation changes once per day.
+     *
+     * Category-page placement is handled separately by
+     * PracticeAreaFirmDirectory.
+     */
+    const exclusiveFirms = firms
+      .filter(
+        (firm) =>
+          getPlanRules(
+            getFirmPlanKey(firm)
+          ).categoryOwner
+      )
+      .sort((a, b) =>
+        String(a.name ?? '').localeCompare(
+          String(b.name ?? '')
+        )
+      );
 
     const rotatingFeatured =
       rotateFeaturedFirms(
-        firms.filter((firm) => {
-          const rules = getPlanRules(
-            getFirmPlanKey(firm)
-          );
+        firms
+          .filter((firm) => {
+            const rules = getPlanRules(
+              getFirmPlanKey(firm)
+            );
 
-          return (
-            rules.featuredPlacement &&
-            !rules.categoryOwner
-          );
-        })
+            return (
+              rules.featuredPlacement &&
+              !rules.categoryOwner
+            );
+          })
+          .sort((a, b) =>
+            String(a.name ?? '').localeCompare(
+              String(b.name ?? '')
+            )
+          )
       );
 
-    return [
-      ...exclusiveFirms,
-      ...rotatingFeatured,
-    ].slice(0, 6);
+    const featuredHomepageFirm =
+      rotatingFeatured[0];
+
+    return featuredHomepageFirm
+      ? [
+          ...exclusiveFirms,
+          featuredHomepageFirm,
+        ]
+      : exclusiveFirms;
   }, [firms]);
 
   const selectedCategoryTitle =
@@ -478,7 +505,7 @@ export default function AppLayout() {
               </h2>
 
               <p className="mt-2 text-gray-600">
-                Explore local law firms, compare their practice areas and profiles, and contact the firm that fits your legal needs.
+                Category Exclusive firms receive constant homepage presence. Category Featured firms rotate through the premium Featured position.
               </p>
             </div>
 
