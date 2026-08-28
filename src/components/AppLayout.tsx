@@ -543,8 +543,8 @@ export default function AppLayout() {
     <div className="min-h-screen bg-[#F8FAFC]">
       <Hero onSearch={handleSearch} />
       {/* Premium homepage placements */}
-      <section className="bg-[#061A2C] px-4 py-8 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-[1500px] space-y-5">
+      <section className="bg-[#061A2C] px-4 py-5 sm:px-6 sm:py-6 lg:px-8">
+        <div className="mx-auto max-w-[1500px] space-y-3">
           {loading ? (
             <div className="flex justify-center py-12">
               <Loader2 className="h-8 w-8 animate-spin text-[#D4A62A]" />
@@ -552,7 +552,7 @@ export default function AppLayout() {
           ) : (
             <>
               {homepageExclusiveFirms.length > 0 && (
-                <div className="rounded-[22px] border border-[#D4A62A]/35 bg-[#071D2F] p-3 sm:p-4">
+                <div className="w-full">
                   <div className="mb-4 flex items-center justify-center gap-4">
                     <div className="hidden h-px max-w-28 flex-1 bg-gradient-to-r from-transparent to-[#D4A62A] sm:block" />
                     <div className="flex items-center gap-2">
@@ -564,7 +564,7 @@ export default function AppLayout() {
                     <div className="hidden h-px max-w-28 flex-1 bg-gradient-to-l from-transparent to-[#D4A62A] sm:block" />
                   </div>
 
-                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+                  <div className="grid w-fit max-w-full gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
                     {homepageExclusiveFirms.slice(0, 5).map((firm) => {
                       const category = getFeaturedCategory(firm);
                       const logo = getHomepageFirmLogo(firm);
@@ -573,7 +573,7 @@ export default function AppLayout() {
                       return (
                         <article
                           key={firm.id}
-                          className="group relative flex min-h-[310px] flex-col overflow-visible rounded-xl border border-[#D4A62A] bg-[#FFFDF8] px-4 pb-4 pt-8 text-[#071D2F] shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition hover:-translate-y-1"
+                          className="group relative flex min-h-[310px] w-[260px] max-w-full flex-col overflow-visible rounded-xl border border-[#D4A62A] bg-[#FFFDF8] px-4 pb-4 pt-8 text-[#071D2F] shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition hover:-translate-y-1"
                         >
                           <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-md bg-gradient-to-r from-[#E0AB26] to-[#F7C84A] px-4 py-1.5 text-[10px] font-black uppercase tracking-wider text-[#061A2C] shadow-md">
                             Exclusive
@@ -625,7 +625,7 @@ export default function AppLayout() {
               )}
 
               {homepageFeaturedFirms.length > 0 && (
-                <div className="rounded-[22px] border border-[#1FA8A1]/45 bg-[#071D2F] p-3 sm:p-4">
+                <div className="w-full">
                   <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <div className="flex items-center gap-2">
                       <Award className="h-5 w-5 text-[#42C6BE]" />
@@ -648,7 +648,7 @@ export default function AppLayout() {
                     </button>
                   </div>
 
-                  <div className="grid gap-3 lg:grid-cols-3">
+                  <div className="grid w-fit max-w-full gap-4 lg:grid-cols-3">
                     {homepageFeaturedFirms.map((firm) => {
                       const category = getFeaturedCategory(firm);
                       const logo = getHomepageFirmLogo(firm);
@@ -658,7 +658,7 @@ export default function AppLayout() {
                       return (
                         <article
                           key={firm.id}
-                          className="group relative grid min-h-[128px] grid-cols-[92px_1fr] overflow-hidden rounded-xl border border-[#1FA8A1]/45 bg-white text-[#071D2F] shadow-md transition hover:-translate-y-0.5"
+                          className="group relative grid min-h-[128px] w-[390px] max-w-full grid-cols-[92px_1fr] overflow-hidden rounded-xl border border-[#1FA8A1]/45 bg-white text-[#071D2F] shadow-md transition hover:-translate-y-0.5"
                         >
                           <div className="relative flex items-center justify-center bg-gradient-to-br from-[#176B78] to-[#1FA8A1] p-3">
                             <span className="absolute left-2 top-2 rounded bg-[#1FA8A1] px-2 py-0.5 text-[9px] font-black uppercase tracking-wide text-white">
@@ -728,7 +728,7 @@ export default function AppLayout() {
       </section>
 
       {/* Consumer legal issue intake */}
-      <section className="bg-[#061A2C] px-4 pb-10 sm:px-6 lg:px-8">
+      <section className="bg-[#061A2C] px-4 pb-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1500px]">
           <LeadCaptureForm
             practiceArea="General Legal Inquiry"
