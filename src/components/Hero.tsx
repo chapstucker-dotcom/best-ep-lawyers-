@@ -216,6 +216,11 @@ export default function Hero({ onSearch }: HeroProps) {
                 value={searchQuery}
                 placeholder="Search by lawyer, firm, or practice area..."
                 className="h-16 w-full rounded-l-xl border-0 bg-white pl-14 pr-5 text-[15px] font-medium text-[#071D2F] outline-none placeholder:text-slate-500"
+                style={{
+                  color: "#071D2F",
+                  WebkitTextFillColor: "#071D2F",
+                  caretColor: "#071D2F",
+                }}
                 onChange={(event) => {
                   setSearchQuery(event.target.value);
                   setShowSuggestions(true);
