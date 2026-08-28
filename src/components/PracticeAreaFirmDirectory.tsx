@@ -13,12 +13,11 @@ import {
   Sparkles,
   Star,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import type { Firm } from "../data/types";
 import type { PracticeAreaPageData } from "../data/practiceAreaPages";
 import { getAllFirms } from "../services/firmService";
-import FirmModal from "./FirmModal";
 import { trackEvent } from "@/services/analyticsService";
 
 type Props = {
@@ -316,14 +315,13 @@ function rotateFirmsDaily(
 export default function PracticeAreaFirmDirectory({
   page,
 }: Props) {
+  const navigate = useNavigate();
+
   const [firms, setFirms] =
     useState<PublicFirm[]>([]);
 
   const [loading, setLoading] =
     useState(true);
-
-  const [selectedFirm, setSelectedFirm] =
-    useState<PublicFirm | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -451,12 +449,7 @@ export default function PracticeAreaFirmDirectory({
   };
 
   const openFirmProfile = (firm: PublicFirm) => {
-    void recordEvent(
-      String(firm.id),
-      "view"
-    );
-
-    setSelectedFirm(firm);
+    navigate(`/firm/${firm.id}`);
   };
 
   return (
@@ -629,7 +622,7 @@ export default function PracticeAreaFirmDirectory({
                     {isExclusive && (
                       <div className="-mx-6 -mt-6 mb-6 flex items-center justify-center gap-2 bg-[#d6a928] px-4 py-3 text-sm font-extrabold uppercase tracking-wider text-[#07162f]">
                         <Crown className="h-4 w-4" />
-                        Category Owner
+                        Category Exclusive
                       </div>
                     )}
 
@@ -898,14 +891,6 @@ export default function PracticeAreaFirmDirectory({
         )}
       </div>
       </section>
-
-      <FirmModal
-        firm={selectedFirm}
-        open={Boolean(selectedFirm)}
-        onClose={() =>
-          setSelectedFirm(null)
-        }
-      />
-    </>
+</>
   );
 }

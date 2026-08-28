@@ -2,10 +2,10 @@ import WhyLawFirmsJoin from "./WhyLawFirmsJoin";
 import LawFirmMarketplace from "./LawFirmMarketplace";
 import SeoPracticeAreaLinks from "./SeoPracticeAreaLinks";
 import { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Hero from './Hero';
 import FirmCard from './FirmCard';
-import FirmModal from './FirmModal';
 import LeadCaptureForm from './LeadCaptureForm';
 import ArticleCard from './ArticleCard';
 import ListFirmForm from './ListFirmForm';
@@ -207,6 +207,7 @@ const getHomepageFirmInitials = (firm: Firm): string =>
 
 
 export default function AppLayout() {
+  const navigate = useNavigate();
   const [firms, setFirms] = useState<Firm[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -217,9 +218,6 @@ export default function AppLayout() {
     useState(false);
   const [sortBy, setSortBy] =
     useState('relevance');
-
-  const [selectedFirm, setSelectedFirm] =
-    useState<Firm | null>(null);
 
   const [showAllCategories, setShowAllCategories] =
     useState(false);
@@ -612,7 +610,7 @@ export default function AppLayout() {
 
                           <button
                             type="button"
-                            onClick={() => setSelectedFirm(firm)}
+                            onClick={() => navigate(`/firm/${firm.id}`)}
                             className="mt-auto inline-flex h-10 w-full items-center justify-center gap-2 rounded-lg border border-[#D4A62A] bg-white font-black text-[#071D2F] transition hover:bg-[#FFF6D9]"
                           >
                             View Profile
@@ -713,7 +711,7 @@ export default function AppLayout() {
 
                             <button
                               type="button"
-                              onClick={() => setSelectedFirm(firm)}
+                              onClick={() => navigate(`/firm/${firm.id}`)}
                               className="mt-auto self-end text-[11px] font-bold text-[#168C8B] transition hover:text-[#0F5D66]"
                             >
                               View Profile →
@@ -910,7 +908,7 @@ export default function AppLayout() {
                       key={firm.id}
                       firm={firm}
                       onClick={() =>
-                        setSelectedFirm(firm)
+                        navigate(`/firm/${firm.id}`)
                       }
                     />
                   ))}
@@ -1127,15 +1125,6 @@ export default function AppLayout() {
       </section>
 
       <Footer />
-
-      <FirmModal
-        firm={selectedFirm}
-        open={Boolean(selectedFirm)}
-        onClose={() =>
-          setSelectedFirm(null)
-        }
-      />
-
-    </div>
+</div>
   );
 }

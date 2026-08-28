@@ -10,6 +10,7 @@ import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
 import AdminDashboard from "./pages/AdminDashboard";
 import AttorneyDetails from "./pages/AttorneyDetails";
+import FirmProfilePage from "./pages/FirmProfilePage";
 
 import PersonalInjury from "./pages/PersonalInjury";
 import WageHour from "./pages/WageHour";
@@ -298,6 +299,7 @@ export default function App() {
         <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/attorney/:id" element={<AttorneyDetails />} />
+        <Route path="/firm/:id" element={<FirmProfilePage />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
