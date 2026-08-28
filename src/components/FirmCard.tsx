@@ -27,6 +27,7 @@ interface FirmCardProps {
   firm: Firm;
   onClick: () => void;
   hideFeaturedBadge?: boolean;
+  hideCategoryOwnerBadge?: boolean;
 }
 
 type PublicFirm = Firm & {
@@ -46,6 +47,7 @@ export default function FirmCard({
   firm,
   onClick,
   hideFeaturedBadge = false,
+  hideCategoryOwnerBadge = false,
 }: FirmCardProps) {
   const publicFirm = firm as PublicFirm;
 
@@ -192,7 +194,7 @@ export default function FirmCard({
         )}
 
         <div className="absolute left-3 top-3 flex flex-wrap gap-2">
-          {isCategoryOwner && (
+          {!hideCategoryOwnerBadge && isCategoryOwner && (
             <Badge className="border-0 bg-[#F5B800] text-[#0F2A43] shadow-sm">
               <Crown className="mr-1 h-3.5 w-3.5" />
               Category Owner
