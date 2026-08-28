@@ -132,6 +132,37 @@ const rotateFeaturedFirms = (
   ];
 };
 
+const getFeaturedCategory = (firm: Firm): string => {
+  const premiumFirm = firm as Firm & {
+    primary_category?: string | null;
+    category?: string | null;
+  };
+
+  return String(
+    premiumFirm.primary_category ??
+      premiumFirm.category ??
+      'Featured Practice Area'
+  ).trim();
+};
+
+const getHomepageFeaturedFirm = (firm: Firm): Firm => {
+  const featuredCategory = getFeaturedCategory(firm);
+
+  // The homepage premium card intentionally shows only the category
+  // attached to the paid placement. Other profile practice areas remain
+  // available on the firm's full profile and elsewhere in the directory.
+  return {
+    ...firm,
+    category: featuredCategory,
+    primary_category: featuredCategory,
+    practice_areas: [featuredCategory],
+    specialties: [],
+    categories: [],
+    description: null,
+    bio: null,
+  } as Firm;
+};
+
 export default function AppLayout() {
   const [firms, setFirms] = useState<Firm[]>([]);
   const [loading, setLoading] = useState(true);
@@ -491,21 +522,28 @@ export default function AppLayout() {
         categoryCount={categories.length}
       />
 
-      {/* Featured firms */}
-      <section className="bg-white py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-8 flex items-end justify-between gap-4">
-            <div>
-              <p className="mb-2 text-sm font-bold uppercase tracking-widest text-[#C99A2E]">
-                Featured Law Firms
-              </p>
+      {/* Premium homepage placements */}
+      <section className="relative overflow-hidden bg-[#071D2F] py-20">
+        <div className="pointer-events-none absolute inset-0 opacity-40">
+          <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-[#1FA8A1]/20 blur-3xl" />
+          <div className="absolute -right-24 top-10 h-80 w-80 rounded-full bg-[#C99A2E]/15 blur-3xl" />
+        </div>
 
-              <h2 className="text-3xl font-bold text-[#0F2A43]">
-                Compare Featured El Paso Law Firms
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-3xl">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#E8C86A]/35 bg-[#C99A2E]/10 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.2em] text-[#F2D77E]">
+                <Award className="h-4 w-4" />
+                Premium Firm Placement
+              </div>
+
+              <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl">
+                Featured El Paso Law Firms
               </h2>
 
-              <p className="mt-2 text-gray-600">
-                Category Exclusive firms receive constant homepage presence. Category Featured firms rotate through the premium Featured position.
+              <p className="mt-3 max-w-2xl text-base leading-7 text-slate-300">
+                Explore firms with premium placement in specific legal categories.
+                Featured placement is advertising and does not imply a ranking or endorsement.
               </p>
             </div>
 
@@ -516,7 +554,7 @@ export default function AppLayout() {
                 setSearchQuery('');
                 scrollToSearch();
               }}
-              className="hidden rounded-lg border border-[#0F2A43]/20 px-5 py-3 font-semibold text-[#0F2A43] transition hover:bg-[#0F2A43] hover:text-white md:inline-flex"
+              className="inline-flex w-fit items-center rounded-xl border border-white/20 bg-white/10 px-5 py-3 font-bold text-white backdrop-blur transition hover:border-white/40 hover:bg-white/15"
             >
               View All Firms →
             </button>
@@ -524,45 +562,94 @@ export default function AppLayout() {
 
           {loading ? (
             <div className="flex justify-center py-12">
-              <Loader2 className="h-8 w-8 animate-spin text-[#1FA8A1]" />
+              <Loader2 className="h-8 w-8 animate-spin text-[#42C6BE]" />
             </div>
           ) : featuredFirms.length > 0 ? (
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {featuredFirms.map((firm) => (
-                <FirmCard
-                  key={firm.id}
-                  firm={firm}
-                  onClick={() =>
-                    setSelectedFirm(firm)
-                  }
-                />
-              ))}
+            <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+              {featuredFirms.map((firm) => {
+                const rules = getPlanRules(getFirmPlanKey(firm));
+                const isExclusive = rules.categoryOwner;
+                const featuredCategory = getFeaturedCategory(firm);
+                const displayFirm = getHomepageFeaturedFirm(firm);
+
+                return (
+                  <div
+                    key={firm.id}
+                    className={`group relative rounded-[28px] p-[1px] shadow-2xl transition duration-300 hover:-translate-y-1 ${
+                      isExclusive
+                        ? 'bg-gradient-to-br from-[#F4D77A] via-[#C99A2E] to-[#8A6516]'
+                        : 'bg-gradient-to-br from-[#50D6CE] via-[#1FA8A1] to-[#0F5D66]'
+                    }`}
+                  >
+                    <div className="relative h-full overflow-hidden rounded-[27px] bg-white">
+                      <div
+                        className={`flex items-center justify-between gap-3 px-5 py-4 ${
+                          isExclusive
+                            ? 'bg-gradient-to-r from-[#0F2A43] to-[#071D2F]'
+                            : 'bg-gradient-to-r from-[#0F2A43] via-[#123B55] to-[#0D5C63]'
+                        }`}
+                      >
+                        <div>
+                          <p className="text-[10px] font-black uppercase tracking-[0.22em] text-white/60">
+                            {isExclusive ? 'Category Exclusive' : 'Category Featured'}
+                          </p>
+                          <p className="mt-1 text-lg font-black tracking-tight text-white">
+                            {featuredCategory}
+                          </p>
+                        </div>
+
+                        <span
+                          className={`shrink-0 rounded-full px-3 py-1.5 text-[10px] font-black uppercase tracking-wider ${
+                            isExclusive
+                              ? 'bg-[#F2D77E] text-[#332400]'
+                              : 'bg-[#5DE0D7] text-[#063B3F]'
+                          }`}
+                        >
+                          {isExclusive ? 'Exclusive' : 'Featured'}
+                        </span>
+                      </div>
+
+                      <div className="p-3 sm:p-4">
+                        <FirmCard
+                          firm={displayFirm}
+                          onClick={() => setSelectedFirm(firm)}
+                        />
+                      </div>
+
+                      <div className="border-t border-slate-100 px-5 py-4">
+                        <p className="text-xs leading-5 text-slate-500">
+                          Paid premium placement for <span className="font-bold text-[#0F2A43]">{featuredCategory}</span>.
+                          {' '}Other practice areas may be listed on the firm profile.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           ) : (
-            <div className="rounded-2xl border border-dashed bg-gray-50 px-6 py-12 text-center">
-              <p className="font-medium text-gray-600">
-                Category Owner and rotating
-                Featured placements are currently
-                available.
+            <div className="rounded-3xl border border-dashed border-white/20 bg-white/5 px-6 py-12 text-center backdrop-blur-sm">
+              <p className="font-semibold text-slate-200">
+                Premium category placements are currently available.
               </p>
 
               <button
                 type="button"
                 onClick={() =>
                   document
-                    .getElementById(
-                      'pricing'
-                    )
-                    ?.scrollIntoView({
-                      behavior: 'smooth',
-                    })
+                    .getElementById('pricing')
+                    ?.scrollIntoView({ behavior: 'smooth' })
                 }
-                className="mt-4 font-semibold text-[#1FA8A1] hover:underline"
+                className="mt-4 font-bold text-[#5DE0D7] hover:underline"
               >
                 View law firm plans
               </button>
             </div>
           )}
+
+          <p className="mt-7 text-center text-xs leading-5 text-slate-400">
+            Category Exclusive placements maintain homepage presence. Category Featured placements rotate through the Featured position.
+          </p>
         </div>
       </section>
 
