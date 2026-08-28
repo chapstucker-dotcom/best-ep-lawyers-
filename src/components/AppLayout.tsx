@@ -609,14 +609,8 @@ export default function AppLayout() {
                         <FirmCard
                           firm={displayFirm}
                           onClick={() => setSelectedFirm(firm)}
+                          hideFeaturedBadge
                         />
-                      </div>
-
-                      <div className="border-t border-slate-100 px-5 py-4">
-                        <p className="text-xs leading-5 text-slate-500">
-                          Paid premium placement for <span className="font-bold text-[#0F2A43]">{featuredCategory}</span>.
-                          {' '}Other practice areas may be listed on the firm profile.
-                        </p>
                       </div>
                     </div>
                   </div>
@@ -1027,3 +1021,4 @@ export default function AppLayout() {
     </div>
   );
 }
+

@@ -26,6 +26,7 @@ import { getPlanRules } from '@/config/planRules';
 interface FirmCardProps {
   firm: Firm;
   onClick: () => void;
+  hideFeaturedBadge?: boolean;
 }
 
 type PublicFirm = Firm & {
@@ -44,6 +45,7 @@ type PublicFirm = Firm & {
 export default function FirmCard({
   firm,
   onClick,
+  hideFeaturedBadge = false,
 }: FirmCardProps) {
   const publicFirm = firm as PublicFirm;
 
@@ -197,7 +199,7 @@ export default function FirmCard({
             </Badge>
           )}
 
-          {!isCategoryOwner && (isPremiumFeatured || isFeatured) && (
+          {!hideFeaturedBadge && !isCategoryOwner && (isPremiumFeatured || isFeatured) && (
             <Badge className="border-0 bg-[#F5B800] text-[#0F2A43] shadow-sm">
               <Star className="mr-1 h-3.5 w-3.5 fill-current" />
               Category Featured
