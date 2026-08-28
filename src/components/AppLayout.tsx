@@ -532,10 +532,6 @@ export default function AppLayout() {
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div className="max-w-3xl">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#E8C86A]/35 bg-[#C99A2E]/10 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.2em] text-[#F2D77E]">
-                <Award className="h-4 w-4" />
-                Premium Firm Placement
-              </div>
 
               <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl">
                 Featured El Paso Law Firms
@@ -646,10 +642,6 @@ export default function AppLayout() {
               </button>
             </div>
           )}
-
-          <p className="mt-7 text-center text-xs leading-5 text-slate-400">
-            Category Exclusive placements maintain homepage presence. Category Featured placements rotate through the Featured position.
-          </p>
         </div>
       </section>
 
