@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Hero from './Hero';
 import FirmCard from './FirmCard';
 import FirmModal from './FirmModal';
+import LeadCaptureForm from './LeadCaptureForm';
 import ArticleCard from './ArticleCard';
 import ListFirmForm from './ListFirmForm';
 import PricingCard from './PricingCard';
@@ -29,6 +30,9 @@ import {
   Building2,
   Car,
   ChevronDown,
+  ExternalLink,
+  MapPin,
+  Phone,
   ChevronUp,
   Gavel,
   HeartHandshake,
@@ -162,6 +166,42 @@ const getHomepageFeaturedFirm = (firm: Firm): Firm => {
     bio: null,
   } as Firm;
 };
+
+type HomepageFirm = Firm & {
+  logo_url?: string | null;
+  image_url?: string | null;
+  primary_category?: string | null;
+  category?: string | null;
+  phone?: string | null;
+  city?: string | null;
+  state?: string | null;
+};
+
+const getHomepageFirmLogo = (firm: Firm): string => {
+  const homepageFirm = firm as HomepageFirm;
+  return String(
+    homepageFirm.logo_url ??
+      homepageFirm.image_url ??
+      ''
+  ).trim();
+};
+
+const getHomepageFirmLocation = (firm: Firm): string => {
+  const homepageFirm = firm as HomepageFirm;
+  const city = String(homepageFirm.city ?? 'El Paso').trim();
+  const state = String(homepageFirm.state ?? 'TX').trim();
+  return [city, state].filter(Boolean).join(', ');
+};
+
+const getHomepageFirmInitials = (firm: Firm): string =>
+  String(firm.name ?? 'Law Firm')
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part.charAt(0).toUpperCase())
+    .join('');
+
+
 
 export default function AppLayout() {
   const [firms, setFirms] = useState<Firm[]>([]);
@@ -469,28 +509,27 @@ export default function AppLayout() {
     [firms]
   );
 
-  const homepageFeaturedFirm = useMemo(() => {
-    const rotatingFeatured =
-      rotateFeaturedFirms(
-        firms
-          .filter((firm) => {
-            const rules = getPlanRules(
-              getFirmPlanKey(firm)
-            );
+  const homepageFeaturedFirms = useMemo(() => {
+    const rotatingFeatured = rotateFeaturedFirms(
+      firms
+        .filter((firm) => {
+          const rules = getPlanRules(
+            getFirmPlanKey(firm)
+          );
 
-            return (
-              rules.featuredPlacement &&
-              !rules.categoryOwner
-            );
-          })
-          .sort((a, b) =>
-            String(a.name ?? '').localeCompare(
-              String(b.name ?? '')
-            )
+          return (
+            rules.featuredPlacement &&
+            !rules.categoryOwner
+          );
+        })
+        .sort((a, b) =>
+          String(a.name ?? '').localeCompare(
+            String(b.name ?? '')
           )
-      );
+        )
+    );
 
-    return rotatingFeatured[0] ?? null;
+    return rotatingFeatured.slice(0, 3);
   }, [firms]);
 
   const selectedCategoryTitle =
@@ -503,189 +542,201 @@ export default function AppLayout() {
   return (
     <div className="min-h-screen bg-[#F8FAFC]">
       <Hero onSearch={handleSearch} />
-      <LawFirmMarketplace
-        firmCount={firms.length}
-        categoryCount={categories.length}
-      />
-
       {/* Premium homepage placements */}
-      <section className="relative overflow-hidden bg-[#071D2F] py-20">
-        <div className="pointer-events-none absolute inset-0 opacity-40">
-          <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-[#1FA8A1]/20 blur-3xl" />
-          <div className="absolute -right-24 top-10 h-80 w-80 rounded-full bg-[#C99A2E]/15 blur-3xl" />
-        </div>
-
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-            <div className="max-w-3xl">
-
-              <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl">
-                Featured El Paso Law Firms
-              </h2>
-
-              <p className="mt-3 max-w-2xl text-base leading-7 text-slate-300">
-                Explore firms with premium placement in specific legal categories.
-                Paid placement does not imply a ranking or endorsement.
-              </p>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => {
-                setSelectedCategory('all');
-                setSearchQuery('');
-                scrollToSearch();
-              }}
-              className="inline-flex w-fit items-center rounded-xl border border-white/20 bg-white/10 px-5 py-3 font-bold text-white backdrop-blur transition hover:border-white/40 hover:bg-white/15"
-            >
-              View All Firms →
-            </button>
-          </div>
-
+      <section className="bg-[#061A2C] px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1500px] space-y-5">
           {loading ? (
             <div className="flex justify-center py-12">
-              <Loader2 className="h-8 w-8 animate-spin text-[#42C6BE]" />
-            </div>
-          ) : homepageExclusiveFirms.length > 0 || homepageFeaturedFirm ? (
-            <div className="space-y-10">
-              {homepageExclusiveFirms.length > 0 && (
-                <div className="space-y-7">
-                  {homepageExclusiveFirms.map((firm) => {
-                    const exclusiveCategory =
-                      getFeaturedCategory(firm);
-                    const displayFirm =
-                      getHomepageFeaturedFirm(firm);
-
-                    return (
-                      <div
-                        key={firm.id}
-                        className="group relative overflow-hidden rounded-[34px] border border-[#E8C86A]/70 bg-gradient-to-br from-[#F6E6A7] via-[#D6B64E] to-[#9A741D] p-[2px] shadow-[0_28px_80px_rgba(0,0,0,0.38)]"
-                      >
-                        <div className="overflow-hidden rounded-[32px] bg-[#081E31]">
-                          <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
-                            <div className="relative flex flex-col justify-between overflow-hidden px-7 py-8 sm:px-9 sm:py-10">
-                              <div className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-[#E8C86A]/15 blur-3xl" />
-                              <div className="pointer-events-none absolute -bottom-20 right-0 h-64 w-64 rounded-full bg-[#1FA8A1]/10 blur-3xl" />
-
-                              <div className="relative">
-                                <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#E8C86A]/45 bg-[#E8C86A]/10 px-4 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-[#F5DE8B]">
-                                  <Award className="h-4 w-4" />
-                                  Category Exclusive
-                                </div>
-
-                                <p className="text-sm font-black uppercase tracking-[0.22em] text-[#E8C86A]">
-                                  Category Owner
-                                </p>
-
-                                <h3 className="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl">
-                                  {exclusiveCategory}
-                                </h3>
-
-                                <p className="mt-5 max-w-xl text-base leading-7 text-slate-300">
-                                  Explore this firm&apos;s attorneys, profile, and contact information for this legal category.
-                                </p>
-                              </div>
-
-                              <div className="relative mt-10 border-t border-white/10 pt-6">
-                                <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">
-                                  Exclusive category placement
-                                </p>
-                                <p className="mt-2 text-sm leading-6 text-slate-300">
-                                  Paid placement does not imply a ranking or endorsement.
-                                </p>
-                              </div>
-                            </div>
-
-                            <div className="bg-gradient-to-br from-[#FFFDF7] to-white p-4 sm:p-6 lg:p-7">
-                              <FirmCard
-                                firm={displayFirm}
-                                onClick={() =>
-                                  setSelectedFirm(firm)
-                                }
-                                hideFeaturedBadge
-                                hideCategoryOwnerBadge
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-
-              {homepageFeaturedFirm && (
-                <div>
-                  <div className="mb-4 flex items-center gap-3">
-                    <div className="h-px flex-1 bg-white/10" />
-                    <p className="text-[11px] font-black uppercase tracking-[0.2em] text-[#5DE0D7]">
-                      Featured Firm
-                    </p>
-                    <div className="h-px flex-1 bg-white/10" />
-                  </div>
-
-                  {(() => {
-                    const firm = homepageFeaturedFirm;
-                    const featuredCategory =
-                      getFeaturedCategory(firm);
-                    const displayFirm =
-                      getHomepageFeaturedFirm(firm);
-
-                    return (
-                      <div className="max-w-md rounded-[28px] bg-gradient-to-br from-[#50D6CE] via-[#1FA8A1] to-[#0F5D66] p-[1px] shadow-2xl transition duration-300 hover:-translate-y-1">
-                        <div className="relative h-full overflow-hidden rounded-[27px] bg-white">
-                          <div className="flex items-center justify-between gap-3 bg-gradient-to-r from-[#0F2A43] via-[#123B55] to-[#0D5C63] px-5 py-4">
-                            <div>
-                              <p className="text-[10px] font-black uppercase tracking-[0.22em] text-white/60">
-                                Category Featured
-                              </p>
-                              <p className="mt-1 text-lg font-black tracking-tight text-white">
-                                {featuredCategory}
-                              </p>
-                            </div>
-
-                            <span className="shrink-0 rounded-full bg-[#5DE0D7] px-3 py-1.5 text-[10px] font-black uppercase tracking-wider text-[#063B3F]">
-                              Featured
-                            </span>
-                          </div>
-
-                          <div className="p-3 sm:p-4">
-                            <FirmCard
-                              firm={displayFirm}
-                              onClick={() =>
-                                setSelectedFirm(firm)
-                              }
-                              hideFeaturedBadge
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })()}
-                </div>
-              )}
+              <Loader2 className="h-8 w-8 animate-spin text-[#D4A62A]" />
             </div>
           ) : (
-            <div className="rounded-3xl border border-dashed border-white/20 bg-white/5 px-6 py-12 text-center backdrop-blur-sm">
-              <p className="font-semibold text-slate-200">
-                Premium category placements are currently available.
-              </p>
+            <>
+              {homepageExclusiveFirms.length > 0 && (
+                <div className="rounded-[22px] border border-[#D4A62A]/35 bg-[#071D2F] p-3 sm:p-4">
+                  <div className="mb-4 flex items-center justify-center gap-4">
+                    <div className="hidden h-px max-w-28 flex-1 bg-gradient-to-r from-transparent to-[#D4A62A] sm:block" />
+                    <div className="flex items-center gap-2">
+                      <Award className="h-6 w-6 text-[#F5B800]" />
+                      <h2 className="text-xl font-black uppercase tracking-wide text-[#F5B800] sm:text-2xl">
+                        Exclusive Law Firms
+                      </h2>
+                    </div>
+                    <div className="hidden h-px max-w-28 flex-1 bg-gradient-to-l from-transparent to-[#D4A62A] sm:block" />
+                  </div>
 
-              <button
-                type="button"
-                onClick={() =>
-                  document
-                    .getElementById('pricing')
-                    ?.scrollIntoView({
-                      behavior: 'smooth',
-                    })
-                }
-                className="mt-4 font-bold text-[#5DE0D7] hover:underline"
-              >
-                View law firm plans
-              </button>
-            </div>
+                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+                    {homepageExclusiveFirms.slice(0, 5).map((firm) => {
+                      const category = getFeaturedCategory(firm);
+                      const logo = getHomepageFirmLogo(firm);
+                      const location = getHomepageFirmLocation(firm);
+
+                      return (
+                        <article
+                          key={firm.id}
+                          className="group relative flex min-h-[310px] flex-col overflow-visible rounded-xl border border-[#D4A62A] bg-[#FFFDF8] px-4 pb-4 pt-8 text-[#071D2F] shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition hover:-translate-y-1"
+                        >
+                          <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-md bg-gradient-to-r from-[#E0AB26] to-[#F7C84A] px-4 py-1.5 text-[10px] font-black uppercase tracking-wider text-[#061A2C] shadow-md">
+                            Exclusive
+                          </span>
+
+                          <div className="flex h-24 items-center justify-center">
+                            {logo ? (
+                              <img
+                                src={logo}
+                                alt={`${firm.name} logo`}
+                                className="max-h-20 max-w-[90%] object-contain"
+                              />
+                            ) : (
+                              <div className="flex h-20 w-20 items-center justify-center rounded-xl border-2 border-[#D4A62A] bg-[#071D2F] text-2xl font-black text-white">
+                                {getHomepageFirmInitials(firm)}
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="mt-2 flex flex-1 flex-col text-center">
+                            <h3 className="line-clamp-2 min-h-[48px] text-lg font-black leading-6">
+                              {firm.name}
+                            </h3>
+
+                            <p className="mt-3 flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wide text-[#9A6413]">
+                              <Scale className="h-4 w-4 shrink-0" />
+                              <span className="line-clamp-1">{category}</span>
+                            </p>
+
+                            <p className="mt-3 flex items-center justify-center gap-1.5 text-sm text-slate-600">
+                              <MapPin className="h-4 w-4" />
+                              {location}
+                            </p>
+
+                            <button
+                              type="button"
+                              onClick={() => setSelectedFirm(firm)}
+                              className="mt-auto inline-flex h-10 w-full items-center justify-center gap-2 rounded-lg border border-[#D4A62A] bg-white font-bold text-[#071D2F] transition hover:bg-[#FFF6D9]"
+                            >
+                              View Profile
+                              <ExternalLink className="h-4 w-4" />
+                            </button>
+                          </div>
+                        </article>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {homepageFeaturedFirms.length > 0 && (
+                <div className="rounded-[22px] border border-[#1FA8A1]/45 bg-[#071D2F] p-3 sm:p-4">
+                  <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="flex items-center gap-2">
+                      <Award className="h-5 w-5 text-[#42C6BE]" />
+                      <h2 className="text-lg font-black uppercase tracking-wide text-[#42C6BE] sm:text-xl">
+                        Featured Law Firms
+                      </h2>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedCategory('all');
+                        setSearchQuery('');
+                        setFeaturedOnly(true);
+                        scrollToSearch();
+                      }}
+                      className="w-fit rounded-lg border border-[#42C6BE]/40 px-3 py-1.5 text-xs font-bold text-[#5DE0D7] transition hover:bg-[#1FA8A1]/10"
+                    >
+                      View All Featured Firms
+                    </button>
+                  </div>
+
+                  <div className="grid gap-3 lg:grid-cols-3">
+                    {homepageFeaturedFirms.map((firm) => {
+                      const category = getFeaturedCategory(firm);
+                      const logo = getHomepageFirmLogo(firm);
+                      const location = getHomepageFirmLocation(firm);
+                      const homepageFirm = firm as HomepageFirm;
+
+                      return (
+                        <article
+                          key={firm.id}
+                          className="group relative grid min-h-[128px] grid-cols-[92px_1fr] overflow-hidden rounded-xl border border-[#1FA8A1]/45 bg-white text-[#071D2F] shadow-md transition hover:-translate-y-0.5"
+                        >
+                          <div className="relative flex items-center justify-center bg-gradient-to-br from-[#176B78] to-[#1FA8A1] p-3">
+                            <span className="absolute left-2 top-2 rounded bg-[#1FA8A1] px-2 py-0.5 text-[9px] font-black uppercase tracking-wide text-white">
+                              Featured
+                            </span>
+
+                            {logo ? (
+                              <img
+                                src={logo}
+                                alt={`${firm.name} logo`}
+                                className="mt-3 max-h-16 max-w-full object-contain"
+                              />
+                            ) : (
+                              <div className="mt-3 flex h-14 w-14 items-center justify-center rounded-lg border border-white/40 bg-white/10 text-lg font-black text-white">
+                                {getHomepageFirmInitials(firm)}
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="flex min-w-0 flex-col p-3">
+                            <h3 className="line-clamp-1 text-base font-black">
+                              {firm.name}
+                            </h3>
+
+                            <p className="mt-1 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wide text-[#168C8B]">
+                              <Scale className="h-3.5 w-3.5 shrink-0" />
+                              <span className="line-clamp-1">{category}</span>
+                            </p>
+
+                            <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 text-xs text-slate-600">
+                              <span className="flex items-center gap-1">
+                                <MapPin className="h-3.5 w-3.5" />
+                                {location}
+                              </span>
+                              {homepageFirm.phone && (
+                                <span className="flex items-center gap-1">
+                                  <Phone className="h-3.5 w-3.5" />
+                                  {homepageFirm.phone}
+                                </span>
+                              )}
+                            </div>
+
+                            <button
+                              type="button"
+                              onClick={() => setSelectedFirm(firm)}
+                              className="mt-auto self-end text-xs font-bold text-[#168C8B] transition hover:text-[#0F5D66]"
+                            >
+                              View Profile →
+                            </button>
+                          </div>
+                        </article>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {homepageExclusiveFirms.length === 0 &&
+                homepageFeaturedFirms.length === 0 && (
+                  <div className="rounded-2xl border border-white/10 bg-white/5 px-6 py-8 text-center text-slate-300">
+                    Browse El Paso law firms by practice area below.
+                  </div>
+                )}
+            </>
           )}
+        </div>
+      </section>
+
+      {/* Consumer legal issue intake */}
+      <section className="bg-[#061A2C] px-4 pb-10 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1500px]">
+          <LeadCaptureForm
+            practiceArea="General Legal Inquiry"
+            title="Get Matched with the Right Lawyer"
+            description="Tell us what you're facing and share your contact information. We'll use your request to help connect you with local legal options in El Paso."
+            variant="homepage"
+            phoneOptional
+          />
         </div>
       </section>
 
@@ -938,6 +989,11 @@ export default function AppLayout() {
         </div>
       </section>
 
+      <LawFirmMarketplace
+        firmCount={firms.length}
+        categoryCount={categories.length}
+      />
+
       {/* For El Paso law firms */}
       <WhyLawFirmsJoin
         onListFirm={() =>
@@ -1071,4 +1127,3 @@ export default function AppLayout() {
     </div>
   );
 }
-
