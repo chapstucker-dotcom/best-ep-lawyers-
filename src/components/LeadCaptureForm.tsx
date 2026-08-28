@@ -11,6 +11,12 @@ import {
   Phone,
   Send,
   UserRound,
+  ShieldCheck,
+  LockKeyhole,
+  Zap,
+  MapPin,
+  MessageCircle,
+  ArrowRight,
 } from 'lucide-react';
 
 import { supabase } from '@/lib/supabase';
@@ -435,42 +441,60 @@ export default function LeadCaptureForm({
     return (
       <section
         id="lead-form"
-        className="overflow-hidden rounded-[22px] border border-[#1FA8A1]/45 bg-[#071D2F] shadow-xl"
+        className="overflow-hidden rounded-2xl border border-[#1FA8A1]/45 bg-[#071D2F] shadow-xl"
       >
-        <div className="grid lg:grid-cols-[0.72fr_1.28fr]">
-          <div className="border-b border-white/10 p-6 text-white sm:p-7 lg:border-b-0 lg:border-r">
-            <p className="text-xs font-black uppercase tracking-widest text-[#F5B800]">
-              Tell Us About Your Legal Issue
-            </p>
+        <div className="grid lg:grid-cols-[0.78fr_1.22fr]">
+          <div className="border-b border-white/10 p-6 text-white sm:p-7 lg:border-b-0 lg:border-r lg:border-white/20">
+            <div className="flex items-center gap-2 text-[#F5B800]">
+              <MessageCircle className="h-6 w-6" />
+              <p className="text-xs font-black uppercase tracking-wide">
+                Tell Us About Your Legal Issue
+              </p>
+            </div>
 
-            <h2 className="mt-3 text-3xl font-black leading-tight">
+            <h2 className="mt-4 font-serif text-3xl font-black leading-tight sm:text-[34px]">
               {formTitle}
             </h2>
 
-            <p className="mt-3 max-w-md text-sm leading-6 text-slate-300">
+            <p className="mt-3 max-w-md text-sm leading-6 text-slate-200">
               {formDescription}
             </p>
 
-            <div className="mt-6 space-y-4 text-sm">
-              <div>
-                <p className="font-bold text-white">Local legal options</p>
-                <p className="mt-1 text-xs leading-5 text-slate-400">
-                  We use the details you provide to identify relevant legal categories and local options.
-                </p>
+            <div className="mt-5 space-y-4">
+              <div className="flex gap-3">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#F5B800] text-[#F5B800]">
+                  <ShieldCheck className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="text-sm font-black text-white">Matched with Local Options</p>
+                  <p className="mt-0.5 text-xs leading-5 text-slate-400">
+                    We use the details you provide to identify relevant legal categories and local options.
+                  </p>
+                </div>
               </div>
 
-              <div>
-                <p className="font-bold text-white">Your information is protected</p>
-                <p className="mt-1 text-xs leading-5 text-slate-400">
-                  Do not include confidential or highly sensitive information.
-                </p>
+              <div className="flex gap-3">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#F5B800] text-[#F5B800]">
+                  <LockKeyhole className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="text-sm font-black text-white">Your Information is Protected</p>
+                  <p className="mt-0.5 text-xs leading-5 text-slate-400">
+                    Do not include confidential or highly sensitive information.
+                  </p>
+                </div>
               </div>
 
-              <div>
-                <p className="font-bold text-white">Fast and simple</p>
-                <p className="mt-1 text-xs leading-5 text-slate-400">
-                  Share the basics of your legal issue and how to reach you.
-                </p>
+              <div className="flex gap-3">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#F5B800] text-[#F5B800]">
+                  <Zap className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="text-sm font-black text-white">Fast &amp; Easy</p>
+                  <p className="mt-0.5 text-xs leading-5 text-slate-400">
+                    Share the basics of your legal issue and how to reach you.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -490,118 +514,105 @@ export default function LeadCaptureForm({
               </Alert>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-2">
-                <Label
-                  htmlFor="homepage-legal-issue"
-                  className="font-bold text-white"
-                >
+            <form onSubmit={handleSubmit} className="space-y-3">
+              <div className="space-y-1.5">
+                <Label htmlFor="homepage-legal-issue" className="font-black text-white">
                   What&apos;s your legal issue? *
                 </Label>
+
+                <p className="text-xs text-slate-300">
+                  Tell us what&apos;s going on. Be as specific as you can.
+                </p>
 
                 <Textarea
                   id="homepage-legal-issue"
                   value={form.legalIssue}
-                  onChange={(event) =>
-                    updateField('legalIssue', event.target.value)
-                  }
-                  placeholder="e.g. car accident, divorce, DWI, immigration, business dispute..."
+                  onChange={(event) => updateField('legalIssue', event.target.value)}
+                  placeholder="e.g. car accident, divorce, DWI, immigration, etc."
                   rows={4}
                   maxLength={1000}
-                  className="min-h-[110px] border-white/15 bg-white/10 text-white placeholder:text-slate-400 focus-visible:ring-[#D4A62A]"
+                  className="min-h-[105px] border-white/20 bg-white/10 text-white placeholder:text-slate-400 focus-visible:ring-[#D4A62A]"
                   disabled={loading}
                   required
                 />
 
-                <p className="text-right text-[11px] text-slate-500">
+                <p className="text-right text-[11px] text-slate-400">
                   {form.legalIssue.length}/1000
                 </p>
               </div>
 
               <div>
-                <p className="mb-2 font-bold text-white">
-                  Your Contact Information
-                </p>
+                <p className="mb-2 font-black text-white">Your Contact Information</p>
 
                 <div className="grid gap-2.5 md:grid-cols-2">
                   <div className="relative">
-                    <UserRound className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                    <UserRound className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-300" />
                     <Input
                       id="homepage-full-name"
                       value={form.fullName}
-                      onChange={(event) =>
-                        updateField('fullName', event.target.value)
-                      }
+                      onChange={(event) => updateField('fullName', event.target.value)}
                       placeholder="Full Name"
                       autoComplete="name"
-                      className="border-white/15 bg-white/10 pl-10 text-white placeholder:text-slate-400"
+                      className="border-white/20 bg-white/10 pl-10 text-white placeholder:text-slate-300"
                       disabled={loading}
                       required
                     />
                   </div>
 
                   <div className="relative">
-                    <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                    <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-300" />
                     <Input
                       id="homepage-email"
                       type="email"
                       value={form.email}
-                      onChange={(event) =>
-                        updateField('email', event.target.value)
-                      }
+                      onChange={(event) => updateField('email', event.target.value)}
                       placeholder="Email Address"
                       autoComplete="email"
-                      className="border-white/15 bg-white/10 pl-10 text-white placeholder:text-slate-400"
+                      className="border-white/20 bg-white/10 pl-10 text-white placeholder:text-slate-300"
                       disabled={loading}
                       required
                     />
                   </div>
 
                   <div className="relative md:col-span-2">
-                    <Phone className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                    <Phone className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-300" />
                     <Input
                       id="homepage-phone"
                       type="tel"
                       value={form.phone}
-                      onChange={(event) =>
-                        updateField('phone', event.target.value)
-                      }
-                      placeholder={
-                        phoneOptional
-                          ? 'Phone Number (Optional)'
-                          : 'Phone Number'
-                      }
+                      onChange={(event) => updateField('phone', event.target.value)}
+                      placeholder={phoneOptional ? 'Phone Number (Optional)' : 'Phone Number'}
                       autoComplete="tel"
-                      className="border-white/15 bg-white/10 pl-10 text-white placeholder:text-slate-400"
+                      className="border-white/20 bg-white/10 pl-10 text-white placeholder:text-slate-300"
                       disabled={loading}
                       required={!phoneOptional}
                     />
                   </div>
 
                   <div className="relative md:col-span-2">
+                    <MapPin className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-300" />
                     <Input
                       id="homepage-location"
                       value={form.location}
-                      onChange={(event) =>
-                        updateField('location', event.target.value)
-                      }
+                      onChange={(event) => updateField('location', event.target.value)}
                       placeholder="City, State"
                       autoComplete="address-level2"
-                      className="border-white/15 bg-white/10 text-white placeholder:text-slate-400"
+                      className="border-white/20 bg-white/10 pl-10 text-white placeholder:text-slate-300"
                       disabled={loading}
                     />
                   </div>
                 </div>
               </div>
 
-              <p className="text-[11px] leading-5 text-slate-400">
-                By submitting, you understand that this does not create an attorney-client relationship and does not guarantee representation.
+              <p className="flex items-center gap-2 text-[11px] leading-5 text-slate-300">
+                <LockKeyhole className="h-3.5 w-3.5 shrink-0 text-[#F5B800]" />
+                We respect your privacy. Submitting does not create an attorney-client relationship or guarantee representation.
               </p>
 
               <Button
                 type="submit"
                 disabled={loading}
-                className="h-11 w-full bg-[#D4A62A] font-black text-[#061A2C] hover:bg-[#E3B53A]"
+                className="h-11 w-full bg-gradient-to-r from-[#E3AA28] to-[#F7C84A] text-base font-black text-[#061A2C] hover:brightness-105"
               >
                 {loading ? (
                   <>
@@ -610,11 +621,16 @@ export default function LeadCaptureForm({
                   </>
                 ) : (
                   <>
-                    <Send className="mr-2 h-4 w-4" />
+                    <Mail className="mr-2 h-4 w-4" />
                     Send My Info
+                    <ArrowRight className="ml-3 h-4 w-4" />
                   </>
                 )}
               </Button>
+
+              <p className="text-center text-[11px] text-slate-400">
+                Share only the information needed to understand your request.
+              </p>
             </form>
           </div>
         </div>

@@ -30,6 +30,9 @@ import {
   Building2,
   Car,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Crown,
   ExternalLink,
   MapPin,
   Phone,
@@ -543,113 +546,120 @@ export default function AppLayout() {
     <div className="min-h-screen bg-[#F8FAFC]">
       <Hero onSearch={handleSearch} />
       {/* Premium homepage placements */}
-      <section className="bg-[#061A2C] px-4 py-5 sm:px-6 sm:py-6 lg:px-8">
-        <div className="mx-auto max-w-[1500px] space-y-3">
+      <section className="bg-[#061A2C] px-4 pb-3 pt-2 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1500px]">
           {loading ? (
             <div className="flex justify-center py-12">
               <Loader2 className="h-8 w-8 animate-spin text-[#D4A62A]" />
             </div>
           ) : (
             <>
-              {homepageExclusiveFirms.length > 0 && (
-                <div className="w-full">
-                  <div className="mb-4 flex items-center justify-center gap-4">
-                    <div className="hidden h-px max-w-28 flex-1 bg-gradient-to-r from-transparent to-[#D4A62A] sm:block" />
-                    <div className="flex items-center gap-2">
-                      <Award className="h-6 w-6 text-[#F5B800]" />
-                      <h2 className="text-xl font-black uppercase tracking-wide text-[#F5B800] sm:text-2xl">
-                        Exclusive Law Firms
-                      </h2>
-                    </div>
-                    <div className="hidden h-px max-w-28 flex-1 bg-gradient-to-l from-transparent to-[#D4A62A] sm:block" />
+              <div className="rounded-2xl border border-[#D4A62A]/30 bg-[#071D2F]/60 px-3 pb-2 pt-1 sm:px-4">
+                <div className="mb-2 flex items-center justify-center gap-4">
+                  <div className="hidden h-px max-w-28 flex-1 bg-gradient-to-r from-transparent to-[#D4A62A] sm:block" />
+                  <div className="flex items-center gap-2">
+                    <Crown className="h-7 w-7 fill-[#F5B800] text-[#F5B800]" />
+                    <h2 className="font-serif text-xl font-black uppercase tracking-wide text-[#F5B800] sm:text-2xl">
+                      Exclusive Law Firms
+                    </h2>
                   </div>
-
-                  <div className="grid w-fit max-w-full gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-                    {homepageExclusiveFirms.slice(0, 5).map((firm) => {
-                      const category = getFeaturedCategory(firm);
-                      const logo = getHomepageFirmLogo(firm);
-                      const location = getHomepageFirmLocation(firm);
-
-                      return (
-                        <article
-                          key={firm.id}
-                          className="group relative flex min-h-[310px] w-[260px] max-w-full flex-col overflow-visible rounded-xl border border-[#D4A62A] bg-[#FFFDF8] px-4 pb-4 pt-8 text-[#071D2F] shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition hover:-translate-y-1"
-                        >
-                          <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-md bg-gradient-to-r from-[#E0AB26] to-[#F7C84A] px-4 py-1.5 text-[10px] font-black uppercase tracking-wider text-[#061A2C] shadow-md">
-                            Exclusive
-                          </span>
-
-                          <div className="flex h-24 items-center justify-center">
-                            {logo ? (
-                              <img
-                                src={logo}
-                                alt={`${firm.name} logo`}
-                                className="max-h-20 max-w-[90%] object-contain"
-                              />
-                            ) : (
-                              <div className="flex h-20 w-20 items-center justify-center rounded-xl border-2 border-[#D4A62A] bg-[#071D2F] text-2xl font-black text-white">
-                                {getHomepageFirmInitials(firm)}
-                              </div>
-                            )}
-                          </div>
-
-                          <div className="mt-2 flex flex-1 flex-col text-center">
-                            <h3 className="line-clamp-2 min-h-[48px] text-lg font-black leading-6">
-                              {firm.name}
-                            </h3>
-
-                            <p className="mt-3 flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wide text-[#9A6413]">
-                              <Scale className="h-4 w-4 shrink-0" />
-                              <span className="line-clamp-1">{category}</span>
-                            </p>
-
-                            <p className="mt-3 flex items-center justify-center gap-1.5 text-sm text-slate-600">
-                              <MapPin className="h-4 w-4" />
-                              {location}
-                            </p>
-
-                            <button
-                              type="button"
-                              onClick={() => setSelectedFirm(firm)}
-                              className="mt-auto inline-flex h-10 w-full items-center justify-center gap-2 rounded-lg border border-[#D4A62A] bg-white font-bold text-[#071D2F] transition hover:bg-[#FFF6D9]"
-                            >
-                              View Profile
-                              <ExternalLink className="h-4 w-4" />
-                            </button>
-                          </div>
-                        </article>
-                      );
-                    })}
-                  </div>
+                  <div className="hidden h-px max-w-28 flex-1 bg-gradient-to-l from-transparent to-[#D4A62A] sm:block" />
                 </div>
-              )}
 
-              {homepageFeaturedFirms.length > 0 && (
-                <div className="w-full">
-                  <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                    <div className="flex items-center gap-2">
-                      <Award className="h-5 w-5 text-[#42C6BE]" />
-                      <h2 className="text-lg font-black uppercase tracking-wide text-[#42C6BE] sm:text-xl">
-                        Featured Law Firms
-                      </h2>
-                    </div>
+                <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+                  {homepageExclusiveFirms.slice(0, 5).map((firm) => {
+                    const category = getFeaturedCategory(firm);
+                    const logo = getHomepageFirmLogo(firm);
+                    const location = getHomepageFirmLocation(firm);
 
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setSelectedCategory('all');
-                        setSearchQuery('');
-                        setFeaturedOnly(true);
-                        scrollToSearch();
-                      }}
-                      className="w-fit rounded-lg border border-[#42C6BE]/40 px-3 py-1.5 text-xs font-bold text-[#5DE0D7] transition hover:bg-[#1FA8A1]/10"
-                    >
-                      View All Featured Firms
-                    </button>
+                    return (
+                      <article
+                        key={firm.id}
+                        className="group relative flex min-h-[285px] flex-col overflow-visible rounded-xl border border-[#D4A62A] bg-[#FFFDF8] px-4 pb-4 pt-8 text-[#071D2F] shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition hover:-translate-y-1"
+                      >
+                        <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-md bg-gradient-to-r from-[#E0AB26] to-[#F7C84A] px-4 py-1.5 text-[10px] font-black uppercase tracking-wider text-[#061A2C] shadow-md">
+                          Exclusive
+                        </span>
+
+                        <div className="flex h-20 items-center justify-center">
+                          {logo ? (
+                            <img
+                              src={logo}
+                              alt={`${firm.name} logo`}
+                              className="max-h-16 max-w-[90%] object-contain"
+                            />
+                          ) : (
+                            <div className="flex h-20 w-20 items-center justify-center rounded-xl border-2 border-[#D4A62A] bg-[#071D2F] text-2xl font-black text-white">
+                              {getHomepageFirmInitials(firm)}
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="mt-2 flex flex-1 flex-col text-center">
+                          <h3 className="line-clamp-2 min-h-[48px] font-serif text-[17px] font-black uppercase leading-6">
+                            {firm.name}
+                          </h3>
+
+                          <p className="mt-3 flex items-center justify-center gap-2 text-[11px] font-black uppercase tracking-wide text-[#9A6413]">
+                            <Scale className="h-4 w-4 shrink-0" />
+                            <span className="line-clamp-1">{category}</span>
+                          </p>
+
+                          <p className="mt-3 flex items-center justify-center gap-1.5 text-sm text-slate-700">
+                            <MapPin className="h-4 w-4" />
+                            {location}
+                          </p>
+
+                          <button
+                            type="button"
+                            onClick={() => setSelectedFirm(firm)}
+                            className="mt-auto inline-flex h-10 w-full items-center justify-center gap-2 rounded-lg border border-[#D4A62A] bg-white font-black text-[#071D2F] transition hover:bg-[#FFF6D9]"
+                          >
+                            View Profile
+                            <ChevronRight className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </article>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="mt-1.5 rounded-2xl border border-[#1FA8A1]/35 bg-[#071D2F]/60 px-3 pb-3 pt-1 sm:px-4">
+                <div className="relative mb-2 flex min-h-10 items-center justify-center">
+                  <div className="flex items-center gap-2">
+                    <Award className="h-6 w-6 fill-[#42C6BE] text-[#42C6BE]" />
+                    <h2 className="text-lg font-black uppercase tracking-wide text-[#42C6BE] sm:text-xl">
+                      Featured Law Firms
+                    </h2>
                   </div>
 
-                  <div className="grid w-fit max-w-full gap-4 lg:grid-cols-3">
-                    {homepageFeaturedFirms.map((firm) => {
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedCategory('all');
+                      setSearchQuery('');
+                      setFeaturedOnly(true);
+                      scrollToSearch();
+                    }}
+                    className="hidden rounded-lg border border-[#42C6BE]/45 px-3 py-1.5 text-[11px] font-bold text-[#5DE0D7] transition hover:bg-[#1FA8A1]/10 sm:absolute sm:right-0 sm:block"
+                  >
+                    View All Featured Firms →
+                  </button>
+                </div>
+
+                <div className="grid items-center gap-2 lg:grid-cols-[42px_1fr_42px]">
+                  <button
+                    type="button"
+                    aria-label="Previous featured firms"
+                    disabled
+                    className="hidden h-10 w-10 items-center justify-center rounded-full border border-[#D4A62A] text-[#D4A62A] opacity-70 lg:flex"
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </button>
+
+                  <div className="grid gap-3 lg:grid-cols-3">
+                    {homepageFeaturedFirms.slice(0, 3).map((firm) => {
                       const category = getFeaturedCategory(firm);
                       const logo = getHomepageFirmLogo(firm);
                       const location = getHomepageFirmLocation(firm);
@@ -658,7 +668,7 @@ export default function AppLayout() {
                       return (
                         <article
                           key={firm.id}
-                          className="group relative grid min-h-[128px] w-[390px] max-w-full grid-cols-[92px_1fr] overflow-hidden rounded-xl border border-[#1FA8A1]/45 bg-white text-[#071D2F] shadow-md transition hover:-translate-y-0.5"
+                          className="group relative grid min-h-[108px] grid-cols-[92px_1fr] overflow-hidden rounded-xl border border-[#1FA8A1]/45 bg-white text-[#071D2F] shadow-md transition hover:-translate-y-0.5"
                         >
                           <div className="relative flex items-center justify-center bg-gradient-to-br from-[#176B78] to-[#1FA8A1] p-3">
                             <span className="absolute left-2 top-2 rounded bg-[#1FA8A1] px-2 py-0.5 text-[9px] font-black uppercase tracking-wide text-white">
@@ -683,12 +693,12 @@ export default function AppLayout() {
                               {firm.name}
                             </h3>
 
-                            <p className="mt-1 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wide text-[#168C8B]">
+                            <p className="mt-1 flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wide text-[#168C8B]">
                               <Scale className="h-3.5 w-3.5 shrink-0" />
                               <span className="line-clamp-1">{category}</span>
                             </p>
 
-                            <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 text-xs text-slate-600">
+                            <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-slate-600">
                               <span className="flex items-center gap-1">
                                 <MapPin className="h-3.5 w-3.5" />
                                 {location}
@@ -704,7 +714,7 @@ export default function AppLayout() {
                             <button
                               type="button"
                               onClick={() => setSelectedFirm(firm)}
-                              className="mt-auto self-end text-xs font-bold text-[#168C8B] transition hover:text-[#0F5D66]"
+                              className="mt-auto self-end text-[11px] font-bold text-[#168C8B] transition hover:text-[#0F5D66]"
                             >
                               View Profile →
                             </button>
@@ -713,27 +723,29 @@ export default function AppLayout() {
                       );
                     })}
                   </div>
-                </div>
-              )}
 
-              {homepageExclusiveFirms.length === 0 &&
-                homepageFeaturedFirms.length === 0 && (
-                  <div className="rounded-2xl border border-white/10 bg-white/5 px-6 py-8 text-center text-slate-300">
-                    Browse El Paso law firms by practice area below.
-                  </div>
-                )}
+                  <button
+                    type="button"
+                    aria-label="Next featured firms"
+                    disabled
+                    className="hidden h-10 w-10 items-center justify-center rounded-full border border-[#D4A62A] text-[#D4A62A] opacity-70 lg:flex"
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
+                </div>
+              </div>
             </>
           )}
         </div>
       </section>
 
       {/* Consumer legal issue intake */}
-      <section className="bg-[#061A2C] px-4 pb-8 sm:px-6 lg:px-8">
+      <section className="bg-[#061A2C] px-4 pb-5 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1500px]">
           <LeadCaptureForm
             practiceArea="General Legal Inquiry"
             title="Get Matched with the Right Lawyer"
-            description="Tell us what you're facing and share your contact information. We'll use your request to help connect you with local legal options in El Paso."
+            description="Whether you've been in an accident, need a criminal defense attorney, or have a family law matter, tell us what you're facing and we'll use your request to help identify relevant local legal options in El Paso."
             variant="homepage"
             phoneOptional
           />
