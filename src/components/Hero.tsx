@@ -74,7 +74,7 @@ export default function Hero({ onSearch }: HeroProps) {
 
   return (
     <section
-      className="relative overflow-hidden bg-[#061A2C] text-white"
+      className="relative overflow-visible bg-[#061A2C] text-white"
       style={{
         backgroundImage: `linear-gradient(90deg, rgba(4,24,43,0.98) 0%, rgba(4,24,43,0.92) 46%, rgba(4,24,43,0.72) 100%), url(${heroImage})`,
         backgroundSize: "cover",
