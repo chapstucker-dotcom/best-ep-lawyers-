@@ -16,6 +16,10 @@ type FirmRow = {
   plan?: string | null;
   plan_key?: string | null;
 
+  primary_category?: string | null;
+  practice_areas?: string[] | null;
+
+  // Legacy compatibility fields.
   category?: string | null;
   categories?: string[] | null;
   specialties?: string[] | null;
@@ -116,9 +120,48 @@ const getSupabaseServerClient = () => {
 };
 
 const getFirmPracticeText = (
-  firm: FirmRow
+  firm: FirmRow,
+  planValue?: unknown
 ): string => {
   const values: string[] = [];
+  const planKey = normalizePlanKey(
+    planValue ??
+      firm.plan_key ??
+      firm.plan ??
+      "free"
+  );
+
+  const isCategoryPremium =
+    planKey === "category_exclusive" ||
+    planKey === "exclusive" ||
+    planKey === "category_featured" ||
+    planKey === "featured";
+
+  /*
+   * Category Featured / Category Exclusive routing applies ONLY
+   * to the firm's purchased primary category.
+   */
+  if (isCategoryPremium) {
+    if (firm.primary_category) {
+      values.push(firm.primary_category);
+    } else if (firm.category) {
+      // Legacy fallback for older records.
+      values.push(firm.category);
+    }
+
+    return normalize(values.join(" "));
+  }
+
+  /*
+   * Expert routing may use the firm's broader practice-area profile.
+   */
+  if (firm.primary_category) {
+    values.push(firm.primary_category);
+  }
+
+  if (Array.isArray(firm.practice_areas)) {
+    values.push(...firm.practice_areas);
+  }
 
   if (firm.category) {
     values.push(firm.category);
@@ -146,7 +189,12 @@ const practiceMatches = (
   }
 
   const firmText =
-    getFirmPracticeText(firm);
+    getFirmPracticeText(
+      firm,
+      firm.plan_key ??
+        firm.plan ??
+        "free"
+    );
 
   if (!firmText) {
     return false;
