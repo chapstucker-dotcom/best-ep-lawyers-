@@ -552,7 +552,7 @@ export default function AppLayout() {
             </div>
           ) : (
             <>
-              <div className="rounded-2xl border border-[#D4A62A]/30 bg-[#071D2F]/60 px-3 pb-2 pt-1 sm:px-4">
+              <div className="rounded-2xl border-2 border-[#F5B800] bg-[#071D2F]/75 px-3 pb-3 pt-1 shadow-[0_0_20px_rgba(245,184,0,0.28)] sm:px-4">
                 <div className="mb-2 flex items-center justify-center gap-4">
                   <div className="hidden h-px max-w-28 flex-1 bg-gradient-to-r from-transparent to-[#D4A62A] sm:block" />
                   <div className="flex items-center gap-2">
@@ -573,9 +573,9 @@ export default function AppLayout() {
                     return (
                       <article
                         key={firm.id}
-                        className="group relative flex min-h-[285px] flex-col overflow-visible rounded-xl border border-[#D4A62A] bg-[#FFFDF8] px-4 pb-4 pt-8 text-[#071D2F] shadow-[0_8px_24px_rgba(0,0,0,0.18)] transition hover:-translate-y-1"
+                        className="group relative flex min-h-[285px] flex-col overflow-visible rounded-xl border-[3px] border-[#FFD21F] bg-[#FFFDF8] px-4 pb-4 pt-8 text-[#071D2F] shadow-[0_0_14px_rgba(255,210,31,0.55),0_10px_28px_rgba(0,0,0,0.24)] transition hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,210,31,0.72),0_14px_34px_rgba(0,0,0,0.28)]"
                       >
-                        <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-md bg-gradient-to-r from-[#E0AB26] to-[#F7C84A] px-4 py-1.5 text-[10px] font-black uppercase tracking-wider text-[#061A2C] shadow-md">
+                        <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-md border border-[#FFD45A] bg-gradient-to-r from-[#E0AB26] via-[#F5B800] to-[#FFD45A] px-4 py-1.5 text-[10px] font-black uppercase tracking-wider text-[#061A2C] shadow-[0_0_12px_rgba(245,184,0,0.55)]">
                           Exclusive
                         </span>
 
@@ -594,7 +594,7 @@ export default function AppLayout() {
                         </div>
 
                         <div className="mt-2 flex flex-1 flex-col text-center">
-                          <h3 className="line-clamp-2 min-h-[48px] font-serif text-[17px] font-black uppercase leading-6">
+                          <h3 className="line-clamp-2 min-h-[48px] font-serif text-[17px] font-black uppercase leading-6 text-[#071D2F]">
                             {firm.name}
                           </h3>
 
@@ -611,7 +611,7 @@ export default function AppLayout() {
                           <button
                             type="button"
                             onClick={() => navigate(`/firm/${firm.id}`)}
-                            className="mt-auto inline-flex h-10 w-full items-center justify-center gap-2 rounded-lg border border-[#D4A62A] bg-white font-black text-[#071D2F] transition hover:bg-[#FFF6D9]"
+                            className="mt-auto inline-flex h-10 w-full items-center justify-center gap-2 rounded-lg border-2 border-[#E6B319] bg-white font-black text-[#071D2F] transition hover:bg-[#FFF6D9]"
                           >
                             View Profile
                             <ChevronRight className="h-4 w-4" />
@@ -656,7 +656,7 @@ export default function AppLayout() {
                     <ChevronLeft className="h-5 w-5" />
                   </button>
 
-                  <div className="grid gap-3 lg:grid-cols-3">
+                  <div className="grid gap-3 lg:grid-cols-[repeat(3,minmax(0,390px))] lg:justify-between">
                     {homepageFeaturedFirms.slice(0, 3).map((firm) => {
                       const category = getFeaturedCategory(firm);
                       const logo = getHomepageFirmLogo(firm);
@@ -666,7 +666,7 @@ export default function AppLayout() {
                       return (
                         <article
                           key={firm.id}
-                          className="group relative grid min-h-[108px] grid-cols-[92px_1fr] overflow-hidden rounded-xl border border-[#1FA8A1]/45 bg-white text-[#071D2F] shadow-md transition hover:-translate-y-0.5"
+                          className="group relative grid min-h-[108px] w-full grid-cols-[84px_1fr] overflow-hidden rounded-xl border border-[#1FA8A1]/45 bg-white text-[#071D2F] shadow-md transition hover:-translate-y-0.5"
                         >
                           <div className="relative flex items-center justify-center bg-gradient-to-br from-[#176B78] to-[#1FA8A1] p-3">
                             <span className="absolute left-2 top-2 rounded bg-[#1FA8A1] px-2 py-0.5 text-[9px] font-black uppercase tracking-wide text-white">
@@ -745,7 +745,6 @@ export default function AppLayout() {
             title="Get Matched with the Right Lawyer"
             description="Whether you've been in an accident, need a criminal defense attorney, or have a family law matter, tell us what you're facing and we'll use your request to help identify relevant local legal options in El Paso."
             variant="homepage"
-            phoneOptional
           />
         </div>
       </section>
