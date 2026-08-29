@@ -156,6 +156,42 @@ const inferPracticeAreaFromUrl = (): string => {
   return 'General Legal Inquiry';
 };
 
+
+const inferPracticeAreaFromLegalIssue = (
+  legalIssue: string
+): string => {
+  const text = legalIssue
+    .toLowerCase()
+    .replace(/[^a-z0-9\s/]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  if (!text) return 'General Legal Inquiry';
+
+  const rules: Array<{ area: string; terms: string[] }> = [
+    { area: 'DWI / DUI', terms: ['dwi', 'dui', 'drunk driving', 'driving while intoxicated', 'driving under the influence'] },
+    { area: 'Family Law', terms: ['family law', 'divorce', 'child custody', 'custody', 'child support', 'spousal support', 'alimony', 'adoption', 'paternity'] },
+    { area: 'Immigration', terms: ['immigration', 'visa', 'green card', 'citizenship', 'deportation', 'asylum', 'naturalization'] },
+    { area: 'Bankruptcy', terms: ['bankruptcy', 'chapter 7', 'chapter 13', 'debt relief'] },
+    { area: 'Employment Law', terms: ['employment law', 'wrongful termination', 'wrongfully terminated', 'workplace discrimination', 'employment discrimination', 'workplace harassment', 'unpaid wages', 'overtime pay', 'wage and hour', 'fired from work'] },
+    { area: 'Personal Injury', terms: ['personal injury', 'car accident', 'auto accident', 'vehicle accident', 'truck accident', 'motorcycle accident', 'slip and fall', 'wrongful death', 'injured in an accident', 'injury claim'] },
+    { area: 'Criminal Defense', terms: ['criminal defense', 'criminal charge', 'criminal charges', 'felony', 'misdemeanor', 'arrested', 'probation violation', 'criminal case'] },
+    { area: 'Probate', terms: ['probate', 'executor', 'estate administration', 'inheritance dispute', 'heir', 'heirs'] },
+    { area: 'Estate Planning', terms: ['estate planning', 'last will', 'living will', 'living trust', 'revocable trust', 'power of attorney', 'create a trust', 'make a will'] },
+    { area: 'Real Estate', terms: ['real estate', 'property dispute', 'landlord', 'tenant', 'lease dispute', 'title dispute', 'deed', 'boundary dispute'] },
+    { area: 'Business Law', terms: ['business law', 'business dispute', 'business contract', 'corporate', 'corporation', 'llc', 'partnership dispute', 'company dispute'] },
+    { area: 'Civil Litigation', terms: ['civil litigation', 'civil lawsuit', 'civil case', 'being sued', 'file a lawsuit', 'lawsuit against'] },
+  ];
+
+  for (const rule of rules) {
+    if (rule.terms.some((term) => text.includes(term))) {
+      return rule.area;
+    }
+  }
+
+  return 'General Legal Inquiry';
+};
+
 const isMissingColumnError = (
   error: {
     code?: string;
@@ -204,8 +240,10 @@ export default function LeadCaptureForm({
    * the URL automatically.
    */
   const effectivePracticeArea =
-    practiceArea?.trim() ||
-    inferPracticeAreaFromUrl();
+    variant === 'homepage'
+      ? inferPracticeAreaFromLegalIssue(form.legalIssue)
+      : practiceArea?.trim() ||
+        inferPracticeAreaFromUrl();
 
   const updateField = (
     field: keyof FormState,
