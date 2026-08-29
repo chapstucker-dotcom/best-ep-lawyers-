@@ -11,12 +11,6 @@ import {
   Phone,
   Send,
   UserRound,
-  ShieldCheck,
-  LockKeyhole,
-  Zap,
-  MapPin,
-  MessageCircle,
-  ArrowRight,
 } from 'lucide-react';
 
 import { supabase } from '@/lib/supabase';
@@ -47,7 +41,6 @@ type FormState = {
   fullName: string;
   email: string;
   phone: string;
-  location: string;
   legalIssue: string;
 };
 
@@ -55,7 +48,6 @@ const EMPTY_FORM: FormState = {
   fullName: '',
   email: '',
   phone: '',
-  location: 'El Paso, TX',
   legalIssue: '',
 };
 
@@ -327,9 +319,6 @@ export default function LeadCaptureForm({
             phone:
               form.phone.trim(),
 
-            location:
-              form.location.trim(),
-
             legalIssue:
               form.legalIssue.trim(),
 
@@ -441,196 +430,200 @@ export default function LeadCaptureForm({
     return (
       <section
         id="lead-form"
-        className="overflow-hidden rounded-2xl border border-[#1FA8A1]/45 bg-[#071D2F] shadow-xl"
+        className="overflow-hidden rounded-[28px] border border-[#1FA8A1]/35 bg-[#071D2F] shadow-2xl"
       >
         <div className="grid lg:grid-cols-[0.78fr_1.22fr]">
-          <div className="border-b border-white/10 p-6 text-white sm:p-7 lg:border-b-0 lg:border-r lg:border-white/20">
-            <div className="flex items-center gap-2 text-[#F5B800]">
-              <MessageCircle className="h-6 w-6" />
-              <p className="text-xs font-black uppercase tracking-wide">
-                Tell Us About Your Legal Issue
-              </p>
-            </div>
+          <div className="border-b border-white/10 p-7 text-white sm:p-9 lg:border-b-0 lg:border-r">
+            <p className="text-sm font-black uppercase tracking-widest text-[#F5B800]">
+              Tell Us About Your Legal Issue
+            </p>
 
-            <h2 className="mt-4 font-serif text-3xl font-black leading-tight sm:text-[34px]">
+            <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl">
               {formTitle}
             </h2>
 
-            <p className="mt-3 max-w-md text-sm leading-6 text-slate-200">
+            <p className="mt-4 max-w-xl leading-7 text-slate-300">
               {formDescription}
             </p>
 
-            <div className="mt-5 space-y-4">
-              <div className="flex gap-3">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#F5B800] text-[#F5B800]">
-                  <ShieldCheck className="h-5 w-5" />
-                </span>
-                <div>
-                  <p className="text-sm font-black text-white">Matched with Local Options</p>
-                  <p className="mt-0.5 text-xs leading-5 text-slate-400">
-                    We use the details you provide to identify relevant legal categories and local options.
-                  </p>
-                </div>
+            <div className="mt-8 space-y-5 text-sm">
+              <div>
+                <p className="font-bold text-white">
+                  Local legal options
+                </p>
+                <p className="mt-1 text-slate-400">
+                  Your inquiry helps us understand the type of legal help you are looking for.
+                </p>
               </div>
 
-              <div className="flex gap-3">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#F5B800] text-[#F5B800]">
-                  <LockKeyhole className="h-5 w-5" />
-                </span>
-                <div>
-                  <p className="text-sm font-black text-white">Your Information is Protected</p>
-                  <p className="mt-0.5 text-xs leading-5 text-slate-400">
-                    Do not include confidential or highly sensitive information.
-                  </p>
-                </div>
+              <div>
+                <p className="font-bold text-white">
+                  Your information is protected
+                </p>
+                <p className="mt-1 text-slate-400">
+                  Do not include confidential or highly sensitive information.
+                </p>
               </div>
 
-              <div className="flex gap-3">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#F5B800] text-[#F5B800]">
-                  <Zap className="h-5 w-5" />
-                </span>
-                <div>
-                  <p className="text-sm font-black text-white">Fast &amp; Easy</p>
-                  <p className="mt-0.5 text-xs leading-5 text-slate-400">
-                    Share the basics of your legal issue and how to reach you.
-                  </p>
-                </div>
+              <div>
+                <p className="font-bold text-white">
+                  Simple and direct
+                </p>
+                <p className="mt-1 text-slate-400">
+                  Share the basics so the right legal category can be identified.
+                </p>
               </div>
             </div>
           </div>
 
-          <div className="p-6 sm:p-7">
+          <div className="p-7 sm:p-9">
             {successMessage && (
-              <Alert className="mb-4 border-green-300 bg-green-50 text-green-800">
+              <Alert className="mb-6 border-green-300 bg-green-50 text-green-800">
                 <CheckCircle2 className="h-4 w-4" />
-                <AlertDescription>{successMessage}</AlertDescription>
+                <AlertDescription>
+                  {successMessage}
+                </AlertDescription>
               </Alert>
             )}
 
             {errorMessage && (
-              <Alert variant="destructive" className="mb-4">
+              <Alert
+                variant="destructive"
+                className="mb-6"
+              >
                 <AlertCircle className="h-4 w-4" />
-                <AlertDescription>{errorMessage}</AlertDescription>
+                <AlertDescription>
+                  {errorMessage}
+                </AlertDescription>
               </Alert>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-3">
-              <div className="space-y-1.5">
-                <Label htmlFor="homepage-legal-issue" className="font-black text-white">
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-5"
+            >
+              <div className="space-y-2">
+                <Label
+                  htmlFor="homepage-legal-issue"
+                  className="text-base font-bold text-white"
+                >
                   What&apos;s your legal issue? *
                 </Label>
-
-                <p className="text-xs text-slate-300">
-                  Tell us what&apos;s going on. Be as specific as you can.
-                </p>
 
                 <Textarea
                   id="homepage-legal-issue"
                   value={form.legalIssue}
-                  onChange={(event) => updateField('legalIssue', event.target.value)}
-                  placeholder="e.g. car accident, divorce, DWI, immigration, etc."
-                  rows={4}
+                  onChange={(event) =>
+                    updateField(
+                      'legalIssue',
+                      event.target.value
+                    )
+                  }
+                  placeholder="e.g. car accident, divorce, DWI, immigration, business dispute..."
+                  rows={5}
                   maxLength={1000}
-                  className="min-h-[105px] border-white/20 bg-white/10 text-white placeholder:text-slate-400 focus-visible:ring-[#D4A62A]"
+                  className="border-white/15 bg-white/10 text-white placeholder:text-slate-400 focus-visible:ring-[#D4A62A]"
                   disabled={loading}
                   required
                 />
 
-                <p className="text-right text-[11px] text-slate-400">
+                <p className="text-right text-xs text-slate-500">
                   {form.legalIssue.length}/1000
                 </p>
               </div>
 
               <div>
-                <p className="mb-2 font-black text-white">Your Contact Information</p>
+                <p className="mb-3 font-bold text-white">
+                  Your Contact Information
+                </p>
 
-                <div className="grid gap-2.5 md:grid-cols-2">
+                <div className="grid gap-3 md:grid-cols-2">
                   <div className="relative">
-                    <UserRound className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-300" />
+                    <UserRound className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
                     <Input
                       id="homepage-full-name"
                       value={form.fullName}
-                      onChange={(event) => updateField('fullName', event.target.value)}
+                      onChange={(event) =>
+                        updateField(
+                          'fullName',
+                          event.target.value
+                        )
+                      }
                       placeholder="Full Name"
                       autoComplete="name"
-                      className="border-white/20 bg-white/10 pl-10 text-white placeholder:text-slate-300"
+                      className="border-white/15 bg-white/10 pl-10 text-white placeholder:text-slate-400"
                       disabled={loading}
                       required
                     />
                   </div>
 
                   <div className="relative">
-                    <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-300" />
+                    <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
                     <Input
                       id="homepage-email"
                       type="email"
                       value={form.email}
-                      onChange={(event) => updateField('email', event.target.value)}
+                      onChange={(event) =>
+                        updateField(
+                          'email',
+                          event.target.value
+                        )
+                      }
                       placeholder="Email Address"
                       autoComplete="email"
-                      className="border-white/20 bg-white/10 pl-10 text-white placeholder:text-slate-300"
+                      className="border-white/15 bg-white/10 pl-10 text-white placeholder:text-slate-400"
                       disabled={loading}
                       required
                     />
                   </div>
 
                   <div className="relative md:col-span-2">
-                    <Phone className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-300" />
+                    <Phone className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
                     <Input
                       id="homepage-phone"
                       type="tel"
                       value={form.phone}
-                      onChange={(event) => updateField('phone', event.target.value)}
-                      placeholder={phoneOptional ? 'Phone Number (Optional)' : 'Phone Number'}
+                      onChange={(event) =>
+                        updateField(
+                          'phone',
+                          event.target.value
+                        )
+                      }
+                      placeholder={
+                        phoneOptional
+                          ? 'Phone Number (Optional)'
+                          : 'Phone Number'
+                      }
                       autoComplete="tel"
-                      className="border-white/20 bg-white/10 pl-10 text-white placeholder:text-slate-300"
+                      className="border-white/15 bg-white/10 pl-10 text-white placeholder:text-slate-400"
                       disabled={loading}
                       required={!phoneOptional}
-                    />
-                  </div>
-
-                  <div className="relative md:col-span-2">
-                    <MapPin className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-300" />
-                    <Input
-                      id="homepage-location"
-                      value={form.location}
-                      onChange={(event) => updateField('location', event.target.value)}
-                      placeholder="City, State"
-                      autoComplete="address-level2"
-                      className="border-white/20 bg-white/10 pl-10 text-white placeholder:text-slate-300"
-                      disabled={loading}
                     />
                   </div>
                 </div>
               </div>
 
-              <p className="flex items-center gap-2 text-[11px] leading-5 text-slate-300">
-                <LockKeyhole className="h-3.5 w-3.5 shrink-0 text-[#F5B800]" />
-                We respect your privacy. Submitting does not create an attorney-client relationship or guarantee representation.
+              <p className="text-xs leading-5 text-slate-400">
+                By submitting, you understand that this does not create an attorney-client relationship and does not guarantee representation.
               </p>
 
               <Button
                 type="submit"
                 disabled={loading}
-                className="h-11 w-full bg-gradient-to-r from-[#E3AA28] to-[#F7C84A] text-base font-black text-[#061A2C] hover:brightness-105"
+                className="h-12 w-full bg-[#D4A62A] text-base font-black text-[#061A2C] hover:bg-[#E3B53A]"
               >
                 {loading ? (
                   <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                     Sending...
                   </>
                 ) : (
                   <>
-                    <Mail className="mr-2 h-4 w-4" />
+                    <Send className="mr-2 h-5 w-5" />
                     Send My Info
-                    <ArrowRight className="ml-3 h-4 w-4" />
                   </>
                 )}
               </Button>
-
-              <p className="text-center text-[11px] text-slate-400">
-                Share only the information needed to understand your request.
-              </p>
             </form>
           </div>
         </div>
