@@ -38,6 +38,8 @@ const workersCompensationPage: PracticeAreaPageData = {
   ],
   localContent: [
     "Workers in El Paso may be injured in construction, transportation, warehousing, manufacturing, retail, healthcare, government, hospitality, and other industries throughout El Paso County.",
+    "Workplace injury options in Texas can depend in part on whether the employer carries workers' compensation insurance. Texas employers do not all participate in the workers' compensation system, so the available claims and procedures may differ when an employer is a nonsubscriber.",
+    "A workplace accident may also involve a separate third-party claim when someone other than the employer or a co-worker contributed to the injury. Depending on the facts, that could include a contractor, property owner, equipment manufacturer, maintenance company, or negligent driver.",
     "An El Paso workers' compensation attorney can help review coverage, medical records, wage information, benefit disputes, deadlines, and whether a separate third-party injury claim should be evaluated.",
   ],
   faqs: [
@@ -98,6 +100,12 @@ const workersCompensationPage: PracticeAreaPageData = {
     { label: "Employment Law", path: "/el-paso-employment-lawyers" },
     { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
   ],
+
+  resourceLinks: [
+    { label: "El Paso Legal Guides", path: "/guides" },
+  ],
+
+  lastUpdated: "August 30, 2026",
 };
 
 export default function WorkersCompensation() {
