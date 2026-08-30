@@ -76,45 +76,129 @@ const criminalDefenseDirectoryPage = {
 
 export default function CriminalDefense() {
   useEffect(() => {
-    const previousTitle = document.title;
+    const title =
+      "Best Criminal Defense Lawyers in El Paso, TX | El Paso's Best Lawyers";
 
-    document.title =
-      "Best Criminal Defense Lawyers in El Paso, TX | Compare Attorneys";
+    const description =
+      "Compare criminal defense lawyers in El Paso, Texas for DWI, drug charges, assault, domestic violence, theft, felonies, misdemeanors, federal cases, and other criminal matters.";
 
-    const existingMeta = document.querySelector(
-      'meta[name="description"]'
-    );
+    document.title = title;
 
-    const previousContent =
-      existingMeta?.getAttribute("content") ?? null;
+    const setMeta = (name: string, content: string) => {
+      let tag = document.querySelector(
+        `meta[name="${name}"]`
+      ) as HTMLMetaElement | null;
 
-    const meta =
-      existingMeta ??
-      document.head.appendChild(
-        document.createElement("meta")
-      );
+      if (!tag) {
+        tag = document.createElement("meta");
+        tag.name = name;
+        document.head.appendChild(tag);
+      }
 
-    meta.setAttribute("name", "description");
+      tag.content = content;
+    };
 
-    meta.setAttribute(
-      "content",
-      "Compare criminal defense lawyers in El Paso, TX for DWI, drug charges, assault, domestic violence, theft, felonies, misdemeanors, and other criminal cases."
-    );
+    const setProperty = (property: string, content: string) => {
+      let tag = document.querySelector(
+        `meta[property="${property}"]`
+      ) as HTMLMetaElement | null;
+
+      if (!tag) {
+        tag = document.createElement("meta");
+        tag.setAttribute("property", property);
+        document.head.appendChild(tag);
+      }
+
+      tag.content = content;
+    };
+
+    setMeta("description", description);
+    setMeta("robots", "index, follow");
+
+    setProperty("og:title", title);
+    setProperty("og:description", description);
+    setProperty("og:type", "website");
+
+    const canonicalUrl =
+      "https://elpasosbestlawyers.com/el-paso-criminal-defense-lawyers";
+
+    let canonical = document.querySelector(
+      'link[rel="canonical"]'
+    ) as HTMLLinkElement | null;
+
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.rel = "canonical";
+      document.head.appendChild(canonical);
+    }
+
+    canonical.href = canonicalUrl;
+
+    const schema = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": `${canonicalUrl}#webpage`,
+          url: canonicalUrl,
+          name: title,
+          description,
+          isPartOf: {
+            "@type": "WebSite",
+            name: "El Paso's Best Lawyers",
+            url: "https://elpasosbestlawyers.com/",
+          },
+          about: {
+            "@type": "Thing",
+            name: "Criminal Defense Lawyers in El Paso, Texas",
+          },
+        },
+        {
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: "https://elpasosbestlawyers.com/",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Criminal Defense Lawyers",
+              item: canonicalUrl,
+            },
+          ],
+        },
+        {
+          "@type": "FAQPage",
+          mainEntity: faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.q,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.a,
+            },
+          })),
+        },
+      ],
+    };
+
+    let script = document.getElementById(
+      "criminal-defense-seo-schema"
+    ) as HTMLScriptElement | null;
+
+    if (!script) {
+      script = document.createElement("script");
+      script.id = "criminal-defense-seo-schema";
+      script.type = "application/ld+json";
+      document.head.appendChild(script);
+    }
+
+    script.text = JSON.stringify(schema);
 
     return () => {
-      document.title = previousTitle;
-
-      if (
-        existingMeta &&
-        previousContent !== null
-      ) {
-        existingMeta.setAttribute(
-          "content",
-          previousContent
-        );
-      } else if (!existingMeta) {
-        meta.remove();
-      }
+      document.getElementById("criminal-defense-seo-schema")?.remove();
     };
   }, []);
 
@@ -188,7 +272,10 @@ export default function CriminalDefense() {
             If you are searching for a criminal attorney in El Paso, use
             this directory to compare participating local firms, review
             related practice areas, and learn what information may matter
-            at the beginning of a criminal case.
+            at the beginning of a criminal case. The right attorney may
+            depend on the specific charge, whether the matter is pending in
+            state or federal court, and the lawyer&apos;s experience with the
+            procedures and consequences involved.
           </p>
         </section>
 
