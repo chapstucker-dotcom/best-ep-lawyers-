@@ -1229,45 +1229,104 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     heroText:
       "Compare El Paso green card attorneys for family-based permanent residence, adjustment of status, consular processing, marriage-based applications, and related immigration issues.",
     topics: [
-      "Adjustment of status",
-      "Family-based green cards",
-      "Marriage-based green cards",
-      "Consular processing",
-      "Permanent residence eligibility",
-      "Green card interviews",
-      "Requests for evidence",
-      "Removal of conditions",
+      "Adjustment of Status",
+      "Family-Based Green Cards",
+      "Marriage-Based Green Cards",
+      "Consular Processing",
+      "Permanent Residence Eligibility",
+      "Green Card Interviews",
+      "Requests for Evidence",
+      "Removal of Conditions",
+      "Immigration History Review",
+      "Cross-Border Processing",
     ],
     overview: [
-      "Green card attorneys help people evaluate paths to lawful permanent residence and prepare applications, petitions, supporting evidence, and responses to immigration agencies.",
-      "The appropriate process can depend on family relationships, immigration history, current status, prior entries or departures, criminal history, and whether processing occurs in the United States or through a U.S. consulate.",
+      "An El Paso green card lawyer can help individuals and families evaluate paths to lawful permanent residence, prepare petitions and applications, organize supporting evidence, respond to immigration-agency requests, and prepare for interviews or consular processing.",
+      "The correct process depends on the immigration category and the applicant's circumstances. Some people may be eligible to apply for adjustment of status from within the United States, while others may need to complete immigrant-visa processing through a U.S. consulate abroad.",
+      "Family-based and marriage-based green card cases can require evidence of the qualifying relationship, financial sponsorship, identity and civil records, immigration history, prior entries and departures, medical documentation, and other materials. Prior overstays, unlawful presence, arrests, criminal history, earlier immigration filings, or inconsistent records can make eligibility more complicated.",
+      "Conditional permanent residents may later need to remove conditions on residence. Applicants who receive a request for evidence, interview notice, or other agency correspondence should review the specific issues raised and preserve copies of all filings, notices, supporting records, and prior immigration documents.",
     ],
     whenToHire: [
-      "You are applying for permanent residence through a spouse or family member.",
-      "You are unsure whether adjustment of status or consular processing applies.",
-      "USCIS requested additional evidence or scheduled an interview.",
-      "Prior immigration, criminal, or travel history may affect eligibility.",
+      "You are applying for permanent residence through a spouse, parent, child, or other qualifying family relationship.",
+      "You are unsure whether adjustment of status or consular processing is the appropriate path.",
+      "USCIS requested additional evidence, scheduled an interview, or raised questions about your application.",
+      "Prior immigration violations, unlawful presence, overstays, entries, departures, arrests, criminal history, or earlier filings may affect eligibility.",
+      "Your case involves marriage-based permanent residence and you need help organizing relationship evidence and required documentation.",
       "You need help removing conditions from permanent residence.",
+      "Your case involves cross-border processing, documents from Mexico, or an immigrant-visa interview outside the United States.",
+      "You want a lawyer to review eligibility and immigration history before filing because a mistake could create delays or other immigration consequences.",
     ],
     localContent: [
-      "El Paso green card cases can involve families with significant cross-border ties to Ciudad Juárez and other communities in Mexico.",
-      "Local immigration counsel may help clients understand how USCIS processing, consular procedures, travel, and immigration history interact in a permanent-residence case.",
+      "El Paso green card cases often involve families with significant cross-border ties to Ciudad Juárez and other communities in Mexico. Applicants may have relatives, property, employment history, civil records, or prior immigration documents on both sides of the border.",
+      "Because El Paso sits directly on the U.S.-Mexico border, permanent-residence cases may involve frequent international travel, prior border crossings, consular processing, foreign birth and marriage records, and immigration histories that should be reviewed carefully before filing.",
+      "An El Paso green card attorney can help determine whether adjustment of status or consular processing may apply, identify documents that should be gathered, review prior entries and departures, prepare for interviews, and respond when USCIS or another immigration agency requests additional evidence.",
+      "Applicants should preserve copies of passports, visas, I-94 records, prior immigration filings, approval notices, travel history, civil documents, tax and sponsorship records, and any correspondence from USCIS, the Department of State, or a U.S. consulate.",
     ],
     faqs: [
-      { question: "What is a green card?", answer: "A green card documents lawful permanent resident status in the United States. Eligibility and the application process depend on the immigration category and individual circumstances." },
-      { question: "Can marriage qualify someone for a green card?", answer: "A qualifying marriage to a U.S. citizen or lawful permanent resident may provide a family-based path, but the required process and eligibility depend on the facts." },
-      { question: "What is adjustment of status?", answer: "Adjustment of status is a process through which certain eligible applicants seek permanent residence from within the United States rather than completing immigrant-visa processing abroad." },
-      { question: "What is consular processing?", answer: "Consular processing generally involves applying for an immigrant visa through a U.S. embassy or consulate outside the United States after the required petition and processing steps." },
-      { question: "When should I speak with a green card lawyer?", answer: "Legal advice may be useful when eligibility is uncertain, immigration history is complicated, prior violations or criminal issues exist, a request for evidence is issued, or the case involves cross-border processing." },
+      {
+        question: "What is a green card?",
+        answer:
+          "A green card is evidence of lawful permanent resident status in the United States. Eligibility and the application process depend on the immigration category and the applicant's individual circumstances.",
+      },
+      {
+        question: "Can marriage qualify someone for a green card?",
+        answer:
+          "A qualifying marriage to a U.S. citizen or lawful permanent resident may provide a family-based path to permanent residence. The required process, documentation, and eligibility depend on the facts of the case.",
+      },
+      {
+        question: "What is adjustment of status?",
+        answer:
+          "Adjustment of status is a process through which certain eligible applicants seek lawful permanent residence from within the United States rather than completing immigrant-visa processing abroad.",
+      },
+      {
+        question: "What is consular processing?",
+        answer:
+          "Consular processing generally involves applying for an immigrant visa through a U.S. embassy or consulate outside the United States after the required petition and processing steps are completed.",
+      },
+      {
+        question: "How long does the green card process take?",
+        answer:
+          "Processing times vary by immigration category, agency workload, filing location, whether an interview or request for evidence is required, and whether the case proceeds through adjustment of status or consular processing. Current agency processing information should be checked rather than relying on a fixed estimate.",
+      },
+      {
+        question: "What happens at a green card interview?",
+        answer:
+          "An immigration officer may review the application, supporting documents, immigration history, identity information, and the basis for eligibility. Marriage-based cases may also include questions about the qualifying relationship.",
+      },
+      {
+        question: "What if USCIS sends a request for evidence?",
+        answer:
+          "A request for evidence asks for additional documents or clarification before USCIS decides the application. The response should address the specific issues raised and be submitted by the stated deadline.",
+      },
+      {
+        question: "Can prior immigration violations affect a green card case?",
+        answer:
+          "They can. Prior entries, overstays, unlawful presence, removal history, misrepresentations, criminal matters, or other immigration issues may affect eligibility and should be reviewed before filing.",
+      },
+      {
+        question: "What is a conditional green card?",
+        answer:
+          "Some marriage-based permanent residents receive conditional status for a limited period and must later complete the required process to remove those conditions. The applicable filing requirements depend on the person's circumstances.",
+      },
+      {
+        question: "When should I speak with an El Paso green card lawyer?",
+        answer:
+          "Consider legal advice when eligibility is uncertain, immigration history is complicated, prior violations or criminal issues exist, a request for evidence or interview notice is issued, or the case involves cross-border or consular processing.",
+      },
     ],
     relatedPages: [
       { label: "Immigration", path: "/el-paso-immigration-lawyers" },
       { label: "Citizenship", path: "/el-paso-citizenship-lawyers" },
+      { label: "Deportation Defense", path: "/el-paso-deportation-defense-lawyers" },
+      { label: "Business Immigration", path: "/el-paso-business-immigration-lawyers" },
       { label: "Family Law", path: "/el-paso-family-lawyers" },
     ],
-    resourceLinks: [{ label: "Browse All Texas Law Guides", path: "/guides" }],
-    lastUpdated: "August 13, 2026",
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "August 30, 2026",
   },
+
   {
     path: "/el-paso-traffic-ticket-lawyers",
     shortTitle: "Traffic Ticket",
