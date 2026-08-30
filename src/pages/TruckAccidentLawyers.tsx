@@ -1,6 +1,8 @@
-﻿export default function TruckAccidentLawyers() {
-  document.title = "Best Truck Accident Lawyers in El Paso, TX";
+import { useEffect } from "react";
+import PracticeAreaFirmDirectory from "../components/PracticeAreaFirmDirectory";
+import type { PracticeAreaPageData } from "../data/practiceAreaPages";
 
+﻿export default function TruckAccidentLawyers() {
   const faqs = [
     {
       q: "What makes truck accident cases different from car accident cases?",
@@ -55,6 +57,176 @@
       href: "/el-paso-wrongful-death-lawyers",
     },
   ];
+
+  const truckAccidentDirectoryPage: PracticeAreaPageData = {
+    path: "/el-paso-truck-accident-lawyers",
+    shortTitle: "Truck Accident",
+    title: "Best Truck Accident Lawyers in El Paso, TX",
+    description:
+      "Compare El Paso truck accident lawyers handling 18-wheeler collisions, commercial trucking crashes, catastrophic injuries, wrongful death claims, and commercial insurance disputes.",
+    metaDescription:
+      "Compare truck accident lawyers in El Paso, TX for 18-wheeler crashes, commercial vehicle collisions, serious injuries, wrongful death, and trucking insurance disputes.",
+    heroText:
+      "Compare El Paso truck accident attorneys handling 18-wheeler crashes, commercial vehicle collisions, serious injuries, wrongful death, and trucking insurance disputes.",
+    topics: caseTypes,
+    overview: [
+      "Truck accident cases can involve commercial carriers, federal and state trucking regulations, commercial insurance policies, driver records, vehicle maintenance records, electronic logging data, and multiple potentially responsible parties.",
+      "An investigation may involve the truck driver, motor carrier, commercial insurer, maintenance contractors, freight companies, cargo companies, and other parties involved in operating or maintaining the vehicle.",
+      "Important evidence can include electronic logging information, driver qualification records, inspection and maintenance records, photographs, video, witness statements, police reports, electronic vehicle data, medical records, and insurance information.",
+    ],
+    whenToHire: [
+      "You were injured in a crash involving an 18-wheeler, semi-truck, tractor trailer, or other commercial vehicle.",
+      "The collision caused serious injuries, hospitalization, surgery, permanent impairment, or a death.",
+      "The trucking company or insurer is requesting a statement, release, or quick settlement.",
+      "Important evidence such as electronic logs, dash-camera footage, vehicle data, or maintenance records may need to be preserved.",
+      "Fault is disputed or multiple companies may share responsibility for the crash.",
+    ],
+    localContent: [
+      "El Paso is a major commercial transportation corridor with significant truck traffic traveling Interstate 10, Loop 375, Zaragoza Road, and routes connecting Texas with New Mexico and international trade crossings.",
+      "Truck crashes in and around El Paso may involve interstate carriers, cross-border freight, commercial insurers, maintenance contractors, cargo companies, and other businesses connected to the operation of the vehicle.",
+      "The exact roadway, carrier records, driver history, vehicle condition, electronic data, available video, and insurance coverage can materially affect how a truck accident claim is investigated.",
+    ],
+    faqs: faqs.map((faq) => ({
+      question: faq.q,
+      answer: faq.a,
+    })),
+    relatedPages: [
+      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
+      { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
+      { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
+      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
+    ],
+    lastUpdated: "August 11, 2026",
+  };
+
+  useEffect(() => {
+    const title =
+      "Best Truck Accident Lawyers in El Paso, TX | El Paso's Best Lawyers";
+    const description =
+      "Compare truck accident lawyers in El Paso, TX for 18-wheeler crashes, commercial vehicle collisions, serious injuries, wrongful death, and trucking insurance disputes.";
+    const canonical =
+      "https://www.elpasosbestlawyers.com/el-paso-truck-accident-lawyers";
+
+    const previousTitle = document.title;
+    document.title = title;
+
+    const upsertMeta = (name: string, content: string) => {
+      let tag = document.querySelector<HTMLMetaElement>(
+        `meta[name="${name}"]`
+      );
+
+      if (!tag) {
+        tag = document.createElement("meta");
+        tag.name = name;
+        document.head.appendChild(tag);
+      }
+
+      tag.content = content;
+    };
+
+    const upsertProperty = (property: string, content: string) => {
+      let tag = document.querySelector<HTMLMetaElement>(
+        `meta[property="${property}"]`
+      );
+
+      if (!tag) {
+        tag = document.createElement("meta");
+        tag.setAttribute("property", property);
+        document.head.appendChild(tag);
+      }
+
+      tag.content = content;
+    };
+
+    upsertMeta("description", description);
+    upsertMeta("robots", "index, follow");
+    upsertProperty("og:type", "website");
+    upsertProperty("og:title", title);
+    upsertProperty("og:description", description);
+    upsertProperty("og:url", canonical);
+    upsertProperty("og:site_name", "El Paso's Best Lawyers");
+
+    let canonicalTag =
+      document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+
+    if (!canonicalTag) {
+      canonicalTag = document.createElement("link");
+      canonicalTag.rel = "canonical";
+      document.head.appendChild(canonicalTag);
+    }
+
+    canonicalTag.href = canonical;
+
+    const schemaId = "truck-accident-seo-schema";
+    document.getElementById(schemaId)?.remove();
+
+    const schema = document.createElement("script");
+    schema.id = schemaId;
+    schema.type = "application/ld+json";
+    schema.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": canonical,
+          url: canonical,
+          name: title,
+          description,
+          isPartOf: {
+            "@type": "WebSite",
+            name: "El Paso's Best Lawyers",
+            url: "https://www.elpasosbestlawyers.com",
+          },
+          breadcrumb: {
+            "@id": `${canonical}#breadcrumb`,
+          },
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": `${canonical}#breadcrumb`,
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: "https://www.elpasosbestlawyers.com",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Personal Injury",
+              item:
+                "https://www.elpasosbestlawyers.com/el-paso-personal-injury-lawyers",
+            },
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: "Truck Accident Lawyers",
+              item: canonical,
+            },
+          ],
+        },
+        {
+          "@type": "FAQPage",
+          mainEntity: faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.q,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.a,
+            },
+          })),
+        },
+      ],
+    });
+
+    document.head.appendChild(schema);
+
+    return () => {
+      document.title = previousTitle;
+      document.getElementById(schemaId)?.remove();
+    };
+  }, []);
 
   return (
     <main
@@ -119,7 +291,7 @@
         </div>
       </section>
 
-      {/* FEATURED ATTORNEYS */}
+      {/* LIVE FIRM DIRECTORY */}
       <section style={{ padding: "60px 24px" }}>
         <div
           style={{
@@ -131,99 +303,26 @@
             style={{
               fontSize: "42px",
               color: "#fbbf24",
-              marginBottom: "30px",
+              marginBottom: "16px",
             }}
           >
-            Featured Truck Accident Attorneys
+            Compare El Paso Truck Accident Law Firms
           </h2>
 
-          <div
+          <p
             style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-              gap: "24px",
+              color: "#cbd5e1",
+              fontSize: "18px",
+              lineHeight: 1.8,
+              marginBottom: "30px",
+              maxWidth: "900px",
             }}
           >
-            <div
-              style={{
-                background: "#111827",
-                border: "1px solid #1e293b",
-                borderRadius: "18px",
-                padding: "28px",
-              }}
-            >
-              <div
-                style={{
-                  display: "inline-block",
-                  background: "#fbbf24",
-                  color: "#0f172a",
-                  padding: "6px 12px",
-                  borderRadius: "999px",
-                  fontWeight: "bold",
-                  marginBottom: "18px",
-                }}
-              >
-                CATEGORY EXCLUSIVE
-              </div>
+            Review participating El Paso firms that identify truck accidents or
+            related personal injury matters as areas of practice.
+          </p>
 
-              <h3
-                style={{
-                  fontSize: "30px",
-                  marginBottom: "12px",
-                }}
-              >
-                Johnson Injury Lawyers
-              </h3>
-
-              <p
-                style={{
-                  color: "#cbd5e1",
-                  lineHeight: 1.8,
-                  marginBottom: "24px",
-                }}
-              >
-                Experienced trucking accident attorneys handling serious
-                collisions involving 18-wheelers, commercial carriers, freight
-                companies, and catastrophic highway accidents.
-              </p>
-
-              <div
-                style={{
-                  display: "flex",
-                  gap: "12px",
-                  flexWrap: "wrap",
-                }}
-              >
-                <a
-                  href="/attorneys/johnson-injury-lawyers"
-                  style={{
-                    background: "#fbbf24",
-                    color: "#0f172a",
-                    padding: "14px 20px",
-                    borderRadius: "12px",
-                    textDecoration: "none",
-                    fontWeight: "bold",
-                  }}
-                >
-                  View Profile
-                </a>
-
-                <a
-                  href="tel:9155551000"
-                  style={{
-                    border: "1px solid #fbbf24",
-                    color: "#fbbf24",
-                    padding: "14px 20px",
-                    borderRadius: "12px",
-                    textDecoration: "none",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Call Now
-                </a>
-              </div>
-            </div>
-          </div>
+          <PracticeAreaFirmDirectory page={truckAccidentDirectoryPage} />
         </div>
       </section>
 
