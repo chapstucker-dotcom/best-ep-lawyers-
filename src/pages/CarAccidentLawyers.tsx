@@ -49,26 +49,131 @@ const faqs = [
 
 export default function CarAccidentLawyers() {
   useEffect(() => {
+    const title =
+      "Best Car Accident Lawyers in El Paso, TX | El Paso's Best Lawyers";
+    const description =
+      "Compare car accident lawyers in El Paso, TX for injury claims, insurance disputes, hit-and-run crashes, uninsured motorists, serious injuries, and wrongful death.";
+    const canonical =
+      "https://www.elpasosbestlawyers.com/el-paso-car-accident-lawyers";
+
     const previousTitle = document.title;
-    document.title = "Best Car Accident Lawyers in El Paso, TX";
+    document.title = title;
 
-    const existingMeta = document.querySelector('meta[name="description"]');
-    const previousContent = existingMeta?.getAttribute("content") ?? null;
-    const meta = existingMeta ?? document.head.appendChild(document.createElement("meta"));
+    const upsertMeta = (name: string, content: string) => {
+      let tag = document.querySelector<HTMLMetaElement>(
+        `meta[name="${name}"]`
+      );
 
-    meta.setAttribute("name", "description");
-    meta.setAttribute(
-      "content",
-      "Compare car accident lawyers in El Paso, TX for injury claims, insurance disputes, hit-and-run crashes, uninsured motorists, serious injuries, and wrongful death."
-    );
+      if (!tag) {
+        tag = document.createElement("meta");
+        tag.name = name;
+        document.head.appendChild(tag);
+      }
+
+      tag.content = content;
+    };
+
+    const upsertProperty = (property: string, content: string) => {
+      let tag = document.querySelector<HTMLMetaElement>(
+        `meta[property="${property}"]`
+      );
+
+      if (!tag) {
+        tag = document.createElement("meta");
+        tag.setAttribute("property", property);
+        document.head.appendChild(tag);
+      }
+
+      tag.content = content;
+    };
+
+    upsertMeta("description", description);
+    upsertMeta("robots", "index, follow");
+    upsertProperty("og:type", "website");
+    upsertProperty("og:title", title);
+    upsertProperty("og:description", description);
+    upsertProperty("og:url", canonical);
+    upsertProperty("og:site_name", "El Paso's Best Lawyers");
+
+    let canonicalTag =
+      document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+
+    if (!canonicalTag) {
+      canonicalTag = document.createElement("link");
+      canonicalTag.rel = "canonical";
+      document.head.appendChild(canonicalTag);
+    }
+
+    canonicalTag.href = canonical;
+
+    const schemaId = "car-accident-seo-schema";
+    document.getElementById(schemaId)?.remove();
+
+    const schema = document.createElement("script");
+    schema.id = schemaId;
+    schema.type = "application/ld+json";
+    schema.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": canonical,
+          url: canonical,
+          name: title,
+          description,
+          isPartOf: {
+            "@type": "WebSite",
+            name: "El Paso's Best Lawyers",
+            url: "https://www.elpasosbestlawyers.com",
+          },
+          breadcrumb: {
+            "@id": `${canonical}#breadcrumb`,
+          },
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": `${canonical}#breadcrumb`,
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: "https://www.elpasosbestlawyers.com",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Personal Injury",
+              item:
+                "https://www.elpasosbestlawyers.com/el-paso-personal-injury-lawyers",
+            },
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: "Car Accident Lawyers",
+              item: canonical,
+            },
+          ],
+        },
+        {
+          "@type": "FAQPage",
+          mainEntity: faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.q,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.a,
+            },
+          })),
+        },
+      ],
+    });
+
+    document.head.appendChild(schema);
 
     return () => {
       document.title = previousTitle;
-      if (existingMeta && previousContent !== null) {
-        existingMeta.setAttribute("content", previousContent);
-      } else if (!existingMeta) {
-        meta.remove();
-      }
+      document.getElementById(schemaId)?.remove();
     };
   }, []);
 
