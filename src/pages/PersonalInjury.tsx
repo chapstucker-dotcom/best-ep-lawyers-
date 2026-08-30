@@ -462,6 +462,46 @@ export default function PersonalInjury() {
         </div>
       </section>
 
+      {/* HOW TO COMPARE */}
+      <section className="border-y border-slate-800 bg-slate-900/50">
+        <div className="mx-auto max-w-6xl px-6 py-16">
+          <div className="max-w-3xl">
+            <p className="font-semibold uppercase tracking-[0.16em] text-amber-400">Comparing Attorneys</p>
+            <h2 className="mt-3 text-3xl font-bold">How to Compare Personal Injury Lawyers in El Paso</h2>
+            <p className="mt-4 leading-7 text-slate-300">The right lawyer for one injury claim may not be the right lawyer for another. When reviewing El Paso personal injury attorneys, consider the firm&apos;s experience with your type of accident, how the case will be staffed, how fees and case expenses are handled, and how the firm communicates with clients.</p>
+          </div>
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            <div className="rounded-2xl border border-slate-800 bg-slate-950 p-6"><h3 className="text-xl font-bold text-amber-400">Relevant case experience</h3><p className="mt-3 leading-7 text-slate-300">Look for attorneys who regularly handle the type of accident or injury involved in your claim, such as vehicle crashes, premises liability, or wrongful death.</p></div>
+            <div className="rounded-2xl border border-slate-800 bg-slate-950 p-6"><h3 className="text-xl font-bold text-amber-400">Who will handle the case</h3><p className="mt-3 leading-7 text-slate-300">Ask whether an attorney, paralegal, or case manager will be your primary contact and who will make important decisions about the claim.</p></div>
+            <div className="rounded-2xl border border-slate-800 bg-slate-950 p-6"><h3 className="text-xl font-bold text-amber-400">Fees and case expenses</h3><p className="mt-3 leading-7 text-slate-300">Review the written fee agreement, including the contingency percentage, responsibility for litigation expenses, and how costs are handled if there is no recovery.</p></div>
+            <div className="rounded-2xl border border-slate-800 bg-slate-950 p-6"><h3 className="text-xl font-bold text-amber-400">Negotiation and litigation</h3><p className="mt-3 leading-7 text-slate-300">Consider the firm&apos;s experience evaluating insurance offers, preparing claims for litigation, and taking cases to court when necessary.</p></div>
+            <div className="rounded-2xl border border-slate-800 bg-slate-950 p-6"><h3 className="text-xl font-bold text-amber-400">Communication</h3><p className="mt-3 leading-7 text-slate-300">Ask how often the firm provides updates, how questions are handled, and what response times a client should reasonably expect.</p></div>
+          </div>
+        </div>
+      </section>
+
+      {/* LOCAL EL PASO CONTEXT */}
+      <section className="mx-auto max-w-6xl px-6 py-16">
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_.8fr]">
+          <article>
+            <p className="font-semibold uppercase tracking-[0.16em] text-amber-400">Local Context</p>
+            <h2 className="mt-3 text-3xl font-bold">Personal Injury Claims in El Paso, Texas</h2>
+            <p className="mt-5 text-lg leading-8 text-slate-300">Personal injury claims in El Paso can arise from crashes on major roads such as Interstate 10 and Loop 375, commercial vehicle collisions, unsafe property conditions, workplace-related incidents involving third parties, and other accidents. The facts of the incident determine which people, businesses, insurers, or other entities may be involved.</p>
+            <p className="mt-5 text-lg leading-8 text-slate-300">Where a claim may be filed and which Texas rules apply can depend on where the accident occurred, where the parties are located, and the identity of the defendant. Claims involving governmental entities or other special circumstances can also involve additional procedures or deadlines. A Texas attorney can evaluate those issues based on the specific facts of a case.</p>
+          </article>
+          <aside className="rounded-2xl border border-slate-800 bg-slate-900 p-7">
+            <h2 className="text-xl font-bold text-amber-400">Start with the type of claim</h2>
+            <p className="mt-4 leading-7 text-slate-300">If you already know what kind of accident is involved, use the focused directory pages to narrow your search.</p>
+            <div className="mt-5 space-y-3">
+              <Link to="/el-paso-car-accident-lawyers" className="block font-semibold text-white hover:text-amber-400">Car Accident Lawyers →</Link>
+              <Link to="/el-paso-truck-accident-lawyers" className="block font-semibold text-white hover:text-amber-400">Truck Accident Lawyers →</Link>
+              <Link to="/el-paso-motorcycle-accident-lawyers" className="block font-semibold text-white hover:text-amber-400">Motorcycle Accident Lawyers →</Link>
+              <Link to="/el-paso-wrongful-death-lawyers" className="block font-semibold text-white hover:text-amber-400">Wrongful Death Lawyers →</Link>
+            </div>
+          </aside>
+        </div>
+      </section>
+
       {/* LIVE PERSONAL INJURY DIRECTORY */}
       <section
         id="personal-injury-firms"
