@@ -2312,27 +2312,111 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     path: "/el-paso-federal-criminal-defense-lawyers",
     shortTitle: "Federal Criminal Defense",
     title: "Best Federal Criminal Defense Lawyers in El Paso, TX | Compare Attorneys",
-    description: "Compare El Paso federal criminal defense lawyers handling federal investigations, indictments, drug cases, fraud allegations, immigration-related offenses, and other federal charges.",
-    metaDescription: "Compare El Paso federal criminal defense lawyers handling federal investigations, indictments, drug cases, fraud allegations, immigration-related offenses, and other federal charges.",
-    heroText: "Compare El Paso federal criminal defense lawyers handling federal investigations, indictments, drug cases, fraud allegations, immigration-related offenses, and other federal charges.",
-    topics: ["Federal investigations", "Federal indictments", "Drug prosecutions", "Fraud allegations", "Conspiracy charges", "Immigration-related offenses", "Federal sentencing", "Grand jury matters"],
-    overview: ["Federal criminal defense attorneys represent people under investigation or charged by the United States and handle cases governed by federal statutes, rules, sentencing law, and court procedures.", "Federal investigations may involve agencies such as the FBI, DEA, HSI, ATF, or other authorities and can develop before an arrest or indictment occurs."],
-    whenToHire: ["Federal agents contacted you or executed a search warrant.", "You received a target, subject, or grand-jury notice.", "You were indicted in federal court.", "The case involves an alleged conspiracy or multi-person investigation.", "You face federal sentencing or supervised-release issues."],
-    localContent: ["El Paso is home to the U.S. District Court for the Western District of Texas and is a major border community where federal prosecutions can involve several investigative agencies.", "Counsel familiar with federal practice can evaluate the investigation, charging documents, discovery, motions, negotiations, trial issues, and sentencing exposure."],
+    description:
+      "Compare El Paso federal criminal defense lawyers handling federal investigations, indictments, search warrants, drug cases, fraud allegations, conspiracy charges, and federal sentencing.",
+    metaDescription:
+      "Compare federal criminal defense lawyers in El Paso, TX for investigations, indictments, search warrants, drug cases, fraud, conspiracy, and federal sentencing.",
+    heroText:
+      "Compare El Paso federal criminal defense attorneys handling federal investigations, grand juries, indictments, search warrants, drug prosecutions, fraud allegations, conspiracy charges, and sentencing.",
+    topics: [
+      "Federal Investigations",
+      "Federal Indictments",
+      "Grand Jury Matters",
+      "Federal Search Warrants",
+      "Drug Prosecutions",
+      "Fraud Allegations",
+      "Conspiracy Charges",
+      "Immigration-Related Offenses",
+      "Federal Sentencing",
+      "Supervised Release",
+    ],
+    overview: [
+      "An El Paso federal criminal defense lawyer can represent people under investigation or charged by the United States in cases governed by federal statutes, rules, evidence standards, sentencing law, and court procedures.",
+      "Federal investigations can begin well before an arrest or indictment and may involve agencies such as the FBI, DEA, HSI, ATF, IRS-CI, or other authorities. A person may first learn of an investigation through an interview request, subpoena, search warrant, target letter, grand-jury notice, or contact from federal agents.",
+      "Federal criminal cases can involve drug trafficking, conspiracy, fraud, immigration-related offenses, firearms allegations, financial crimes, and other charges. The government may rely on extensive discovery, digital records, surveillance, cooperating witnesses, financial documents, and multi-agency investigative work.",
+      "Federal sentencing can be significantly different from state-court sentencing and may involve advisory sentencing guidelines, statutory minimums or maximums, criminal-history calculations, offense characteristics, restitution, forfeiture, and supervised-release issues.",
+    ],
+    whenToHire: [
+      "Federal agents contacted you or asked to interview you.",
+      "Agents executed a federal search warrant at your home, business, vehicle, or electronic account.",
+      "You received a subpoena, target letter, subject notice, or grand-jury-related communication.",
+      "You were arrested or indicted in federal court.",
+      "The case involves an alleged conspiracy or multi-person federal investigation.",
+      "The allegations involve federal drug trafficking, fraud, immigration-related offenses, firearms, or financial crimes.",
+      "You are concerned about federal sentencing guidelines, mandatory minimums, forfeiture, or restitution.",
+      "You face a supervised-release violation or revocation proceeding.",
+      "You need advice before deciding whether to speak with federal investigators or prosecutors.",
+    ],
+    localContent: [
+      "El Paso is part of the Western District of Texas and is a major border community where federal prosecutions may involve multiple investigative agencies and offenses connected to interstate or international activity.",
+      "Federal cases in the El Paso Division may involve the FBI, DEA, HSI, ATF, U.S. Border Patrol, IRS-CI, or other federal agencies depending on the investigation.",
+      "Federal criminal practice can involve grand-jury proceedings, extensive discovery, detention hearings, motion practice, plea negotiations, trial preparation, sentencing, and supervised-release issues.",
+      "An El Paso federal criminal defense attorney can evaluate the investigation, charging documents, search warrants, discovery, potential motions, guideline exposure, negotiations, trial issues, and sentencing considerations in the Western District of Texas.",
+    ],
     faqs: [
-      { question: "What does a federal criminal defense lawyer do?", answer: "A federal criminal defense lawyer evaluates the allegations, evidence, applicable law, court procedure, and available defense or resolution options based on the individual case." },
-      { question: "Should I speak with a lawyer before talking to investigators?", answer: "Legal advice can help you understand your rights and the possible consequences of making statements before deciding how to respond to investigators." },
-      { question: "What outcomes are possible?", answer: "Outcomes depend on the charge, evidence, history, applicable law, negotiations, motions, and court proceedings. No particular result can be guaranteed." },
-      { question: "How quickly should I contact an attorney?", answer: "Prompt advice can be useful when an investigation, arrest, warrant, court date, or deadline is pending." },
-      { question: "Can I compare several El Paso attorneys?", answer: "Yes. Comparing relevant experience, fees, communication, and approach can help you choose counsel for your circumstances." },
+      {
+        question: "What makes a federal criminal case different from a Texas state case?",
+        answer:
+          "Federal cases are prosecuted by the United States and follow federal statutes, rules, court procedures, and sentencing law. Investigations may also involve federal agencies and grand-jury proceedings.",
+      },
+      {
+        question: "What does it mean if federal agents want to interview me?",
+        answer:
+          "Federal agents may be seeking information from a witness, subject, or potential target. Statements can become evidence, so a person may want legal advice before deciding whether and how to respond.",
+      },
+      {
+        question: "What is a federal target letter?",
+        answer:
+          "A target letter generally indicates that prosecutors believe a person may have substantial involvement in conduct under investigation. The exact meaning and next steps depend on the wording and circumstances.",
+      },
+      {
+        question: "What happens after a federal indictment?",
+        answer:
+          "After indictment, the case generally proceeds through an initial appearance or arraignment, detention or release issues, discovery, motions, negotiations, and potentially trial and sentencing.",
+      },
+      {
+        question: "What is a federal grand jury?",
+        answer:
+          "A federal grand jury considers evidence presented by prosecutors and may issue subpoenas or return an indictment when the legal standard is satisfied.",
+      },
+      {
+        question: "Can federal agents search my home or electronic accounts?",
+        answer:
+          "Federal agents may execute a search warrant when a judge has authorized one based on the required legal showing. The scope and validity of the warrant may later become an issue in the case.",
+      },
+      {
+        question: "How do federal sentencing guidelines work?",
+        answer:
+          "Federal sentencing often involves advisory guidelines that consider the offense, specific conduct, criminal history, and other factors. Statutory minimums and maximums may also apply.",
+      },
+      {
+        question: "What is a federal conspiracy charge?",
+        answer:
+          "A conspiracy charge generally alleges an agreement between two or more people to commit a federal offense. The required elements and potential consequences depend on the statute involved.",
+      },
+      {
+        question: "What happens if I violate federal supervised release?",
+        answer:
+          "An alleged supervised-release violation can lead to a revocation proceeding and possible additional custody or supervision. The outcome depends on the alleged violation, history, and court findings.",
+      },
+      {
+        question: "When should I contact an El Paso federal criminal defense lawyer?",
+        answer:
+          "Consider contacting counsel promptly after contact from federal agents, a subpoena, search warrant, target letter, arrest, indictment, grand-jury notice, or other indication that a federal investigation or case is underway.",
+      },
     ],
     relatedPages: [
       { label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" },
       { label: "Drug Crimes", path: "/el-paso-drug-crimes-lawyers" },
+      { label: "Weapons Charges", path: "/el-paso-weapons-charges-lawyers" },
       { label: "Immigration", path: "/el-paso-immigration-lawyers" },
     ],
-    lastUpdated: "August 13, 2026",
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "August 31, 2026",
   },
+
   {
     path: "/el-paso-weapons-charges-lawyers",
     shortTitle: "Weapons Charges",
