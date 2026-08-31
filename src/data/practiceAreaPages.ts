@@ -1439,31 +1439,111 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     shortTitle: "Drug Crimes",
     title: "Best Drug Crime Lawyers in El Paso, TX | Compare Defense Attorneys",
     description:
-      "Compare El Paso drug crime lawyers defending possession, delivery, manufacture, controlled-substance, prescription-drug, and related criminal charges.",
+      "Compare El Paso drug crime lawyers defending possession, delivery, manufacture, controlled-substance, prescription-drug, and related state or federal criminal charges.",
     metaDescription:
-      "Compare drug crime lawyers in El Paso, TX for possession, delivery, manufacture, controlled substances, prescription-drug cases, and criminal defense.",
+      "Compare drug crime lawyers in El Paso, TX for possession, delivery, manufacture, controlled substances, prescription-drug cases, searches, and criminal defense.",
     heroText:
-      "Compare El Paso drug crime defense attorneys handling possession, delivery, manufacture, controlled-substance allegations, prescription-drug cases, searches, and related charges.",
-    topics: ["Drug possession", "Possession with intent", "Delivery allegations", "Manufacture charges", "Controlled substances", "Prescription-drug cases", "Search and seizure", "Felony and misdemeanor defense"],
-    overview: [
-      "Drug crime defense attorneys represent people accused of offenses involving controlled substances and evaluate the prosecution's evidence, the legality of searches, possession issues, laboratory evidence, statements, and possible defenses.",
-      "Potential consequences vary based on the substance, quantity, alleged conduct, criminal history, location, and whether state or federal law is involved.",
+      "Compare El Paso drug crime defense attorneys handling possession, delivery, manufacture, controlled-substance allegations, prescription-drug cases, searches, and state or federal charges.",
+    topics: [
+      "Drug Possession",
+      "Possession with Intent",
+      "Delivery Allegations",
+      "Manufacture Charges",
+      "Controlled Substances",
+      "Prescription-Drug Cases",
+      "Search and Seizure",
+      "Vehicle Searches",
+      "State Drug Charges",
+      "Federal Drug Charges",
     ],
-    whenToHire: ["You were arrested or charged with a drug offense.", "Police searched your vehicle, home, belongings, or electronic devices.", "You are accused of possessing drugs that belonged to someone else.", "The case involves alleged delivery or manufacture.", "Federal authorities may be involved."],
+    overview: [
+      "An El Paso drug crime lawyer can defend people accused of offenses involving controlled substances and evaluate the prosecution's evidence, possession allegations, searches and seizures, laboratory evidence, statements, warrants, and possible defenses.",
+      "Drug cases can range from possession allegations to accusations involving delivery, manufacture, or possession with intent. Potential consequences depend on factors such as the alleged substance, quantity, conduct, criminal history, location, and whether prosecutors pursue the case under Texas or federal law.",
+      "Possession can be disputed when drugs are found in a vehicle, residence, bag, or other location used by more than one person. The prosecution's evidence connecting an accused person to the substance can therefore be important, including where the item was found, who had access to the area, statements, fingerprints, recordings, and other surrounding circumstances.",
+      "Search-and-seizure issues may also affect a drug prosecution. Defense counsel can review traffic stops, vehicle searches, home searches, warrants, consent, seizures of phones or other property, and the circumstances officers relied on when obtaining or collecting evidence.",
+      "Some El Paso drug investigations involve federal agencies or allegations connected to interstate or international activity. Federal cases can involve different charging practices, procedures, sentencing rules, and investigative evidence than a state prosecution.",
+    ],
+    whenToHire: [
+      "You were arrested, charged, or told that you are under investigation for a drug offense.",
+      "Police searched your vehicle, home, belongings, phone, or other property.",
+      "You are accused of possessing drugs found in a shared vehicle, residence, room, or other location.",
+      "The allegation involves possession with intent, delivery, manufacture, or distribution.",
+      "A search warrant, traffic stop, consent search, or other search-and-seizure issue may be important.",
+      "Federal agents participated in the investigation or federal charges may be possible.",
+      "The prosecution relies on laboratory testing, recorded communications, surveillance, or confidential-source evidence.",
+      "You have prior convictions or other circumstances that could affect the seriousness of the case.",
+    ],
     localContent: [
-      "El Paso's border location can make some drug investigations involve local, state, and federal agencies.",
-      "Defense counsel can evaluate which agency investigated the case, where charges are pending, and whether search, seizure, possession, or evidentiary issues may be important.",
+      "El Paso's location on the U.S.-Mexico border means some drug investigations may involve local police, the El Paso County Sheriff's Office, Texas agencies, or federal law-enforcement agencies depending on the allegations and circumstances.",
+      "Drug cases arising from traffic stops can involve questions about why a vehicle was stopped, how long the detention lasted, whether consent was requested, whether officers had legal grounds for a search, and where the alleged controlled substance was found.",
+      "Cases involving border crossings, interstate travel, larger alleged quantities, or coordinated investigations may receive federal attention. Determining whether a case is being investigated or prosecuted by state or federal authorities can materially affect defense strategy.",
+      "An El Paso drug crime attorney can review the charging documents, agency reports, body-camera or other recordings when available, warrants, laboratory evidence, alleged statements, possession evidence, and court deadlines before advising a client about possible defenses and resolution options.",
     ],
     faqs: [
-      { question: "What does the prosecution have to prove in a drug possession case?", answer: "The required elements depend on the charged offense, but possession cases generally involve questions about whether the accused knowingly possessed the alleged controlled substance." },
-      { question: "Can an illegal search affect a drug case?", answer: "Search-and-seizure issues can be important. Whether evidence may be challenged depends on the circumstances, warrants, exceptions, and applicable law." },
-      { question: "What if the drugs belonged to someone else?", answer: "Ownership and possession are not always the same question. A defense attorney can evaluate where the substance was found, who had access, and what evidence allegedly connects a person to it." },
-      { question: "Are all drug charges felonies?", answer: "No. Classification and punishment depend on the substance, amount, alleged conduct, and applicable law." },
-      { question: "When should I contact a drug crime lawyer?", answer: "Consider speaking with defense counsel as soon as possible after an arrest, search, investigation, or notice of charges, particularly before making statements about the allegations." },
+      {
+        question: "What does the prosecution have to prove in a drug possession case?",
+        answer:
+          "The required elements depend on the charged offense, but possession cases generally involve whether the accused knowingly possessed the alleged controlled substance and whether the substance falls within the applicable drug laws.",
+      },
+      {
+        question: "What if drugs were found in a car with several people inside?",
+        answer:
+          "The location of the substance does not automatically establish that every occupant possessed it. Evidence about where it was found, who controlled the area, statements, behavior, ownership, and other circumstances may be relevant.",
+      },
+      {
+        question: "Can an illegal search affect an El Paso drug case?",
+        answer:
+          "Potentially. Search-and-seizure issues can affect whether particular evidence may be used. The analysis depends on the stop or search, any warrant, consent, recognized exceptions, and the specific facts.",
+      },
+      {
+        question: "What if the drugs belonged to someone else?",
+        answer:
+          "Ownership and legal possession are not necessarily the same issue. Defense counsel can evaluate where the substance was found, who had access to it, and what evidence allegedly connects the accused person to the substance.",
+      },
+      {
+        question: "What is possession with intent to deliver?",
+        answer:
+          "It generally refers to an allegation that a person possessed a controlled substance with an intent to transfer or deliver it. The exact elements and potential consequences depend on the applicable law and facts.",
+      },
+      {
+        question: "Are all drug charges felonies in Texas?",
+        answer:
+          "No. Classification depends on factors including the substance, amount, alleged conduct, and applicable statute. Drug allegations can carry different offense levels and potential consequences.",
+      },
+      {
+        question: "Can an El Paso drug case become a federal case?",
+        answer:
+          "Some investigations may lead to federal charges depending on the alleged conduct, agencies involved, quantity, location, interstate or international activity, and prosecutorial decisions.",
+      },
+      {
+        question: "Does laboratory testing matter in a drug prosecution?",
+        answer:
+          "Laboratory evidence may be used to identify an alleged controlled substance or establish other facts. Defense counsel can review the testing evidence, reports, handling of evidence, and how the prosecution intends to prove the substance involved.",
+      },
+      {
+        question: "Should I talk to police if they want to question me about drugs?",
+        answer:
+          "Statements can become evidence in a criminal investigation. A person who believes they are suspected of an offense may want legal advice before deciding whether to answer investigative questions.",
+      },
+      {
+        question: "When should I contact an El Paso drug crime lawyer?",
+        answer:
+          "Consider contacting defense counsel promptly after an arrest, search, seizure, investigation, or notice of charges, especially when search issues, federal authorities, significant quantities, prior history, or disputed possession may be involved.",
+      },
     ],
-    relatedPages: [{ label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" }, { label: "DWI / DUI", path: "/el-paso-dwi-lawyers" }, { label: "Assault", path: "/el-paso-assault-lawyers" }],
-    lastUpdated: "August 13, 2026",
+    relatedPages: [
+      { label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" },
+      { label: "Federal Criminal Defense", path: "/el-paso-federal-criminal-defense-lawyers" },
+      { label: "DWI / DUI", path: "/el-paso-dwi-lawyers" },
+      { label: "Traffic Ticket", path: "/el-paso-traffic-ticket-lawyers" },
+      { label: "Probation Violation", path: "/el-paso-probation-violation-lawyers" },
+    ],
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "August 30, 2026",
   },
+
   {
     path: "/el-paso-assault-lawyers",
     shortTitle: "Assault",
