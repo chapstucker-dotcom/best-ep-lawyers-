@@ -2531,27 +2531,111 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     path: "/el-paso-white-collar-crime-lawyers",
     shortTitle: "White Collar Crime",
     title: "Best White Collar Crime Lawyers in El Paso, TX | Compare Attorneys",
-    description: "Compare El Paso white collar crime lawyers handling fraud, embezzlement, financial investigations, business-related allegations, and state or federal criminal cases.",
-    metaDescription: "Compare El Paso white collar crime lawyers handling fraud, embezzlement, financial investigations, business-related allegations, and state or federal criminal cases.",
-    heroText: "Compare El Paso white collar crime lawyers handling fraud, embezzlement, financial investigations, business-related allegations, and state or federal criminal cases.",
-    topics: ["Fraud allegations", "Embezzlement", "Financial crimes", "Business investigations", "Wire and mail fraud", "Identity-related offenses", "Conspiracy allegations", "State and federal defense"],
-    overview: ["White collar defense attorneys represent individuals and businesses in investigations and prosecutions involving alleged financial deception, misuse of funds, records, transactions, or business activity.", "These matters can involve extensive documents, electronic records, financial analysis, multiple witnesses, and parallel civil, regulatory, or employment consequences."],
-    whenToHire: ["Investigators requested records or an interview.", "You received a subpoena or search warrant related to financial activity.", "Your employer or business is investigating alleged misuse of funds.", "You are accused of fraud, embezzlement, or another financial offense.", "State or federal prosecutors may be involved."],
-    localContent: ["El Paso white collar matters may be investigated by local authorities, Texas agencies, or federal agencies depending on the conduct alleged.", "Early legal review can be important when investigators are collecting documents, interviewing witnesses, or tracing financial transactions."],
+    description:
+      "Compare El Paso white collar crime lawyers handling fraud, embezzlement, financial investigations, subpoenas, search warrants, wire or mail fraud, and state or federal criminal cases.",
+    metaDescription:
+      "Compare white collar crime lawyers in El Paso, TX for fraud, embezzlement, subpoenas, search warrants, financial investigations, wire fraud, mail fraud, and federal defense.",
+    heroText:
+      "Compare El Paso white collar crime attorneys handling fraud, embezzlement, financial investigations, subpoenas, search warrants, internal investigations, and state or federal prosecutions.",
+    topics: [
+      "Fraud Allegations",
+      "Embezzlement",
+      "Financial Crimes",
+      "Business Investigations",
+      "Wire Fraud",
+      "Mail Fraud",
+      "Identity-Related Offenses",
+      "Conspiracy Allegations",
+      "Subpoenas and Search Warrants",
+      "State and Federal Defense",
+    ],
+    overview: [
+      "An El Paso white collar crime lawyer can represent individuals, executives, employees, and businesses in investigations and prosecutions involving alleged financial deception, misuse of funds, records, transactions, or business activity.",
+      "White collar investigations often begin before formal charges are filed and may involve subpoenas, search warrants, document requests, internal investigations, interviews, audits, or contact from state or federal agencies.",
+      "These cases can involve large volumes of financial records, emails, contracts, accounting data, electronic communications, bank records, witness statements, and business documents that require careful review and organization.",
+      "White collar allegations can also create parallel civil, regulatory, employment, licensing, restitution, or forfeiture consequences in addition to criminal exposure. The defense strategy may depend on whether the investigation is state, federal, or both.",
+    ],
+    whenToHire: [
+      "Investigators requested records, financial documents, or an interview.",
+      "You received a subpoena, search warrant, target letter, or other investigative notice.",
+      "Your employer or business is investigating alleged misuse of funds or financial misconduct.",
+      "You are accused of fraud, embezzlement, wire fraud, mail fraud, or another financial offense.",
+      "Federal agents or prosecutors are involved in the investigation.",
+      "The case involves complex accounting, banking, transaction, or business records.",
+      "You are concerned about conspiracy allegations involving multiple people or entities.",
+      "Restitution, forfeiture, licensing, employment, or regulatory consequences may be involved.",
+      "You need advice before responding to investigators or producing documents.",
+    ],
+    localContent: [
+      "El Paso white collar matters may be investigated by local authorities, Texas agencies, federal agencies, or multiple agencies depending on the alleged conduct.",
+      "Federal white collar investigations in the El Paso region may involve agencies such as the FBI, IRS-CI, HSI, or other authorities depending on the financial activity under review.",
+      "These cases can require review of bank records, accounting data, contracts, emails, business records, payment histories, digital evidence, and communications among multiple people or companies.",
+      "An El Paso white collar crime attorney can evaluate investigative demands, subpoenas, search warrants, financial records, potential charges, state or federal jurisdiction, restitution or forfeiture issues, and the risks of speaking with investigators.",
+    ],
     faqs: [
-      { question: "What does a white collar crime lawyer do?", answer: "A white collar crime lawyer evaluates the allegations, evidence, applicable law, court procedure, and available defense or resolution options based on the individual case." },
-      { question: "Should I speak with a lawyer before talking to investigators?", answer: "Legal advice can help you understand your rights and the possible consequences of making statements before deciding how to respond to investigators." },
-      { question: "What outcomes are possible?", answer: "Outcomes depend on the charge, evidence, history, applicable law, negotiations, motions, and court proceedings. No particular result can be guaranteed." },
-      { question: "How quickly should I contact an attorney?", answer: "Prompt advice can be useful when an investigation, arrest, warrant, court date, or deadline is pending." },
-      { question: "Can I compare several El Paso attorneys?", answer: "Yes. Comparing relevant experience, fees, communication, and approach can help you choose counsel for your circumstances." },
+      {
+        question: "What is considered a white collar crime?",
+        answer:
+          "White collar crime generally refers to nonviolent offenses involving alleged financial deception, fraud, misuse of funds, business activity, records, or transactions. The exact offense depends on the conduct and statute involved.",
+      },
+      {
+        question: "What should I do if I receive a subpoena in a financial investigation?",
+        answer:
+          "A subpoena can require documents, testimony, or other information. The scope, deadlines, and legal risks should be reviewed carefully before responding.",
+      },
+      {
+        question: "What happens if investigators execute a search warrant at a business?",
+        answer:
+          "Investigators may seize records, computers, phones, or other evidence within the scope of a valid warrant. The warrant, search, and seized materials may later become important issues in the case.",
+      },
+      {
+        question: "What is the difference between fraud and embezzlement?",
+        answer:
+          "Fraud generally involves alleged deception to obtain money, property, or another benefit, while embezzlement typically involves alleged misuse or conversion of property entrusted to a person. The precise legal elements depend on the charge.",
+      },
+      {
+        question: "Can a white collar case become federal?",
+        answer:
+          "Yes. Financial offenses may be prosecuted federally when federal statutes, agencies, interstate activity, federal programs, or other jurisdictional factors are involved.",
+      },
+      {
+        question: "What is wire fraud or mail fraud?",
+        answer:
+          "Wire fraud and mail fraud are federal offenses that generally involve an alleged scheme to defraud using interstate electronic communications or the mail. The government must prove the required statutory elements.",
+      },
+      {
+        question: "Can business records and emails be used as evidence?",
+        answer:
+          "Yes. Financial records, emails, contracts, accounting data, messages, transaction histories, and other business documents can become important evidence in a white collar investigation or prosecution.",
+      },
+      {
+        question: "Can a criminal investigation happen at the same time as a civil or regulatory case?",
+        answer:
+          "Yes. White collar matters can involve parallel criminal, civil, regulatory, employment, or licensing proceedings, and decisions in one matter may affect another.",
+      },
+      {
+        question: "Should I speak with investigators before hiring a lawyer?",
+        answer:
+          "Statements can become evidence. A person who believes they are under investigation may want legal advice before deciding whether and how to respond to investigators.",
+      },
+      {
+        question: "When should I contact an El Paso white collar crime lawyer?",
+        answer:
+          "Consider contacting counsel promptly after a subpoena, search warrant, interview request, internal investigation, financial-record demand, or other indication that state or federal authorities are reviewing alleged financial misconduct.",
+      },
     ],
     relatedPages: [
       { label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" },
       { label: "Federal Criminal Defense", path: "/el-paso-federal-criminal-defense-lawyers" },
       { label: "Business Law", path: "/el-paso-business-lawyers" },
+      { label: "Theft", path: "/el-paso-theft-lawyers" },
     ],
-    lastUpdated: "August 13, 2026",
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "August 31, 2026",
   },
+
   {
     path: "/el-paso-probation-violation-lawyers",
     shortTitle: "Probation Violation",
