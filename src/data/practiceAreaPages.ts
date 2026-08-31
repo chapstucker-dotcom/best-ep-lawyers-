@@ -1657,31 +1657,110 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     shortTitle: "Domestic Violence",
     title: "Best Domestic Violence Lawyers in El Paso, TX | Compare Local Attorneys",
     description:
-      "Compare El Paso domestic violence lawyers handling family-violence allegations, assault cases, protective orders, custody-related issues, and criminal defense.",
+      "Compare El Paso domestic violence lawyers handling family-violence allegations, assault cases, protective orders, emergency orders, custody-related issues, and related criminal or family-law matters.",
     metaDescription:
-      "Compare domestic violence lawyers in El Paso, TX for family-violence allegations, assault defense, protective orders, and related family-law matters.",
+      "Compare domestic violence lawyers in El Paso, TX for family-violence allegations, assault defense, protective orders, custody issues, and related legal proceedings.",
     heroText:
-      "Compare El Paso attorneys handling family-violence allegations, criminal defense, protective orders, custody implications, and related legal proceedings.",
-    topics: ["Family violence allegations", "Assault defense", "Protective orders", "Emergency orders", "No-contact conditions", "Custody implications", "Criminal cases", "Family-law proceedings"],
-    overview: [
-      "Domestic violence matters can involve criminal allegations, protective orders, release conditions, family-law disputes, and significant consequences for housing, employment, firearms, and parenting issues.",
-      "Because criminal and family proceedings may overlap, the appropriate legal strategy depends on the allegations, existing orders, relationship between the parties, and pending cases.",
+      "Compare El Paso domestic violence attorneys handling family-violence allegations, assault defense, protective orders, emergency orders, custody implications, and related criminal or family-law proceedings.",
+    topics: [
+      "Family Violence Allegations",
+      "Assault Defense",
+      "Protective Orders",
+      "Emergency Protective Orders",
+      "No-Contact Conditions",
+      "Bond Conditions",
+      "Custody Implications",
+      "Possession and Access Issues",
+      "Firearm Restrictions",
+      "Criminal and Family-Law Proceedings",
     ],
-    whenToHire: ["You were arrested or accused of family violence.", "A protective order has been requested or issued.", "You need legal protection from alleged family violence.", "Custody or visitation may be affected by allegations.", "Criminal and family-law cases are proceeding at the same time."],
+    overview: [
+      "Domestic violence matters in El Paso can involve criminal allegations, assault charges, protective orders, emergency orders, release conditions, and family-law disputes. The legal consequences can extend beyond the immediate court case and may affect housing, employment, firearm rights, parenting arrangements, and reputation.",
+      "Texas family-violence cases can involve spouses, dating partners, relatives, household members, or other qualifying relationships. The exact legal issues depend on the alleged conduct, relationship between the people involved, existing court orders, prior history, and whether criminal and family proceedings are happening at the same time.",
+      "A domestic violence lawyer may review police reports, 911 calls, body-camera footage, witness statements, photographs, medical records, text messages, social-media communications, protective-order filings, bond conditions, and other evidence relevant to the allegations and pending proceedings.",
+      "Because criminal cases, protective-order hearings, divorce cases, custody disputes, and possession or access issues can overlap, legal strategy may require careful coordination. Statements or decisions made in one proceeding can sometimes affect another.",
+    ],
+    whenToHire: [
+      "You were arrested, cited, or accused of family violence in El Paso.",
+      "A protective order, temporary ex parte order, or emergency protective order has been requested or issued.",
+      "You need legal protection from alleged family violence.",
+      "A no-contact condition, bond restriction, or other court condition affects where you may live or whom you may contact.",
+      "Child custody, conservatorship, possession, or visitation may be affected by the allegations.",
+      "The case involves assault allegations between spouses, dating partners, relatives, or household members.",
+      "Criminal and family-law proceedings are happening at the same time.",
+      "The allegations may affect firearm rights, employment, immigration status, housing, or a professional license.",
+    ],
     localContent: [
-      "El Paso family-violence matters may involve criminal courts, protective-order proceedings, and family courts depending on the circumstances.",
-      "An attorney can help identify which orders apply, what hearings are pending, and how one proceeding may affect another.",
+      "El Paso domestic violence matters may involve criminal courts, protective-order proceedings, and family courts depending on the allegations and the type of relief requested.",
+      "Police investigations may involve the El Paso Police Department, El Paso County Sheriff's Office, or other local agencies, and evidence may include recordings, witness accounts, photographs, medical information, and electronic communications.",
+      "Protective-order proceedings can impose restrictions involving contact, residence, firearms, children, or other conduct. Criminal bond conditions may create separate restrictions that should be reviewed carefully because different orders can overlap.",
+      "An El Paso domestic violence attorney can help identify which courts and orders are involved, review the evidence and allegations, explain upcoming hearings and deadlines, and evaluate how criminal, protective-order, and family-law proceedings may affect one another.",
     ],
     faqs: [
-      { question: "What is family violence under Texas law?", answer: "Texas law defines family violence through specific statutes and relationships. Whether conduct falls within that definition depends on the alleged acts and relationship of the people involved." },
-      { question: "What is a protective order?", answer: "A protective order is a court order that can impose restrictions intended to protect an applicant from certain alleged conduct. Requirements and available relief depend on the type of proceeding." },
-      { question: "Can domestic violence allegations affect child custody?", answer: "Family-violence allegations and findings can be relevant in conservatorship, possession, and access decisions. The effect depends on the evidence and applicable law." },
-      { question: "Can the complaining witness make criminal charges disappear?", answer: "Criminal charging decisions are generally controlled by prosecutors rather than the complaining witness alone." },
-      { question: "When should I contact a domestic violence lawyer?", answer: "Prompt legal advice may be important after an arrest, protective-order application, emergency order, custody dispute involving violence allegations, or other court notice." },
+      {
+        question: "What is family violence under Texas law?",
+        answer:
+          "Texas law defines family violence through specific statutes and qualifying relationships. Whether conduct falls within that definition depends on the alleged acts, relationship between the people involved, and other circumstances.",
+      },
+      {
+        question: "What is a protective order?",
+        answer:
+          "A protective order is a court order that can impose restrictions intended to protect an applicant from certain alleged conduct. The available relief and requirements depend on the type of proceeding and facts presented to the court.",
+      },
+      {
+        question: "What is an emergency protective order?",
+        answer:
+          "An emergency protective order can impose temporary restrictions after certain arrests or allegations. The scope, duration, and conditions depend on the order issued and the circumstances of the case.",
+      },
+      {
+        question: "Can domestic violence allegations affect child custody?",
+        answer:
+          "Yes. Family-violence allegations and findings can be relevant in decisions involving conservatorship, possession, access, and other parenting issues. The effect depends on the evidence and applicable Texas law.",
+      },
+      {
+        question: "Can a protective order affect firearm rights?",
+        answer:
+          "Certain protective orders and criminal case conditions can affect firearm possession or access. The consequences depend on the specific order, charge, and applicable state and federal law.",
+      },
+      {
+        question: "What if the complaining witness does not want to press charges?",
+        answer:
+          "Criminal charging and prosecution decisions are generally controlled by prosecutors rather than the complaining witness alone. A witness's position may matter, but it does not automatically end the case.",
+      },
+      {
+        question: "Can domestic violence allegations affect a divorce?",
+        answer:
+          "They can. Allegations or findings of family violence may be relevant to custody, possession, protective orders, property issues, temporary orders, and other matters depending on the facts of the divorce case.",
+      },
+      {
+        question: "Can a no-contact order stop me from returning home?",
+        answer:
+          "Some protective orders, bond conditions, or emergency orders may restrict contact or access to a residence. The exact terms of the order should be reviewed carefully because violating a court order can create additional legal problems.",
+      },
+      {
+        question: "Should I talk to police if I am accused of family violence?",
+        answer:
+          "Statements can become evidence in a criminal investigation. A person who believes they are under investigation or accused of an offense may want legal advice before deciding whether and how to speak with law enforcement.",
+      },
+      {
+        question: "When should I contact an El Paso domestic violence lawyer?",
+        answer:
+          "Consider contacting counsel promptly after an arrest, accusation, protective-order application, emergency order, custody dispute involving violence allegations, or other court notice that may affect your rights.",
+      },
     ],
-    relatedPages: [{ label: "Assault", path: "/el-paso-assault-lawyers" }, { label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" }, { label: "Family Law", path: "/el-paso-family-lawyers" }, { label: "Child Custody", path: "/el-paso-child-custody-lawyers" }],
-    lastUpdated: "August 13, 2026",
+    relatedPages: [
+      { label: "Assault", path: "/el-paso-assault-lawyers" },
+      { label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" },
+      { label: "Family Law", path: "/el-paso-family-lawyers" },
+      { label: "Child Custody", path: "/el-paso-child-custody-lawyers" },
+      { label: "Protective Orders", path: "/el-paso-protective-orders-lawyers" },
+    ],
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "August 30, 2026",
   },
+
   {
     path: "/el-paso-child-support-lawyers",
     shortTitle: "Child Support",
