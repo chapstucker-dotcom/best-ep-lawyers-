@@ -2093,27 +2093,111 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     path: "/el-paso-expunction-lawyers",
     shortTitle: "Expunction",
     title: "Best Expunction Lawyers in El Paso, TX | Compare Local Attorneys",
-    description: "Compare El Paso expunction lawyers for record clearing, arrest-record eligibility, petitions, nondisclosure questions, and related Texas criminal-record matters.",
-    metaDescription: "Compare El Paso expunction lawyers for record clearing, arrest-record eligibility, petitions, nondisclosure questions, and related Texas criminal-record matters.",
-    heroText: "Compare El Paso expunction lawyers for record clearing, arrest-record eligibility, petitions, nondisclosure questions, and related Texas criminal-record matters.",
-    topics: ["Expunction eligibility", "Arrest records", "Dismissed charges", "Acquittals", "Petitions for expunction", "Orders of nondisclosure", "Background records", "Record-clearing strategy"],
-    overview: ["Expunction attorneys help clients determine whether Texas law permits qualifying arrest or criminal records to be destroyed or otherwise restricted from public disclosure.", "Eligibility is technical and depends on the disposition, timing, charge history, and the specific record-clearing remedy available."],
-    whenToHire: ["A charge was dismissed and you want to know whether the record can be cleared.", "You were arrested but not convicted.", "You were acquitted of a criminal charge.", "You need to compare expunction with an order of nondisclosure.", "A past record is affecting employment, housing, or other opportunities."],
-    localContent: ["El Paso record-clearing matters may require filings in the appropriate Texas court and notice to agencies that maintain records.", "Local counsel can evaluate the disposition and determine which remedy, if any, may be available."],
+    description:
+      "Compare El Paso expunction lawyers for arrest-record clearing, dismissed charges, acquittals, petitions, eligibility questions, and orders of nondisclosure.",
+    metaDescription:
+      "Compare expunction lawyers in El Paso, TX for dismissed charges, arrest records, acquittals, eligibility, petitions, nondisclosure, and record-clearing matters.",
+    heroText:
+      "Compare El Paso expunction attorneys for arrest-record clearing, dismissed charges, acquittals, eligibility questions, petitions, and orders of nondisclosure.",
+    topics: [
+      "Expunction Eligibility",
+      "Arrest Records",
+      "Dismissed Charges",
+      "Acquittals",
+      "Arrests Without Conviction",
+      "Petitions for Expunction",
+      "Orders of Nondisclosure",
+      "Background Records",
+      "Agency Notice",
+      "Record-Clearing Strategy",
+    ],
+    overview: [
+      "An El Paso expunction lawyer can help determine whether Texas law allows qualifying arrest or criminal records to be destroyed and removed from many government databases and public record systems.",
+      "Eligibility for expunction is technical and can depend on how the case ended, whether charges were filed, whether the charge was dismissed, whether there was an acquittal, how much time has passed, and whether related charges arose from the same arrest.",
+      "Expunction is different from an order of nondisclosure. Expunction generally seeks destruction of qualifying records, while nondisclosure may restrict public access to certain criminal records without eliminating them in the same way.",
+      "Because eligibility rules and waiting periods can vary by disposition and offense, a careful review of the arrest history, court record, charging documents, dismissal paperwork, and final disposition is often necessary before filing.",
+    ],
+    whenToHire: [
+      "A criminal charge was dismissed and you want to know whether the arrest record can be cleared.",
+      "You were arrested but no charge was ultimately filed.",
+      "You were acquitted of a criminal offense.",
+      "A prior arrest is appearing on employment, housing, licensing, or other background checks.",
+      "You need to determine whether expunction or an order of nondisclosure may be the correct remedy.",
+      "You are unsure whether a waiting period applies before filing.",
+      "Multiple charges arose from the same arrest and you need to know how they affect eligibility.",
+      "You need help preparing the petition and identifying agencies that may hold the records.",
+      "A prior record is creating practical problems even though the case did not result in a conviction.",
+    ],
+    localContent: [
+      "El Paso expunction matters may require filing in the appropriate Texas court and giving notice to agencies that maintain arrest, booking, prosecution, court, and criminal-history records.",
+      "Records may be held by local law-enforcement agencies, courts, prosecutors, jail systems, state agencies, and other entities depending on the arrest and case history.",
+      "A complete review may include the arrest date, cause number, charges, disposition, dismissal paperwork, court orders, and any related cases arising from the same incident.",
+      "An El Paso expunction attorney can evaluate eligibility, determine whether waiting periods or statutory limitations apply, prepare the petition, identify agencies for notice, and explain how expunction differs from nondisclosure.",
+    ],
     faqs: [
-      { question: "What does a expunction lawyer do?", answer: "A expunction lawyer evaluates the allegations, evidence, applicable law, court procedure, and available defense or resolution options based on the individual case." },
-      { question: "Should I speak with a lawyer before talking to investigators?", answer: "Legal advice can help you understand your rights and the possible consequences of making statements before deciding how to respond to investigators." },
-      { question: "What outcomes are possible?", answer: "Outcomes depend on the charge, evidence, history, applicable law, negotiations, motions, and court proceedings. No particular result can be guaranteed." },
-      { question: "How quickly should I contact an attorney?", answer: "Prompt advice can be useful when an investigation, arrest, warrant, court date, or deadline is pending." },
-      { question: "Can I compare several El Paso attorneys?", answer: "Yes. Comparing relevant experience, fees, communication, and approach can help you choose counsel for your circumstances." },
+      {
+        question: "What is an expunction in Texas?",
+        answer:
+          "An expunction is a legal process that can require qualifying arrest and criminal records to be destroyed or removed from many government record systems when the statutory requirements are satisfied.",
+      },
+      {
+        question: "Can a dismissed charge be expunged in Texas?",
+        answer:
+          "Sometimes. A dismissal may qualify for expunction depending on the offense, timing, how the case ended, whether other charges arose from the same arrest, and other statutory requirements.",
+      },
+      {
+        question: "Can an arrest be expunged if I was never convicted?",
+        answer:
+          "Possibly. Some arrests that do not result in conviction may qualify, but eligibility depends on the disposition, waiting periods, related charges, and other facts.",
+      },
+      {
+        question: "Can an acquittal be expunged?",
+        answer:
+          "An acquittal may create a path to expunction in appropriate circumstances, although the exact process and eligibility should be reviewed based on the court record.",
+      },
+      {
+        question: "What is the difference between expunction and nondisclosure?",
+        answer:
+          "Expunction generally seeks destruction of qualifying records, while an order of nondisclosure usually restricts public access to certain records without erasing them in the same way.",
+      },
+      {
+        question: "How long do I have to wait before filing for expunction?",
+        answer:
+          "Waiting periods depend on the type of case, offense level, whether charges were filed, and how the matter was resolved. Some cases may allow earlier filing than others.",
+      },
+      {
+        question: "Does an expunction remove records from background checks?",
+        answer:
+          "A granted expunction can require qualifying government records to be destroyed or removed, which may reduce their appearance in many background systems. Private databases may not update immediately.",
+      },
+      {
+        question: "What if multiple charges came from the same arrest?",
+        answer:
+          "Charges arising from the same arrest can affect expunction eligibility. The entire arrest and disposition history should be reviewed rather than looking at only one charge in isolation.",
+      },
+      {
+        question: "Do I have to notify agencies when filing an expunction?",
+        answer:
+          "Expunction proceedings generally involve notice to agencies and entities that may possess relevant records. The required parties depend on the specific arrest and case history.",
+      },
+      {
+        question: "When should I contact an El Paso expunction lawyer?",
+        answer:
+          "Consider legal advice when a dismissed charge, arrest without conviction, acquittal, or old arrest record is affecting employment, housing, licensing, or other opportunities and you want to evaluate record-clearing options.",
+      },
     ],
     relatedPages: [
       { label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" },
+      { label: "Theft", path: "/el-paso-theft-lawyers" },
       { label: "Drug Crimes", path: "/el-paso-drug-crimes-lawyers" },
       { label: "DWI / DUI", path: "/el-paso-dwi-lawyers" },
     ],
-    lastUpdated: "August 13, 2026",
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "August 30, 2026",
   },
+
   {
     path: "/el-paso-juvenile-defense-lawyers",
     shortTitle: "Juvenile Defense",
