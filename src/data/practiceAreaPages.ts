@@ -1984,27 +1984,111 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     path: "/el-paso-theft-lawyers",
     shortTitle: "Theft",
     title: "Best Theft Lawyers in El Paso, TX | Compare Defense Attorneys",
-    description: "Compare El Paso theft lawyers defending shoplifting, property theft, fraud-related theft allegations, burglary-related matters, and misdemeanor or felony charges.",
-    metaDescription: "Compare El Paso theft lawyers defending shoplifting, property theft, fraud-related theft allegations, burglary-related matters, and misdemeanor or felony charges.",
-    heroText: "Compare El Paso theft lawyers defending shoplifting, property theft, fraud-related theft allegations, burglary-related matters, and misdemeanor or felony charges.",
-    topics: ["Shoplifting", "Property theft", "Misdemeanor theft", "Felony theft", "Theft by check", "Possession of stolen property", "Burglary-related allegations", "Restitution issues"],
-    overview: ["Theft defense attorneys represent people accused of unlawfully taking or exercising control over property and evaluate intent, ownership, value, identification, statements, and other evidence.", "The level of a Texas theft charge can depend on the alleged value and type of property, prior history, and other statutory factors."],
-    whenToHire: ["You were arrested or cited for an alleged theft offense.", "You are accused of shoplifting or taking property that belonged to someone else.", "The value or ownership of the property is disputed.", "Police or investigators want to question you about missing property.", "The allegation may be charged as a felony."],
-    localContent: ["El Paso theft cases may arise from retail incidents, workplace allegations, vehicle or property disputes, and other circumstances.", "Local defense counsel can review the filed charge, evidence, court setting, and possible collateral consequences."],
+    description:
+      "Compare El Paso theft lawyers defending shoplifting, property theft, theft by check, possession of stolen property, value disputes, and misdemeanor or felony theft charges.",
+    metaDescription:
+      "Compare theft lawyers in El Paso, TX for shoplifting, property theft, theft by check, possession of stolen property, value disputes, and criminal defense.",
+    heroText:
+      "Compare El Paso theft defense attorneys handling shoplifting, property theft, theft by check, possession of stolen property, value disputes, and misdemeanor or felony charges.",
+    topics: [
+      "Shoplifting",
+      "Property Theft",
+      "Misdemeanor Theft",
+      "Felony Theft",
+      "Theft by Check",
+      "Possession of Stolen Property",
+      "Property Value Disputes",
+      "Retail Theft",
+      "Workplace Theft Allegations",
+      "Restitution Issues",
+    ],
+    overview: [
+      "An El Paso theft lawyer can represent people accused of unlawfully taking or exercising control over property and evaluate intent, ownership, value, identification, statements, surveillance, receipts, digital records, and other evidence.",
+      "Texas theft charges can range from lower-level misdemeanors to serious felonies depending on the alleged value and type of property, prior history, and other statutory factors. The specific charge can materially affect potential penalties and collateral consequences.",
+      "Some theft cases turn on disputed ownership, mistaken identification, lack of intent, possession of property belonging to another person, or disagreements over the alleged value of the property. These issues can be important when determining the correct charge and possible defenses.",
+      "Retail theft, workplace allegations, theft by check, and possession-of-stolen-property cases can involve very different evidence and legal issues. Defense counsel may review surveillance video, transaction records, messages, witness statements, inventory records, payment history, and other documentation connected to the accusation.",
+    ],
+    whenToHire: [
+      "You were arrested, cited, or charged with theft in El Paso County.",
+      "You are accused of shoplifting or taking property from a store.",
+      "The allegation involves property from an employer, coworker, customer, or business.",
+      "The value or ownership of the property is disputed.",
+      "You are accused of possessing property that police claim was stolen.",
+      "The allegation involves a check, payment, transaction, or financial record.",
+      "Police or investigators want to question you about missing property.",
+      "The charge may be filed as a felony or enhanced because of prior history.",
+      "Restitution or repayment is being discussed as part of the case.",
+    ],
+    localContent: [
+      "El Paso theft cases can arise from retail incidents, workplace allegations, vehicle or property disputes, financial transactions, and other circumstances involving disputed ownership or possession.",
+      "Retail theft cases may involve store surveillance, loss-prevention reports, receipts, point-of-sale records, witness statements, and allegations about concealment or intent.",
+      "The alleged value of property can affect the level of a Texas theft charge, so receipts, appraisals, purchase records, condition, market value, and other evidence may become important.",
+      "An El Paso theft defense attorney can review the filed charge, police reports, surveillance, witness statements, ownership records, alleged property value, criminal history, court settings, and possible collateral consequences before advising a client about defense and resolution options.",
+    ],
     faqs: [
-      { question: "What does a theft lawyer do?", answer: "A theft lawyer evaluates the allegations, evidence, applicable law, court procedure, and available defense or resolution options based on the individual case." },
-      { question: "Should I speak with a lawyer before talking to investigators?", answer: "Legal advice can help you understand your rights and the possible consequences of making statements before deciding how to respond to investigators." },
-      { question: "What outcomes are possible?", answer: "Outcomes depend on the charge, evidence, history, applicable law, negotiations, motions, and court proceedings. No particular result can be guaranteed." },
-      { question: "How quickly should I contact an attorney?", answer: "Prompt advice can be useful when an investigation, arrest, warrant, court date, or deadline is pending." },
-      { question: "Can I compare several El Paso attorneys?", answer: "Yes. Comparing relevant experience, fees, communication, and approach can help you choose counsel for your circumstances." },
+      {
+        question: "What is theft under Texas law?",
+        answer:
+          "Texas theft law generally involves unlawfully appropriating property with intent to deprive the owner of it. The precise elements and charge depend on the facts and applicable statute.",
+      },
+      {
+        question: "Is shoplifting treated as theft in Texas?",
+        answer:
+          "Shoplifting allegations are generally prosecuted under Texas theft laws. The level of the charge can depend on the alleged value of the merchandise and other circumstances.",
+      },
+      {
+        question: "What determines whether theft is a misdemeanor or felony?",
+        answer:
+          "The classification can depend on the alleged value and type of property, prior convictions, and other statutory factors. Different value ranges can correspond to different offense levels.",
+      },
+      {
+        question: "What if the property actually belonged to me?",
+        answer:
+          "Ownership can be a central issue in a theft case. Documents, receipts, contracts, messages, witness testimony, and other evidence may help establish who had a legal right to the property.",
+      },
+      {
+        question: "What is possession of stolen property?",
+        answer:
+          "A person may face theft-related allegations when accused of possessing property that authorities claim was stolen. The prosecution still must prove the required elements, including the person's knowledge or intent where applicable.",
+      },
+      {
+        question: "Can the value of the property be challenged?",
+        answer:
+          "Yes. Property value can affect the level of the charge, and the alleged amount may sometimes be disputed using receipts, appraisals, market information, condition, or other evidence.",
+      },
+      {
+        question: "Can repayment or restitution make a theft charge disappear?",
+        answer:
+          "Not automatically. Repayment or restitution may be relevant in some cases, but criminal charging decisions are generally controlled by prosecutors and the court process.",
+      },
+      {
+        question: "Should I speak with investigators about a theft accusation?",
+        answer:
+          "Statements can become evidence. A person who believes they are under investigation may want legal advice before deciding whether and how to answer questions.",
+      },
+      {
+        question: "Can a theft conviction affect employment?",
+        answer:
+          "It can. Theft-related convictions may create employment, licensing, housing, immigration, or reputation consequences depending on the offense and individual circumstances.",
+      },
+      {
+        question: "When should I contact an El Paso theft lawyer?",
+        answer:
+          "Consider contacting defense counsel promptly after an arrest, citation, investigation, warrant, or notice of theft charges, especially when property value, ownership, identification, or intent is disputed.",
+      },
     ],
     relatedPages: [
       { label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" },
       { label: "Drug Crimes", path: "/el-paso-drug-crimes-lawyers" },
       { label: "Assault", path: "/el-paso-assault-lawyers" },
+      { label: "Expunction", path: "/el-paso-expunction-lawyers" },
     ],
-    lastUpdated: "August 13, 2026",
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "August 30, 2026",
   },
+
   {
     path: "/el-paso-expunction-lawyers",
     shortTitle: "Expunction",
