@@ -2421,27 +2421,112 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     path: "/el-paso-weapons-charges-lawyers",
     shortTitle: "Weapons Charges",
     title: "Best Weapons Charge Lawyers in El Paso, TX | Compare Defense Attorneys",
-    description: "Compare El Paso weapons charge lawyers defending unlawful-carry allegations, prohibited-weapon cases, firearm possession charges, and weapons-related criminal matters.",
-    metaDescription: "Compare El Paso weapons charge lawyers defending unlawful-carry allegations, prohibited-weapon cases, firearm possession charges, and weapons-related criminal matters.",
-    heroText: "Compare El Paso weapons charge lawyers defending unlawful-carry allegations, prohibited-weapon cases, firearm possession charges, and weapons-related criminal matters.",
-    topics: ["Unlawful carrying", "Firearm possession", "Prohibited weapons", "Felon-in-possession allegations", "Weapons enhancements", "Vehicle firearm issues", "Search and seizure", "State and federal charges"],
-    overview: ["Weapons-charge attorneys defend clients accused of violating state or federal firearm and weapons laws and evaluate possession, location, status, search, intent, and constitutional issues.", "The potential consequences vary significantly depending on the weapon, alleged conduct, criminal history, location, and whether state or federal law applies."],
-    whenToHire: ["You were arrested for an alleged firearm or weapons offense.", "A weapon was found during a vehicle or home search.", "Your prior record may affect firearm possession rights.", "The weapon allegation is connected to another criminal charge.", "Federal authorities are involved."],
-    localContent: ["Weapons cases in the El Paso region can involve Texas law, federal law, or both depending on the circumstances.", "Defense counsel can identify the charging authority and evaluate possession, search-and-seizure, and related evidentiary issues."],
+    description:
+      "Compare El Paso weapons charge lawyers defending unlawful-carry allegations, firearm possession charges, prohibited-weapon cases, search-and-seizure issues, and state or federal weapons offenses.",
+    metaDescription:
+      "Compare weapons charge lawyers in El Paso, TX for unlawful carrying, firearm possession, prohibited weapons, search-and-seizure issues, and state or federal charges.",
+    heroText:
+      "Compare El Paso weapons charge attorneys handling unlawful carrying, firearm possession, prohibited weapons, vehicle or home searches, prior-record issues, and state or federal weapons cases.",
+    topics: [
+      "Unlawful Carrying",
+      "Firearm Possession",
+      "Prohibited Weapons",
+      "Prior-Record Firearm Issues",
+      "Vehicle Firearm Cases",
+      "Home and Vehicle Searches",
+      "Search and Seizure",
+      "Weapons Enhancements",
+      "State Weapons Charges",
+      "Federal Firearm Charges",
+    ],
+    overview: [
+      "An El Paso weapons charge lawyer can defend people accused of violating Texas or federal firearm and weapons laws and evaluate possession, location, criminal history, search-and-seizure issues, intent, and the circumstances surrounding the alleged offense.",
+      "Weapons cases can involve unlawful carrying, prohibited weapons, possession restrictions based on prior convictions or other legal status, firearms discovered during traffic stops or searches, and allegations connected to another criminal offense.",
+      "The legal issues can change significantly depending on where the weapon was found, who allegedly possessed it, whether law enforcement conducted a search, whether another person had access to the weapon, and whether state or federal law applies.",
+      "Weapons allegations can also create additional exposure when tied to drug, assault, domestic-violence, or federal criminal investigations. Defense counsel may review police reports, body-camera footage, search warrants, vehicle or residence evidence, witness statements, criminal-history records, and other materials relevant to possession and admissibility.",
+    ],
+    whenToHire: [
+      "You were arrested, cited, or charged with a firearm or weapons offense.",
+      "A weapon was found during a vehicle, home, or other law-enforcement search.",
+      "You are accused of unlawfully carrying or possessing a firearm.",
+      "Your prior criminal record may affect firearm possession rights.",
+      "The weapon allegation is connected to an assault, drug case, domestic-violence matter, or another criminal charge.",
+      "Law enforcement claims you possessed a weapon that belonged to someone else.",
+      "Search-and-seizure issues may affect whether the weapon can be used as evidence.",
+      "Federal agents or prosecutors are involved in the investigation.",
+      "You face a weapons-related enhancement or additional charge tied to another alleged offense.",
+    ],
+    localContent: [
+      "Weapons cases in El Paso can involve Texas criminal law, federal law, or both depending on the alleged conduct, criminal history, location, and investigating agency.",
+      "Firearm allegations may arise from traffic stops, vehicle searches, home searches, domestic disputes, drug investigations, or other encounters with law enforcement.",
+      "Because El Paso is a border community within the Western District of Texas, some firearm investigations may involve federal agencies in addition to local or state authorities.",
+      "An El Paso weapons charge attorney can identify the charging authority, review possession and criminal-history issues, evaluate searches and warrants, examine whether another person had access to the weapon, and assess state or federal exposure.",
+    ],
     faqs: [
-      { question: "What does a weapons charges lawyer do?", answer: "A weapons charges lawyer evaluates the allegations, evidence, applicable law, court procedure, and available defense or resolution options based on the individual case." },
-      { question: "Should I speak with a lawyer before talking to investigators?", answer: "Legal advice can help you understand your rights and the possible consequences of making statements before deciding how to respond to investigators." },
-      { question: "What outcomes are possible?", answer: "Outcomes depend on the charge, evidence, history, applicable law, negotiations, motions, and court proceedings. No particular result can be guaranteed." },
-      { question: "How quickly should I contact an attorney?", answer: "Prompt advice can be useful when an investigation, arrest, warrant, court date, or deadline is pending." },
-      { question: "Can I compare several El Paso attorneys?", answer: "Yes. Comparing relevant experience, fees, communication, and approach can help you choose counsel for your circumstances." },
+      {
+        question: "What is unlawful carrying of a weapon in Texas?",
+        answer:
+          "Texas law regulates when and where certain weapons may be carried and identifies circumstances that can make possession or carrying unlawful. The exact charge depends on the weapon, location, conduct, and other facts.",
+      },
+      {
+        question: "Can a prior conviction affect firearm possession?",
+        answer:
+          "Yes. Certain prior convictions or legal statuses can restrict firearm possession under Texas or federal law. The applicable restriction depends on the person's history and the law involved.",
+      },
+      {
+        question: "What if a gun was found in a car with several people inside?",
+        answer:
+          "Possession can be disputed when multiple people had access to the location where a weapon was found. Ownership, knowledge, control, statements, fingerprints, location, and other evidence may be relevant.",
+      },
+      {
+        question: "Can police search a vehicle for a firearm?",
+        answer:
+          "Whether a vehicle search is lawful depends on the circumstances and the legal basis for the search. Search-and-seizure issues can sometimes affect whether evidence may be used in court.",
+      },
+      {
+        question: "What is a prohibited weapon?",
+        answer:
+          "Texas and federal law identify certain weapons or configurations that may be prohibited or specially regulated. The exact offense depends on the item and applicable statute.",
+      },
+      {
+        question: "Can a weapons charge become a federal case?",
+        answer:
+          "Yes. Some firearm allegations may be prosecuted federally depending on the person's status, the alleged conduct, the weapon involved, interstate or federal jurisdiction, and other circumstances.",
+      },
+      {
+        question: "Can a weapon charge be added to another criminal case?",
+        answer:
+          "Yes. Firearm or weapons allegations can sometimes accompany drug, assault, robbery, domestic-violence, or other criminal charges and may affect overall exposure.",
+      },
+      {
+        question: "What if the weapon belonged to someone else?",
+        answer:
+          "Ownership and possession are not always the same issue. Prosecutors generally must prove the elements of the charged offense, and evidence about access, knowledge, control, and ownership may be important.",
+      },
+      {
+        question: "Should I speak with police about a weapons allegation?",
+        answer:
+          "Statements can become evidence. A person who believes they are under investigation may want legal advice before deciding whether and how to answer questions.",
+      },
+      {
+        question: "When should I contact an El Paso weapons charge lawyer?",
+        answer:
+          "Consider contacting defense counsel promptly after an arrest, search, investigation, firearm seizure, or notice of weapons charges, especially when prior-record, possession, search-and-seizure, or federal issues may be involved.",
+      },
     ],
     relatedPages: [
       { label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" },
       { label: "Federal Criminal Defense", path: "/el-paso-federal-criminal-defense-lawyers" },
       { label: "Assault", path: "/el-paso-assault-lawyers" },
+      { label: "Drug Crimes", path: "/el-paso-drug-crimes-lawyers" },
+      { label: "Domestic Violence", path: "/el-paso-domestic-violence-lawyers" },
     ],
-    lastUpdated: "August 13, 2026",
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "August 31, 2026",
   },
+
   {
     path: "/el-paso-white-collar-crime-lawyers",
     shortTitle: "White Collar Crime",
