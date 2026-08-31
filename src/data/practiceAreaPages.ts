@@ -2202,27 +2202,112 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     path: "/el-paso-juvenile-defense-lawyers",
     shortTitle: "Juvenile Defense",
     title: "Best Juvenile Defense Lawyers in El Paso, TX | Compare Attorneys",
-    description: "Compare El Paso juvenile defense lawyers handling delinquency allegations, detention hearings, school-related offenses, probation issues, and serious juvenile cases.",
-    metaDescription: "Compare El Paso juvenile defense lawyers handling delinquency allegations, detention hearings, school-related offenses, probation issues, and serious juvenile cases.",
-    heroText: "Compare El Paso juvenile defense lawyers handling delinquency allegations, detention hearings, school-related offenses, probation issues, and serious juvenile cases.",
-    topics: ["Juvenile detention", "Delinquency allegations", "School-related offenses", "Juvenile probation", "Certification issues", "Drug allegations", "Assault allegations", "Juvenile court hearings"],
-    overview: ["Juvenile defense attorneys represent minors in proceedings that differ in important ways from adult criminal cases and can involve detention, adjudication, supervision, treatment, and other court orders.", "Serious allegations can also raise questions about whether a youth may face proceedings with consequences extending beyond the juvenile system."],
-    whenToHire: ["A child has been detained or accused of an offense.", "A school-related incident may lead to juvenile charges.", "A juvenile probation violation is alleged.", "The case involves a serious felony allegation.", "Your family needs help understanding juvenile court procedures."],
-    localContent: ["El Paso juvenile matters are handled through a specialized court process with procedures and terminology distinct from ordinary adult criminal cases.", "Local counsel can explain hearings, deadlines, release conditions, and potential outcomes to the child and family."],
+    description:
+      "Compare El Paso juvenile defense lawyers handling delinquency allegations, detention hearings, school-related offenses, probation issues, certification matters, and serious juvenile cases.",
+    metaDescription:
+      "Compare juvenile defense lawyers in El Paso, TX for detention hearings, school-related offenses, probation violations, certification issues, and serious juvenile cases.",
+    heroText:
+      "Compare El Paso juvenile defense attorneys handling delinquency allegations, detention hearings, school-related offenses, juvenile probation, certification issues, and serious juvenile cases.",
+    topics: [
+      "Juvenile Detention",
+      "Delinquency Allegations",
+      "School-Related Offenses",
+      "Juvenile Probation",
+      "Probation Violations",
+      "Certification Issues",
+      "Drug Allegations",
+      "Assault Allegations",
+      "Property Offenses",
+      "Juvenile Court Hearings",
+    ],
+    overview: [
+      "An El Paso juvenile defense lawyer can represent minors accused of delinquent conduct in a court system that differs in important ways from ordinary adult criminal proceedings.",
+      "Juvenile cases can involve detention hearings, adjudication, probation, treatment requirements, school-related allegations, drug or assault charges, property offenses, and other court orders affecting the child and family.",
+      "Serious allegations can raise additional issues involving certification or transfer, which may determine whether a youth remains in the juvenile system or faces adult criminal proceedings. The rules and consequences can be significant and time-sensitive.",
+      "Juvenile defense counsel may review police reports, school records, witness statements, video, social-media evidence, probation records, prior court orders, and other information relevant to the allegations and the child's circumstances.",
+    ],
+    whenToHire: [
+      "A child has been detained or accused of delinquent conduct.",
+      "A detention hearing or juvenile court appearance is scheduled.",
+      "A school-related incident may lead to juvenile charges.",
+      "A juvenile probation violation is alleged.",
+      "The case involves assault, drugs, theft, weapons, or another serious allegation.",
+      "Certification or transfer to adult court may be an issue.",
+      "Police, school officials, or investigators want to question the child.",
+      "The family needs help understanding juvenile court procedure, release conditions, or possible outcomes.",
+      "A prior juvenile case or court order may affect the current matter.",
+    ],
+    localContent: [
+      "El Paso juvenile cases are handled through a specialized court process with terminology, procedures, and goals that differ from ordinary adult criminal cases.",
+      "Juvenile matters can involve detention hearings, adjudication, probation supervision, treatment programs, school issues, and court-ordered conditions affecting both the child and family.",
+      "Evidence may come from police, schools, probation officers, witnesses, digital communications, surveillance, or other sources depending on the allegation.",
+      "An El Paso juvenile defense attorney can explain hearings, deadlines, release conditions, available defenses, probation issues, certification concerns, and the potential consequences of the case for the child and family.",
+    ],
     faqs: [
-      { question: "What does a juvenile defense lawyer do?", answer: "A juvenile defense lawyer evaluates the allegations, evidence, applicable law, court procedure, and available defense or resolution options based on the individual case." },
-      { question: "Should I speak with a lawyer before talking to investigators?", answer: "Legal advice can help you understand your rights and the possible consequences of making statements before deciding how to respond to investigators." },
-      { question: "What outcomes are possible?", answer: "Outcomes depend on the charge, evidence, history, applicable law, negotiations, motions, and court proceedings. No particular result can be guaranteed." },
-      { question: "How quickly should I contact an attorney?", answer: "Prompt advice can be useful when an investigation, arrest, warrant, court date, or deadline is pending." },
-      { question: "Can I compare several El Paso attorneys?", answer: "Yes. Comparing relevant experience, fees, communication, and approach can help you choose counsel for your circumstances." },
+      {
+        question: "What is juvenile delinquency in Texas?",
+        answer:
+          "Juvenile delinquency generally refers to conduct by a minor that would violate criminal law if committed by an adult. The juvenile system uses different procedures and terminology than adult criminal court.",
+      },
+      {
+        question: "What happens at a juvenile detention hearing?",
+        answer:
+          "A detention hearing addresses whether a child should remain detained or may be released under conditions while the case is pending. The court considers the circumstances and applicable juvenile-law standards.",
+      },
+      {
+        question: "Can a juvenile case involve school discipline too?",
+        answer:
+          "Yes. A school-related incident can result in both school disciplinary action and a juvenile court case. The two processes are separate but may involve overlapping evidence and consequences.",
+      },
+      {
+        question: "What happens if a juvenile violates probation?",
+        answer:
+          "A probation violation can lead to additional court proceedings and possible changes to supervision, conditions, placement, or other orders. The response depends on the alleged violation and case history.",
+      },
+      {
+        question: "Can a juvenile be tried as an adult in Texas?",
+        answer:
+          "In some serious cases, prosecutors may seek certification or transfer to adult court. Whether that can occur depends on the child's age, alleged offense, statutory requirements, and court findings.",
+      },
+      {
+        question: "Should a child speak with police or school investigators?",
+        answer:
+          "Statements can become evidence in a juvenile case. A family may want legal advice before the child decides whether and how to answer investigative questions.",
+      },
+      {
+        question: "Can juvenile records affect the future?",
+        answer:
+          "Juvenile records can have consequences depending on the type of case, disposition, and applicable law. Record confidentiality, sealing, and future use can be complex and should be reviewed case by case.",
+      },
+      {
+        question: "Do parents have a role in juvenile court?",
+        answer:
+          "Parents or guardians are often involved in juvenile proceedings and may need to attend hearings, assist with supervision, or comply with court-related requirements depending on the case.",
+      },
+      {
+        question: "What outcomes are possible in a juvenile case?",
+        answer:
+          "Possible outcomes depend on the allegation, evidence, age, history, and court findings and may include dismissal, probation, treatment, supervision, placement, or other juvenile court orders.",
+      },
+      {
+        question: "When should I contact an El Paso juvenile defense lawyer?",
+        answer:
+          "Consider contacting counsel promptly after detention, questioning, a school-related incident, probation allegation, court notice, or serious charge, especially when certification or significant consequences may be involved.",
+      },
     ],
     relatedPages: [
       { label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" },
       { label: "Assault", path: "/el-paso-assault-lawyers" },
       { label: "Drug Crimes", path: "/el-paso-drug-crimes-lawyers" },
+      { label: "Theft", path: "/el-paso-theft-lawyers" },
+      { label: "Expunction", path: "/el-paso-expunction-lawyers" },
     ],
-    lastUpdated: "August 13, 2026",
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "August 30, 2026",
   },
+
   {
     path: "/el-paso-federal-criminal-defense-lawyers",
     shortTitle: "Federal Criminal Defense",
