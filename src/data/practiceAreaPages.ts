@@ -1549,31 +1549,109 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     shortTitle: "Assault",
     title: "Best Assault Lawyers in El Paso, TX | Compare Defense Attorneys",
     description:
-      "Compare El Paso assault lawyers defending misdemeanor and felony assault allegations, aggravated assault, bodily injury cases, threats, and related criminal charges.",
+      "Compare El Paso assault lawyers handling misdemeanor and felony assault allegations, bodily-injury cases, aggravated assault, family-violence allegations, and related criminal charges.",
     metaDescription:
-      "Compare assault lawyers in El Paso, TX for misdemeanor assault, aggravated assault, bodily injury allegations, threats, and criminal defense.",
+      "Compare assault lawyers in El Paso, TX for misdemeanor assault, felony assault, aggravated assault, bodily-injury allegations, and related criminal defense matters.",
     heroText:
-      "Compare El Paso assault defense attorneys handling bodily-injury allegations, threats, aggravated assault, disputed incidents, self-defense claims, and related criminal cases.",
-    topics: ["Assault bodily injury", "Aggravated assault", "Threat allegations", "Self-defense", "Felony assault", "Misdemeanor assault", "Protective orders", "Criminal investigations"],
-    overview: [
-      "Assault defense attorneys represent people accused of causing or threatening bodily injury and investigate witness accounts, physical evidence, recordings, injuries, intent, and possible defenses.",
-      "The seriousness of an assault allegation can depend on the alleged conduct, injuries, weapon allegations, relationship between the parties, prior history, and other statutory factors.",
+      "Compare El Paso assault defense attorneys for misdemeanor and felony assault charges, bodily-injury allegations, aggravated assault, family-violence cases, and related criminal matters.",
+    topics: [
+      "Misdemeanor Assault",
+      "Felony Assault",
+      "Aggravated Assault",
+      "Assault Causing Bodily Injury",
+      "Threat-Based Assault",
+      "Family-Violence Allegations",
+      "Deadly Weapon Allegations",
+      "Protective Orders",
+      "Self-Defense Claims",
+      "Criminal Court Proceedings",
     ],
-    whenToHire: ["You were arrested or charged with assault.", "Police want to question you about an alleged altercation.", "You believe you acted in self-defense or defense of another person.", "The allegation involves a weapon or serious injury.", "A protective order or related family-violence allegation exists."],
+    overview: [
+      "An El Paso assault lawyer can represent people accused of assault and related offenses under Texas law. Assault allegations can arise from physical contact, alleged bodily injury, threats, family or dating relationships, weapons, or other circumstances that affect how a case is charged and prosecuted.",
+      "The seriousness of an assault case depends on the alleged conduct, injuries, relationship between the people involved, criminal history, use or exhibition of a weapon, and other facts. Some allegations may be prosecuted as misdemeanors, while others can result in felony charges.",
+      "A defense attorney may examine witness statements, photographs, medical records, body-camera footage, surveillance video, 911 recordings, text messages, social-media evidence, and other information relevant to what occurred. Possible defenses depend on the facts and may include self-defense, defense of another person, mistaken identity, lack of required intent, or challenges to the prosecution's evidence.",
+      "Because an assault allegation can affect liberty, employment, firearm rights, family matters, immigration consequences, and reputation, defendants should understand both the criminal charge and potential collateral consequences before making important decisions about the case.",
+    ],
+    whenToHire: [
+      "You were arrested, cited, or charged with assault in El Paso County.",
+      "Police are investigating an incident and you believe criminal charges may be filed.",
+      "The allegation involves bodily injury, a weapon, or aggravated assault.",
+      "The complaining witness is a spouse, dating partner, family member, or household member.",
+      "You believe you acted in self-defense or in defense of another person.",
+      "A protective order, emergency order, or no-contact condition is involved.",
+      "Video, text messages, photographs, medical records, or witness testimony may be important evidence.",
+      "The charge could affect your employment, professional license, firearm rights, immigration status, or family-law proceedings.",
+    ],
     localContent: [
-      "Assault allegations in El Paso may lead to criminal proceedings and, depending on the circumstances, related protective-order issues.",
-      "Local defense counsel can review police reports, recordings, witness evidence, court conditions, and the specific charge filed in the case.",
+      "Assault cases arising in El Paso may be prosecuted in municipal, county, or district courts depending on the specific offense and level of the charge. Felony assault matters are generally handled differently from lower-level misdemeanor cases.",
+      "El Paso assault investigations may involve the El Paso Police Department, El Paso County Sheriff's Office, other local agencies, or law-enforcement agencies serving military and federal communities in the region.",
+      "Cases involving family or dating relationships can create issues beyond the criminal prosecution, including protective orders, bond conditions, custody disputes, firearm restrictions, and other consequences that may require careful coordination.",
+      "An El Paso assault defense attorney can review the charging documents, police reports, witness accounts, recordings, physical evidence, alleged injuries, court conditions, and available defenses while helping the accused understand the stages of the local criminal process.",
     ],
     faqs: [
-      { question: "Can self-defense apply to an assault charge?", answer: "Self-defense may be relevant in some cases. Whether it applies depends on the circumstances and Texas law governing the use of force." },
-      { question: "What is aggravated assault?", answer: "Texas law can elevate certain assault allegations based on factors such as serious bodily injury or use or exhibition of a deadly weapon. The precise charge depends on the alleged facts." },
-      { question: "What if the other person does not want to press charges?", answer: "The government, not the complaining witness, generally decides whether a criminal prosecution continues. A witness's position may matter but does not automatically end a case." },
-      { question: "Can assault charges affect employment or firearm rights?", answer: "A conviction or certain court orders may carry consequences beyond the immediate criminal penalties. The effect depends on the offense and individual circumstances." },
-      { question: "When should I contact an assault lawyer?", answer: "Consider defense counsel promptly after an arrest, accusation, police contact, protective-order filing, or notice that charges may be pursued." },
+      {
+        question: "What is assault under Texas law?",
+        answer:
+          "Texas assault law covers several forms of alleged conduct, including intentionally, knowingly, or recklessly causing bodily injury, certain threats of imminent bodily injury, and some forms of offensive or provocative physical contact. The precise charge depends on the facts and applicable statute.",
+      },
+      {
+        question: "Is assault always a felony in Texas?",
+        answer:
+          "No. Assault offenses can range from misdemeanors to serious felonies depending on factors such as alleged injury, the people involved, prior convictions, weapon allegations, and other statutory circumstances.",
+      },
+      {
+        question: "What is aggravated assault?",
+        answer:
+          "Aggravated assault generally involves circumstances such as serious bodily injury or the use or exhibition of a deadly weapon during an assault. The exact charge and potential penalties depend on the alleged facts.",
+      },
+      {
+        question: "Can self-defense be used in an assault case?",
+        answer:
+          "Self-defense may be relevant when the legal requirements are satisfied. Whether it applies depends on the circumstances, including what occurred before and during the confrontation and the evidence available.",
+      },
+      {
+        question: "What evidence can matter in an assault case?",
+        answer:
+          "Relevant evidence may include witness statements, body-camera footage, surveillance video, photographs, medical records, 911 calls, text messages, social-media communications, physical evidence, and other records connected to the incident.",
+      },
+      {
+        question: "What if the other person does not want to press charges?",
+        answer:
+          "The complaining witness does not necessarily control whether a criminal case continues. Prosecutors generally make charging and prosecution decisions based on the evidence and applicable law.",
+      },
+      {
+        question: "Can an assault charge affect my firearm rights?",
+        answer:
+          "Certain convictions, protective orders, bond conditions, and family-violence findings can affect firearm possession or access. The consequences depend on the specific case and applicable state and federal law.",
+      },
+      {
+        question: "Can an assault case affect child custody or a divorce?",
+        answer:
+          "Assault or family-violence allegations can sometimes be relevant in divorce, custody, conservatorship, possession, and protective-order proceedings. The effect depends on the facts, evidence, and applicable law.",
+      },
+      {
+        question: "Should I talk to police if I am accused of assault?",
+        answer:
+          "Statements made during an investigation can become evidence. A person who is under investigation or accused of assault may want legal advice before deciding whether and how to speak with law enforcement.",
+      },
+      {
+        question: "When should I contact an El Paso assault lawyer?",
+        answer:
+          "Consider contacting counsel promptly after an arrest, criminal charge, police investigation, protective-order filing, serious assault allegation, or other situation in which your liberty or legal rights may be affected.",
+      },
     ],
-    relatedPages: [{ label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" }, { label: "Domestic Violence", path: "/el-paso-domestic-violence-lawyers" }, { label: "DWI / DUI", path: "/el-paso-dwi-lawyers" }],
-    lastUpdated: "August 13, 2026",
+    relatedPages: [
+      { label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" },
+      { label: "Domestic Violence", path: "/el-paso-domestic-violence-lawyers" },
+      { label: "Drug Crimes", path: "/el-paso-drug-crimes-lawyers" },
+      { label: "DWI / DUI", path: "/el-paso-dwi-lawyers" },
+    ],
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "August 30, 2026",
   },
+
   {
     path: "/el-paso-domestic-violence-lawyers",
     shortTitle: "Domestic Violence",
