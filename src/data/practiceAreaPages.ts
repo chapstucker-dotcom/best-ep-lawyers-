@@ -1766,31 +1766,111 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     shortTitle: "Child Support",
     title: "Best Child Support Lawyers in El Paso, TX | Compare Local Attorneys",
     description:
-      "Compare El Paso child support lawyers handling support orders, calculations, modifications, enforcement, arrears, income disputes, and related family-law matters.",
+      "Compare El Paso child support lawyers handling support orders, guideline calculations, modifications, enforcement, arrears, income disputes, medical support, and related family-law matters.",
     metaDescription:
-      "Compare child support lawyers in El Paso, TX for support calculations, modifications, enforcement, arrears, income disputes, and family-law cases.",
+      "Compare child support lawyers in El Paso, TX for calculations, modifications, enforcement, arrears, income disputes, medical support, and related family-law cases.",
     heroText:
-      "Compare El Paso child support attorneys handling support calculations, establishment, modifications, enforcement, arrears, income disputes, and related parenting cases.",
-    topics: ["Child support calculations", "Establishing support", "Support modifications", "Enforcement", "Arrears", "Income disputes", "Medical support", "Parentage issues"],
-    overview: [
-      "Child support attorneys help parents address the establishment, calculation, modification, and enforcement of support obligations and related medical-support requirements.",
-      "The amount and procedure can depend on income, number of children, existing obligations, possession arrangements, health coverage, parentage, and other circumstances recognized by Texas law.",
+      "Compare El Paso child support attorneys handling guideline calculations, establishment, modifications, enforcement, arrears, income disputes, medical support, and related parenting cases.",
+    topics: [
+      "Child Support Calculations",
+      "Establishing Support",
+      "Support Modifications",
+      "Enforcement",
+      "Arrears",
+      "Income Disputes",
+      "Self-Employment Income",
+      "Medical and Dental Support",
+      "Parentage Issues",
+      "Interstate Support Matters",
     ],
-    whenToHire: ["A child support order needs to be established.", "Income or circumstances have materially changed.", "Support is not being paid as ordered.", "You are accused of owing arrears.", "Income, parentage, medical support, or other calculation issues are disputed."],
+    overview: [
+      "An El Paso child support lawyer can help parents address the establishment, calculation, modification, and enforcement of child support obligations, as well as related medical and dental support requirements.",
+      "Texas child support calculations often begin with statutory guidelines, but the correct amount depends on the facts of the case. Relevant issues may include net resources, number of children, other support obligations, health-insurance costs, possession arrangements, parentage, and other circumstances recognized by law.",
+      "Income disputes can become more complicated when a parent is self-employed, receives commissions or bonuses, has variable income, owns a business, receives benefits, or has other sources of compensation. Accurate financial documentation can be important when establishing or modifying support.",
+      "Existing child support orders do not automatically change when income, employment, custody arrangements, or other circumstances change. A parent seeking a different amount may need a court-approved modification, while unpaid support may lead to enforcement proceedings and disputes over arrears.",
+    ],
+    whenToHire: [
+      "A child support order needs to be established for the first time.",
+      "Your income, employment, or other financial circumstances have materially changed.",
+      "The other parent's income is disputed, difficult to document, or includes self-employment or variable compensation.",
+      "Child support is not being paid as ordered and enforcement may be necessary.",
+      "You are accused of owing arrears or disagree with the claimed balance.",
+      "Medical or dental support obligations are disputed.",
+      "Parentage must be established before support can be determined.",
+      "You need to modify an existing order because circumstances have changed.",
+      "The child or one of the parents lives outside Texas and interstate support issues may be involved.",
+    ],
     localContent: [
-      "El Paso child support cases may arise in divorce, parentage, modification, or enforcement proceedings.",
-      "Local family-law counsel can review existing orders, payment records, income information, and the court procedure applicable to the case.",
+      "El Paso child support cases may arise in divorce, parentage, custody, modification, or enforcement proceedings. The court handling the matter depends on the existing case and procedural history.",
+      "Parents should preserve court orders, payment records, pay stubs, tax returns, bank records, health-insurance information, childcare costs, and other financial records that may affect support calculations or enforcement.",
+      "El Paso families may also have military, federal-employment, cross-border, or interstate circumstances that affect how income, benefits, residence, or enforcement issues are evaluated.",
+      "An El Paso child support attorney can review the existing order, financial information, payment history, parentage issues, medical-support obligations, and court deadlines before advising a parent about establishment, modification, or enforcement options.",
     ],
     faqs: [
-      { question: "How is child support calculated in Texas?", answer: "Texas uses statutory guidelines in many cases, but the calculation depends on the facts, including net resources, number of children, other support obligations, and potentially other relevant factors." },
-      { question: "Can child support be modified?", answer: "Modification may be available when statutory requirements are met. A change in income or circumstances does not automatically change an existing court order." },
-      { question: "What if child support has not been paid?", answer: "Enforcement remedies may be available for unpaid court-ordered support. The appropriate procedure depends on the existing order and payment history." },
-      { question: "Can parents privately agree to a different amount?", answer: "Parents may reach agreements in some circumstances, but an informal agreement does not necessarily modify an existing court order. Court approval may be required." },
-      { question: "When should I contact a child support lawyer?", answer: "Consider legal advice when support is being established, modification is needed, enforcement is threatened or necessary, arrears are disputed, or financial information is contested." },
+      {
+        question: "How is child support calculated in Texas?",
+        answer:
+          "Texas uses statutory guidelines in many cases, but the calculation depends on the facts, including net resources, number of children, other support obligations, health-insurance costs, and potentially other relevant circumstances.",
+      },
+      {
+        question: "Can child support be modified?",
+        answer:
+          "Modification may be available when statutory requirements are met. A change in income or circumstances does not automatically change an existing court order, so court approval may be necessary.",
+      },
+      {
+        question: "What if child support has not been paid?",
+        answer:
+          "Enforcement remedies may be available for unpaid court-ordered support. The appropriate procedure depends on the existing order, payment history, claimed arrears, and other facts.",
+      },
+      {
+        question: "What are child support arrears?",
+        answer:
+          "Arrears generally refer to unpaid child support that has accumulated under an existing order. The amount can become disputed when payments, credits, records, or prior enforcement activity are unclear.",
+      },
+      {
+        question: "How is self-employment income handled for child support?",
+        answer:
+          "Self-employment income may require review of tax returns, business records, expenses, distributions, and other financial information. The correct treatment depends on the facts and applicable Texas law.",
+      },
+      {
+        question: "Can bonuses, commissions, or overtime affect child support?",
+        answer:
+          "They can. Variable compensation may be relevant when determining net resources, but the treatment depends on the nature, frequency, and documentation of the income.",
+      },
+      {
+        question: "Who pays for a child's health insurance or medical support?",
+        answer:
+          "Texas child support orders can include medical and dental support provisions. The allocation depends on the court order, available coverage, costs, and applicable law.",
+      },
+      {
+        question: "Can parents privately agree to a different child support amount?",
+        answer:
+          "Parents may reach agreements in some circumstances, but an informal agreement does not necessarily modify an existing court order. Court approval may be required for the change to be legally effective.",
+      },
+      {
+        question: "Can child support be enforced if a parent moves out of Texas?",
+        answer:
+          "Interstate enforcement may be possible when a parent or child lives in another state. The correct procedure depends on the existing order, jurisdictions involved, and applicable interstate support laws.",
+      },
+      {
+        question: "When should I contact an El Paso child support lawyer?",
+        answer:
+          "Consider legal advice when support is being established, income is disputed, modification is needed, enforcement is threatened or necessary, arrears are contested, or medical-support and parentage issues are involved.",
+      },
     ],
-    relatedPages: [{ label: "Family Law", path: "/el-paso-family-lawyers" }, { label: "Divorce", path: "/el-paso-divorce-lawyers" }, { label: "Child Custody", path: "/el-paso-child-custody-lawyers" }, { label: "Adoption", path: "/el-paso-adoption-lawyers" }],
-    lastUpdated: "August 13, 2026",
+    relatedPages: [
+      { label: "Family Law", path: "/el-paso-family-lawyers" },
+      { label: "Divorce", path: "/el-paso-divorce-lawyers" },
+      { label: "Child Custody", path: "/el-paso-child-custody-lawyers" },
+      { label: "Adoption", path: "/el-paso-adoption-lawyers" },
+      { label: "Spousal Support", path: "/el-paso-spousal-support-lawyers" },
+    ],
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "August 30, 2026",
   },
+
   {
     path: "/el-paso-adoption-lawyers",
     shortTitle: "Adoption",
