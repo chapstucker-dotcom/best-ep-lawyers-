@@ -3117,6 +3117,10 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       },
       { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
     ],
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "August 31, 2026",
   },
   {
     path: "/el-paso-18-wheeler-accident-lawyer",
