@@ -266,6 +266,10 @@ export default function App() {
           element={<LaneChangeAccident />}
         />
         <Route
+          path="/el-paso-merging-accident-lawyers"
+          element={<MergingAccident />}
+        />
+        <Route
   path="/el-paso-failure-to-yield-accident-lawyers"
   element={<FailureToYieldAccident />}
 />
