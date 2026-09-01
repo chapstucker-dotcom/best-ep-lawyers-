@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowLeft,
@@ -11,8 +12,26 @@ import {
 
 const MergingAccident = () => {
   const pageTitle = "Best Merging Accident Lawyers in El Paso, TX";
+  const description =
+    "Find El Paso merging accident lawyers for crashes involving unsafe highway merging, failure to yield, entrance ramps, blind spots, disputed fault, and insurance claims.";
 
-  document.title = `${pageTitle} | El Paso's Best Lawyers`;
+  useEffect(() => {
+    document.title = `${pageTitle} | El Paso's Best Lawyers`;
+
+    let meta = document.querySelector(
+      'meta[name="description"]'
+    ) as HTMLMetaElement | null;
+
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.name = "description";
+      document.head.appendChild(meta);
+    }
+
+    meta.content = description;
+
+    window.scrollTo(0, 0);
+  }, []);
 
   const issues = [
     "Unsafe highway merging",
