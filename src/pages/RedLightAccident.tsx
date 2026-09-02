@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowLeft,
@@ -11,8 +12,26 @@ import {
 
 const RedLightAccident = () => {
   const pageTitle = "Best Red Light Accident Lawyers in El Paso, TX";
+  const description =
+    "Find El Paso red light accident lawyers for intersection crashes involving T-bone collisions, left turns, distracted driving, disputed traffic signals, fault, and insurance claims.";
 
-  document.title = `${pageTitle} | El Paso's Best Lawyers`;
+  useEffect(() => {
+    document.title = `${pageTitle} | El Paso's Best Lawyers`;
+
+    let meta = document.querySelector(
+      'meta[name="description"]'
+    ) as HTMLMetaElement | null;
+
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.name = "description";
+      document.head.appendChild(meta);
+    }
+
+    meta.content = description;
+
+    window.scrollTo(0, 0);
+  }, []);
 
   const issues = [
     "Running a red light",
