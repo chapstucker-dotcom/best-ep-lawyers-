@@ -48,7 +48,7 @@ const features = [
   {
     title: "Category Exclusive",
     description:
-      "Own your practice area with top placement, a Category Owner badge, competitor lockout, and maximum exposure.",
+  "Secure premium top placement in a practice-area category when Exclusive inventory is available.",
     icon: Crown,
   },
 ];

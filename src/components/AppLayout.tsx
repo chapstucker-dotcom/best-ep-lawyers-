@@ -1003,30 +1003,131 @@ export default function AppLayout() {
       />
 
       {/* Law firm business gateway */}
-      <section className="bg-white py-12">
-        <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-          <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#B88900]">
-            For Law Firms
-          </p>
-
-          <h2 className="mt-3 text-2xl font-bold text-[#0F2A43] sm:text-3xl">
-            Are you an El Paso law firm?
-          </h2>
-
-          <p className="mx-auto mt-3 max-w-2xl text-gray-600">
-            Learn about firm listings, attorney profiles, advertising,
-            and premium category visibility on El Paso&apos;s Best Lawyers.
-          </p>
-
-          <button
-            type="button"
-            onClick={() => navigate("/for-law-firms")}
-            className="mt-6 inline-flex items-center rounded-lg bg-[#0F2A43] px-6 py-3 font-bold text-white transition hover:bg-[#163b5d]"
-          >
-            Advertising &amp; Law Firm Listings
-          </button>
+      <section className="border-y border-[#D4A62A]/25 bg-gradient-to-br from-[#061A2C] via-[#0F2A43] to-[#123D55] py-14 text-white">
+  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+      <div>
+        <div className="mb-3 text-sm font-bold uppercase tracking-[0.18em] text-[#D4A62A]">
+          For El Paso Law Firms
         </div>
-      </section>
+
+        <h2 className="max-w-3xl text-3xl font-bold tracking-tight sm:text-4xl">
+          More Visibility. More Opportunities to Connect.
+        </h2>
+
+        <p className="mt-4 max-w-3xl text-base leading-7 text-slate-200 sm:text-lg">
+          Build your presence where people are actively searching for El Paso
+          legal help. Start with a complimentary firm listing, then add enhanced
+          profiles, lead tools, advertising, and limited premium category
+          visibility as your firm grows.
+        </p>
+
+        <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+          <Button
+            asChild
+            className="bg-[#D4A62A] font-semibold text-[#061A2C] hover:bg-[#E3B83E]"
+          >
+            <Link to="/for-law-firms">
+              Advertising &amp; Law Firm Listings
+              <ChevronRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+
+          <Button
+            asChild
+            variant="outline"
+            className="border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white"
+          >
+            <Link to="/pricing">Compare Firm Plans</Link>
+          </Button>
+        </div>
+
+        <p className="mt-3 text-sm text-slate-300">
+          Complimentary firm listings available.
+        </p>
+      </div>
+
+      <div className="rounded-2xl border border-white/15 bg-white/10 p-6 shadow-xl backdrop-blur-sm">
+        <div className="flex items-start gap-3">
+          <Award className="mt-1 h-6 w-6 shrink-0 text-[#D4A62A]" />
+          <div>
+            <h3 className="text-xl font-bold">Built for the El Paso Legal Market</h3>
+            <p className="mt-2 text-sm leading-6 text-slate-200">
+              Present your firm clearly, highlight your attorneys and practice
+              areas, and give prospective clients direct ways to learn more.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-6 grid gap-3 sm:grid-cols-2">
+          {[
+            "Local El Paso legal directory exposure",
+            "Practice-area visibility",
+            "Firm and attorney profile options",
+            "Limited premium placement inventory",
+          ].map((item) => (
+            <div
+              key={item}
+              className="flex items-start gap-2 rounded-lg border border-white/10 bg-[#061A2C]/35 p-3"
+            >
+              <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#D4A62A]" />
+              <span className="text-sm text-slate-100">{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <div className="rounded-xl border border-white/10 bg-white p-5 text-[#061A2C] shadow-lg">
+        <Award className="h-6 w-6 text-[#B88A12]" />
+        <h3 className="mt-4 text-lg font-bold">Premium Visibility</h3>
+        <p className="mt-2 text-sm leading-6 text-slate-600">
+          Increase visibility in relevant practice areas with enhanced firm
+          presentation and limited Featured or Exclusive category
+          opportunities.
+        </p>
+      </div>
+
+      <div className="rounded-xl border border-white/10 bg-white p-5 text-[#061A2C] shadow-lg">
+        <Users className="h-6 w-6 text-[#B88A12]" />
+        <h3 className="mt-4 text-lg font-bold">
+          Enhanced Firm &amp; Attorney Profiles
+        </h3>
+        <p className="mt-2 text-sm leading-6 text-slate-600">
+          Showcase your firm, attorneys, practice areas, biography, photos,
+          contact information, website, and other details available with your
+          plan.
+        </p>
+      </div>
+
+      <div className="rounded-xl border border-white/10 bg-white p-5 text-[#061A2C] shadow-lg">
+        <Phone className="h-6 w-6 text-[#B88A12]" />
+        <h3 className="mt-4 text-lg font-bold">Lead &amp; Contact Tools</h3>
+        <p className="mt-2 text-sm leading-6 text-slate-600">
+          Give prospective clients clear ways to view your profile, visit your
+          website, contact your firm, and submit consultation inquiries when
+          included with your plan.
+        </p>
+      </div>
+
+      <div className="rounded-xl border border-white/10 bg-white p-5 text-[#061A2C] shadow-lg">
+        <ExternalLink className="h-6 w-6 text-[#B88A12]" />
+        <h3 className="mt-4 text-lg font-bold">Search &amp; Content Visibility</h3>
+        <p className="mt-2 text-sm leading-6 text-slate-600">
+          Build visibility across the El Paso legal directory, practice-area
+          pages, attorney profiles, and relevant consumer legal resources.
+        </p>
+      </div>
+    </div>
+
+    <p className="mt-7 text-center text-xs leading-5 text-slate-300">
+      Paid placement increases visibility but does not constitute an
+      endorsement, ranking of legal ability, or guarantee of clients, leads,
+      search rankings, or case results.
+    </p>
+  </div>
+</section>
 
       {/* Disclaimers */}
       <section
