@@ -348,7 +348,39 @@
       "destination": "/index.html"
     },
     {
-      "source": "/guides/:slug",
+      "source": "/guides/what-to-do-after-car-accident-el-paso",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/guides/texas-car-accident-statute-of-limitations",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/guides/uninsured-driver-accident-texas",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/guides/how-to-get-texas-crash-report-el-paso",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/guides/truck-accident-evidence-texas",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/guides/texas-wrongful-death-deadline",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/guides/texas-dwi-basics-el-paso",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/guides/texas-child-custody-conservatorship-basics",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/guides/what-to-do-after-uber-lyft-accident-el-paso",
       "destination": "/index.html"
     },
     {
