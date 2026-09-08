@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 
 import { useAuth } from "@/contexts/AuthContext";
+import { useSeo } from "../hooks/use-seo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -127,6 +128,13 @@ const getFriendlyAuthError = (
 };
 
 export default function Signup() {
+  useSeo({
+    title: "Create Firm Account | El Paso's Best Lawyers",
+    description:
+      "Create a law firm account on El Paso's Best Lawyers to manage your firm profile, attorneys, and directory visibility.",
+    path: "/signup",
+    robots: "noindex, nofollow",
+  });
   const [searchParams] =
     useSearchParams();
 

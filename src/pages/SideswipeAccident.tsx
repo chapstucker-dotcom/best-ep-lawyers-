@@ -1,27 +1,18 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, CheckCircle, Scale, Car, AlertTriangle } from "lucide-react";
+import { useSeo } from "../hooks/use-seo";
 
 export default function SideswipeAccident() {
+  useSeo({
+    title:
+      "Best Sideswipe Accident Lawyers in El Paso, TX | El Paso's Best Lawyers",
+    description:
+      "Find experienced sideswipe accident lawyers in El Paso, Texas. Compare attorneys who handle lane-change crashes, highway sideswipes, disputed fault, injuries, and insurance claims.",
+    path: "/el-paso-sideswipe-accident-lawyers",
+  });
+
   useEffect(() => {
-    document.title =
-      "Best Sideswipe Accident Lawyers in El Paso, TX | El Paso's Best Lawyers";
-
-    const description =
-      "Find experienced sideswipe accident lawyers in El Paso, Texas. Compare attorneys who handle lane-change crashes, highway sideswipes, disputed fault, injuries, and insurance claims.";
-
-    let meta = document.querySelector(
-      'meta[name="description"]'
-    ) as HTMLMetaElement | null;
-
-    if (!meta) {
-      meta = document.createElement("meta");
-      meta.name = "description";
-      document.head.appendChild(meta);
-    }
-
-    meta.content = description;
-
     window.scrollTo(0, 0);
   }, []);
 

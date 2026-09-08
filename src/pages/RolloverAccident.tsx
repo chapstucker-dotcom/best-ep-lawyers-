@@ -1,26 +1,14 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useSeo } from "../hooks/use-seo";
 
 export default function RolloverAccident() {
-  useEffect(() => {
-    document.title =
-      "Best Rollover Accident Lawyers in El Paso, TX | El Paso's Best Lawyers";
-
-    const description =
-      "Find rollover accident lawyers in El Paso, Texas. Learn about rollover crashes, common causes, injuries, liability, insurance claims, and how to find an attorney.";
-
-    let meta = document.querySelector(
-      'meta[name="description"]'
-    ) as HTMLMetaElement | null;
-
-    if (!meta) {
-      meta = document.createElement("meta");
-      meta.name = "description";
-      document.head.appendChild(meta);
-    }
-
-    meta.content = description;
-  }, []);
+  useSeo({
+    title:
+      "Best Rollover Accident Lawyers in El Paso, TX | El Paso's Best Lawyers",
+    description:
+      "Find rollover accident lawyers in El Paso, Texas. Learn about rollover crashes, common causes, injuries, liability, insurance claims, and how to find an attorney.",
+    path: "/el-paso-rollover-accident-lawyers",
+  });
 
   return (
     <main className="min-h-screen bg-white text-slate-900">
@@ -155,7 +143,7 @@ export default function RolloverAccident() {
             </h2>
 
             <p className="mt-4 leading-7 text-slate-700">
-              Browse El Paso's Best Lawyers to find attorneys who handle
+              Browse El Paso&apos;s Best Lawyers to find attorneys who handle
               rollover accidents and other serious motor vehicle injury cases.
             </p>
 

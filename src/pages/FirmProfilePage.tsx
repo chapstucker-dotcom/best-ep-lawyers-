@@ -38,6 +38,7 @@ import LeadCaptureForm from "../components/LeadCaptureForm";
 import { supabase } from "@/lib/supabase";
 import { getPlanRules } from "@/config/planRules";
 import { trackEvent } from "@/services/analyticsService";
+import { useSeo } from "../hooks/use-seo";
 
 interface Review {
   id: string;
@@ -132,6 +133,26 @@ export default function FirmProfilePage() {
   const [loadingAttorneys, setLoadingAttorneys] = useState(false);
   const [liveFirm, setLiveFirm] = useState<PublicFirm | null>(null);
   const [loadingFirm, setLoadingFirm] = useState(true);
+  const seoDescription =
+    liveFirm?.description?.trim() ||
+    liveFirm?.blurb?.trim() ||
+    (liveFirm
+      ? `${liveFirm.name}${liveFirm.city ? ` in ${liveFirm.city}` : ""}${liveFirm.state ? `, ${liveFirm.state}` : ""}. View firm details, practice areas, attorneys, reviews, and contact information.`
+      : "Law firm profile information on El Paso's Best Lawyers.");
+
+  useSeo({
+    title: liveFirm
+      ? `${liveFirm.name} | El Paso's Best Lawyers`
+      : "Law Firm Profile | El Paso's Best Lawyers",
+    description: seoDescription,
+    path: id ? `/firm/${id}` : "/firm",
+    robots:
+      !loadingFirm && liveFirm
+        ? "index, follow"
+        : "noindex, nofollow",
+    canonical:
+      !loadingFirm && Boolean(liveFirm),
+  });
 
   const loadLiveFirm = async (firmId: string) => {
     const { data, error } = await supabase

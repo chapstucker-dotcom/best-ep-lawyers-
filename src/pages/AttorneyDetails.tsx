@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 
 import { supabase } from '@/lib/supabase';
+import { useSeo } from "../hooks/use-seo";
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -122,17 +123,25 @@ export default function AttorneyDetails() {
     void loadProfile();
   }, [id]);
 
-  useEffect(() => {
-    if (!attorney) return;
+  const seoDescription =
+    attorney?.bio?.trim() ||
+    (attorney
+      ? `${attorney.name}${firm?.name ? ` of ${firm.name}` : ""}${firm?.city ? ` in ${firm.city}` : ""}${firm?.state ? `, ${firm.state}` : ""}. View attorney profile, practice areas, contact information, education, and bar admissions.`
+      : "Attorney profile information on El Paso's Best Lawyers.");
 
-    document.title =
-      `${attorney.name} | El Paso's Best Lawyers`;
-
-    return () => {
-      document.title =
-        "El Paso's Best Lawyers";
-    };
-  }, [attorney]);
+  useSeo({
+    title: attorney
+      ? `${attorney.name} | El Paso's Best Lawyers`
+      : "Attorney Profile | El Paso's Best Lawyers",
+    description: seoDescription,
+    path: id ? `/attorney/${id}` : "/attorney",
+    robots:
+      !loading && attorney && !errorMessage
+        ? "index, follow"
+        : "noindex, nofollow",
+    canonical:
+      !loading && Boolean(attorney) && !errorMessage,
+  });
 
   const externalUrl = (url: string) =>
     url.startsWith('http') ? url : `https://${url}`;

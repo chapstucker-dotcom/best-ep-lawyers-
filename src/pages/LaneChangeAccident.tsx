@@ -9,27 +9,20 @@ import {
   ShieldCheck,
   MapPin,
 } from "lucide-react";
+import { useSeo } from "../hooks/use-seo";
 
 const LaneChangeAccident = () => {
   const pageTitle = "Best Lane Change Accident Lawyers in El Paso, TX";
   const description =
     "Find El Paso lane change accident lawyers for crashes involving unsafe lane changes, failure to yield, blind spots, improper merging, and disputed fault.";
 
+  useSeo({
+    title: pageTitle,
+    description,
+    path: "/el-paso-lane-change-accident-lawyers",
+  });
+
   useEffect(() => {
-    document.title = `${pageTitle} | El Paso's Best Lawyers`;
-
-    let meta = document.querySelector(
-      'meta[name="description"]'
-    ) as HTMLMetaElement | null;
-
-    if (!meta) {
-      meta = document.createElement("meta");
-      meta.name = "description";
-      document.head.appendChild(meta);
-    }
-
-    meta.content = description;
-
     window.scrollTo(0, 0);
   }, []);
 

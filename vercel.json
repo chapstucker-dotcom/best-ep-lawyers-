@@ -8,7 +8,59 @@
   ],
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/el-paso-:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/guides",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/guides/:slug",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/featured-on-el-pasos-best-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/pricing",
+      "destination": "/index.html"
+    },
+{
+  "source": "/for-law-firms",
+  "destination": "/index.html"
+},
+    {
+      "source": "/login",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/signup",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/dashboard",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/auth/callback",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/reset-password",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/attorney/:id",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/firm/:id",
       "destination": "/index.html"
     }
   ]

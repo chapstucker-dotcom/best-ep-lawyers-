@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import LeadCaptureForm from "../components/LeadCaptureForm";
+import { useSeo } from "../hooks/use-seo";
 
 const relatedPages = [
   ["Green Card", "/el-paso-green-card-lawyers"],
@@ -46,30 +46,12 @@ const faqs = [
 ];
 
 export default function Immigration() {
-  useEffect(() => {
-    const previousTitle = document.title;
-    document.title = "Best Immigration Lawyers in El Paso, TX | Compare Attorneys";
-
-    const existingMeta = document.querySelector('meta[name="description"]');
-    const previousContent = existingMeta?.getAttribute("content") ?? null;
-    const meta =
-      existingMeta ?? document.head.appendChild(document.createElement("meta"));
-
-    meta.setAttribute("name", "description");
-    meta.setAttribute(
-      "content",
-      "Compare immigration lawyers in El Paso, TX for green cards, citizenship, visas, deportation defense, family immigration, waivers, and consular processing."
-    );
-
-    return () => {
-      document.title = previousTitle;
-      if (existingMeta && previousContent !== null) {
-        existingMeta.setAttribute("content", previousContent);
-      } else if (!existingMeta) {
-        meta.remove();
-      }
-    };
-  }, []);
+  useSeo({
+    title: "Best Immigration Lawyers in El Paso, TX | Compare Attorneys",
+    description:
+      "Compare immigration lawyers in El Paso, TX for green cards, citizenship, visas, deportation defense, family immigration, waivers, and consular processing.",
+    path: "/el-paso-immigration-lawyers",
+  });
 
   return (
     <main
@@ -129,8 +111,8 @@ export default function Immigration() {
               maxWidth: "930px",
             }}
           >
-            El Paso's location on the U.S.-Mexico border makes immigration law
-            especially important to local families and businesses. Use this
+            El Paso&apos;s location on the U.S.-Mexico border makes immigration
+            law especially important to local families and businesses. Use this
             directory to explore common immigration practice areas and compare
             participating local firms.
           </p>
@@ -198,6 +180,7 @@ export default function Immigration() {
             <h2 style={{ marginBottom: "14px", fontSize: "26px" }}>
               How to Compare Immigration Lawyers
             </h2>
+
             <ul
               style={{
                 color: "#cbd5e1",
@@ -226,6 +209,7 @@ export default function Immigration() {
             <h2 style={{ marginBottom: "14px", fontSize: "26px" }}>
               What an Immigration Attorney Can Help With
             </h2>
+
             <ul
               style={{
                 color: "#cbd5e1",
@@ -257,28 +241,40 @@ export default function Immigration() {
             Immigration Law in El Paso
           </h2>
 
-          <p style={{ color: "#cbd5e1", lineHeight: 1.75, marginBottom: "16px" }}>
+          <p
+            style={{
+              color: "#cbd5e1",
+              lineHeight: 1.75,
+              marginBottom: "16px",
+            }}
+          >
             El Paso immigration matters often involve families, employers, and
-            individuals with close ties to Ciudad Juárez, Chihuahua, New Mexico,
-            and communities throughout Mexico and the border region. Cases may
-            involve USCIS filings, U.S. consular processing, ports of entry,
-            immigration-court proceedings, travel history, prior entries, or
-            family relationships spanning both countries.
+            individuals with close ties to Ciudad Juárez, Chihuahua, New
+            Mexico, and communities throughout Mexico and the border region.
+            Cases may involve USCIS filings, U.S. consular processing, ports of
+            entry, immigration-court proceedings, travel history, prior
+            entries, or family relationships spanning both countries.
           </p>
 
-          <p style={{ color: "#cbd5e1", lineHeight: 1.75, marginBottom: "16px" }}>
+          <p
+            style={{
+              color: "#cbd5e1",
+              lineHeight: 1.75,
+              marginBottom: "16px",
+            }}
+          >
             Fort Bliss also makes military-related immigration and citizenship
-            issues especially relevant in the region. Service members, veterans,
-            spouses, and family members may encounter immigration questions
-            involving naturalization, family petitions, travel, documentation,
-            and status.
+            issues especially relevant in the region. Service members,
+            veterans, spouses, and family members may encounter immigration
+            questions involving naturalization, family petitions, travel,
+            documentation, and status.
           </p>
 
           <p style={{ color: "#cbd5e1", lineHeight: 1.75, margin: 0 }}>
             An El Paso immigration attorney can review immigration history,
-            family relationships, prior applications, travel, criminal history,
-            government notices, and supporting documents to help determine which
-            process or options may apply.
+            family relationships, prior applications, travel, criminal
+            history, government notices, and supporting documents to help
+            determine which process or options may apply.
           </p>
         </section>
 
@@ -308,7 +304,13 @@ export default function Immigration() {
             ¿Busca un abogado de inmigración en El Paso?
           </h2>
 
-          <p style={{ color: "#cbd5e1", lineHeight: 1.75, marginBottom: "14px" }}>
+          <p
+            style={{
+              color: "#cbd5e1",
+              lineHeight: 1.75,
+              marginBottom: "14px",
+            }}
+          >
             Compare abogados de inmigración en El Paso que atienden asuntos de
             residencia permanente, ciudadanía, visas, inmigración familiar,
             defensa contra deportación, perdones migratorios y procesos
@@ -390,6 +392,7 @@ export default function Immigration() {
                 >
                   {faq.q}
                 </h3>
+
                 <p style={{ color: "#cbd5e1", lineHeight: 1.7, margin: 0 }}>
                   {faq.a}
                 </p>
@@ -407,9 +410,16 @@ export default function Immigration() {
             marginBottom: "40px",
           }}
         >
-          <h2 style={{ marginTop: 0, marginBottom: "12px", fontSize: "28px" }}>
+          <h2
+            style={{
+              marginTop: 0,
+              marginBottom: "12px",
+              fontSize: "28px",
+            }}
+          >
             Connect With an El Paso Immigration Lawyer
           </h2>
+
           <p
             style={{
               color: "#cbd5e1",
@@ -420,6 +430,7 @@ export default function Immigration() {
             Use the form below to submit your information and connect with a
             participating law firm.
           </p>
+
           <LeadCaptureForm />
         </section>
 

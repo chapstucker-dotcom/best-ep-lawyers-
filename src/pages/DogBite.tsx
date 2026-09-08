@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import LeadCaptureForm from "../components/LeadCaptureForm";
+import { useSeo } from "../hooks/use-seo";
 
 const faqs = [
   {
@@ -37,31 +37,12 @@ const faqs = [
 ];
 
 export default function DogBite() {
-  useEffect(() => {
-    const oldTitle = document.title;
-    document.title =
-      "Best Dog Bite Lawyers in El Paso, TX | Compare Attorneys";
-
-    const existingMeta = document.querySelector('meta[name="description"]');
-    const oldDescription = existingMeta?.getAttribute("content") ?? null;
-    const meta =
-      existingMeta ?? document.head.appendChild(document.createElement("meta"));
-
-    meta.setAttribute("name", "description");
-    meta.setAttribute(
-      "content",
-      "Compare dog bite lawyers in El Paso, TX handling dog attacks, animal bites, scarring, child injuries, insurance claims, and other serious animal-related injuries."
-    );
-
-    return () => {
-      document.title = oldTitle;
-      if (existingMeta && oldDescription !== null) {
-        existingMeta.setAttribute("content", oldDescription);
-      } else if (!existingMeta) {
-        meta.remove();
-      }
-    };
-  }, []);
+  useSeo({
+    title: "Best Dog Bite Lawyers in El Paso, TX | Compare Attorneys",
+    description:
+      "Compare dog bite lawyers in El Paso, TX handling dog attacks, animal bites, scarring, child injuries, insurance claims, and other serious animal-related injuries.",
+    path: "/el-paso-dog-bite-lawyers",
+  });
 
   return (
     <main
@@ -186,9 +167,16 @@ export default function DogBite() {
               border: "1px solid #1e293b",
             }}
           >
-            <h2 style={{ fontSize: "27px", marginTop: 0, marginBottom: "14px" }}>
+            <h2
+              style={{
+                fontSize: "27px",
+                marginTop: 0,
+                marginBottom: "14px",
+              }}
+            >
               Evidence That May Matter After a Dog Attack
             </h2>
+
             <ul
               style={{
                 color: "#cbd5e1",
@@ -216,9 +204,16 @@ export default function DogBite() {
               border: "1px solid #1e293b",
             }}
           >
-            <h2 style={{ fontSize: "27px", marginTop: 0, marginBottom: "14px" }}>
+            <h2
+              style={{
+                fontSize: "27px",
+                marginTop: 0,
+                marginBottom: "14px",
+              }}
+            >
               How a Dog Bite Attorney May Help
             </h2>
+
             <ul
               style={{
                 color: "#cbd5e1",
@@ -228,7 +223,7 @@ export default function DogBite() {
               }}
             >
               <li>Investigate how and where the attack occurred</li>
-              <li>Identify the animal's owner or other responsible parties</li>
+              <li>Identify the animal&apos;s owner or other responsible parties</li>
               <li>Seek records concerning prior incidents when relevant</li>
               <li>Evaluate potentially applicable insurance coverage</li>
               <li>Document injuries, scarring, treatment, and losses</li>
@@ -247,11 +242,23 @@ export default function DogBite() {
             marginBottom: "52px",
           }}
         >
-          <h2 style={{ fontSize: "30px", marginTop: 0, marginBottom: "14px" }}>
+          <h2
+            style={{
+              fontSize: "30px",
+              marginTop: 0,
+              marginBottom: "14px",
+            }}
+          >
             Dog Bite Claims in El Paso, Texas
           </h2>
 
-          <p style={{ color: "#cbd5e1", lineHeight: 1.75, marginBottom: "16px" }}>
+          <p
+            style={{
+              color: "#cbd5e1",
+              lineHeight: 1.75,
+              marginBottom: "16px",
+            }}
+          >
             Liability after a dog bite or animal attack can depend on the
             particular facts. Questions may include whether the owner knew of
             dangerous tendencies, whether the animal was properly controlled,
@@ -259,7 +266,13 @@ export default function DogBite() {
             occurred, and what actions were taken before the incident.
           </p>
 
-          <p style={{ color: "#cbd5e1", lineHeight: 1.75, marginBottom: "16px" }}>
+          <p
+            style={{
+              color: "#cbd5e1",
+              lineHeight: 1.75,
+              marginBottom: "16px",
+            }}
+          >
             Incidents can occur in neighborhoods, apartment complexes, parks,
             businesses, private residences, sidewalks, and other locations
             throughout El Paso. Determining who owned or controlled the dog and
@@ -342,6 +355,7 @@ export default function DogBite() {
                 >
                   {faq.q}
                 </h3>
+
                 <p style={{ color: "#cbd5e1", lineHeight: 1.7, margin: 0 }}>
                   {faq.a}
                 </p>
@@ -359,9 +373,16 @@ export default function DogBite() {
             marginBottom: "40px",
           }}
         >
-          <h2 style={{ marginTop: 0, marginBottom: "12px", fontSize: "28px" }}>
+          <h2
+            style={{
+              marginTop: 0,
+              marginBottom: "12px",
+              fontSize: "28px",
+            }}
+          >
             Connect With an El Paso Dog Bite Lawyer
           </h2>
+
           <p
             style={{
               color: "#cbd5e1",
@@ -372,6 +393,7 @@ export default function DogBite() {
             Use the form below to submit your information and connect with a
             participating law firm.
           </p>
+
           <LeadCaptureForm />
         </section>
 

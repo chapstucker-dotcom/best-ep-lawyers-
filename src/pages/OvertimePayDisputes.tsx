@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useSeo } from "../hooks/use-seo";
 import { Link } from "react-router-dom";
 
 const issues = [
@@ -36,32 +36,12 @@ const faqs = [
 ];
 
 export default function OvertimePayDisputes() {
-  useEffect(() => {
-    document.title =
-      "Best Overtime & Pay Dispute Lawyers in El Paso, TX | Compare Attorneys";
-
-    const description =
-      "Compare El Paso overtime and pay dispute lawyers handling unpaid overtime, off-the-clock work, minimum wage, misclassification, commissions, final paychecks, payroll issues, and wage retaliation.";
-
-    let meta = document.querySelector('meta[name="description"]');
-    if (!meta) {
-      meta = document.createElement("meta");
-      meta.setAttribute("name", "description");
-      document.head.appendChild(meta);
-    }
-    meta.setAttribute("content", description);
-
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement("link");
-      canonical.setAttribute("rel", "canonical");
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute(
-      "href",
-      "https://www.elpasosbestlawyers.com/el-paso-overtime-pay-disputes-lawyers"
-    );
-  }, []);
+  useSeo({
+    title: "Best Overtime & Pay Dispute Lawyers in El Paso, TX | Compare Attorneys",
+    description:
+      "Compare El Paso overtime and pay dispute lawyers handling unpaid overtime, off-the-clock work, minimum wage, misclassification, commissions, final paychecks, payroll issues, and wage retaliation.",
+    path: "/el-paso-overtime-pay-disputes-lawyers",
+  });
 
   return (
     <main className="min-h-screen bg-[#0b1529] text-white">

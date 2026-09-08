@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useSeo } from "../hooks/use-seo";
 import { Link } from "react-router-dom";
 
 const faqs = [
@@ -30,36 +30,12 @@ const faqs = [
 ];
 
 export default function SexDiscrimination() {
-  useEffect(() => {
-    document.title =
-      "Best Sex Discrimination Lawyers in El Paso, TX | Compare Attorneys";
-
-    const description =
-      "Compare sex discrimination lawyers in El Paso, TX handling workplace discrimination, unequal treatment, retaliation, harassment, pregnancy-related discrimination, and other employment claims.";
-
-    let meta = document.querySelector('meta[name="description"]');
-
-    if (!meta) {
-      meta = document.createElement("meta");
-      meta.setAttribute("name", "description");
-      document.head.appendChild(meta);
-    }
-
-    meta.setAttribute("content", description);
-
-    let canonical = document.querySelector('link[rel="canonical"]');
-
-    if (!canonical) {
-      canonical = document.createElement("link");
-      canonical.setAttribute("rel", "canonical");
-      document.head.appendChild(canonical);
-    }
-
-    canonical.setAttribute(
-      "href",
-      "https://www.elpasosbestlawyers.com/el-paso-sex-discrimination-lawyers"
-    );
-  }, []);
+  useSeo({
+    title: "Best Sex Discrimination Lawyers in El Paso, TX | Compare Attorneys",
+    description:
+      "Compare sex discrimination lawyers in El Paso, TX handling workplace discrimination, unequal treatment, retaliation, harassment, pregnancy-related discrimination, and other employment claims.",
+    path: "/el-paso-sex-discrimination-lawyers",
+  });
 
   const issues = [
     "Unequal pay or compensation",

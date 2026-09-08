@@ -1,5 +1,13 @@
+import { useSeo } from "../hooks/use-seo";
+
 export default function AdminDashboard() {
-  document.title = "Admin Dashboard | El Paso's Best Lawyers";
+  useSeo({
+    title: "Admin Dashboard | El Paso's Best Lawyers",
+    description:
+      "Administrative dashboard for managing leads, attorney listings, featured placements, and directory operations.",
+    path: "/admin",
+    robots: "noindex, nofollow",
+  });
 
   return (
     <main
@@ -183,4 +191,3 @@ export default function AdminDashboard() {
     </main>
   );
 }
-

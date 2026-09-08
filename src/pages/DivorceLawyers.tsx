@@ -1,8 +1,11 @@
-﻿# Full `src/pages/DivorceLawyers.tsx`
+﻿import { useSeo } from "../hooks/use-seo";
 
-```tsx
 export default function DivorceLawyers() {
-  document.title = "Best Divorce Lawyers in El Paso, TX";
+  useSeo({
+    title: "Best Divorce Lawyers in El Paso, TX | El Paso's Best Lawyers",
+    description: "Compare El Paso divorce lawyers and learn about divorce, property division, child custody, support, and other Texas family law issues.",
+    path: "/el-paso-divorce-lawyers",
+  });
 
   return (
     <main
@@ -154,7 +157,7 @@ export default function DivorceLawyers() {
                 }}
               >
                 <a
-                  href="/attorneys/el-paso-family-law-group"
+                 href="/el-paso-family-lawyers"
                   style={{
                     background: "#fbbf24",
                     color: "#0f172a",
@@ -316,72 +319,4 @@ export default function DivorceLawyers() {
     </main>
   );
 }
-```
-
-# Add To `src/App.tsx`
-
-Add this import:
-
-```tsx
-import DivorceLawyers from "./pages/DivorceLawyers";
-```
-
-Then add this route inside `App()` BEFORE the homepage return:
-
-```tsx
-if (path === "/el-paso-divorce-lawyers") {
-  return <DivorceLawyers />;
-}
-```
-
-# Build
-
-```powershell
-cd "C:\Users\PC\Projects\best-ep-lawyers-\EP BEST LAWYERS"
-npm run build
-```
-
-# Push
-
-```powershell
-cd "C:\Users\PC\Projects\best-ep-lawyers-"
-git add -A
-git commit -m "add divorce lawyers SEO page"
-git push
-```
-
-# Live URL
-
-[https://www.elpasosbestlawyers.com/el-paso-divorce-lawyers](https://www.elpasosbestlawyers.com/el-paso-divorce-lawyers)
-
-      </p>
-
-      <form
-        style={{
-          display: "grid",
-          gap: "20px",
-        }}
-      >
-        <input
-          type="text"
-          placeholder="Full Name"
-          style={{
-            padding: "18px",
-            borderRadius: "12px",
-            border: "1px solid #334155",
-            background: "#0f172a",
-            color: "white",
-            fontSize: "16px",
-          }}
-        />
-
-        <input
-          type="email"
-          placeholder="Email Address"
-          style={{
-            padding: "18px",
-            borderRadius: "12px",
-            border: "1px solid #334155",
-}
-
 

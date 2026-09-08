@@ -1,4 +1,3 @@
-import WhyLawFirmsJoin from "./WhyLawFirmsJoin";
 import LawFirmMarketplace from "./LawFirmMarketplace";
 import SeoPracticeAreaLinks from "./SeoPracticeAreaLinks";
 import { useEffect, useMemo, useState } from 'react';
@@ -8,8 +7,8 @@ import Hero from './Hero';
 import FirmCard from './FirmCard';
 import LeadCaptureForm from './LeadCaptureForm';
 import ArticleCard from './ArticleCard';
-import ListFirmForm from './ListFirmForm';
-import PricingCard from './PricingCard';
+
+
 import SearchFilters from './SearchFilters';
 import Footer from './Footer';
 
@@ -19,7 +18,7 @@ import {
   getPracticeAreaTitle,
 } from '../data/categories';
 import { articles } from '../data/articles';
-import { plans } from '../data/plans';
+
 import { getPlanRules } from '@/config/planRules';
 
 import type { Firm } from '../data/types';
@@ -1003,60 +1002,29 @@ export default function AppLayout() {
         categoryCount={categories.length}
       />
 
-      {/* For El Paso law firms */}
-      <WhyLawFirmsJoin
-        onListFirm={() =>
-          document.getElementById("list-form")?.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          })
-        }
-        onViewPricing={() =>
-          document.getElementById("pricing")?.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          })
-        }
-      />
-      {/* Pricing */}
-      <section
-        id="pricing"
-        className="bg-gray-50 py-16"
-      >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-4 text-center text-3xl font-bold text-[#0F2A43]">
-            Plans for Law Firms
+      {/* Law firm business gateway */}
+      <section className="bg-white py-12">
+        <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+          <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#B88900]">
+            For Law Firms
+          </p>
+
+          <h2 className="mt-3 text-2xl font-bold text-[#0F2A43] sm:text-3xl">
+            Are you an El Paso law firm?
           </h2>
 
-          <p className="mb-8 text-center text-gray-600">
-            Start free. Upgrade at any
-            time.
+          <p className="mx-auto mt-3 max-w-2xl text-gray-600">
+            Learn about firm listings, attorney profiles, advertising,
+            and premium category visibility on El Paso&apos;s Best Lawyers.
           </p>
 
-          <div className="mb-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {plans.map((plan) => (
-              <PricingCard
-                key={plan.id}
-                plan={plan}
-              />
-            ))}
-          </div>
-
-          <p className="text-center text-sm text-gray-600">
-            Plans renew monthly. Cancel
-            anytime. Upgrades take effect
-            immediately.
-          </p>
-        </div>
-      </section>
-
-      {/* List firm */}
-      <section
-        id="list-form"
-        className="bg-white py-16"
-      >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <ListFirmForm />
+          <button
+            type="button"
+            onClick={() => navigate("/for-law-firms")}
+            className="mt-6 inline-flex items-center rounded-lg bg-[#0F2A43] px-6 py-3 font-bold text-white transition hover:bg-[#163b5d]"
+          >
+            Advertising &amp; Law Firm Listings
+          </button>
         </div>
       </section>
 

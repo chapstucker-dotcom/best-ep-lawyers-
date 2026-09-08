@@ -11,6 +11,8 @@ import {
 
 import { useAuth } from "@/contexts/AuthContext";
 import { saveFirmProfile } from "@/services/firmService";
+import { useSeo } from "../hooks/use-seo";
+
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -70,6 +72,13 @@ const readPendingFirmProfile =
   };
 
 export default function Login() {
+  useSeo({
+    title: "Firm Login | El Paso's Best Lawyers",
+    description:
+      "Sign in to manage your law firm profile on El Paso's Best Lawyers.",
+    path: "/login",
+    robots: "noindex, nofollow",
+  });
   const [searchParams] =
     useSearchParams();
 

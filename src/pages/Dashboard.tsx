@@ -34,6 +34,7 @@ import {
 import {
   useToast,
 } from "@/hooks/use-toast";
+import { useSeo } from "../hooks/use-seo";
 import {
   supabase,
   isSupabaseConfigured,
@@ -86,6 +87,13 @@ const readPendingFirmProfile =
   };
 
 export default function Dashboard() {
+  useSeo({
+    title: "Firm Dashboard | El Paso's Best Lawyers",
+    description:
+      "Manage your law firm profile, attorneys, reviews, analytics, and subscription on El Paso's Best Lawyers.",
+    path: "/dashboard",
+    robots: "noindex, nofollow",
+  });
   const [
     activeTab,
     setActiveTab,

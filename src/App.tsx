@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Pricing from "./pages/Pricing";
+import ForLawFirms from "./pages/ForLawFirms";
 import AuthCallback from "./pages/AuthCallback";
 import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
@@ -55,6 +56,9 @@ import LaneChangeAccident from "./pages/LaneChangeAccident";
 import MergingAccident from "./pages/MergingAccident";
 import FailureToYieldAccident from "./pages/FailureToYieldAccident";
 import RedLightAccident from "./pages/RedLightAccident";
+import DWI from "./pages/DWI";
+import FamilyLaw from "./pages/FamilyLaw";
+import EstatePlanning from "./pages/EstatePlanning";
 
 import Guides from "./pages/Guides";
 import GuideArticle from "./pages/GuideArticle";
@@ -106,8 +110,10 @@ const customPracticeAreaPaths = [
   "/el-paso-merging-accident-lawyers",
   "/el-paso-failure-to-yield-accident-lawyers",
   "/el-paso-red-light-accident-lawyers",
+  "/el-paso-dwi-lawyers",
+  "/el-paso-family-lawyers",
+  "/el-paso-estate-planning-lawyers",
 ];
-
 
 export default function App() {
   return (
@@ -257,7 +263,7 @@ export default function App() {
           path="/el-paso-rollover-accident-lawyers"
           element={<RolloverAccident />}
         />
-            <Route
+        <Route
           path="/el-paso-sideswipe-accident-lawyers"
           element={<SideswipeAccident />}
         />
@@ -270,13 +276,21 @@ export default function App() {
           element={<MergingAccident />}
         />
         <Route
-  path="/el-paso-failure-to-yield-accident-lawyers"
-  element={<FailureToYieldAccident />}
-/>
-<Route
-  path="/el-paso-red-light-accident-lawyers"
-  element={<RedLightAccident />}
-/>
+          path="/el-paso-failure-to-yield-accident-lawyers"
+          element={<FailureToYieldAccident />}
+        />
+        <Route
+          path="/el-paso-red-light-accident-lawyers"
+          element={<RedLightAccident />}
+        />
+
+        <Route path="/el-paso-dwi-lawyers" element={<DWI />} />
+        <Route path="/el-paso-family-lawyers" element={<FamilyLaw />} />
+        <Route
+          path="/el-paso-estate-planning-lawyers"
+          element={<EstatePlanning />}
+        />
+
         {practiceAreaPages
           .filter((page) => !customPracticeAreaPaths.includes(page.path))
           .map((page) => (
@@ -296,6 +310,7 @@ export default function App() {
         />
 
         <Route path="/pricing" element={<Pricing />} />
+<Route path="/for-law-firms" element={<ForLawFirms />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<Dashboard />} />

@@ -1,26 +1,13 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useSeo } from "../hooks/use-seo";
 
 export default function HitAndRunAccident() {
-  useEffect(() => {
-    document.title =
-      "El Paso Hit-and-Run Accident Lawyers | El Paso's Best Lawyers";
-
-    const description =
-      "Find El Paso hit-and-run accident lawyers. Learn about hit-and-run claims, uninsured motorist coverage, evidence, deadlines, and how attorneys may help after a driver leaves the scene.";
-
-    let meta = document.querySelector(
-      'meta[name="description"]'
-    ) as HTMLMetaElement | null;
-
-    if (!meta) {
-      meta = document.createElement("meta");
-      meta.name = "description";
-      document.head.appendChild(meta);
-    }
-
-    meta.content = description;
-  }, []);
+  useSeo({
+    title: "El Paso Hit-and-Run Accident Lawyers | El Paso's Best Lawyers",
+    description:
+      "Find El Paso hit-and-run accident lawyers. Learn about hit-and-run claims, uninsured motorist coverage, evidence, deadlines, and how attorneys may help after a driver leaves the scene.",
+    path: "/el-paso-hit-and-run-accident-lawyers",
+  });
 
   return (
     <main className="min-h-screen bg-white text-slate-900">

@@ -1753,7 +1753,7 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       { label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" },
       { label: "Family Law", path: "/el-paso-family-lawyers" },
       { label: "Child Custody", path: "/el-paso-child-custody-lawyers" },
-      { label: "Protective Orders", path: "/el-paso-protective-orders-lawyers" },
+      { label: "Protective Orders", path: "/el-paso-protective-order-lawyers" },
     ],
     resourceLinks: [
       { label: "Browse All Texas Law Guides", path: "/guides" },
@@ -3476,7 +3476,7 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       whenToHire: ["You were arrested or indicted for a felony.", "Police or investigators say you are a suspect in a serious offense.", "A warrant or bond condition has been issued.", "The allegation involves drugs, violence, theft, weapons, fraud, or another felony-level offense.", "You need representation for negotiations, motions, trial, sentencing, or appeal."],
       localContent: ["Felony prosecutions in El Paso County may proceed in district court and can involve local law enforcement, prosecutors, forensic evidence, witnesses, and pretrial proceedings.", "An El Paso felony defense attorney can evaluate the charge, evidence, bond conditions, potential defenses, collateral consequences, and available resolutions."],
       faqs: [{ question: "What is a felony in Texas?", answer: "A felony is a serious criminal offense classified under Texas law into different levels with varying punishment ranges." }, { question: "Can a felony charge be reduced or dismissed?", answer: "Some cases may be reduced, dismissed, or otherwise resolved depending on the evidence, legal issues, negotiations, and circumstances, but no outcome is guaranteed." }, { question: "What happens after a felony arrest?", answer: "The process may include booking, bond proceedings, charging decisions, indictment, discovery, pretrial hearings, negotiations, and potentially trial." }, { question: "Should I talk to investigators?", answer: "Consider consulting defense counsel before giving substantive statements about an investigation or accusation." }, { question: "When should I hire a felony lawyer?", answer: "As early as possible after learning of an investigation, warrant, arrest, indictment, or felony accusation." }],
-      relatedPages: [{ label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" }, { label: "Federal Criminal Defense", path: "/el-paso-federal-criminal-defense-lawyers" }, { label: "Drug Crimes", path: "/el-paso-drug-crime-lawyers" }, { label: "Probation Violation", path: "/el-paso-probation-violation-lawyers" }],
+      relatedPages: [{ label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" }, { label: "Federal Criminal Defense", path: "/el-paso-federal-criminal-defense-lawyers" }, { label: "Drug Crimes", path: "/el-paso-drug-crimes-lawyers" }, { label: "Probation Violation", path: "/el-paso-probation-violation-lawyers" }],
       lastUpdated: "August 13, 2026",
     },
   {
@@ -3539,7 +3539,361 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       relatedPages: [{ label: "Immigration", path: "/el-paso-immigration-lawyers" }, { label: "Visa", path: "/el-paso-visa-lawyers" }, { label: "Green Card", path: "/el-paso-green-card-lawyers" }, { label: "Citizenship", path: "/el-paso-citizenship-lawyers" }],
       lastUpdated: "August 13, 2026",
     },
-];
+  {
+    path: "/el-paso-retaliation-lawyers",
+    shortTitle: "Workplace Retaliation",
+    title: "Best Retaliation Lawyers in El Paso, TX | Compare Employment Attorneys",
+    description:
+      "Compare El Paso retaliation lawyers handling workplace retaliation involving discrimination complaints, harassment reports, wage claims, leave, safety concerns, whistleblowing, and other protected activity.",
+    metaDescription:
+      "Compare retaliation lawyers in El Paso, TX for workplace complaints, discrimination, harassment, wage claims, leave, whistleblowing, and adverse employment actions.",
+    heroText:
+      "Compare El Paso workplace retaliation attorneys helping employees evaluate adverse treatment after protected complaints, reports, requests, or participation in workplace investigations and legal processes.",
+    topics: [
+      "Workplace Retaliation",
+      "Retaliation Lawyer",
+      "Employment Retaliation",
+      "Retaliatory Termination",
+      "Protected Activity",
+      "Discrimination Complaints",
+      "Harassment Complaints",
+      "Wage Complaint Retaliation",
+      "Whistleblower Retaliation",
+      "Protected Leave",
+      "Demotion and Discipline",
+      "Adverse Employment Actions",
+    ],
+    overview: [
+      "Workplace retaliation can arise when an employee experiences termination, demotion, discipline, reduced hours, reassignment, exclusion, threats, or other adverse treatment after engaging in activity protected by applicable employment law.",
+      "Protected activity may include certain complaints about discrimination or harassment, wage and overtime concerns, protected leave, workplace safety, participation in investigations, or other legally protected reports or requests.",
+      "Retaliation cases often depend heavily on timing, documentation, decision-makers, explanations given by the employer, comparable treatment of other employees, and the sequence of events before and after the protected activity.",
+      "An employment attorney can review the workplace timeline, communications, complaints, disciplinary records, performance history, witnesses, and employer explanations to evaluate whether retaliation may have occurred.",
+    ],
+    whenToHire: [
+      "You were fired, demoted, disciplined, reassigned, or had your hours reduced after making a workplace complaint.",
+      "You reported discrimination, harassment, unpaid wages, overtime issues, safety concerns, or other workplace misconduct and then experienced negative treatment.",
+      "You requested or used potentially protected leave and believe the employer retaliated afterward.",
+      "Your employer's explanation for an adverse action conflicts with earlier reviews, communications, or the timing of events.",
+      "You participated in an internal investigation, agency proceeding, or legal process and then experienced adverse treatment.",
+      "Important emails, texts, complaints, reviews, schedules, or disciplinary records may need to be preserved.",
+    ],
+    localContent: [
+      "Workplace retaliation disputes in El Paso can arise across healthcare, construction, logistics, manufacturing, retail, hospitality, education, government contracting, professional services, and other workplaces.",
+      "An El Paso retaliation attorney can review the timing between protected activity and later employment decisions, identify relevant decision-makers and witnesses, and evaluate records that may support or contradict the employer's stated reason for its actions.",
+      "Employees should consider preserving complaints, emails, text messages, performance reviews, disciplinary records, schedules, pay records, leave documents, policies, termination notices, and notes identifying important dates and witnesses.",
+    ],
+    faqs: [
+      {
+        question: "What is workplace retaliation?",
+        answer:
+          "Workplace retaliation generally refers to adverse treatment connected to certain legally protected complaints, reports, requests, or participation in protected processes.",
+      },
+      {
+        question: "Can retaliation include something other than termination?",
+        answer:
+          "Yes. Depending on the facts and applicable law, retaliation allegations may involve demotion, discipline, reduced hours, undesirable assignments, exclusion, threats, pay changes, or other materially adverse actions.",
+      },
+      {
+        question: "Does timing matter in a retaliation case?",
+        answer:
+          "Timing can be important, but it is usually considered together with documents, explanations, decision-makers, prior performance, comparable treatment, and other evidence.",
+      },
+      {
+        question: "What evidence should I save?",
+        answer:
+          "Preserve complaints, emails, texts, performance reviews, disciplinary records, schedules, policies, pay records, leave documents, termination notices, and notes identifying witnesses and key dates.",
+      },
+      {
+        question: "When should I contact a retaliation lawyer?",
+        answer:
+          "Prompt review can be useful after an adverse employment action follows a workplace complaint, protected request, investigation, or other potentially protected activity.",
+      },
+    ],
+    relatedPages: [
+      { label: "Employment Law", path: "/el-paso-employment-lawyers" },
+      {
+        label: "Wrongful Termination",
+        path: "/el-paso-wrongful-termination-lawyers",
+      },
+      {
+        label: "Workplace Discrimination",
+        path: "/el-paso-workplace-discrimination-lawyers",
+      },
+      {
+        label: "Sexual Harassment",
+        path: "/el-paso-sexual-harassment-lawyers",
+      },
+      { label: "Wage and Hour", path: "/el-paso-wage-hour-lawyers" },
+    ],
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "September 7, 2026",
+  },
+
+  {
+    path: "/el-paso-sexual-harassment-lawyers",
+    shortTitle: "Sexual Harassment",
+    title: "Best Sexual Harassment Lawyers in El Paso, TX | Compare Attorneys",
+    description:
+      "Compare El Paso sexual harassment lawyers handling hostile work environment claims, unwanted conduct, supervisor harassment, coworker harassment, retaliation, and workplace complaints.",
+    metaDescription:
+      "Compare sexual harassment lawyers in El Paso, TX for workplace harassment, hostile work environment claims, unwanted conduct, complaints, and retaliation.",
+    heroText:
+      "Compare El Paso sexual harassment attorneys helping employees evaluate workplace harassment, unwanted conduct, hostile work environment allegations, complaints, and retaliation.",
+    topics: [
+      "Sexual Harassment",
+      "Workplace Harassment",
+      "Hostile Work Environment",
+      "Unwanted Conduct",
+      "Supervisor Harassment",
+      "Coworker Harassment",
+      "Harassment Complaints",
+      "Retaliation",
+      "Workplace Investigations",
+      "Text Messages and Emails",
+      "Employment Discrimination",
+    ],
+    overview: [
+      "Workplace sexual harassment can involve unwelcome sexual conduct, comments, messages, requests, touching, propositions, images, or other behavior that may violate applicable employment law depending on the circumstances.",
+      "Harassment allegations may involve supervisors, managers, coworkers, customers, vendors, or others connected to the workplace, and the employer's knowledge and response can be important.",
+      "Evidence may include emails, text messages, chat messages, photographs, recordings, witness accounts, complaints, human-resources records, schedules, performance records, and documentation showing how the employer responded.",
+      "An employment attorney can review the conduct, frequency, severity, workplace context, reporting history, employer response, and any retaliation that occurred after a complaint.",
+    ],
+    whenToHire: [
+      "You experienced repeated or serious unwanted sexual comments, messages, propositions, touching, or other workplace conduct.",
+      "A supervisor, manager, coworker, customer, or vendor engaged in conduct you believe may constitute unlawful harassment.",
+      "You reported harassment and the employer failed to investigate or take appropriate action.",
+      "You experienced retaliation after reporting or opposing harassment.",
+      "You are involved in a workplace investigation involving harassment allegations.",
+      "Important messages, emails, photographs, complaints, or witness information may need to be preserved.",
+    ],
+    localContent: [
+      "Sexual harassment disputes in El Paso can arise in offices, hospitals, restaurants, hotels, schools, construction sites, warehouses, retail businesses, professional workplaces, and other employment settings.",
+      "An El Paso sexual harassment attorney can review the alleged conduct, workplace policies, reporting history, employer response, witnesses, electronic communications, and any later disciplinary or employment actions.",
+      "Employees should consider preserving relevant messages, emails, photographs, complaints, HR communications, schedules, performance records, disciplinary documents, and a detailed chronology of events.",
+    ],
+    faqs: [
+      {
+        question: "What can qualify as workplace sexual harassment?",
+        answer:
+          "Depending on the facts and applicable law, harassment may involve unwelcome sexual conduct, comments, requests, touching, messages, images, propositions, or other conduct that affects the workplace.",
+      },
+      {
+        question: "Can harassment come from a coworker instead of a supervisor?",
+        answer:
+          "Yes. Harassment allegations can involve supervisors, managers, coworkers, customers, vendors, or other people connected to the workplace.",
+      },
+      {
+        question: "What should I document?",
+        answer:
+          "Preserve relevant emails, texts, messages, photographs, complaints, HR communications, witness information, schedules, and notes identifying dates, locations, and what occurred.",
+      },
+      {
+        question: "Can retaliation after a harassment complaint be unlawful?",
+        answer:
+          "Certain complaints and participation in protected processes may be legally protected, and adverse treatment afterward may raise separate retaliation issues depending on the circumstances.",
+      },
+      {
+        question: "When should I contact a sexual harassment lawyer?",
+        answer:
+          "Prompt review can be useful when serious or repeated conduct occurs, after a workplace complaint is made, or when retaliation, discipline, or termination follows.",
+      },
+    ],
+    relatedPages: [
+      { label: "Employment Law", path: "/el-paso-employment-lawyers" },
+      {
+        label: "Workplace Discrimination",
+        path: "/el-paso-workplace-discrimination-lawyers",
+      },
+      { label: "Retaliation", path: "/el-paso-retaliation-lawyers" },
+      {
+        label: "Wrongful Termination",
+        path: "/el-paso-wrongful-termination-lawyers",
+      },
+      { label: "Wage and Hour", path: "/el-paso-wage-hour-lawyers" },
+    ],
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "September 7, 2026",
+  },
+
+  {
+    path: "/el-paso-employment-contract-lawyers",
+    shortTitle: "Employment Contracts",
+    title: "Best Employment Contract Lawyers in El Paso, TX | Compare Attorneys",
+    description:
+      "Compare El Paso employment contract lawyers reviewing employment agreements, compensation terms, restrictive covenants, confidentiality provisions, duties, termination clauses, and workplace disputes.",
+    metaDescription:
+      "Compare employment contract lawyers in El Paso, TX for employment agreements, compensation, confidentiality, restrictive covenants, termination, and contract disputes.",
+    heroText:
+      "Compare El Paso employment contract attorneys helping employees, executives, professionals, and businesses review workplace agreements, compensation terms, restrictions, and contract disputes.",
+    topics: [
+      "Employment Contracts",
+      "Employment Agreements",
+      "Offer Letters",
+      "Executive Agreements",
+      "Compensation Agreements",
+      "Confidentiality Agreements",
+      "Restrictive Covenants",
+      "Non-Compete Agreements",
+      "Non-Solicitation Agreements",
+      "Termination Clauses",
+      "Contract Disputes",
+    ],
+    overview: [
+      "Employment contracts and related workplace agreements can define compensation, duties, benefits, bonuses, commissions, confidentiality obligations, restrictive covenants, termination rights, dispute procedures, and other terms of the employment relationship.",
+      "Disputes may arise when parties disagree about compensation, job duties, termination rights, commissions, bonuses, restrictions after employment, confidentiality obligations, or the interpretation of written terms.",
+      "An employment attorney can review the entire agreement together with offer letters, amendments, compensation plans, policies, communications, and the circumstances surrounding formation or termination.",
+      "Contract review before signing can help identify obligations, restrictions, unclear provisions, and potential areas for negotiation.",
+    ],
+    whenToHire: [
+      "You received an employment agreement, executive contract, offer letter, or compensation agreement and want it reviewed before signing.",
+      "The agreement includes confidentiality, non-compete, non-solicitation, arbitration, repayment, or restrictive-covenant provisions.",
+      "You have a dispute involving salary, commissions, bonuses, equity, benefits, or other compensation.",
+      "Your employment is ending and the employer claims continuing contractual restrictions apply.",
+      "You believe an employer or employee breached an employment-related agreement.",
+      "You need help negotiating or interpreting contract language.",
+    ],
+    localContent: [
+      "Employment agreements in El Paso may involve local businesses, healthcare systems, national employers, professional practices, contractors, transportation companies, cross-border enterprises, and executives working for organizations based outside Texas.",
+      "An El Paso employment contract attorney can review the written agreement together with compensation records, policies, amendments, communications, and applicable Texas or federal law.",
+      "Because employment agreements may affect future work opportunities, compensation, confidentiality duties, dispute procedures, and termination rights, careful review before signing or acting can be important.",
+    ],
+    faqs: [
+      {
+        question: "Should I have an employment contract reviewed before signing?",
+        answer:
+          "Review before signing can help identify compensation terms, termination provisions, restrictive covenants, confidentiality duties, dispute procedures, and other obligations that may affect your rights.",
+      },
+      {
+        question: "Can an employment contract control how I am paid?",
+        answer:
+          "Employment-related agreements may address salary, bonuses, commissions, incentives, benefits, reimbursement, equity, or other compensation depending on the arrangement.",
+      },
+      {
+        question: "What are restrictive covenants?",
+        answer:
+          "Restrictive covenants can include provisions such as non-compete, non-solicitation, confidentiality, or other post-employment restrictions. Their enforceability depends on applicable law and the specific language and circumstances.",
+      },
+      {
+        question: "Can an attorney help negotiate an employment agreement?",
+        answer:
+          "Yes. Employment attorneys may review proposed terms, identify risks or ambiguities, and assist with negotiations before an agreement is signed.",
+      },
+      {
+        question: "When should I contact an employment contract lawyer?",
+        answer:
+          "Before signing a significant agreement when possible, and promptly when a dispute develops involving compensation, termination, restrictions, confidentiality, or alleged breach.",
+      },
+    ],
+    relatedPages: [
+      { label: "Employment Law", path: "/el-paso-employment-lawyers" },
+      {
+        label: "Wrongful Termination",
+        path: "/el-paso-wrongful-termination-lawyers",
+      },
+      {
+        label: "Severance Agreements",
+        path: "/el-paso-severance-agreement-lawyers",
+      },
+      { label: "Wage and Hour", path: "/el-paso-wage-hour-lawyers" },
+      { label: "Business Law", path: "/el-paso-business-lawyers" },
+    ],
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "September 7, 2026",
+  },
+
+  {
+    path: "/el-paso-severance-agreement-lawyers",
+    shortTitle: "Severance Agreements",
+    title: "Best Severance Agreement Lawyers in El Paso, TX | Compare Attorneys",
+    description:
+      "Compare El Paso severance agreement lawyers reviewing severance pay, releases, confidentiality terms, restrictive covenants, benefits, payment terms, and employment separation agreements.",
+    metaDescription:
+      "Compare severance agreement lawyers in El Paso, TX for severance pay, releases, confidentiality, restrictive covenants, benefits, and employment separation agreements.",
+    heroText:
+      "Compare El Paso severance agreement attorneys helping employees, executives, and employers review separation agreements, releases, compensation, restrictions, and post-employment obligations.",
+    topics: [
+      "Severance Agreements",
+      "Separation Agreements",
+      "Severance Pay",
+      "Release of Claims",
+      "Confidentiality",
+      "Non-Disparagement",
+      "Restrictive Covenants",
+      "Benefits",
+      "Employment Termination",
+      "Negotiation",
+      "Employment Contracts",
+    ],
+    overview: [
+      "A severance agreement may provide compensation or benefits in exchange for a release of legal claims and other obligations connected to the end of employment.",
+      "Agreements can address severance pay, payment timing, benefits, confidentiality, non-disparagement, return of company property, restrictive covenants, cooperation duties, references, dispute procedures, and other post-employment obligations.",
+      "Because signing a release may affect existing or potential legal claims, employees may benefit from understanding the agreement before accepting payment or signing.",
+      "An employment attorney can review the agreement together with the circumstances of termination, compensation history, workplace complaints, employment contracts, and possible claims that may be released.",
+    ],
+    whenToHire: [
+      "You received a severance or separation agreement after termination, layoff, resignation, or restructuring.",
+      "The agreement requires you to release legal claims.",
+      "You are concerned about confidentiality, non-disparagement, non-compete, non-solicitation, or other continuing obligations.",
+      "You believe discrimination, retaliation, unpaid compensation, contract issues, or another employment dispute may exist.",
+      "The severance amount, payment timing, benefits, bonus, commission, or other compensation is disputed.",
+      "You want help negotiating the terms before signing.",
+    ],
+    localContent: [
+      "El Paso employees and executives may receive severance agreements from local employers, national companies, healthcare organizations, contractors, professional firms, manufacturers, transportation companies, and other businesses.",
+      "An El Paso severance attorney can review the proposed payment, release language, confidentiality provisions, restrictive covenants, benefits, compensation issues, and any employment claims potentially affected by the agreement.",
+      "Employees should consider preserving the severance agreement, termination notice, employment contract, compensation records, performance reviews, workplace complaints, emails, texts, and other documents relevant to the separation.",
+    ],
+    faqs: [
+      {
+        question: "Do I have to sign a severance agreement?",
+        answer:
+          "Whether to sign depends on the agreement, compensation offered, claims being released, restrictions imposed, deadlines, and your individual circumstances.",
+      },
+      {
+        question: "What does a release of claims mean?",
+        answer:
+          "A release generally means giving up specified legal claims against one or more parties. The scope depends on the language of the agreement and applicable law.",
+      },
+      {
+        question: "Can a severance agreement be negotiated?",
+        answer:
+          "Some severance agreements may be negotiable, including provisions involving compensation, payment timing, benefits, references, confidentiality, restrictive covenants, or other terms.",
+      },
+      {
+        question: "Should I review a severance agreement before signing?",
+        answer:
+          "Review can help you understand what compensation you will receive, which claims may be released, what obligations continue after employment, and what deadlines apply.",
+      },
+      {
+        question: "When should I contact a severance lawyer?",
+        answer:
+          "As soon as possible after receiving the agreement so there is time to review the terms, applicable deadlines, potential claims, and possible negotiation options before signing.",
+      },
+    ],
+    relatedPages: [
+      { label: "Employment Law", path: "/el-paso-employment-lawyers" },
+      {
+        label: "Employment Contracts",
+        path: "/el-paso-employment-contract-lawyers",
+      },
+      {
+        label: "Wrongful Termination",
+        path: "/el-paso-wrongful-termination-lawyers",
+      },
+      { label: "Retaliation", path: "/el-paso-retaliation-lawyers" },
+      { label: "Wage and Hour", path: "/el-paso-wage-hour-lawyers" },
+    ],
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "September 7, 2026",
+  }, ];
 
 export const getPracticeAreaPageByPath = (
   path: string

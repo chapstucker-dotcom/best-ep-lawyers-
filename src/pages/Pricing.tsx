@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight, Scale } from "lucide-react";
 import PricingSection from "@/components/PricingSection";
+import { useSeo } from "../hooks/use-seo";
 
 export default function Pricing() {
-  document.title = "Law Firm Pricing | El Paso's Best Lawyers";
+  useSeo({
+    title: "Law Firm Pricing | El Paso's Best Lawyers",
+    description:
+      "Compare law firm listing and visibility options on El Paso's Best Lawyers, including free listings, enhanced profiles, and premium category placement.",
+    path: "/pricing",
+  });
 
   return (
     <main className="min-h-screen bg-slate-50">

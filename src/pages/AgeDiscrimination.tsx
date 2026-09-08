@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useSeo } from "../hooks/use-seo";
 
 const issues = [
   "Termination or Layoffs",
@@ -19,40 +19,30 @@ const issues = [
 const faqs = [
   [
     "What is age discrimination in the workplace?",
-    "Age discrimination generally refers to unfavorable workplace treatment because of age. Whether particular conduct creates a legal claim depends on the facts, the employer, the worker, and the law that applies."
+    "Age discrimination generally refers to unfavorable workplace treatment because of age. Whether particular conduct creates a legal claim depends on the facts, the employer, the worker, and the law that applies.",
   ],
   [
     "Can an El Paso lawyer review an age-related termination?",
-    "An employment lawyer can review the circumstances surrounding a termination, including the stated reason, timing, performance history, workplace communications, comparison evidence, and other facts that may be relevant."
+    "An employment lawyer can review the circumstances surrounding a termination, including the stated reason, timing, performance history, workplace communications, comparison evidence, and other facts that may be relevant.",
   ],
   [
     "What evidence should I preserve?",
-    "Keep relevant emails, text messages, performance reviews, disciplinary records, job postings, policies, pay records, severance documents, termination paperwork, and notes identifying important dates, statements, and witnesses."
+    "Keep relevant emails, text messages, performance reviews, disciplinary records, job postings, policies, pay records, severance documents, termination paperwork, and notes identifying important dates, statements, and witnesses.",
   ],
   [
     "Can age discrimination overlap with retaliation or wrongful termination?",
-    "Potentially. Workplace disputes can involve more than one issue, so an attorney may evaluate age discrimination together with retaliation, wrongful termination, severance, wage, contract, or other employment-law concerns when the facts support them."
+    "Potentially. Workplace disputes can involve more than one issue, so an attorney may evaluate age discrimination together with retaliation, wrongful termination, severance, wage, contract, or other employment-law concerns when the facts support them.",
   ],
 ];
 
 export default function AgeDiscrimination() {
-  useEffect(() => {
-    document.title =
-      "Best Age Discrimination Lawyers in El Paso, TX | Compare Attorneys";
-
-    let meta = document.querySelector(
-      'meta[name="description"]'
-    ) as HTMLMetaElement | null;
-
-    if (!meta) {
-      meta = document.createElement("meta");
-      meta.name = "description";
-      document.head.appendChild(meta);
-    }
-
-    meta.content =
-      "Compare age discrimination lawyers in El Paso, TX for workplace termination, hiring, promotion, demotion, harassment, retaliation, severance, and other age-related employment disputes.";
-  }, []);
+  useSeo({
+    title:
+      "Best Age Discrimination Lawyers in El Paso, TX | Compare Attorneys",
+    description:
+      "Compare age discrimination lawyers in El Paso, TX for workplace termination, hiring, promotion, demotion, harassment, retaliation, severance, and other age-related employment disputes.",
+    path: "/el-paso-age-discrimination-lawyers",
+  });
 
   return (
     <main className="min-h-screen bg-[#0b1529] text-white">
@@ -102,12 +92,17 @@ export default function AgeDiscrimination() {
             <h2 className="text-2xl font-medium">
               What to Preserve for an Attorney Review
             </h2>
+
             <ul className="mt-5 space-y-3 text-slate-200">
               <li>• Termination, discipline, or demotion documents</li>
               <li>• Performance reviews and employment records</li>
               <li>• Emails, texts, and relevant workplace communications</li>
-              <li>• Job postings, promotion records, and organizational changes</li>
-              <li>• Severance agreements, contracts, policies, and pay records</li>
+              <li>
+                • Job postings, promotion records, and organizational changes
+              </li>
+              <li>
+                • Severance agreements, contracts, policies, and pay records
+              </li>
             </ul>
           </article>
 
@@ -115,6 +110,7 @@ export default function AgeDiscrimination() {
             <h2 className="text-2xl font-medium">
               How to Compare Age Discrimination Attorneys
             </h2>
+
             <ul className="mt-5 space-y-3 text-slate-200">
               <li>• Experience with employment discrimination matters</li>
               <li>• Familiarity with age-related termination disputes</li>
@@ -135,7 +131,7 @@ export default function AgeDiscrimination() {
               Workplace age disputes may arise from hiring decisions,
               promotions, layoffs, discipline, compensation, job assignments,
               performance evaluations, or termination. An attorney reviewing a
-              matter may consider both the employer's stated reason and the
+              matter may consider both the employer&apos;s stated reason and the
               surrounding evidence.
             </p>
 
@@ -149,7 +145,9 @@ export default function AgeDiscrimination() {
         </section>
 
         <section className="mt-14">
-          <h2 className="text-3xl font-medium">Frequently Asked Questions</h2>
+          <h2 className="text-3xl font-medium">
+            Frequently Asked Questions
+          </h2>
 
           <div className="mt-6 space-y-4">
             {faqs.map(([question, answer]) => (

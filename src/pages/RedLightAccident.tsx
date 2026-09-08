@@ -9,27 +9,21 @@ import {
   ShieldCheck,
   MapPin,
 } from "lucide-react";
+import { useSeo } from "../hooks/use-seo";
 
 const RedLightAccident = () => {
-  const pageTitle = "Best Red Light Accident Lawyers in El Paso, TX";
+ const pageTitle =
+  "Best Red Light Accident Lawyers in El Paso, TX | El Paso's Best Lawyers";
   const description =
     "Find El Paso red light accident lawyers for intersection crashes involving T-bone collisions, left turns, distracted driving, disputed traffic signals, fault, and insurance claims.";
 
+  useSeo({
+    title: pageTitle,
+    description,
+    path: "/el-paso-red-light-accident-lawyers",
+  });
+
   useEffect(() => {
-    document.title = `${pageTitle} | El Paso's Best Lawyers`;
-
-    let meta = document.querySelector(
-      'meta[name="description"]'
-    ) as HTMLMetaElement | null;
-
-    if (!meta) {
-      meta = document.createElement("meta");
-      meta.name = "description";
-      document.head.appendChild(meta);
-    }
-
-    meta.content = description;
-
     window.scrollTo(0, 0);
   }, []);
 
