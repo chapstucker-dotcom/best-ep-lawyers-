@@ -137,7 +137,7 @@ const rearEndAccidentPage: PracticeAreaPageData = {
     },
     {
       label: "How to Get a Texas Crash Report After an El Paso Accident",
-      path: "/guides/texas-crash-report-el-paso",
+      path: "/guides/how-to-get-texas-crash-report-el-paso",
     },
   ],
 

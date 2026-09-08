@@ -964,7 +964,7 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     resourceLinks: [
       { label: "What to Do After a Car Accident in El Paso, Texas", path: "/guides/what-to-do-after-car-accident-el-paso" },
       { label: "How Long Do You Have to File a Car Accident Claim in Texas?", path: "/guides/texas-car-accident-statute-of-limitations" },
-      { label: "What Happens if the Driver Who Hit You Is Uninsured in Texas?", path: "/guides/uninsured-driver-texas-car-accident" },
+      { label: "What Happens if the Driver Who Hit You Is Uninsured in Texas?", path: "/guides/uninsured-driver-accident-texas" },
     ],
     lastUpdated: "August 10, 2026",
   },
@@ -1037,8 +1037,8 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     ],
     resourceLinks: [
       { label: "What to Do After a Car Accident in El Paso, Texas", path: "/guides/what-to-do-after-car-accident-el-paso" },
-      { label: "What Happens if the Driver Who Hit You Is Uninsured in Texas?", path: "/guides/uninsured-driver-texas-car-accident" },
-      { label: "How to Get a Texas Crash Report After an El Paso Accident", path: "/guides/texas-crash-report-el-paso" },
+      { label: "What Happens if the Driver Who Hit You Is Uninsured in Texas?", path: "/guides/uninsured-driver-accident-texas" },
+      { label: "How to Get a Texas Crash Report After an El Paso Accident", path: "/guides/how-to-get-texas-crash-report-el-paso" },
     ],
     lastUpdated: "August 14, 2026",
   },  {
@@ -1104,8 +1104,8 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     ],
     resourceLinks: [
       { label: "What to Do After a Car Accident in El Paso, Texas", path: "/guides/what-to-do-after-car-accident-el-paso" },
-      { label: "What Happens if the Driver Who Hit You Is Uninsured in Texas?", path: "/guides/uninsured-driver-texas-car-accident" },
-      { label: "How to Get a Texas Crash Report After an El Paso Accident", path: "/guides/texas-crash-report-el-paso" },
+      { label: "What Happens if the Driver Who Hit You Is Uninsured in Texas?", path: "/guides/uninsured-driver-accident-texas" },
+      { label: "How to Get a Texas Crash Report After an El Paso Accident", path: "/guides/how-to-get-texas-crash-report-el-paso" },
     ],
     lastUpdated: "August 16, 2026",
   },
@@ -3287,8 +3287,8 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     ],
     resourceLinks: [
       { label: "What to Do After a Car Accident in El Paso, Texas", path: "/guides/what-to-do-after-car-accident-el-paso" },
-      { label: "How to Get a Texas Crash Report After an El Paso Accident", path: "/guides/texas-crash-report-el-paso" },
-      { label: "What Happens if the Driver Who Hit You Is Uninsured in Texas?", path: "/guides/uninsured-driver-texas-car-accident" }
+      { label: "How to Get a Texas Crash Report After an El Paso Accident", path: "/guides/how-to-get-texas-crash-report-el-paso" },
+      { label: "What Happens if the Driver Who Hit You Is Uninsured in Texas?", path: "/guides/uninsured-driver-accident-texas" }
     ],
     lastUpdated: "August 14, 2026",
   },
