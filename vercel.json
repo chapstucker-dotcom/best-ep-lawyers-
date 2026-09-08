@@ -8,7 +8,339 @@
   ],
   "rewrites": [
     {
-      "source": "/el-paso-:path*",
+      "source": "/el-paso-personal-injury-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-slip-and-fall-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-medical-malpractice-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-brain-injury-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-construction-accident-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-dog-bite-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-traumatic-brain-injury-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-18-wheeler-accident-lawyer",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-semi-truck-accident-lawyer",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-car-accident-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-truck-accident-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-motorcycle-accident-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-wrongful-death-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-pedestrian-accident-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-bicycle-accident-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-uber-lyft-accident-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-rideshare-accident-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-uninsured-motorist-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-drunk-driving-accident-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-distracted-driving-accident-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-rear-end-accident-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-hit-and-run-accident-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-intersection-accident-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-highway-accident-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-multi-vehicle-accident-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-head-on-collision-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-wrong-way-accident-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-t-bone-accident-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-rollover-accident-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-sideswipe-accident-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-lane-change-accident-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-merging-accident-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-failure-to-yield-accident-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-red-light-accident-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-premises-liability-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-product-liability-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-criminal-defense-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-dwi-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-traffic-ticket-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-drug-crimes-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-assault-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-domestic-violence-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-theft-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-expunction-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-juvenile-defense-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-federal-criminal-defense-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-weapons-charges-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-white-collar-crime-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-probation-violation-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-felony-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-family-violence-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-protective-order-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-immigration-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-green-card-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-citizenship-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-deportation-defense-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-visa-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-business-immigration-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-family-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-divorce-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-child-custody-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-child-support-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-adoption-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-uncontested-divorce-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-spousal-support-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-prenuptial-agreement-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-estate-planning-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-probate-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-bankruptcy-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-employment-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-wage-hour-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-workplace-discrimination-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-age-discrimination-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-sex-discrimination-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-overtime-pay-disputes-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-workers-compensation-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-wrongful-termination-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-retaliation-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-sexual-harassment-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-employment-contract-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-severance-agreement-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-business-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-real-estate-lawyers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/el-paso-civil-litigation-lawyers",
       "destination": "/index.html"
     },
     {
@@ -27,10 +359,10 @@
       "source": "/pricing",
       "destination": "/index.html"
     },
-{
-  "source": "/for-law-firms",
-  "destination": "/index.html"
-},
+    {
+      "source": "/for-law-firms",
+      "destination": "/index.html"
+    },
     {
       "source": "/login",
       "destination": "/index.html"
