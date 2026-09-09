@@ -121,7 +121,7 @@ export default function PricingSection() {
               </p>
 
               <Link
-                to="/for-law-firms"
+                to="/for-law-firms?interest=category-exclusive#business-inquiry"
                 className="mt-7 inline-flex items-center justify-center rounded-xl bg-[#D4A62A] px-6 py-4 font-extrabold text-[#06224A] transition hover:bg-[#E3B53A]"
               >
                 Check Exclusive Availability

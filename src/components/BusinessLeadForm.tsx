@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { useSearchParams } from "react-router-dom";
 import {
   AlertCircle,
   Building2,
@@ -48,9 +49,24 @@ const INTEREST_OPTIONS = [
   "Not Sure Yet",
 ];
 
+const INTEREST_QUERY_MAP: Record<string, string> = {
+  "free": "Free Firm Listing",
+  "expert": "Expert Plan",
+  "category-featured": "Category Featured",
+  "category-exclusive": "Category Exclusive",
+  "advertising-sponsorship": "Advertising / Sponsorship",
+};
 export default function BusinessLeadForm() {
+  const [searchParams] = useSearchParams();
+
   const [form, setForm] =
-    useState<BusinessLeadState>(EMPTY_FORM);
+    useState<BusinessLeadState>(() => ({
+      ...EMPTY_FORM,
+      interest:
+        INTEREST_QUERY_MAP[
+          searchParams.get("interest") ?? ""
+        ] ?? "",
+    }));
 
   const [submitting, setSubmitting] =
     useState(false);

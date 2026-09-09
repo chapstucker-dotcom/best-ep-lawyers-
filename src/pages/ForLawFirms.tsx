@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, type ReactNode } from "react";
+import { Link, useLocation } from "react-router-dom";
 import {
   ArrowLeft,
   ArrowRight,
@@ -79,12 +79,26 @@ const productionFeatures = [
 ];
 
 export default function ForLawFirms() {
+  const location = useLocation();
   useSeo({
     title: "For El Paso Law Firms | Advertising & Listings",
     description:
       "Build your law firm's presence on El Paso's Best Lawyers with firm listings, attorney profiles, lead tools, premium category visibility, advertising, and local search exposure.",
     path: "/for-law-firms",
   });
+
+  useEffect(() => {
+    if (location.hash !== "#business-inquiry") return;
+
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById("business-inquiry")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [location.hash]);
 
   const scrollToInquiry = () => {
     document.getElementById("business-inquiry")?.scrollIntoView({
