@@ -28,6 +28,7 @@ import {
   BriefcaseBusiness,
   Building2,
   Car,
+  CheckCircle2,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
