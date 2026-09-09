@@ -1,7 +1,11 @@
 import LawFirmMarketplace from "./LawFirmMarketplace";
 import SeoPracticeAreaLinks from "./SeoPracticeAreaLinks";
 import { useEffect, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Button } from "@/components/ui/button";
+
+
+
 
 import Hero from './Hero';
 import FirmCard from './FirmCard';
