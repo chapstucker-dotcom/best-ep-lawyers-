@@ -416,6 +416,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/el-paso-landlord-tenant-lawyers",
+      "destination": "/index.html"
+    },
+    {
       "source": "/login",
       "destination": "/index.html"
     },

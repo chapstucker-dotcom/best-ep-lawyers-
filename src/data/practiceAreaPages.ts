@@ -4435,6 +4435,121 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     ],
     lastUpdated: "September 9, 2026",
   },
+  {
+    path: "/el-paso-landlord-tenant-lawyers",
+    shortTitle: "Landlord-Tenant",
+    title: "Best Landlord-Tenant Lawyers in El Paso, TX | Compare Attorneys",
+    description:
+      "Compare El Paso landlord-tenant lawyers handling evictions, lease disputes, unpaid rent, repairs, security deposits, lockouts, retaliation, property conditions, and other rental disputes.",
+    metaDescription:
+      "Compare landlord-tenant lawyers in El Paso, TX for evictions, lease disputes, repairs, security deposits, lockouts, retaliation, unpaid rent, and rental-property disputes.",
+    heroText:
+      "Compare El Paso landlord-tenant attorneys helping renters, landlords, and property owners resolve eviction, lease, repair, deposit, lockout, retaliation, and other rental-property disputes.",
+    topics: [
+      "Evictions and Forcible Detainer Cases",
+      "Lease Disputes",
+      "Nonpayment of Rent",
+      "Lease Violations",
+      "Repairs and Property Conditions",
+      "Security Deposit Disputes",
+      "Landlord Retaliation",
+      "Lockouts and Access Disputes",
+      "Notice and Termination Issues",
+      "Holdover Tenancies",
+      "Property Damage Claims",
+      "Rent and Fee Disputes",
+      "Residential Landlord-Tenant Law",
+      "Commercial Lease Disputes",
+      "Property Management Disputes",
+    ],
+    overview: [
+      "Landlord-tenant law governs disputes between property owners, landlords, property managers, and tenants involving possession of rental property, lease obligations, rent, repairs, deposits, notices, access, and termination of a tenancy. Some disputes can be resolved through documentation and negotiation, while others require a Justice Court case or other litigation.",
+      "Texas eviction cases are commonly called forcible detainer cases. A landlord generally must use the legal eviction process to obtain possession rather than simply removing a tenant without court process. Eviction disputes can involve unpaid rent, alleged lease violations, expiration or nonrenewal of a tenancy, holdover occupancy, notice requirements, defenses, and possession after judgment.",
+      "Repair and property-condition disputes can involve conditions that materially affect a tenant's physical health or safety, notice to the landlord, whether the landlord had a reasonable opportunity to address the condition, and whether statutory remedies may be available. The proper remedy depends on the facts and procedural requirements, so tenants should not assume they can withhold rent or make deductions without satisfying applicable law.",
+      "Security-deposit disputes may involve deductions, alleged property damage, cleaning or repair charges, itemization, forwarding-address requirements, and whether the landlord complied with Texas law governing return of deposits. Photographs, move-in and move-out records, inspection reports, receipts, communications, and the lease can be important evidence.",
+      "Texas law also regulates certain landlord lockouts and retaliation. Whether a lockout, rent increase, service reduction, eviction, nonrenewal, or other action is lawful can depend on the lease, notice, payment history, timing, the tenant's conduct, and whether the tenant previously exercised rights protected by law.",
+    ],
+    whenToHire: [
+      "You received an eviction notice, notice to vacate, eviction petition, hearing date, or judgment and need help understanding the next steps.",
+      "You are a landlord seeking possession because of unpaid rent, a lease violation, holdover occupancy, or another alleged breach.",
+      "A dispute involves whether proper notice was given before an eviction, termination, or nonrenewal.",
+      "Serious repair, habitability, health, safety, utility, or property-condition problems remain unresolved after notice to the landlord or property manager.",
+      "A landlord is withholding some or all of a security deposit and the parties disagree about damages, deductions, charges, or required documentation.",
+      "You were locked out, denied access, had locks changed, or are involved in a dispute over a landlord's right to restrict access.",
+      "You believe a landlord retaliated after a good-faith repair request, government complaint, tenant-rights activity, or another protected action.",
+      "The parties disagree about rent, fees, lease terms, renewal, termination, unauthorized occupants, pets, maintenance responsibilities, or property damage.",
+      "A residential or commercial lease dispute involves substantial money, business operations, multiple properties, guarantors, or complex contract terms.",
+      "You need help preserving evidence, responding to court papers, negotiating a resolution, or determining which landlord-tenant remedy or defense may apply.",
+    ],
+    localContent: [
+      "El Paso landlord-tenant disputes can involve apartments, single-family rentals, duplexes, manufactured housing, student rentals, military households, commercial spaces, and properties managed by local or out-of-area owners and property-management companies.",
+      "Eviction cases are generally handled in Justice Court, while related claims or appeals may involve other courts depending on the issue. Deadlines in eviction and possession matters can move quickly, so consumers should review every notice, citation, judgment, and hearing date promptly.",
+      "Useful records can include the signed lease and amendments, payment history, notices, photographs and video, repair requests, inspection records, text messages, emails, move-in and move-out documentation, deposit records, utility records, witness information, and communications with the landlord or property manager.",
+      "An El Paso landlord-tenant attorney can evaluate whether a dispute centers on possession, rent, lease enforcement, repairs, deposits, access, retaliation, property damage, commercial leasing, or another rental-property issue and explain the procedural options that may be available.",
+    ],
+    faqs: [
+      {
+        question: "How does an eviction work in Texas?",
+        answer:
+          "An eviction is a court process used by a landlord to recover possession of rental property. The required notices, grounds, hearing process, deadlines, and possible appeals depend on the lease and circumstances. A tenant generally cannot be physically removed through the eviction process until the required court procedures have occurred.",
+      },
+      {
+        question: "Can a landlord evict a tenant without going to court?",
+        answer:
+          "A landlord generally must use the legal eviction process to obtain possession when a tenant does not leave voluntarily. Lockout rules are separate from eviction rules, and changing locks does not by itself substitute for a court eviction.",
+      },
+      {
+        question: "What should I do if I receive a notice to vacate?",
+        answer:
+          "Read the notice carefully, preserve it and the envelope or delivery information, review the lease, identify the stated reason, and note every deadline or court date. A notice to vacate can be an important step before an eviction case, so prompt review may be useful.",
+      },
+      {
+        question: "Can a tenant withhold rent because repairs are needed?",
+        answer:
+          "Tenants should not assume they may simply stop paying rent because repairs are needed. Texas repair remedies have statutory requirements involving the condition, notice, rent status, timing, and other procedures. The lease and applicable law should be reviewed before withholding, deducting, or redirecting rent.",
+      },
+      {
+        question: "What evidence matters in a repair dispute?",
+        answer:
+          "The lease, written repair requests, photographs, video, inspection reports, maintenance records, messages, emails, receipts, utility records, medical or safety documentation when relevant, and proof of when the landlord received notice can all matter.",
+      },
+      {
+        question: "When must a Texas landlord return a security deposit?",
+        answer:
+          "Texas law generally sets a 30-day period for returning a residential security deposit after the tenant surrenders the premises, subject to statutory requirements such as the tenant providing a forwarding address and any lawful deductions. The facts and lease should be reviewed when a deposit is disputed.",
+      },
+      {
+        question: "Can a landlord deduct for property damage?",
+        answer:
+          "A landlord may be able to make lawful deductions for certain damages or charges, but disputes often arise over whether the condition is ordinary wear and tear, whether the tenant caused the damage, whether the amount is reasonable, and whether required documentation was provided.",
+      },
+      {
+        question: "Can a Texas landlord lock out a tenant?",
+        answer:
+          "Texas law permits certain residential lockouts only under limited conditions and procedural requirements. A lockout is not the same as an eviction, and tenants may have rights concerning notice, access, and a replacement key. The lease and circumstances should be reviewed carefully.",
+      },
+      {
+        question: "What is landlord retaliation?",
+        answer:
+          "Retaliation can involve certain adverse actions taken because a tenant exercised rights protected by law, such as making a good-faith repair request or complaint. Not every eviction, rent increase, nonrenewal, or lease enforcement action is retaliation; the reason, timing, lease history, and statutory exceptions matter.",
+      },
+      {
+        question: "When should I contact a landlord-tenant lawyer?",
+        answer:
+          "Consider prompt legal review when an eviction or court deadline is approaching, serious repair or safety issues remain unresolved, access has been restricted, a security deposit is disputed, retaliation is suspected, significant money or property is at stake, or the lease dispute is becoming difficult to resolve.",
+      },
+    ],
+    relatedPages: [
+      { label: "Real Estate", path: "/el-paso-real-estate-lawyers" },
+      { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
+      { label: "Business Law", path: "/el-paso-business-lawyers" },
+      { label: "Construction Law", path: "/el-paso-construction-lawyers" },
+    ],
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "September 9, 2026",
+  },
 ];
 
 export const getPracticeAreaPageByPath = (
