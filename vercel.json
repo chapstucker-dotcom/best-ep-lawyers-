@@ -412,6 +412,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/el-paso-tax-irs-lawyers",
+      "destination": "/index.html"
+    },
+    {
       "source": "/login",
       "destination": "/index.html"
     },

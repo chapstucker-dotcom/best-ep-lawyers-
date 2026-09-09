@@ -4320,10 +4320,124 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     ],
     lastUpdated: "September 9, 2026",
   },
+  {
+    path: "/el-paso-tax-irs-lawyers",
+    shortTitle: "Tax / IRS",
+    title: "Best Tax & IRS Lawyers in El Paso, TX | Compare Attorneys",
+    description:
+      "Compare El Paso tax and IRS lawyers handling audits, unpaid taxes, IRS notices, tax liens and levies, collection disputes, appeals, penalties, Tax Court matters, and business tax controversies.",
+    metaDescription:
+      "Compare tax and IRS lawyers in El Paso, TX for audits, back taxes, IRS notices, liens, levies, appeals, penalties, Tax Court disputes, and collection matters.",
+    heroText:
+      "Compare El Paso tax and IRS attorneys helping individuals and businesses respond to audits, collection actions, tax liens and levies, penalties, appeals, and other federal tax disputes.",
+    topics: [
+      "IRS Audits and Examinations",
+      "IRS Notices",
+      "Back and Unpaid Taxes",
+      "Federal Tax Liens",
+      "IRS Levies",
+      "Tax Collection Disputes",
+      "Collection Due Process",
+      "IRS Appeals",
+      "Installment Agreements",
+      "Offers in Compromise",
+      "Currently Not Collectible Status",
+      "Penalty Abatement",
+      "Tax Court Disputes",
+      "Payroll and Employment Taxes",
+      "Trust Fund Recovery Penalty",
+    ],
+    overview: [
+      "A tax or IRS lawyer represents individuals and businesses in disputes involving federal tax assessments, audits, collection activity, penalties, appeals, and litigation. These matters can begin with an IRS notice, examination, unpaid balance, proposed collection action, business tax problem, or other disagreement with the government.",
+      "IRS collection tools can include federal tax liens and levies, but they are not the same. A federal tax lien is a legal claim against property arising from unpaid tax debt, while a levy is a legal seizure of property or rights to property to satisfy a tax debt. The available response depends on the notice, procedural history, deadlines, and the taxpayer's financial circumstances.",
+      "Potential collection resolutions can include installment agreements, offers in compromise, or currently-not-collectible treatment in qualifying situations. Eligibility is not automatic, and the IRS may require detailed financial information before approving a collection alternative.",
+      "Tax controversy work can also involve administrative appeals, Collection Due Process proceedings, penalty disputes, refund issues, employment and payroll taxes, responsible-person assessments, and petitions in the United States Tax Court. Filing deadlines can vary by the type of notice or proceeding, so the date and instructions on an IRS notice should be reviewed carefully.",
+      "Some tax problems overlap with bankruptcy, business law, civil litigation, or federal criminal defense. A civil tax dispute involving audits or collection is different from a criminal tax investigation, and the appropriate lawyer may depend on whether the matter is administrative, civil, or criminal.",
+    ],
+    whenToHire: [
+      "You received an IRS audit, examination notice, proposed adjustment, or request for records and want help responding.",
+      "You owe back taxes and are receiving collection notices, demands for payment, or warnings about enforced collection.",
+      "The IRS filed or may file a federal tax lien, or you received notice of a proposed or completed levy.",
+      "You want to evaluate an installment agreement, offer in compromise, currently-not-collectible status, or another collection alternative.",
+      "You disagree with an IRS determination and may need an administrative appeal or Collection Due Process review.",
+      "Penalties or interest are substantial and you want to evaluate whether relief or abatement may be available.",
+      "You received a notice involving a deadline to petition the United States Tax Court or otherwise challenge an IRS determination.",
+      "Your business has payroll, employment-tax, withholding, or Trust Fund Recovery Penalty issues.",
+      "You are facing a tax dispute involving significant assets, a business, real estate, cross-border issues, or multiple years of unresolved tax problems.",
+      "The matter may involve allegations of tax fraud, false returns, evasion, or an IRS Criminal Investigation inquiry and you need to determine whether civil tax counsel or criminal defense counsel is appropriate.",
+    ],
+    localContent: [
+      "El Paso tax matters can involve wage earners, self-employed people, small businesses, closely held companies, real estate, military households, and taxpayers with financial activity or property connected to Texas, New Mexico, or Mexico.",
+      "Federal tax disputes may require review of returns, IRS transcripts, notices, bank records, payroll records, business books, contracts, asset information, prior correspondence, and proof of income and expenses. Preserving complete records can be important when responding to an audit, collection case, or appeal.",
+      "Tax Court and federal tax matters follow federal procedures rather than ordinary Texas state-court rules. Deadlines can depend on the specific IRS notice or action, so consumers should avoid assuming that every tax dispute has the same response period.",
+      "An El Paso tax attorney can evaluate whether a matter involves an audit, assessment dispute, collection problem, lien, levy, appeal, Tax Court case, penalty issue, business tax controversy, or another federal tax problem and explain the available procedural options.",
+    ],
+    faqs: [
+      {
+        question: "What is the difference between a federal tax lien and an IRS levy?",
+        answer:
+          "A federal tax lien is the government's legal claim against property when qualifying tax debt remains unpaid. A levy is a legal seizure of property or rights to property to collect a tax debt. Notices, appeal rights, exemptions, and available remedies can differ, so the specific IRS documents should be reviewed carefully.",
+      },
+      {
+        question: "Can a tax lawyer help with an IRS audit?",
+        answer:
+          "Yes. A tax attorney may help organize records, communicate with the IRS, analyze proposed adjustments, identify legal and factual issues, respond to information requests, and evaluate administrative appeal or litigation options if a dispute remains unresolved.",
+      },
+      {
+        question: "What should I do if I receive an IRS notice?",
+        answer:
+          "Read the entire notice, note the tax year and issue involved, preserve the envelope and all attachments, and identify any response or petition deadline. Do not assume the notice is routine if it threatens collection, proposes an assessment, or describes appeal or Tax Court rights.",
+      },
+      {
+        question: "Can I set up a payment plan with the IRS?",
+        answer:
+          "The IRS offers installment agreements for qualifying taxpayers, but eligibility, required financial information, payment terms, fees, and available options depend on the amount owed and the taxpayer's circumstances. A lawyer can help evaluate whether an installment agreement or another collection option is appropriate.",
+      },
+      {
+        question: "Does everyone who owes back taxes qualify for an offer in compromise?",
+        answer:
+          "No. An offer in compromise is not automatic and the IRS evaluates eligibility under specific standards. Financial information, ability to pay, income, expenses, assets, compliance history, and other factors can affect whether an offer is available or likely to be accepted.",
+      },
+      {
+        question: "What does currently not collectible mean?",
+        answer:
+          "Currently-not-collectible status may be available when the IRS determines that collecting the tax would create qualifying financial hardship. It generally does not erase the underlying tax debt, and interest or penalties may continue while collection is suspended.",
+      },
+      {
+        question: "Can IRS penalties be reduced or removed?",
+        answer:
+          "Penalty relief may be available in some circumstances, depending on the type of penalty, filing and payment history, reasonable-cause facts, statutory requirements, and IRS administrative rules. Relief is not guaranteed and should be evaluated based on the specific penalty and facts.",
+      },
+      {
+        question: "What is Collection Due Process?",
+        answer:
+          "Collection Due Process is an IRS administrative review process that may be available after certain lien or levy notices. It can provide an opportunity to challenge certain collection issues or propose collection alternatives, subject to procedural requirements and deadlines.",
+      },
+      {
+        question: "How long do I have to file a Tax Court case?",
+        answer:
+          "The deadline depends on the type of IRS notice or proceeding. Some Tax Court cases have different filing periods from others, and missing the applicable deadline can affect the right to judicial review. The date and instructions on the notice should be checked immediately.",
+      },
+      {
+        question: "When should I contact a tax or IRS lawyer?",
+        answer:
+          "Consider prompt legal review when you receive an audit or collection notice, face a lien or levy, disagree with a tax assessment, have substantial unpaid taxes or penalties, receive a Tax Court deadline, have payroll-tax problems, or believe the matter could involve civil or criminal tax exposure.",
+      },
+    ],
+    relatedPages: [
+      { label: "Bankruptcy", path: "/el-paso-bankruptcy-lawyers" },
+      { label: "Business Law", path: "/el-paso-business-lawyers" },
+      { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
+      { label: "Federal Criminal Defense", path: "/el-paso-federal-criminal-defense-lawyers" },
+    ],
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "September 9, 2026",
+  },
 ];
 
 export const getPracticeAreaPageByPath = (
   path: string
 ): PracticeAreaPageData | undefined =>
   practiceAreaPages.find((page) => page.path === path);
-
