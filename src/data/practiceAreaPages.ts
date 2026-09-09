@@ -4666,6 +4666,122 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     ],
     lastUpdated: "September 9, 2026",
   },
+  {
+    path: "/el-paso-civil-rights-lawyers",
+    shortTitle: "Civil Rights",
+    title: "Best Civil Rights Lawyers in El Paso, TX | Compare Attorneys",
+    description:
+      "Compare El Paso civil rights lawyers handling constitutional claims, police misconduct, excessive force, unlawful arrest or detention, unlawful searches, First Amendment claims, due process, equal protection, and Section 1983 litigation.",
+    metaDescription:
+      "Compare civil rights lawyers in El Paso, TX for police misconduct, excessive force, unlawful arrest or detention, unlawful searches, First Amendment claims, due process, equal protection, and Section 1983 cases.",
+    heroText:
+      "Compare El Paso civil rights attorneys handling claims involving government conduct, constitutional protections, police misconduct, excessive force, unlawful searches or detention, First Amendment rights, due process, equal protection, and Section 1983.",
+    topics: [
+      "Civil Rights Violations",
+      "Constitutional Rights",
+      "Section 1983 Claims",
+      "Police Misconduct",
+      "Excessive Force",
+      "Unlawful Arrest and Detention",
+      "Unlawful Searches and Seizures",
+      "First Amendment Claims",
+      "Retaliation for Protected Speech",
+      "Due Process Claims",
+      "Equal Protection Claims",
+      "Jail and Detention Rights",
+      "Government Misconduct",
+      "Municipal Liability",
+      "Injunctive and Declaratory Relief",
+      "Federal Civil Rights Litigation",
+    ],
+    overview: [
+      "Civil rights law addresses violations of rights protected by the United States Constitution and federal law. Claims can arise when a person acting under governmental authority allegedly deprives someone of a protected right. Depending on the facts, a case may involve law enforcement, detention, government officials, public agencies, municipalities, schools, or other state or local actors.",
+      "42 U.S.C. Section 1983 provides a civil cause of action for certain deprivations of federal constitutional or statutory rights committed under color of state law. Section 1983 does not itself create every underlying right, and the availability of a claim depends on the specific constitutional or federal protection involved, the defendant, the conduct alleged, available defenses, causation, and the requested remedy.",
+      "Civil rights disputes can involve allegations of excessive force, unreasonable searches or seizures, unlawful arrest or detention, retaliation for protected speech, denial of procedural protections, unequal treatment, or other government conduct affecting federally protected rights. Not every unfair, mistaken, or harmful government action establishes a civil rights claim.",
+      "These cases can raise complex issues involving immunity, municipal responsibility, individual liability, jurisdiction, evidence, damages, and equitable relief. Video, photographs, body-camera footage, dispatch records, reports, medical records, witness information, court records, messages, and other contemporaneous evidence may become important.",
+      "Civil rights claims can be subject to statutes of limitation, notice requirements, administrative procedures, preservation issues, and other deadlines that vary with the claim and defendant. Prompt review can be important when evidence may be lost or a filing period may be running.",
+    ],
+    whenToHire: [
+      "You believe law enforcement used excessive force during an arrest, stop, search, detention, or other encounter.",
+      "You were arrested or detained and believe the seizure lacked a lawful basis or violated a constitutional protection.",
+      "Your home, vehicle, phone, property, or person was searched or seized and you believe the government conduct violated your rights.",
+      "You believe a government official retaliated against you because of speech, protest activity, petitioning, reporting misconduct, or another protected activity.",
+      "You believe a state or local official denied legally required procedures before depriving you of liberty, property, or another protected interest.",
+      "You believe government action treated you differently in a way that may implicate equal-protection rights.",
+      "You or a family member experienced alleged misconduct while in a jail, detention facility, or other government-controlled setting.",
+      "Body-camera footage, surveillance video, dispatch records, reports, medical records, photographs, or witness evidence may need to be preserved quickly.",
+      "A government agency, municipality, officer, or official is involved and you need help identifying the proper legal theory, defendants, defenses, or remedies.",
+      "You received a dismissal, judgment, or significant ruling in a civil rights case and need advice about post-judgment or appellate options.",
+    ],
+    localContent: [
+      "Federal civil rights cases arising in El Paso may be filed in the United States District Court for the Western District of Texas when federal jurisdiction exists. The Western District has an El Paso Division serving El Paso and Hudspeth Counties.",
+      "Local civil rights matters may involve city, county, state, school, detention, or law-enforcement actors. The correct defendants and legal standards depend on who acted, under what authority, what right is alleged to have been violated, and whether the claim concerns an individual action, an official policy, or another basis for liability.",
+      "Evidence can be especially important in claims involving stops, arrests, searches, detention, or use of force. Potential materials include body-camera and dash-camera footage, surveillance video, photographs, dispatch and 911 records, incident reports, citations, booking records, medical records, witness names, court filings, social-media posts, messages, and records showing the timing of events.",
+      "An El Paso civil rights attorney can evaluate whether the alleged conduct may implicate a constitutional or federal right, identify possible defendants and defenses, assess jurisdiction and deadlines, preserve evidence, and explain whether damages, declaratory relief, injunctive relief, or another remedy may be legally available.",
+    ],
+    faqs: [
+      {
+        question: "What does a civil rights lawyer do?",
+        answer:
+          "A civil rights lawyer evaluates claims involving alleged violations of constitutional or federal rights, identifies the potentially responsible government actors, reviews evidence and available defenses, assesses jurisdiction and deadlines, and may pursue negotiation, litigation, injunctive relief, damages, or other legally available remedies.",
+      },
+      {
+        question: "What is a Section 1983 claim?",
+        answer:
+          "42 U.S.C. Section 1983 provides a way to bring certain civil claims when a person acting under color of state law allegedly deprives someone of a right secured by the Constitution or federal law. Whether a viable claim exists depends on the particular right, defendant, conduct, causation, defenses, and requested relief.",
+      },
+      {
+        question: "Can police misconduct be a civil rights violation?",
+        answer:
+          "Potentially. Conduct such as excessive force, an unreasonable search or seizure, or an unlawful arrest or detention may raise constitutional issues depending on the circumstances. Not every mistake, injury, or unfavorable police encounter establishes a federal civil rights claim.",
+      },
+      {
+        question: "What is excessive force?",
+        answer:
+          "Excessive-force claims generally examine whether the force used by a government officer violated the constitutional standard that applies to the specific setting. The analysis is fact-specific and may consider the circumstances confronting the officer, the type and amount of force used, the reason for the encounter, injuries, video evidence, and other facts.",
+      },
+      {
+        question: "Can an unlawful search or arrest support a civil rights case?",
+        answer:
+          "It may. The Fourth Amendment protects against unreasonable searches and seizures, and some unlawful-search, unlawful-arrest, or detention claims may be pursued through federal civil rights law. The existence of a warrant, probable cause, consent, exceptions, court rulings, and other facts can affect the analysis.",
+      },
+      {
+        question: "Can retaliation by a government official violate the First Amendment?",
+        answer:
+          "In some circumstances, government retaliation for constitutionally protected speech or activity can support a First Amendment claim. The protected activity, the government's action, causation, applicable legal standards, and defenses all matter.",
+      },
+      {
+        question: "Can I sue a city or county under Section 1983?",
+        answer:
+          "A municipality is not automatically liable simply because it employed the person accused of misconduct. Claims against a city or county can require proof of a legally sufficient basis for municipal liability, which may involve an official policy, custom, decision, or other recognized theory. The specific facts require careful review.",
+      },
+      {
+        question: "What is qualified immunity?",
+        answer:
+          "Qualified immunity is a defense that can apply to certain government officials sued for damages in their individual capacities. Whether it applies depends on the defendant, the right at issue, the facts, and controlling law. It is a complex issue that can substantially affect civil rights litigation.",
+      },
+      {
+        question: "What evidence should I preserve after alleged police or government misconduct?",
+        answer:
+          "Preserve photographs, video, medical records, names and contact information for witnesses, citations, court papers, booking documents, messages, social-media posts, incident numbers, and a written timeline. Potential government-held evidence such as body-camera footage, dispatch records, reports, or surveillance video may also require prompt preservation efforts.",
+      },
+      {
+        question: "Do civil rights claims have deadlines?",
+        answer:
+          "Yes. Different civil rights claims can involve different statutes of limitation, notice rules, administrative procedures, and other filing requirements. The correct deadline depends on the claim, defendant, events, and jurisdiction, so prompt legal review is important.",
+      },
+    ],
+    relatedPages: [
+      { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
+      { label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" },
+      { label: "Federal Criminal Defense", path: "/el-paso-federal-criminal-defense-lawyers" },
+      { label: "Workplace Discrimination", path: "/el-paso-workplace-discrimination-lawyers" },
+    ],
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "September 9, 2026",
+  },
 ];
 
 export const getPracticeAreaPageByPath = (
