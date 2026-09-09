@@ -420,6 +420,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/el-paso-appeals-lawyers",
+      "destination": "/index.html"
+    },
+    {
       "source": "/login",
       "destination": "/index.html"
     },

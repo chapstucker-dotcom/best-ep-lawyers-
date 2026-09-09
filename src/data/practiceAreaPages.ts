@@ -4543,7 +4543,123 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       { label: "Real Estate", path: "/el-paso-real-estate-lawyers" },
       { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
       { label: "Business Law", path: "/el-paso-business-lawyers" },
-      { label: "Construction Law", path: "/el-paso-construction-lawyers" },
+      { label: "Bankruptcy", path: "/el-paso-bankruptcy-lawyers" },
+    ],
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "September 9, 2026",
+  },
+  {
+    path: "/el-paso-appeals-lawyers",
+    shortTitle: "Appeals",
+    title: "Best Appeals & Appellate Lawyers in El Paso, TX | Compare Attorneys",
+    description:
+      "Compare El Paso appeals and appellate lawyers handling civil appeals, criminal appeals, family-law appeals, federal appeals, appellate briefs, oral argument, mandamus, and review of trial-court rulings.",
+    metaDescription:
+      "Compare appeals and appellate lawyers in El Paso, TX for civil, criminal, family, state, and federal appeals, appellate briefs, oral argument, and mandamus.",
+    heroText:
+      "Compare El Paso appellate attorneys handling appeals from civil, criminal, family, and business cases, along with appellate briefing, record review, oral argument, and other appellate proceedings.",
+    topics: [
+      "Civil Appeals",
+      "Criminal Appeals",
+      "Family Law Appeals",
+      "Business and Commercial Appeals",
+      "Texas State Court Appeals",
+      "Federal Appeals",
+      "Notices of Appeal",
+      "Appellate Records",
+      "Appellate Briefing",
+      "Oral Argument",
+      "Preservation of Error",
+      "Standards of Review",
+      "Interlocutory Appeals",
+      "Motions for Rehearing",
+      "Petitions for Review",
+      "Mandamus and Extraordinary Relief",
+    ],
+    overview: [
+      "Appellate law focuses on reviewing decisions made by trial courts and, in some matters, seeking review of particular rulings before a case is fully concluded. An appeal is generally not a new trial. Appellate courts ordinarily review the existing record, the legal arguments presented in written briefs, and the standards that govern the challenged ruling.",
+      "A lawyer handling an appeal may evaluate whether an order or judgment can be reviewed, whether appellate jurisdiction exists, whether an issue was preserved in the trial court, what standard of review applies, what belongs in the appellate record, and how the governing law applies to the record. Written briefing is central to most appeals, while oral argument may be permitted or requested in appropriate cases.",
+      "Appellate issues can arise in civil lawsuits, criminal cases, family-law matters, business disputes, employment cases, property cases, and other proceedings. The legal questions and available remedies vary substantially by case type, the court that issued the ruling, and whether the challenged decision is final or interlocutory.",
+      "Deadlines are especially important in appellate practice. The time to file a notice of appeal, motion, petition, record-related request, or other appellate document can vary depending on the type of case, the order being challenged, and post-judgment filings. Anyone considering an appeal should have the judgment, order, docket, and applicable deadlines reviewed promptly rather than relying on a general deadline.",
+      "Some disputes may involve extraordinary relief such as mandamus rather than an ordinary appeal. These proceedings have different standards and are not substitutes for an appeal in every case. An appellate lawyer can assess whether direct appeal, interlocutory review, mandamus, rehearing, or review by a higher court may be available.",
+    ],
+    whenToHire: [
+      "A final judgment or appealable order has been entered and you are considering whether to appeal.",
+      "Another party filed an appeal and you need to defend the judgment or ruling as the appellee.",
+      "You need to determine whether a trial-court ruling can be reviewed immediately or only after final judgment.",
+      "A civil, criminal, family-law, business, employment, or property case resulted in an adverse ruling that may involve legal or procedural error.",
+      "You need help identifying and preserving issues for possible appellate review before or after trial.",
+      "The appellate record, clerk's record, reporter's record, findings, exhibits, motions, objections, or trial transcripts may affect the issues on appeal.",
+      "An appellate brief, response brief, reply brief, motion, or petition is due or has been requested by a court.",
+      "You need representation for possible oral argument before a Texas or federal appellate court.",
+      "You are considering rehearing, review by a higher court, or another post-decision appellate procedure.",
+      "You believe extraordinary relief such as mandamus may be necessary because an ordinary appeal may not provide an adequate remedy.",
+    ],
+    localContent: [
+      "The Eighth Court of Appeals is located in El Paso and has appellate jurisdiction over qualifying civil and criminal cases from district and county courts in El Paso County and other counties within its appellate district. It also has jurisdiction over certain original proceedings, including mandamus matters.",
+      "Federal cases originating in the Western District of Texas may proceed to the United States Court of Appeals for the Fifth Circuit when federal appellate jurisdiction exists. Federal appellate rules, deadlines, briefing requirements, and standards differ from Texas state appellate procedure.",
+      "Useful appellate materials can include the signed judgment or order, docket sheet, pleadings, motions, responses, objections, offers of proof, findings of fact and conclusions of law, jury charge materials, exhibits, clerk's record, reporter's record, hearing or trial transcripts, and post-judgment motions.",
+      "An El Paso appellate attorney can review the procedural history and record, identify potentially reviewable issues, assess preservation and jurisdiction, research the applicable standard of review, prepare appellate briefing, and explain the possible appellate remedies and next steps.",
+    ],
+    faqs: [
+      {
+        question: "What does an appellate lawyer do?",
+        answer:
+          "An appellate lawyer focuses on review of trial-court rulings and judgments. Work can include evaluating appellate jurisdiction, identifying preserved legal issues, analyzing the record and applicable standards of review, researching legal authority, preparing briefs and motions, handling oral argument, and advising on rehearing or further review.",
+      },
+      {
+        question: "Is an appeal a new trial?",
+        answer:
+          "Usually not. An appellate court generally reviews what happened in the trial court based on the appellate record and the legal arguments raised by the parties. The appellate court ordinarily does not retry the case simply because one side disagrees with the result.",
+      },
+      {
+        question: "Can I introduce new evidence on appeal?",
+        answer:
+          "Direct appeals generally focus on the record created in the trial court rather than new evidence. Whether another procedure may permit additional evidence depends on the type of case and issue, so the record and available procedural options should be reviewed carefully.",
+      },
+      {
+        question: "How long do I have to file an appeal in Texas?",
+        answer:
+          "There is no single deadline that applies to every appeal. The deadline can depend on the type of case, the judgment or order, post-judgment motions, and the court involved. Because missing an appellate deadline can affect the right to review, the signed order or judgment and docket should be reviewed promptly.",
+      },
+      {
+        question: "What is preservation of error?",
+        answer:
+          "Preservation of error generally concerns whether an issue was properly raised, presented, objected to, or ruled on in the trial court in a way that allows an appellate court to review it. The requirements depend on the issue and procedural context.",
+      },
+      {
+        question: "What is a standard of review?",
+        answer:
+          "A standard of review is the framework an appellate court uses to evaluate a particular trial-court decision. Different issues can be reviewed under different standards, which can affect how much deference the appellate court gives the trial court and how the argument should be presented.",
+      },
+      {
+        question: "Can every trial-court order be appealed immediately?",
+        answer:
+          "No. Many appeals occur after a final judgment, although Texas and federal law permit immediate review of certain interlocutory orders in specified circumstances. In some situations, extraordinary relief such as mandamus may be considered, but it has separate requirements.",
+      },
+      {
+        question: "What happens after a notice of appeal is filed?",
+        answer:
+          "The process can include establishing appellate jurisdiction, preparing and filing the appellate record, briefing by the appellant and appellee, motions, possible oral argument, a written decision, and in some cases rehearing or further review. The exact sequence and deadlines depend on the court and case.",
+      },
+      {
+        question: "Is oral argument required in every appeal?",
+        answer:
+          "No. Many appeals are decided from the written record and briefs. Whether oral argument occurs depends on the applicable rules, the court, the parties' requests, and whether the court concludes argument would assist its decision.",
+      },
+      {
+        question: "When should I contact an appeals lawyer?",
+        answer:
+          "Consider contacting an appellate lawyer as soon as a significant ruling or judgment may be challenged, and preferably before appellate deadlines begin to expire. Early review can help identify jurisdictional issues, preservation questions, record needs, post-judgment options, and the correct appellate procedure.",
+      },
+    ],
+    relatedPages: [
+      { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
+      { label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" },
+      { label: "Family Law", path: "/el-paso-family-lawyers" },
+      { label: "Federal Criminal Defense", path: "/el-paso-federal-criminal-defense-lawyers" },
     ],
     resourceLinks: [
       { label: "Browse All Texas Law Guides", path: "/guides" },
