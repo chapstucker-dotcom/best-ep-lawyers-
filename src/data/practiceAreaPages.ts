@@ -4206,6 +4206,120 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     ],
     lastUpdated: "September 9, 2026",
   },
+  {
+    path: "/el-paso-nursing-home-abuse-lawyers",
+    shortTitle: "Nursing Home Abuse",
+    title: "Best Nursing Home Abuse Lawyers in El Paso, TX | Compare Attorneys",
+    description:
+      "Compare El Paso nursing home abuse lawyers handling neglect, pressure injuries, falls, malnutrition, dehydration, medication problems, unexplained injuries, exploitation, and wrongful death.",
+    metaDescription:
+      "Compare nursing home abuse lawyers in El Paso, TX for neglect, bedsores, falls, malnutrition, dehydration, medication errors, exploitation, serious injuries, and wrongful death.",
+    heroText:
+      "Compare El Paso nursing home abuse attorneys helping residents and families investigate neglect, abuse, preventable injuries, unsafe care, exploitation, and serious harm in nursing facilities.",
+    topics: [
+      "Nursing Home Abuse",
+      "Nursing Home Neglect",
+      "Pressure Injuries and Bedsores",
+      "Falls and Fall Injuries",
+      "Malnutrition and Dehydration",
+      "Medication Errors",
+      "Physical Abuse",
+      "Sexual Abuse",
+      "Financial Exploitation",
+      "Unexplained Injuries",
+      "Missing Residents and Elopement",
+      "Inadequate Supervision",
+      "Staffing and Care Failures",
+      "Resident Safety",
+      "Wrongful Death",
+    ],
+    overview: [
+      "A nursing home abuse lawyer represents residents and families when a nursing facility, employee, caregiver, contractor, or other responsible party may have caused or allowed serious harm through abuse, neglect, exploitation, unsafe care, or failures to protect a resident.",
+      "Potential warning signs can include pressure injuries, repeated falls, unexplained bruising or fractures, sudden weight loss, dehydration, medication problems, poor hygiene, untreated infections, changes in behavior, missing property, unexplained financial activity, or a resident leaving a facility without appropriate supervision.",
+      "Texas nursing facilities are subject to state and federal requirements concerning resident safety, care, reporting, investigation, and protection. Texas Health and Human Services identifies abuse, neglect, exploitation, unusual-circumstance deaths, missing residents, misappropriation, drug theft, and suspicious injuries of unknown source among incidents nursing facilities may be required to report.",
+      "Investigation may involve medical records, nursing notes, care plans, medication-administration records, incident reports, staffing records, surveillance footage, photographs, witness statements, facility policies, complaint history, regulatory records, and communications with residents and family members.",
+      "Some nursing-home cases involve medical issues that overlap with medical malpractice, while others focus on facility operations, supervision, staffing, resident protection, premises safety, abuse, neglect, or exploitation. The legal theory depends on the facts and the people or entities involved.",
+    ],
+    whenToHire: [
+      "A resident developed serious pressure injuries, infected wounds, unexplained bruises, fractures, or other injuries that may have been preventable.",
+      "A resident suffered repeated falls, wandering, elopement, or another safety event involving inadequate supervision or care.",
+      "There are signs of malnutrition, dehydration, poor hygiene, untreated infection, medication problems, or a significant unexplained decline.",
+      "A resident reports or shows signs of physical abuse, sexual abuse, intimidation, mistreatment, or exploitation.",
+      "Money, property, medication, or personal belongings are missing or there is suspicious financial activity.",
+      "The facility's explanation for an injury, hospitalization, transfer, or death is unclear, inconsistent, or disputed.",
+      "Important records, video, photographs, witness information, staffing information, or other evidence may need to be identified and preserved.",
+      "A nursing facility, insurer, management company, contractor, or caregiver disputes responsibility for serious harm.",
+      "A family member died after suspected abuse, neglect, unsafe care, or another preventable nursing-facility incident.",
+    ],
+    localContent: [
+      "Nursing home abuse and neglect matters in El Paso may involve nursing facilities, skilled nursing facilities, rehabilitation centers, long-term-care providers, and other residential care settings serving older adults and people with disabilities.",
+      "Residents and families may have records from hospitals, physicians, pharmacies, emergency services, rehabilitation providers, hospice or home-health providers, and the nursing facility itself. Comparing those records can help establish when an injury or decline began and what care was provided.",
+      "El Paso families may also need to preserve photographs, text messages, emails, visitor notes, names of staff members and witnesses, billing records, personal-property records, and details about prior complaints or unexplained incidents.",
+      "An El Paso nursing home abuse attorney can evaluate whether the facts involve neglect, abuse, exploitation, medical negligence, unsafe facility practices, inadequate supervision, staffing issues, or multiple potentially responsible parties.",
+    ],
+    faqs: [
+      {
+        question: "What is considered nursing home abuse or neglect?",
+        answer:
+          "Nursing home abuse can include intentional physical, sexual, emotional, or financial harm. Neglect generally involves failures to provide necessary care, supervision, protection, nutrition, hydration, hygiene, medication, treatment, or other services. Whether particular conduct creates legal liability depends on the facts and applicable law.",
+      },
+      {
+        question: "What are common warning signs of nursing home neglect?",
+        answer:
+          "Warning signs can include pressure injuries, repeated falls, unexplained bruises or fractures, weight loss, dehydration, poor hygiene, untreated infections, medication problems, changes in behavior, unsafe wandering, or a sudden unexplained decline.",
+      },
+      {
+        question: "Are bedsores always proof of neglect?",
+        answer:
+          "No. Pressure injuries can develop even when appropriate care is provided, particularly in medically fragile residents. Their location, severity, progression, risk assessments, repositioning, nutrition, wound care, treatment records, and overall care plan may need to be reviewed before responsibility can be evaluated.",
+      },
+      {
+        question: "What should I do if I suspect abuse or neglect in a nursing home?",
+        answer:
+          "Address immediate medical and safety needs first. Document what you observed, preserve photographs and communications, identify witnesses, request appropriate records, and consider reporting suspected abuse or neglect to the proper authorities. If there is an immediate threat or danger, contact 911 or local law enforcement.",
+      },
+      {
+        question: "What evidence can matter in a nursing home abuse case?",
+        answer:
+          "Medical records, care plans, nursing notes, medication records, wound documentation, incident reports, photographs, video, staffing records, facility policies, witness statements, complaint records, regulatory materials, and communications with the resident or family can all be important.",
+      },
+      {
+        question: "Can a nursing home be responsible for a resident's fall?",
+        answer:
+          "A fall does not automatically establish liability. The circumstances may require review of fall-risk assessments, supervision, mobility assistance, alarms, care plans, medications, environmental hazards, prior falls, staffing, and whether reasonable safety measures were followed.",
+      },
+      {
+        question: "What if the nursing home says the injury was unavoidable?",
+        answer:
+          "The facility's explanation should be compared with the medical records, care plan, incident documentation, witness accounts, photographs, staffing information, and other available evidence. Some injuries are unavoidable, while others may be connected to preventable care or safety failures.",
+      },
+      {
+        question: "Can financial exploitation happen in a nursing facility?",
+        answer:
+          "Yes. Potential concerns can include missing cash or property, unauthorized transactions, misuse of accounts or cards, coercion, forged documents, or improper use of a resident's money or belongings. Financial and facility records may need to be preserved.",
+      },
+      {
+        question: "Can a nursing home abuse case involve wrongful death?",
+        answer:
+          "Yes. When suspected abuse, neglect, exploitation, unsafe care, or another wrongful act contributes to a resident's death, surviving family members may need to evaluate potential wrongful-death and survival claims along with the underlying nursing-home issues.",
+      },
+      {
+        question: "When should I contact a nursing home abuse lawyer?",
+        answer:
+          "Consider prompt legal review when there is serious injury, suspected abuse or neglect, unexplained decline, conflicting explanations, a hospitalization or death, financial exploitation, or time-sensitive evidence such as video, records, staffing information, or witness accounts that may need to be preserved.",
+      },
+    ],
+    relatedPages: [
+      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
+      { label: "Medical Malpractice", path: "/el-paso-medical-malpractice-lawyers" },
+      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
+      { label: "Elder Law", path: "/el-paso-elder-law-lawyers" },
+    ],
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "September 9, 2026",
+  },
 ];
 
 export const getPracticeAreaPageByPath = (

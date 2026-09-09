@@ -408,6 +408,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/el-paso-nursing-home-abuse-lawyers",
+      "destination": "/index.html"
+    },
+    {
       "source": "/login",
       "destination": "/index.html"
     },
