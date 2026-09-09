@@ -3983,6 +3983,118 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     ],
     lastUpdated: "September 9, 2026",
   },
+  {
+    path: "/el-paso-elder-law-lawyers",
+    shortTitle: "Elder Law",
+    title: "Best Elder Law Lawyers in El Paso, TX | Compare Attorneys",
+    description:
+      "Compare El Paso elder law lawyers helping older adults and families with long-term care planning, Medicaid planning, powers of attorney, advance directives, elder financial exploitation, and aging-related legal issues.",
+    metaDescription:
+      "Compare elder law lawyers in El Paso, TX for long-term care planning, Medicaid planning, powers of attorney, advance directives, elder protection, and related legal matters.",
+    heroText:
+      "Compare El Paso elder law attorneys helping older adults, caregivers, and families plan for long-term care, incapacity, public benefits, financial protection, and aging-related legal needs.",
+    topics: [
+      "Elder Law Planning",
+      "Medicaid and Long-Term Care Planning",
+      "Nursing Home and Assisted Living Planning",
+      "Powers of Attorney",
+      "Advance Directives",
+      "Incapacity Planning",
+      "Elder Financial Exploitation",
+      "Caregiver and Family Planning",
+      "Asset and Property Planning",
+      "Public Benefits Coordination",
+      "Guardianship Alternatives",
+      "Special Needs and Disability Planning",
+    ],
+    overview: [
+      "Elder law addresses legal issues that often become more important as a person ages, develops health limitations, needs long-term care, or begins relying more heavily on family members or caregivers. The practice can overlap with estate planning, disability planning, public benefits, property matters, and protection from financial exploitation.",
+      "An elder law attorney may help a client prepare or review powers of attorney, advance directives, and other incapacity-planning documents; evaluate long-term care and Medicaid planning issues; organize property and financial arrangements; and coordinate legal planning with existing wills, trusts, beneficiary designations, and family responsibilities.",
+      "Families may also seek elder law advice when an older adult can no longer safely manage financial or personal decisions, when there is concern about undue influence or financial exploitation, or when relatives need to understand whether less restrictive planning options may be available before pursuing guardianship.",
+      "Because elder law issues often involve several areas at the same time, an attorney may work with the older adult, authorized family members, financial professionals, healthcare providers, care managers, and other advisors to help organize a legally appropriate plan.",
+    ],
+    whenToHire: [
+      "You or a family member may need nursing-home, assisted-living, or other long-term care.",
+      "You need help understanding Medicaid planning or how long-term care may affect finances and property.",
+      "An older adult needs powers of attorney, advance directives, or other incapacity-planning documents.",
+      "A parent, spouse, or other relative is beginning to have difficulty managing financial or personal decisions.",
+      "You are concerned that an older adult is being financially exploited, pressured, manipulated, or subjected to undue influence.",
+      "A caregiver or family member needs to understand what legal authority is available to help manage another person's affairs.",
+      "You want to coordinate estate planning, disability planning, public benefits, and long-term care needs.",
+      "You are considering guardianship and want to understand whether other legal planning tools may be available.",
+    ],
+    localContent: [
+      "El Paso families may face elder law questions involving aging parents, long-term care, home-based care, nursing facilities, disability, property, retirement income, military-family benefits, and relatives who live in Texas, New Mexico, Mexico, or elsewhere.",
+      "Planning can become more complicated when property, bank accounts, retirement benefits, insurance, family businesses, or caregiving responsibilities are spread across different jurisdictions or shared among several family members.",
+      "An El Paso elder law attorney can help review existing legal documents, identify gaps in incapacity or long-term-care planning, explain available legal options, and coordinate aging-related issues with estate planning, probate, disability, real estate, and other areas of law when necessary.",
+      "Families should consider preserving powers of attorney, wills, trusts, deeds, beneficiary information, insurance records, long-term-care documents, financial statements, benefit notices, healthcare directives, and records of significant financial transactions when seeking legal advice.",
+    ],
+    faqs: [
+      {
+        question: "What does an elder law lawyer do?",
+        answer:
+          "Elder law attorneys help older adults and families address legal issues involving long-term care, incapacity planning, powers of attorney, advance directives, public benefits, financial protection, property planning, and other aging-related concerns.",
+      },
+      {
+        question: "Is elder law the same as estate planning?",
+        answer:
+          "No. The areas often overlap, but estate planning generally focuses on wills, trusts, property transfer, incapacity documents, and succession planning. Elder law more broadly addresses legal issues connected to aging, long-term care, public benefits, caregiving, incapacity, and protection of older adults.",
+      },
+      {
+        question: "Can an elder law attorney help with Medicaid planning?",
+        answer:
+          "Yes. Elder law attorneys may help clients understand Medicaid eligibility issues, long-term-care planning considerations, and how financial or property decisions may affect benefit planning. Eligibility rules can be detailed and fact-specific, so individual circumstances should be reviewed carefully.",
+      },
+      {
+        question: "When should a family start long-term-care planning?",
+        answer:
+          "Planning can be useful before a crisis occurs. Families often seek advice when health begins to decline, long-term care may be needed, financial decisions are becoming more difficult, or existing estate and incapacity documents need to be reviewed.",
+      },
+      {
+        question: "What documents are commonly used for incapacity planning?",
+        answer:
+          "Depending on the person's circumstances, planning may involve financial powers of attorney, medical powers of attorney, advance directives, HIPAA-related authorizations, wills, trusts, and other documents addressing decision-making and property management.",
+      },
+      {
+        question: "What if I think an older family member is being financially exploited?",
+        answer:
+          "Preserve financial records, communications, account statements, transaction information, powers of attorney, property documents, and other relevant evidence. An attorney can help evaluate available civil, probate, protective, or other legal options based on the circumstances.",
+      },
+      {
+        question: "Does an older adult automatically need a guardian if they become ill?",
+        answer:
+          "No. Guardianship is a court process and may not be necessary in every situation. Existing powers of attorney, trusts, supported decision-making arrangements, or other legal tools may sometimes address particular needs. The appropriate option depends on the person's capacity and circumstances.",
+      },
+      {
+        question: "Can elder law planning involve a disabled adult child?",
+        answer:
+          "Yes. Families may need to coordinate planning for an aging parent with the long-term needs of an adult child who has a disability, including estate planning, benefit considerations, decision-making arrangements, and related legal issues.",
+      },
+      {
+        question: "What records should I bring to an elder law attorney?",
+        answer:
+          "Useful records may include wills, trusts, powers of attorney, advance directives, deeds, account statements, insurance information, retirement and benefit records, long-term-care documents, medical-authority documents, and information about significant assets or recent transfers.",
+      },
+      {
+        question: "When should I contact an elder law lawyer?",
+        answer:
+          "Consider contacting an attorney when long-term care may be needed, an older adult's decision-making ability is changing, Medicaid or other benefit planning is becoming important, financial exploitation is suspected, or the family needs help coordinating aging-related legal and financial issues.",
+      },
+    ],
+    relatedPages: [
+      { label: "Estate Planning", path: "/el-paso-estate-planning-lawyers" },
+      { label: "Probate", path: "/el-paso-probate-lawyers" },
+      {
+        label: "Social Security Disability",
+        path: "/el-paso-social-security-disability-lawyers",
+      },
+      { label: "Real Estate", path: "/el-paso-real-estate-lawyers" },
+    ],
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "September 9, 2026",
+  },
 ];
 
 export const getPracticeAreaPageByPath = (
