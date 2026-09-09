@@ -3893,7 +3893,97 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       { label: "Browse All Texas Law Guides", path: "/guides" },
     ],
     lastUpdated: "September 7, 2026",
-  }, ];
+  },
+
+  {
+    path: "/el-paso-social-security-disability-lawyers",
+    shortTitle: "Social Security Disability",
+    title: "Best Social Security Disability Lawyers in El Paso, TX | Compare Attorneys",
+    description:
+      "Compare El Paso Social Security Disability lawyers helping with SSDI and SSI applications, denied disability claims, reconsideration, hearings, appeals, and disability-benefit disputes.",
+    metaDescription:
+      "Compare Social Security Disability lawyers in El Paso, TX for SSDI, SSI, denied claims, reconsideration, hearings, appeals, and disability benefits.",
+    heroText:
+      "Compare El Paso Social Security Disability attorneys helping people pursue SSDI and SSI benefits, challenge denied claims, prepare for disability hearings, and navigate Social Security appeals.",
+    topics: [
+      "Social Security Disability Insurance (SSDI)",
+      "Supplemental Security Income (SSI)",
+      "Initial Disability Applications",
+      "Denied Disability Claims",
+      "Reconsideration",
+      "Administrative Law Judge Hearings",
+      "Social Security Appeals",
+      "Medical Evidence",
+      "Disability Onset Dates",
+      "Work History",
+      "Continuing Disability Reviews",
+      "Back Pay and Past-Due Benefits",
+    ],
+    overview: [
+      "Social Security Disability cases involve federal benefit programs administered by the Social Security Administration. Applicants may seek Social Security Disability Insurance (SSDI), Supplemental Security Income (SSI), or both depending on work history, income, resources, medical evidence, and other eligibility requirements.",
+      "A disability claim may involve medical records, treatment history, work history, functional limitations, vocational evidence, agency forms, consultative examinations, and testimony about how a medical condition affects the ability to work.",
+      "Claims can be denied at the initial application stage and may proceed through reconsideration, a hearing before an administrative law judge, and additional administrative or federal-court review when appropriate.",
+      "A Social Security Disability attorney can help evaluate the claim, identify missing evidence, prepare filings and hearing materials, explain deadlines, and represent a claimant during the appeals process.",
+    ],
+    whenToHire: [
+      "Your SSDI or SSI application was denied.",
+      "You need help applying for Social Security Disability benefits.",
+      "You received a reconsideration denial and want to request a hearing.",
+      "You have an upcoming Social Security disability hearing.",
+      "Your medical records do not fully document how your condition limits your ability to work.",
+      "You are unsure whether SSDI, SSI, or both may apply to your situation.",
+      "You received a notice involving continuing disability review, termination, overpayment, or another benefit dispute.",
+      "You need help understanding an appeal deadline or the next stage of the Social Security process.",
+    ],
+    localContent: [
+      "El Paso residents seeking disability benefits may have claims involving physical injuries, chronic illness, neurological conditions, mental-health conditions, degenerative disease, or other impairments that affect the ability to maintain substantial work.",
+      "An El Paso Social Security Disability lawyer can help organize medical and vocational evidence, prepare a claimant for a disability hearing, communicate with the Social Security Administration, and address issues that arise during an appeal.",
+      "Claimants should consider preserving Social Security notices, application records, medical records, medication lists, test results, treatment history, work-history information, earnings records, and documents showing how their conditions affect daily activities and employment.",
+    ],
+    faqs: [
+      {
+        question: "What is the difference between SSDI and SSI?",
+        answer:
+          "SSDI generally depends on a claimant's qualifying work history and Social Security coverage, while SSI is a needs-based program with income and resource requirements. Some people may qualify for one program or potentially both.",
+      },
+      {
+        question: "What should I do if my Social Security Disability claim was denied?",
+        answer:
+          "Review the denial notice carefully and pay attention to the appeal deadline. A denied claim may proceed through additional administrative stages, and an attorney can help evaluate the reason for denial and what evidence may strengthen the appeal.",
+      },
+      {
+        question: "Do I need a lawyer to apply for SSDI or SSI?",
+        answer:
+          "A lawyer is not required to submit an application, but legal help may be useful when the medical or work-history issues are complicated, a claim has been denied, or a hearing or appeal is approaching.",
+      },
+      {
+        question: "What evidence matters in a disability case?",
+        answer:
+          "Medical records, treatment history, test results, physician information, medication effects, work history, functional limitations, and other evidence showing how a condition affects the ability to perform sustained work can be important.",
+      },
+      {
+        question: "How long does a Social Security Disability appeal take?",
+        answer:
+          "Processing times vary by stage, location, case complexity, and agency workload. The notices in the individual case should be reviewed for current deadlines and procedural requirements.",
+      },
+      {
+        question: "When should I contact a Social Security Disability lawyer?",
+        answer:
+          "Consider contacting an attorney when a claim has been denied, an appeal deadline is approaching, a hearing has been scheduled, evidence is incomplete, or you need help understanding eligibility and the next procedural step.",
+      },
+    ],
+    relatedPages: [
+      { label: "Workers' Compensation", path: "/el-paso-workers-compensation-lawyers" },
+      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
+      { label: "Employment Law", path: "/el-paso-employment-lawyers" },
+      { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
+    ],
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "September 9, 2026",
+  },
+];
 
 export const getPracticeAreaPageByPath = (
   path: string
