@@ -4095,6 +4095,117 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     ],
     lastUpdated: "September 9, 2026",
   },
+  {
+    path: "/el-paso-guardianship-lawyers",
+    shortTitle: "Guardianship",
+    title: "Best Guardianship Lawyers in El Paso, TX | Compare Attorneys",
+    description:
+      "Compare El Paso guardianship lawyers handling adult guardianships, guardians of the person or estate, contested proceedings, temporary guardianships, reporting duties, and related court matters.",
+    metaDescription:
+      "Compare guardianship lawyers in El Paso, TX for adult guardianships, guardians of the person or estate, contested cases, temporary guardianships, and related proceedings.",
+    heroText:
+      "Compare El Paso guardianship attorneys helping families navigate incapacity proceedings, guardian appointments, contested cases, court supervision, and alternatives to guardianship.",
+    topics: [
+      "Adult Guardianship",
+      "Guardian of the Person",
+      "Guardian of the Estate",
+      "Limited Guardianship",
+      "Temporary Guardianship",
+      "Contested Guardianship",
+      "Incapacity Proceedings",
+      "Guardianship Alternatives",
+      "Guardian Removal or Replacement",
+      "Annual Reports and Accountings",
+      "Guardianship Modification",
+      "Capacity Restoration",
+    ],
+    overview: [
+      "Guardianship is a court-supervised legal process that may be considered when a person cannot safely manage some or all personal, medical, residential, or financial decisions and less restrictive alternatives are not sufficient. Texas law requires courts to consider alternatives to guardianship and available supports and services before appointing a guardian.",
+      "Depending on the circumstances, a court may appoint a guardian of the person, a guardian of the estate, or both. A guardian of the person generally addresses personal-care and decision-making matters, while a guardian of the estate generally manages property and financial affairs within the authority granted by the court.",
+      "Guardianship proceedings can involve medical evidence, capacity evaluations, notice to interested parties, appointment of attorneys or other court representatives, hearings, and findings about whether guardianship is necessary and what powers should be granted. The court may limit a guardianship to particular areas when broader authority is not required.",
+      "After appointment, guardians generally have continuing duties to the court. Depending on the type of guardianship, those duties may include annual reports concerning the person's well-being, financial accountings, recordkeeping, court approval for certain actions, and compliance with the specific powers and restrictions in the court's order.",
+      "Guardianship cases can also involve disputes over who should serve, allegations of misconduct or exploitation, requests to remove or replace a guardian, transfers between jurisdictions, modification of the guardian's authority, or restoration of rights when a person's capacity improves.",
+    ],
+    whenToHire: [
+      "A parent, spouse, adult child, or other relative may no longer be able to make important personal or financial decisions safely.",
+      "You are considering filing an application for guardianship and need to understand whether Texas requirements are met.",
+      "You need help determining whether a guardian of the person, guardian of the estate, limited guardianship, or another arrangement may be appropriate.",
+      "A guardianship application has been filed and you disagree that guardianship is necessary or disagree with the proposed guardian.",
+      "A temporary or urgent guardianship issue has arisen and immediate court involvement may be necessary.",
+      "You are serving as a guardian and need guidance about reports, accountings, expenditures, property, court approval, or other ongoing duties.",
+      "You believe a guardian is misusing authority, mishandling money, neglecting responsibilities, or acting against the protected person's interests.",
+      "You want to seek removal or replacement of a guardian, modification of a guardianship, or restoration of rights.",
+      "A family is trying to determine whether powers of attorney, supported decision-making, trusts, representative-payee arrangements, or other less restrictive options may address the situation without a full guardianship.",
+    ],
+    localContent: [
+      "El Paso guardianship matters may involve older adults with declining capacity, adults with significant disabilities, people recovering from serious illness or injury, and families who need legal authority to address personal care or financial management.",
+      "Because El Paso families may have relatives, property, healthcare providers, military connections, or financial accounts in Texas, New Mexico, Mexico, or other jurisdictions, guardianship planning can involve questions about venue, existing legal documents, property ownership, and coordination with other courts or professionals.",
+      "An El Paso guardianship attorney can review existing powers of attorney, trusts, medical directives, supported decision-making arrangements, financial records, medical evidence, and family circumstances to help determine whether guardianship or a less restrictive alternative should be considered.",
+      "People preparing for a guardianship consultation should consider preserving medical records, physician information, existing estate-planning documents, powers of attorney, financial statements, benefit information, property records, communications among family members, and documents showing the person's current decision-making needs.",
+    ],
+    faqs: [
+      {
+        question: "What is guardianship in Texas?",
+        answer:
+          "Guardianship is a court-supervised legal arrangement in which a court gives an appointed guardian specific authority to make decisions for a person who has been found to need that protection. The authority granted depends on the person's circumstances and the court's order.",
+      },
+      {
+        question: "What is the difference between a guardian of the person and a guardian of the estate?",
+        answer:
+          "A guardian of the person generally has court-authorized responsibility for personal matters such as care, residence, and certain medical or support decisions. A guardian of the estate generally manages money, property, and financial affairs within the authority granted by the court. A court may appoint one type or both.",
+      },
+      {
+        question: "Does Texas require a full guardianship in every incapacity case?",
+        answer:
+          "No. Texas law requires consideration of alternatives to guardianship and available supports and services. When guardianship is necessary, the court may limit the guardian's powers to the areas in which assistance is actually required.",
+      },
+      {
+        question: "What are alternatives to guardianship?",
+        answer:
+          "Depending on the circumstances, alternatives may include powers of attorney, trusts, supported decision-making agreements, representative-payee arrangements, management of particular property, medical decision-making authority, or other legal and support arrangements. Whether an alternative is sufficient depends on the person's capacity and needs.",
+      },
+      {
+        question: "What is a temporary guardianship?",
+        answer:
+          "A temporary guardianship is a short-term court process that may be used in qualifying circumstances when immediate protection is alleged to be necessary. Because temporary proceedings involve specific statutory requirements and deadlines, legal advice may be useful when an urgent guardianship issue arises.",
+      },
+      {
+        question: "Can a guardianship be contested?",
+        answer:
+          "Yes. A person may dispute whether guardianship is necessary, the extent of any incapacity, the powers requested, or who should serve as guardian. Contested cases may involve medical evidence, testimony, family disputes, financial issues, and arguments about less restrictive alternatives.",
+      },
+      {
+        question: "What duties does a guardian have after appointment?",
+        answer:
+          "The duties depend on the court order and the type of guardianship. Guardians may be required to maintain records, protect the person's rights and property, file annual reports or financial accountings, obtain court approval for certain actions, and comply with continuing court supervision.",
+      },
+      {
+        question: "Can a guardian be removed or replaced?",
+        answer:
+          "Yes. Courts can address requests involving resignation, removal, replacement, or appointment of a successor guardian. The appropriate procedure depends on the reason for the requested change and the circumstances of the guardianship.",
+      },
+      {
+        question: "Can a guardianship be changed or ended if capacity improves?",
+        answer:
+          "A court may consider modification of a guardianship or restoration of rights when circumstances change. Evidence concerning the person's current abilities and needs may be important when asking the court to reduce or terminate guardianship authority.",
+      },
+      {
+        question: "When should I contact a guardianship lawyer?",
+        answer:
+          "Consider contacting an attorney when guardianship is being proposed, an application has been filed, family members disagree about the need for guardianship or who should serve, urgent protection may be required, a guardian's conduct is disputed, or an existing guardianship may need to be modified or ended.",
+      },
+    ],
+    relatedPages: [
+      { label: "Elder Law", path: "/el-paso-elder-law-lawyers" },
+      { label: "Probate", path: "/el-paso-probate-lawyers" },
+      { label: "Estate Planning", path: "/el-paso-estate-planning-lawyers" },
+      { label: "Family Law", path: "/el-paso-family-law-lawyers" },
+    ],
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "September 9, 2026",
+  },
 ];
 
 export const getPracticeAreaPageByPath = (
