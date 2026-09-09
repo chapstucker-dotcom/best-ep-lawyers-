@@ -22,6 +22,9 @@ import {
   AlertDescription,
 } from "@/components/ui/alert";
 import { plans } from "@/data/plans";
+import {
+  normalizeSelfServicePlanId,
+} from "@/config/selfServicePlans";
 
 const PRACTICE_AREAS = [
   "Personal Injury",
@@ -129,21 +132,28 @@ const getFriendlyAuthError = (
 
 export default function Signup() {
   useSeo({
-    title: "Create Firm Account | El Paso's Best Lawyers",
+    title:
+      "Create Firm Account | El Paso's Best Lawyers",
     description:
       "Create a law firm account on El Paso's Best Lawyers to manage your firm profile, attorneys, and directory visibility.",
     path: "/signup",
     robots: "noindex, nofollow",
   });
+
   const [searchParams] =
     useSearchParams();
 
-  const requestedPlan =
+  const rawRequestedPlan =
     searchParams.get("plan") ||
     localStorage.getItem(
       "selected-firm-plan"
     ) ||
     "free";
+
+  const requestedPlan =
+    normalizeSelfServicePlanId(
+      rawRequestedPlan
+    );
 
   const requestedPracticeArea =
     searchParams.get(
@@ -206,10 +216,8 @@ export default function Signup() {
   } = useAuth();
 
   const isLimitedPlan =
-    selectedPlan.name ===
-      "Category Featured" ||
-    selectedPlan.name ===
-      "Category Exclusive";
+    selectedPlan.id ===
+    "category-featured";
 
   const clearErrors = () => {
     setFormError("");

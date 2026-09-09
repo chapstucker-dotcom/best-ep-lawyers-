@@ -45,6 +45,9 @@ import {
 import {
   saveFirmProfile,
 } from "@/services/firmService";
+import {
+  normalizeSelfServicePlanId,
+} from "@/config/selfServicePlans";
 
 import {
   Alert,
@@ -94,6 +97,7 @@ export default function Dashboard() {
     path: "/dashboard",
     robots: "noindex, nofollow",
   });
+
   const [
     activeTab,
     setActiveTab,
@@ -260,29 +264,36 @@ export default function Dashboard() {
             pending?.firmName?.trim() ||
             String(
               metadata.firm_name ??
-                ""
+              ""
             ).trim();
 
           const phone =
             pending?.phone?.trim() ||
             String(
               metadata.phone ??
-                ""
+              ""
             ).trim();
 
           const practiceArea =
             pending?.practiceArea?.trim() ||
             String(
               metadata.practice_area ??
-                ""
+              ""
             ).trim();
 
-          const requestedPlan =
+          const rawRequestedPlan =
             pending?.requestedPlan ||
             String(
               metadata.selected_plan ??
-                ""
+              ""
             ).trim();
+
+          const requestedPlan =
+            rawRequestedPlan
+              ? normalizeSelfServicePlanId(
+                  rawRequestedPlan
+                )
+              : "";
 
           const email =
             pending?.email?.trim() ||
@@ -527,17 +538,17 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-<DashboardNav
-  activeTab={
-    activeTab
-  }
-  setActiveTab={
-    setActiveTab
-  }
-  currentPlan={
-    currentPlan
-  }
-/>
+      <DashboardNav
+        activeTab={
+          activeTab
+        }
+        setActiveTab={
+          setActiveTab
+        }
+        currentPlan={
+          currentPlan
+        }
+      />
 
       <div className="container mx-auto px-4 py-8">
         {!isConfigured && (

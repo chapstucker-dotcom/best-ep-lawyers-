@@ -12,6 +12,9 @@ import {
 import { useAuth } from "@/contexts/AuthContext";
 import { saveFirmProfile } from "@/services/firmService";
 import { useSeo } from "../hooks/use-seo";
+import {
+  normalizeSelfServicePlanId,
+} from "@/config/selfServicePlans";
 
 
 import { Button } from "@/components/ui/button";
@@ -126,9 +129,11 @@ export default function Login() {
     ) || "";
 
   const requestedPlan =
+  normalizeSelfServicePlanId(
     searchParams.get("plan") ||
-    storedPlan ||
-    "";
+      storedPlan ||
+      "free"
+  );
 
   const requestedPracticeArea =
     searchParams.get(
@@ -297,22 +302,35 @@ export default function Login() {
       }
 
       /*
-       * Preserve the paid plan request.
-       * Stripe will activate it later.
-       */
-      if (
-        pending.requestedPlan
-      ) {
-        localStorage.setItem(
-          "pending-checkout-plan",
-          pending.requestedPlan
-        );
+ * Preserve only valid self-service
+ * plan requests. Stripe will activate
+ * paid plans later.
+ */
+const pendingRequestedPlan =
+  normalizeSelfServicePlanId(
+    pending.requestedPlan || "free"
+  );
 
-        localStorage.setItem(
-          "selected-firm-plan",
-          pending.requestedPlan
-        );
-      }
+if (pendingRequestedPlan !== "free") {
+  localStorage.setItem(
+    "pending-checkout-plan",
+    pendingRequestedPlan
+  );
+
+  localStorage.setItem(
+    "selected-firm-plan",
+    pendingRequestedPlan
+  );
+} else {
+  localStorage.removeItem(
+    "pending-checkout-plan"
+  );
+
+  localStorage.setItem(
+    "selected-firm-plan",
+    "free"
+  );
+}
 
       localStorage.setItem(
         "pending-checkout-practice-area",

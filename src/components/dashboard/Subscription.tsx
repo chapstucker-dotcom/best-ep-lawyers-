@@ -35,6 +35,10 @@ import {
 } from "@/data/plans";
 
 import {
+  isSelfServicePlanId,
+} from "@/config/selfServicePlans";
+
+import {
   supabase,
 } from "@/lib/supabase";
 
@@ -622,7 +626,7 @@ export const Subscription =
         )}
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          {plans.map(
+          {plans.filter((plan) => isSelfServicePlanId(plan.id)).map(
             (plan) => {
               const normalizedPlanId =
                 normalizePlan(
