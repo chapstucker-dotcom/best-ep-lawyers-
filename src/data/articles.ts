@@ -364,6 +364,125 @@ export const articles: Article[] = [
       },
     ],
   },
+  {
+    id: 'what-to-do-after-arrest-el-paso',
+    slug: 'what-to-do-after-arrest-el-paso',
+    title: 'What to Do After an Arrest in El Paso, Texas',
+    metaDescription: 'Learn what generally happens after an arrest in El Paso, including magistrate warnings, bond and release issues, court dates, evidence preservation, and when to contact a criminal defense lawyer.',
+    summary: 'A practical guide to the first steps after an arrest in El Paso, including the magistrate process, bond and release conditions, court paperwork, evidence preservation, and getting legal help.',
+    topic: 'Criminal Defense',
+    readTime: '8 min read',
+    updatedAt: '2026-09-10',
+    relatedPracticeArea: { label: 'Compare El Paso Criminal Defense Lawyers', path: '/el-paso-criminal-defense-lawyers' },
+    sections: [
+      {
+        heading: 'Focus first on safety, identification, and the immediate process',
+        paragraphs: [
+          'After an arrest, avoid physical resistance and follow lawful safety instructions. The first hours can involve transportation, booking, identification, property inventory, medical screening, and a determination of where the person will be held or released.',
+          'Do not rely on another personâ€™s experience to predict exactly what will happen. The process can differ based on the alleged offense, warrants, the arresting agency, whether the case is state or federal, and other circumstances.',
+        ],
+      },
+      {
+        heading: 'Texas law requires a prompt appearance before a magistrate',
+        paragraphs: [
+          'Texas Code of Criminal Procedure Article 15.17 generally requires the person having custody of someone who has been arrested to take the arrested person before a magistrate without unnecessary delay and no later than 48 hours after the arrest.',
+          'At that appearance, the magistrate must provide required warnings and information. The statute addresses the accusation, the right to retain counsel, the right to remain silent, the right to have an attorney present during questioning, the right to terminate an interview, and the right to request appointed counsel if the person cannot afford an attorney.',
+        ],
+      },
+      {
+        heading: 'Be careful about statements and questioning',
+        paragraphs: [
+          'Anything a person says after an arrest can become important later. Article 15.17 requires the magistrate to advise an arrested person of the right to remain silent and the right to have an attorney present during an interview with law enforcement or attorneys representing the state.',
+          'A person who wants legal advice before answering investigative questions can ask to speak with an attorney. Whether a particular statement may be used in court depends on the facts and applicable law, so specific questions about an interview, confession, recording, or waiver should be reviewed individually.',
+        ],
+      },
+      {
+        heading: 'Understand bond and release conditions before leaving custody',
+        paragraphs: [
+          'Bail is the security used to help ensure that an accused person appears before the proper court. Texas bail law is detailed and has changed in recent years, so the type of release, amount of bail, eligibility, and conditions can depend on the charge, criminal history, other pending cases, court authority, and additional statutory factors.',
+          'Before leaving custody, keep copies of any bond paperwork and release conditions. Conditions can address matters such as court appearances, contact with particular people, travel, alcohol or controlled substances, electronic monitoring, or other restrictions depending on the case. Violating a release condition can create additional legal problems.',
+        ],
+      },
+      {
+        heading: 'Save every document and identify the next court date',
+        paragraphs: [
+          'Keep booking or release papers, bond documents, magistrate paperwork, charging documents, citations, property receipts, court notices, and any written conditions of release. Write down the arresting agency, approximate time and location of the arrest, and any case, booking, or cause number shown on official paperwork.',
+          'Do not assume that a future notice will correct a missed date. If the paperwork is unclear about where or when to appear, confirm the information with the appropriate court or with counsel rather than relying on memory or informal advice.',
+        ],
+        bullets: [
+          'Keep the original paperwork together and make a backup copy.',
+          'Record every scheduled court date and reporting requirement.',
+          'Save contact information for witnesses who may have seen relevant events.',
+          'Preserve texts, photos, videos, receipts, location records, and other potentially relevant digital evidence.',
+        ],
+      },
+      {
+        heading: 'Preserve evidence instead of trying to improve or explain it',
+        paragraphs: [
+          'Evidence can disappear quickly. Surveillance video may be overwritten, messages can be deleted, and witnesses can become difficult to locate. Preserve potentially relevant information in its original form when possible.',
+          'Avoid editing screenshots, deleting unfavorable messages, contacting witnesses to influence what they say, or posting detailed accounts of the incident on social media. A lawyer can evaluate what evidence may matter and whether preservation requests or other steps are appropriate.',
+        ],
+      },
+      {
+        heading: 'El Paso arrests may involve different courts and agencies',
+        paragraphs: [
+          'The court and detention process depends on the type of case. El Paso County operates a Jail Magistrate function, and the Downtown Detention Facility houses Jail Magistrate Courts along with bonding, warrants, and other detention-related operations.',
+          'Some matters can involve municipal, county, district, or federal authorities. El Pasoâ€™s border location also means that certain arrests may involve federal agencies or immigration consequences. The agency that made the arrest does not by itself answer every question about which court will ultimately handle the case.',
+        ],
+      },
+      {
+        heading: 'When to contact an El Paso criminal defense lawyer',
+        paragraphs: [
+          'Consider seeking legal advice promptly after an arrest, when questioning is requested, when a person is trying to understand bond or release conditions, when a court date is approaching, or when important evidence may need to be preserved.',
+          'A criminal defense lawyer can review the alleged offense, charging and bond documents, police reports when available, statements, searches, video, witness information, prior history, and the procedural posture of the case. The appropriate strategy depends on the specific facts rather than on a general checklist.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'How soon must someone arrested in Texas see a magistrate?',
+        answer: 'Texas Code of Criminal Procedure Article 15.17 generally requires an arrested person to be taken before a magistrate without unnecessary delay and no later than 48 hours after the arrest.',
+      },
+      {
+        question: 'Do I have to answer police questions after an arrest?',
+        answer: 'Article 15.17 requires warnings that include the right to remain silent, the right to have an attorney present during an interview with law enforcement or attorneys representing the state, and the right to terminate the interview. Questions about a specific statement or interview should be evaluated based on the facts.',
+      },
+      {
+        question: 'What paperwork should I keep after being released from jail?',
+        answer: 'Keep bond and release papers, magistrate paperwork, charging documents, court notices, property receipts, and anything showing a case, booking, or cause number. Also keep a written record of upcoming court dates and release conditions.',
+      },
+      {
+        question: 'Can bond conditions continue after I leave jail?',
+        answer: 'Yes. Release can be subject to conditions imposed under applicable law and court orders. Read the written conditions carefully and get legal advice if any requirement is unclear.',
+      },
+      {
+        question: 'What evidence should I preserve after an arrest?',
+        answer: 'Preserve relevant messages, photographs, videos, receipts, location records, witness contact information, official paperwork, and other records connected to the incident. Avoid altering or deleting potentially relevant material.',
+      },
+      {
+        question: 'When should I contact a criminal defense lawyer in El Paso?',
+        answer: 'Consider contacting counsel promptly after an arrest, before investigative questioning, when bond or release conditions are unclear, when a court date is approaching, or when evidence may need to be preserved.',
+      },
+    ],
+    sources: [
+      {
+        name: 'Texas Code of Criminal Procedure Chapter 15 â€” Arrest Under Warrant and Article 15.17',
+        url: 'https://statutes.capitol.texas.gov/Docs/CR/pdf/CR.15.pdf',
+      },
+      {
+        name: 'Texas Code of Criminal Procedure Chapter 17 â€” Bail',
+        url: 'https://statutes.capitol.texas.gov/Docs/CR/pdf/CR.17.pdf',
+      },
+      {
+        name: 'El Paso County â€” Jail Magistrate',
+        url: 'https://www.epcounty.com/615/Jail-Magistrate',
+      },
+      {
+        name: 'El Paso County â€” Downtown Detention Facility',
+        url: 'https://www.epcounty.com/1147/Downtown-Detention-Facility',
+      },
+    ],
+  },
 ];
 
 export const getArticleBySlug = (slug: string | undefined) =>
