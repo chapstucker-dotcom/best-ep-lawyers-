@@ -618,6 +618,161 @@ export const articles: Article[] = [
       },
     ],
   },
+  {
+    id: "how-to-file-for-divorce-texas-el-paso",
+    slug: "how-to-file-for-divorce-texas-el-paso",
+    title: "How to File for Divorce in Texas: Step-by-Step El Paso Guide",
+    metaDescription:
+      "Learn the general Texas divorce process from residency and filing through service, temporary orders, settlement, and the final decree, with El Paso-specific considerations.",
+    summary:
+      "A practical overview of how a Texas divorce generally moves from the initial petition to a final decree, including residency, service, temporary orders, property, children, settlement, and court.",
+    topic: "Family Law",
+    readTime: "9 min read",
+    updatedAt: "2026-09-10",
+    relatedPracticeArea: {
+      label: "Compare El Paso Divorce Lawyers",
+      path: "/el-paso-divorce-lawyers",
+    },
+    sections: [
+      {
+        heading: "Confirm that Texas and El Paso County are proper places to file",
+        paragraphs: [
+          "Texas Family Code Section 6.301 generally requires that, when the divorce is filed, either spouse has been a Texas domiciliary for the preceding six months and a resident of the county where the case is filed for the preceding 90 days.",
+          "Texas law also contains special residency rules for certain military and public-service situations. Those provisions can matter for families connected to Fort Bliss or for spouses who have recently been stationed, deployed, or transferred.",
+        ],
+      },
+      {
+        heading: "Start the case with an Original Petition for Divorce",
+        paragraphs: [
+          "A Texas divorce case generally begins when one spouse files an Original Petition for Divorce. The filing spouse is the petitioner, and the other spouse is the respondent.",
+          "The petition identifies the marriage and asks the court for the relief the petitioner seeks. Depending on the case, the requested relief may involve property and debts, children, support, temporary orders, name restoration, or other issues.",
+        ],
+      },
+      {
+        heading: "Make sure the other spouse receives legally sufficient notice",
+        paragraphs: [
+          "After filing, the respondent generally must receive legally sufficient notice of the case unless an authorized waiver or another permitted procedure applies. TexasLawHelp explains that a respondent may be formally served or may voluntarily file an answer or a waiver of service.",
+          "A waiver should be read carefully before it is signed. Service and waiver requirements can become especially important when there is family violence, a protective order, disagreement about jurisdiction, or concern that a spouse may not participate voluntarily.",
+        ],
+      },
+      {
+        heading: "Understand the response and whether the case is agreed or contested",
+        paragraphs: [
+          "A respondent who is served has a deadline to file an answer. Filing an answer allows the respondent to participate and prevents the case from being completed by default without the procedures required for a contested case.",
+          "A divorce may be agreed if the spouses can resolve all issues needed for the final decree. It is contested when material issues remain disputed and the court may need to resolve them through hearings or trial.",
+        ],
+      },
+      {
+        heading: "Temporary orders may control important issues while the case is pending",
+        paragraphs: [
+          "A divorce can take months or longer, especially when issues are disputed. Temporary orders may address children, possession schedules, support, use of the home or vehicles, payment of bills, preservation of property, and other matters while the case is pending.",
+          "Temporary decisions can have practical consequences well before the final decree, so parties should keep court papers and understand exactly what any temporary order requires.",
+        ],
+      },
+      {
+        heading: "Identify property, debts, retirement benefits, and financial information",
+        paragraphs: [
+          "Texas divorce cases can require the spouses to identify and characterize property and debts. Issues may include community property, separate-property claims, real estate, bank accounts, retirement benefits, businesses, vehicles, credit accounts, reimbursement claims, and other financial interests.",
+          "Retirement benefits may require additional plan-specific documents. TexasLawHelp notes that dividing some retirement accounts can require a Qualified Domestic Relations Order or other additional paperwork.",
+        ],
+      },
+      {
+        heading: "Address conservatorship, possession, and support when children are involved",
+        paragraphs: [
+          "When spouses have children, the divorce may also determine conservatorship, parental rights and duties, possession and access, child support, medical support, geographic restrictions, and related parenting provisions.",
+          "Texas uses the terms conservatorship, possession, and access rather than relying only on the everyday word custody. The final decree should state the parenting and support terms precisely because those provisions can remain important long after the marriage is dissolved.",
+        ],
+      },
+      {
+        heading: "The 60-day rule is a minimum waiting period, not a completion promise",
+        paragraphs: [
+          "Texas Family Code Section 6.702 generally prevents a court from granting a divorce before the 60th day after the suit is filed, subject to statutory exceptions.",
+          "That does not mean a Texas divorce will be finished in 60 days. Service, temporary orders, financial investigation, discovery, negotiations, mediation, children-related issues, court scheduling, and trial preparation can extend the timeline.",
+        ],
+      },
+      {
+        heading: "Settlement or mediation may resolve the case before trial",
+        paragraphs: [
+          "Many divorces are resolved through agreement or mediation rather than a contested trial. Any agreement should be translated accurately into the final decree and related orders.",
+          "Complex assets, retirement plans, businesses, military benefits, real estate, cross-border property, parenting restrictions, or support obligations can make careful drafting particularly important.",
+        ],
+      },
+      {
+        heading: "Finish the divorce with a final decree and any required supporting orders",
+        paragraphs: [
+          "A divorce is not finished merely because the spouses separate or reach an agreement. The court must sign a Final Decree of Divorce that resolves the issues necessary to complete the case.",
+          "Depending on the circumstances, additional documents may be needed for child support, possession, retirement division, property transfers, or other matters. After the judge signs the decree, keep a complete copy and follow any additional steps required to carry out its terms.",
+        ],
+      },
+      {
+        heading: "When to contact an El Paso divorce lawyer",
+        paragraphs: [
+          "Consider legal advice early when the divorce involves disputed children, family violence, significant property or debt, retirement benefits, a business, military service, another state or country, hidden assets, temporary-order disputes, or uncertainty about where the case should be filed.",
+          "A lawyer can also review proposed settlement terms and the final decree before signing, when mistakes or incomplete language could affect property, support, parenting rights, or future enforcement.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "How long must I live in Texas before filing for divorce?",
+        answer:
+          "Texas Family Code Section 6.301 generally requires that either spouse has been a Texas domiciliary for the preceding six months and a resident of the filing county for the preceding 90 days. Special rules may apply in some military or public-service situations.",
+      },
+      {
+        question: "Do I have to wait 60 days to get divorced in Texas?",
+        answer:
+          "Texas law generally prevents a court from granting the divorce before the 60th day after filing, subject to statutory exceptions. The 60 days are a minimum waiting period and do not guarantee that the case will finish on that date.",
+      },
+      {
+        question: "What starts a Texas divorce case?",
+        answer:
+          "The case generally begins when one spouse files an Original Petition for Divorce with the appropriate court.",
+      },
+      {
+        question: "Does my spouse have to be served?",
+        answer:
+          "The respondent generally must receive legally sufficient notice. Formal service may be used, although a respondent may be able to file an answer or an authorized waiver of service instead.",
+      },
+      {
+        question: "What is the difference between an agreed and contested divorce?",
+        answer:
+          "An agreed divorce means the spouses can resolve the issues needed for the final decree. A contested divorce involves one or more unresolved issues that may require additional negotiation, hearings, mediation, or trial.",
+      },
+      {
+        question: "Can a Texas court make temporary orders during a divorce?",
+        answer:
+          "Yes. Temporary orders can address issues such as children, possession schedules, support, property use, bills, and preservation of assets while the divorce is pending.",
+      },
+      {
+        question: "What happens to retirement accounts in a divorce?",
+        answer:
+          "Retirement benefits may have community and separate-property components. Some plans require additional documents, such as a Qualified Domestic Relations Order when applicable, to carry out a division ordered in the divorce.",
+      },
+      {
+        question: "When should I contact an El Paso divorce lawyer?",
+        answer:
+          "Consider contacting counsel before filing or signing major documents when the case involves children, significant property or debt, retirement benefits, military service, family violence, jurisdiction questions, cross-border issues, or contested terms.",
+      },
+    ],
+    sources: [
+      {
+        name: "Texas Family Code Chapter 6 - Suit for Dissolution of Marriage",
+        url: "https://statutes.capitol.texas.gov/Docs/FA/htm/FA.6.htm",
+      },
+      {
+        name: "TexasLawHelp - I Need a Divorce. We Have Children Under 18",
+        url: "https://texaslawhelp.org/guide/i-need-a-divorce-we-have-children-under-18",
+      },
+      {
+        name: "TexasLawHelp - I Need a Divorce. We Do Not Have Minor Children",
+        url: "https://texaslawhelp.org/guide/i-need-a-divorce-we-do-not-have-minor-children",
+      },
+      {
+        name: "TexasLawHelp - My Spouse Filed for Divorce",
+        url: "https://texaslawhelp.org/guide/my-spouse-filed-for-divorce",
+      },
+    ],
+  },
 ];
 
 export const getArticleBySlug = (slug: string | undefined) =>
