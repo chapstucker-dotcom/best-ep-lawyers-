@@ -483,6 +483,141 @@ export const articles: Article[] = [
       },
     ],
   },
+  {
+    id: 'texas-dwi-license-suspension-alr-hearing-el-paso',
+    slug: 'texas-dwi-license-suspension-alr-hearing-el-paso',
+    title: 'Texas DWI License Suspension & ALR Hearings: El Paso Guide',
+    metaDescription: 'Learn how Texas DWI-related license suspensions and ALR hearings generally work, including notice deadlines, failed or refused tests, delayed blood results, and when to seek legal help.',
+    summary: 'A practical guide to Texas Administrative License Revocation after a DWI arrest, including hearing deadlines, DIC-25 notices, delayed blood-test results, what an ALR hearing decides, and how the process differs from the criminal case.',
+    topic: 'Criminal Defense',
+    readTime: '8 min read',
+    updatedAt: '2026-09-10',
+    relatedPracticeArea: { label: 'Compare El Paso DWI Lawyers', path: '/el-paso-dwi-lawyers' },
+    sections: [
+      {
+        heading: 'An ALR case is separate from the criminal DWI case',
+        paragraphs: [
+          'Texas uses the Administrative License Revocation process for certain driver-license suspensions connected to DWI or BWI arrests. The Texas Department of Public Safety describes ALR as a civil administrative process that is separate from the criminal prosecution.',
+          'That means a person can have a criminal court case and a driver-license proceeding moving on different tracks. A criminal court date does not replace an ALR deadline, and an ALR result does not by itself decide the criminal charge.',
+        ],
+      },
+      {
+        heading: 'Read the suspension notice immediately',
+        paragraphs: [
+          'For many refusal or failed-test cases, the arresting officer issues a DIC-25 notice. DPS describes the DIC-25 as the suspension notice that explains the steps for requesting an ALR hearing.',
+          'Do not assume the deadline runs from the next court date. The deadline depends on the type of notice and how the driver received it, so the actual paperwork should be reviewed promptly.',
+        ],
+      },
+      {
+        heading: 'Many ALR hearing requests have a 15-day deadline',
+        paragraphs: [
+          'DPS states that when a driver is served an ALR suspension or disqualification notice, the driver generally has 15 days from the date the notice is served to request a hearing.',
+          'If a timely hearing is not requested in that circumstance, DPS states that the suspension generally takes effect on the 40th day after service of the notice. Because missing the request deadline can eliminate the opportunity for an ALR hearing, a driver should not wait for the criminal case to develop before checking the notice.',
+        ],
+      },
+      {
+        heading: 'Delayed blood-test results can create a different notice timeline',
+        paragraphs: [
+          'When a driver consents to a blood test and the result is not available at the time of arrest, DPS explains that a suspension notice may be mailed later if the reported alcohol concentration is above the applicable limit.',
+          'DPS currently states that in this delayed blood-result situation the driver has 20 days from the date the suspension notice is mailed to request a hearing. This is one reason a general statement such as "every driver has 15 days after arrest" can be inaccurate.',
+        ],
+      },
+      {
+        heading: 'A timely hearing request can delay the suspension decision',
+        paragraphs: [
+          'Texas law provides procedures for contesting an ALR suspension before an administrative law judge. ALR hearings are conducted through the State Office of Administrative Hearings.',
+          'A timely request generally keeps the proposed suspension from becoming final until the administrative process reaches a decision. The hearing notice should be reviewed carefully for the date, time, location or remote-hearing information, and any instructions for submitting evidence or appearing.',
+        ],
+      },
+      {
+        heading: 'What the ALR hearing addresses',
+        paragraphs: [
+          'An ALR hearing does not function as a full criminal DWI trial. It addresses the statutory issues that allow DPS to suspend or disqualify driving privileges under the applicable Transportation Code provisions.',
+          'The exact issues depend on whether the case involves a refusal, a failed breath or blood test, a commercial license, a minor, or another category. Police reports, sworn paperwork, test records, video, and testimony can become important depending on the case.',
+        ],
+      },
+      {
+        heading: 'Preserve the paperwork and evidence tied to the arrest',
+        paragraphs: [
+          'Keep the DIC-25 or mailed suspension notice, temporary driving permit if issued, bond and release papers, citations, blood-draw paperwork, breath-test documents, tow or impound records, and any DPS correspondence.',
+          'Also preserve potentially relevant video, photographs, receipts, phone location records, witness information, and other records connected to the stop or arrest. Do not alter or delete potentially relevant material.',
+        ],
+        bullets: [
+          'Write down the date the notice was served or mailed.',
+          'Save the envelope if DPS mailed the notice.',
+          'Keep proof of any hearing request that is submitted.',
+          'Record the ALR hearing date separately from criminal court dates.',
+          'Check the current status of the Texas driver license through official DPS resources.',
+        ],
+      },
+      {
+        heading: 'Occupational licenses and reinstatement are separate questions',
+        paragraphs: [
+          'DPS states that some people whose non-commercial driving privileges are suspended may be eligible to apply for an occupational license. Eligibility and the procedure depend on the type of suspension and the person\'s circumstances, so an occupational license should not be treated as automatic.',
+          'DPS also states that an ALR reinstatement fee is required before renewal or issuance of a license after an ALR suspension, in addition to any other outstanding requirements. Drivers should confirm current eligibility and compliance items directly with DPS.',
+        ],
+      },
+      {
+        heading: 'When to contact an El Paso DWI lawyer',
+        paragraphs: [
+          'Consider seeking legal advice promptly if the hearing-request deadline is approaching, the notice is unclear, a blood result arrived after the arrest, the case involves a refusal, a commercial license, a prior alcohol-related enforcement action, or the driver needs to understand how the ALR process interacts with the criminal case.',
+          'A DWI lawyer can review the notice, arrest paperwork, testing evidence, available video, prior history, and applicable deadlines. The available options depend on the facts and current law rather than on a single general rule.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Is an ALR hearing the same as my DWI criminal case?',
+        answer: 'No. Texas DPS describes Administrative License Revocation as a civil administrative process separate from the criminal DWI or BWI prosecution.',
+      },
+      {
+        question: 'How long do I have to request an ALR hearing in Texas?',
+        answer: 'DPS states that many ALR hearing requests must be made within 15 days after the driver is served the suspension notice. A different timeline can apply when DPS later mails a suspension notice after receiving a consenting blood-test result, so the actual notice should be reviewed immediately.',
+      },
+      {
+        question: 'What is a DIC-25?',
+        answer: 'Texas DPS describes the DIC-25 as a suspension notice issued in certain failed-test or refusal cases that explains how to request an ALR hearing.',
+      },
+      {
+        question: 'What happens if my blood-test result was not available when I was arrested?',
+        answer: 'DPS states that when a driver consented to a blood test and an over-limit result is received later, DPS may mail a Notice of Suspension. DPS currently describes a 20-day period from the mailing date to request a hearing in that situation.',
+      },
+      {
+        question: 'Does requesting an ALR hearing stop the criminal DWI case?',
+        answer: 'No. The ALR process and the criminal prosecution are separate proceedings. A hearing request concerns the administrative driver-license action, not whether the criminal charge continues.',
+      },
+      {
+        question: 'Can I get an occupational license after an ALR suspension?',
+        answer: 'Some drivers may be eligible to apply for an occupational license to operate a non-commercial motor vehicle while suspended. Eligibility is not automatic and depends on the applicable law and the driver\'s circumstances.',
+      },
+      {
+        question: 'When should I contact a DWI lawyer in El Paso about an ALR notice?',
+        answer: 'Consider contacting counsel promptly because hearing-request deadlines can be short and may depend on how and when the notice was issued or mailed.',
+      },
+    ],
+    sources: [
+      {
+        name: 'Texas Department of Public Safety â€” Administrative License Revocation (ALR) Program',
+        url: 'https://www.dps.texas.gov/section/driver-license/administrative-license-revocation-alr-program',
+      },
+      {
+        name: 'Texas Department of Public Safety â€” ALR Frequently Asked Questions',
+        url: 'https://www.dps.texas.gov/section/driver-license/faq/section-19-administrative-license-revocation-alr',
+      },
+      {
+        name: 'Texas Transportation Code Chapter 524 â€” Administrative Suspension of Driver\'s License for Failure to Pass Test',
+        url: 'https://statutes.capitol.texas.gov/Docs/TN/htm/TN.524.htm',
+      },
+      {
+        name: 'Texas Transportation Code Chapter 724 â€” Implied Consent',
+        url: 'https://statutes.capitol.texas.gov/Docs/TN/htm/TN.724.htm',
+      },
+      {
+        name: 'Texas Department of Public Safety â€” ALR Hearing Request',
+        url: 'https://www.dps.texas.gov/apps/DriverLicense/DLHearings/ALR',
+      },
+    ],
+  },
 ];
 
 export const getArticleBySlug = (slug: string | undefined) =>
