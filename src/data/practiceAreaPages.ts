@@ -4782,6 +4782,122 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     ],
     lastUpdated: "September 9, 2026",
   },
+  {
+    path: "/el-paso-military-law-lawyers",
+    shortTitle: "Military Law",
+    title: "Best Military Law Lawyers in El Paso, TX | Compare Attorneys",
+    description:
+      "Compare El Paso military law lawyers handling UCMJ investigations, courts-martial, Article 15 proceedings, Article 32 preliminary hearings, administrative separation, officer elimination, and other adverse military actions.",
+    metaDescription:
+      "Compare military law lawyers in El Paso, TX for UCMJ investigations, courts-martial, Article 15 actions, Article 32 hearings, administrative separation, and military defense.",
+    heroText:
+      "Compare El Paso military law attorneys representing service members in UCMJ investigations, courts-martial, Article 15 proceedings, Article 32 preliminary hearings, administrative separation, officer elimination, and other military justice matters.",
+    topics: [
+      "Uniform Code of Military Justice",
+      "UCMJ Investigations",
+      "Courts-Martial",
+      "General Courts-Martial",
+      "Special Courts-Martial",
+      "Summary Courts-Martial",
+      "Article 15 Proceedings",
+      "Nonjudicial Punishment",
+      "Article 32 Preliminary Hearings",
+      "Administrative Separation",
+      "Separation Boards",
+      "Officer Elimination",
+      "Boards of Inquiry",
+      "Military Investigations",
+      "Adverse Administrative Actions",
+      "Military Justice Defense",
+    ],
+    overview: [
+      "Military law includes legal proceedings and administrative actions that apply specifically to members of the armed forces. Service members may face investigations, disciplinary proceedings, nonjudicial punishment, courts-martial, separation actions, or other adverse matters governed by military law, regulations, and the Uniform Code of Military Justice.",
+      "A court-martial is a military criminal proceeding. Depending on the allegations and procedural posture, a case may involve investigation, preferral or referral of charges, pretrial proceedings, motions, evidentiary issues, plea discussions, trial, findings, sentencing, and possible post-trial or appellate review.",
+      "Article 15 proceedings, also known as nonjudicial punishment, are different from courts-martial. They can still have significant consequences for rank, pay, duties, career progression, security clearances, evaluations, retention, and future military service. The rights and options available can depend on the service member's status, command, branch, location, and circumstances.",
+      "Administrative separation and officer-elimination matters can affect whether a service member remains in the military and how the service is characterized. Some cases may involve separation boards, boards of inquiry, alleged misconduct, substandard performance, rehabilitation failure, adverse evaluations, or other administrative grounds.",
+      "Military investigations and disciplinary matters often move on command-driven timelines. Statements, digital evidence, text messages, photographs, videos, witness accounts, military records, law-enforcement reports, medical records, evaluations, orders, and investigative files may become important. Early legal review can help a service member understand the process, preserve evidence, evaluate available rights, and prepare for upcoming deadlines or proceedings.",
+    ],
+    whenToHire: [
+      "You are a service member who has been told you are under investigation for possible UCMJ misconduct.",
+      "You were contacted by military law enforcement, command investigators, or another investigative authority about alleged misconduct.",
+      "You received notice of court-martial charges or believe charges may be preferred or referred.",
+      "You are facing an Article 15 or other nonjudicial punishment proceeding.",
+      "You received notice of an Article 32 preliminary hearing.",
+      "Your command initiated administrative separation or involuntary discharge proceedings.",
+      "You are an officer facing elimination proceedings or a board of inquiry.",
+      "You are concerned that an adverse military action could affect rank, pay, benefits, security clearance, promotion, retention, or future service.",
+      "Witness statements, messages, photographs, video, military records, investigative reports, or other evidence may need prompt review or preservation.",
+      "You received an adverse decision in a military justice matter and need to understand possible post-trial, administrative, or appellate options.",
+    ],
+    localContent: [
+      "Fort Bliss makes military justice and administrative military-law issues particularly relevant in the El Paso area. Service members stationed at or connected to Fort Bliss may face command investigations, nonjudicial punishment, courts-martial, separation proceedings, or other military actions while living in the Borderland.",
+      "Military defense matters can involve commanders, military law-enforcement personnel, investigators, prosecutors, defense counsel, witnesses, medical providers, and administrative offices. The applicable process depends on the type of proceeding, branch of service, duty status, allegations, and governing regulations.",
+      "Military cases can overlap with civilian legal problems without being the same proceeding. Alleged conduct may sometimes create separate military, federal, Texas, family-law, employment, licensing, immigration, or security-clearance consequences that require careful coordination.",
+      "An El Paso military law attorney can evaluate the nature of the proceeding, review notices and investigative materials, identify upcoming deadlines, explain military-specific rights and procedures, prepare for hearings or boards, and advise a service member about available defense, administrative, post-trial, or appellate options.",
+    ],
+    faqs: [
+      {
+        question: "What does a military law lawyer do?",
+        answer:
+          "A military law lawyer represents or advises service members in matters governed by military law and regulations. Depending on the case, that can include UCMJ investigations, courts-martial, Article 15 proceedings, Article 32 preliminary hearings, administrative separation, officer elimination, boards, adverse actions, and related post-trial or appellate issues.",
+      },
+      {
+        question: "What is the UCMJ?",
+        answer:
+          "The Uniform Code of Military Justice is the federal statutory framework governing military criminal law and discipline. It establishes offenses, procedures, and military-justice authority applicable to covered members of the armed forces.",
+      },
+      {
+        question: "What is a court-martial?",
+        answer:
+          "A court-martial is a military criminal proceeding used to adjudicate alleged UCMJ offenses. Different forms of court-martial have different jurisdiction, procedures, and potential consequences, so the specific charges and type of proceeding should be reviewed carefully.",
+      },
+      {
+        question: "What is an Article 15?",
+        answer:
+          "Article 15 of the UCMJ provides a process for nonjudicial punishment. It is not the same as a court-martial, but it may still affect rank, pay, duties, evaluations, promotion, retention, and a service member's military career. Available rights and choices depend on the circumstances.",
+      },
+      {
+        question: "What is an Article 32 preliminary hearing?",
+        answer:
+          "An Article 32 preliminary hearing can occur before certain court-martial charges are referred for trial. The proceeding addresses matters such as probable cause, jurisdiction, the form of charges, and recommendations concerning disposition. The precise role and procedure depend on the case.",
+      },
+      {
+        question: "What happens in an administrative separation case?",
+        answer:
+          "Administrative separation is a process that may result in a service member being discharged from the military for specified administrative grounds. Depending on the member's status and the proposed characterization or basis, the process may include notice, an opportunity to respond, and in some cases a separation board.",
+      },
+      {
+        question: "What is an officer board of inquiry?",
+        answer:
+          "A board of inquiry may be used in certain officer-elimination proceedings to determine whether an officer should be retained or separated. The issues, evidence, procedural rights, and possible outcomes depend on the grounds for elimination and applicable military regulations.",
+      },
+      {
+        question: "Should I make a statement if military investigators want to question me?",
+        answer:
+          "Statements can become important evidence in a military investigation or disciplinary proceeding. A service member who believes they are suspected of misconduct may want legal advice about applicable rights and the circumstances before deciding whether and how to provide a statement.",
+      },
+      {
+        question: "Can a military case also create civilian legal consequences?",
+        answer:
+          "Yes. Some alleged conduct can create separate military and civilian issues. Depending on the facts, there may be consequences involving federal or state criminal law, family law, immigration, employment, licensing, security clearances, or other matters in addition to the military proceeding.",
+      },
+      {
+        question: "When should I contact a military law lawyer in El Paso?",
+        answer:
+          "Consider contacting counsel promptly after learning of an investigation, Article 15, court-martial charge, Article 32 hearing, separation action, officer-elimination proceeding, adverse administrative action, or other matter that could affect your liberty, rank, pay, military status, or career.",
+      },
+    ],
+    relatedPages: [
+      { label: "Criminal Defense", path: "/el-paso-criminal-defense-lawyers" },
+      { label: "Federal Criminal Defense", path: "/el-paso-federal-criminal-defense-lawyers" },
+      { label: "Appeals & Appellate", path: "/el-paso-appeals-lawyers" },
+      { label: "Divorce", path: "/el-paso-divorce-lawyers" },
+    ],
+    resourceLinks: [
+      { label: "Browse All Texas Law Guides", path: "/guides" },
+    ],
+    lastUpdated: "September 9, 2026",
+  },
 ];
 
 export const getPracticeAreaPageByPath = (
