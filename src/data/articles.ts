@@ -941,6 +941,179 @@ export const articles: Article[] = [
       },
     ],
   },
+  {
+    id: "texas-protective-order-el-paso",
+    slug: "how-to-get-protective-order-texas-el-paso",
+    title: "How to Get a Protective Order in Texas: El Paso Guide",
+    metaDescription:
+      "Learn how Texas protective orders generally work, including eligibility, temporary ex parte relief, hearings, restrictions, duration, enforcement, and El Paso considerations.",
+    summary:
+      "A practical overview of Texas protective orders for family violence and related conduct, including who may apply, temporary protection, hearings, possible restrictions, enforcement, and related family or criminal cases.",
+    topic: "Family Law",
+    readTime: "9 min read",
+    updatedAt: "2026-09-10",
+    relatedPracticeArea: {
+      label: "Compare El Paso Protective Order Lawyers",
+      path: "/el-paso-protective-order-lawyers",
+    },
+    sections: [
+      {
+        heading: "A protective order is different from a restraining order",
+        paragraphs: [
+          "A Texas protective order is a court order designed to protect a person from qualifying violence, threats, stalking, sexual assault, trafficking, or other conduct covered by law. A family-violence protective order is different from an ordinary temporary restraining order used in a divorce or custody case.",
+          "The correct procedure depends on the relationship between the people involved, the alleged conduct, and the type of protection requested. A person facing immediate danger should contact 911 or local law enforcement rather than wait for a civil court filing.",
+        ],
+      },
+      {
+        heading: "Texas law recognizes several grounds for protective relief",
+        paragraphs: [
+          "Texas Family Code Chapter 71 defines family violence and related family, household, and dating relationships. Other Texas laws also authorize protective orders for conduct such as stalking, sexual assault, trafficking, and certain other offenses.",
+          "Because different statutes can apply to different facts, a person should not assume that every protective-order case uses the same legal standard, filing procedure, or available relief.",
+        ],
+      },
+      {
+        heading: "An application starts the protective-order case",
+        paragraphs: [
+          "A protective-order case generally begins when an eligible applicant files an application asking a court for protection. The application describes the people involved, the conduct alleged, and the protections requested.",
+          "Texas law generally does not allow a filing fee, service fee, or similar court charge to be assessed against an applicant for a protective order under the Family Code protective-order provisions.",
+        ],
+      },
+      {
+        heading: "Temporary ex parte protection may be available before the full hearing",
+        paragraphs: [
+          "When an application shows a clear and present danger of family violence, a court may issue a temporary ex parte protective order before the respondent receives notice or appears at a full hearing. The purpose is to provide temporary protection until the court can hold the protective-order hearing.",
+          "A temporary ex parte order is not the same as a final protective order. Its exact terms should be read carefully, and the applicant generally still must attend the scheduled hearing to seek longer-term protection.",
+        ],
+      },
+      {
+        heading: "The respondent must receive notice before the final hearing",
+        paragraphs: [
+          "A respondent generally must be served with the protective-order application and notice of the hearing before the court decides whether to issue a final protective order. Service and hearing procedures can affect the timing of the case.",
+          "A person who is served should read every document carefully, comply with any order already in effect, preserve relevant evidence, and note the hearing date immediately.",
+        ],
+      },
+      {
+        heading: "The court decides whether the statutory requirements are met",
+        paragraphs: [
+          "At the hearing, the judge considers testimony, documents, photographs, messages, recordings, medical records, police information, witness evidence, and other admissible evidence offered by the parties.",
+          "For a family-violence protective order under the current Texas Family Code, the court determines whether family violence has occurred. The findings and relief required or permitted by law depend on the type of protective-order proceeding and the evidence presented.",
+        ],
+      },
+      {
+        heading: "A protective order can impose significant restrictions",
+        paragraphs: [
+          "Depending on the law and facts, a protective order may restrict contact, communication, proximity to specified people or locations, possession of firearms, access to a residence, or other conduct. A court may also address certain temporary family-law issues when authorized by statute.",
+          "The signed order controls. Anyone protected by or restricted by the order should read its exact language rather than relying on a verbal summary of what the order supposedly requires.",
+        ],
+      },
+      {
+        heading: "Duration depends on the type of order and the findings",
+        paragraphs: [
+          "Temporary ex parte orders are short-term orders intended to bridge the period before a hearing. Final family-violence protective orders commonly last up to two years, but Texas law permits longer orders in specified circumstances.",
+          "Because duration can depend on statutory findings and the type of protective order, the expiration date and any continuing provisions should be confirmed from the signed order itself.",
+        ],
+      },
+      {
+        heading: "Violating a protective order can create separate legal consequences",
+        paragraphs: [
+          "A violation of certain protective-order provisions can lead to law-enforcement involvement and possible criminal consequences. A person subject to an order should follow its terms unless and until a court changes or ends the order.",
+          "Likewise, a protected person who believes an order has been violated should preserve evidence and contact law enforcement when immediate safety or enforcement is needed.",
+        ],
+      },
+      {
+        heading: "Protective-order cases can overlap with divorce, custody, and criminal cases",
+        paragraphs: [
+          "Protective-order allegations or findings can intersect with divorce, conservatorship, possession and access, housing, property, support, firearm restrictions, bond conditions, and criminal charges.",
+          "An emergency protective order issued after an arrest is also legally distinct from a civil family-violence protective order. When several proceedings exist at the same time, the terms of each order should be reviewed together so that a person understands which restrictions currently apply.",
+        ],
+      },
+      {
+        heading: "When to consider an El Paso protective-order lawyer",
+        paragraphs: [
+          "Legal advice may be especially useful when immediate protection is requested, the allegations are disputed, children or a shared residence are involved, firearms or employment may be affected, evidence is contested, or a protective-order case overlaps with divorce, custody, or criminal proceedings.",
+          "A lawyer can also help a respondent understand the application, prepare for the hearing, identify evidence, and evaluate the consequences of proposed restrictions without ignoring any temporary order already in effect.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Who can ask for a protective order in Texas?",
+        answer:
+          "Eligibility depends on the type of protective order, the alleged conduct, and sometimes the relationship between the applicant and respondent. Texas law provides procedures for family violence and for certain other conduct such as stalking, sexual assault, and trafficking.",
+      },
+      {
+        question: "Can I get a protective order the same day I apply?",
+        answer:
+          "A court may issue a temporary ex parte protective order when the statutory requirements for emergency relief are met. A final protective order generally requires notice and a hearing.",
+      },
+      {
+        question: "How long does a temporary ex parte protective order last?",
+        answer:
+          "Under the Texas Family Code, a temporary ex parte protective order is generally effective for the period stated in the order, not to exceed 20 days, and the statute permits extensions in additional 20-day periods in specified circumstances.",
+      },
+      {
+        question: "How long does a final Texas protective order last?",
+        answer:
+          "Many family-violence protective orders last up to two years, but Texas law allows longer duration in specified circumstances. The signed order should be checked for its actual expiration date and terms.",
+      },
+      {
+        question: "What should I do if I am served with a protective-order application?",
+        answer:
+          "Read the application, notice, and any temporary order carefully; obey restrictions already in effect; preserve relevant evidence; note the hearing date; and consider obtaining legal advice promptly.",
+      },
+      {
+        question: "Can a protective order affect child custody or visitation?",
+        answer:
+          "Yes. Protective-order proceedings can overlap with conservatorship, possession, access, and other family-law issues, and allegations or findings of family violence may be relevant in related cases.",
+      },
+      {
+        question: "Can a Texas protective order affect firearm possession?",
+        answer:
+          "Certain protective orders can create firearm restrictions under state or federal law. The effect depends on the exact order, legal status, and applicable statutes.",
+      },
+      {
+        question: "Is a protective order the same as an emergency protective order after an arrest?",
+        answer:
+          "No. A magistrate's order for emergency protection associated with certain criminal cases is distinct from a civil protective order under the Texas Family Code, although both can impose important restrictions.",
+      },
+      {
+        question: "What happens if someone violates a protective order?",
+        answer:
+          "Certain violations can result in law-enforcement action and criminal consequences. The exact result depends on the provision allegedly violated and the applicable law.",
+      },
+      {
+        question: "When should I contact an El Paso protective-order lawyer?",
+        answer:
+          "Consider legal advice promptly when you need emergency protection, have been served with an application or temporary order, face a contested hearing, or have overlapping custody, divorce, housing, firearm, or criminal issues.",
+      },
+    ],
+    sources: [
+      {
+        name: "Texas Family Code Chapter 71 - Definitions",
+        url: "https://statutes.capitol.texas.gov/Docs/FA/htm/FA.71.htm",
+      },
+      {
+        name: "Texas Family Code Chapter 81 - General Protective Order Provisions",
+        url: "https://statutes.capitol.texas.gov/Docs/FA/htm/FA.81.htm",
+      },
+      {
+        name: "Texas Family Code Chapter 82 - Applying for a Protective Order",
+        url: "https://statutes.capitol.texas.gov/Docs/FA/htm/FA.82.htm",
+      },
+      {
+        name: "Texas Family Code Chapter 83 - Temporary Ex Parte Orders",
+        url: "https://statutes.capitol.texas.gov/Docs/FA/htm/FA.83.htm",
+      },
+      {
+        name: "Texas Family Code Chapter 85 - Issuance of Protective Order",
+        url: "https://statutes.capitol.texas.gov/Docs/FA/htm/FA.85.htm",
+      },
+      {
+        name: "TexasLawHelp - I Need a Protective Order",
+        url: "https://texaslawhelp.org/toolkit/i-need-protective-order",
+      },
+    ],
+  },
 ];
 
 export const getArticleBySlug = (slug: string | undefined) =>
