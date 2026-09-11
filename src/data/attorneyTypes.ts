@@ -10,6 +10,7 @@ export interface AttorneyProfile {
   specialties?: string[];
   education?: string[];
   bar_admissions?: string[];
+  bar_number?: string;
 
   years_experience?: number;
   languages?: string[];
@@ -36,6 +37,7 @@ export interface AttorneyProfileInput {
   specialties?: string[];
   education?: string[];
   bar_admissions?: string[];
+  bar_number?: string;
 
   years_experience?: number;
   languages?: string[];

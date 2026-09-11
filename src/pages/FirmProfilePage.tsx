@@ -892,6 +892,12 @@ export default function FirmProfilePage() {
                           </p>
                         )}
 
+                        {attorney.bar_number && (
+                          <p className="mt-2 text-sm font-medium text-gray-500">
+                            Texas Bar Card No. {attorney.bar_number}
+                          </p>
+                        )}
+
                         {attorney.bio && (
                           <p className="mt-3 line-clamp-4 leading-6 text-gray-600">
                             {attorney.bio}

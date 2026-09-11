@@ -76,6 +76,7 @@ export const hicksExclusiveAttorneys: AttorneyProfile[] = [
       "Texas, 1997",
       "U.S. District Court, Western District of Texas, 2001",
     ],
+    bar_number: "24002277",
     years_experience: 27,
     awards: [
       "National Association of Distinguished Counsel — Top One Percent of Attorneys (as listed by the firm)",
