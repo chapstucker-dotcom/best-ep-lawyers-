@@ -773,6 +773,174 @@ export const articles: Article[] = [
       },
     ],
   },
+  {
+    id: "texas-child-custody-support-modification-el-paso",
+    slug: "how-to-modify-child-custody-child-support-texas-el-paso",
+    title: "How to Modify Child Custody or Child Support in Texas: El Paso Guide",
+    metaDescription:
+      "Learn how Texas custody, visitation, and child support modifications generally work, including changed circumstances, filing, existing orders, and El Paso considerations.",
+    summary:
+      "A practical overview of changing an existing Texas conservatorship, possession, visitation, or child support order, including legal standards, filing steps, evidence, and when court approval is required.",
+    topic: "Family Law",
+    readTime: "9 min read",
+    updatedAt: "2026-09-10",
+    relatedPracticeArea: {
+      label: "Compare El Paso Child Custody Lawyers",
+      path: "/el-paso-child-custody-lawyers",
+    },
+    sections: [
+      {
+        heading: "A Texas court order does not change automatically",
+        paragraphs: [
+          "When a court has already entered an order involving conservatorship, possession and access, child support, medical support, or dental support, changed circumstances do not automatically rewrite the order. The existing order generally remains in effect until a court with authority over the case signs a new order.",
+          "Parents may sometimes agree informally to short-term practical changes, but an informal agreement does not necessarily replace the enforceable terms of the court order. A parent seeking a lasting legal change should determine whether a formal modification is needed.",
+        ],
+      },
+      {
+        heading: "Modification usually starts with the court that has continuing jurisdiction",
+        paragraphs: [
+          "Texas modification cases are generally filed in the court that has continuing, exclusive jurisdiction over the child. The cause number and court information on the existing order are important starting points when identifying where the modification should be filed.",
+          "Jurisdiction can become more complicated when a child or parent has moved to another Texas county, another state, or another country. Interstate and international cases may require additional analysis before filing.",
+        ],
+      },
+      {
+        heading: "Custody and visitation modifications use a best-interest standard plus statutory grounds",
+        paragraphs: [
+          "Texas Family Code Section 156.101 allows a court to modify conservatorship or possession-and-access provisions when the modification would be in the child's best interest and one of the statutory grounds is established.",
+          "One commonly litigated ground is a material and substantial change in the circumstances of the child, a conservator, or another party affected by the order. Other statutory grounds can apply in particular situations, so a modification should not be evaluated under a single phrase alone.",
+        ],
+      },
+      {
+        heading: "Requests to change primary residence can have additional requirements",
+        paragraphs: [
+          "A request to change which conservator has the exclusive right to determine the child's primary residence can involve additional statutory requirements. The timing of the request, the prior order, the child's circumstances, and whether the requested change is within one year of the earlier order can matter.",
+          "Texas law places special restrictions on certain requests to change primary residence within one year of the existing order. Because those rules are fact-specific, a parent considering a rapid post-order change should review the current statute and existing order carefully before filing.",
+        ],
+      },
+      {
+        heading: "What may qualify as a material and substantial change depends on the facts",
+        paragraphs: [
+          "Texas law does not reduce every custody modification to a single checklist. Courts evaluate the circumstances presented in the case and compare them with the circumstances relevant to the existing order.",
+          "Potentially important facts can include major changes in a child's needs, a parent's circumstances, residence, work schedule, caregiving arrangements, safety concerns, repeated problems with the existing possession schedule, or other developments that materially affect the parent-child relationship. The significance of any particular change depends on the evidence and the relief requested.",
+        ],
+      },
+      {
+        heading: "Child support has its own modification rules",
+        paragraphs: [
+          "Texas Family Code Section 156.401 provides separate grounds for modifying child support. In many cases, modification may be considered when the circumstances of the child or a person affected by the support order have materially and substantially changed since the legally relevant prior date.",
+          "The statute also provides a three-year guideline comparison route in qualifying cases when the existing monthly support amount differs from the guideline amount by either 20 percent or $100. That route is subject to statutory exceptions and should not be treated as an automatic right to modification in every case.",
+        ],
+      },
+      {
+        heading: "A job loss or income change does not automatically change support",
+        paragraphs: [
+          "A raise, job loss, new job, change in hours, self-employment income, disability, or other financial change may be relevant to child support, but the existing support obligation does not automatically change on the date income changes.",
+          "Until a court signs a modified order, the existing support terms can remain enforceable. Parents should preserve pay records, tax returns, benefit information, business records, health-insurance costs, and other documents that may be relevant to the requested modification.",
+        ],
+      },
+      {
+        heading: "File a petition that identifies the order and requested changes",
+        paragraphs: [
+          "A modification case generally begins with a Petition to Modify the Parent-Child Relationship. The petition identifies the existing case and asks the court to change specified provisions of the current order.",
+          "TexasLawHelp provides modification forms and instructions for certain agreed and default cases. Contested cases can involve formal service, answers, discovery, temporary orders, mediation, evidentiary hearings, and a final hearing before a judge.",
+        ],
+      },
+      {
+        heading: "The existing order stays important while the case is pending",
+        paragraphs: [
+          "Filing a modification case does not by itself suspend the existing custody, visitation, or support order. Until the court enters a new order, the prior order generally remains the operative order.",
+          "If circumstances require temporary relief while the modification is pending, a party may need to request appropriate temporary orders rather than simply stop following the current order.",
+        ],
+      },
+      {
+        heading: "Evidence should match the specific change being requested",
+        paragraphs: [
+          "The useful evidence in a modification case depends on what a party wants changed and why. Custody or possession disputes may involve school records, medical information, calendars, communications, travel records, residence information, witness testimony, or evidence concerning the child's care and needs.",
+          "Support modification disputes may require pay stubs, tax returns, employment records, business records, benefit statements, health-insurance information, childcare costs, payment histories, and documentation of other legally relevant resources or obligations.",
+        ],
+      },
+      {
+        heading: "El Paso modifications can involve military and cross-border issues",
+        paragraphs: [
+          "El Paso families may have modification issues connected to Fort Bliss assignments, deployment, permanent-change-of-station orders, parents living in New Mexico, relatives or travel in Mexico, long-distance possession schedules, or children changing schools within the Borderland.",
+          "Those circumstances can affect jurisdiction, transportation, possession schedules, geographic restrictions, communication provisions, and the evidence needed to evaluate a proposed change.",
+        ],
+      },
+      {
+        heading: "When to consider speaking with an El Paso family-law attorney",
+        paragraphs: [
+          "Legal advice may be especially useful when the other parent contests the requested change, a move or relocation is disputed, primary residence may change, the existing order is less than one year old, family violence or safety concerns exist, significant support arrears are involved, income is difficult to determine, or interstate or military issues affect the case.",
+          "An attorney can review the existing order, identify the applicable modification standard, evaluate evidence, address service and temporary-order issues, and help distinguish modification from enforcement when the real problem is noncompliance with the current order.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Can parents change a Texas custody order just by agreeing?",
+        answer:
+          "Parents may agree on practical arrangements, but an informal agreement does not necessarily replace an existing court order. A formal modification may be needed for the new terms to become the enforceable court order.",
+      },
+      {
+        question: "What is a material and substantial change in circumstances?",
+        answer:
+          "There is no single fact that automatically qualifies in every case. The court evaluates the circumstances relevant to the existing order, what has changed, the requested modification, and the evidence presented.",
+      },
+      {
+        question: "Can I change custody or visitation if the other parent moves?",
+        answer:
+          "A move can be relevant, particularly if it affects a geographic restriction, school, transportation, possession schedules, or the child's relationship with a parent. Whether modification is appropriate depends on the existing order and statutory requirements.",
+      },
+      {
+        question: "Can child support be changed after three years?",
+        answer:
+          "Texas law includes a three-year guideline comparison ground in qualifying cases when the ordered monthly amount differs from the guideline amount by either 20 percent or $100. Statutory exceptions apply, so the three-year rule is not available in every case.",
+      },
+      {
+        question: "Does losing a job automatically reduce child support?",
+        answer:
+          "No. An employment or income change may support a request for modification, but the existing support order generally remains in effect until a court signs a new order.",
+      },
+      {
+        question: "Can child support be modified if both parents agree?",
+        answer:
+          "Parents can reach an agreement, but a court order generally must be modified through the legal process for the new amount to replace the existing enforceable order.",
+      },
+      {
+        question: "Do I keep following the old order after filing for modification?",
+        answer:
+          "Generally, yes. Filing a modification case does not by itself replace or suspend the existing order. A court must sign a new order or other applicable relief.",
+      },
+      {
+        question: "Is modification the same as enforcement?",
+        answer:
+          "No. Modification asks the court to change an existing order. Enforcement asks the court to address alleged violations of the order already in effect. Some disputes can involve both issues.",
+      },
+      {
+        question: "What if the existing order is from another state?",
+        answer:
+          "Jurisdiction must be evaluated before Texas attempts to modify an out-of-state custody or support order. Interstate cases can involve additional state and federal rules, so legal advice may be particularly useful.",
+      },
+      {
+        question: "When should I contact an El Paso child custody or child support lawyer?",
+        answer:
+          "Consider legal advice when a requested modification is contested, primary residence or relocation is disputed, the existing order is recent, safety concerns exist, support calculations are complex, or military, interstate, or cross-border issues are involved.",
+      },
+    ],
+    sources: [
+      {
+        name: "Texas Family Code Chapter 156 - Modification",
+        url: "https://statutes.capitol.texas.gov/Docs/FA/htm/FA.156.htm",
+      },
+      {
+        name: "TexasLawHelp - Changing a Custody, Visitation, or Child Support Order",
+        url: "https://texaslawhelp.org/article/changing-a-custody-visitation-or-child-support-order",
+      },
+      {
+        name: "TexasLawHelp - Modification Guide and Forms",
+        url: "https://texaslawhelp.org/guide/i-need-to-change-a-custody-visitation-or-support-order-modification",
+      },
+    ],
+  },
 ];
 
 export const getArticleBySlug = (slug: string | undefined) =>
