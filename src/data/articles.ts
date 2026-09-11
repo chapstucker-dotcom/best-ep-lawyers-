@@ -1114,6 +1114,182 @@ export const articles: Article[] = [
       },
     ],
   },
+  {
+    id: "texas-probate-process-el-paso",
+    slug: "how-does-probate-work-texas-el-paso",
+    title: "How Does Probate Work in Texas? Step-by-Step El Paso Guide",
+    metaDescription:
+      "Learn how Texas probate generally works, including wills, intestacy, executors, independent administration, creditors, small-estate alternatives, and El Paso considerations.",
+    summary:
+      "A practical overview of the Texas probate process from determining whether probate is needed through filing, appointment of a personal representative, debts, estate administration, distributions, and possible alternatives.",
+    topic: "Probate",
+    readTime: "10 min read",
+    updatedAt: "2026-09-10",
+    relatedPracticeArea: {
+      label: "Compare El Paso Probate Lawyers",
+      path: "/el-paso-probate-lawyers",
+    },
+    sections: [
+      {
+        heading: "Probate is the court process used to handle certain property after a death",
+        paragraphs: [
+          "Probate is a legal process used to establish authority over a deceased person's probate estate, recognize a valid will when one exists, appoint a personal representative when administration is needed, address estate obligations, and transfer property to the people legally entitled to receive it.",
+          "Not every asset passes through probate. Property may transfer outside probate through a valid beneficiary designation, survivorship arrangement, trust, transfer-on-death device, or another method recognized by law. The first step is therefore to identify the property involved and determine what actually requires a probate proceeding.",
+        ],
+      },
+      {
+        heading: "The process differs depending on whether the person left a will",
+        paragraphs: [
+          "When a valid will exists, an interested person may ask the probate court to admit the will to probate. The will can identify beneficiaries and nominate an executor, but the court process may still be needed before the executor has legal authority to act for the estate.",
+          "When there is no valid will, Texas intestacy law determines who inherits probate property. The court may also need to determine the legal heirs and appoint an administrator if estate administration is necessary.",
+        ],
+      },
+      {
+        heading: "Texas generally has a four-year period for admitting a will to probate",
+        paragraphs: [
+          "Texas Estates Code Section 256.003 generally provides that a will may not be admitted to probate after the fourth anniversary of the testator's death unless the applicant proves that the applicant was not in default for failing to present the will earlier. Additional rules apply to late probate and to the issuance of letters testamentary.",
+          "Because the statute contains exceptions and late-filing consequences, families should not assume that a will is automatically useless after four years or that waiting has no effect. Questions about an older estate should be evaluated under the facts and current statute.",
+        ],
+      },
+      {
+        heading: "A probate case usually begins with an application in the proper court",
+        paragraphs: [
+          "The person seeking probate generally files an application in the court with probate jurisdiction for the appropriate Texas county. The filing identifies the decedent, the requested relief, and information required by the Estates Code.",
+          "Citation, posting, notices, hearing procedures, and supporting documents depend on the type of case. El Paso County procedures and the particular estate can affect scheduling and what must be filed before the court acts.",
+        ],
+      },
+      {
+        heading: "The court may admit the will and appoint a personal representative",
+        paragraphs: [
+          "If the court finds the statutory requirements are satisfied, it may admit a will to probate and appoint an executor or other personal representative. In an intestate estate, the court may appoint an administrator.",
+          "The personal representative's authority comes from the court and applicable law, not merely from possession of the will. Depending on the estate, the representative may receive letters testamentary or letters of administration showing authority to act.",
+        ],
+      },
+      {
+        heading: "Independent administration can reduce ongoing court supervision",
+        paragraphs: [
+          "Texas law permits independent administration in many estates. An independent executor or administrator can generally perform many estate-administration tasks with less continuing court supervision than a dependent representative.",
+          "Whether independent administration is available can depend on the will, the agreement of distributees, statutory requirements, and the court's findings. A dependent administration involves greater court oversight and may require approval for actions that an independent representative could perform without a separate order.",
+        ],
+      },
+      {
+        heading: "The personal representative identifies property, records, and estate obligations",
+        paragraphs: [
+          "Administration commonly involves identifying estate assets, protecting property, gathering financial information, determining ownership, keeping records, and addressing required inventories, affidavits, or other filings.",
+          "Real estate, closely held businesses, mineral interests, vehicles, digital assets, property in another jurisdiction, or disputed ownership can make the administration more complicated.",
+        ],
+      },
+      {
+        heading: "Creditors and estate debts must be handled before final distribution",
+        paragraphs: [
+          "A personal representative may have duties involving notices to creditors, evaluating claims, paying valid obligations according to applicable priority rules, and preserving enough estate property to complete administration.",
+          "Family members should be cautious about distributing estate property too early. The order in which claims and expenses are paid can matter, and a representative can have legal duties to the estate and its beneficiaries.",
+        ],
+      },
+      {
+        heading: "Some estates may qualify for a simpler alternative",
+        paragraphs: [
+          "Texas law provides procedures that may avoid or simplify a full administration in appropriate cases. Examples can include a small estate affidavit, an affidavit of heirship for certain property situations, or use of nonprobate transfer mechanisms that were already in place before death.",
+          "A small estate affidavit has specific statutory requirements and is not simply available whenever an estate feels small. Eligibility depends on factors such as the value and type of property, debts, heirs, and how real property is involved.",
+        ],
+      },
+      {
+        heading: "Distributions occur after the estate is ready to transfer remaining property",
+        paragraphs: [
+          "After administration requirements are satisfied, remaining probate property can be distributed according to the admitted will or, when there is no valid will, according to Texas intestacy law.",
+          "Disputes over ownership, heirship, interpretation of a will, executor conduct, creditor claims, or a will contest can delay distribution and may require additional hearings or litigation.",
+        ],
+      },
+      {
+        heading: "El Paso probate cases can involve cross-border and military issues",
+        paragraphs: [
+          "El Paso estates can involve relatives or property in Mexico or New Mexico, bilingual documents, jointly owned real estate, family businesses, military families connected to Fort Bliss, retirement benefits, or property located outside Texas.",
+          "Those facts can create separate questions about jurisdiction, title, beneficiary designations, foreign documents, ancillary proceedings, or which property is actually part of the Texas probate estate.",
+        ],
+      },
+      {
+        heading: "When to consider an El Paso probate lawyer",
+        paragraphs: [
+          "Legal advice may be especially useful when the estate includes real estate or a business, no clear will exists, heirs are uncertain, family members disagree, creditor claims are significant, the proposed executor faces objections, property crosses state or national borders, or a deadline may be approaching.",
+          "A probate lawyer can help evaluate whether probate is needed, identify the appropriate procedure, prepare required court filings, advise a personal representative about duties, and address contested issues.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Does every estate have to go through probate in Texas?",
+        answer:
+          "No. Some property passes outside probate through beneficiary designations, survivorship arrangements, trusts, transfer-on-death devices, or other nonprobate methods. Some estates may also qualify for a simplified procedure.",
+      },
+      {
+        question: "What happens if someone dies without a will in Texas?",
+        answer:
+          "Texas intestacy law determines who inherits probate property. A court may need to determine the legal heirs and appoint an administrator if administration is required.",
+      },
+      {
+        question: "How long do I have to probate a will in Texas?",
+        answer:
+          "Texas generally uses a four-year period from the date of death for admitting a will to probate, but the statute contains an exception when the applicant can prove the applicant was not in default for failing to present the will earlier. Late filings can involve additional legal consequences.",
+      },
+      {
+        question: "What is the difference between an executor and an administrator?",
+        answer:
+          "An executor is commonly a personal representative named in a will and appointed by the court. An administrator is a personal representative appointed under the Estates Code when an administration is needed and an executor is not serving.",
+      },
+      {
+        question: "What is independent administration in Texas?",
+        answer:
+          "Independent administration is a form of Texas estate administration that generally allows the personal representative to perform many tasks with less ongoing court supervision than a dependent administration.",
+      },
+      {
+        question: "What is a small estate affidavit?",
+        answer:
+          "A small estate affidavit is a statutory procedure available only when specific Texas requirements are met. Eligibility depends on the estate's property, debts, heirs, timing, and other facts.",
+      },
+      {
+        question: "Are beneficiary-designated accounts part of probate?",
+        answer:
+          "An asset with a valid beneficiary designation generally passes according to that designation rather than through the probate estate, although disputes, failed designations, or other facts can change the analysis.",
+      },
+      {
+        question: "What happens to debts when someone dies?",
+        answer:
+          "Debts do not automatically become the personal debts of every family member. Valid claims are generally addressed through the estate under applicable Texas rules, with the result depending on the debt, estate assets, ownership, and any separate contractual liability.",
+      },
+      {
+        question: "Can probate be contested?",
+        answer:
+          "Yes. Probate disputes can involve the validity or interpretation of a will, heirship, ownership of property, creditor claims, or allegations concerning a personal representative's conduct.",
+      },
+      {
+        question: "When should I contact an El Paso probate lawyer?",
+        answer:
+          "Consider legal advice when court administration may be required, a will is old or disputed, heirs are uncertain, real estate or a business is involved, creditor or tax issues are significant, family conflict exists, or the estate has interstate or cross-border complications.",
+      },
+    ],
+    sources: [
+      {
+        name: "Texas Estates Code Chapter 256 - Probate of Wills Generally",
+        url: "https://statutes.capitol.texas.gov/Docs/ES/htm/ES.256.htm",
+      },
+      {
+        name: "Texas Estates Code Chapter 401 - Creation of Independent Administration",
+        url: "https://statutes.capitol.texas.gov/Docs/ES/htm/ES.401.htm",
+      },
+      {
+        name: "Texas Estates Code Chapter 205 - Small Estate Affidavit",
+        url: "https://statutes.capitol.texas.gov/Docs/ES/htm/ES.205.htm",
+      },
+      {
+        name: "Texas Estates Code Chapter 201 - Descent and Distribution",
+        url: "https://statutes.capitol.texas.gov/Docs/ES/htm/ES.201.htm",
+      },
+      {
+        name: "TexasLawHelp - Handling an Estate",
+        url: "https://texaslawhelp.org/article/handling-an-estate",
+      },
+    ],
+  },
 ];
 
 export const getArticleBySlug = (slug: string | undefined) =>
