@@ -862,7 +862,7 @@ export default function FirmProfilePage() {
                 No attorney profiles have been added yet.
               </div>
             ) : (
-              <div className="grid gap-5 lg:grid-cols-2">
+              <div className={attorneys.length === 1 ? "grid gap-5" : "grid gap-5 lg:grid-cols-2"}>
                 {attorneys.map((attorney) => (
                   <article
                     key={attorney.id}
@@ -899,7 +899,7 @@ export default function FirmProfilePage() {
                         )}
 
                         {attorney.bio && (
-                          <p className="mt-3 line-clamp-4 leading-6 text-gray-600">
+                          <p className="mt-3 leading-6 text-gray-600">
                             {attorney.bio}
                           </p>
                         )}
