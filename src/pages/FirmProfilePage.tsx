@@ -1170,7 +1170,7 @@ export default function FirmProfilePage() {
               <div className="grid gap-4 md:grid-cols-3">
                 <article className="rounded-xl border bg-gray-50 p-5">
                   <p className="leading-6 text-gray-700">
-                    "Mr. Hicks was the most professional, timely and effective lawyer I have ever met."
+                    Mr. Hicks was the most professional, timely and effective lawyer I have ever met.
                   </p>
                   <p className="mt-4 border-t pt-3 font-semibold text-[#0F2A43]">
                     Melissa
@@ -1179,7 +1179,7 @@ export default function FirmProfilePage() {
 
                 <article className="rounded-xl border bg-gray-50 p-5">
                   <p className="leading-6 text-gray-700">
-                    "I hold him in high regard for his honesty and integrity."
+                    I hold him in high regard for his honesty and integrity.
                   </p>
                   <p className="mt-4 border-t pt-3 font-semibold text-[#0F2A43]">
                     Chris
@@ -1188,7 +1188,7 @@ export default function FirmProfilePage() {
 
                 <article className="rounded-xl border bg-gray-50 p-5">
                   <p className="leading-6 text-gray-700">
-                    "Throughout the process he was honest, straightforward, and available."
+                    Throughout the process he was honest, straightforward, and available.
                   </p>
                   <p className="mt-4 border-t pt-3 font-semibold text-[#0F2A43]">
                     Leslie
