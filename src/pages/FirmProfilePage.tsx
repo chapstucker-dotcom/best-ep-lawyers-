@@ -527,7 +527,7 @@ export default function FirmProfilePage() {
               <img
                 src={firmLogo}
                 alt={`${publicFirm.name} logo`}
-                className="h-28 w-28 shrink-0 rounded-2xl border-4 border-white bg-white p-2 object-contain shadow-lg"
+                className="h-28 w-48 shrink-0 rounded-2xl border-4 border-white bg-white p-2 object-contain shadow-lg"
               />
             ) : (
               <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-2xl border-4 border-white/80 bg-white/10 shadow-lg">
