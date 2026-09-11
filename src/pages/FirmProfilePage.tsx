@@ -1149,18 +1149,67 @@ export default function FirmProfilePage() {
             </div>
           )}
 
-          <section className="rounded-2xl border bg-white p-6 shadow-sm">
-            <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
-              <h3 className="flex items-center gap-2 text-2xl font-bold text-[#0F2A43]">
-                <MessageSquare className="h-6 w-6" />
-                Client Reviews ({reviews.length})
-              </h3>
-
-              {isLocalHicksShowcase ? (
-                <p className="text-sm text-gray-500">
-                  Reviews are not enabled for this showcase profile.
+          {isLocalHicksShowcase ? (
+            <section className="rounded-2xl border bg-white p-6 shadow-sm">
+              <div className="mb-5">
+                <h3 className="flex items-center gap-2 text-2xl font-bold text-[#0F2A43]">
+                  <MessageSquare className="h-6 w-6" />
+                  Client Testimonials
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-gray-500">
+                  Testimonials below are published by The Law Offices of Bill D. Hicks on the firm's website and are not independently verified or endorsed by El Paso's Best Lawyers.
                 </p>
-              ) : (
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-3">
+                <article className="rounded-xl border bg-gray-50 p-5">
+                  <p className="leading-6 text-gray-700">
+                    "Mr. Hicks was the most professional, timely and effective lawyer I have ever met."
+                  </p>
+                  <p className="mt-4 border-t pt-3 font-semibold text-[#0F2A43]">
+                    Melissa
+                  </p>
+                </article>
+
+                <article className="rounded-xl border bg-gray-50 p-5">
+                  <p className="leading-6 text-gray-700">
+                    "I hold him in high regard for his honesty and integrity."
+                  </p>
+                  <p className="mt-4 border-t pt-3 font-semibold text-[#0F2A43]">
+                    Chris
+                  </p>
+                </article>
+
+                <article className="rounded-xl border bg-gray-50 p-5">
+                  <p className="leading-6 text-gray-700">
+                    "Throughout the process he was honest, straightforward, and available."
+                  </p>
+                  <p className="mt-4 border-t pt-3 font-semibold text-[#0F2A43]">
+                    Leslie
+                  </p>
+                </article>
+              </div>
+
+              <div className="mt-5">
+                <Button asChild variant="outline">
+                  <a
+                    href="https://billhickslaw.com/testimonials/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View Testimonials on Firm Website
+                  </a>
+                </Button>
+              </div>
+            </section>
+          ) : (
+            <section className="rounded-2xl border bg-white p-6 shadow-sm">
+              <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
+                <h3 className="flex items-center gap-2 text-2xl font-bold text-[#0F2A43]">
+                  <MessageSquare className="h-6 w-6" />
+                  Client Reviews ({reviews.length})
+                </h3>
+
                 <Button
                   type="button"
                   onClick={() =>
@@ -1169,72 +1218,72 @@ export default function FirmProfilePage() {
                 >
                   {showReviewForm ? "Cancel" : "Write a Review"}
                 </Button>
+              </div>
+
+              {showReviewForm && (
+                <div className="mb-6 rounded-xl border bg-gray-50 p-4">
+                  <ReviewForm
+                    firmId={publicFirm.id}
+                    firmName={publicFirm.name}
+                    onSuccess={() => {
+                      setShowReviewForm(false);
+                      void loadReviews(publicFirm.id);
+                    }}
+                  />
+                </div>
               )}
-            </div>
 
-            {!isLocalHicksShowcase && showReviewForm && (
-              <div className="mb-6 rounded-xl border bg-gray-50 p-4">
-                <ReviewForm
-                  firmId={publicFirm.id}
-                  firmName={publicFirm.name}
-                  onSuccess={() => {
-                    setShowReviewForm(false);
-                    void loadReviews(publicFirm.id);
-                  }}
-                />
-              </div>
-            )}
+              {reviews.length === 0 ? (
+                <div className="rounded-xl border border-dashed p-8 text-center text-gray-500">
+                  No approved reviews yet.
+                </div>
+              ) : (
+                <div className="grid gap-4 md:grid-cols-2">
+                  {reviews.map((review) => (
+                    <article
+                      key={review.id}
+                      className="rounded-xl border bg-gray-50 p-5"
+                    >
+                      <div className="mb-3 flex">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <Star
+                            key={star}
+                            className={`h-5 w-5 ${
+                              review.rating >= star
+                                ? "fill-[#F5B800] text-[#F5B800]"
+                                : "text-gray-300"
+                            }`}
+                          />
+                        ))}
+                      </div>
 
-            {reviews.length === 0 ? (
-              <div className="rounded-xl border border-dashed p-8 text-center text-gray-500">
-                No approved reviews yet.
-              </div>
-            ) : (
-              <div className="grid gap-4 md:grid-cols-2">
-                {reviews.map((review) => (
-                  <article
-                    key={review.id}
-                    className="rounded-xl border bg-gray-50 p-5"
-                  >
-                    <div className="mb-3 flex">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <Star
-                          key={star}
-                          className={`h-5 w-5 ${
-                            review.rating >= star
-                              ? "fill-[#F5B800] text-[#F5B800]"
-                              : "text-gray-300"
-                          }`}
-                        />
-                      ))}
-                    </div>
+                      {review.title && (
+                        <h4 className="font-bold text-[#0F2A43]">
+                          {review.title}
+                        </h4>
+                      )}
 
-                    {review.title && (
-                      <h4 className="font-bold text-[#0F2A43]">
-                        {review.title}
-                      </h4>
-                    )}
-
-                    <p className="mt-2 leading-6 text-gray-600">
-                      {review.comment}
-                    </p>
-
-                    <div className="mt-4 border-t pt-3">
-                      <p className="font-medium text-gray-800">
-                        {review.reviewer_name}
+                      <p className="mt-2 leading-6 text-gray-600">
+                        {review.comment}
                       </p>
 
-                      <p className="text-xs text-gray-500">
-                        {new Date(
-                          review.created_at
-                        ).toLocaleDateString()}
-                      </p>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            )}
-          </section>
+                      <div className="mt-4 border-t pt-3">
+                        <p className="font-medium text-gray-800">
+                          {review.reviewer_name}
+                        </p>
+
+                        <p className="text-xs text-gray-500">
+                          {new Date(
+                            review.created_at
+                          ).toLocaleDateString()}
+                        </p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              )}
+            </section>
+          )}
 
           <section className="sticky bottom-0 z-10 -mx-6 border-t bg-white/95 px-6 py-4 shadow-[0_-8px_24px_rgba(15,42,67,0.10)] backdrop-blur sm:-mx-8 sm:px-8">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
