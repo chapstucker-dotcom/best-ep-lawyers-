@@ -38,6 +38,11 @@ import LeadCaptureForm from "../components/LeadCaptureForm";
 import { supabase } from "@/lib/supabase";
 import { getPlanRules } from "@/config/planRules";
 import { trackEvent } from "@/services/analyticsService";
+import {
+  HICKS_DEMO_FIRM_ID,
+  hicksExclusiveAttorneys,
+  hicksExclusiveFirm,
+} from "../data/hicksExclusiveDemo";
 import { useSeo } from "../hooks/use-seo";
 
 interface Review {
@@ -126,6 +131,7 @@ const getVideoEmbedUrl = (value: string): string | null => {
 export default function FirmProfilePage() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
+  const isLocalHicksShowcase = id === HICKS_DEMO_FIRM_ID;
 
   const [reviews, setReviews] = useState<Review[]>([]);
   const [attorneys, setAttorneys] = useState<AttorneyProfile[]>([]);
@@ -218,6 +224,17 @@ export default function FirmProfilePage() {
 
     const loadPage = async () => {
       setLoadingFirm(true);
+
+      if (id === HICKS_DEMO_FIRM_ID) {
+        if (!active) return;
+
+        setLiveFirm(hicksExclusiveFirm as unknown as PublicFirm);
+        setReviews([]);
+        setAttorneys(hicksExclusiveAttorneys);
+        setLoadingAttorneys(false);
+        setLoadingFirm(false);
+        return;
+      }
 
       const { data, error } = await supabase
         .from("firms")
@@ -385,6 +402,8 @@ export default function FirmProfilePage() {
   const recordContactClick = (
     eventType: "click_phone" | "click_email" | "click_website"
   ) => {
+    if (isLocalHicksShowcase) return;
+
     void trackEvent(publicFirm.id, eventType).catch((error) => {
       console.error(`Failed to track ${eventType}:`, error);
     });
@@ -945,16 +964,18 @@ export default function FirmProfilePage() {
                             </Button>
                           )}
 
-                          <Button
-                            type="button"
-                            size="sm"
-                            className="bg-[#1FA8A1] hover:bg-[#178D87]"
-                            onClick={() =>
-                              openAttorneyProfile(attorney.id)
-                            }
-                          >
-                            View Full Profile
-                          </Button>
+                          {!isLocalHicksShowcase && (
+                            <Button
+                              type="button"
+                              size="sm"
+                              className="bg-[#1FA8A1] hover:bg-[#178D87]"
+                              onClick={() =>
+                                openAttorneyProfile(attorney.id)
+                              }
+                            >
+                              View Full Profile
+                            </Button>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -1120,7 +1141,7 @@ export default function FirmProfilePage() {
               className="scroll-mt-24"
             >
               <LeadCaptureForm
-                firmId={publicFirm.id}
+                firmId={isLocalHicksShowcase ? undefined : publicFirm.id}
                 firmName={publicFirm.name}
                 firmEmail={publicFirm.email}
                 practiceArea={displayedPracticeAreas[0]?.title}
@@ -1135,17 +1156,23 @@ export default function FirmProfilePage() {
                 Client Reviews ({reviews.length})
               </h3>
 
-              <Button
-                type="button"
-                onClick={() =>
-                  setShowReviewForm((current) => !current)
-                }
-              >
-                {showReviewForm ? "Cancel" : "Write a Review"}
-              </Button>
+              {isLocalHicksShowcase ? (
+                <p className="text-sm text-gray-500">
+                  Reviews are not enabled for this showcase profile.
+                </p>
+              ) : (
+                <Button
+                  type="button"
+                  onClick={() =>
+                    setShowReviewForm((current) => !current)
+                  }
+                >
+                  {showReviewForm ? "Cancel" : "Write a Review"}
+                </Button>
+              )}
             </div>
 
-            {showReviewForm && (
+            {!isLocalHicksShowcase && showReviewForm && (
               <div className="mb-6 rounded-xl border bg-gray-50 p-4">
                 <ReviewForm
                   firmId={publicFirm.id}

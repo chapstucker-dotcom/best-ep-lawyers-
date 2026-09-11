@@ -5,25 +5,44 @@ import type { Firm } from "@/data/types";
 type FirmInput = Partial<Firm> & Record<string, unknown>;
 
 type LocalFirm = {
+  id?: string;
   name: string;
   category?: string;
   categories?: string[];
   specialties?: string[];
   phone?: string;
+  email?: string;
   website?: string;
   address?: string;
+  city?: string;
+  state?: string;
+  zip_code?: string;
   bio?: string;
   description?: string;
+  logo?: string;
+  logo_url?: string;
   featured?: boolean;
   exclusive?: boolean;
   verified?: boolean;
   plan?: string;
   plan_key?: string;
+  video_url?: string;
+  years_experience?: number | string;
+  team_size?: number | string;
+  consultation_fee?: number | string;
+  office_hours?: string;
+  languages?: string[];
+  awards?: string[];
+  linkedin_url?: string;
+  facebook_url?: string;
+  instagram_url?: string;
+  google_maps_url?: string;
+  gallery_urls?: string[];
 };
 
 const fallbackFirms = (): Firm[] =>
   (localFirms as LocalFirm[]).map((firm, index) => ({
-    id: String(index + 1),
+    id: firm.id ?? String(index + 1),
     user_id: "",
     name: firm.name,
 
@@ -33,12 +52,13 @@ const fallbackFirms = (): Firm[] =>
       "",
 
     phone: firm.phone ?? "",
+    email: firm.email ?? "",
     website: firm.website ?? "",
     address: firm.address ?? "",
 
-    city: "El Paso",
-    state: "TX",
-    zip_code: "",
+    city: firm.city ?? "El Paso",
+    state: firm.state ?? "TX",
+    zip_code: firm.zip_code ?? "",
 
     specialties:
       firm.specialties ??
@@ -79,9 +99,32 @@ const fallbackFirms = (): Firm[] =>
     verified:
       firm.verified ?? false,
 
+    logo: firm.logo ?? "",
+    logo_url: firm.logo_url ?? "",
+
+    video_url: firm.video_url ?? "",
+    years_experience: firm.years_experience ?? 0,
+    team_size: firm.team_size ?? 0,
+    consultation_fee: firm.consultation_fee ?? 0,
+    office_hours: firm.office_hours ?? "",
+    languages: firm.languages ?? [],
+    awards: firm.awards ?? [],
+    linkedin_url: firm.linkedin_url ?? "",
+    facebook_url: firm.facebook_url ?? "",
+    instagram_url: firm.instagram_url ?? "",
+    google_maps_url: firm.google_maps_url ?? "",
+    gallery_urls: firm.gallery_urls ?? [],
+
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   })) as Firm[];
+
+export const getLocalFirmById = (
+  firmId: string
+): Firm | null =>
+  fallbackFirms().find(
+    (firm) => firm.id === firmId
+  ) ?? null;
 
 const notConfigured = {
   message: "Supabase is not configured",
