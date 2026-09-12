@@ -27,6 +27,11 @@ export interface LegalMarket {
   homepagePriority: number;
 }
 
+export interface PracticeAreaPageResolution {
+  practiceArea?: PracticeArea;
+  market?: LegalMarket;
+}
+
 export const LEGAL_MARKETS: LegalMarket[] = [
   {
     key: "personal-injury",
@@ -118,32 +123,120 @@ export const PREMIUM_MARKETS = LEGAL_MARKETS.filter(
   (market) => market.premiumInventory
 );
 
+const normalize = (value: string | null | undefined): string =>
+  String(value ?? "")
+    .trim()
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+
+const PAGE_PATH_TO_PRACTICE_AREA_SLUG: Record<string, string> = {
+  "/el-paso-pedestrian-accident-lawyers": "pedestrian-accidents",
+  "/el-paso-bicycle-accident-lawyers": "bicycle-accidents",
+  "/el-paso-uber-lyft-accident-lawyers": "rideshare-accidents",
+  "/el-paso-citizenship-lawyers": "citizenship",
+  "/el-paso-green-card-lawyers": "green-cards",
+  "/el-paso-domestic-violence-lawyers": "domestic-violence-defense",
+  "/el-paso-expunction-lawyers": "expungement",
+  "/el-paso-federal-criminal-defense-lawyers": "federal-crimes",
+  "/el-paso-white-collar-crime-lawyers": "white-collar-crimes",
+  "/el-paso-probation-violation-lawyers": "probation-violations",
+  "/el-paso-dog-bite-lawyers": "dog-bites",
+  "/el-paso-traumatic-brain-injury-lawyers": "brain-injury",
+  "/el-paso-18-wheeler-accident-lawyer": "truck-accidents",
+  "/el-paso-truck-accident-lawyers": "truck-accidents",
+  "/el-paso-semi-truck-accident-lawyer": "truck-accidents",
+  "/el-paso-uncontested-divorce-lawyers": "divorce",
+  "/el-paso-family-violence-lawyers": "domestic-violence-defense",
+  "/el-paso-employment-contract-lawyers": "employment-contracts",
+  "/el-paso-severance-agreement-lawyers": "employment-contracts",
+  "/el-paso-tax-irs-lawyers": "tax-law",
+  "/el-paso-landlord-tenant-lawyers": "landlord-tenant",
+  "/el-paso-civil-rights-lawyers": "constitutional-law",
+};
+
+const PAGE_PATH_TO_MARKET_KEY: Record<string, MarketKey> = {
+  "/el-paso-traffic-ticket-lawyers": "criminal-defense",
+  "/el-paso-weapons-charges-lawyers": "criminal-defense",
+  "/el-paso-construction-accident-lawyers": "personal-injury",
+  "/el-paso-spousal-support-lawyers": "family-law",
+  "/el-paso-visa-lawyers": "immigration",
+  "/el-paso-felony-lawyers": "criminal-defense",
+  "/el-paso-business-immigration-lawyers": "immigration",
+  "/el-paso-retaliation-lawyers": "employment",
+  "/el-paso-military-law-lawyers": "specialized-law",
+};
+
 export const getMarketByKey = (
   key: string | null | undefined
 ): LegalMarket | undefined =>
   LEGAL_MARKETS.find((market) => market.key === key);
 
 export const getMarketByName = (
-  name: string | null | undefined
-): LegalMarket | undefined =>
+  name: string | null | undefined): LegalMarket | undefined =>
   LEGAL_MARKETS.find((market) => market.name === name);
+
+export const getPracticeAreaByValue = (
+  value: string | null | undefined
+): PracticeArea | undefined => {
+  if (!value) return undefined;
+
+  const normalized = normalize(value);
+
+  return categories.find(
+    (item) =>
+      normalize(item.slug) === normalized ||
+      normalize(item.title) === normalized
+  );
+};
 
 export const getMarketForPracticeArea = (
   value: string | null | undefined
 ): LegalMarket | undefined => {
-  if (!value) return undefined;
-
-  const normalized = value.trim().toLowerCase();
-
-  const practiceArea = categories.find(
-    (item) =>
-      item.slug.toLowerCase() === normalized ||
-      item.title.toLowerCase() === normalized
-  );
+  const practiceArea = getPracticeAreaByValue(value);
 
   if (!practiceArea) return undefined;
 
   return getMarketByName(practiceArea.category);
+};
+
+export const resolvePracticeAreaPage = (
+  path: string | null | undefined,
+  shortTitle: string | null | undefined): PracticeAreaPageResolution => {
+  const normalizedPath = String(path ?? "").trim().toLowerCase();
+
+  const mappedPracticeAreaSlug =
+    PAGE_PATH_TO_PRACTICE_AREA_SLUG[normalizedPath];
+
+  const practiceArea =
+    getPracticeAreaByValue(mappedPracticeAreaSlug) ??
+    getPracticeAreaByValue(shortTitle);
+
+  if (practiceArea) {
+    return {
+      practiceArea,
+      market: getMarketByName(practiceArea.category),
+    };
+  }
+
+  const mappedMarketKey = PAGE_PATH_TO_MARKET_KEY[normalizedPath];
+
+  if (mappedMarketKey) {
+    return {
+      market: getMarketByKey(mappedMarketKey),
+    };
+  }
+
+  const normalizedTitle = normalize(shortTitle);
+
+  const market = LEGAL_MARKETS.find(
+    (item) =>
+      normalize(item.name) === normalizedTitle ||
+      normalize(item.slug) === normalizedTitle
+  );
+
+  return { market };
 };
 
 export const getMarketPracticeAreas = (
