@@ -20,6 +20,12 @@ import type { PracticeAreaPageData } from "../data/practiceAreaPages";
 import { getAllFirms } from "../services/firmService";
 import { trackEvent } from "@/services/analyticsService";
 import { isLocalExclusiveShowcaseId } from "../data/exclusiveShowcases";
+import {
+  getMarketByName,
+  getMarketForPracticeArea,
+  getPracticeAreaByValue,
+  resolvePracticeAreaPage,
+} from "../data/platformModel";
 
 type Props = {
   page: PracticeAreaPageData;
@@ -48,151 +54,6 @@ type PublicFirm = Firm & {
   verified?: boolean;
 };
 
-const PRACTICE_ALIASES: Record<string, string[]> = {
-  probate: [
-    "probate",
-    "estate",
-    "will",
-    "trust",
-    "heirship",
-    "guardianship",
-    "elder law",
-  ],
-
-  bankruptcy: [
-    "bankruptcy",
-    "chapter 7",
-    "chapter 13",
-    "debt relief",
-  ],
-
-  employment: [
-    "employment",
-    "labor",
-    "wrongful termination",
-    "discrimination",
-    "wage",
-  ],
-
-  business: [
-    "business",
-    "corporate",
-    "commercial",
-    "contract",
-    "partnership",
-  ],
-
-  "real estate": [
-    "real estate",
-    "property",
-    "landlord",
-    "tenant",
-    "title",
-  ],
-
-  "civil litigation": [
-    "civil litigation",
-    "litigation",
-    "contract dispute",
-    "business dispute",
-  ],
-
-  divorce: [
-    "divorce",
-    "family law",
-    "custody",
-    "child support",
-  ],
-
-  "child custody": [
-    "child custody",
-    "family law",
-    "divorce",
-    "visitation",
-  ],
-
-  "car accident": [
-    "car accident",
-    "auto accident",
-    "personal injury",
-    "motor vehicle",
-  ],
-
-  "truck accident": [
-    "truck accident",
-    "18-wheeler",
-    "commercial vehicle",
-    "personal injury",
-  ],
-
-  "motorcycle accident": [
-    "motorcycle accident",
-    "personal injury",
-    "motor vehicle",
-  ],
-
-  "wrongful death": [
-    "wrongful death",
-    "personal injury",
-    "fatal accident",
-  ],
-
-  "green card": [
-    "green card",
-    "immigration",
-    "adjustment of status",
-  ],
-
-  citizenship: [
-    "citizenship",
-    "naturalization",
-    "immigration",
-  ],
-
-  immigration: [
-    "immigration",
-    "green card",
-    "citizenship",
-    "deportation",
-  ],
-
-  "personal injury": [
-    "personal injury",
-    "car accident",
-    "truck accident",
-    "wrongful death",
-    "injury",
-  ],
-
-  "criminal defense": [
-    "criminal defense",
-    "criminal law",
-    "dwi",
-    "dui",
-  ],
-
-  dwi: [
-    "dwi",
-    "dui",
-    "criminal defense",
-    "criminal law",
-  ],
-
-  "family law": [
-    "family law",
-    "divorce",
-    "custody",
-    "child support",
-  ],
-
-  "estate planning": [
-    "estate planning",
-    "probate",
-    "wills",
-    "trusts",
-  ],
-};
-
 function normalize(value: unknown): string {
   return String(value ?? "")
     .toLowerCase()
@@ -200,17 +61,28 @@ function normalize(value: unknown): string {
     .trim();
 }
 
-function getFirmSearchText(
-  firm: PublicFirm
-): string {
-  return normalize(
-    [
-      firm.name,
-      firm.category,
-      ...(firm.specialties ?? []),
-      ...(firm.categories ?? []),
-    ].join(" ")
+function getFirmMarketValues(firm: PublicFirm): string[] {
+  return [
+    firm.category,
+    ...(firm.categories ?? []),
+  ].filter((value): value is string => Boolean(value));
+}
+
+function getFirmSpecialtyValues(firm: PublicFirm): string[] {
+  return (firm.specialties ?? []).filter(
+    (value): value is string => Boolean(value)
   );
+}
+
+function valueMatchesMarket(
+  value: string,
+  targetMarketKey: string
+): boolean {
+  const market =
+    getMarketByName(value) ??
+    getMarketForPracticeArea(value);
+
+  return market?.key === targetMarketKey;
 }
 
 function getPlanKey(
@@ -272,19 +144,47 @@ function matchesPracticeArea(
   firm: PublicFirm,
   page: PracticeAreaPageData
 ): boolean {
-  const firmText =
-    getFirmSearchText(firm);
+  const resolution = resolvePracticeAreaPage(
+    page.path,
+    page.shortTitle
+  );
 
-  const key =
-    normalize(page.shortTitle);
+  const targetPracticeArea = resolution.practiceArea;
+  const targetMarket = resolution.market;
 
-  const aliases =
-    PRACTICE_ALIASES[key] ?? [key];
+  if (!targetPracticeArea && !targetMarket) {
+    return false;
+  }
 
-  return aliases.some((alias) =>
-    firmText.includes(
-      normalize(alias)
-    )
+  const specialties = getFirmSpecialtyValues(firm);
+  const marketValues = getFirmMarketValues(firm);
+
+  if (targetPracticeArea) {
+    const specialtyMatch = specialties.some((value) => {
+      const practiceArea = getPracticeAreaByValue(value);
+
+      return practiceArea?.slug === targetPracticeArea.slug;
+    });
+
+    if (specialtyMatch) {
+      return true;
+    }
+
+    if (targetMarket) {
+      return marketValues.some((value) =>
+        valueMatchesMarket(value, targetMarket.key)
+      );
+    }
+
+    return false;
+  }
+
+  if (!targetMarket) {
+    return false;
+  }
+
+  return [...marketValues, ...specialties].some((value) =>
+    valueMatchesMarket(value, targetMarket.key)
   );
 }
 
