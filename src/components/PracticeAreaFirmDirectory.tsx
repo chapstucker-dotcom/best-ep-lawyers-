@@ -639,7 +639,9 @@ export default function PracticeAreaFirmDirectory({
                     <div className="flex items-start justify-between gap-4">
                       <div
                         className={
-                          isExclusive
+                          firm.logo_url
+                            ? "flex h-16 w-28 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/20 bg-white p-2 shadow-sm"
+                            : isExclusive
                             ? "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#d6a928] text-[#07162f]"
                             : isFeatured
                             ? "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#07162f] text-[#d6a928] ring-2 ring-[#d6a928]/30"
@@ -648,7 +650,9 @@ export default function PracticeAreaFirmDirectory({
                             : "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#07162f] text-[#d6a928]"
                         }
                       >
-                        {isExclusive ? (
+                        {firm.logo_url ? (
+                          <img src={firm.logo_url} alt={`${firm.name} logo`} className="h-full w-full object-contain" />
+                        ) : isExclusive ? (
                           <Crown className="h-7 w-7" />
                         ) : isFeatured ||
                           isExpert ? (
