@@ -53,6 +53,7 @@ export const firms = [
     verified: false,
     plan: "category_exclusive",
     plan_key: "category_exclusive",
+    logo_url: "/attorneys/bill-hicks-logo.png",
     video_url: "https://vimeo.com/475455474",
     years_experience: 27,
     awards: [
