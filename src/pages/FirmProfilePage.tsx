@@ -38,11 +38,8 @@ import LeadCaptureForm from "../components/LeadCaptureForm";
 import { supabase } from "@/lib/supabase";
 import { getPlanRules } from "@/config/planRules";
 import { trackEvent } from "@/services/analyticsService";
-import {
-  HICKS_DEMO_FIRM_ID,
-  hicksExclusiveAttorneys,
-  hicksExclusiveFirm,
-} from "../data/hicksExclusiveDemo";
+
+import { getLocalExclusiveShowcase } from "../data/exclusiveShowcases";
 import { useSeo } from "../hooks/use-seo";
 
 interface Review {
@@ -131,7 +128,8 @@ const getVideoEmbedUrl = (value: string): string | null => {
 export default function FirmProfilePage() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-  const isLocalHicksShowcase = id === HICKS_DEMO_FIRM_ID;
+  const localExclusiveShowcase = getLocalExclusiveShowcase(id);
+  const isLocalExclusiveShowcase = Boolean(localExclusiveShowcase);
 
   const [reviews, setReviews] = useState<Review[]>([]);
   const [attorneys, setAttorneys] = useState<AttorneyProfile[]>([]);
@@ -225,12 +223,12 @@ export default function FirmProfilePage() {
     const loadPage = async () => {
       setLoadingFirm(true);
 
-      if (id === HICKS_DEMO_FIRM_ID) {
+      if (localExclusiveShowcase) {
         if (!active) return;
 
-        setLiveFirm(hicksExclusiveFirm as unknown as PublicFirm);
+        setLiveFirm(localExclusiveShowcase.firm as unknown as PublicFirm);
         setReviews([]);
-        setAttorneys(hicksExclusiveAttorneys);
+        setAttorneys(localExclusiveShowcase.attorneys);
         setLoadingAttorneys(false);
         setLoadingFirm(false);
         return;
@@ -402,7 +400,7 @@ export default function FirmProfilePage() {
   const recordContactClick = (
     eventType: "click_phone" | "click_email" | "click_website"
   ) => {
-    if (isLocalHicksShowcase) return;
+    if (isLocalExclusiveShowcase) return;
 
     void trackEvent(publicFirm.id, eventType).catch((error) => {
       console.error(`Failed to track ${eventType}:`, error);
@@ -970,7 +968,7 @@ export default function FirmProfilePage() {
                             </Button>
                           )}
 
-                          {!isLocalHicksShowcase && (
+                          {!isLocalExclusiveShowcase && (
                             <Button
                               type="button"
                               size="sm"
@@ -1147,7 +1145,7 @@ export default function FirmProfilePage() {
               className="scroll-mt-24"
             >
               <LeadCaptureForm
-                firmId={isLocalHicksShowcase ? undefined : publicFirm.id}
+                firmId={isLocalExclusiveShowcase ? undefined : publicFirm.id}
                 firmName={publicFirm.name}
                 firmEmail={publicFirm.email}
                 practiceArea={displayedPracticeAreas[0]?.title}
@@ -1155,60 +1153,46 @@ export default function FirmProfilePage() {
             </div>
           )}
 
-          {isLocalHicksShowcase ? (
+          {localExclusiveShowcase?.testimonials ? (
             <section className="rounded-2xl border bg-white p-6 shadow-sm">
               <div className="mb-5">
                 <h3 className="flex items-center gap-2 text-2xl font-bold text-[#0F2A43]">
                   <MessageSquare className="h-6 w-6" />
-                  Client Testimonials
+                  {localExclusiveShowcase.testimonials.title}
                 </h3>
                 <p className="mt-2 text-sm leading-6 text-gray-500">
-                  Testimonials below are published by The Law Offices of Bill D. Hicks on the firm's website and are not independently verified or endorsed by El Paso's Best Lawyers.
+                  {localExclusiveShowcase.testimonials.disclosure}
                 </p>
               </div>
 
               <div className="grid gap-4 md:grid-cols-3">
-                <article className="rounded-xl border bg-gray-50 p-5">
-                  <p className="leading-6 text-gray-700">
-                    Mr. Hicks was the most professional, timely and effective lawyer I have ever met.
-                  </p>
-                  <p className="mt-4 border-t pt-3 font-semibold text-[#0F2A43]">
-                    Melissa
-                  </p>
-                </article>
-
-                <article className="rounded-xl border bg-gray-50 p-5">
-                  <p className="leading-6 text-gray-700">
-                    I hold him in high regard for his honesty and integrity.
-                  </p>
-                  <p className="mt-4 border-t pt-3 font-semibold text-[#0F2A43]">
-                    Chris
-                  </p>
-                </article>
-
-                <article className="rounded-xl border bg-gray-50 p-5">
-                  <p className="leading-6 text-gray-700">
-                    Throughout the process he was honest, straightforward, and available.
-                  </p>
-                  <p className="mt-4 border-t pt-3 font-semibold text-[#0F2A43]">
-                    Leslie
-                  </p>
-                </article>
+                {localExclusiveShowcase.testimonials.items.map((testimonial) => (
+                  <article
+                    key={`${testimonial.author}-${testimonial.quote}`}
+                    className="rounded-xl border bg-gray-50 p-5"
+                  >
+                    <p className="leading-6 text-gray-700">
+                      {testimonial.quote}
+                    </p>
+                    <p className="mt-4 border-t pt-3 font-semibold text-[#0F2A43]">
+                      {testimonial.author}
+                    </p>
+                  </article>
+                ))}
               </div>
-
               <div className="mt-5">
                 <Button asChild variant="outline">
                   <a
-                    href="https://billhickslaw.com/testimonials/"
+                    href={localExclusiveShowcase.testimonials.sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    View Testimonials on Firm Website
+                    {localExclusiveShowcase.testimonials.sourceLabel}
                   </a>
                 </Button>
               </div>
             </section>
-          ) : (
+          ) : isLocalExclusiveShowcase ? null : (
             <section className="rounded-2xl border bg-white p-6 shadow-sm">
               <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
                 <h3 className="flex items-center gap-2 text-2xl font-bold text-[#0F2A43]">

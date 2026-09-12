@@ -19,6 +19,7 @@ import type { Firm } from "../data/types";
 import type { PracticeAreaPageData } from "../data/practiceAreaPages";
 import { getAllFirms } from "../services/firmService";
 import { trackEvent } from "@/services/analyticsService";
+import { isLocalExclusiveShowcaseId } from "../data/exclusiveShowcases";
 
 type Props = {
   page: PracticeAreaPageData;
@@ -435,6 +436,8 @@ export default function PracticeAreaFirmDirectory({
     firmId: string,
     eventType: "view" | "click_phone" | "click_email" | "click_website"
   ) => {
+    if (isLocalExclusiveShowcaseId(firmId)) return;
+
     const { error } = await trackEvent(
       firmId,
       eventType
