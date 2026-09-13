@@ -1,8 +1,15 @@
 import { createClient } from "@supabase/supabase-js";
 
-type PaidPlan =
-  | "Category Featured"
-  | "Category Exclusive";
+import {
+  getCommercialProductByPlanId,
+  type CommercialProductDefinition,
+} from "../src/data/commercialModel";
+import {
+  getMarketByKey,
+  getMarketByName,
+  getMarketForPracticeArea,
+  type LegalMarket,
+} from "../src/data/platformModel";
 
 const getSupabaseServerClient = () => {
   const url =
@@ -30,67 +37,69 @@ const getSupabaseServerClient = () => {
   });
 };
 
-const normalizePlan = (
+const resolveMarket = (
   value: unknown
-): string =>
-  String(value ?? "")
-    .trim()
-    .toLowerCase()
-    .replace(/[\s-]+/g, "_");
+): LegalMarket | undefined => {
+  const input = String(value ?? "").trim();
 
-const normalizeCategory = (
-  value: unknown
-): string =>
-  String(value ?? "")
-    .trim()
-    .toLowerCase();
+  if (!input) return undefined;
 
-const firmMatchesCategory = (
-  firm: any,
-  category: string
-): boolean => {
-  const target =
-    normalizeCategory(category);
-
-  const values: string[] = [];
-
-  if (firm.category) {
-    values.push(
-      String(firm.category)
-    );
-  }
-
-  if (
-    Array.isArray(
-      firm.categories
-    )
-  ) {
-    values.push(
-      ...firm.categories.map(
-        String
-      )
-    );
-  }
-
-  if (
-    Array.isArray(
-      firm.specialties
-    )
-  ) {
-    values.push(
-      ...firm.specialties.map(
-        String
-      )
-    );
-  }
-
-  return values.some(
-    (value) =>
-      normalizeCategory(
-        value
-      ) === target
+  return (
+    getMarketByKey(input) ||
+    getMarketByName(input) ||
+    getMarketForPracticeArea(input)
   );
 };
+
+const getFirmCommercialProduct = (
+  firm: any
+): CommercialProductDefinition =>
+  getCommercialProductByPlanId(
+    firm.plan_key ??
+      firm.plan ??
+      "free"
+  );
+
+const getFirmMarkets = (
+  firm: any
+): LegalMarket[] => {
+  const values: unknown[] = [
+    firm.category,
+    ...(Array.isArray(firm.categories)
+      ? firm.categories
+      : []),
+    ...(Array.isArray(firm.specialties)
+      ? firm.specialties
+      : []),
+  ];
+
+  const markets = values
+    .map(resolveMarket)
+    .filter(
+      (
+        market
+      ): market is LegalMarket =>
+        Boolean(market)
+    );
+
+  return Array.from(
+    new Map(
+      markets.map((market) => [
+        market.key,
+        market,
+      ])
+    ).values()
+  );
+};
+
+const firmMatchesMarket = (
+  firm: any,
+  market: LegalMarket
+): boolean =>
+  getFirmMarkets(firm).some(
+    (firmMarket) =>
+      firmMarket.key === market.key
+  );
 
 export default async function handler(
   req: any,
@@ -109,37 +118,61 @@ export default async function handler(
   try {
     const {
       plan,
+      market: requestedMarket,
       category,
     } = req.body ?? {};
 
-    if (
-      !plan ||
-      !category
-    ) {
+    if (!plan) {
       return res
         .status(400)
         .json({
           success: false,
           available: false,
           error:
-            "Plan and category are required.",
+            "Plan is required.",
         });
     }
 
-    const paidPlan =
-      String(plan) as PaidPlan;
+    const product =
+      getCommercialProductByPlanId(
+        plan
+      );
 
-    if (
-      paidPlan !==
-        "Category Featured" &&
-      paidPlan !==
-        "Category Exclusive"
-    ) {
+    if (!product.marketPlacement) {
       return res
         .status(200)
         .json({
           success: true,
           available: true,
+          product: product.key,
+        });
+    }
+
+    const market = resolveMarket(
+      requestedMarket ?? category
+    );
+
+    if (!market) {
+      return res
+        .status(400)
+        .json({
+          success: false,
+          available: false,
+          error:
+            "A valid legal market is required for premium placement.",
+        });
+    }
+
+    if (!market.premiumInventory) {
+      return res
+        .status(200)
+        .json({
+          success: true,
+          available: false,
+          product: product.key,
+          market: market.key,
+          reason:
+            "Premium placement is not currently offered in this legal market.",
         });
     }
 
@@ -176,122 +209,87 @@ export default async function handler(
           firm.is_active !== false
       );
 
-    const featured =
+    const placementsInMarket =
       firms.filter(
-        (firm: any) =>
-          normalizePlan(
-            firm.plan_key ??
-              firm.plan
-          ).includes(
-            "featured"
-          )
+        (firm: any) => {
+          const firmProduct =
+            getFirmCommercialProduct(
+              firm
+            );
+
+          return (
+            firmProduct.marketPlacement &&
+            firmMatchesMarket(
+              firm,
+              market
+            )
+          );
+        }
       );
 
-    const exclusive =
-      firms.filter(
+    const exclusiveInMarket =
+      placementsInMarket.filter(
         (firm: any) =>
-          normalizePlan(
-            firm.plan_key ??
-              firm.plan
-          ).includes(
-            "exclusive"
-          )
-      );
-
-    const featuredInCategory =
-      featured.filter(
-        (firm: any) =>
-          firmMatchesCategory(
-            firm,
-            category
-          )
-      );
-
-    const exclusiveInCategory =
-      exclusive.filter(
-        (firm: any) =>
-          firmMatchesCategory(
-            firm,
-            category
-          )
+          getFirmCommercialProduct(
+            firm
+          ).competitorLockout
       );
 
     if (
-      paidPlan ===
-      "Category Featured"
+      !product.competitorLockout &&
+      exclusiveInMarket.length > 0
     ) {
-      if (
-        exclusiveInCategory.length >
-        0
-      ) {
-        return res
-          .status(200)
-          .json({
-            success: true,
-            available: false,
-            reason:
-              "This category is owned by a Category Exclusive firm.",
-          });
-      }
-
-      if (
-        featuredInCategory.length >=
-        2
-      ) {
-        return res
-          .status(200)
-          .json({
-            success: true,
-            available: false,
-            reason:
-              "Category Featured is sold out in this practice area.",
-          });
-      }
-
-      if (
-        featured.length >= 10
-      ) {
-        return res
-          .status(200)
-          .json({
-            success: true,
-            available: false,
-            reason:
-              "All Category Featured positions are currently sold out.",
-          });
-      }
+      return res
+        .status(200)
+        .json({
+          success: true,
+          available: false,
+          product: product.key,
+          market: market.key,
+          reason:
+            "This legal market is currently reserved by a Market Exclusive firm.",
+        });
     }
 
     if (
-      paidPlan ===
-      "Category Exclusive"
+      product.competitorLockout &&
+      placementsInMarket.length > 0
     ) {
-      if (
-        exclusiveInCategory.length >=
-        1
-      ) {
-        return res
-          .status(200)
-          .json({
-            success: true,
-            available: false,
-            reason:
-              "Category Exclusive is already sold in this practice area.",
-          });
-      }
+      return res
+        .status(200)
+        .json({
+          success: true,
+          available: false,
+          product: product.key,
+          market: market.key,
+          reason:
+            "Market Exclusive is unavailable while another premium placement is active in this legal market.",
+        });
+    }
 
-      if (
-        exclusive.length >= 5
-      ) {
-        return res
-          .status(200)
-          .json({
-            success: true,
-            available: false,
-            reason:
-              "All Category Exclusive positions are currently sold out.",
-          });
-      }
+    const sameProductInMarket =
+      placementsInMarket.filter(
+        (firm: any) =>
+          getFirmCommercialProduct(
+            firm
+          ).key === product.key
+      );
+
+    if (
+      product.maxPerMarket !== null &&
+      sameProductInMarket.length >=
+        product.maxPerMarket
+    ) {
+      return res
+        .status(200)
+        .json({
+          success: true,
+          available: false,
+          product: product.key,
+          market: market.key,
+          reason:
+            `${product.displayName} is currently sold out in ${market.name}.`,
+        });
     }
 
     return res
@@ -299,15 +297,17 @@ export default async function handler(
       .json({
         success: true,
         available: true,
+        product: product.key,
+        market: market.key,
         counts: {
-          featuredTotal:
-            featured.length,
-          featuredInCategory:
-            featuredInCategory.length,
-          exclusiveTotal:
-            exclusive.length,
-          exclusiveInCategory:
-            exclusiveInCategory.length,
+          sameProductInMarket:
+            sameProductInMarket.length,
+          premiumPlacementsInMarket:
+            placementsInMarket.length,
+          exclusiveInMarket:
+            exclusiveInMarket.length,
+          maxPerMarket:
+            product.maxPerMarket,
         },
       });
   } catch (err: any) {
