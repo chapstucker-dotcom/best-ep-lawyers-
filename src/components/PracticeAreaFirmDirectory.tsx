@@ -20,6 +20,7 @@ import type { PracticeAreaPageData } from "../data/practiceAreaPages";
 import { getAllFirms } from "../services/firmService";
 import { trackEvent } from "@/services/analyticsService";
 import { isLocalExclusiveShowcaseId } from "../data/exclusiveShowcases";
+import { getCommercialProductByPlanId } from "../data/commercialModel";
 import {
   getMarketByName,
   getMarketForPracticeArea,
@@ -85,25 +86,29 @@ function valueMatchesMarket(
   return market?.key === targetMarketKey;
 }
 
-function getPlanKey(
-  firm: PublicFirm
-): string {
-  return normalize(
+function getCommercialProductForFirm(firm: PublicFirm) {
+  return getCommercialProductByPlanId(
     firm.plan_key ??
       firm.plan ??
       "free"
   );
 }
 
+function getPlanKey(
+  firm: PublicFirm
+): string {
+  return getCommercialProductForFirm(firm).key;
+}
+
 function getPlanRank(
   firm: PublicFirm
 ): number {
-  const plan = getPlanKey(firm);
+  const product = getCommercialProductForFirm(firm);
 
-  if (plan.includes("exclusive")) return 4;
-  if (plan.includes("featured")) return 3;
-  if (plan.includes("expert")) return 2;
-  if (plan.includes("pro")) return 1;
+  if (product.key === "market_exclusive") return 4;
+  if (product.key === "premier") return 3;
+  if (product.key === "featured") return 3;
+  if (product.key === "expert") return 2;
 
   return 0;
 }
@@ -111,22 +116,22 @@ function getPlanRank(
 function getPlanLabel(
   firm: PublicFirm
 ): string | null {
-  const plan = getPlanKey(firm);
+  const product = getCommercialProductForFirm(firm);
 
-  if (plan.includes("exclusive")) {
+  if (product.key === "market_exclusive") {
     return "Category Exclusive";
   }
 
-  if (plan.includes("featured")) {
+  if (product.key === "premier") {
+    return "Premier";
+  }
+
+  if (product.key === "featured") {
     return "Category Featured";
   }
 
-  if (plan.includes("expert")) {
+  if (product.key === "expert") {
     return "Expert";
-  }
-
-  if (plan.includes("pro")) {
-    return "Pro";
   }
 
   return null;
@@ -279,55 +284,54 @@ export default function PracticeAreaFirmDirectory({
       );
 
     const exclusiveFirms = matched
-      .filter((firm) =>
-        getPlanKey(firm).includes("exclusive")
+      .filter(
+        (firm) =>
+          getCommercialProductForFirm(firm).key ===
+          "market_exclusive"
       )
       .sort(alphabetical);
 
+    const premierFirms = rotateFirmsDaily(
+      matched
+        .filter(
+          (firm) =>
+            getCommercialProductForFirm(firm).key ===
+            "premier"
+        )
+        .sort(alphabetical)
+    );
+
     const featuredFirms = rotateFirmsDaily(
       matched
-        .filter((firm) => {
-          const plan = getPlanKey(firm);
-          return (
-            !plan.includes("exclusive") &&
-            plan.includes("featured")
-          );
-        })
+        .filter(
+          (firm) =>
+            getCommercialProductForFirm(firm).key ===
+            "featured"
+        )
         .sort(alphabetical)
     );
 
     const expertFirms = matched
-      .filter((firm) => {
-        const plan = getPlanKey(firm);
-        return (
-          !plan.includes("exclusive") &&
-          !plan.includes("featured") &&
-          plan.includes("expert")
-        );
-      })
-      .sort(alphabetical);
-
-    const proFirms = matched
-      .filter((firm) => {
-        const plan = getPlanKey(firm);
-        return (
-          !plan.includes("exclusive") &&
-          !plan.includes("featured") &&
-          !plan.includes("expert") &&
-          plan.includes("pro")
-        );
-      })
+      .filter(
+        (firm) =>
+          getCommercialProductForFirm(firm).key ===
+          "expert"
+      )
       .sort(alphabetical);
 
     const freeFirms = matched
-      .filter((firm) => getPlanRank(firm) === 0)
+      .filter(
+        (firm) =>
+          getCommercialProductForFirm(firm).key ===
+          "free"
+      )
       .sort(alphabetical);
 
     return [
       ...exclusiveFirms,
+      ...premierFirms,
       ...featuredFirms,
       ...expertFirms,
-      ...proFirms,
       ...freeFirms,
     ].slice(0, 12);
   }, [firms, page]);
@@ -423,30 +427,16 @@ export default function PracticeAreaFirmDirectory({
                   );
 
                 const isExclusive =
-                  plan.includes(
-                    "exclusive"
-                  );
+                  plan === "market_exclusive";
+
+                const isPremier =
+                  plan === "premier";
 
                 const isFeatured =
-                  !isExclusive &&
-                  plan.includes(
-                    "featured"
-                  );
+                  plan === "featured";
 
                 const isExpert =
-                  !isExclusive &&
-                  !isFeatured &&
-                  plan.includes(
-                    "expert"
-                  );
-
-                const isPro =
-                  !isExclusive &&
-                  !isFeatured &&
-                  !isExpert &&
-                  plan.includes(
-                    "pro"
-                  );
+                  plan === "expert";
 
                 const rawAddress =
                   String(
@@ -491,12 +481,10 @@ export default function PracticeAreaFirmDirectory({
                 const cardClass =
                   isExclusive
                     ? "relative flex h-full flex-col overflow-hidden rounded-2xl border-2 border-[#d6a928] bg-[#0b2348] p-6 text-white shadow-2xl ring-1 ring-[#d6a928]/40"
-                    : isFeatured
+                    : isPremier || isFeatured
                     ? "relative flex h-full flex-col overflow-hidden rounded-2xl border-2 border-[#d6a928] bg-white p-6 text-slate-900 shadow-2xl"
                     : isExpert
                     ? "relative flex h-full flex-col rounded-2xl border-2 border-[#d6a928]/55 bg-white p-6 text-slate-900 shadow-xl"
-                    : isPro
-                    ? "relative flex h-full flex-col rounded-2xl border border-slate-300 bg-white p-6 text-slate-900 shadow-lg"
                     : "relative flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 text-slate-900 shadow-md";
 
                 const headingClass =
@@ -529,6 +517,13 @@ export default function PracticeAreaFirmDirectory({
                       </div>
                     )}
 
+                    {isPremier && (
+                      <div className="-mx-6 -mt-6 mb-6 flex items-center justify-center gap-2 bg-[#d6a928] px-4 py-3 text-sm font-extrabold uppercase tracking-wider text-[#07162f]">
+                        <Sparkles className="h-4 w-4" />
+                        Premier
+                      </div>
+                    )}
+
                     {isFeatured && (
                       <div className="-mx-6 -mt-6 mb-6 flex items-center justify-center gap-2 bg-[#d6a928] px-4 py-3 text-sm font-extrabold uppercase tracking-wider text-[#07162f]">
                         <Star className="h-4 w-4 fill-current" />
@@ -543,7 +538,7 @@ export default function PracticeAreaFirmDirectory({
                             ? "flex h-16 w-28 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/20 bg-white p-2 shadow-sm"
                             : isExclusive
                             ? "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#d6a928] text-[#07162f]"
-                            : isFeatured
+                            : isPremier || isFeatured
                             ? "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#07162f] text-[#d6a928] ring-2 ring-[#d6a928]/30"
                             : isExpert
                             ? "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#07162f] text-[#d6a928]"
@@ -554,7 +549,8 @@ export default function PracticeAreaFirmDirectory({
                           <img src={firm.logo_url} alt={`${firm.name} logo`} className="h-full w-full object-contain" />
                         ) : isExclusive ? (
                           <Crown className="h-7 w-7" />
-                        ) : isFeatured ||
+                        ) : isPremier ||
+                          isFeatured ||
                           isExpert ? (
                           <Sparkles className="h-7 w-7" />
                         ) : (
@@ -565,6 +561,7 @@ export default function PracticeAreaFirmDirectory({
                       <div className="flex flex-wrap justify-end gap-2">
                         {tier &&
                           !isExclusive &&
+                          !isPremier &&
                           !isFeatured && (
                             <span
                               className={
@@ -600,7 +597,7 @@ export default function PracticeAreaFirmDirectory({
                         {firm.category ??
                           firm.specialties
                             ?.slice(0, 2)
-                            .join(" Â· ")}
+                            .join(" · ")}
                       </p>
                     )}
 
@@ -639,6 +636,13 @@ export default function PracticeAreaFirmDirectory({
                           for consumers comparing
                           El Paso lawyers.
                         </p>
+                      </div>
+                    )}
+
+                    {isPremier && (
+                      <div className="mt-4 flex items-center gap-2 text-sm font-bold text-[#7a5800]">
+                        <Sparkles className="h-4 w-4" />
+                        Premier market placement
                       </div>
                     )}
 
