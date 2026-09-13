@@ -154,6 +154,12 @@ export function getCommercialProductByPlanId(
 ): CommercialProductDefinition {
   const normalized = normalizePlanId(value);
 
+  const canonicalKey = normalized.replace(/-/g, "_") as CommercialProductKey;
+
+  if (canonicalKey in COMMERCIAL_PRODUCTS) {
+    return COMMERCIAL_PRODUCTS[canonicalKey];
+  }
+
   if (normalized === "pro") {
     return COMMERCIAL_PRODUCTS.expert;
   }
