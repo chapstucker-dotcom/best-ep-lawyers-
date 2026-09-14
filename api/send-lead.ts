@@ -1,6 +1,15 @@
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
 
+import { getCommercialProductByPlanId } from "../src/data/commercialModel";
+import {
+  getMarketByKey,
+  getMarketByName,
+  getMarketForPracticeArea,
+  getPracticeAreaByValue,
+  type LegalMarket,
+} from "../src/data/platformModel";
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const ADMIN_EMAIL = "support@elpasosbestlawyers.com";
@@ -50,46 +59,17 @@ const normalize = (value: unknown): string =>
     .replace(/[^a-z0-9]+/g, " ")
     .trim();
 
-const normalizePlanKey = (
-  value: unknown
-): string =>
-  String(value ?? "free")
-    .trim()
-    .toLowerCase()
-    .replace(/[\s-]+/g, "_");
-
-const getPlanPriority = (
-  value: unknown
-): number => {
-  const plan = normalizePlanKey(value);
-
-  if (
-    plan === "category_exclusive" ||
-    plan === "exclusive"
-  ) {
-    return 1;
-  }
-
-  if (
-    plan === "category_featured" ||
-    plan === "featured"
-  ) {
-    return 2;
-  }
-
-  if (
-    plan === "expert" ||
-    plan === "pro"
-  ) {
-    return 3;
-  }
-
-  return 4;
-};
+const getCommercialProductForFirm = (firm: FirmRow) =>
+  getCommercialProductByPlanId(
+    firm.plan_key ??
+      firm.plan ??
+      "free"
+  );
 
 const planIncludesLeadRouting = (
-  value: unknown
-): boolean => getPlanPriority(value) <= 3;
+  firm: FirmRow
+): boolean =>
+  getCommercialProductForFirm(firm).key !== "free";
 
 const getSupabaseServerClient = () => {
   const url =
@@ -119,232 +99,171 @@ const getSupabaseServerClient = () => {
   });
 };
 
-const getFirmPracticeText = (
-  firm: FirmRow,
-  planValue?: unknown
-): string => {
-  const values: string[] = [];
-  const planKey = normalizePlanKey(
-    planValue ??
-      firm.plan_key ??
-      firm.plan ??
-      "free"
+const resolveMarketValue = (
+  value: string | null | undefined
+): LegalMarket | undefined => {
+  if (!value) return undefined;
+
+  return (
+    getMarketByKey(value) ??
+    getMarketByName(value) ??
+    getMarketForPracticeArea(value)
   );
+};
 
-  const isCategoryPremium =
-    planKey === "category_exclusive" ||
-    planKey === "exclusive" ||
-    planKey === "category_featured" ||
-    planKey === "featured";
+const getFirmPrimaryMarket = (
+  firm: FirmRow
+): LegalMarket | undefined => {
+  return (
+    resolveMarketValue(firm.primary_category) ??
+    resolveMarketValue(firm.category)
+  );
+};
 
-  /*
-   * Category Featured / Category Exclusive routing applies ONLY
-   * to the firm's purchased primary category.
-   */
-  if (isCategoryPremium) {
-    if (firm.primary_category) {
-      values.push(firm.primary_category);
-    } else if (firm.category) {
-      // Legacy fallback for older records.
-      values.push(firm.category);
-    }
+const getFirmPracticeValues = (
+  firm: FirmRow
+): string[] => {
+  return [
+    firm.primary_category,
+    ...(firm.practice_areas ?? []),
+    firm.category,
+    ...(firm.categories ?? []),
+    ...(firm.specialties ?? []),
+  ].filter(
+    (value): value is string =>
+      Boolean(String(value ?? "").trim())
+  );
+};
 
-    return normalize(values.join(" "));
-  }
-
-  /*
-   * Expert routing may use the firm's broader practice-area profile.
-   */
-  if (firm.primary_category) {
-    values.push(firm.primary_category);
-  }
-
-  if (Array.isArray(firm.practice_areas)) {
-    values.push(...firm.practice_areas);
-  }
-
-  if (firm.category) {
-    values.push(firm.category);
-  }
-
-  if (Array.isArray(firm.categories)) {
-    values.push(...firm.categories);
-  }
-
-  if (Array.isArray(firm.specialties)) {
-    values.push(...firm.specialties);
-  }
-
-  return normalize(values.join(" "));
+const getFirmExplicitPracticeAreas = (
+  firm: FirmRow
+) => {
+  return [
+    ...(firm.practice_areas ?? []),
+    ...(firm.specialties ?? []),
+  ]
+    .map((value) => getPracticeAreaByValue(value))
+    .filter(
+      (
+        value
+      ): value is NonNullable<
+        ReturnType<typeof getPracticeAreaByValue>
+      > => Boolean(value)
+    );
 };
 
 const practiceMatches = (
   firm: FirmRow,
   practiceArea: string
 ): boolean => {
-  const target = normalize(practiceArea);
+  const cleanTarget =
+    String(practiceArea ?? "").trim();
 
-  if (!target) {
+  if (!cleanTarget) {
     return true;
   }
 
-  const firmText =
-    getFirmPracticeText(
-      firm,
-      firm.plan_key ??
-        firm.plan ??
-        "free"
-    );
+  const targetPracticeArea =
+    getPracticeAreaByValue(cleanTarget);
 
-  if (!firmText) {
-    return false;
+  const targetMarket =
+    getMarketByKey(cleanTarget) ??
+    getMarketByName(cleanTarget) ??
+    getMarketForPracticeArea(cleanTarget);
+
+  const product =
+    getCommercialProductForFirm(firm);
+
+  /*
+   * Market-placement products are sold against one primary
+   * legal market. They may receive an inquiry only when the
+   * purchased market matches the inquiry market.
+   *
+   * When a firm already has explicit specialty data, require
+   * an exact specialty match for specialty-level inquiries.
+   * Older records without specialty data retain the market
+   * fallback until their profiles are fully normalized.
+   */
+  if (product.marketPlacement) {
+    if (!targetMarket) {
+      return false;
+    }
+
+    const firmMarket =
+      getFirmPrimaryMarket(firm);
+
+    if (
+      !firmMarket ||
+      firmMarket.key !== targetMarket.key
+    ) {
+      return false;
+    }
+
+    if (!targetPracticeArea) {
+      return true;
+    }
+
+    const explicitPracticeAreas =
+      getFirmExplicitPracticeAreas(firm);
+
+    if (explicitPracticeAreas.length === 0) {
+      return true;
+    }
+
+    return explicitPracticeAreas.some(
+      (item) =>
+        item.slug ===
+        targetPracticeArea.slug
+    );
   }
 
-  const aliases: Record<string, string[]> = {
-    "personal injury": [
-      "personal injury",
-      "car accident",
-      "auto accident",
-      "truck accident",
-      "motorcycle accident",
-      "slip and fall",
-      "wrongful death",
-      "injury",
-    ],
+  /*
+   * Expert routing can use the firm's broader practice-area
+   * profile. Prefer exact canonical specialty matching, then
+   * allow a canonical market match.
+   */
+  const firmValues =
+    getFirmPracticeValues(firm);
 
-    "car accident": [
-      "car accident",
-      "auto accident",
-      "personal injury",
-    ],
+  if (targetPracticeArea) {
+    const exactPracticeMatch =
+      firmValues.some((value) => {
+        const resolved =
+          getPracticeAreaByValue(value);
 
-    "truck accident": [
-      "truck accident",
-      "personal injury",
-    ],
+        return (
+          resolved?.slug ===
+          targetPracticeArea.slug
+        );
+      });
 
-    "motorcycle accident": [
-      "motorcycle accident",
-      "personal injury",
-    ],
+    if (exactPracticeMatch) {
+      return true;
+    }
+  }
 
-    "wrongful death": [
-      "wrongful death",
-      "personal injury",
-    ],
+  if (targetMarket) {
+    return firmValues.some((value) => {
+      const resolvedMarket =
+        resolveMarketValue(value);
 
-    "criminal defense": [
-      "criminal defense",
-      "criminal law",
-      "dwi",
-      "dui",
-    ],
+      return (
+        resolvedMarket?.key ===
+        targetMarket.key
+      );
+    });
+  }
 
-    "dwi dui": [
-      "dwi",
-      "dui",
-      "criminal defense",
-    ],
+  /*
+   * Legacy fallback for a value that has not yet been mapped
+   * into the canonical taxonomy. Require a direct normalized
+   * text match rather than maintaining another alias table.
+   */
+  const target = normalize(cleanTarget);
 
-    dwi: [
-      "dwi",
-      "dui",
-      "criminal defense",
-    ],
-
-    dui: [
-      "dwi",
-      "dui",
-      "criminal defense",
-    ],
-
-    immigration: [
-      "immigration",
-      "green card",
-      "citizenship",
-      "deportation",
-    ],
-
-    "family law": [
-      "family law",
-      "divorce",
-      "custody",
-      "child support",
-    ],
-
-    divorce: [
-      "divorce",
-      "family law",
-    ],
-
-    probate: [
-      "probate",
-      "estate planning",
-      "estate",
-      "trust",
-      "will",
-    ],
-
-    "estate planning": [
-      "estate planning",
-      "probate",
-      "trust",
-      "will",
-    ],
-
-    bankruptcy: [
-      "bankruptcy",
-      "chapter 7",
-      "chapter 13",
-    ],
-
-    "business law": [
-      "business law",
-      "business",
-      "corporate",
-      "commercial",
-    ],
-
-    business: [
-      "business law",
-      "business",
-      "corporate",
-      "commercial",
-    ],
-
-    "real estate": [
-      "real estate",
-      "property",
-      "landlord",
-      "tenant",
-    ],
-
-    "employment law": [
-      "employment law",
-      "employment",
-      "labor",
-      "wrongful termination",
-      "discrimination",
-      "wage",
-    ],
-
-    employment: [
-      "employment law",
-      "employment",
-      "labor",
-    ],
-
-    "civil litigation": [
-      "civil litigation",
-      "litigation",
-    ],
-  };
-
-  const targetAliases =
-    aliases[target] ?? [target];
-
-  return targetAliases.some((alias) =>
-    firmText.includes(normalize(alias))
+  return firmValues.some(
+    (value) =>
+      normalize(value) === target
   );
 };
 
@@ -357,14 +276,9 @@ const choosePriorityFirm = (
       const email =
         String(firm.email ?? "").trim();
 
-      const plan =
-        firm.plan_key ??
-        firm.plan ??
-        "free";
-
       return (
         Boolean(email) &&
-        planIncludesLeadRouting(plan) &&
+        planIncludesLeadRouting(firm) &&
         practiceMatches(
           firm,
           practiceArea
@@ -373,23 +287,24 @@ const choosePriorityFirm = (
       );
     })
     .map((firm): RoutedFirm => {
-      const planKey =
-        normalizePlanKey(
-          firm.plan_key ??
-            firm.plan ??
-            "free"
-        );
+      const product =
+        getCommercialProductForFirm(firm);
 
       return {
         id: String(firm.id),
+
         name:
           String(firm.name ?? "").trim() ||
           "Participating Law Firm",
+
         email:
           String(firm.email ?? "").trim(),
-        planKey,
+
+        planKey:
+          product.key,
+
         priority:
-          getPlanPriority(planKey),
+          product.placementPriority,
       };
     })
     .sort((a, b) => {
@@ -466,12 +381,8 @@ const lookupSpecificFirm = async (
   const firm =
     data as FirmRow;
 
-  const planKey =
-    normalizePlanKey(
-      firm.plan_key ??
-        firm.plan ??
-        "free"
-    );
+  const product =
+    getCommercialProductForFirm(firm);
 
   const email =
     String(
@@ -480,9 +391,7 @@ const lookupSpecificFirm = async (
 
   if (
     !email ||
-    !planIncludesLeadRouting(
-      planKey
-    ) ||
+    !planIncludesLeadRouting(firm) ||
     firm.is_active === false
   ) {
     return null;
@@ -499,12 +408,11 @@ const lookupSpecificFirm = async (
 
     email,
 
-    planKey,
+    planKey:
+      product.key,
 
     priority:
-      getPlanPriority(
-        planKey
-      ),
+      product.placementPriority,
   };
 };
 
@@ -812,7 +720,7 @@ export default async function handler(
 
     /*
      * General practice-area lead:
-     * Exclusive -> Featured -> Expert
+     * Market Exclusive -> Premier -> Featured -> Expert
      */
     if (
       !firmId &&

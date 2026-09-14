@@ -3,7 +3,7 @@ import {
   getPracticeAreasByGroup,
   type PracticeArea,
   type PracticeAreaGroup,
-} from "@/data/categories";
+} from "./categories";
 
 export type MarketKey =
   | "personal-injury"
