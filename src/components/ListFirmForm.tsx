@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { createFirm } from "@/services/firmService";
+import { LEGAL_MARKETS } from "@/data/platformModel";
 
 type PlanName =
   | "Free"
   | "Expert"
-  | "Category Featured"
-  | "Category Exclusive";
+  | "Category Featured";
 
 type FormData = {
   name: string;
@@ -19,21 +19,6 @@ type FormData = {
   agreed: boolean;
 };
 
-const PRACTICE_AREAS = [
-  "Personal Injury",
-  "Family Law",
-  "Criminal Defense",
-  "Immigration",
-  "Estate Planning",
-  "Business Law",
-  "Real Estate",
-  "Employment Law",
-  "Bankruptcy",
-  "DWI / DUI",
-  "Probate",
-  "Civil Litigation",
-];
-
 const STRIPE_LINKS: Record<
   Exclude<PlanName, "Free">,
   string
@@ -43,9 +28,6 @@ const STRIPE_LINKS: Record<
 
   "Category Featured":
     "https://buy.stripe.com/fZu6oG0RWeSu2AP98SaAw03",
-
-  "Category Exclusive":
-    "https://buy.stripe.com/8x27sK3046lYb7lgBkaAw04",
 };
 
 const INITIAL_FORM: FormData = {
@@ -148,9 +130,7 @@ export default function ListFirmForm() {
     }> => {
       if (
         formData.plan !==
-          "Category Featured" &&
-        formData.plan !==
-          "Category Exclusive"
+          "Category Featured"
       ) {
         return {
           available: true,
@@ -168,7 +148,7 @@ export default function ListFirmForm() {
             },
             body: JSON.stringify({
               plan: formData.plan,
-              category:
+              market:
                 formData.practiceArea,
             }),
           }
@@ -247,18 +227,16 @@ export default function ListFirmForm() {
     /*
      * LIMITED INVENTORY CHECK
      *
-     * Featured and Exclusive plans must
-     * pass the server-side availability
+     * Featured plans must pass the
+     * server-side market availability
      * check before checkout.
      */
     if (
       formData.plan ===
-        "Category Featured" ||
-      formData.plan ===
-        "Category Exclusive"
+        "Category Featured"
     ) {
       setStatus(
-        "Checking category availability..."
+        "Checking market availability..."
       );
 
       const availability =
@@ -513,7 +491,7 @@ export default function ListFirmForm() {
               htmlFor="practice-area"
               className="mb-2 block font-medium"
             >
-              Primary Practice Area *
+              Primary Legal Market *
             </label>
 
             <select
@@ -531,25 +509,25 @@ export default function ListFirmForm() {
               }
             >
               <option value="">
-                Select a practice area
+                Select a legal market
               </option>
 
-              {PRACTICE_AREAS.map(
-                (area) => (
+              {LEGAL_MARKETS.map(
+                (market) => (
                   <option
-                    key={area}
-                    value={area}
+                    key={market.key}
+                    value={market.name}
                   >
-                    {area}
+                    {market.name}
                   </option>
                 )
               )}
             </select>
 
             <p className="mt-2 text-sm text-gray-500">
-              Featured and Exclusive
+              Category Featured
               availability is based on the
-              selected practice area.
+              selected legal market.
             </p>
           </div>
 
@@ -605,27 +583,13 @@ export default function ListFirmForm() {
               <option value="Category Featured">
                 Category Featured — $2,000/month
               </option>
-
-              <option value="Category Exclusive">
-                Category Exclusive — $5,000/month
-              </option>
             </select>
 
             {formData.plan ===
               "Category Featured" && (
               <p className="mt-3 text-sm font-medium text-[#021B45]">
-                Limited to 2 Featured
-                firms per practice area
-                and 10 total positions.
-              </p>
-            )}
-
-            {formData.plan ===
-              "Category Exclusive" && (
-              <p className="mt-3 text-sm font-medium text-[#021B45]">
-                Limited to 1 Exclusive
-                firm per practice area
-                and 5 total positions.
+                Limited to 2 Category Featured
+                firms per legal market.
               </p>
             )}
 
