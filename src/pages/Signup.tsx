@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+﻿import { useMemo, useState } from "react";
 import {
   Link,
   useSearchParams,
@@ -23,23 +23,13 @@ import {
 } from "@/components/ui/alert";
 import { plans } from "@/data/plans";
 import {
+  LEGAL_MARKETS,
+  getMarketByName,
+  getMarketForPracticeArea,
+} from "@/data/platformModel";
+import {
   normalizeSelfServicePlanId,
 } from "@/config/selfServicePlans";
-
-const PRACTICE_AREAS = [
-  "Personal Injury",
-  "Family Law",
-  "Criminal Defense",
-  "Immigration",
-  "Estate Planning",
-  "Business Law",
-  "Real Estate",
-  "Employment Law",
-  "Bankruptcy",
-  "DWI / DUI",
-  "Probate",
-  "Civil Litigation",
-];
 
 const MIN_PASSWORD_LENGTH = 6;
 
@@ -155,13 +145,22 @@ export default function Signup() {
       rawRequestedPlan
     );
 
-  const requestedPracticeArea =
+  const rawRequestedPracticeArea =
     searchParams.get(
       "practiceArea"
     ) ||
     localStorage.getItem(
       "selected-firm-practice-area"
     ) ||
+    "";
+
+  const requestedPracticeArea =
+    getMarketByName(
+      rawRequestedPracticeArea
+    )?.name ||
+    getMarketForPracticeArea(
+      rawRequestedPracticeArea
+    )?.name ||
     "";
 
   const selectedPlan =
@@ -244,7 +243,7 @@ export default function Signup() {
 
       if (!formData.practiceArea) {
         setAvailabilityError(
-          "Please select a primary practice area."
+          "Please select a primary legal market."
         );
 
         return false;
@@ -263,7 +262,7 @@ export default function Signup() {
               body: JSON.stringify({
                 plan:
                   selectedPlan.name,
-                category:
+                market:
                   formData.practiceArea,
               }),
             }
@@ -413,7 +412,7 @@ export default function Signup() {
 
       if (!formData.practiceArea) {
         setAvailabilityError(
-          "Please select a primary practice area."
+          "Please select a primary legal market."
         );
 
         return false;
@@ -460,7 +459,7 @@ export default function Signup() {
         !formData.practiceArea
       ) {
         setAvailabilityError(
-          "Please select a primary practice area before continuing."
+          "Please select a primary legal market before continuing."
         );
 
         return;
@@ -652,7 +651,7 @@ export default function Signup() {
                 <strong>
                   {formData.practiceArea}
                 </strong>{" "}
-                practice area have
+                legal market selection have
                 been saved for the
                 next step.
               </span>
@@ -818,7 +817,7 @@ export default function Signup() {
 
             <div className="mb-5 space-y-2">
               <Label htmlFor="practiceArea">
-                Primary Practice Area
+                Primary Legal Market
               </Label>
 
               <select
@@ -844,16 +843,16 @@ export default function Signup() {
                 required
               >
                 <option value="">
-                  Select a practice area
+                  Select a legal market
                 </option>
 
-                {PRACTICE_AREAS.map(
-                  (area) => (
+                {LEGAL_MARKETS.map(
+                  (market) => (
                     <option
-                      key={area}
-                      value={area}
+                      key={market.key}
+                      value={market.name}
                     >
-                      {area}
+                      {market.name}
                     </option>
                   )
                 )}
@@ -861,7 +860,7 @@ export default function Signup() {
 
               {isLimitedPlan && (
                 <p className="text-xs leading-5 text-slate-500">
-                  Premium category
+                  Premium market
                   availability will be
                   verified before your
                   account is created.
