@@ -35,6 +35,11 @@ import {
 } from "@/data/plans";
 
 import {
+  getMarketByName,
+  getMarketForPracticeArea,
+} from "@/data/platformModel";
+
+import {
   isSelfServicePlanId,
 } from "@/config/selfServicePlans";
 
@@ -67,7 +72,7 @@ const PLAN_LABELS: Record<string, string> = {
   free: "Free Listing",
   expert: "Expert",
   "category-featured": "Category Featured",
-  "category-exclusive": "Category Exclusive",
+  "category-exclusive": "Market Exclusive",
 };
 
 const normalizePlan = (
@@ -82,6 +87,28 @@ const normalizePlan = (
       /[\s_]+/g,
       "-"
     );
+
+const resolveLegalMarketName = (
+  value: unknown
+): string => {
+  const rawValue = String(
+    value ?? ""
+  ).trim();
+
+  if (!rawValue) {
+    return "";
+  }
+
+  return (
+    getMarketByName(
+      rawValue
+    )?.name ||
+    getMarketForPracticeArea(
+      rawValue
+    )?.name ||
+    rawValue
+  );
+};
 
 export const Subscription =
   () => {
@@ -101,8 +128,8 @@ export const Subscription =
     ] = useState("");
 
     const [
-      selectedPracticeArea,
-      setSelectedPracticeArea,
+      selectedMarket,
+      setSelectedMarket,
     ] = useState("");
 
     const [
@@ -132,22 +159,40 @@ export const Subscription =
     } = useToast();
 
     /*
-     * Load selected practice area
+     * Load the selected legal market
      * preserved from signup.
+     *
+     * The localStorage key names are
+     * intentionally retained for
+     * checkout compatibility.
      */
     useEffect(() => {
-      const storedPracticeArea =
-        localStorage.getItem(
-          "selected-firm-practice-area"
-        ) ||
-        localStorage.getItem(
-          "pending-checkout-practice-area"
-        ) ||
-        "";
+      const storedMarket =
+        resolveLegalMarketName(
+          localStorage.getItem(
+            "selected-firm-practice-area"
+          ) ||
+            localStorage.getItem(
+              "pending-checkout-practice-area"
+            ) ||
+            ""
+        );
 
-      setSelectedPracticeArea(
-        storedPracticeArea
+      setSelectedMarket(
+        storedMarket
       );
+
+      if (storedMarket) {
+        localStorage.setItem(
+          "selected-firm-practice-area",
+          storedMarket
+        );
+
+        localStorage.setItem(
+          "pending-checkout-practice-area",
+          storedMarket
+        );
+      }
     }, []);
 
     /*
@@ -236,32 +281,39 @@ export const Subscription =
 
           /*
            * If localStorage was lost,
-           * recover the practice area
+           * recover the legal market
            * directly from the firm row.
+           *
+           * Older rows may contain a
+           * specialty or legacy category,
+           * so normalize it through the
+           * canonical taxonomy first.
            */
           if (
-            !selectedPracticeArea
+            !selectedMarket
           ) {
-            const recoveredArea =
-              data.primary_category ||
-              data.category ||
-              "";
+            const recoveredMarket =
+              resolveLegalMarketName(
+                data.primary_category ||
+                  data.category ||
+                  ""
+              );
 
             if (
-              recoveredArea
+              recoveredMarket
             ) {
-              setSelectedPracticeArea(
-                recoveredArea
+              setSelectedMarket(
+                recoveredMarket
               );
 
               localStorage.setItem(
                 "selected-firm-practice-area",
-                recoveredArea
+                recoveredMarket
               );
 
               localStorage.setItem(
                 "pending-checkout-practice-area",
-                recoveredArea
+                recoveredMarket
               );
             }
           }
@@ -270,7 +322,7 @@ export const Subscription =
       void loadFirm();
     }, [
       user,
-      selectedPracticeArea,
+      selectedMarket,
     ]);
 
     const checkAvailability =
@@ -279,18 +331,16 @@ export const Subscription =
       ): Promise<boolean> => {
         if (
           planName !==
-            "Category Featured" &&
-          planName !==
-            "Category Exclusive"
+            "Category Featured"
         ) {
           return true;
         }
 
         if (
-          !selectedPracticeArea
+          !selectedMarket
         ) {
           setAvailabilityError(
-            "No primary practice area was found for this signup."
+            "No primary legal market was found for this signup."
           );
 
           return false;
@@ -315,8 +365,8 @@ export const Subscription =
                       plan:
                         planName,
 
-                      category:
-                        selectedPracticeArea,
+                      market:
+                        selectedMarket,
                     }
                   ),
               }
@@ -446,10 +496,10 @@ export const Subscription =
         }
 
         if (
-          !selectedPracticeArea
+          !selectedMarket
         ) {
           setAvailabilityError(
-            "No practice area is connected to this firm."
+            "No legal market is connected to this firm."
           );
 
           return;
@@ -491,7 +541,7 @@ export const Subscription =
 
           localStorage.setItem(
             "pending-checkout-practice-area",
-            selectedPracticeArea
+            selectedMarket
           );
 
           localStorage.setItem(
@@ -550,38 +600,38 @@ export const Subscription =
 
             {(currentPlan === "category-featured" ||
               currentPlan === "category-exclusive") &&
-              selectedPracticeArea && (
+              selectedMarket && (
                 <div className="mt-4 border-t pt-4">
                   <p className="text-sm font-semibold text-gray-900">
                     {currentPlan === "category-exclusive"
-                      ? "Exclusive Category"
-                      : "Featured Category"}
+                      ? "Market Exclusive"
+                      : "Featured Legal Market"}
                   </p>
 
                   <p className="mt-1 text-lg font-bold text-[#0F2A43]">
-                    {selectedPracticeArea}
+                    {selectedMarket}
                   </p>
 
                   <p className="mt-2 text-sm leading-6 text-gray-600">
                     Your{" "}
                     {PLAN_LABELS[currentPlan] || currentPlan} placement
-                    applies to this category only. Other practice areas
-                    listed on your firm profile are profile practice areas
-                    and do not receive this premium category placement.
+                    applies to this legal market only. Other practice areas
+                    listed on your firm profile remain profile practice areas
+                    and do not receive this premium market placement.
                   </p>
                 </div>
               )}
 
             {currentPlan !== "category-featured" &&
               currentPlan !== "category-exclusive" &&
-              selectedPracticeArea && (
+              selectedMarket && (
                 <div className="mt-4 border-t pt-4">
                   <p className="text-sm text-gray-500">
-                    Primary Practice Area
+                    Primary Legal Market
                   </p>
 
                   <p className="mt-1 font-semibold text-gray-900">
-                    {selectedPracticeArea}
+                    {selectedMarket}
                   </p>
                 </div>
               )}
