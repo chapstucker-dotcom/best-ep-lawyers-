@@ -1,25 +1,59 @@
-// Database types matching Supabase schema
+// Canonical application types aligned with the current firm platform model.
+// Some fields remain optional because local fallback records and Supabase rows
+// are not yet guaranteed to contain the same complete shape.
 
 export interface Firm {
   id: string;
   user_id: string;
   name: string;
-  description?: string;
-  logo_url?: string;
-  address?: string;
-  city?: string;
-  state?: string;
-  zip_code?: string;
-  phone?: string;
-  email?: string;
-  website?: string;
-  specialties?: string[];
-  years_experience?: number;
-  team_size?: number;
-  consultation_fee?: number;
-  is_verified: boolean;
+
+  // Public profile
+  description?: string | null;
+  bio?: string | null;
+  blurb?: string | null;
+  logo?: string | null;
+  logo_url?: string | null;
+  image_url?: string | null;
+  video_url?: string | null;
+  address?: string | null;
+  city?: string | null;
+  state?: string | null;
+  zip?: string | null;
+  zip_code?: string | null;
+  phone?: string | null;
+  email?: string | null;
+  website?: string | null;
+  slug?: string | null;
+
+  // Canonical legal-market and specialty assignment
+  category?: string | null;
+  primary_category?: string | null;
+  categories?: string[] | null;
+  practice_areas?: string[] | null;
+  specialties?: string[] | null;
+
+  // Commercial placement / legacy compatibility
+  plan?: string | null;
+  plan_key?: string | null;
   is_featured: boolean;
-  slug?: string;
+  featured?: boolean | null;
+  exclusive?: boolean | null;
+  is_verified: boolean;
+  verified?: boolean | null;
+
+  // Enhanced profile fields
+  years_experience?: number | string | null;
+  team_size?: number | string | null;
+  consultation_fee?: number | string | null;
+  office_hours?: string | null;
+  languages?: string[] | null;
+  awards?: string[] | null;
+  linkedin_url?: string | null;
+  facebook_url?: string | null;
+  instagram_url?: string | null;
+  google_maps_url?: string | null;
+  gallery_urls?: string[] | null;
+
   created_at: string;
   updated_at: string;
 }
@@ -91,4 +125,3 @@ export interface Plan {
   attorneyProfileLimit: number;
   additionalAttorneyPrice: number; // Price per additional attorney profile
 }
-
