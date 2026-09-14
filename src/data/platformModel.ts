@@ -132,6 +132,7 @@ const normalize = (value: string | null | undefined): string =>
     .trim();
 
 const PAGE_PATH_TO_PRACTICE_AREA_SLUG: Record<string, string> = {
+  "/el-paso-car-accident-lawyers": "car-accidents",
   "/el-paso-pedestrian-accident-lawyers": "pedestrian-accidents",
   "/el-paso-bicycle-accident-lawyers": "bicycle-accidents",
   "/el-paso-uber-lyft-accident-lawyers": "rideshare-accidents",
@@ -151,6 +152,7 @@ const PAGE_PATH_TO_PRACTICE_AREA_SLUG: Record<string, string> = {
   "/el-paso-family-violence-lawyers": "domestic-violence-defense",
   "/el-paso-employment-contract-lawyers": "employment-contracts",
   "/el-paso-severance-agreement-lawyers": "employment-contracts",
+  "/el-paso-wage-hour-lawyers": "wage-and-hour",
   "/el-paso-tax-irs-lawyers": "tax-law",
   "/el-paso-landlord-tenant-lawyers": "landlord-tenant",
   "/el-paso-civil-rights-lawyers": "constitutional-law",
@@ -191,6 +193,37 @@ export const getPracticeAreaByValue = (
   );
 };
 
+const getPracticeAreaFromPagePath = (
+  normalizedPath: string
+): PracticeArea | undefined => {
+  const mappedPracticeAreaSlug =
+    PAGE_PATH_TO_PRACTICE_AREA_SLUG[normalizedPath];
+
+  const mappedPracticeArea =
+    getPracticeAreaByValue(mappedPracticeAreaSlug);
+
+  if (mappedPracticeArea) {
+    return mappedPracticeArea;
+  }
+
+  const genericMatch = normalizedPath.match(
+    /^\/el-paso-(.+)-lawyers?$/
+  );
+
+  if (!genericMatch?.[1]) {
+    return undefined;
+  }
+
+  const routeSlug = genericMatch[1];
+
+  return (
+    getPracticeAreaByValue(routeSlug) ??
+    (routeSlug.endsWith("-accident")
+      ? getPracticeAreaByValue(`${routeSlug}s`)
+      : undefined)
+  );
+};
+
 export const getMarketForPracticeArea = (
   value: string | null | undefined
 ): LegalMarket | undefined => {
@@ -204,13 +237,13 @@ export const getMarketForPracticeArea = (
 export const resolvePracticeAreaPage = (
   path: string | null | undefined,
   shortTitle: string | null | undefined): PracticeAreaPageResolution => {
-  const normalizedPath = String(path ?? "").trim().toLowerCase();
-
-  const mappedPracticeAreaSlug =
-    PAGE_PATH_TO_PRACTICE_AREA_SLUG[normalizedPath];
+  const normalizedPath = String(path ?? "")
+    .trim()
+    .toLowerCase()
+    .replace(/\/+$/, "");
 
   const practiceArea =
-    getPracticeAreaByValue(mappedPracticeAreaSlug) ??
+    getPracticeAreaFromPagePath(normalizedPath) ??
     getPracticeAreaByValue(shortTitle);
 
   if (practiceArea) {
