@@ -14,6 +14,10 @@ import {
 } from 'lucide-react';
 
 import { supabase } from '@/lib/supabase';
+import {
+  getPracticeAreaByValue,
+  resolvePracticeAreaPage,
+} from '@/data/platformModel';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -51,111 +55,54 @@ const EMPTY_FORM: FormState = {
   legalIssue: '',
 };
 
-const PRACTICE_AREA_NAMES: Record<string, string> = {
-  'personal-injury': 'Personal Injury',
-  'car-accident': 'Car Accident',
-  'truck-accident': 'Truck Accident',
-  'motorcycle-accident': 'Motorcycle Accident',
-  'construction-accident': 'Construction Accident',
-  'slip-and-fall': 'Slip and Fall',
-  'wrongful-death': 'Wrongful Death',
-  'workers-compensation': "Workers' Compensation",
-  'workplace-discrimination': 'Workplace Discrimination',
-  'wage-hour': 'Wage and Hour',
-  'traffic-ticket': 'Traffic Ticket',
-  'criminal-defense': 'Criminal Defense',
-  immigration: 'Immigration',
-  'family-law': 'Family Law',
-  divorce: 'Divorce',
-  'estate-planning': 'Estate Planning',
-  probate: 'Probate',
-  'business-law': 'Business Law',
-  business: 'Business Law',
-  'real-estate': 'Real Estate',
-  'employment-law': 'Employment Law',
-  employment: 'Employment Law',
-  bankruptcy: 'Bankruptcy',
-  'civil-litigation': 'Civil Litigation',
-  dwi: 'DWI / DUI',
-  dui: 'DWI / DUI',
-  'dwi-dui': 'DWI / DUI',
-};
+const GENERAL_LEGAL_INQUIRY = 'General Legal Inquiry';
 
-const formatPracticeAreaSlug = (
-  slug: string
+const resolveCanonicalPracticeArea = (
+  value: string | null | undefined
 ): string => {
-  if (PRACTICE_AREA_NAMES[slug]) {
-    return PRACTICE_AREA_NAMES[slug];
+  const practiceArea = getPracticeAreaByValue(value);
+
+  if (practiceArea) {
+    return practiceArea.title;
   }
 
-  return slug
-    .split('-')
-    .filter(Boolean)
-    .map((word) => {
-      const lower = word.toLowerCase();
-
-      if (lower === 'dwi' || lower === 'dui') {
-        return lower.toUpperCase();
-      }
-
-      return (
-        lower.charAt(0).toUpperCase() +
-        lower.slice(1)
-      );
-    })
-    .join(' ');
+  return GENERAL_LEGAL_INQUIRY;
 };
 
 const inferPracticeAreaFromUrl = (): string => {
   if (typeof window === 'undefined') {
-    return 'General Legal Inquiry';
+    return GENERAL_LEGAL_INQUIRY;
   }
 
-  let pathname = window.location.pathname
+  const { practiceArea, market } =
+    resolvePracticeAreaPage(
+      window.location.pathname,
+      null
+    );
+
+  if (practiceArea) {
+    return practiceArea.title;
+  }
+
+  if (market) {
+    return market.name;
+  }
+
+  const pathname = window.location.pathname
     .toLowerCase()
     .replace(/^\/+/, '')
     .replace(/\/+$/, '');
 
-  if (!pathname) {
-    return 'General Legal Inquiry';
-  }
-
-  /*
-   * Handles URLs such as:
-   * /el-paso-personal-injury-lawyers
-   * /el-paso-workers-compensation-lawyers
-   */
-  if (pathname.startsWith('el-paso-')) {
-    pathname = pathname.replace(
-      /^el-paso-/,
-      ''
-    );
-
-    pathname = pathname.replace(
-      /-lawyers?$/,
-      ''
-    );
-
-    return formatPracticeAreaSlug(pathname);
-  }
-
-  /*
-   * Handles category URLs such as:
-   * /category/immigration
-   */
   if (pathname.startsWith('category/')) {
     const slug =
       pathname.split('/').filter(Boolean).pop() ||
       '';
 
-    if (slug) {
-      return formatPracticeAreaSlug(slug);
-    }
+    return resolveCanonicalPracticeArea(slug);
   }
 
-  return 'General Legal Inquiry';
+  return GENERAL_LEGAL_INQUIRY;
 };
-
 
 const inferPracticeAreaFromLegalIssue = (
   legalIssue: string
@@ -185,6 +132,13 @@ const inferPracticeAreaFromLegalIssue = (
 
   for (const rule of rules) {
     if (rule.terms.some((term) => text.includes(term))) {
+      const practiceArea =
+        getPracticeAreaByValue(rule.area);
+
+      if (practiceArea) {
+        return practiceArea.title;
+      }
+
       return rule.area;
     }
   }
