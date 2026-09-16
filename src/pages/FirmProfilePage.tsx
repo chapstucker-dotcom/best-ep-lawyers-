@@ -255,7 +255,7 @@ export default function FirmProfilePage() {
       if (data) {
         void loadReviews(id);
         void loadAttorneys(id);
-        void trackEvent(id, "view").catch((trackError) => {
+        void trackEvent(id, "profile_view").catch((trackError) => {
           console.error("Failed to track firm profile view:", trackError);
         });
       }

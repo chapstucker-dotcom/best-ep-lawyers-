@@ -14,7 +14,9 @@ import {
 } from 'lucide-react';
 
 import { supabase } from '@/lib/supabase';
+import { trackEvent } from '@/services/analyticsService';
 import {
+  getMarketForPracticeArea,
   getPracticeAreaByValue,
   resolvePracticeAreaPage,
 } from '@/data/platformModel';
@@ -376,6 +378,34 @@ export default function LeadCaptureForm({
 
       if (error) {
         throw error;
+      }
+
+      if (firmId) {
+        const canonicalPracticeArea =
+          getPracticeAreaByValue(effectivePracticeArea);
+        const canonicalMarket =
+          getMarketForPracticeArea(effectivePracticeArea);
+
+        const { error: attributionError } =
+          await trackEvent(
+            firmId,
+            'consultation_submit',
+            {
+              market: canonicalMarket?.key,
+              specialty: canonicalPracticeArea?.slug,
+              page:
+                typeof window !== 'undefined'
+                  ? window.location.pathname
+                  : null,
+            }
+          );
+
+        if (attributionError) {
+          console.error(
+            'Unable to track consultation_submit:',
+            attributionError
+          );
+        }
       }
 
       await sendLeadNotification();

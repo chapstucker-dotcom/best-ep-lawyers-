@@ -223,6 +223,15 @@ export default function PracticeAreaFirmDirectory({
 }: Props) {
   const navigate = useNavigate();
 
+  const pageResolution = useMemo(
+    () =>
+      resolvePracticeAreaPage(
+        page.path,
+        page.shortTitle
+      ),
+    [page.path, page.shortTitle]
+  );
+
   const [firms, setFirms] =
     useState<PublicFirm[]>([]);
 
@@ -335,6 +344,41 @@ export default function PracticeAreaFirmDirectory({
       ...freeFirms,
     ].slice(0, 12);
   }, [firms, page]);
+  useEffect(() => {
+    if (loading || matchingFirms.length === 0) {
+      return;
+    }
+
+    matchingFirms.forEach((firm) => {
+      if (isLocalExclusiveShowcaseId(firm.id)) {
+        return;
+      }
+
+      void trackEvent(
+        firm.id,
+        "listing_impression",
+        {
+          market: pageResolution.market?.key,
+          specialty: pageResolution.practiceArea?.slug,
+          page: page.path,
+        }
+      ).then(({ error }) => {
+        if (error) {
+          console.error(
+            "Unable to track listing_impression:",
+            error
+          );
+        }
+      });
+    });
+  }, [
+    loading,
+    matchingFirms,
+    page.path,
+    pageResolution.market?.key,
+    pageResolution.practiceArea?.slug,
+  ]);
+
 
   const recordEvent = async (
     firmId: string,
@@ -344,7 +388,12 @@ export default function PracticeAreaFirmDirectory({
 
     const { error } = await trackEvent(
       firmId,
-      eventType
+      eventType,
+      {
+        market: pageResolution.market?.key,
+        specialty: pageResolution.practiceArea?.slug,
+        page: page.path,
+      }
     );
 
     if (error) {
