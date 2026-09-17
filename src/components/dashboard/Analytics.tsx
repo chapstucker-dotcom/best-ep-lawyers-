@@ -15,6 +15,7 @@ import {
   MousePointerClick,
   Phone,
   RefreshCw,
+  Send,
   TrendingUp,
 } from 'lucide-react';
 
@@ -39,19 +40,23 @@ import { getAnalyticsSummary } from '@/services/analyticsService';
 import { useToast } from '@/hooks/use-toast';
 
 interface AnalyticsSummary {
+  listing_impressions: number;
   total_views: number;
   phone_clicks: number;
   email_clicks: number;
   website_clicks: number;
   total_clicks: number;
+  consultation_submissions: number;
 }
 
 const EMPTY_SUMMARY: AnalyticsSummary = {
+  listing_impressions: 0,
   total_views: 0,
   phone_clicks: 0,
   email_clicks: 0,
   website_clicks: 0,
   total_clicks: 0,
+  consultation_submissions: 0,
 };
 
 export const Analytics = () => {
@@ -114,6 +119,8 @@ export const Analytics = () => {
         }
 
         setSummary({
+          listing_impressions:
+            Number(data?.listing_impressions) || 0,
           total_views:
             Number(data?.total_views) || 0,
           phone_clicks:
@@ -124,6 +131,8 @@ export const Analytics = () => {
             Number(data?.website_clicks) || 0,
           total_clicks:
             Number(data?.total_clicks) || 0,
+          consultation_submissions:
+            Number(data?.consultation_submissions) || 0,
         });
 
         if (showRefreshMessage) {
@@ -183,10 +192,18 @@ export const Analytics = () => {
     summary.email_clicks;
 
   const hasActivity =
+    summary.listing_impressions > 0 ||
     summary.total_views > 0 ||
-    summary.total_clicks > 0;
+    summary.total_clicks > 0 ||
+    summary.consultation_submissions > 0;
 
   const stats = [
+    {
+      label: 'Listing Impressions',
+      value: summary.listing_impressions,
+      description: 'Times your firm appeared in a matching directory',
+      icon: BarChart3,
+    },
     {
       label: 'Profile Views',
       value: summary.total_views,
@@ -214,6 +231,12 @@ export const Analytics = () => {
       description:
         'Visitors sent to your firm website',
       icon: Globe,
+    },
+    {
+      label: 'Consultation Submissions',
+      value: summary.consultation_submissions,
+      description: 'Consultation requests successfully submitted',
+      icon: Send,
     },
   ];
 
@@ -315,7 +338,7 @@ export const Analytics = () => {
         </Alert>
       )}
 
-      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {stats.map((stat) => {
           const Icon = stat.icon;
 
@@ -492,19 +515,23 @@ export const Analytics = () => {
 
             <p className="mx-auto mt-2 max-w-lg text-sm leading-6 text-gray-600">
               Your dashboard will begin recording
-              profile views and contact clicks as
-              visitors interact with your public
-              firm listing.
+              listing impressions, profile views,
+              contact actions, and consultation
+              submissions as visitors interact with
+              your public firm listing.
             </p>
           </CardContent>
         </Card>
       )}
 
       <p className="text-xs text-gray-500">
-        Analytics reflect button clicks recorded through
-        your public firm listing. Clicks show visitor
-        actions and do not confirm completed calls,
-        emails, consultations, or new clients.
+        Analytics reflect activity recorded through your
+        public firm listing. Clicks show visitor actions
+        and do not confirm completed calls, emails,
+        consultations, or new clients. Consultation
+        submissions indicate a successfully stored
+        consultation request and do not confirm
+        representation or a new client.
       </p>
     </div>
   );

@@ -90,19 +90,23 @@ export interface AttributionEvent {
 }
 
 export interface AnalyticsSummary {
+  listing_impressions: number;
   total_views: number;
   total_clicks: number;
   phone_clicks: number;
   email_clicks: number;
   website_clicks: number;
+  consultation_submissions: number;
 }
 
 const EMPTY_SUMMARY: AnalyticsSummary = {
+  listing_impressions: 0,
   total_views: 0,
   total_clicks: 0,
   phone_clicks: 0,
   email_clicks: 0,
   website_clicks: 0,
+  consultation_submissions: 0,
 };
 
 const ATTRIBUTION_ACTIONS =
@@ -410,10 +414,16 @@ export const getFirmAnalytics = async (
 };
 
 /**
- * Get the existing dashboard analytics summary.
+ * Get the canonical attribution summary for a firm.
  *
- * Keep this RPC contract unchanged until the attribution
- * reporting/dashboard upgrade is performed separately.
+ * Reporting reads directly from attribution_events so the
+ * authenticated firm-owner and admin SELECT RLS policies
+ * remain the authorization boundary.
+ *
+ * Legacy analytics history is intentionally not combined
+ * with canonical attribution events. Mixing the stores
+ * would double-count dual-written activity and would treat
+ * older navigation-intent "view" events as profile views.
  */
 export const getAnalyticsSummary =
   async (
@@ -435,16 +445,14 @@ export const getAnalyticsSummary =
     const {
       data,
       error,
-    } = await supabase.rpc(
-      "get_firm_analytics_summary",
-      {
-        p_firm_id: firmId,
-      }
-    );
+    } = await supabase
+      .from("attribution_events")
+      .select("action")
+      .eq("firm_id", firmId);
 
     if (error) {
       console.error(
-        "Analytics summary failed:",
+        "Attribution summary failed:",
         error
       );
 
@@ -454,34 +462,50 @@ export const getAnalyticsSummary =
       };
     }
 
-    /*
-     * RETURNS TABLE RPC functions come back
-     * from Supabase as an array.
-     * The dashboard expects one summary object.
-     */
-    const row =
-      Array.isArray(data)
-        ? data[0]
-        : data;
+    const summary: AnalyticsSummary = {
+      ...EMPTY_SUMMARY,
+    };
+
+    for (const row of data ?? []) {
+      switch (
+        row.action as AttributionAction
+      ) {
+        case "listing_impression":
+          summary.listing_impressions += 1;
+          break;
+
+        case "profile_view":
+          summary.total_views += 1;
+          break;
+
+        case "click_phone":
+          summary.phone_clicks += 1;
+          break;
+
+        case "click_email":
+          summary.email_clicks += 1;
+          break;
+
+        case "click_website":
+          summary.website_clicks += 1;
+          break;
+
+        case "consultation_submit":
+          summary.consultation_submissions += 1;
+          break;
+
+        default:
+          break;
+      }
+    }
+
+    summary.total_clicks =
+      summary.phone_clicks +
+      summary.email_clicks +
+      summary.website_clicks;
 
     return {
-      data: {
-        total_views: Number(
-          row?.total_views ?? 0
-        ),
-        total_clicks: Number(
-          row?.total_clicks ?? 0
-        ),
-        phone_clicks: Number(
-          row?.phone_clicks ?? 0
-        ),
-        email_clicks: Number(
-          row?.email_clicks ?? 0
-        ),
-        website_clicks: Number(
-          row?.website_clicks ?? 0
-        ),
-      },
+      data: summary,
       error: null,
     };
   };
