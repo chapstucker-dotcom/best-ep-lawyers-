@@ -1,5 +1,10 @@
 import type { AttorneyProfile } from "./attorneyTypes";
 import {
+  CARTER_DEMO_FIRM_ID,
+  carterExclusiveAttorneys,
+  carterExclusiveFirm,
+} from "./carterExclusiveDemo";
+import {
   HICKS_DEMO_FIRM_ID,
   hicksExclusiveAttorneys,
   hicksExclusiveFirm,
@@ -56,6 +61,12 @@ const localExclusiveShowcases: Record<string, LocalExclusiveShowcase> = {
         },
       ],
     },
+  },
+  [CARTER_DEMO_FIRM_ID]: {
+    id: CARTER_DEMO_FIRM_ID,
+    firm: carterExclusiveFirm,
+    attorneys: carterExclusiveAttorneys,
+    exclusiveCategory: "Truck Accidents",
   },
 };
 
