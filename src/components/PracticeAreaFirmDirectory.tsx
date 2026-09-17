@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
   BadgeCheck,
@@ -222,6 +222,7 @@ export default function PracticeAreaFirmDirectory({
   page,
 }: Props) {
   const navigate = useNavigate();
+  const impressionKeysRef = useRef<Set<string>>(new Set());
 
   const pageResolution = useMemo(
     () =>
@@ -353,6 +354,11 @@ export default function PracticeAreaFirmDirectory({
       if (isLocalExclusiveShowcaseId(firm.id)) {
         return;
       }
+
+      const impressionKey = [firm.id, page.path, pageResolution.market?.key ?? "", pageResolution.practiceArea?.slug ?? ""].join("|");
+
+      if (impressionKeysRef.current.has(impressionKey)) return;
+      impressionKeysRef.current.add(impressionKey);
 
       void trackEvent(
         firm.id,

@@ -7,12 +7,8 @@ import type { Analytics } from "@/data/types";
 import type { MarketKey } from "@/data/platformModel";
 
 /**
- * Legacy event names already stored by the current
- * Supabase analytics schema.
- *
- * Keep these available while attribution is upgraded
- * so existing callers and historical reporting continue
- * to work before the database migration.
+ * Legacy event names stored by the existing analytics
+ * schema and consumed by current dashboard reporting.
  */
 export type LegacyEventType =
   | "view"
@@ -63,17 +59,18 @@ export interface AttributionContext {
   referrer?: string | null;
 
   /**
-   * Traffic-source dimensions. These are captured at the
-   * application layer now and can be persisted after the
-   * analytics schema is upgraded.
+   * Traffic-source dimensions.
    */
   source?: string | null;
   medium?: string | null;
   campaign?: string | null;
 
   /**
-   * Optional lead identifier for a successful consultation
-   * submission once lead attribution is connected.
+   * Reserved for trusted lead/event correlation.
+   *
+   * Public browser attribution writes intentionally do not
+   * persist a lead ID. The attribution_events public INSERT
+   * policy requires lead_id to remain null.
    */
   leadId?: string | null;
 }
@@ -107,6 +104,24 @@ const EMPTY_SUMMARY: AnalyticsSummary = {
   email_clicks: 0,
   website_clicks: 0,
 };
+
+const ATTRIBUTION_ACTIONS =
+  new Set<AttributionAction>([
+    "listing_impression",
+    "profile_view",
+    "click_phone",
+    "click_email",
+    "click_website",
+    "consultation_submit",
+  ]);
+
+function isAttributionAction(
+  eventType: EventType
+): eventType is AttributionAction {
+  return ATTRIBUTION_ACTIONS.has(
+    eventType as AttributionAction
+  );
+}
 
 function getBrowserReferrer(): string | null {
   if (typeof document === "undefined") {
@@ -202,15 +217,20 @@ export function createAttributionEvent(
 }
 
 /**
- * Map the richer application event model onto the current
- * legacy Supabase schema.
+ * Map canonical attribution actions onto the legacy
+ * analytics schema where a compatible event exists.
  *
- * listing_impression and consultation_submit intentionally
- * do not write yet because the live analytics table does not
- * have a safe representation for those events.
+ * profile_view continues to dual-write as legacy "view"
+ * so existing dashboard reporting remains compatible.
  *
- * profile_view temporarily persists as legacy "view" so
- * existing dashboard reporting remains compatible.
+ * listing_impression and consultation_submit have no
+ * equivalent legacy representation and therefore write
+ * only to attribution_events.
+ *
+ * A direct legacy "view" remains legacy-only. Existing
+ * callers use it for navigation intent rather than a
+ * successfully loaded profile, so it must not become a
+ * canonical profile_view.
  */
 function getLegacyEventType(
   action: EventType
@@ -233,24 +253,20 @@ function getLegacyEventType(
 /**
  * Track an analytics/attribution event.
  *
- * The public contract accepts the richer attribution context
- * now. Until the database migration is completed, only fields
- * supported by the current analytics table are persisted.
+ * Canonical actions are persisted to attribution_events.
+ * Compatible actions are also written to the legacy
+ * analytics table so current dashboard reporting continues
+ * to work during the reporting transition.
+ *
+ * Public browser writes never persist lead_id. Correlating
+ * a stored lead to an attribution event requires a trusted
+ * server-side path or RPC with appropriate authorization.
  */
 export const trackEvent = async (
   firmId: string,
   eventType: EventType,
   context?: AttributionContext
 ): Promise<{ error: unknown }> => {
-  const legacyEventType =
-    getLegacyEventType(eventType);
-
-  if (!legacyEventType) {
-    return {
-      error: null,
-    };
-  }
-
   if (
     !isSupabaseConfigured ||
     !supabase
@@ -263,35 +279,84 @@ export const trackEvent = async (
   const normalized =
     normalizeContext(context);
 
-  const { error } = await supabase
-    .from("analytics")
-    .insert([
-      {
-        firm_id: firmId,
-        event_type: legacyEventType,
-        referrer: normalized.referrer,
-        user_agent:
-          getBrowserUserAgent(),
-      },
-    ]);
+  let attributionError: unknown = null;
+  let legacyError: unknown = null;
 
-  if (error) {
-    console.error(
-      "Analytics tracking failed:",
-      error
-    );
+  if (isAttributionAction(eventType)) {
+    const { error } = await supabase
+      .from("attribution_events")
+      .insert([
+        {
+          firm_id: firmId,
+          action: eventType,
+          market: normalized.market,
+          specialty: normalized.specialty,
+          page: normalized.page,
+          source: normalized.source,
+          medium: normalized.medium,
+          campaign: normalized.campaign,
+          referrer: normalized.referrer,
+
+          /*
+           * Required by attribution_events_public_insert.
+           * Browser clients may not attach arbitrary leads
+           * to attribution events.
+           */
+          lead_id: null,
+
+          occurred_at: normalized.occurredAt,
+        },
+      ]);
+
+    attributionError = error;
+
+    if (error) {
+      console.error(
+        "Attribution tracking failed:",
+        error
+      );
+    }
+  }
+
+  const legacyEventType =
+    getLegacyEventType(eventType);
+
+  if (legacyEventType) {
+    const { error } = await supabase
+      .from("analytics")
+      .insert([
+        {
+          firm_id: firmId,
+          event_type: legacyEventType,
+          referrer: normalized.referrer,
+          user_agent:
+            getBrowserUserAgent(),
+        },
+      ]);
+
+    legacyError = error;
+
+    if (error) {
+      console.error(
+        "Legacy analytics tracking failed:",
+        error
+      );
+    }
   }
 
   return {
-    error,
+    error:
+      attributionError ??
+      legacyError ??
+      null,
   };
 };
 
 /**
  * Get analytics events for a firm.
  *
- * This remains on the legacy Analytics shape until the
- * Supabase analytics schema is upgraded.
+ * This remains on the legacy Analytics shape while the
+ * current dashboard continues to use legacy reporting.
  */
 export const getFirmAnalytics = async (
   firmId: string,
@@ -347,9 +412,8 @@ export const getFirmAnalytics = async (
 /**
  * Get the existing dashboard analytics summary.
  *
- * Keep this RPC contract unchanged until the analytics
- * database migration and dashboard upgrade are performed
- * together.
+ * Keep this RPC contract unchanged until the attribution
+ * reporting/dashboard upgrade is performed separately.
  */
 export const getAnalyticsSummary =
   async (
