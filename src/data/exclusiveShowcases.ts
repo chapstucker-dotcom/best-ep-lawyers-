@@ -67,6 +67,20 @@ const localExclusiveShowcases: Record<string, LocalExclusiveShowcase> = {
     firm: carterExclusiveFirm,
     attorneys: carterExclusiveAttorneys,
     exclusiveCategory: "Truck Accidents",
+    testimonials: {
+      title: "Client Testimonials",
+      disclosure:
+        "The testimonial below is published by The Carter Law Firm, P.C. on the firm's website and is not independently verified or endorsed by El Paso's Best Lawyers.",
+      sourceUrl: "https://www.carterlawwins.com/reviews",
+      sourceLabel: "View Client Reviews on Firm Website",
+      items: [
+        {
+          quote:
+            "Very pleased with Mr. Carter and his team. State Farm tried to low-ball me an offer for my injuries, but Carter knew and fought for what I deserved.",
+          author: "Regan Garcia",
+        },
+      ],
+    },
   },
 };
 
