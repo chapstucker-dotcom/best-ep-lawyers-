@@ -125,6 +125,21 @@ const getVideoEmbedUrl = (value: string): string | null => {
   }
 };
 
+const getDirectVideoUrl = (value: string): string | null => {
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+
+  try {
+    const url = new URL(
+      /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`
+    );
+
+    return /\.mp4$/i.test(url.pathname) ? url.toString() : null;
+  } catch {
+    return null;
+  }
+};
+
 export default function FirmProfilePage() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
@@ -344,6 +359,12 @@ export default function FirmProfilePage() {
     (isCategoryFeatured || isCategoryExclusive) &&
     publicFirm.video_url
       ? getVideoEmbedUrl(publicFirm.video_url)
+      : null;
+
+  const directVideoUrl =
+    (isCategoryFeatured || isCategoryExclusive) &&
+    publicFirm.video_url
+      ? getDirectVideoUrl(publicFirm.video_url)
       : null;
 
   const rawPracticeAreas =
@@ -663,7 +684,7 @@ export default function FirmProfilePage() {
             )}
           </section>
 
-                    {videoEmbedUrl && (
+                    {(videoEmbedUrl || directVideoUrl) && (
             <section className="mx-auto w-full max-w-4xl overflow-hidden rounded-2xl border border-[#D4A62A]/40 bg-[#0F2A43] shadow-lg">
               <div className="border-b border-white/10 px-6 py-4 text-white">
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#D4A62A]">
@@ -679,14 +700,27 @@ export default function FirmProfilePage() {
               </div>
 
               <div className="aspect-video w-full overflow-hidden bg-black">
-                <iframe
-                  src={videoEmbedUrl}
-                  title={`${publicFirm.name} introduction video`}
-                  className="h-full w-full"
-                  loading="lazy"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                />
+                {directVideoUrl ? (
+                  <video
+                    controls
+                    playsInline
+                    preload="metadata"
+                    className="h-full w-full"
+                    title={`${publicFirm.name} introduction video`}
+                  >
+                    <source src={directVideoUrl} type="video/mp4" />
+                    Your browser does not support HTML5 video.
+                  </video>
+                ) : videoEmbedUrl ? (
+                  <iframe
+                    src={videoEmbedUrl}
+                    title={`${publicFirm.name} introduction video`}
+                    className="h-full w-full"
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                ) : null}
               </div>
             </section>
           )}
