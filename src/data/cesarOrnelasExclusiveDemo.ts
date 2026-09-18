@@ -1,0 +1,94 @@
+import type { AttorneyProfile } from "./attorneyTypes";
+
+export const CESAR_ORNELAS_DEMO_FIRM_ID = "cesar-ornelas-injury-law";
+
+export const cesarOrnelasExclusiveFirm = {
+  id: CESAR_ORNELAS_DEMO_FIRM_ID,
+  user_id: "",
+  name: "Cesar Ornelas Injury Law",
+  description:
+    "Cesar Ornelas Injury Law represents personal injury and wrongful death clients in El Paso and across multiple states. The firm's El Paso practice includes car accidents, truck and commercial vehicle accidents, motorcycle accidents, oilfield and workplace injuries, catastrophic injuries, brain and spinal injuries, premises liability, product liability, and wrongful death. The firm states that it has recovered more than $1 billion for injury victims nationwide. Cesar Ornelas Law offers free case evaluations and states that clients pay no fees unless the firm recovers compensation.",
+  phone: "(866) 377-9855",
+  website:
+    "https://www.cesarornelaslaw.com/areas-we-serve/texas/el-paso-personal-injury-lawyer/",
+  address: "6044 Gateway East Blvd",
+  city: "El Paso",
+  state: "TX",
+  zip_code: "79905",
+  office_hours:
+    "Contact the firm for current office hours and consultation availability",
+  languages: ["English", "Spanish"],
+  specialties: [
+    "Personal Injury",
+    "Car Accidents",
+    "Truck Accidents",
+    "Motorcycle Accidents",
+    "Commercial Vehicle Accidents",
+    "Oilfield Injuries",
+    "Workplace Injuries",
+    "Catastrophic Injury",
+    "Brain Injury",
+    "Spinal Cord Injury",
+    "Premises Liability",
+    "Product Liability",
+    "Wrongful Death",
+  ],
+  categories: ["Personal Injury"],
+  category: "Personal Injury",
+  plan: "category_exclusive",
+  plan_key: "category_exclusive",
+  is_featured: false,
+  featured: false,
+  exclusive: true,
+  is_verified: false,
+  verified: false,
+  logo_url: "/attorneys/cesar-ornelas-logo.png",
+  linkedin_url: "https://www.linkedin.com/company/cesar-ornelas-law",
+  instagram_url: "https://www.instagram.com/cesar_ornelas_law",
+  facebook_url: "https://www.facebook.com/cesarornelaslaw/",
+  twitter_url: "https://twitter.com/cesarornelaslaw/",
+  google_maps_url:
+    "https://www.google.com/maps/search/?api=1&query=6044+Gateway+East+Blvd%2C+El+Paso%2C+TX+79905",
+  created_at: "2026-09-18T00:00:00.000Z",
+  updated_at: "2026-09-18T00:00:00.000Z",
+} as const;
+
+export const cesarOrnelasExclusiveAttorneys: AttorneyProfile[] = [
+  {
+    id: "cesar-ornelas-ii-attorney",
+    firm_id: CESAR_ORNELAS_DEMO_FIRM_ID,
+    name: "Cesar Ornelas II",
+    title: "Principal | Personal Injury Attorney",
+    photo_url: "/attorneys/cesar-ornelas-about.jpg",
+    bio:
+      "Cesar Ornelas II is the founder and Principal of Cesar Ornelas Law. The firm states that he is a first-generation college graduate and first-generation attorney who earned his J.D. from St. Mary's Law School and has dedicated his legal career to representing injury victims. He is licensed in Texas and represents clients in catastrophic personal injury and wrongful death matters. The firm states that Ornelas is a life member of both the Million Dollar Advocates Forum and the Multi-Million Dollar Advocates Forum and was selected for The National Trial Lawyers Top 40 Under 40.",
+    specialties: [
+      "Personal Injury",
+      "Catastrophic Injury",
+      "Wrongful Death",
+      "Truck Accidents",
+      "Commercial Vehicle Accidents",
+      "Car Accidents",
+      "Oilfield Injuries",
+      "Workplace Injuries",
+      "Brain Injury",
+      "Spinal Cord Injury",
+      "Premises Liability",
+      "Product Liability",
+    ],
+    education: ["J.D., St. Mary's Law School"],
+    bar_admissions: ["Texas"],
+    awards: [
+      "Life Member, Million Dollar Advocates Forum",
+      "Life Member, Multi-Million Dollar Advocates Forum",
+      "The National Trial Lawyers Top 40 Under 40",
+    ],
+    consultation_url: "https://www.cesarornelaslaw.com/contact/",
+    phone: "(866) 377-9855",
+    linkedin_url: "https://www.linkedin.com/company/cesar-ornelas-law",
+    display_order: 1,
+    is_active: true,
+    created_at: "2026-09-18T00:00:00.000Z",
+    updated_at: "2026-09-18T00:00:00.000Z",
+  },
+];

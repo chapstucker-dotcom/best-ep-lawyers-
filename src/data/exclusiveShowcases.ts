@@ -5,6 +5,11 @@ import {
   carterExclusiveFirm,
 } from "./carterExclusiveDemo";
 import {
+  CESAR_ORNELAS_DEMO_FIRM_ID,
+  cesarOrnelasExclusiveAttorneys,
+  cesarOrnelasExclusiveFirm,
+} from "./cesarOrnelasExclusiveDemo";
+import {
   HICKS_DEMO_FIRM_ID,
   hicksExclusiveAttorneys,
   hicksExclusiveFirm,
@@ -78,6 +83,26 @@ const localExclusiveShowcases: Record<string, LocalExclusiveShowcase> = {
           quote:
             "Very pleased with Mr. Carter and his team. State Farm tried to low-ball me an offer for my injuries, but Carter knew and fought for what I deserved.",
           author: "Regan Garcia",
+        },
+      ],
+    },
+  },
+  [CESAR_ORNELAS_DEMO_FIRM_ID]: {
+    id: CESAR_ORNELAS_DEMO_FIRM_ID,
+    firm: cesarOrnelasExclusiveFirm,
+    attorneys: cesarOrnelasExclusiveAttorneys,
+    exclusiveCategory: "Personal Injury",
+    testimonials: {
+      title: "Client Testimonials",
+      disclosure:
+        "The testimonial below is published by Cesar Ornelas Law on the firm's website and is not independently verified or endorsed by El Paso's Best Lawyers.",
+      sourceUrl: "https://www.cesarornelaslaw.com/testimonials/",
+      sourceLabel: "View Client Reviews on Firm Website",
+      items: [
+        {
+          quote:
+            "Great customer service! Always kept me in the loop on what was going on! I would give them more stars if I could.",
+          author: "Remundo G.",
         },
       ],
     },
