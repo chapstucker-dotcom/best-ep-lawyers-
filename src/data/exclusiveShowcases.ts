@@ -10,6 +10,11 @@ import {
   cesarOrnelasExclusiveFirm,
 } from "./cesarOrnelasExclusiveDemo";
 import {
+  LOZANO_MEZA_DEMO_FIRM_ID,
+  lozanoMezaExclusiveAttorneys,
+  lozanoMezaExclusiveFirm,
+} from "./lozanoMezaExclusiveDemo";
+import {
   HICKS_DEMO_FIRM_ID,
   hicksExclusiveAttorneys,
   hicksExclusiveFirm,
@@ -106,6 +111,12 @@ const localExclusiveShowcases: Record<string, LocalExclusiveShowcase> = {
         },
       ],
     },
+  },
+  [LOZANO_MEZA_DEMO_FIRM_ID]: {
+    id: LOZANO_MEZA_DEMO_FIRM_ID,
+    firm: lozanoMezaExclusiveFirm,
+    attorneys: lozanoMezaExclusiveAttorneys,
+    exclusiveCategory: "Criminal Defense",
   },
 };
 
