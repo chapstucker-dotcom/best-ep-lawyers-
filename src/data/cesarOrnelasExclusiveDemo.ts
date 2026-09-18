@@ -59,14 +59,14 @@ export const cesarOrnelasExclusiveAttorneys: AttorneyProfile[] = [
     id: "cesar-ornelas-ii-attorney",
     firm_id: CESAR_ORNELAS_DEMO_FIRM_ID,
     name: "Cesar Ornelas II",
-    title: "Principal | Personal Injury Attorney",
+    title: "Principal | Catastrophic Injury & Wrongful Death Attorney",
     photo_url: "/attorneys/cesar-ornelas-about.jpg",
     bio:
       "Cesar Ornelas II is the founder and Principal of Cesar Ornelas Law. The firm states that he is a first-generation college graduate and first-generation attorney who earned his J.D. from St. Mary's Law School and has dedicated his legal career to representing injury victims. He is licensed in Texas and represents clients in catastrophic personal injury and wrongful death matters. The firm states that Ornelas is a life member of both the Million Dollar Advocates Forum and the Multi-Million Dollar Advocates Forum and was selected for The National Trial Lawyers Top 40 Under 40.",
     specialties: [
-      "Personal Injury",
       "Catastrophic Injury",
       "Wrongful Death",
+      "Personal Injury",
       "Truck Accidents",
       "Commercial Vehicle Accidents",
       "Car Accidents",
