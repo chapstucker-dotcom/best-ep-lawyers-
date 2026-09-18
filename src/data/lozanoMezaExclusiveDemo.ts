@@ -50,6 +50,7 @@ export const lozanoMezaExclusiveAttorneys: AttorneyProfile[] = [
     id: "cesar-lozano-attorney",
     firm_id: LOZANO_MEZA_DEMO_FIRM_ID,
     name: "Cesar Lozano",
+    photo_url: "/attorneys/lozano-cesar.webp",
     title: "Partner | Criminal Defense Attorney",
     bio:
       "Cesar Lozano is a partner at Lozano Meza Law Firm whose practice focuses on criminal defense. The firm states that he has more than 15 years of experience in Texas criminal law. His practice includes serious state and federal criminal matters, including felony and misdemeanor charges.",
@@ -81,6 +82,7 @@ export const lozanoMezaExclusiveAttorneys: AttorneyProfile[] = [
     id: "eric-meza-attorney",
     firm_id: LOZANO_MEZA_DEMO_FIRM_ID,
     name: "Eric Meza",
+    photo_url: "/attorneys/meza-eric.webp",
     title: "Partner | Criminal Defense & Personal Injury Attorney",
     bio:
       "Eric Meza is a partner at Lozano Meza Law Firm and an El Paso native. His practice focuses on criminal defense and personal injury. The firm states that he has more than 15 years of experience in Texas criminal law and represents clients in serious state and federal criminal matters.",
@@ -114,6 +116,7 @@ export const lozanoMezaExclusiveAttorneys: AttorneyProfile[] = [
     id: "rebecca-spencer-tavitas-attorney",
     firm_id: LOZANO_MEZA_DEMO_FIRM_ID,
     name: "Rebecca Spencer Tavitas",
+    photo_url: "/attorneys/tavitas-rebecca-spencer.webp",
     title: "Attorney | Trial Lawyer",
     bio:
       "Rebecca Spencer Tavitas is a trial lawyer at Lozano Meza Law Firm. Before joining the firm, she served as a public defender with the El Paso County Public Defender's Office, representing clients in matters ranging from misdemeanors to serious felonies.",
