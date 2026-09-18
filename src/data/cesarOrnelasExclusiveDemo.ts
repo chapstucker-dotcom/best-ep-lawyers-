@@ -43,6 +43,7 @@ export const cesarOrnelasExclusiveFirm = {
   is_verified: false,
   verified: false,
   logo_url: "/attorneys/cesar-ornelas-logo.png",
+  video_url: "https://www.cesarornelaslaw.com/wp-content/uploads/2026/05/Cesar-Ornelas-Injury-Law-30Sec-JT-FINAL.mp4",
   linkedin_url: "https://www.linkedin.com/company/cesar-ornelas-law",
   instagram_url: "https://www.instagram.com/cesar_ornelas_law",
   facebook_url: "https://www.facebook.com/cesarornelaslaw/",
