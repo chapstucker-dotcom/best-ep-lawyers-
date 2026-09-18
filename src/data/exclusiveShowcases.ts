@@ -15,6 +15,11 @@ import {
   lozanoMezaExclusiveFirm,
 } from "./lozanoMezaExclusiveDemo";
 import {
+  LABINOTI_DEMO_FIRM_ID,
+  labinotiExclusiveAttorneys,
+  labinotiExclusiveFirm,
+} from "./labinotiExclusiveDemo";
+import {
   HICKS_DEMO_FIRM_ID,
   hicksExclusiveAttorneys,
   hicksExclusiveFirm,
@@ -111,6 +116,12 @@ const localExclusiveShowcases: Record<string, LocalExclusiveShowcase> = {
         },
       ],
     },
+  },
+  [LABINOTI_DEMO_FIRM_ID]: {
+    id: LABINOTI_DEMO_FIRM_ID,
+    firm: labinotiExclusiveFirm,
+    attorneys: labinotiExclusiveAttorneys,
+    exclusiveCategory: "Traumatic Brain Injury & Catastrophic Injury",
   },
   [LOZANO_MEZA_DEMO_FIRM_ID]: {
     id: LOZANO_MEZA_DEMO_FIRM_ID,
