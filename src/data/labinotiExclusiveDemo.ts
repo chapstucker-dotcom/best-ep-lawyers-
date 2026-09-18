@@ -10,6 +10,8 @@ export const labinotiExclusiveFirm = {
     "Labinoti Law Firm is an El Paso personal injury law firm representing people injured in serious accidents and negligence matters. The firm's practice includes traumatic brain injuries, catastrophic injuries, spinal cord injuries, car and truck accidents, workplace and oilfield injuries, premises liability, medical malpractice, and wrongful death. The firm states that Daniela Labinoti founded the practice in 2010 and personally directs trial strategy. Labinoti Law Firm represents clients in Texas and New Mexico and offers free consultations.",
   phone: "(915) 201-0132",
   website: "https://www.labinotilaw.com/",
+  logo_url: "/attorneys/labinoti-logo.png",
+  video_url: "https://www.youtube.com/watch?v=GPeQY_ZZ2Gg",
   address: "707 Myrtle Ave",
   city: "El Paso",
   state: "TX",
