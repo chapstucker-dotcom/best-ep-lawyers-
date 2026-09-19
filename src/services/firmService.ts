@@ -161,7 +161,17 @@ export const getAllFirms = async (): Promise<{
       .replace(/[^a-z0-9]/g, "")
       .trim();
 
-  const merged = [...remote];
+  const merged = remote.map((remoteFirm) => {
+    const localMatch = local.find(
+      (localFirm) =>
+        normalizeName(localFirm.name ?? "") ===
+        normalizeName(remoteFirm.name ?? "")
+    );
+
+    return localMatch?.id
+      ? { ...remoteFirm, id: localMatch.id }
+      : remoteFirm;
+  });
 
   for (const localFirm of local) {
     const alreadyExists =

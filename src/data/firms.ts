@@ -4,6 +4,7 @@ export const firms = [
   // ============================================================
 
   {
+    id: "cesar-ornelas-injury-law",
     name: "Cesar Ornelas Injury Law",
     category: "Personal Injury",
     phone: "(866) 377-9855",
@@ -17,6 +18,7 @@ export const firms = [
   },
 
   {
+    id: "labinoti-law-firm",
     name: "Labinoti Law Firm",
     category: "Personal Injury",
     phone: "(915) 201-0132",
@@ -66,6 +68,7 @@ export const firms = [
   },
 
   {
+    id: "lozano-meza-law-firm",
     name: "Lozano Meza Law Firm",
     category: "Personal Injury",
     phone: "(915) 706-2111",
