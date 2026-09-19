@@ -10,6 +10,7 @@ export const lozanoMezaExclusiveFirm = {
     "Lozano Meza Law Firm is an El Paso litigation practice representing clients in criminal defense and personal injury matters. The firm states that its lawyers have more than 30 combined years of legal advocacy and prepare each case as if it is going to trial. Its criminal defense practice handles state and federal matters including DWI/DUI, drug charges, assault, manslaughter, murder, weapons charges, juvenile offenses, white-collar matters, organized crime, and other felony and misdemeanor charges. The firm offers free initial consultations and bilingual English-Spanish service.",
   phone: "(915) 706-2111",
   website: "https://www.lozanomeza.com/",
+  logo_url: "/attorneys/lozano-meza-logo.png",
   address: "221 N Kansas St, #1200",
   city: "El Paso",
   state: "TX",
