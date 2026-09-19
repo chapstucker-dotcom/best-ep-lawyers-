@@ -905,7 +905,7 @@ export default function FirmProfilePage() {
                         <img
                           src={attorney.photo_url}
                           alt={attorney.name}
-                          className="h-28 w-28 shrink-0 rounded-2xl object-cover"
+                          className="h-36 w-28 shrink-0 rounded-2xl object-cover object-top"
                         />
                       ) : (
                         <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-2xl bg-gray-100 text-4xl font-bold text-gray-400">
