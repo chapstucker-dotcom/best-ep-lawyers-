@@ -37,6 +37,22 @@ export const firms = [
   },
 
   {
+    id: "carter-law-firm",
+    name: "The Carter Law Firm, P.C.",
+    category: "Personal Injury",
+    phone: "(915) 621-1818",
+    website: "https://www.carterlawwins.com/",
+    address: "124 W. Castellano Drive, Unit 103, El Paso, TX 79912",
+    featured: false,
+    exclusive: true,
+    plan: "category_exclusive",
+    plan_key: "category_exclusive",
+    logo_url: "/attorneys/carter-law-logo.png",
+    verified: false,
+    bio: "El Paso personal injury law firm representing injured clients in truck accidents, car accidents, wrongful death, and other serious injury matters.",
+  },
+
+  {
     id: "bill-d-hicks",
     name: "The Law Offices of Bill D. Hicks P.C.",
     category: "Personal Injury",
