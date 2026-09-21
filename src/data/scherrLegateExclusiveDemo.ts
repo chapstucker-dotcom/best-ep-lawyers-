@@ -8,7 +8,7 @@ export const scherrLegateExclusiveFirm = {
   name: "Scherr Legate PLLC",
   description:
     "Scherr Legate PLLC is an El Paso personal injury law firm representing people and families affected by serious and catastrophic injuries. The firm's published practice areas include on-the-job accidents, construction accidents, oilfield accidents, explosions, trench collapses, electrocutions, traumatic brain injuries, product liability, and other serious injury matters. The firm states that it has served injured clients and their families for more than 40 years.",
-  phone: "(915) 544-0100",
+  phone: "(915) 348-5485",
   website: "https://www.scherrlegate.com/",
   address: "420 San Antonio",
   city: "El Paso",
@@ -37,6 +37,7 @@ export const scherrLegateExclusiveFirm = {
   is_verified: false,
   verified: false,
   logo_url: "/attorneys/scherr-legate-logo.png",
+  video_url: "https://www.youtube.com/watch?v=fxWjzX_OFpM",
   google_maps_url:
     "https://www.google.com/maps/search/?api=1&query=420+San+Antonio+El+Paso+TX+79901",
   created_at: "2026-09-20T00:00:00.000Z",
@@ -62,7 +63,7 @@ export const scherrLegateExclusiveAttorneys: AttorneyProfile[] = [
     bio:
       "James F. Scherr is the founder of Scherr Legate PLLC. The firm's published materials identify workplace and industrial injury matters among its areas of experience, including construction incidents, explosions, trench and building collapses, power-line and electrocution incidents, chemical exposures, forklift incidents, and other work-related injuries.",
     specialties: SCHERR_LEGATE_SPECIALTIES,
-    phone: "(915) 544-0100",
+    phone: "(915) 348-5485",
     display_order: 1,
     is_active: true,
     created_at: "2026-09-20T00:00:00.000Z",
@@ -77,7 +78,7 @@ export const scherrLegateExclusiveAttorneys: AttorneyProfile[] = [
     bio:
       "Sam J. Legate is an attorney with Scherr Legate PLLC. He is presented by the firm as a member of its El Paso legal team representing clients in serious personal injury matters.",
     specialties: SCHERR_LEGATE_SPECIALTIES,
-    phone: "(915) 544-0100",
+    phone: "(915) 348-5485",
     display_order: 2,
     is_active: true,
     created_at: "2026-09-20T00:00:00.000Z",
@@ -92,7 +93,7 @@ export const scherrLegateExclusiveAttorneys: AttorneyProfile[] = [
     bio:
       "Rodrigo V. Ramos is an attorney with Scherr Legate PLLC and is listed by the firm as a member of its El Paso legal team.",
     specialties: SCHERR_LEGATE_SPECIALTIES,
-    phone: "(915) 544-0100",
+    phone: "(915) 348-5485",
     display_order: 3,
     is_active: true,
     created_at: "2026-09-20T00:00:00.000Z",
@@ -107,7 +108,7 @@ export const scherrLegateExclusiveAttorneys: AttorneyProfile[] = [
     bio:
       "Manuel Lopez is an attorney with Scherr Legate PLLC and is listed by the firm as a member of its El Paso legal team.",
     specialties: SCHERR_LEGATE_SPECIALTIES,
-    phone: "(915) 544-0100",
+    phone: "(915) 348-5485",
     display_order: 4,
     is_active: true,
     created_at: "2026-09-20T00:00:00.000Z",
@@ -122,7 +123,7 @@ export const scherrLegateExclusiveAttorneys: AttorneyProfile[] = [
     bio:
       "Angelica Carbajal is an attorney with Scherr Legate PLLC and is listed by the firm as a member of its El Paso legal team.",
     specialties: SCHERR_LEGATE_SPECIALTIES,
-    phone: "(915) 544-0100",
+    phone: "(915) 348-5485",
     display_order: 5,
     is_active: true,
     created_at: "2026-09-20T00:00:00.000Z",
@@ -137,7 +138,7 @@ export const scherrLegateExclusiveAttorneys: AttorneyProfile[] = [
     bio:
       "Pablo S. Lopez is an attorney with Scherr Legate PLLC and is listed by the firm as a member of its El Paso legal team.",
     specialties: SCHERR_LEGATE_SPECIALTIES,
-    phone: "(915) 544-0100",
+    phone: "(915) 348-5485",
     display_order: 6,
     is_active: true,
     created_at: "2026-09-20T00:00:00.000Z",

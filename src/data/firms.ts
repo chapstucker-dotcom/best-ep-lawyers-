@@ -69,7 +69,7 @@ export const firms = [
       "Trench Collapse",
       "Product Liability",
     ],
-    phone: "(915) 544-0100",
+    phone: "(915) 348-5485",
     website: "https://www.scherrlegate.com/",
     address: "420 San Antonio, El Paso, TX 79901",
     featured: false,
