@@ -24,6 +24,11 @@ import {
   hicksExclusiveAttorneys,
   hicksExclusiveFirm,
 } from "./hicksExclusiveDemo";
+import {
+  SCHERR_LEGATE_DEMO_FIRM_ID,
+  scherrLegateExclusiveAttorneys,
+  scherrLegateExclusiveFirm,
+} from "./scherrLegateExclusiveDemo";
 
 export interface ShowcaseTestimonial {
   quote: string;
@@ -128,6 +133,12 @@ const localExclusiveShowcases: Record<string, LocalExclusiveShowcase> = {
     firm: lozanoMezaExclusiveFirm,
     attorneys: lozanoMezaExclusiveAttorneys,
     exclusiveCategory: "Criminal Defense",
+  },
+  [SCHERR_LEGATE_DEMO_FIRM_ID]: {
+    id: SCHERR_LEGATE_DEMO_FIRM_ID,
+    firm: scherrLegateExclusiveFirm,
+    attorneys: scherrLegateExclusiveAttorneys,
+    exclusiveCategory: "Workplace & Industrial Catastrophic Injury",
   },
 };
 
