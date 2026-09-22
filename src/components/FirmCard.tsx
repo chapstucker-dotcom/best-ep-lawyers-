@@ -28,6 +28,8 @@ interface FirmCardProps {
   onClick: () => void;
   hideFeaturedBadge?: boolean;
   hideCategoryOwnerBadge?: boolean;
+  attributionMarket?: string;
+  attributionSpecialty?: string;
 }
 
 type PublicFirm = Firm & {
@@ -48,6 +50,8 @@ export default function FirmCard({
   onClick,
   hideFeaturedBadge = false,
   hideCategoryOwnerBadge = false,
+  attributionMarket,
+  attributionSpecialty,
 }: FirmCardProps) {
   const publicFirm = firm as PublicFirm;
 
@@ -111,7 +115,8 @@ export default function FirmCard({
     try {
       await trackEvent(
         firm.id,
-        'click_phone'
+        'click_phone',
+        { market: attributionMarket, specialty: attributionSpecialty }
       );
     } catch (error) {
       console.error(
@@ -134,7 +139,8 @@ export default function FirmCard({
     try {
       await trackEvent(
         firm.id,
-        'click_website'
+        'click_website',
+        { market: attributionMarket, specialty: attributionSpecialty }
       );
     } catch (error) {
       console.error(
