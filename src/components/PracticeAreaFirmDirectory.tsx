@@ -411,7 +411,14 @@ export default function PracticeAreaFirmDirectory({
   };
 
   const openFirmProfile = (firm: PublicFirm) => {
-    navigate(`/firm/${firm.id}`);
+    navigate(`/firm/${firm.id}`, {
+      state: {
+        attribution: {
+          market: pageResolution.market?.key,
+          specialty: pageResolution.practiceArea?.slug,
+        },
+      },
+    });
   };
 
   return (

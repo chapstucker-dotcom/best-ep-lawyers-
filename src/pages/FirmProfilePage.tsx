@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { Badge } from "../components/ui/badge";
 import { Button } from "../components/ui/button";
@@ -142,6 +142,13 @@ const getDirectVideoUrl = (value: string): string | null => {
 
 export default function FirmProfilePage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const attribution = (location.state as {
+    attribution?: {
+      market?: string;
+      specialty?: string;
+    };
+  } | null)?.attribution;
   const { id } = useParams<{ id: string }>();
   const localExclusiveShowcase = getLocalExclusiveShowcase(id);
   const isLocalExclusiveShowcase = Boolean(localExclusiveShowcase);
@@ -270,7 +277,10 @@ export default function FirmProfilePage() {
       if (data) {
         void loadReviews(id);
         void loadAttorneys(id);
-        void trackEvent(id, "profile_view").catch((trackError) => {
+        void trackEvent(id, "profile_view", {
+          market: attribution?.market,
+          specialty: attribution?.specialty,
+        }).catch((trackError) => {
           console.error("Failed to track firm profile view:", trackError);
         });
       }
@@ -423,7 +433,10 @@ export default function FirmProfilePage() {
   ) => {
     if (isLocalExclusiveShowcase) return;
 
-    void trackEvent(publicFirm.id, eventType).catch((error) => {
+    void trackEvent(publicFirm.id, eventType, {
+      market: attribution?.market,
+      specialty: attribution?.specialty,
+    }).catch((error) => {
       console.error(`Failed to track ${eventType}:`, error);
     });
   };
