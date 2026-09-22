@@ -1,5 +1,19 @@
 import { useEffect } from "react";
 import LeadCaptureForm from "../components/LeadCaptureForm";
+import PracticeAreaFirmDirectory from "../components/PracticeAreaFirmDirectory";
+import type { PracticeAreaPageData } from "../data/practiceAreaPages";
+
+const carAccidentDirectoryPage: PracticeAreaPageData = {
+  path: "/el-paso-car-accident-lawyers",
+  shortTitle: "Car Accident",
+  title: "Best Car Accident Lawyers in El Paso, TX",
+  description: "Compare participating El Paso law firms handling car accident and related personal injury matters.",
+  metaDescription: "Compare participating El Paso car accident lawyers and law firms.",
+  heroText: "Compare participating El Paso car accident lawyers and law firms.",
+  topics: ["Car Accidents"],
+  faqs: [],
+  relatedPages: [],
+};
 
 const relatedPages = [
   ["Personal Injury", "/el-paso-personal-injury-lawyers"],
@@ -425,6 +439,14 @@ export default function CarAccidentLawyers() {
               </a>
             ))}
           </div>
+        </section>
+
+        <section style={{ marginBottom: "52px" }}>
+          <h2 style={{ fontSize: "32px", marginBottom: "14px" }}>Compare El Paso Car Accident Law Firms</h2>
+          <p style={{ color: "#cbd5e1", lineHeight: 1.75, marginBottom: "24px" }}>
+            Review participating El Paso firms that identify car accidents or related personal injury matters as areas of practice.
+          </p>
+          <PracticeAreaFirmDirectory page={carAccidentDirectoryPage} />
         </section>
 
         <section style={{ marginBottom: "52px" }}>
