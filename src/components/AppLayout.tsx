@@ -22,6 +22,10 @@ import {
   getPracticeAreaTitle,
 } from '../data/categories';
 import { articles } from '../data/articles';
+import {
+  getMarketForPracticeArea,
+  getPracticeAreaByValue,
+} from '../data/platformModel';
 
 import { getPlanRules } from '@/config/planRules';
 
@@ -544,6 +548,16 @@ export default function AppLayout() {
           selectedCategory
         );
 
+  const selectedAttributionPracticeArea =
+    selectedCategory === 'all'
+      ? undefined
+      : getPracticeAreaByValue(selectedCategory);
+
+  const selectedAttributionMarket =
+    selectedCategory === 'all'
+      ? undefined
+      : getMarketForPracticeArea(selectedCategory);
+
   return (
     <div className="min-h-screen bg-[#F8FAFC]">
       <Hero onSearch={handleSearch} />
@@ -911,7 +925,14 @@ export default function AppLayout() {
                       key={firm.id}
                       firm={firm}
                       onClick={() =>
-                        navigate(`/firm/${firm.id}`)
+                        navigate(`/firm/${firm.id}`, {
+                          state: {
+                            attribution: {
+                              market: selectedAttributionMarket?.key,
+                              specialty: selectedAttributionPracticeArea?.slug,
+                            },
+                          },
+                        })
                       }
                     />
                   ))}
