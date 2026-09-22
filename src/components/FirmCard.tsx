@@ -82,6 +82,10 @@ export default function FirmCard({
     )
   );
 
+  const currentPracticeArea = attributionSpecialty ? getPracticeAreaTitle(attributionSpecialty) : '';
+
+  const displayedPracticeAreas = currentPracticeArea ? [currentPracticeArea, ...practiceAreas.filter((practiceArea) => practiceArea !== currentPracticeArea)] : practiceAreas;
+
   const isFeatured =
     Boolean(publicFirm.is_featured) ||
     Boolean(publicFirm.featured);
@@ -191,7 +195,7 @@ export default function FirmCard({
           <img
             src={logo}
             alt={`${firm.name} logo`}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain p-6"
           />
         ) : (
           <div className="flex h-20 w-20 items-center justify-center rounded-2xl border border-white/20 bg-white/10">
@@ -243,9 +247,9 @@ export default function FirmCard({
           {description}
         </p>
 
-        {practiceAreas.length > 0 && (
+        {displayedPracticeAreas.length > 0 && (
           <div className="mb-5 flex flex-wrap gap-2">
-            {practiceAreas
+            {displayedPracticeAreas
               .slice(0, 3)
               .map((practiceArea) => (
                 <Badge
@@ -257,12 +261,12 @@ export default function FirmCard({
                 </Badge>
               ))}
 
-            {practiceAreas.length > 3 && (
+            {displayedPracticeAreas.length > 3 && (
               <Badge
                 variant="outline"
                 className="rounded-full px-3 py-1 text-xs"
               >
-                +{practiceAreas.length - 3} more
+                +{displayedPracticeAreas.length - 3} more
               </Badge>
             )}
           </div>
