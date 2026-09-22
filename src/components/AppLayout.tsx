@@ -27,6 +27,8 @@ import {
   getPracticeAreaByValue,
 } from '../data/platformModel';
 
+import { getLocalExclusiveShowcase } from '../data/exclusiveShowcases';
+
 import { getPlanRules } from '@/config/planRules';
 
 import type { Firm } from '../data/types';
@@ -148,6 +150,9 @@ const rotateFeaturedFirms = (
 };
 
 const getFeaturedCategory = (firm: Firm): string => {
+  const exclusiveCategory = getLocalExclusiveShowcase(firm.id)?.exclusiveCategory?.trim();
+
+  if (exclusiveCategory) return exclusiveCategory;
   const premiumFirm = firm as Firm & {
     primary_category?: string | null;
     category?: string | null;
