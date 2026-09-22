@@ -41,8 +41,8 @@ type LocalFirm = {
 };
 
 const fallbackFirms = (): Firm[] =>
-  (localFirms as LocalFirm[]).map((firm, index) => ({
-    id: firm.id ?? String(index + 1),
+  (localFirms as LocalFirm[]).map((firm) => ({
+    id: firm.id ?? (() => { throw new Error(`Local firm "${firm.name}" is missing a canonical id.`); })(),
     user_id: "",
     name: firm.name,
 

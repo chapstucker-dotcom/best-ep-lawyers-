@@ -134,6 +134,7 @@ export const firms = [
   },
 
   {
+    id: "cal-mundell-law-firm",
     name: "Cal Mundell Law Firm, PLLC",
     category: "Personal Injury",
     phone: "(915) 250-0700",
@@ -146,6 +147,7 @@ export const firms = [
   },
 
   {
+    id: "tawney-acosta-chaparro",
     name: "Tawney, Acosta & Chaparro P.C.",
     category: "Personal Injury",
     phone: "(915) 615-3851",
@@ -158,6 +160,7 @@ export const firms = [
   },
 
   {
+    id: "bieganowski-law-group",
     name: "Bieganowski Law Group",
     category: "Personal Injury",
     phone: "(915) 264-1800",
@@ -170,6 +173,7 @@ export const firms = [
   },
 
   {
+    id: "harmonson-law-firm",
     name: "Harmonson Law Firm",
     category: "Personal Injury",
     phone: "(915) 233-6427",
@@ -182,6 +186,7 @@ export const firms = [
   },
 
   {
+    id: "mission-personal-injury-lawyers",
     name: "Mission Personal Injury Lawyers",
     category: "Personal Injury",
     phone: "(915) 591-1000",
@@ -199,6 +204,7 @@ export const firms = [
   // ============================================================
 
   {
+    id: "setra-law-firm",
     name: "Setra Law Firm",
     category: "Criminal Defense",
     phone: "(915) 337-8100",
@@ -211,6 +217,7 @@ export const firms = [
   },
 
   {
+    id: "benjamin-law-firm",
     name: "Benjamin Law Firm",
     category: "Criminal Defense",
     phone: "(915) 320-6730",
@@ -223,6 +230,7 @@ export const firms = [
   },
 
   {
+    id: "valenzuela-law-firm",
     name: "Valenzuela Law Firm",
     category: "Criminal Defense",
     phone: "(915) 292-3173",
@@ -235,6 +243,7 @@ export const firms = [
   },
 
   {
+    id: "nava-law-texas",
     name: "Nava Law Texas",
     category: "Criminal Defense",
     phone: "(915) 975-7180",
@@ -247,6 +256,7 @@ export const firms = [
   },
 
   {
+    id: "dunham-jones",
     name: "Dunham & Jones, Attorneys at Law, P.C.",
     category: "Criminal Defense",
     phone: "(915) 777-7777",
@@ -260,6 +270,7 @@ export const firms = [
   },
 
   {
+    id: "law-offices-of-ruben-ortiz",
     name: "Law Offices of Ruben Ortiz",
     category: "Criminal Defense",
     phone: "(915) 201-0110",
@@ -272,6 +283,7 @@ export const firms = [
   },
 
   {
+    id: "curtis-cox-law-firm",
     name: "Curtis Cox Law Firm",
     category: "Criminal Defense",
     phone: "(915) 308-2410",
@@ -288,6 +300,7 @@ export const firms = [
   // ============================================================
 
   {
+    id: "villar-garcia-immigration-attorneys",
     name: "Villar & Garcia Immigration Attorneys",
     category: "Immigration",
     phone: "",
@@ -300,6 +313,7 @@ export const firms = [
   },
 
   {
+    id: "cynthia-r-lopez-pc",
     name: "Cynthia R. Lopez, PC",
     category: "Immigration",
     phone: "",
@@ -316,6 +330,7 @@ export const firms = [
   // ============================================================
 
   {
+    id: "amy-a-moore-law-office",
     name: "The Law Office of Amy A. Moore",
     category: "Family Law",
     phone: "",
@@ -328,6 +343,7 @@ export const firms = [
   },
 
   {
+    id: "laine-law-firm",
     name: "Laine Law Firm, PLLC",
     category: "Family Law",
     phone: "",
