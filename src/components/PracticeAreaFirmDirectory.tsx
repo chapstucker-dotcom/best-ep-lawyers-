@@ -19,7 +19,7 @@ import type { Firm } from "../data/types";
 import type { PracticeAreaPageData } from "../data/practiceAreaPages";
 import { getAllFirms } from "../services/firmService";
 import { trackEvent } from "@/services/analyticsService";
-import { isLocalExclusiveShowcaseId } from "../data/exclusiveShowcases";
+import { getLocalExclusiveShowcase, isLocalExclusiveShowcaseId } from "../data/exclusiveShowcases";
 import { getCommercialProductByPlanId } from "../data/commercialModel";
 import {
   getMarketByName,
@@ -193,6 +193,46 @@ function matchesPracticeArea(
   );
 }
 
+function isExclusiveForPracticeArea(
+  firm: PublicFirm,
+  page: PracticeAreaPageData
+): boolean {
+  if (getCommercialProductForFirm(firm).key !== "market_exclusive") {
+    return false;
+  }
+
+  const showcase = getLocalExclusiveShowcase(String(firm.id ?? ""));
+  const exclusiveCategory = showcase?.exclusiveCategory?.trim();
+
+  if (!exclusiveCategory) {
+    return false;
+  }
+
+  const pageResolution = resolvePracticeAreaPage(
+    page.path,
+    page.shortTitle
+  );
+
+  const exclusiveResolution = resolvePracticeAreaPage(
+    "",
+    exclusiveCategory
+  );
+
+  if (
+    pageResolution.practiceArea &&
+    exclusiveResolution.practiceArea
+  ) {
+    return (
+      pageResolution.practiceArea.slug ===
+      exclusiveResolution.practiceArea.slug
+    );
+  }
+
+  return (
+    page.shortTitle.trim().toLowerCase() ===
+    exclusiveCategory.toLowerCase()
+  );
+}
 function getDailyRotationKey(): number {
   const now = new Date();
   return Math.floor(
@@ -295,9 +335,7 @@ export default function PracticeAreaFirmDirectory({
 
     const exclusiveFirms = matched
       .filter(
-        (firm) =>
-          getCommercialProductForFirm(firm).key ===
-          "market_exclusive"
+        (firm) => isExclusiveForPracticeArea(firm, page)
       )
       .sort(alphabetical);
 
@@ -489,7 +527,7 @@ export default function PracticeAreaFirmDirectory({
                   );
 
                 const isExclusive =
-                  plan === "market_exclusive";
+                  isExclusiveForPracticeArea(firm, page);
 
                 const isPremier =
                   plan === "premier";
