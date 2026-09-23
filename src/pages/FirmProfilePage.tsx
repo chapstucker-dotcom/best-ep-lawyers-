@@ -35,6 +35,7 @@ import type { AttorneyProfile } from "../data/attorneyTypes";
 import { categories } from "../data/categories";
 import { ReviewForm } from "../components/ReviewForm";
 import LeadCaptureForm from "../components/LeadCaptureForm";
+import { getFirmById } from "@/services/firmService";
 import { supabase } from "@/lib/supabase";
 import { getPlanRules } from "@/config/planRules";
 import { trackEvent } from "@/services/analyticsService";
@@ -181,11 +182,7 @@ export default function FirmProfilePage() {
   });
 
   const loadLiveFirm = async (firmId: string) => {
-    const { data, error } = await supabase
-      .from("firms")
-      .select("*")
-      .eq("id", firmId)
-      .maybeSingle();
+    const { data, error } = await getFirmById(firmId);
 
     if (error) {
       console.error("Failed to refresh firm details:", error);
@@ -256,11 +253,7 @@ export default function FirmProfilePage() {
         return;
       }
 
-      const { data, error } = await supabase
-        .from("firms")
-        .select("*")
-        .eq("id", id)
-        .maybeSingle();
+      const { data, error } = await getFirmById(id);
 
       if (!active) return;
 
@@ -431,7 +424,6 @@ export default function FirmProfilePage() {
   const recordContactClick = (
     eventType: "click_phone" | "click_email" | "click_website"
   ) => {
-    console.log("[CONTACT-TRACK-TEST]", { firmId: publicFirm.id, eventType, isLocalExclusiveShowcase });
     if (isLocalExclusiveShowcase) return;
 
     void trackEvent(publicFirm.id, eventType, {

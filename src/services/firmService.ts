@@ -130,6 +130,32 @@ const notConfigured = {
   message: "Supabase is not configured",
 };
 
+const hasRemoteValue = (value: unknown): boolean => {
+  if (value === null || value === undefined) return false;
+  if (typeof value === "string") return value.trim().length > 0;
+  if (Array.isArray(value)) return value.length > 0;
+  return true;
+};
+
+const mergeFirmRecords = (localFirm: Firm, remoteFirm: Firm): Firm => {
+  const merged = { ...localFirm } as Firm & Record<string, unknown>;
+
+  for (const [key, value] of Object.entries(remoteFirm)) {
+    if (hasRemoteValue(value)) {
+      merged[key] = value;
+    }
+  }
+
+  merged.id = localFirm.id;
+  return merged as Firm;
+};
+
+const normalizeFirmName = (value: string): string =>
+  value
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "")
+    .trim();
+
 export const getAllFirms = async (): Promise<{
   data: Firm[] | null;
   error: any;
@@ -150,40 +176,28 @@ export const getAllFirms = async (): Promise<{
       ascending: false,
     });
 
-  const remote =
-    (data ?? []) as Firm[];
-
-  const normalizeName = (
-    value: string
-  ) =>
-    value
-      .toLowerCase()
-      .replace(/[^a-z0-9]/g, "")
-      .trim();
+  const remote = (data ?? []) as Firm[];
 
   const merged = remote.map((remoteFirm) => {
     const localMatch = local.find(
       (localFirm) =>
-        normalizeName(localFirm.name ?? "") ===
-        normalizeName(remoteFirm.name ?? "")
+        localFirm.id === remoteFirm.id ||
+        normalizeFirmName(localFirm.name ?? "") ===
+          normalizeFirmName(remoteFirm.name ?? "")
     );
 
-    return localMatch?.id
-      ? { ...remoteFirm, id: localMatch.id }
+    return localMatch
+      ? mergeFirmRecords(localMatch, remoteFirm)
       : remoteFirm;
   });
 
   for (const localFirm of local) {
-    const alreadyExists =
-      remote.some(
-        (remoteFirm) =>
-          normalizeName(
-            remoteFirm.name ?? ""
-          ) ===
-          normalizeName(
-            localFirm.name ?? ""
-          )
-      );
+    const alreadyExists = remote.some(
+      (remoteFirm) =>
+        remoteFirm.id === localFirm.id ||
+        normalizeFirmName(remoteFirm.name ?? "") ===
+          normalizeFirmName(localFirm.name ?? "")
+    );
 
     if (!alreadyExists) {
       merged.push(localFirm);
@@ -196,6 +210,48 @@ export const getAllFirms = async (): Promise<{
   };
 };
 
+export const getFirmById = async (
+  firmId: string
+): Promise<{
+  data: Firm | null;
+  error: any;
+}> => {
+  const localFirm = getLocalFirmById(firmId);
+
+  if (!isSupabaseConfigured || !supabase) {
+    return {
+      data: localFirm,
+      error: null,
+    };
+  }
+
+  const { data, error } = await supabase
+    .from("firms")
+    .select("*")
+    .eq("id", firmId)
+    .maybeSingle();
+
+  if (error) {
+    return {
+      data: localFirm,
+      error,
+    };
+  }
+
+  const remoteFirm = (data ?? null) as Firm | null;
+
+  if (localFirm && remoteFirm) {
+    return {
+      data: mergeFirmRecords(localFirm, remoteFirm),
+      error: null,
+    };
+  }
+
+  return {
+    data: remoteFirm ?? localFirm,
+    error: null,
+  };
+};
 export const getFirmByUserId = async (
   userId: string
 ) => {
