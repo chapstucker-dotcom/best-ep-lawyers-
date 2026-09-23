@@ -431,6 +431,7 @@ export default function FirmProfilePage() {
   const recordContactClick = (
     eventType: "click_phone" | "click_email" | "click_website"
   ) => {
+    console.log("[CONTACT-TRACK-TEST]", { firmId: publicFirm.id, eventType, isLocalExclusiveShowcase });
     if (isLocalExclusiveShowcase) return;
 
     void trackEvent(publicFirm.id, eventType, {
