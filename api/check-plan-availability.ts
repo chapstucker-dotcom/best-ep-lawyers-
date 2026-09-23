@@ -1,5 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 
+import { isSelfServicePlanId } from "../src/config/selfServicePlans";
+
 import {
   getCommercialProductByPlanId,
   type CommercialProductDefinition,
@@ -130,6 +132,17 @@ export default async function handler(
           available: false,
           error:
             "Plan is required.",
+        });
+    }
+
+    if (!isSelfServicePlanId(plan)) {
+      return res
+        .status(400)
+        .json({
+          success: false,
+          available: false,
+          error:
+            "This plan is not available for self-service purchase.",
         });
     }
 
