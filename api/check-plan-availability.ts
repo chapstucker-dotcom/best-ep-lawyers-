@@ -1,6 +1,9 @@
 import { createClient } from "@supabase/supabase-js";
 
-import { isSelfServicePlanId } from "../src/config/selfServicePlans";
+const SELF_SERVICE_PLAN_IDS = new Set(["free", "expert", "category-featured"]);
+
+const isSelfServicePlanId = (value: unknown): boolean =>
+  SELF_SERVICE_PLAN_IDS.has(String(value ?? "").trim().toLowerCase());
 
 import {
   getCommercialProductByPlanId,
