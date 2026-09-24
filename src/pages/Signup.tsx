@@ -261,7 +261,7 @@ export default function Signup() {
               },
               body: JSON.stringify({
                 plan:
-                  selectedPlan.name,
+                  selectedPlan.id,
                 market:
                   formData.practiceArea,
               }),
