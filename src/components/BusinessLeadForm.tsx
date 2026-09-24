@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import {
   AlertCircle,
   Building2,
@@ -76,6 +76,11 @@ export default function BusinessLeadForm() {
 
   const [errorMessage, setErrorMessage] =
     useState("");
+
+  const [
+    submittedInterest,
+    setSubmittedInterest,
+  ] = useState("");
 
   const updateField = (
     field: keyof BusinessLeadState,
@@ -161,7 +166,7 @@ export default function BusinessLeadForm() {
               form.message.trim(),
             sourceUrl:
               typeof window !== "undefined"
-                ? window.location.href
+                ? `${window.location.origin}${window.location.pathname}`
                 : null,
           }),
         }
@@ -181,6 +186,10 @@ export default function BusinessLeadForm() {
 
       setSuccessMessage(
         "Thank you. Your firm inquiry was submitted successfully."
+      );
+
+      setSubmittedInterest(
+        form.interest
       );
 
       setForm(EMPTY_FORM);
@@ -268,7 +277,31 @@ export default function BusinessLeadForm() {
             <Alert className="mt-6 border-green-300 bg-green-50 text-green-800">
               <CheckCircle2 className="h-4 w-4" />
               <AlertDescription>
-                {successMessage}
+                <div>
+                  <p>{successMessage}</p>
+
+                  {submittedInterest ===
+                    "Category Featured" && (
+                    <div className="mt-4">
+                      <p className="leading-6">
+                        Your Category Featured request is now under
+                        availability review. You can create your account
+                        now and begin setting up your firm profile.
+                        Premium placement will not be activated until
+                        availability is confirmed.
+                      </p>
+
+                      <Button
+                        asChild
+                        className="mt-4 bg-[#D4A62A] font-extrabold text-[#06224A] hover:bg-[#E3B53A]"
+                      >
+                        <Link to="/signup?plan=category-featured">
+                          Create Firm Profile
+                        </Link>
+                      </Button>
+                    </div>
+                  )}
+                </div>
               </AlertDescription>
             </Alert>
           )}
