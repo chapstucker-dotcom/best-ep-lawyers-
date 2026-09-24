@@ -115,9 +115,18 @@ export default function PricingSection() {
                 Interested in Category Exclusive?
               </h4>
 
+              <div className="mt-4 flex items-end gap-1">
+                <span className="text-4xl font-extrabold tracking-tight">
+                  $5,000
+                </span>
+                <span className="pb-1 text-sm font-semibold text-white/70">
+                  /month
+                </span>
+              </div>
+
               <p className="mt-4 text-sm leading-6 text-white/75">
-                Availability is reviewed by practice area. Pricing and
-                placement details are provided directly by our business team.
+                Availability is reviewed by practice area. Category Exclusive
+                placement is handled directly by our business team.
               </p>
 
               <Link
