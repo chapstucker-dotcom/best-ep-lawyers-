@@ -58,14 +58,12 @@ import {
 /*
  * SANDBOX TEST MODE
  *
- * Only Category Featured uses Stripe
- * Sandbox right now.
+ * Expert uses the deployed create-checkout
+ * Edge Function with Stripe test credentials.
  *
- * No live checkout links are used here.
+ * Category Featured remains availability-controlled
+ * and is not enabled for self-service checkout.
  */
-const CATEGORY_FEATURED_SANDBOX_URL =
-  "https://buy.stripe.com/test_28EfZg8ssgM82Ce54RaVa02";
-
 const SANDBOX_MODE = true;
 
 const PLAN_LABELS: Record<string, string> = {
@@ -120,11 +118,6 @@ export const Subscription =
     const [
       firmId,
       setFirmId,
-    ] = useState("");
-
-    const [
-      firmEmail,
-      setFirmEmail,
     ] = useState("");
 
     const [
@@ -257,12 +250,6 @@ export const Subscription =
             String(
               data.id
             )
-          );
-
-          setFirmEmail(
-            data.email ||
-              user.email ||
-              ""
           );
 
           const databasePlan =
@@ -408,82 +395,38 @@ export const Subscription =
         }
       };
 
-    const buildSandboxCheckoutUrl =
-      () => {
-        const url =
-          new URL(
-            CATEGORY_FEATURED_SANDBOX_URL
-          );
-
-        /*
-         * Stripe Payment Links support
-         * client_reference_id.
-         *
-         * Our webhook uses this value
-         * to locate the correct firms row.
-         */
-        url.searchParams.set(
-          "client_reference_id",
-          firmId
-        );
-
-        /*
-         * Prefill the customer's email
-         * when available.
-         */
-        if (firmEmail) {
-          url.searchParams.set(
-            "prefilled_email",
-            firmEmail
-          );
-        }
-
-        return url.toString();
-      };
-
     const handleSubscribe =
       async (
         planId: string,
         planName: string
       ) => {
-        setAvailabilityError(
-          ""
-        );
-
+        setAvailabilityError("");
         setFirmError("");
 
-        if (
-          planId ===
-          "free"
-        ) {
+        if (planId === "free") {
           toast({
-            title:
-              "Free Listing",
-
+            title: "Free Listing",
             description:
               "Your firm already has access to the free listing plan.",
           });
-
           return;
         }
 
-        /*
-         * Only Category Featured is
-         * enabled during Sandbox testing.
-         */
-        if (
-          SANDBOX_MODE &&
-          planId !==
-            "category-featured"
-        ) {
+        if (planId === "category-featured") {
           toast({
-            title:
-              "Sandbox testing active",
-
+            title: "Category Featured requires availability review",
             description:
-              "Only Category Featured is enabled for Sandbox checkout right now.",
+              "Category Featured placement is not available for self-service checkout. Submit an availability request before premium placement can be activated.",
           });
+          return;
+        }
 
+        if (SANDBOX_MODE && planId !== "expert") {
+          toast({
+            title: "Sandbox testing active",
+            description:
+              "Only the Expert plan is enabled for Stripe Sandbox checkout right now.",
+          });
           return;
         }
 
@@ -491,83 +434,98 @@ export const Subscription =
           setFirmError(
             "Your firm profile is still loading. Please wait a moment and try again."
           );
-
           return;
         }
 
-        if (
-          !selectedMarket
-        ) {
+        if (!selectedMarket) {
           setAvailabilityError(
             "No legal market is connected to this firm."
           );
-
           return;
         }
 
-        setLoadingPlan(
-          planId
-        );
+        setLoadingPlan(planId);
 
         const available =
-          await checkAvailability(
-            planName
-          );
+          await checkAvailability(planName);
 
         if (!available) {
-          setLoadingPlan(
-            null
-          );
-
+          setLoadingPlan(null);
           return;
         }
 
-        if (
-          planId ===
-          "category-featured"
-        ) {
-          /*
-           * Preserve checkout context.
-           */
+        if (planId === "expert") {
           localStorage.setItem(
             "selected-firm-plan",
             planId
           );
-
           localStorage.setItem(
             "pending-checkout-plan",
             planId
           );
-
           localStorage.setItem(
             "pending-checkout-practice-area",
             selectedMarket
           );
-
           localStorage.setItem(
             "pending-checkout-firm-id",
             firmId
           );
-
           localStorage.setItem(
             "pending-checkout-started-at",
             new Date().toISOString()
           );
 
-          /*
-           * The firm remains FREE in
-           * Supabase until Stripe confirms
-           * payment through the webhook.
-           */
-          window.location.href =
-            buildSandboxCheckoutUrl();
+          try {
+            const { data, error } =
+              await supabase.functions.invoke(
+                "create-checkout",
+                {
+                  body: {
+                    planKey: planId,
+                    firmId,
+                    userId: user?.id,
+                  },
+                }
+              );
 
-          return;
+            if (error) {
+              throw error;
+            }
+
+            if (!data?.url) {
+              throw new Error(
+                "Stripe checkout did not return a checkout URL."
+              );
+            }
+
+            window.location.href = data.url;
+            return;
+          } catch (error) {
+            console.error(
+              "Unable to start Expert checkout:",
+              error
+            );
+
+            const message =
+              error instanceof Error
+                ? error.message
+                : "Unable to start Stripe checkout.";
+
+            setFirmError(message);
+
+            toast({
+              title: "Checkout unavailable",
+              description: message,
+              variant: "destructive",
+            });
+
+            setLoadingPlan(null);
+            return;
+          }
         }
 
-        setLoadingPlan(
-          null
-        );
+        setLoadingPlan(null);
       };
 
     return (
@@ -644,11 +602,11 @@ export const Subscription =
 
             <AlertDescription>
               Sandbox testing is
-              active. Category
-              Featured will use the
-              Stripe test checkout.
-              No real $2,000 charge
-              will be made.
+              active. Expert will use
+              the Stripe test checkout.
+              No real $299 charge will
+              be made. Category Featured
+              remains availability-controlled.
             </AlertDescription>
           </Alert>
         )}
@@ -695,14 +653,18 @@ export const Subscription =
                 loadingPlan ===
                 plan.id;
 
-              const isSandboxFeatured =
+              const isSandboxExpert =
+                plan.id ===
+                "expert";
+
+              const isFeaturedPlan =
                 plan.id ===
                 "category-featured";
 
               const disabledForSandbox =
                 SANDBOX_MODE &&
                 !isFreePlan &&
-                !isSandboxFeatured;
+                !isSandboxExpert;
 
               return (
                 <Card
@@ -712,7 +674,7 @@ export const Subscription =
                   className={
                     isCurrentPlan
                       ? "border-2 border-[#1FA8A1]"
-                      : isSandboxFeatured
+                      : isSandboxExpert
                         ? "border-2 border-amber-300"
                         : ""
                   }
@@ -726,7 +688,7 @@ export const Subscription =
                           }
                         </span>
 
-                        {isSandboxFeatured &&
+                        {isSandboxExpert &&
                           SANDBOX_MODE && (
                             <Badge className="bg-amber-100 text-amber-900 hover:bg-amber-100">
                               Sandbox
@@ -785,6 +747,15 @@ export const Subscription =
                       >
                         Free Listing
                       </Button>
+                    ) : isFeaturedPlan ? (
+                      <Button
+                        type="button"
+                        className="w-full"
+                        variant="outline"
+                        disabled
+                      >
+                        Availability Review Required
+                      </Button>
                     ) : disabledForSandbox ? (
                       <Button
                         type="button"
@@ -814,8 +785,8 @@ export const Subscription =
                           <>
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
 
-                            Checking
-                            Availability...
+                            Starting
+                            Checkout...
                           </>
                         ) : (
                           "Test Sandbox Checkout"
