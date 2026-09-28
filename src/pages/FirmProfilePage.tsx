@@ -47,9 +47,11 @@ interface Review {
   id: string;
   reviewer_name: string;
   rating: number;
-  title: string;
+  title: string | null;
   comment: string;
   created_at: string;
+  firm_response: string | null;
+  firm_response_at: string | null;
 }
 
 
@@ -196,9 +198,18 @@ export default function FirmProfilePage() {
   const loadReviews = async (firmId: string) => {
     const { data, error } = await supabase
       .from("reviews")
-      .select("*")
+      .select(`
+        id,
+        reviewer_name,
+        rating,
+        title,
+        comment,
+        created_at,
+        firm_response,
+        firm_response_at
+      `)
       .eq("firm_id", firmId)
-      .eq("is_approved", true)
+      .eq("moderation_status", "published")
       .order("created_at", { ascending: false });
 
     if (error) {
@@ -521,7 +532,7 @@ export default function FirmProfilePage() {
         }`
       : null,
     reviews.length > 0
-      ? `${reviews.length} approved review${
+      ? `${reviews.length} published review${
           reviews.length === 1 ? "" : "s"
         }`
       : null,
@@ -1265,7 +1276,7 @@ export default function FirmProfilePage() {
 
               {reviews.length === 0 ? (
                 <div className="rounded-xl border border-dashed p-8 text-center text-gray-500">
-                  No approved reviews yet.
+                  No published reviews yet.
                 </div>
               ) : (
                 <div className="grid gap-4 md:grid-cols-2">
@@ -1308,6 +1319,26 @@ export default function FirmProfilePage() {
                           ).toLocaleDateString()}
                         </p>
                       </div>
+
+                      {review.firm_response && (
+                        <div className="mt-4 rounded-lg border border-[#1FA8A1]/20 bg-white p-4">
+                          <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+                            <p className="text-sm font-semibold text-[#0F2A43]">
+                              Response from the firm
+                            </p>
+
+                            {review.firm_response_at && (
+                              <p className="text-xs text-gray-500">
+                                {new Date(review.firm_response_at).toLocaleDateString()}
+                              </p>
+                            )}
+                          </div>
+
+                          <p className="text-sm leading-6 text-gray-600">
+                            {review.firm_response}
+                          </p>
+                        </div>
+                      )}
                     </article>
                   ))}
                 </div>

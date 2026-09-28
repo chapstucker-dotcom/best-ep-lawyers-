@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+﻿import { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 
@@ -89,7 +89,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     if (!isSupabaseConfigured) {
       return { data: null, error: { message: 'Supabase is not configured. Please contact the administrator.' } };
     }
-    return await supabase.auth.resetPasswordForEmail(email);
+    return await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/reset-password` });
   };
 
   const updatePassword = async (newPassword: string) => {
@@ -122,5 +122,3 @@ export const useAuth = () => {
   if (!context) throw new Error('useAuth must be used within AuthProvider');
   return context;
 };
-
-

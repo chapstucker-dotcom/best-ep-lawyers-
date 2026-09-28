@@ -39,10 +39,9 @@ export const ReviewForm = ({ firmId, firmName, onSuccess }: ReviewFormProps) => 
         rating,
         title,
         comment,
-        is_approved: false
       });
       if (error) throw error;
-      toast({ title: 'Success', description: 'Review submitted! It will appear after approval.' });
+      toast({ title: 'Success', description: "Review submitted! It will appear after review by El Paso's Best Lawyers." });
       setRating(0); setName(''); setEmail(''); setTitle(''); setComment('');
       onSuccess?.();
     } catch (err: any) {
