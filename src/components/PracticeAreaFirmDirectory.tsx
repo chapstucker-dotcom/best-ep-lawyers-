@@ -75,6 +75,36 @@ function getFirmSpecialtyValues(firm: PublicFirm): string[] {
   );
 }
 
+function getConsumerSpecialtyLabel(
+  firm: PublicFirm,
+  page: PracticeAreaPageData
+): string | null {
+  const resolution = resolvePracticeAreaPage(
+    page.path,
+    page.shortTitle
+  );
+
+  if (resolution.practiceArea) {
+    const matchingSpecialty = getFirmSpecialtyValues(firm).find(
+      (value) =>
+        getPracticeAreaByValue(value)?.slug ===
+        resolution.practiceArea?.slug
+    );
+
+    if (matchingSpecialty) {
+      return matchingSpecialty;
+    }
+  }
+
+  const category = String(firm.category ?? "").trim();
+
+  if (category) {
+    return category;
+  }
+
+  return getFirmSpecialtyValues(firm)[0] ?? null;
+}
+
 function valueMatchesMarket(
   value: string,
   targetMarketKey: string
@@ -689,15 +719,9 @@ export default function PracticeAreaFirmDirectory({
                       {firm.name}
                     </h3>
 
-                    {(firm.category ||
-                      (firm.specialties &&
-                        firm.specialties
-                          .length > 0)) && (
-                      <p className="mt-2 font-semibold text-[#b58a1d]">
-                        {firm.category ??
-                          firm.specialties
-                            ?.slice(0, 2)
-                            .join(" · ")}
+                    {getConsumerSpecialtyLabel(firm, page) && (
+                      <p className="mx-auto mt-2 line-clamp-2 max-w-full text-center text-[1.05rem] font-semibold leading-snug text-[#b58a1d] sm:text-base">
+                        {getConsumerSpecialtyLabel(firm, page)}
                       </p>
                     )}
 
