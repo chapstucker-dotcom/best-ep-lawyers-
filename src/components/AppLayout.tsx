@@ -768,6 +768,7 @@ export default function AppLayout() {
             title="Get Matched with the Right Lawyer"
             description="Whether you've been in an accident, need a criminal defense attorney, or have a family law matter, tell us what you're facing and we'll use your request to help identify relevant local legal options in El Paso."
             variant="homepage"
+            phoneOptional
           />
         </div>
       </section>
