@@ -640,7 +640,6 @@ export default async function handler(
     if (
       !fullName ||
       !email ||
-      !phone ||
       !legalIssue
     ) {
       return res
