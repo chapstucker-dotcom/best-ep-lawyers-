@@ -132,7 +132,7 @@ const localExclusiveShowcases: Record<string, LocalExclusiveShowcase> = {
     id: LOZANO_MEZA_DEMO_FIRM_ID,
     firm: lozanoMezaExclusiveFirm,
     attorneys: lozanoMezaExclusiveAttorneys,
-    exclusiveCategory: "Criminal Defense",
+    exclusiveCategory: "Federal & Felony Defense",
   },
   [SCHERR_LEGATE_DEMO_FIRM_ID]: {
     id: SCHERR_LEGATE_DEMO_FIRM_ID,
