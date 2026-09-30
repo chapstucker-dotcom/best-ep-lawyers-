@@ -47,6 +47,7 @@ export interface LocalExclusiveShowcase {
   id: string;
   firm: Record<string, unknown>;
   attorneys: AttorneyProfile[];
+  exclusivePracticeArea?: string;
   exclusiveCategory?: string;
   testimonials?: ShowcaseTestimonials;
 }
@@ -56,6 +57,7 @@ const localExclusiveShowcases: Record<string, LocalExclusiveShowcase> = {
     id: HICKS_DEMO_FIRM_ID,
     firm: hicksExclusiveFirm,
     attorneys: hicksExclusiveAttorneys,
+    exclusivePracticeArea: "personal-injury",
     exclusiveCategory: "Personal Injury",
     testimonials: {
       title: "Client Testimonials",
@@ -86,6 +88,7 @@ const localExclusiveShowcases: Record<string, LocalExclusiveShowcase> = {
     id: CARTER_DEMO_FIRM_ID,
     firm: carterExclusiveFirm,
     attorneys: carterExclusiveAttorneys,
+    exclusivePracticeArea: "truck-accidents",
     exclusiveCategory: "Truck Accidents",
     testimonials: {
       title: "Client Testimonials",
@@ -106,6 +109,7 @@ const localExclusiveShowcases: Record<string, LocalExclusiveShowcase> = {
     id: CESAR_ORNELAS_DEMO_FIRM_ID,
     firm: cesarOrnelasExclusiveFirm,
     attorneys: cesarOrnelasExclusiveAttorneys,
+    exclusivePracticeArea: "catastrophic-injury",
     exclusiveCategory: "Catastrophic Injury & Wrongful Death",
     testimonials: {
       title: "Client Testimonials",
@@ -126,18 +130,21 @@ const localExclusiveShowcases: Record<string, LocalExclusiveShowcase> = {
     id: LABINOTI_DEMO_FIRM_ID,
     firm: labinotiExclusiveFirm,
     attorneys: labinotiExclusiveAttorneys,
+    exclusivePracticeArea: "brain-injury",
     exclusiveCategory: "Traumatic Brain Injury & Catastrophic Injury",
   },
   [LOZANO_MEZA_DEMO_FIRM_ID]: {
     id: LOZANO_MEZA_DEMO_FIRM_ID,
     firm: lozanoMezaExclusiveFirm,
     attorneys: lozanoMezaExclusiveAttorneys,
+    exclusivePracticeArea: "federal-crimes",
     exclusiveCategory: "Federal & Felony Defense",
   },
   [SCHERR_LEGATE_DEMO_FIRM_ID]: {
     id: SCHERR_LEGATE_DEMO_FIRM_ID,
     firm: scherrLegateExclusiveFirm,
     attorneys: scherrLegateExclusiveAttorneys,
+    exclusivePracticeArea: "construction-accidents",
     exclusiveCategory: "Workplace & Industrial Catastrophic Injury",
   },
 };

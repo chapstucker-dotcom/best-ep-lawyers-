@@ -251,6 +251,11 @@ const SERVER_SAFE_PRACTICE_AREAS: ServerSafePracticeArea[] = [
     "category": "Personal Injury"
   },
   {
+    "slug": "construction-accidents",
+    "title": "Construction Accidents",
+    "category": "Personal Injury"
+  },
+  {
     "slug": "motorcycle-accidents",
     "title": "Motorcycle Accidents",
     "category": "Personal Injury"

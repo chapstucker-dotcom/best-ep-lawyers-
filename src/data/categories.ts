@@ -53,6 +53,12 @@ export const categories: PracticeArea[] = [
     featured: true,
   },
   {
+    id: "construction-accidents",
+    slug: "construction-accidents",
+    title: "Construction Accidents",
+    category: "Personal Injury",
+  },
+  {
     id: "motorcycle-accidents",
     slug: "motorcycle-accidents",
     title: "Motorcycle Accidents",

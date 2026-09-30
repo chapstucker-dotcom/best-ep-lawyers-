@@ -147,6 +147,7 @@ const PAGE_PATH_TO_PRACTICE_AREA_SLUG: Record<string, string> = {
   "/el-paso-traumatic-brain-injury-lawyers": "brain-injury",
   "/el-paso-18-wheeler-accident-lawyer": "truck-accidents",
   "/el-paso-truck-accident-lawyers": "truck-accidents",
+  "/el-paso-construction-accident-lawyers": "construction-accidents",
   "/el-paso-semi-truck-accident-lawyer": "truck-accidents",
   "/el-paso-uncontested-divorce-lawyers": "divorce",
   "/el-paso-family-violence-lawyers": "domestic-violence-defense",
@@ -161,7 +162,6 @@ const PAGE_PATH_TO_PRACTICE_AREA_SLUG: Record<string, string> = {
 const PAGE_PATH_TO_MARKET_KEY: Record<string, MarketKey> = {
   "/el-paso-traffic-ticket-lawyers": "criminal-defense",
   "/el-paso-weapons-charges-lawyers": "criminal-defense",
-  "/el-paso-construction-accident-lawyers": "personal-injury",
   "/el-paso-spousal-support-lawyers": "family-law",
   "/el-paso-visa-lawyers": "immigration",
   "/el-paso-felony-lawyers": "criminal-defense",

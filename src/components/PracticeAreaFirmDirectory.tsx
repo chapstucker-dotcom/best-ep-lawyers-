@@ -232,9 +232,9 @@ function isExclusiveForPracticeArea(
   }
 
   const showcase = getLocalExclusiveShowcase(String(firm.id ?? ""));
-  const exclusiveCategory = showcase?.exclusiveCategory?.trim();
+  const exclusivePracticeArea = showcase?.exclusivePracticeArea?.trim();
 
-  if (!exclusiveCategory) {
+  if (!exclusivePracticeArea) {
     return false;
   }
 
@@ -243,24 +243,8 @@ function isExclusiveForPracticeArea(
     page.shortTitle
   );
 
-  const exclusiveResolution = resolvePracticeAreaPage(
-    "",
-    exclusiveCategory
-  );
-
-  if (
-    pageResolution.practiceArea &&
-    exclusiveResolution.practiceArea
-  ) {
-    return (
-      pageResolution.practiceArea.slug ===
-      exclusiveResolution.practiceArea.slug
-    );
-  }
-
   return (
-    page.shortTitle.trim().toLowerCase() ===
-    exclusiveCategory.toLowerCase()
+    pageResolution.practiceArea?.slug === exclusivePracticeArea
   );
 }
 function getDailyRotationKey(): number {
