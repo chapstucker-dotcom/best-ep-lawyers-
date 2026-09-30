@@ -106,7 +106,7 @@ const localExclusiveShowcases: Record<string, LocalExclusiveShowcase> = {
     id: CESAR_ORNELAS_DEMO_FIRM_ID,
     firm: cesarOrnelasExclusiveFirm,
     attorneys: cesarOrnelasExclusiveAttorneys,
-    exclusiveCategory: "Personal Injury",
+    exclusiveCategory: "Catastrophic Injury & Wrongful Death",
     testimonials: {
       title: "Client Testimonials",
       disclosure:

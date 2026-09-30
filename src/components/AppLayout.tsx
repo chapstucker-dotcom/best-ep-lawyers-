@@ -621,9 +621,9 @@ export default function AppLayout() {
                             {firm.name}
                           </h3>
 
-                          <p className="mt-3 flex items-center justify-center gap-2 text-[11px] font-black uppercase tracking-wide text-[#9A6413]">
+                          <p className="mt-3 flex min-h-[44px] items-center justify-center gap-2 text-center text-sm font-black uppercase leading-snug tracking-normal text-[#9A6413]">
                             <Scale className="h-4 w-4 shrink-0" />
-                            <span className="line-clamp-1">{category}</span>
+                            <span className="line-clamp-2">{category}</span>
                           </p>
 
                           <p className="mt-3 flex items-center justify-center gap-1.5 text-sm text-slate-700">
