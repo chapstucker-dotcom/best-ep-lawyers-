@@ -97,6 +97,10 @@ const COMMERCIAL_PRODUCTS = {
   },
 };
 
+type CommercialProductKey = keyof typeof COMMERCIAL_PRODUCTS;
+type CommercialProductDefinition =
+  (typeof COMMERCIAL_PRODUCTS)[CommercialProductKey];
+
 function normalizePlanId(value: unknown): string {
   return String(value ?? "")
     .trim()
