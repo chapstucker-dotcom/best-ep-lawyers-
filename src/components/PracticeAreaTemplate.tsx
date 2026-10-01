@@ -22,6 +22,7 @@ import {
 
 import type { PracticeAreaPageData } from "../data/practiceAreaPages";
 import PracticeAreaFirmDirectory from "./PracticeAreaFirmDirectory";
+import LeadCaptureForm from "./LeadCaptureForm";
 
 type Props = {
   page: PracticeAreaPageData;
@@ -538,18 +539,27 @@ export default function PracticeAreaTemplate({ page }: Props) {
             </h2>
 
             <p className="mt-4 max-w-3xl leading-7 text-slate-600">
-              Use the directory to compare participating firms, review services,
-              and contact a law office directly about your legal matter.
+              Compare participating firms above, contact a law office directly,
+              or tell us about your legal issue below.
             </p>
           </div>
 
-          <Link
-            to="/#lead-form"
+          <a
+            href="#lead-form"
             className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#d6a928] px-6 py-3 font-bold text-[#07162f]"
           >
-            Find Legal Help
+            Tell Us What Happened
             <ArrowRight className="h-5 w-5" />
-          </Link>
+          </a>
+        </div>
+
+        <div className="mt-8">
+          <LeadCaptureForm
+            practiceArea={page.shortTitle}
+            title={`Get Help With ${page.shortTitle}`}
+            description={`Tell us briefly what happened. Your request will be recorded as a ${page.shortTitle} inquiry so El Paso's Best Lawyers can help identify relevant local legal options.`}
+            phoneOptional
+          />
         </div>
 
         <div className="mt-12">

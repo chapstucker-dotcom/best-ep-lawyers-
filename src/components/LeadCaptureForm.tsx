@@ -48,6 +48,8 @@ type FormState = {
   email: string;
   phone: string;
   legalIssue: string;
+  matterLocation: string;
+  matterTiming: string;
 };
 
 const EMPTY_FORM: FormState = {
@@ -55,9 +57,47 @@ const EMPTY_FORM: FormState = {
   email: '',
   phone: '',
   legalIssue: '',
+  matterLocation: '',
+  matterTiming: '',
 };
 
 const GENERAL_LEGAL_INQUIRY = 'General Legal Inquiry';
+
+type LeadAttribution = {
+  sourceUrl: string | null;
+  landingPage: string | null;
+  referrer: string | null;
+  source: string | null;
+  medium: string | null;
+  campaign: string | null;
+};
+
+const getLeadAttribution = (): LeadAttribution => {
+  if (typeof window === 'undefined') {
+    return {
+      sourceUrl: null,
+      landingPage: null,
+      referrer: null,
+      source: null,
+      medium: null,
+      campaign: null,
+    };
+  }
+
+  const params = new URLSearchParams(window.location.search);
+
+  return {
+    sourceUrl: window.location.href,
+    landingPage: `${window.location.pathname}${window.location.search}`,
+    referrer:
+      typeof document !== 'undefined'
+        ? document.referrer || null
+        : null,
+    source: params.get('utm_source'),
+    medium: params.get('utm_medium'),
+    campaign: params.get('utm_campaign'),
+  };
+};
 
 const resolveCanonicalPracticeArea = (
   value: string | null | undefined
@@ -257,6 +297,8 @@ export default function LeadCaptureForm({
     /*
      * First try to save the complete lead record.
      */
+    const attribution = getLeadAttribution();
+
     const enrichedLead = {
       ...baseLead,
       firm_id: firmId || null,
@@ -265,6 +307,14 @@ export default function LeadCaptureForm({
         effectivePracticeArea ||
         'General Legal Inquiry',
       status: 'new',
+      source_url: attribution.sourceUrl,
+      landing_page: attribution.landingPage,
+      referrer: attribution.referrer,
+      source: attribution.source,
+      medium: attribution.medium,
+      campaign: attribution.campaign,
+      matter_location: form.matterLocation.trim() || null,
+      matter_timing: form.matterTiming.trim() || null,
     };
 
     const firstAttempt = await supabase
@@ -316,6 +366,12 @@ export default function LeadCaptureForm({
             legalIssue:
               form.legalIssue.trim(),
 
+            matterLocation:
+              form.matterLocation.trim() || null,
+
+            matterTiming:
+              form.matterTiming.trim() || null,
+
             firmId:
               firmId || null,
 
@@ -328,10 +384,7 @@ export default function LeadCaptureForm({
             practiceArea:
               effectivePracticeArea,
 
-            sourceUrl:
-              typeof window !== 'undefined'
-                ? window.location.href
-                : null,
+            ...getLeadAttribution(),
           }),
         }
       );
@@ -554,6 +607,33 @@ export default function LeadCaptureForm({
                 </p>
               </div>
 
+              <div className="grid gap-3 md:grid-cols-2">
+                <Input
+                  value={form.matterLocation}
+                  onChange={(event) =>
+                    updateField(
+                      'matterLocation',
+                      event.target.value
+                    )
+                  }
+                  placeholder="Where did this happen? (Optional)"
+                  className="border-white/15 bg-white/10 text-white placeholder:text-slate-400"
+                  disabled={loading}
+                />
+                <Input
+                  value={form.matterTiming}
+                  onChange={(event) =>
+                    updateField(
+                      'matterTiming',
+                      event.target.value
+                    )
+                  }
+                  placeholder="When did this happen? (Optional)"
+                  className="border-white/15 bg-white/10 text-white placeholder:text-slate-400"
+                  disabled={loading}
+                />
+              </div>
+
               <div>
                 <p className="mb-3 font-bold text-white">
                   Your Contact Information
@@ -756,7 +836,7 @@ export default function LeadCaptureForm({
 
             <div className="space-y-2 md:col-span-2">
               <Label htmlFor="lead-phone">
-                Phone Number *
+                Phone Number{phoneOptional ? ' (Optional)' : ' *'}
               </Label>
 
               <div className="relative">
@@ -776,9 +856,56 @@ export default function LeadCaptureForm({
                   autoComplete="tel"
                   className="pl-10 text-slate-900"
                   disabled={loading}
-                  required
+                  required={!phoneOptional}
                 />
               </div>
+            </div>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="lead-matter-location">
+                Where did this happen?{' '}
+                <span className="font-normal text-gray-500">
+                  (Optional)
+                </span>
+              </Label>
+
+              <Input
+                id="lead-matter-location"
+                value={form.matterLocation}
+                onChange={(event) =>
+                  updateField(
+                    'matterLocation',
+                    event.target.value
+                  )
+                }
+                placeholder="El Paso, another Texas city, or elsewhere"
+                className="text-slate-900"
+                disabled={loading}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="lead-matter-timing">
+                When did this happen?{' '}
+                <span className="font-normal text-gray-500">
+                  (Optional)
+                </span>
+              </Label>
+
+              <Input
+                id="lead-matter-timing"
+                value={form.matterTiming}
+                onChange={(event) =>
+                  updateField(
+                    'matterTiming',
+                    event.target.value
+                  )
+                }
+                placeholder="e.g. last week, June 2026"
+                className="text-slate-900"
+                disabled={loading}
+              />
             </div>
           </div>
 

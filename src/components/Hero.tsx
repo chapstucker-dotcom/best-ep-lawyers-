@@ -175,9 +175,9 @@ export default function Hero({ onSearch }: HeroProps) {
               El Paso, Texas
             </h1>
             <p className="mt-4 max-w-[610px] text-base leading-7 text-white/90">
-              Search local attorneys by practice area, compare law firms,
-              explore legal resources, and connect with the right lawyer
-              for your needs.
+              Search El Paso lawyers by practice area, compare local firms,
+              contact attorneys directly, or tell us what happened and use
+              our legal-help request to identify relevant local options.
             </p>
           </div>
 
@@ -196,8 +196,9 @@ export default function Hero({ onSearch }: HeroProps) {
                   Tell us about your legal issue
                 </h2>
                 <p className="mt-4 max-w-[390px] text-sm leading-6 text-white/85">
-                  Share a few details about your situation and we&apos;ll help
-                  connect you with relevant local legal options in El Paso.
+                  Not sure which lawyer you need? Share a few details about
+                  your situation and we&apos;ll identify the relevant legal
+                  category and local options.
                 </p>
               </div>
             </div>
