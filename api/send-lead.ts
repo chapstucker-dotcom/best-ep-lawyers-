@@ -1311,6 +1311,8 @@ const sendFirmLead = async ({
   legalIssue,
   practiceArea,
   sourceUrl,
+  matterLocation,
+  matterTiming,
 }: {
   routedFirm: RoutedFirm;
   fullName: string;
@@ -1319,6 +1321,8 @@ const sendFirmLead = async ({
   legalIssue: string;
   practiceArea: string;
   sourceUrl?: string | null;
+  matterLocation?: string | null;
+  matterTiming?: string | null;
 }) => {
   return resend.emails.send({
     from: FROM_EMAIL,
@@ -1413,6 +1417,9 @@ const sendFirmLead = async ({
             ${escapeHtml(phone)}
           </p>
 
+          ${matterLocation ? `<p><strong>Where:</strong> ${escapeHtml(matterLocation)}</p>` : ""}
+          ${matterTiming ? `<p><strong>When:</strong> ${escapeHtml(matterTiming)}</p>` : ""}
+
           <h3>
             Legal Matter
           </h3>
@@ -1492,6 +1499,8 @@ export default async function handler(
       firmName,
       practiceArea,
       sourceUrl,
+      matterLocation,
+      matterTiming,
     } = req.body ?? {};
 
     if (
@@ -1558,6 +1567,9 @@ export default async function handler(
           )
         : null;
 
+    const cleanMatterLocation = matterLocation ? String(matterLocation).trim() : null;
+    const cleanMatterTiming = matterTiming ? String(matterTiming).trim() : null;
+
     let routedFirm:
       RoutedFirm | null =
       null;
@@ -1616,6 +1628,12 @@ export default async function handler(
 
           sourceUrl:
             cleanSourceUrl,
+
+          matterLocation:
+            cleanMatterLocation,
+
+          matterTiming:
+            cleanMatterTiming,
         });
 
       if (firmEmailError) {
@@ -1762,6 +1780,9 @@ export default async function handler(
                     : "Admin capture only"
                 }
               </p>
+
+              ${cleanMatterLocation ? `<p><strong>Where:</strong> ${escapeHtml(cleanMatterLocation)}</p>` : ""}
+              ${cleanMatterTiming ? `<p><strong>When:</strong> ${escapeHtml(cleanMatterTiming)}</p>` : ""}
 
               <h3>
                 Legal Matter
