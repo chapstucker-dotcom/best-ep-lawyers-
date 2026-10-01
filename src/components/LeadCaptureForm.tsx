@@ -59,6 +59,42 @@ const EMPTY_FORM: FormState = {
 
 const GENERAL_LEGAL_INQUIRY = 'General Legal Inquiry';
 
+type LeadAttribution = {
+  sourceUrl: string | null;
+  landingPage: string | null;
+  referrer: string | null;
+  source: string | null;
+  medium: string | null;
+  campaign: string | null;
+};
+
+const getLeadAttribution = (): LeadAttribution => {
+  if (typeof window === 'undefined') {
+    return {
+      sourceUrl: null,
+      landingPage: null,
+      referrer: null,
+      source: null,
+      medium: null,
+      campaign: null,
+    };
+  }
+
+  const params = new URLSearchParams(window.location.search);
+
+  return {
+    sourceUrl: window.location.href,
+    landingPage: `${window.location.pathname}${window.location.search}`,
+    referrer:
+      typeof document !== 'undefined'
+        ? document.referrer || null
+        : null,
+    source: params.get('utm_source'),
+    medium: params.get('utm_medium'),
+    campaign: params.get('utm_campaign'),
+  };
+};
+
 const resolveCanonicalPracticeArea = (
   value: string | null | undefined
 ): string => {
@@ -257,6 +293,8 @@ export default function LeadCaptureForm({
     /*
      * First try to save the complete lead record.
      */
+    const attribution = getLeadAttribution();
+
     const enrichedLead = {
       ...baseLead,
       firm_id: firmId || null,
@@ -265,6 +303,12 @@ export default function LeadCaptureForm({
         effectivePracticeArea ||
         'General Legal Inquiry',
       status: 'new',
+      source_url: attribution.sourceUrl,
+      landing_page: attribution.landingPage,
+      referrer: attribution.referrer,
+      source: attribution.source,
+      medium: attribution.medium,
+      campaign: attribution.campaign,
     };
 
     const firstAttempt = await supabase
@@ -328,10 +372,7 @@ export default function LeadCaptureForm({
             practiceArea:
               effectivePracticeArea,
 
-            sourceUrl:
-              typeof window !== 'undefined'
-                ? window.location.href
-                : null,
+            ...getLeadAttribution(),
           }),
         }
       );
