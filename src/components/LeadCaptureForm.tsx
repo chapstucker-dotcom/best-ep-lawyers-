@@ -610,14 +610,24 @@ export default function LeadCaptureForm({
               <div className="grid gap-3 md:grid-cols-2">
                 <Input
                   value={form.matterLocation}
-                  onChange={(event) => updateField('matterLocation', event.target.value)}
+                  onChange={(event) =>
+                    updateField(
+                      'matterLocation',
+                      event.target.value
+                    )
+                  }
                   placeholder="Where did this happen? (Optional)"
                   className="border-white/15 bg-white/10 text-white placeholder:text-slate-400"
                   disabled={loading}
                 />
                 <Input
                   value={form.matterTiming}
-                  onChange={(event) => updateField('matterTiming', event.target.value)}
+                  onChange={(event) =>
+                    updateField(
+                      'matterTiming',
+                      event.target.value
+                    )
+                  }
                   placeholder="When did this happen? (Optional)"
                   className="border-white/15 bg-white/10 text-white placeholder:text-slate-400"
                   disabled={loading}
@@ -854,12 +864,48 @@ export default function LeadCaptureForm({
 
           <div className="grid gap-5 md:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="lead-matter-location">Where did this happen? <span className="font-normal text-gray-500">(Optional)</span></Label>
-              <Input id="lead-matter-location" value={form.matterLocation} onChange={(event) => updateField('matterLocation', event.target.value)} placeholder="El Paso, another Texas city, or elsewhere" className="text-slate-900" disabled={loading} />
+              <Label htmlFor="lead-matter-location">
+                Where did this happen?{' '}
+                <span className="font-normal text-gray-500">
+                  (Optional)
+                </span>
+              </Label>
+
+              <Input
+                id="lead-matter-location"
+                value={form.matterLocation}
+                onChange={(event) =>
+                  updateField(
+                    'matterLocation',
+                    event.target.value
+                  )
+                }
+                placeholder="El Paso, another Texas city, or elsewhere"
+                className="text-slate-900"
+                disabled={loading}
+              />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="lead-matter-timing">When did this happen? <span className="font-normal text-gray-500">(Optional)</span></Label>
-              <Input id="lead-matter-timing" value={form.matterTiming} onChange={(event) => updateField('matterTiming', event.target.value)} placeholder="e.g. last week, June 2026" className="text-slate-900" disabled={loading} />
+              <Label htmlFor="lead-matter-timing">
+                When did this happen?{' '}
+                <span className="font-normal text-gray-500">
+                  (Optional)
+                </span>
+              </Label>
+
+              <Input
+                id="lead-matter-timing"
+                value={form.matterTiming}
+                onChange={(event) =>
+                  updateField(
+                    'matterTiming',
+                    event.target.value
+                  )
+                }
+                placeholder="e.g. last week, June 2026"
+                className="text-slate-900"
+                disabled={loading}
+              />
             </div>
           </div>
 
