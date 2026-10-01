@@ -836,7 +836,7 @@ export default function LeadCaptureForm({
 
             <div className="space-y-2 md:col-span-2">
               <Label htmlFor="lead-phone">
-                Phone Number *
+                Phone Number{phoneOptional ? ' (Optional)' : ' *'}
               </Label>
 
               <div className="relative">
@@ -856,7 +856,7 @@ export default function LeadCaptureForm({
                   autoComplete="tel"
                   className="pl-10 text-slate-900"
                   disabled={loading}
-                  required
+                  required={!phoneOptional}
                 />
               </div>
             </div>
