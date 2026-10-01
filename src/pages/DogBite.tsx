@@ -394,7 +394,7 @@ export default function DogBite() {
             participating law firm.
           </p>
 
-          <LeadCaptureForm />
+          <LeadCaptureForm phoneOptional />
         </section>
 
         <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
