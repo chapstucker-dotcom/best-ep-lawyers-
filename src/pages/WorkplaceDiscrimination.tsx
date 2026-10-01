@@ -240,7 +240,7 @@ export default function WorkplaceDiscrimination() {
             participating law firm.
           </p>
 
-          <LeadCaptureForm />
+          <LeadCaptureForm phoneOptional />
         </section>
 
         <a
