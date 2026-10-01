@@ -1417,8 +1417,20 @@ const sendFirmLead = async ({
             ${escapeHtml(phone)}
           </p>
 
-          ${matterLocation ? `<p><strong>Where:</strong> ${escapeHtml(matterLocation)}</p>` : ""}
-          ${matterTiming ? `<p><strong>When:</strong> ${escapeHtml(matterTiming)}</p>` : ""}
+          ${
+            matterLocation
+              ? `<p><strong>Where:</strong> ${escapeHtml(
+                  matterLocation
+                )}</p>`
+              : ""
+          }
+          ${
+            matterTiming
+              ? `<p><strong>When:</strong> ${escapeHtml(
+                  matterTiming
+                )}</p>`
+              : ""
+          }
 
           <h3>
             Legal Matter
@@ -1567,8 +1579,19 @@ export default async function handler(
           )
         : null;
 
-    const cleanMatterLocation = matterLocation ? String(matterLocation).trim() : null;
-    const cleanMatterTiming = matterTiming ? String(matterTiming).trim() : null;
+    const cleanMatterLocation =
+      matterLocation
+        ? String(
+            matterLocation
+          ).trim()
+        : null;
+
+    const cleanMatterTiming =
+      matterTiming
+        ? String(
+            matterTiming
+          ).trim()
+        : null;
 
     let routedFirm:
       RoutedFirm | null =
@@ -1781,8 +1804,20 @@ export default async function handler(
                 }
               </p>
 
-              ${cleanMatterLocation ? `<p><strong>Where:</strong> ${escapeHtml(cleanMatterLocation)}</p>` : ""}
-              ${cleanMatterTiming ? `<p><strong>When:</strong> ${escapeHtml(cleanMatterTiming)}</p>` : ""}
+              ${
+                cleanMatterLocation
+                  ? `<p><strong>Where:</strong> ${escapeHtml(
+                      cleanMatterLocation
+                    )}</p>`
+                  : ""
+              }
+              ${
+                cleanMatterTiming
+                  ? `<p><strong>When:</strong> ${escapeHtml(
+                      cleanMatterTiming
+                    )}</p>`
+                  : ""
+              }
 
               <h3>
                 Legal Matter
