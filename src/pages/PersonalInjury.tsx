@@ -165,7 +165,7 @@ export default function PersonalInjury() {
     setProperty("og:type", "website");
 
     const canonicalUrl =
-      "https://elpasosbestlawyers.com/el-paso-personal-injury-lawyers";
+      "https://www.elpasosbestlawyers.com/el-paso-personal-injury-lawyers";
 
     let canonical = document.querySelector(
       'link[rel="canonical"]'
@@ -191,7 +191,7 @@ export default function PersonalInjury() {
           isPartOf: {
             "@type": "WebSite",
             name: "El Paso's Best Lawyers",
-            url: "https://elpasosbestlawyers.com/",
+            url: "https://www.elpasosbestlawyers.com/",
           },
           about: {
             "@type": "Thing",
