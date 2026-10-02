@@ -4,11 +4,11 @@ import type { PracticeAreaPageData } from "../data/practiceAreaPages";
 const motorcyclePage: PracticeAreaPageData = {
   path: "/el-paso-motorcycle-accident-lawyers",
   shortTitle: "Motorcycle Accident",
-  title: "Best Motorcycle Accident Lawyers in El Paso, Texas",
+  title: "Motorcycle Accident Lawyers in El Paso, TX | Compare Local Attorneys",
   description:
-    "Compare El Paso motorcycle accident attorneys handling serious injuries, left-turn crashes, road hazards, uninsured drivers, insurance disputes, and wrongful death claims.",
+    "Compare El Paso motorcycle accident lawyers and attorneys handling serious injuries, left-turn crashes, road hazards, uninsured drivers, insurance disputes, and wrongful death claims.",
   metaDescription:
-    "Compare motorcycle accident lawyers in El Paso for serious injury claims, left-turn crashes, road hazards, uninsured drivers, insurance disputes, and wrongful death.",
+    "Compare El Paso motorcycle accident lawyers and attorneys for serious injury claims, left-turn crashes, road hazards, uninsured drivers, insurance disputes, and wrongful death.",
   heroText:
     "Compare El Paso motorcycle accident attorneys for serious injury claims, insurance disputes, unsafe road conditions, and fatal motorcycle crashes.",
   topics: [
