@@ -6,7 +6,7 @@ import type { PracticeAreaPageData } from "../data/practiceAreaPages";
 const carAccidentDirectoryPage: PracticeAreaPageData = {
   path: "/el-paso-car-accident-lawyers",
   shortTitle: "Car Accident",
-  title: "Best Car Accident Lawyers in El Paso, TX",
+  title: "Car Accident Lawyers in El Paso, TX",
   description: "Compare participating El Paso law firms handling car accident and related personal injury matters.",
   metaDescription: "Compare participating El Paso car accident lawyers and law firms.",
   heroText: "Compare participating El Paso car accident lawyers and law firms.",
@@ -64,9 +64,9 @@ const faqs = [
 export default function CarAccidentLawyers() {
   useEffect(() => {
     const title =
-      "Best Car Accident Lawyers in El Paso, TX | El Paso's Best Lawyers";
+      "Car Accident Lawyers in El Paso, TX | Compare Local Attorneys";
     const description =
-      "Compare car accident lawyers in El Paso, TX for injury claims, insurance disputes, hit-and-run crashes, uninsured motorists, serious injuries, and wrongful death.";
+      "Compare El Paso car accident lawyers and attorneys handling injury claims, insurance disputes, hit-and-run crashes, uninsured motorists, serious injuries, and wrongful death.";
     const canonical =
       "https://www.elpasosbestlawyers.com/el-paso-car-accident-lawyers";
 
