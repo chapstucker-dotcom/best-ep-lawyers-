@@ -503,7 +503,7 @@ export default function CarAccidentLawyers() {
             Use the form below to submit your information and connect with a
             participating law firm.
           </p>
-          <LeadCaptureForm />
+          <LeadCaptureForm phoneOptional />
         </section>
 
         <a

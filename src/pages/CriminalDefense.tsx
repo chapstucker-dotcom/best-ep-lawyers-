@@ -634,7 +634,7 @@ export default function CriminalDefense() {
             a participating law firm.
           </p>
 
-          <LeadCaptureForm />
+          <LeadCaptureForm phoneOptional />
         </section>
 
         <a

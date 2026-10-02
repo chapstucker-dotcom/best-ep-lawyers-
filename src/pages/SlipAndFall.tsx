@@ -313,7 +313,7 @@ export default function SlipAndFall() {
           <p style={{ color: "#cbd5e1", lineHeight: 1.7, marginBottom: "24px" }}>
             Use the form below to submit your information and connect with a participating law firm.
           </p>
-          <LeadCaptureForm />
+          <LeadCaptureForm phoneOptional />
         </section>
 
         <section style={{ marginBottom: "36px" }}>
