@@ -1,5 +1,6 @@
 import { useSeo } from "../hooks/use-seo";
 import { Link } from "react-router-dom";
+import LeadCaptureForm from "../components/LeadCaptureForm";
 
 const issues = [
   "Unpaid Overtime",
@@ -201,6 +202,23 @@ export default function OvertimePayDisputes() {
             >
               Sex Discrimination Lawyers
             </Link>
+          </div>
+        </section>
+
+        <section className="mt-14 rounded-2xl border border-amber-400/30 bg-slate-900/60 p-8">
+          <h2 className="text-3xl font-medium">
+            Get Help With an Overtime or Pay Dispute
+          </h2>
+          <p className="mt-4 max-w-4xl leading-7 text-slate-300">
+            Tell us briefly about the pay issue. Your request will be recorded
+            as an overtime and pay dispute inquiry so El Paso&apos;s Best Lawyers
+            can help identify relevant local legal options.
+          </p>
+          <div className="mt-6">
+            <LeadCaptureForm
+              practiceArea="Overtime & Pay Disputes"
+              phoneOptional
+            />
           </div>
         </section>
 
