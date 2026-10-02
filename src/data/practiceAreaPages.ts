@@ -3011,7 +3011,7 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
     ],
     relatedPages: [
       { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-      { label: "Dog Bite", path: "/el-paso-dog-bite-lawyers" },
+      { label: "Premises Liability", path: "/el-paso-premises-liability-lawyers" },
       { label: "Brain Injury", path: "/el-paso-brain-injury-lawyers" },
       { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
     ],
