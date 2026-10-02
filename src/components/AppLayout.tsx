@@ -930,6 +930,8 @@ export default function AppLayout() {
                     <FirmCard
                       key={firm.id}
                       firm={firm}
+                      attributionMarket={selectedAttributionMarket?.key}
+                      attributionSpecialty={selectedAttributionPracticeArea?.slug}
                       onClick={() =>
                         navigate(`/firm/${firm.id}`, {
                           state: {
