@@ -14,6 +14,8 @@ const priorityLinks = [
   ["DWI Lawyers", "/el-paso-dwi-lawyers"],
   ["Traffic Ticket Lawyers", "/el-paso-traffic-ticket-lawyers"],
   ["Civil Litigation Lawyers", "/el-paso-civil-litigation-lawyers"],
+  ["Slip and Fall Lawyers", "/el-paso-slip-and-fall-lawyers"],
+  ["Probation Violation Lawyers", "/el-paso-probation-violation-lawyers"],
 ] as const;
 
 export default function SeoPracticeAreaLinks() {
