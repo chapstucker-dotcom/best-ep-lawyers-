@@ -15,6 +15,7 @@ import AttorneyDetails from "./pages/AttorneyDetails";
 import FirmProfilePage from "./pages/FirmProfilePage";
 
 import PersonalInjury from "./pages/PersonalInjury";
+import InjuryHelp from "./pages/InjuryHelp";
 import WageHour from "./pages/WageHour";
 import WorkplaceDiscrimination from "./pages/WorkplaceDiscrimination";
 import CriminalDefense from "./pages/CriminalDefense";
@@ -126,6 +127,7 @@ export default function App() {
           path="/el-paso-personal-injury-lawyers"
           element={<PersonalInjury />}
         />
+        <Route path="/injury-help" element={<InjuryHelp />} />
         <Route path="/el-paso-wage-hour-lawyers" element={<WageHour />} />
         <Route
           path="/el-paso-workplace-discrimination-lawyers"
