@@ -12,6 +12,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/injury-help",
+      "destination": "/index.html"
+    },
+    {
       "source": "/el-paso-slip-and-fall-lawyers",
       "destination": "/index.html"
     },
