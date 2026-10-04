@@ -15,6 +15,7 @@ import {
 
 import { supabase } from '@/lib/supabase';
 import { trackEvent } from '@/services/analyticsService';
+import { trackMetaLead } from '@/services/metaPixel';
 import {
   getMarketForPracticeArea,
   getPracticeAreaByValue,
@@ -432,6 +433,8 @@ export default function LeadCaptureForm({
       if (error) {
         throw error;
       }
+
+      trackMetaLead();
 
       if (firmId) {
         const canonicalPracticeArea =
