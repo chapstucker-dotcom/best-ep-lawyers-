@@ -5,12 +5,12 @@ import Stripe from "npm:stripe@14.25.0";
 const STRIPE_SECRET_KEY = Deno.env.get("STRIPE_SECRET_KEY")!;
 const SITE_URL = Deno.env.get("SITE_URL") || "http://localhost:5173";
 
-// Your real Stripe Price IDs (you provided these)
+// Stripe Price IDs for production subscription plans
 const STRIPE_PRICE_IDS: Record<string, string> = {
   pro: "price_1StEa8COdLFRh1rKnxsEp84R",
-  expert: "price_1StEaECOdLFRh1rKrC9U9X6D",
-  category_featured: "price_1StEaLCOdLFRh1rKsPGJciAu",
-  category_exclusive: "price_1StEaSCOdLFRh1rKllNB5v76",
+  expert: "price_1TXOu8C9X7qoxVlJLgqLVvfH",
+  category_featured: "price_1TXOwgC9X7qoxVlJzWcxLiaG",
+  category_exclusive: "price_1TXOxsC9X7qoxVlJplvRQzO4",
 };
 
 const corsHeaders = {

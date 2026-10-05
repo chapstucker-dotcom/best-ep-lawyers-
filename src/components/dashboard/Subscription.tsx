@@ -27,7 +27,6 @@ import {
   AlertTriangle,
   Check,
   Loader2,
-  TestTube2,
 } from "lucide-react";
 
 import {
@@ -54,17 +53,6 @@ import {
 import {
   useToast,
 } from "@/hooks/use-toast";
-
-/*
- * SANDBOX TEST MODE
- *
- * Expert uses the deployed create-checkout
- * Edge Function with Stripe test credentials.
- *
- * Category Featured remains availability-controlled
- * and is not enabled for self-service checkout.
- */
-const SANDBOX_MODE = true;
 
 const PLAN_LABELS: Record<string, string> = {
   free: "Free Listing",
@@ -421,15 +409,6 @@ export const Subscription =
           return;
         }
 
-        if (SANDBOX_MODE && planId !== "expert") {
-          toast({
-            title: "Sandbox testing active",
-            description:
-              "Only the Expert plan is enabled for Stripe Sandbox checkout right now.",
-          });
-          return;
-        }
-
         if (!firmId) {
           setFirmError(
             "Your firm profile is still loading. Please wait a moment and try again."
@@ -536,13 +515,6 @@ export const Subscription =
               Subscription Management
             </h2>
 
-            {SANDBOX_MODE && (
-              <Badge className="bg-amber-100 text-amber-900 hover:bg-amber-100">
-                <TestTube2 className="mr-1 h-3.5 w-3.5" />
-
-                Stripe Sandbox
-              </Badge>
-            )}
           </div>
 
           <div className="mt-4 rounded-xl border bg-white p-4">
@@ -596,20 +568,6 @@ export const Subscription =
           </div>
         </div>
 
-        {SANDBOX_MODE && (
-          <Alert className="border-amber-300 bg-amber-50">
-            <TestTube2 className="h-4 w-4" />
-
-            <AlertDescription>
-              Sandbox testing is
-              active. Expert will use
-              the Stripe test checkout.
-              No real $299 charge will
-              be made. Category Featured
-              remains availability-controlled.
-            </AlertDescription>
-          </Alert>
-        )}
 
         {firmError && (
           <Alert variant="destructive">
@@ -653,31 +611,16 @@ export const Subscription =
                 loadingPlan ===
                 plan.id;
 
-              const isSandboxExpert =
-                plan.id ===
-                "expert";
-
               const isFeaturedPlan =
                 plan.id ===
                 "category-featured";
-
-              const disabledForSandbox =
-                SANDBOX_MODE &&
-                !isFreePlan &&
-                !isSandboxExpert;
 
               return (
                 <Card
                   key={
                     plan.id
                   }
-                  className={
-                    isCurrentPlan
-                      ? "border-2 border-[#1FA8A1]"
-                      : isSandboxExpert
-                        ? "border-2 border-amber-300"
-                        : ""
-                  }
+                  className={isCurrentPlan ? "border-2 border-[#1FA8A1]" : ""}
                 >
                   <CardHeader>
                     <CardTitle className="text-center">
@@ -688,12 +631,6 @@ export const Subscription =
                           }
                         </span>
 
-                        {isSandboxExpert &&
-                          SANDBOX_MODE && (
-                            <Badge className="bg-amber-100 text-amber-900 hover:bg-amber-100">
-                              Sandbox
-                            </Badge>
-                          )}
                       </div>
 
                       <div className="mt-2 text-3xl font-bold text-[#1FA8A1]">
@@ -756,16 +693,6 @@ export const Subscription =
                       >
                         Availability Review Required
                       </Button>
-                    ) : disabledForSandbox ? (
-                      <Button
-                        type="button"
-                        className="w-full"
-                        variant="outline"
-                        disabled
-                      >
-                        Disabled During
-                        Sandbox Test
-                      </Button>
                     ) : (
                       <Button
                         type="button"
@@ -789,7 +716,7 @@ export const Subscription =
                             Checkout...
                           </>
                         ) : (
-                          "Test Sandbox Checkout"
+                          "Subscribe to Expert"
                         )}
                       </Button>
                     )}
