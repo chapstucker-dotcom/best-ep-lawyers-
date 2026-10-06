@@ -263,7 +263,10 @@ export default function Login() {
           category:
             practiceArea,
 
-          categories: [
+          primary_category:
+            practiceArea,
+
+          practice_areas: [
             practiceArea,
           ],
 
@@ -275,12 +278,19 @@ export default function Login() {
           plan_key: "free",
 
           is_featured: false,
-          featured: false,
-
-          exclusive: false,
+          is_exclusive: false,
 
           is_verified: false,
           verified: false,
+
+          approved: false,
+          is_active: true,
+
+          payment_status:
+            "unpaid",
+
+          status:
+            "pending",
         }
       );
 
