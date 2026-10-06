@@ -27,6 +27,8 @@ type BusinessLeadState = {
   phone: string;
   website: string;
   interest: string;
+  heardAbout: string;
+  referringOrganization: string;
   message: string;
 };
 
@@ -37,6 +39,8 @@ const EMPTY_FORM: BusinessLeadState = {
   phone: "",
   website: "",
   interest: "",
+  heardAbout: "",
+  referringOrganization: "",
   message: "",
 };
 
@@ -47,6 +51,17 @@ const INTEREST_OPTIONS = [
   "Category Exclusive",
   "Advertising / Sponsorship",
   "Not Sure Yet",
+];
+
+const HEARD_ABOUT_OPTIONS = [
+  "Community Partner / Organization",
+  "Referred by Someone",
+  "Google / Search",
+  "Social Media",
+  "Email",
+  "Event",
+  "EPBL Outreach",
+  "Other",
 ];
 
 const INTEREST_QUERY_MAP: Record<string, string> = {
@@ -117,6 +132,17 @@ export default function BusinessLeadForm() {
       return "Select what your firm is interested in.";
     }
 
+    if (!form.heardAbout) {
+      return "Tell us how you heard about El Paso's Best Lawyers.";
+    }
+
+    if (
+      form.heardAbout === "Community Partner / Organization" &&
+      form.referringOrganization.trim().length < 2
+    ) {
+      return "Enter the organization that referred you.";
+    }
+
     return "";
   };
 
@@ -162,6 +188,12 @@ export default function BusinessLeadForm() {
               form.website.trim(),
             interest:
               form.interest,
+            heardAbout:
+              form.heardAbout,
+            referringOrganization:
+              form.heardAbout === "Community Partner / Organization"
+                ? form.referringOrganization.trim()
+                : "",
             message:
               form.message.trim(),
             sourceUrl:
@@ -478,6 +510,71 @@ export default function BusinessLeadForm() {
                 )}
               </select>
             </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="business-heard-about">
+                How did you hear about El Paso&apos;s Best Lawyers? *
+              </Label>
+
+              <select
+                id="business-heard-about"
+                value={form.heardAbout}
+                onChange={(event) => {
+                  const value = event.target.value;
+
+                  setForm((current) => ({
+                    ...current,
+                    heardAbout: value,
+                    referringOrganization:
+                      value === "Community Partner / Organization"
+                        ? current.referringOrganization
+                        : "",
+                  }));
+                }}
+                className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm"
+                disabled={submitting}
+                required
+              >
+                <option value="">
+                  Select an option
+                </option>
+
+                {HEARD_ABOUT_OPTIONS.map(
+                  (option) => (
+                    <option
+                      key={option}
+                      value={option}
+                    >
+                      {option}
+                    </option>
+                  )
+                )}
+              </select>
+            </div>
+
+            {form.heardAbout ===
+              "Community Partner / Organization" && (
+              <div className="space-y-2">
+                <Label htmlFor="business-referring-organization">
+                  Which organization referred you? *
+                </Label>
+
+                <Input
+                  id="business-referring-organization"
+                  value={form.referringOrganization}
+                  onChange={(event) =>
+                    updateField(
+                      "referringOrganization",
+                      event.target.value
+                    )
+                  }
+                  placeholder="Organization name"
+                  maxLength={150}
+                  disabled={submitting}
+                  required
+                />
+              </div>
+            )}
 
             <div className="space-y-2">
               <Label htmlFor="business-message">
