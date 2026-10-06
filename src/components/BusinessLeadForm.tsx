@@ -137,10 +137,22 @@ export default function BusinessLeadForm() {
     }
 
     if (
-      form.heardAbout === "Community Partner / Organization" &&
+      [
+        "Community Partner / Organization",
+        "Referred by Someone",
+        "Other",
+      ].includes(form.heardAbout) &&
       form.referringOrganization.trim().length < 2
     ) {
-      return "Enter the organization that referred you.";
+      if (form.heardAbout === "Community Partner / Organization") {
+        return "Enter the organization that referred you.";
+      }
+
+      if (form.heardAbout === "Referred by Someone") {
+        return "Enter who referred you.";
+      }
+
+      return "Tell us where you heard about El Paso's Best Lawyers.";
     }
 
     return "";
@@ -191,7 +203,11 @@ export default function BusinessLeadForm() {
             heardAbout:
               form.heardAbout,
             referringOrganization:
-              form.heardAbout === "Community Partner / Organization"
+              [
+                "Community Partner / Organization",
+                "Referred by Someone",
+                "Other",
+              ].includes(form.heardAbout)
                 ? form.referringOrganization.trim()
                 : "",
             message:
@@ -526,7 +542,11 @@ export default function BusinessLeadForm() {
                     ...current,
                     heardAbout: value,
                     referringOrganization:
-                      value === "Community Partner / Organization"
+                      [
+                        "Community Partner / Organization",
+                        "Referred by Someone",
+                        "Other",
+                      ].includes(value)
                         ? current.referringOrganization
                         : "",
                   }));
@@ -552,11 +572,18 @@ export default function BusinessLeadForm() {
               </select>
             </div>
 
-            {form.heardAbout ===
-              "Community Partner / Organization" && (
+            {[
+              "Community Partner / Organization",
+              "Referred by Someone",
+              "Other",
+            ].includes(form.heardAbout) && (
               <div className="space-y-2">
                 <Label htmlFor="business-referring-organization">
-                  Which organization referred you? *
+                  {form.heardAbout === "Community Partner / Organization"
+                    ? "Which organization referred you? *"
+                    : form.heardAbout === "Referred by Someone"
+                      ? "Who referred you? *"
+                      : "Please tell us where you heard about us. *"}
                 </Label>
 
                 <Input
@@ -568,7 +595,13 @@ export default function BusinessLeadForm() {
                       event.target.value
                     )
                   }
-                  placeholder="Organization name"
+                  placeholder={
+                    form.heardAbout === "Community Partner / Organization"
+                      ? "Organization name"
+                      : form.heardAbout === "Referred by Someone"
+                        ? "Person or organization"
+                        : "Where did you hear about us?"
+                  }
                   maxLength={150}
                   disabled={submitting}
                   required
