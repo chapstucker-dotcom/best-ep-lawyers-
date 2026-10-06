@@ -132,8 +132,11 @@ export default async function handler(
         cleanHeardAbout
       ) ||
       (
-        cleanHeardAbout ===
-          "Community Partner / Organization" &&
+        [
+          "Community Partner / Organization",
+          "Referred by Someone",
+          "Other",
+        ].includes(cleanHeardAbout) &&
         cleanReferringOrganization.length < 2
       )
     ) {
@@ -265,7 +268,7 @@ export default async function handler(
               safeReferringOrganization
                 ? `
                   <p>
-                    <strong>Referring Organization:</strong>
+                    <strong>Referral / Source Detail:</strong>
                     ${safeReferringOrganization}
                   </p>
                 `
