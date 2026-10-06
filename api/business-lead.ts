@@ -13,6 +13,17 @@ const FROM_EMAIL =
 const EMAIL_REGEX =
   /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const ALLOWED_HEARD_ABOUT = new Set([
+  "Community Partner / Organization",
+  "Referred by Someone",
+  "Google / Search",
+  "Social Media",
+  "Email",
+  "Event",
+  "EPBL Outreach",
+  "Other",
+]);
+
 const ALLOWED_INTERESTS = new Set([
   "Free Firm Listing",
   "Expert Plan",
@@ -73,6 +84,8 @@ export default async function handler(
       phone,
       website,
       interest,
+      heardAbout,
+      referringOrganization,
       message,
       sourceUrl,
     } = req.body || {};
@@ -95,6 +108,12 @@ export default async function handler(
     const cleanInterest =
       cleanText(interest, 100);
 
+    const cleanHeardAbout =
+      cleanText(heardAbout, 100);
+
+    const cleanReferringOrganization =
+      cleanText(referringOrganization, 150);
+
     const cleanMessage =
       cleanText(message, 1500);
 
@@ -108,6 +127,14 @@ export default async function handler(
       cleanPhone.length < 7 ||
       !ALLOWED_INTERESTS.has(
         cleanInterest
+      ) ||
+      !ALLOWED_HEARD_ABOUT.has(
+        cleanHeardAbout
+      ) ||
+      (
+        cleanHeardAbout ===
+          "Community Partner / Organization" &&
+        cleanReferringOrganization.length < 2
       )
     ) {
       return res.status(400).json({
@@ -134,6 +161,12 @@ export default async function handler(
 
     const safeInterest =
       escapeHtml(cleanInterest);
+
+    const safeHeardAbout =
+      escapeHtml(cleanHeardAbout);
+
+    const safeReferringOrganization =
+      escapeHtml(cleanReferringOrganization);
 
     const safeMessage =
       escapeHtml(cleanMessage);
@@ -222,6 +255,22 @@ export default async function handler(
               <strong>Interest:</strong>
               ${safeInterest}
             </p>
+
+            <p>
+              <strong>How They Heard About EPBL:</strong>
+              ${safeHeardAbout}
+            </p>
+
+            ${
+              safeReferringOrganization
+                ? `
+                  <p>
+                    <strong>Referring Organization:</strong>
+                    ${safeReferringOrganization}
+                  </p>
+                `
+                : ""
+            }
 
             ${
               safeSourceUrl
