@@ -65,6 +65,8 @@ import EstatePlanning from "./pages/EstatePlanning";
 import Guides from "./pages/Guides";
 import GuideArticle from "./pages/GuideArticle";
 import FeaturedBadge from "./pages/FeaturedBadge";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 
 import { practiceAreaPages } from "./data/practiceAreaPages";
 import { AuthProvider } from "./contexts/AuthContext";
@@ -122,6 +124,8 @@ export default function App() {
     <AuthProvider>
       <Routes>
         <Route path="/" element={<Index />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
 
         <Route
           path="/el-paso-personal-injury-lawyers"

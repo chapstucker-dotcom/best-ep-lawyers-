@@ -120,21 +120,21 @@ export default function Footer() {
               </li>
 
               <li>
-                <button
-                  type="button"
+                <Link
+                  to="/privacy"
                   className="transition hover:text-[#D4A62A]"
                 >
                   Privacy Policy
-                </button>
+                </Link>
               </li>
 
               <li>
-                <button
-                  type="button"
+                <Link
+                  to="/terms"
                   className="transition hover:text-[#D4A62A]"
                 >
                   Terms of Service
-                </button>
+                </Link>
               </li>
             </ul>
           </div>

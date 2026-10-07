@@ -536,7 +536,7 @@ export default function LeadCaptureForm({
 
               <div>
                 <p className="font-bold text-white">
-                  Your information is protected
+                  Share only what is necessary
                 </p>
                 <p className="mt-1 text-slate-400">
                   Do not include confidential or highly sensitive information.
