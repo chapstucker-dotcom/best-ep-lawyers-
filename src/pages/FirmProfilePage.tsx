@@ -163,6 +163,38 @@ const JM_MUNOZ_ATTORNEY: AttorneyProfile = {
   created_at: "",
   updated_at: "",
 };
+const DAVID_SAUCEDO_ATTORNEY: AttorneyProfile = {
+  id: "david-saucedo",
+  firm_id: "david-saucedo",
+  name: "David Saucedo",
+  title: "Attorney",
+  photo_url: "/david-saucedo.jpg",
+  bio: "El Paso attorney licensed in Texas, New Mexico, and federal courts, with a practice focused on personal injury, medical malpractice, business and real estate litigation, EB-5 immigrant investor visas, copyright law, and online privacy law.",
+  specialties: [
+    "Medical Malpractice",
+    "Personal Injury",
+    "Business & Real Estate Litigation",
+    "EB-5 Immigrant Investor Visas",
+    "Copyright Law",
+    "Online Privacy Law",
+  ],
+  education: [
+    "Mitchell Hamline School of Law",
+    "University of Notre Dame, Mendoza College of Business",
+    "Tecnologico de Monterrey, International Business",
+  ],
+  bar_admissions: [
+    "Texas",
+    "New Mexico",
+    "Federal Courts",
+  ],
+  phone: "1-800-341-6750",
+  linkedin_url: "https://www.linkedin.com/in/david-e-saucedo-ii-el-paso/",
+  display_order: 0,
+  is_active: true,
+  created_at: "",
+  updated_at: "",
+};
 export default function FirmProfilePage() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -300,8 +332,8 @@ export default function FirmProfilePage() {
 
       if (data) {
         void loadReviews(id);
-        if (id === "jm-munoz-law-firm") {
-          setAttorneys([JM_MUNOZ_ATTORNEY]);
+        if (id === "jm-munoz-law-firm" || id === "david-saucedo") {
+          setAttorneys([id === "jm-munoz-law-firm" ? JM_MUNOZ_ATTORNEY : DAVID_SAUCEDO_ATTORNEY]);
           setLoadingAttorneys(false);
         } else {
           void loadAttorneys(id);
@@ -1050,7 +1082,7 @@ export default function FirmProfilePage() {
                             </Button>
                           )}
 
-                          {!isLocalExclusiveShowcase && attorney.id !== "jm-munoz" && (
+                          {!isLocalExclusiveShowcase && attorney.id !== "jm-munoz" && attorney.id !== "david-saucedo" && (
                             <Button
                               type="button"
                               size="sm"

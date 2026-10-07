@@ -199,6 +199,31 @@ export const firms = [
     bio: "Personal injury law firm with an El Paso office representing clients in accident, negligence, and serious injury matters.",
   },
 
+  {
+    id: "david-saucedo",
+    name: "David Saucedo",
+    category: "Personal Injury",
+    categories: ["Personal Injury", "Business & Corporate", "Real Estate & Construction", "Immigration", "Specialized Law"],
+    specialties: [
+      "Medical Malpractice",
+      "Personal Injury",
+      "Business & Real Estate Litigation",
+      "Investor Visas (EB-5)",
+      "Copyright Law",
+      "Online Privacy Law",
+    ],
+    phone: "1-800-341-6750",
+    website: "https://saucedoesq.com/",
+    address: "711 N. Copia St.",
+    city: "El Paso",
+    state: "TX",
+    zip_code: "79903",
+    featured: false,
+    exclusive: false,
+    verified: true,
+    bio: "El Paso attorney representing clients in personal injury, medical malpractice, business and real estate litigation, EB-5 immigrant investor visa, copyright, and online privacy matters.",
+  },
+
   // ============================================================
   // CIVIL LITIGATION
   // ============================================================
