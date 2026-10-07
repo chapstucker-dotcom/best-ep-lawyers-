@@ -765,8 +765,8 @@ export default function AppLayout() {
         <div className="mx-auto max-w-[1500px]">
           <LeadCaptureForm
             practiceArea="General Legal Inquiry"
-            title="Get Matched with the Right Lawyer"
-            description="Whether you've been in an accident, need a criminal defense attorney, or have a family law matter, tell us what you're facing and we'll use your request to help identify relevant local legal options in El Paso."
+            title="Tell Us What Legal Help You Need"
+            description="Tell us what you're facing and we'll use your request to identify relevant legal options available through El Paso's Best Lawyers. You can also browse and compare local law firms yourself."
             variant="homepage"
             phoneOptional
           />
