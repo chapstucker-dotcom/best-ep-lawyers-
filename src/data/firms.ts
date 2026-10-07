@@ -200,6 +200,32 @@ export const firms = [
   },
 
   // ============================================================
+  // CIVIL LITIGATION
+  // ============================================================
+
+  {
+    id: "jm-munoz-law-firm",
+    name: "JM Munoz Law Firm, PLLC",
+    category: "Civil Litigation",
+    categories: ["Civil Litigation"],
+    specialties: [
+      "Insurance Disputes",
+      "Property Insurance Claims",
+      "Hail & Storm Damage Insurance Claims",
+      "Denied Insurance Claims",
+      "Underpaid Insurance Claims",
+      "Delayed Insurance Claims",
+    ],
+    phone: "(915) 356-1400",
+    website: "https://jm-lawfirm.com/",
+    address: "5823 N Mesa St, El Paso, TX 79912",
+    featured: false,
+    exclusive: false,
+    verified: true,
+    bio: "El Paso law firm representing property owners in denied, underpaid, or delayed property insurance claims, including hail and storm damage insurance matters.",
+  },
+
+  // ============================================================
   // CRIMINAL DEFENSE
   // ============================================================
 
