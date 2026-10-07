@@ -45,6 +45,7 @@ export interface ShowcaseTestimonials {
 
 export interface LocalExclusiveShowcase {
   id: string;
+  liveFirmId?: string;
   firm: Record<string, unknown>;
   attorneys: AttorneyProfile[];
   exclusivePracticeArea?: string;

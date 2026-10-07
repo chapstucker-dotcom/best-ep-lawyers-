@@ -432,12 +432,16 @@ export default function FirmProfilePage() {
 
   const fullAddress = addressParts.join(", ");
 
+  const trackingFirmId = isLocalExclusiveShowcase
+    ? localExclusiveShowcase?.liveFirmId
+    : publicFirm.id;
+
   const recordContactClick = (
     eventType: "click_phone" | "click_email" | "click_website"
   ) => {
-    if (isLocalExclusiveShowcase) return;
+    if (!trackingFirmId) return;
 
-    void trackEvent(publicFirm.id, eventType, {
+    void trackEvent(trackingFirmId, eventType, {
       market: attribution?.market,
       specialty: attribution?.specialty,
     }).catch((error) => {
@@ -1196,7 +1200,7 @@ export default function FirmProfilePage() {
               className="scroll-mt-24"
             >
               <LeadCaptureForm
-                firmId={isLocalExclusiveShowcase ? undefined : publicFirm.id}
+                firmId={trackingFirmId}
                 firmName={publicFirm.name}
                 firmEmail={publicFirm.email}
                 practiceArea={displayedPracticeAreas[0]?.title}
