@@ -300,6 +300,29 @@ export default function Dashboard() {
             user.email ||
             "";
 
+          const normalizedFirmName = firmName
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/[^a-z0-9]/g, "");
+
+          const existingListingNames = new Set([
+            "davidesaucedo",
+            "davidesaucedoii",
+            "jmmunozlawfirm",
+            "jmmunozlawfirmpllc",
+            "josemanuelmunoz",
+          ]);
+
+          if (existingListingNames.has(normalizedFirmName)) {
+            if (active) {
+              setFirmLoadError(
+                "This law firm already has a listing on El Paso's Best Lawyers. Please contact the directory administrator to verify ownership and connect your existing listing. A duplicate profile has not been created."
+              );
+              setIsLoadingFirm(false);
+            }
+            return;
+          }
           if (!firmName) {
             if (active) {
               setFirmLoadError(
