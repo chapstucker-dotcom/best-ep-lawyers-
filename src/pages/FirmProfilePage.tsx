@@ -143,6 +143,26 @@ const getDirectVideoUrl = (value: string): string | null => {
   }
 };
 
+const JM_MUNOZ_ATTORNEY: AttorneyProfile = {
+  id: "jm-munoz",
+  firm_id: "jm-munoz-law-firm",
+  name: 'Jose Manuel "JM" Munoz',
+  photo_url: "/jm-munoz.jpg",
+  bio: "El Paso attorney representing property owners in denied, underpaid, or delayed property insurance claims, including hail and storm damage insurance matters.",
+  specialties: [
+    "Property Insurance Claims",
+    "Hail & Storm Damage Insurance Claims",
+    "Denied Insurance Claims",
+    "Underpaid Insurance Claims",
+    "Delayed Insurance Claims",
+  ],
+  email: "jmlaw915@gmail.com",
+  phone: "(915) 356-1400",
+  display_order: 0,
+  is_active: true,
+  created_at: "",
+  updated_at: "",
+};
 export default function FirmProfilePage() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -280,7 +300,12 @@ export default function FirmProfilePage() {
 
       if (data) {
         void loadReviews(id);
-        void loadAttorneys(id);
+        if (id === "jm-munoz-law-firm") {
+          setAttorneys([JM_MUNOZ_ATTORNEY]);
+          setLoadingAttorneys(false);
+        } else {
+          void loadAttorneys(id);
+        }
         void trackEvent(id, "profile_view", {
           market: attribution?.market,
           specialty: attribution?.specialty,
@@ -1025,7 +1050,7 @@ export default function FirmProfilePage() {
                             </Button>
                           )}
 
-                          {!isLocalExclusiveShowcase && (
+                          {!isLocalExclusiveShowcase && attorney.id !== "jm-munoz" && (
                             <Button
                               type="button"
                               size="sm"
