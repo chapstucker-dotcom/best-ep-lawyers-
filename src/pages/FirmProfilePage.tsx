@@ -362,6 +362,8 @@ export default function FirmProfilePage() {
 
   const planRules = getPlanRules(planKey);
   const hasLeadFormAccess = planRules.leadForm;
+  const canRequestConsultation =
+    hasLeadFormAccess && (!isLocalExclusiveShowcase || Boolean(trackingFirmId));
 
   const isCategoryFeatured =
     planKey === "category_featured" || planKey === "featured";
@@ -1194,7 +1196,7 @@ export default function FirmProfilePage() {
             </section>
           )}
 
-         {hasLeadFormAccess && (
+         {canRequestConsultation && (
             <div
               id={`consultation-form-${publicFirm.id}`}
               className="scroll-mt-24"
@@ -1358,7 +1360,7 @@ export default function FirmProfilePage() {
                 </p>
 
                 <p className="text-sm text-gray-600">
-                  {hasLeadFormAccess
+                  {canRequestConsultation
                     ? "Call, email, visit the firm's website, get directions, or request a consultation."
                     : "Call, email, visit the firm's website, or get directions."}
                 </p>
@@ -1414,7 +1416,7 @@ export default function FirmProfilePage() {
                   </Button>
                 )}
 
-                {hasLeadFormAccess && (
+                {canRequestConsultation && (
                   <Button
                     type="button"
                     variant="outline"
