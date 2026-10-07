@@ -214,6 +214,7 @@ export const firms = [
     ],
     phone: "1-800-341-6750",
     website: "https://saucedoesq.com/",
+    logo_url: "/david-saucedo-logo.png",
     address: "711 N. Copia St.",
     city: "El Paso",
     state: "TX",
