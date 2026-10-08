@@ -709,7 +709,7 @@ export default function LeadCaptureForm({
               </div>
 
               <p className="text-xs leading-5 text-slate-400">
-                By submitting, you understand that this does not create an attorney-client relationship and does not guarantee representation.
+                By submitting, you understand that El Paso&apos;s Best Lawyers may review your information and share it with a participating law firm to evaluate your inquiry. Submission does not establish an attorney-client relationship or guarantee representation. Do not include confidential or highly sensitive information. See our <a href="/privacy" className="font-semibold underline">Privacy Policy</a>.
               </p>
 
               <Button
@@ -958,9 +958,7 @@ export default function LeadCaptureForm({
           </Button>
 
           <p className="text-center text-xs leading-5 text-gray-500">
-            Submission does not guarantee representation
-            and does not create an attorney-client
-            relationship.
+            El Paso&apos;s Best Lawyers may review your information and share it with a participating law firm to evaluate your inquiry. Submission does not establish an attorney-client relationship or guarantee representation. Do not include confidential or highly sensitive information. See our <a href="/privacy" className="font-semibold underline">Privacy Policy</a>.
           </p>
         </form>
       </div>
