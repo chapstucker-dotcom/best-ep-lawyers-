@@ -44,6 +44,11 @@ const navigationItems = [
     label: 'Subscription',
     icon: CreditCard,
   },
+  {
+    id: 'security',
+    label: 'Security',
+    icon: Lock,
+  },
 ];
 
 export function DashboardNav({

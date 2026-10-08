@@ -35,7 +35,7 @@ export default function ResetPassword() {
 
     const checkRecoverySession = async () => {
       const { data } = await supabase.auth.getSession();
-      if (mounted && data.session) setRecoveryMode(true);
+      if (mounted && data.session && (new URLSearchParams(window.location.hash.slice(1)).get("type") === "recovery" || new URLSearchParams(window.location.search).get("type") === "recovery")) setRecoveryMode(true);
     };
 
     void checkRecoverySession();

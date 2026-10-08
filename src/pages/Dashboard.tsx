@@ -35,6 +35,7 @@ import {
   useToast,
 } from "@/hooks/use-toast";
 import { useSeo } from "../hooks/use-seo";
+import { AccountSecurity } from "@/components/dashboard/AccountSecurity";
 import {
   supabase,
   isSupabaseConfigured,
@@ -671,6 +672,10 @@ export default function Dashboard() {
         {activeTab ===
           "subscription" && (
           <Subscription />
+        )}
+
+        {activeTab === "security" && (
+          <AccountSecurity />
         )}
       </div>
     </div>
