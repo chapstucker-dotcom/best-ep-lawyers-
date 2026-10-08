@@ -422,10 +422,9 @@ export default function FirmProfilePage() {
   const planRules = getPlanRules(planKey);
   const hasLeadFormAccess = planRules.leadForm;
   const trackingFirmId = isLocalExclusiveShowcase
-    ? localExclusiveShowcase?.liveFirmId
+    ? localExclusiveShowcase?.liveFirmId ?? publicFirm.id
     : publicFirm.id;
-  const canRequestConsultation =
-    hasLeadFormAccess && (!isLocalExclusiveShowcase || Boolean(trackingFirmId));
+  const canRequestConsultation = hasLeadFormAccess;
 
   const isCategoryFeatured =
     planKey === "category_featured" || planKey === "featured";

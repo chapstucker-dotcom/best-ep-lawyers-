@@ -292,10 +292,9 @@ export default function AppLayout() {
     []
   );
 
-  const displayedCategories =
-    showAllCategories
-      ? categories
-      : homepageCategories;
+  const displayedCategories = (
+    showAllCategories ? categories : homepageCategories
+  ).slice().sort((a, b) => a.title.localeCompare(b.title));
 
   const getFirmSearchText = (
     firm: Firm
@@ -423,7 +422,11 @@ export default function AppLayout() {
           ) ||
           searchableText.includes(
             selectedTitle
-          );
+          ) ||
+            (selectedCategory === 'business-law' &&
+              searchableText.includes(
+                normalizeText(selectedCategoryRecord?.category)
+              ));
 
         const matchesFeatured =
           !featuredOnly ||
