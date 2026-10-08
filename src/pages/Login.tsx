@@ -1,6 +1,7 @@
 import {
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import {
@@ -10,7 +11,7 @@ import {
 } from "react-router-dom";
 
 import { useAuth } from "@/contexts/AuthContext";
-import { saveFirmProfile } from "@/services/firmService";
+import { getFirmByUserId, saveFirmProfile } from "@/services/firmService";
 import { useSeo } from "../hooks/use-seo";
 import {
   normalizeSelfServicePlanId,
@@ -191,7 +192,9 @@ export default function Login() {
     }
   };
 
-  const finalizePendingFirm =
+  const finalizationPromise = useRef<Promise<boolean> | null>(null);
+
+  const finalizePendingFirmImpl =
     async (
       userId: string,
       authenticatedEmail?: string | null
@@ -205,6 +208,29 @@ export default function Login() {
        * can simply continue to dashboard.
        */
       if (!pending) {
+        return true;
+      }
+
+      // Never apply a pending signup to a different authenticated account.
+      if (
+        pending.email?.trim() &&
+        authenticatedEmail &&
+        pending.email.trim().toLowerCase() !== authenticatedEmail.trim().toLowerCase()
+      ) {
+        setFormError("This pending signup belongs to another email address. Sign in with the email used to register your firm.");
+        return false;
+      }
+
+      // Existing firm records must never be overwritten by signup defaults.
+      const { data: existingFirm, error: lookupError } = await getFirmByUserId(userId);
+      if (lookupError) {
+        setFormError(`Could not verify your existing firm profile: ${lookupError.message}`);
+        return false;
+      }
+      if (existingFirm) {
+        localStorage.removeItem("pending-firm-profile");
+        localStorage.removeItem("pending-firm-name");
+        localStorage.removeItem("pending-firm-phone");
         return true;
       }
 
@@ -227,6 +253,17 @@ export default function Login() {
           "Your account is signed in, but the pending firm profile is missing its practice area."
         );
 
+        return false;
+      }
+
+      // These firms already have managed listings; do not create duplicates.
+      const normalizedFirmName = firmName.toLowerCase().replace(/[^a-z0-9]/g, "");
+      const existingListingNames = new Set([
+        "davidesaucedo", "davidesaucedoii", "jmmunozlawfirm",
+        "jmmunozlawfirmpllc", "josemanuelmunoz",
+      ]);
+      if (existingListingNames.has(normalizedFirmName)) {
+        setFormError("This firm already has a listing. Please contact support to claim or manage the existing profile.");
         return false;
       }
 
@@ -371,6 +408,18 @@ if (pendingRequestedPlan !== "free") {
 
       return true;
     };
+
+  // Share a single in-flight operation between email login and auth-session effects.
+  const finalizePendingFirm = (userId: string, authenticatedEmail?: string | null): Promise<boolean> => {
+    if (finalizationPromise.current) return finalizationPromise.current;
+    const operation = finalizePendingFirmImpl(userId, authenticatedEmail);
+    finalizationPromise.current = operation;
+    void operation.then(
+      () => { if (finalizationPromise.current === operation) finalizationPromise.current = null; },
+      () => { if (finalizationPromise.current === operation) finalizationPromise.current = null; }
+    );
+    return operation;
+  };
 
   /*
    * This also handles a user returning
