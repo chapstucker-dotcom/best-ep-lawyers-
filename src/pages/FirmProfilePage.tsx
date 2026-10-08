@@ -24,6 +24,7 @@ import {
   Phone,
   PlayCircle,
   Scale,
+  Share2,
   Star,
   UserRound,
   Users,
@@ -211,6 +212,7 @@ export default function FirmProfilePage() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [attorneys, setAttorneys] = useState<AttorneyProfile[]>([]);
   const [showReviewForm, setShowReviewForm] = useState(false);
+  const [shareMessage, setShareMessage] = useState("");
   const [loadingAttorneys, setLoadingAttorneys] = useState(false);
   const [liveFirm, setLiveFirm] = useState<PublicFirm | null>(null);
   const [loadingFirm, setLoadingFirm] = useState(true);
@@ -419,6 +421,9 @@ export default function FirmProfilePage() {
 
   const planRules = getPlanRules(planKey);
   const hasLeadFormAccess = planRules.leadForm;
+  const trackingFirmId = isLocalExclusiveShowcase
+    ? localExclusiveShowcase?.liveFirmId
+    : publicFirm.id;
   const canRequestConsultation =
     hasLeadFormAccess && (!isLocalExclusiveShowcase || Boolean(trackingFirmId));
 
@@ -491,10 +496,6 @@ export default function FirmProfilePage() {
 
   const fullAddress = addressParts.join(", ");
 
-  const trackingFirmId = isLocalExclusiveShowcase
-    ? localExclusiveShowcase?.liveFirmId
-    : publicFirm.id;
-
   const recordContactClick = (
     eventType: "click_phone" | "click_email" | "click_website"
   ) => {
@@ -532,6 +533,27 @@ export default function FirmProfilePage() {
       "_blank",
       "noopener,noreferrer"
     );
+  };
+
+  const shareProfile = async () => {
+    const url = window.location.href;
+    const title = `${publicFirm.name} | El Paso's Best Lawyers`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({ title, url });
+        return;
+      } catch (error) {
+        if (error instanceof DOMException && error.name === "AbortError") return;
+      }
+    }
+
+    try {
+      await navigator.clipboard.writeText(url);
+      setShareMessage("Profile link copied!");
+    } catch {
+      setShareMessage("Copy this link from your browser address bar to share.");
+    }
   };
 
   const openDirections = () => {
@@ -692,6 +714,14 @@ export default function FirmProfilePage() {
             </div>
           </div>
         </section>
+
+        <div className="flex flex-wrap items-center gap-3 border-b bg-white px-6 py-3 sm:px-8">
+          <Button type="button" variant="outline" onClick={() => void shareProfile()}>
+            <Share2 className="mr-2 h-4 w-4" />
+            Share Profile
+          </Button>
+          {shareMessage && <span role="status" className="text-sm text-[#0F2A43]">{shareMessage}</span>}
+        </div>
 
         <section className="border-b bg-white px-6 py-4 sm:px-8">
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
