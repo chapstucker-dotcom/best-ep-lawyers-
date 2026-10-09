@@ -289,10 +289,7 @@ export default function Login() {
             pending.phone?.trim() ||
             null,
 
-          email:
-            pending.email?.trim() ||
-            authenticatedEmail ||
-            "",
+          email: "",
 
           city: "El Paso",
           state: "TX",
@@ -339,11 +336,7 @@ export default function Login() {
           error
         );
 
-        setFormError(
-          error?.message
-            ? `You signed in successfully, but your firm profile could not be completed: ${error.message}`
-            : "You signed in successfully, but your firm profile could not be completed."
-        );
+        setFormError(error?.code === "23505" ? "This law firm already has a listing. Please contact support to request verified ownership of the existing profile." : error?.message ? `You signed in successfully, but your firm profile could not be completed: ${error.message}` : "You signed in successfully, but your firm profile could not be completed.");
 
         return false;
       }
