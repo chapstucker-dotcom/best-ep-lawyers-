@@ -315,7 +315,7 @@ export default function Signup() {
       }
 
       const normalize = (value: string) =>
-        value.toLowerCase().replace(/[^a-z0-9]/g, "");
+        value.toLowerCase().replace(/[^a-z0-9]/g, "").replace(/(pllc|llc|llp|lp|pc|inc|corp|corporation|professionalcorporation)$/g, "");
 
       if (data.some((firm) => normalize(firm.name || "") === normalize(name))) {
         setFormError("This law firm already has a listing on El Paso's Best Lawyers. Please contact support to request verified ownership of the existing profile.");
