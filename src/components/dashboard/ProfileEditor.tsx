@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -24,6 +24,7 @@ import {
 
 import {
   getFirmByUserId,
+  getLocalFirmById,
   saveFirmProfile,
 } from "@/services/firmService";
 
@@ -275,6 +276,10 @@ export const ProfileEditor = () => {
   const [planKey, setPlanKey] =
     useState<PlanKey>("free");
 
+  // Preserve existing descriptive specialties when only editing contact details.
+  const originalSpecialties = useRef<string[]>([]);
+  const originalPracticeAreas = useRef<string[]>([]);
+
   const planRules = getPlanRules(planKey);
 
   const hasVideoAccess =
@@ -323,34 +328,47 @@ export const ProfileEditor = () => {
       }
 
       if (data) {
+        const local = getLocalFirmById(data.id);
+        const preferred = (remote: unknown, fallback: unknown): string =>
+          text(remote).trim() || text(fallback);
+        const storedCategories =
+          (Array.isArray(data.categories) && data.categories.length
+            ? data.categories
+            : Array.isArray(data.practice_areas) && data.practice_areas.length
+              ? data.practice_areas
+              : local?.categories?.length
+                ? local.categories
+                : local?.category
+                  ? [local.category]
+                  : null);
+        const storedPracticeAreas = storedCategories ?? data.specialties ?? [];
+        const normalizedAreas = normalizePracticeAreas(storedPracticeAreas);
+        originalPracticeAreas.current = normalizedAreas;
+        originalSpecialties.current =
+          Array.isArray(data.specialties) && data.specialties.length
+            ? data.specialties
+            : local?.specialties ?? [];
         setPlanKey(
           normalizePlanKey(
             data.plan_key ?? data.plan
           )
         );
 
-        const storedPracticeAreas =
-          data.specialties ??
-          data.categories ??
-          [];
-
         setForm({
-          name: text(data.name),
-          description: text(data.description),
-          address: text(data.address),
-          city: text(data.city) || "El Paso",
-          state: text(data.state) || "TX",
-          zip_code: text(data.zip_code),
-          phone: text(data.phone),
-          email:
-            text(data.email) ||
-            user.email ||
-            "",
-          website: text(data.website),
-          practiceAreas:
-            normalizePracticeAreas(
-              storedPracticeAreas
-            ),
+          name: preferred(data.name, local?.name),
+          description: preferred(data.description, local?.description ?? local?.bio),
+          address: preferred(data.address, local?.address),
+          city: preferred(data.city, local?.city) || "El Paso",
+          state: preferred(data.state, local?.state) || "TX",
+          zip_code: preferred(data.zip_code, local?.zip_code),
+          phone: preferred(data.phone, local?.phone),
+          // Authentication email is private and must never be a public default.
+          email: text(data.email).trim().toLowerCase() ===
+            text(user.email).trim().toLowerCase()
+              ? ""
+              : preferred(data.email, local?.email),
+          website: preferred(data.website, local?.website),
+          practiceAreas: normalizedAreas,
           years_experience: text(
             data.years_experience
           ),
@@ -370,10 +388,9 @@ export const ProfileEditor = () => {
           gallery_urls: arrayToLines(data.gallery_urls),
         });
       } else {
-        setForm({
-          ...EMPTY,
-          email: user.email || "",
-        });
+        originalSpecialties.current = [];
+        originalPracticeAreas.current = [];
+        setForm({ ...EMPTY });
       }
 
       setLoading(false);
@@ -506,6 +523,20 @@ export const ProfileEditor = () => {
       return;
     }
 
+    // The legacy database stores detailed specialties separately from
+    // selectable practice-area categories. Do not silently discard either.
+    if (
+      originalSpecialties.current.length > 0 &&
+      JSON.stringify(form.practiceAreas) !==
+        JSON.stringify(originalPracticeAreas.current)
+    ) {
+      setMessage(
+        "Practice-area changes for an existing listing require administrator review. Your current specialties are protected."
+      );
+      setMessageType("error");
+      return;
+    }
+
     setSaving(true);
 
     const { data, error } =
@@ -526,17 +557,19 @@ export const ProfileEditor = () => {
         phone:
           form.phone.trim() || null,
         email:
-          form.email.trim() || null,
+          form.email.trim().toLowerCase() ===
+          text(user.email).trim().toLowerCase()
+            ? null
+            : form.email.trim() || null,
         website: websiteValue(
           form.website
         ),
 
-        // The database already expects this array.
-        specialties:
-          form.practiceAreas.slice(
-            0,
-            practiceAreaLimit
-          ),
+        // Existing descriptive specialties are not practice-area selections.
+        // Keep them intact when saving ordinary profile changes.
+        specialties: originalSpecialties.current.length
+          ? originalSpecialties.current
+          : form.practiceAreas.slice(0, practiceAreaLimit),
 
         years_experience:
           optionalNumber(
@@ -554,9 +587,9 @@ export const ProfileEditor = () => {
 
         // Video is a premium benefit. The plan itself is
         // controlled by billing/admin logic, not by this form.
-        video_url: hasVideoAccess
-          ? videoValue(form.video_url)
-          : null,
+        ...(hasVideoAccess
+          ? { video_url: videoValue(form.video_url) }
+          : {}),
 
         office_hours:
           form.office_hours.trim() || null,
@@ -608,11 +641,7 @@ export const ProfileEditor = () => {
     setForm((current) => ({
       ...current,
       website: text(data.website),
-      practiceAreas:
-        normalizePracticeAreas(
-          data.specialties ??
-            current.practiceAreas
-        ),
+      practiceAreas: current.practiceAreas,
       years_experience: text(
         data.years_experience
       ),
@@ -620,8 +649,12 @@ export const ProfileEditor = () => {
       consultation_fee: text(
         data.consultation_fee
       ),
-      video_url: text(data.video_url),
+      video_url: hasVideoAccess ? text(data.video_url) : current.video_url,
     }));
+    originalSpecialties.current = Array.isArray(data.specialties)
+      ? data.specialties
+      : originalSpecialties.current;
+    originalPracticeAreas.current = [...form.practiceAreas];
 
     setMessage(
       "Profile saved successfully."
