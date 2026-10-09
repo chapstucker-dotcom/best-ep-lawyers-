@@ -11,7 +11,7 @@ import {
 } from "react-router-dom";
 
 import { useAuth } from "@/contexts/AuthContext";
-import { getFirmByUserId, saveFirmProfile } from "@/services/firmService";
+import { getAllFirms, getFirmByUserId, saveFirmProfile } from "@/services/firmService";
 import { useSeo } from "../hooks/use-seo";
 import {
   normalizeSelfServicePlanId,
@@ -267,6 +267,20 @@ export default function Login() {
         return false;
       }
 
+      // Prevent older signups from creating a duplicate of any existing listing.
+      const { data: directoryFirms, error: directoryError } = await getAllFirms();
+      if (directoryError || !directoryFirms) {
+        setFormError("We could not verify whether this law firm already has a listing. Please try again.");
+        return false;
+      }
+
+      const normalizeListingName = (value: string) =>
+        value.toLowerCase().replace(/[^a-z0-9]/g, "").replace(/(pllc|llc|llp|lp|pc|inc|corp|corporation|professionalcorporation)$/g, "");
+
+      if (directoryFirms.some((firm) => normalizeListingName(firm.name || "") === normalizeListingName(firmName))) {
+        setFormError("This law firm already has a listing. Please contact support to request verified ownership of the existing profile.");
+        return false;
+      }
       setFinalizingFirm(true);
 
       /*
