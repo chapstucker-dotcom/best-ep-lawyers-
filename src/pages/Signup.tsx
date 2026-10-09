@@ -1,4 +1,4 @@
-﻿import { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Link,
   useSearchParams,
@@ -30,6 +30,8 @@ import {
 import {
   normalizeSelfServicePlanId,
 } from "@/config/selfServicePlans";
+
+import { getAllFirms } from "@/services/firmService";
 
 const MIN_PASSWORD_LENGTH = 6;
 
@@ -301,6 +303,32 @@ export default function Signup() {
       }
     };
 
+  const checkExistingFirm = async (): Promise<boolean> => {
+    const name = formData.firmName.trim();
+    if (!name) return false;
+
+    try {
+      const { data, error } = await getAllFirms();
+      if (error || !data) {
+        setFormError("We could not verify whether this law firm already has a listing. Please try again.");
+        return false;
+      }
+
+      const normalize = (value: string) =>
+        value.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+      if (data.some((firm) => normalize(firm.name || "") === normalize(name))) {
+        setFormError("This law firm already has a listing on El Paso's Best Lawyers. Please contact support to request verified ownership of the existing profile.");
+        return false;
+      }
+
+      return true;
+    } catch (error) {
+      console.error("Firm duplicate check failed:", error);
+      setFormError("We could not verify whether this law firm already has a listing. Please try again.");
+      return false;
+    }
+  };
   const storeSelections = () => {
     localStorage.setItem(
       "selected-firm-plan",
@@ -486,6 +514,8 @@ export default function Signup() {
         return;
       }
 
+      if (!(await checkExistingFirm())) { setLoading(false); return; }
+
       storeSelections();
       storePendingFirmProfile();
 
@@ -531,6 +561,8 @@ export default function Signup() {
 
         return;
       }
+
+      if (!(await checkExistingFirm())) { setLoading(false); return; }
 
       storeSelections();
       storePendingFirmProfile();
