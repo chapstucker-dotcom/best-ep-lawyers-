@@ -44,6 +44,7 @@ import {
   plans,
 } from "@/data/plans";
 import {
+  getAllFirms,
   saveFirmProfile,
 } from "@/services/firmService";
 import {
@@ -296,10 +297,7 @@ export default function Dashboard() {
                 )
               : "";
 
-          const email =
-            pending?.email?.trim() ||
-            user.email ||
-            "";
+
 
           const normalizedFirmName = firmName
             .toLowerCase()
@@ -320,6 +318,26 @@ export default function Dashboard() {
               setFirmLoadError(
                 "This law firm already has a listing on El Paso's Best Lawyers. Please contact the directory administrator to verify ownership and connect your existing listing. A duplicate profile has not been created."
               );
+              setIsLoadingFirm(false);
+            }
+            return;
+          }
+          // Check all directory listings before creating a new firm.
+          const { data: directoryFirms, error: directoryError } = await getAllFirms();
+          if (directoryError || !directoryFirms) {
+            if (active) {
+              setFirmLoadError("Could not verify existing firm listings. Please try again.");
+              setIsLoadingFirm(false);
+            }
+            return;
+          }
+
+          const normalizeListingName = (value: string) =>
+            value.toLowerCase().replace(/[^a-z0-9]/g, "").replace(/(pllc|llc|llp|lp|pc|inc|corp|corporation|professionalcorporation)$/g, "");
+
+          if (directoryFirms.some((firm) => normalizeListingName(firm.name || "") === normalizeListingName(firmName))) {
+            if (active) {
+              setFirmLoadError("This law firm already has a listing. Please contact support to request verified ownership. No duplicate profile was created.");
               setIsLoadingFirm(false);
             }
             return;
@@ -366,7 +384,7 @@ export default function Dashboard() {
                 phone:
                   phone || null,
 
-                email,
+                email: "",
 
                 city:
                   "El Paso",
