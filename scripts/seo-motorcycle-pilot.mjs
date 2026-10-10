@@ -1,4 +1,4 @@
-﻿import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 const root = process.cwd();
@@ -14,7 +14,7 @@ const get = (key) => {
 if (get('path') !== path) throw new Error('Unexpected motorcycle canonical path');
 const title = get('title') + " | El Paso's Best Lawyers";
 const description = get('metaDescription');
-const canonical = site + path;
+const canonical = site + path + "/";
 const esc = (v) => v.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 let html = template;
 function replaceOne(pattern, replacement, name) {
