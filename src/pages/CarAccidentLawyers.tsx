@@ -68,7 +68,7 @@ export default function CarAccidentLawyers() {
     const description =
       "Compare El Paso car accident lawyers and attorneys handling injury claims, insurance disputes, hit-and-run crashes, uninsured motorists, serious injuries, and wrongful death.";
     const canonical =
-      "https://www.elpasosbestlawyers.com/el-paso-car-accident-lawyers";
+      "https://www.elpasosbestlawyers.com/el-paso-car-accident-lawyers/";
 
     const previousTitle = document.title;
     document.title = title;

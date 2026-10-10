@@ -1,6 +1,21 @@
 {
   "redirects": [
     {
+      "source": "/el-paso-personal-injury-lawyers",
+      "destination": "/el-paso-personal-injury-lawyers/",
+      "permanent": true
+    },
+    {
+      "source": "/el-paso-car-accident-lawyers",
+      "destination": "/el-paso-car-accident-lawyers/",
+      "permanent": true
+    },
+    {
+      "source": "/el-paso-truck-accident-lawyers",
+      "destination": "/el-paso-truck-accident-lawyers/",
+      "permanent": true
+    },
+    {
       "source": "/el-paso-motorcycle-accident-lawyers",
       "destination": "/el-paso-motorcycle-accident-lawyers/",
       "permanent": true
@@ -12,10 +27,6 @@
     }
   ],
   "rewrites": [
-    {
-      "source": "/el-paso-personal-injury-lawyers",
-      "destination": "/index.html"
-    },
     {
       "source": "/injury-help",
       "destination": "/index.html"
@@ -50,14 +61,6 @@
     },
     {
       "source": "/el-paso-semi-truck-accident-lawyer",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/el-paso-car-accident-lawyers",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/el-paso-truck-accident-lawyers",
       "destination": "/index.html"
     },
     {

@@ -105,7 +105,7 @@ import type { PracticeAreaPageData } from "../data/practiceAreaPages";
     const description =
       "Compare truck accident lawyers in El Paso, TX for 18-wheeler crashes, commercial vehicle collisions, serious injuries, wrongful death, and trucking insurance disputes.";
     const canonical =
-      "https://www.elpasosbestlawyers.com/el-paso-truck-accident-lawyers";
+      "https://www.elpasosbestlawyers.com/el-paso-truck-accident-lawyers/";
 
     const previousTitle = document.title;
     document.title = title;
