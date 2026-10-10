@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/el-paso-motorcycle-accident-lawyers",
+      "destination": "/el-paso-motorcycle-accident-lawyers/",
+      "permanent": true
+    },
+    {
       "source": "/category/immigration",
       "destination": "/el-paso-immigration-lawyers",
       "permanent": true
@@ -54,10 +59,6 @@
     {
       "source": "/el-paso-truck-accident-lawyers",
       "destination": "/index.html"
-    },
-    {
-      "source": "/el-paso-motorcycle-accident-lawyers",
-      "destination": "/el-paso-motorcycle-accident-lawyers/index.html"
     },
     {
       "source": "/el-paso-wrongful-death-lawyers",
