@@ -1,6 +1,46 @@
 {
   "redirects": [
     {
+      "source": "/el-paso-family-violence-lawyers",
+      "destination": "/el-paso-family-violence-lawyers/",
+      "permanent": true
+    },
+    {
+      "source": "/el-paso-landlord-tenant-lawyers",
+      "destination": "/el-paso-landlord-tenant-lawyers/",
+      "permanent": true
+    },
+    {
+      "source": "/el-paso-prenuptial-agreement-lawyers",
+      "destination": "/el-paso-prenuptial-agreement-lawyers/",
+      "permanent": true
+    },
+    {
+      "source": "/el-paso-sex-discrimination-lawyers",
+      "destination": "/el-paso-sex-discrimination-lawyers/",
+      "permanent": true
+    },
+    {
+      "source": "/el-paso-sideswipe-accident-lawyers",
+      "destination": "/el-paso-sideswipe-accident-lawyers/",
+      "permanent": true
+    },
+    {
+      "source": "/el-paso-t-bone-accident-lawyers",
+      "destination": "/el-paso-t-bone-accident-lawyers/",
+      "permanent": true
+    },
+    {
+      "source": "/el-paso-uninsured-motorist-lawyers",
+      "destination": "/el-paso-uninsured-motorist-lawyers/",
+      "permanent": true
+    },
+    {
+      "source": "/el-paso-wrong-way-accident-lawyers",
+      "destination": "/el-paso-wrong-way-accident-lawyers/",
+      "permanent": true
+    },
+    {
       "source": "/el-paso-personal-injury-lawyers",
       "destination": "/el-paso-personal-injury-lawyers/",
       "permanent": true
@@ -84,10 +124,6 @@
       "destination": "/index.html"
     },
     {
-      "source": "/el-paso-uninsured-motorist-lawyers",
-      "destination": "/index.html"
-    },
-    {
       "source": "/el-paso-drunk-driving-accident-lawyers",
       "destination": "/index.html"
     },
@@ -120,19 +156,7 @@
       "destination": "/index.html"
     },
     {
-      "source": "/el-paso-wrong-way-accident-lawyers",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/el-paso-t-bone-accident-lawyers",
-      "destination": "/index.html"
-    },
-    {
       "source": "/el-paso-rollover-accident-lawyers",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/el-paso-sideswipe-accident-lawyers",
       "destination": "/index.html"
     },
     {
@@ -216,10 +240,6 @@
       "destination": "/index.html"
     },
     {
-      "source": "/el-paso-family-violence-lawyers",
-      "destination": "/index.html"
-    },
-    {
       "source": "/el-paso-protective-order-lawyers",
       "destination": "/index.html"
     },
@@ -276,10 +296,6 @@
       "destination": "/index.html"
     },
     {
-      "source": "/el-paso-prenuptial-agreement-lawyers",
-      "destination": "/index.html"
-    },
-    {
       "source": "/el-paso-estate-planning-lawyers",
       "destination": "/index.html"
     },
@@ -305,10 +321,6 @@
     },
     {
       "source": "/el-paso-age-discrimination-lawyers",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/el-paso-sex-discrimination-lawyers",
       "destination": "/index.html"
     },
     {
@@ -452,10 +464,6 @@
     },
     {
       "source": "/el-paso-tax-irs-lawyers",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/el-paso-landlord-tenant-lawyers",
       "destination": "/index.html"
     },
     {
