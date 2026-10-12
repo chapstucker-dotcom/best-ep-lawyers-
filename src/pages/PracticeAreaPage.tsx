@@ -5,7 +5,7 @@ import { getPracticeAreaPageByPath } from "../data/practiceAreaPages";
 
 export default function PracticeAreaPage() {
   const { pathname } = useLocation();
-  const page = getPracticeAreaPageByPath(pathname);
+  const page = getPracticeAreaPageByPath(pathname.replace(/\/+$/, "") || "/");
 
   if (!page) {
     return <NotFound />;
