@@ -13,7 +13,7 @@ import {
   Sparkles,
   Star,
 } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import type { Firm } from "../data/types";
 import type { PracticeAreaPageData } from "../data/practiceAreaPages";
@@ -275,7 +275,7 @@ function rotateFirmsDaily(
 export default function PracticeAreaFirmDirectory({
   page,
 }: Props) {
-  const navigate = useNavigate();
+
   const impressionKeysRef = useRef<Set<string>>(new Set());
 
   const pageResolution = useMemo(
@@ -462,16 +462,7 @@ export default function PracticeAreaFirmDirectory({
     }
   };
 
-  const openFirmProfile = (firm: PublicFirm) => {
-    navigate(`/firm/${firm.id}`, {
-      state: {
-        attribution: {
-          market: pageResolution.market?.key,
-          specialty: pageResolution.practiceArea?.slug,
-        },
-      },
-    });
-  };
+
 
   return (
     <>
@@ -863,11 +854,14 @@ export default function PracticeAreaFirmDirectory({
                         </a>
                       )}
 
-                      <button
-                        type="button"
-                        onClick={() =>
-                          openFirmProfile(firm)
-                        }
+                      <Link
+                        to={`/firm/${firm.id}`}
+                        state={{
+                          attribution: {
+                            market: pageResolution.market?.key,
+                            specialty: pageResolution.practiceArea?.slug,
+                          },
+                        }}
                         className={
                           isExclusive
                             ? "inline-flex items-center gap-2 rounded-lg border border-white/30 px-4 py-2.5 font-bold text-white transition hover:bg-white hover:text-[#07162f]"
@@ -875,7 +869,7 @@ export default function PracticeAreaFirmDirectory({
                         }
                       >
                         View Profile
-                      </button>
+                      </Link>
                     </div>
                   </article>
                 );
