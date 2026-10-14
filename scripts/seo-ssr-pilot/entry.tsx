@@ -24,3 +24,20 @@ export function renderPersonalInjury(): string {
 console.log(
   `Personal Injury SSR: ${renderPersonalInjury().length} HTML characters`
 );
+
+export function renderMotorcycle(): string {
+  const html = renderToString(
+    <StaticRouter location="/el-paso-motorcycle-accident-lawyers/">
+      <MetaPixelTracker />
+      <App />
+    </StaticRouter>
+  );
+
+  const h1Count = (html.match(/<h1\b/g) ?? []).length;
+
+  if (h1Count !== 1) {
+    throw new Error(`Expected one Motorcycle H1, found ${h1Count}`);
+  }
+
+  return html;
+}

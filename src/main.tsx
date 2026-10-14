@@ -17,11 +17,14 @@ const app = (
   </BrowserRouter>
 );
 
-if (
-  root.dataset.ssr === "personal-injury" &&
-  window.location.pathname.replace(/\/+$/, "") ===
-    "/el-paso-personal-injury-lawyers"
-) {
+const ssrRoutes: Record<string, string> = {
+  "/el-paso-personal-injury-lawyers": "personal-injury",
+  "/el-paso-motorcycle-accident-lawyers": "motorcycle",
+};
+
+const pathname = window.location.pathname.replace(/\/+$/, "") || "/";
+
+if (ssrRoutes[pathname] && root.dataset.ssr === ssrRoutes[pathname]) {
   hydrateRoot(root, app);
 } else {
   createRoot(root).render(app);
