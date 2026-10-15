@@ -9,7 +9,7 @@ if (!bundleSource.includes("Personal Injury SSR:")) {
   throw new Error("SSR bundle validation failed");
 }
 
-const { renderPersonalInjury, renderMotorcycle, renderCarAccident, renderTruckAccident, renderFamilyViolence, renderLandlordTenant, renderPrenuptialAgreement, renderSexDiscrimination, renderSideswipeAccident, renderTBoneAccident, renderUninsuredMotorist, renderWrongWayAccident } = await import(
+const { renderPersonalInjury, renderMotorcycle, renderCarAccident, renderTruckAccident, renderFamilyViolence, renderLandlordTenant, renderPrenuptialAgreement, renderSexDiscrimination, renderSideswipeAccident, renderTBoneAccident, renderUninsuredMotorist, renderWrongWayAccident, renderWageHour, renderSexualHarassment } = await import(
   pathToFileURL(bundle).href
 );
 
@@ -41,6 +41,8 @@ const pages = [
   { slug: "el-paso-t-bone-accident-lawyers", marker: "t-bone-accident", render: renderTBoneAccident },
   { slug: "el-paso-uninsured-motorist-lawyers", marker: "uninsured-motorist", render: renderUninsuredMotorist },
   { slug: "el-paso-wrong-way-accident-lawyers", marker: "wrong-way-accident", render: renderWrongWayAccident },
+  { slug: "el-paso-wage-hour-lawyers", marker: "wage-hour", render: renderWageHour },
+  { slug: "el-paso-sexual-harassment-lawyers", marker: "sexual-harassment", render: renderSexualHarassment },
 ];
 
 const outputs = [];

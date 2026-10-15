@@ -1,6 +1,16 @@
 {
   "redirects": [
     {
+      "source": "/el-paso-wage-hour-lawyers",
+      "destination": "/el-paso-wage-hour-lawyers/",
+      "permanent": true
+    },
+    {
+      "source": "/el-paso-sexual-harassment-lawyers",
+      "destination": "/el-paso-sexual-harassment-lawyers/",
+      "permanent": true
+    },
+    {
       "source": "/el-paso-family-violence-lawyers",
       "destination": "/el-paso-family-violence-lawyers/",
       "permanent": true
@@ -312,10 +322,6 @@
       "destination": "/index.html"
     },
     {
-      "source": "/el-paso-wage-hour-lawyers",
-      "destination": "/index.html"
-    },
-    {
       "source": "/el-paso-workplace-discrimination-lawyers",
       "destination": "/index.html"
     },
@@ -349,10 +355,6 @@
     },
     {
       "source": "/el-paso-retaliation-lawyers",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/el-paso-sexual-harassment-lawyers",
       "destination": "/index.html"
     },
     {

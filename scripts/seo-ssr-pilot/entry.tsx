@@ -97,3 +97,11 @@ export function renderUninsuredMotorist(): string {
 export function renderWrongWayAccident(): string {
   return renderAdditionalPage("/el-paso-wrong-way-accident-lawyers/", "Wrong-Way Accident");
 }
+
+export function renderWageHour(): string {
+  return renderAdditionalPage('/el-paso-wage-hour-lawyers/', 'Wage & Hour');
+}
+
+export function renderSexualHarassment(): string {
+  return renderAdditionalPage('/el-paso-sexual-harassment-lawyers/', 'Sexual Harassment');
+}

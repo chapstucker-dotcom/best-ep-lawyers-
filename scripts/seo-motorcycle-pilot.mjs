@@ -17,6 +17,8 @@ const pages = [
   { path: '/el-paso-t-bone-accident-lawyers', source: 'src/pages/TBoneAccident.tsx', mode: 'pageData' },
   { path: '/el-paso-uninsured-motorist-lawyers', source: 'src/pages/UninsuredMotorist.tsx', mode: 'pageData' },
   { path: '/el-paso-wrong-way-accident-lawyers', source: 'src/pages/WrongWayAccident.tsx', mode: 'pageData' },
+  { path: '/el-paso-wage-hour-lawyers', source: 'src/pages/WageHour.tsx', mode: 'useSeo' },
+  { path: '/el-paso-sexual-harassment-lawyers', source: 'src/data/practiceAreaPages.ts', mode: 'shared' },
 ];
 
 const escapeHtml = (value) => value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
