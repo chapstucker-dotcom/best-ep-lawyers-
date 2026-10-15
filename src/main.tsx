@@ -22,6 +22,14 @@ const ssrRoutes: Record<string, string> = {
   "/el-paso-motorcycle-accident-lawyers": "motorcycle",
   "/el-paso-car-accident-lawyers": "car-accident",
   "/el-paso-truck-accident-lawyers": "truck-accident",
+  "/el-paso-family-violence-lawyers": "family-violence",
+  "/el-paso-landlord-tenant-lawyers": "landlord-tenant",
+  "/el-paso-prenuptial-agreement-lawyers": "prenuptial-agreement",
+  "/el-paso-sex-discrimination-lawyers": "sex-discrimination",
+  "/el-paso-sideswipe-accident-lawyers": "sideswipe-accident",
+  "/el-paso-t-bone-accident-lawyers": "t-bone-accident",
+  "/el-paso-uninsured-motorist-lawyers": "uninsured-motorist",
+  "/el-paso-wrong-way-accident-lawyers": "wrong-way-accident",
 };
 
 const pathname = window.location.pathname.replace(/\/+$/, "") || "/";

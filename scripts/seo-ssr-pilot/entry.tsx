@@ -65,3 +65,35 @@ export function renderCarAccident(): string {
 export function renderTruckAccident(): string {
   return renderAdditionalPage("/el-paso-truck-accident-lawyers/", "Truck Accident");
 }
+
+export function renderFamilyViolence(): string {
+  return renderAdditionalPage("/el-paso-family-violence-lawyers/", "Family Violence");
+}
+
+export function renderLandlordTenant(): string {
+  return renderAdditionalPage("/el-paso-landlord-tenant-lawyers/", "Landlord Tenant");
+}
+
+export function renderPrenuptialAgreement(): string {
+  return renderAdditionalPage("/el-paso-prenuptial-agreement-lawyers/", "Prenuptial Agreement");
+}
+
+export function renderSexDiscrimination(): string {
+  return renderAdditionalPage("/el-paso-sex-discrimination-lawyers/", "Sex Discrimination");
+}
+
+export function renderSideswipeAccident(): string {
+  return renderAdditionalPage("/el-paso-sideswipe-accident-lawyers/", "Sideswipe Accident");
+}
+
+export function renderTBoneAccident(): string {
+  return renderAdditionalPage("/el-paso-t-bone-accident-lawyers/", "T-Bone Accident");
+}
+
+export function renderUninsuredMotorist(): string {
+  return renderAdditionalPage("/el-paso-uninsured-motorist-lawyers/", "Uninsured Motorist");
+}
+
+export function renderWrongWayAccident(): string {
+  return renderAdditionalPage("/el-paso-wrong-way-accident-lawyers/", "Wrong-Way Accident");
+}

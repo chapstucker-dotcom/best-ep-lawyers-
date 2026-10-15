@@ -9,7 +9,7 @@ if (!bundleSource.includes("Personal Injury SSR:")) {
   throw new Error("SSR bundle validation failed");
 }
 
-const { renderPersonalInjury, renderMotorcycle, renderCarAccident, renderTruckAccident } = await import(
+const { renderPersonalInjury, renderMotorcycle, renderCarAccident, renderTruckAccident, renderFamilyViolence, renderLandlordTenant, renderPrenuptialAgreement, renderSexDiscrimination, renderSideswipeAccident, renderTBoneAccident, renderUninsuredMotorist, renderWrongWayAccident } = await import(
   pathToFileURL(bundle).href
 );
 
@@ -33,6 +33,14 @@ const pages = [
     marker: "truck-accident",
     render: renderTruckAccident,
   },
+  { slug: "el-paso-family-violence-lawyers", marker: "family-violence", render: renderFamilyViolence },
+  { slug: "el-paso-landlord-tenant-lawyers", marker: "landlord-tenant", render: renderLandlordTenant },
+  { slug: "el-paso-prenuptial-agreement-lawyers", marker: "prenuptial-agreement", render: renderPrenuptialAgreement },
+  { slug: "el-paso-sex-discrimination-lawyers", marker: "sex-discrimination", render: renderSexDiscrimination },
+  { slug: "el-paso-sideswipe-accident-lawyers", marker: "sideswipe-accident", render: renderSideswipeAccident },
+  { slug: "el-paso-t-bone-accident-lawyers", marker: "t-bone-accident", render: renderTBoneAccident },
+  { slug: "el-paso-uninsured-motorist-lawyers", marker: "uninsured-motorist", render: renderUninsuredMotorist },
+  { slug: "el-paso-wrong-way-accident-lawyers", marker: "wrong-way-accident", render: renderWrongWayAccident },
 ];
 
 const outputs = [];
