@@ -20,6 +20,8 @@ const app = (
 const ssrRoutes: Record<string, string> = {
   "/el-paso-personal-injury-lawyers": "personal-injury",
   "/el-paso-motorcycle-accident-lawyers": "motorcycle",
+  "/el-paso-car-accident-lawyers": "car-accident",
+  "/el-paso-truck-accident-lawyers": "truck-accident",
 };
 
 const pathname = window.location.pathname.replace(/\/+$/, "") || "/";

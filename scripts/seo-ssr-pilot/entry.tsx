@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
 import App from "../../src/App.tsx";
@@ -40,4 +40,28 @@ export function renderMotorcycle(): string {
   }
 
   return html;
+}
+
+function renderAdditionalPage(path: string, name: string): string {
+  const html = renderToString(
+    <StaticRouter location={path}>
+      <MetaPixelTracker />
+      <App />
+    </StaticRouter>
+  );
+
+  const h1Count = (html.match(/<h1\b/g) ?? []).length;
+  if (h1Count !== 1) {
+    throw new Error(`Expected one ${name} H1, found ${h1Count}`);
+  }
+
+  return html;
+}
+
+export function renderCarAccident(): string {
+  return renderAdditionalPage("/el-paso-car-accident-lawyers/", "Car Accident");
+}
+
+export function renderTruckAccident(): string {
+  return renderAdditionalPage("/el-paso-truck-accident-lawyers/", "Truck Accident");
 }

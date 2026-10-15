@@ -1,4 +1,4 @@
-﻿import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 
@@ -9,7 +9,7 @@ if (!bundleSource.includes("Personal Injury SSR:")) {
   throw new Error("SSR bundle validation failed");
 }
 
-const { renderPersonalInjury, renderMotorcycle } = await import(
+const { renderPersonalInjury, renderMotorcycle, renderCarAccident, renderTruckAccident } = await import(
   pathToFileURL(bundle).href
 );
 
@@ -23,6 +23,15 @@ const pages = [
     slug: "el-paso-motorcycle-accident-lawyers",
     marker: "motorcycle",
     render: renderMotorcycle,
+  },  {
+    slug: "el-paso-car-accident-lawyers",
+    marker: "car-accident",
+    render: renderCarAccident,
+  },
+  {
+    slug: "el-paso-truck-accident-lawyers",
+    marker: "truck-accident",
+    render: renderTruckAccident,
   },
 ];
 
