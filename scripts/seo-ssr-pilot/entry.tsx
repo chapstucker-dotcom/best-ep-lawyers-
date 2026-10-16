@@ -105,3 +105,12 @@ export function renderWageHour(): string {
 export function renderSexualHarassment(): string {
   return renderAdditionalPage('/el-paso-sexual-harassment-lawyers/', 'Sexual Harassment');
 }
+
+export function renderCriminalDefense(): string { return renderAdditionalPage('/el-paso-criminal-defense-lawyers/', 'Criminal Defense'); }
+export function renderImmigration(): string { return renderAdditionalPage('/el-paso-immigration-lawyers/', 'Immigration'); }
+export function renderFamilyLaw(): string { return renderAdditionalPage('/el-paso-family-lawyers/', 'Family Law'); }
+export function renderEmploymentLaw(): string { return renderAdditionalPage('/el-paso-employment-lawyers/', 'Employment Law'); }
+export function renderWrongfulTermination(): string { return renderAdditionalPage('/el-paso-wrongful-termination-lawyers/', 'Wrongful Termination'); }
+export function renderWrongfulDeath(): string { return renderAdditionalPage('/el-paso-wrongful-death-lawyers/', 'Wrongful Death'); }
+export function renderMedicalMalpractice(): string { return renderAdditionalPage('/el-paso-medical-malpractice-lawyers/', 'Medical Malpractice'); }
+export function renderSlipAndFall(): string { return renderAdditionalPage('/el-paso-slip-and-fall-lawyers/', 'Slip and Fall'); }

@@ -120,7 +120,7 @@ export default function CriminalDefense() {
     setProperty("og:type", "website");
 
     const canonicalUrl =
-      "https://elpasosbestlawyers.com/el-paso-criminal-defense-lawyers";
+      "https://www.elpasosbestlawyers.com/el-paso-criminal-defense-lawyers/";
 
     let canonical = document.querySelector(
       'link[rel="canonical"]'

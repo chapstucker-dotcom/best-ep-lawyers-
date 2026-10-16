@@ -19,6 +19,14 @@ const pages = [
   { path: '/el-paso-wrong-way-accident-lawyers', source: 'src/pages/WrongWayAccident.tsx', mode: 'pageData' },
   { path: '/el-paso-wage-hour-lawyers', source: 'src/pages/WageHour.tsx', mode: 'useSeo' },
   { path: '/el-paso-sexual-harassment-lawyers', source: 'src/data/practiceAreaPages.ts', mode: 'shared' },
+  { path: '/el-paso-criminal-defense-lawyers', source: 'src/pages/CriminalDefense.tsx', mode: 'pageData' },
+  { path: '/el-paso-immigration-lawyers', source: 'src/pages/Immigration.tsx', mode: 'useSeo' },
+  { path: '/el-paso-family-lawyers', source: 'src/pages/FamilyLaw.tsx', mode: 'pageData' },
+  { path: '/el-paso-employment-lawyers', source: 'src/pages/EmploymentLaw.tsx', mode: 'pageData' },
+  { path: '/el-paso-wrongful-termination-lawyers', source: 'src/pages/WrongfulTermination.tsx', mode: 'useSeo' },
+  { path: '/el-paso-wrongful-death-lawyers', source: 'src/pages/WrongfulDeath.tsx', mode: 'pageData' },
+  { path: '/el-paso-medical-malpractice-lawyers', source: 'src/pages/MedicalMalpractice.tsx', mode: 'pageData' },
+  { path: '/el-paso-slip-and-fall-lawyers', source: 'src/pages/SlipAndFall.tsx', mode: 'pageData' },
 ];
 
 const escapeHtml = (value) => value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');

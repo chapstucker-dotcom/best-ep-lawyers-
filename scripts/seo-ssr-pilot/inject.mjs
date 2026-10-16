@@ -9,7 +9,7 @@ if (!bundleSource.includes("Personal Injury SSR:")) {
   throw new Error("SSR bundle validation failed");
 }
 
-const { renderPersonalInjury, renderMotorcycle, renderCarAccident, renderTruckAccident, renderFamilyViolence, renderLandlordTenant, renderPrenuptialAgreement, renderSexDiscrimination, renderSideswipeAccident, renderTBoneAccident, renderUninsuredMotorist, renderWrongWayAccident, renderWageHour, renderSexualHarassment } = await import(
+const { renderPersonalInjury, renderMotorcycle, renderCarAccident, renderTruckAccident, renderFamilyViolence, renderLandlordTenant, renderPrenuptialAgreement, renderSexDiscrimination, renderSideswipeAccident, renderTBoneAccident, renderUninsuredMotorist, renderWrongWayAccident, renderWageHour, renderSexualHarassment, renderCriminalDefense, renderImmigration, renderFamilyLaw, renderEmploymentLaw, renderWrongfulTermination, renderWrongfulDeath, renderMedicalMalpractice, renderSlipAndFall } = await import(
   pathToFileURL(bundle).href
 );
 
@@ -43,8 +43,15 @@ const pages = [
   { slug: "el-paso-wrong-way-accident-lawyers", marker: "wrong-way-accident", render: renderWrongWayAccident },
   { slug: "el-paso-wage-hour-lawyers", marker: "wage-hour", render: renderWageHour },
   { slug: "el-paso-sexual-harassment-lawyers", marker: "sexual-harassment", render: renderSexualHarassment },
+  { slug: "el-paso-criminal-defense-lawyers", marker: "criminal-defense", render: renderCriminalDefense },
+  { slug: "el-paso-immigration-lawyers", marker: "immigration", render: renderImmigration },
+  { slug: "el-paso-family-lawyers", marker: "family", render: renderFamilyLaw },
+  { slug: "el-paso-employment-lawyers", marker: "employment", render: renderEmploymentLaw },
+  { slug: "el-paso-wrongful-termination-lawyers", marker: "wrongful-termination", render: renderWrongfulTermination },
+  { slug: "el-paso-wrongful-death-lawyers", marker: "wrongful-death", render: renderWrongfulDeath },
+  { slug: "el-paso-medical-malpractice-lawyers", marker: "medical-malpractice", render: renderMedicalMalpractice },
+  { slug: "el-paso-slip-and-fall-lawyers", marker: "slip-and-fall", render: renderSlipAndFall },
 ];
-
 const outputs = [];
 
 for (const page of pages) {

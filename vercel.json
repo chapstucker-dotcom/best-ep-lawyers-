@@ -1,5 +1,13 @@
 {
   "redirects": [
+    { "source": "/el-paso-criminal-defense-lawyers", "destination": "/el-paso-criminal-defense-lawyers/", "permanent": true },
+    { "source": "/el-paso-immigration-lawyers", "destination": "/el-paso-immigration-lawyers/", "permanent": true },
+    { "source": "/el-paso-family-lawyers", "destination": "/el-paso-family-lawyers/", "permanent": true },
+    { "source": "/el-paso-employment-lawyers", "destination": "/el-paso-employment-lawyers/", "permanent": true },
+    { "source": "/el-paso-wrongful-termination-lawyers", "destination": "/el-paso-wrongful-termination-lawyers/", "permanent": true },
+    { "source": "/el-paso-wrongful-death-lawyers", "destination": "/el-paso-wrongful-death-lawyers/", "permanent": true },
+    { "source": "/el-paso-medical-malpractice-lawyers", "destination": "/el-paso-medical-malpractice-lawyers/", "permanent": true },
+    { "source": "/el-paso-slip-and-fall-lawyers", "destination": "/el-paso-slip-and-fall-lawyers/", "permanent": true },
     {
       "source": "/el-paso-wage-hour-lawyers",
       "destination": "/el-paso-wage-hour-lawyers/",
@@ -82,14 +90,6 @@
       "destination": "/index.html"
     },
     {
-      "source": "/el-paso-slip-and-fall-lawyers",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/el-paso-medical-malpractice-lawyers",
-      "destination": "/index.html"
-    },
-    {
       "source": "/el-paso-brain-injury-lawyers",
       "destination": "/index.html"
     },
@@ -111,10 +111,6 @@
     },
     {
       "source": "/el-paso-semi-truck-accident-lawyer",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/el-paso-wrongful-death-lawyers",
       "destination": "/index.html"
     },
     {
@@ -194,10 +190,6 @@
       "destination": "/index.html"
     },
     {
-      "source": "/el-paso-criminal-defense-lawyers",
-      "destination": "/index.html"
-    },
-    {
       "source": "/el-paso-dwi-lawyers",
       "destination": "/index.html"
     },
@@ -254,10 +246,6 @@
       "destination": "/index.html"
     },
     {
-      "source": "/el-paso-immigration-lawyers",
-      "destination": "/index.html"
-    },
-    {
       "source": "/el-paso-green-card-lawyers",
       "destination": "/index.html"
     },
@@ -275,10 +263,6 @@
     },
     {
       "source": "/el-paso-business-immigration-lawyers",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/el-paso-family-lawyers",
       "destination": "/index.html"
     },
     {
@@ -318,10 +302,6 @@
       "destination": "/index.html"
     },
     {
-      "source": "/el-paso-employment-lawyers",
-      "destination": "/index.html"
-    },
-    {
       "source": "/el-paso-workplace-discrimination-lawyers",
       "destination": "/index.html"
     },
@@ -347,10 +327,6 @@
     },
     {
       "source": "/el-paso-guardianship-lawyers",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/el-paso-wrongful-termination-lawyers",
       "destination": "/index.html"
     },
     {

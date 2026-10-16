@@ -41,7 +41,7 @@ export default function WrongfulTermination() {
       "Best Wrongful Termination Lawyers in El Paso, TX | El Paso's Best Lawyers",
     description:
       "Compare wrongful termination lawyers in El Paso, TX for retaliation, discrimination, protected leave, wage complaints, employment contracts, severance disputes, and unlawful firing claims.",
-    path: "/el-paso-wrongful-termination-lawyers",
+    path: "/el-paso-wrongful-termination-lawyers/",
   });
 
   return (

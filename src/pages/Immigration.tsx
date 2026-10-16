@@ -50,7 +50,7 @@ export default function Immigration() {
     title: "Best Immigration Lawyers in El Paso, TX | Compare Attorneys",
     description:
       "Compare immigration lawyers in El Paso, TX for green cards, citizenship, visas, deportation defense, family immigration, waivers, and consular processing.",
-    path: "/el-paso-immigration-lawyers",
+    path: "/el-paso-immigration-lawyers/",
   });
 
   return (

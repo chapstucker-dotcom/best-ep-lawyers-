@@ -75,7 +75,7 @@ export default function EmploymentLaw() {
     const title = "Best Employment Lawyers in El Paso, TX | El Paso's Best Lawyers";
     const description =
       "Compare employment lawyers in El Paso, TX for wrongful termination, discrimination, retaliation, harassment, unpaid wages, overtime, employment contracts, severance agreements, and workplace disputes.";
-    const canonical = "https://www.elpasosbestlawyers.com/el-paso-employment-lawyers";
+    const canonical = "https://www.elpasosbestlawyers.com/el-paso-employment-lawyers/";
 
     const previousTitle = document.title;
     document.title = title;

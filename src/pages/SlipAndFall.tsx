@@ -97,7 +97,7 @@ export default function SlipAndFall() {
     const description =
       "Compare slip and fall lawyers in El Paso, TX handling premises liability claims involving stores, businesses, apartments, unsafe walkways, wet floors, and other dangerous property conditions.";
     const canonical =
-      "https://www.elpasosbestlawyers.com/el-paso-slip-and-fall-lawyers";
+      "https://www.elpasosbestlawyers.com/el-paso-slip-and-fall-lawyers/";
 
     const previousTitle = document.title;
     document.title = title;
