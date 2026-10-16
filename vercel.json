@@ -1,5 +1,7 @@
 {
   "redirects": [
+    { "source": "/el-paso-estate-planning-lawyers", "destination": "/el-paso-estate-planning-lawyers/", "permanent": true },
+    { "source": "/el-paso-retaliation-lawyers", "destination": "/el-paso-retaliation-lawyers/", "permanent": true },
     { "source": "/el-paso-criminal-defense-lawyers", "destination": "/el-paso-criminal-defense-lawyers/", "permanent": true },
     { "source": "/el-paso-immigration-lawyers", "destination": "/el-paso-immigration-lawyers/", "permanent": true },
     { "source": "/el-paso-family-lawyers", "destination": "/el-paso-family-lawyers/", "permanent": true },
@@ -290,10 +292,6 @@
       "destination": "/index.html"
     },
     {
-      "source": "/el-paso-estate-planning-lawyers",
-      "destination": "/index.html"
-    },
-    {
       "source": "/el-paso-probate-lawyers",
       "destination": "/index.html"
     },
@@ -327,10 +325,6 @@
     },
     {
       "source": "/el-paso-guardianship-lawyers",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/el-paso-retaliation-lawyers",
       "destination": "/index.html"
     },
     {

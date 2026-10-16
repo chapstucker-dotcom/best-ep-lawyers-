@@ -27,6 +27,8 @@ const pages = [
   { path: '/el-paso-wrongful-death-lawyers', source: 'src/pages/WrongfulDeath.tsx', mode: 'pageData' },
   { path: '/el-paso-medical-malpractice-lawyers', source: 'src/pages/MedicalMalpractice.tsx', mode: 'pageData' },
   { path: '/el-paso-slip-and-fall-lawyers', source: 'src/pages/SlipAndFall.tsx', mode: 'pageData' },
+  { path: '/el-paso-estate-planning-lawyers', source: 'src/pages/EstatePlanning.tsx', mode: 'pageData' },
+  { path: '/el-paso-retaliation-lawyers', source: 'src/data/practiceAreaPages.ts', mode: 'shared' },
 ];
 
 const escapeHtml = (value) => value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');

@@ -9,7 +9,7 @@ if (!bundleSource.includes("Personal Injury SSR:")) {
   throw new Error("SSR bundle validation failed");
 }
 
-const { renderPersonalInjury, renderMotorcycle, renderCarAccident, renderTruckAccident, renderFamilyViolence, renderLandlordTenant, renderPrenuptialAgreement, renderSexDiscrimination, renderSideswipeAccident, renderTBoneAccident, renderUninsuredMotorist, renderWrongWayAccident, renderWageHour, renderSexualHarassment, renderCriminalDefense, renderImmigration, renderFamilyLaw, renderEmploymentLaw, renderWrongfulTermination, renderWrongfulDeath, renderMedicalMalpractice, renderSlipAndFall } = await import(
+const { renderPersonalInjury, renderMotorcycle, renderCarAccident, renderTruckAccident, renderFamilyViolence, renderLandlordTenant, renderPrenuptialAgreement, renderSexDiscrimination, renderSideswipeAccident, renderTBoneAccident, renderUninsuredMotorist, renderWrongWayAccident, renderWageHour, renderSexualHarassment, renderCriminalDefense, renderImmigration, renderFamilyLaw, renderEmploymentLaw, renderWrongfulTermination, renderWrongfulDeath, renderMedicalMalpractice, renderSlipAndFall, renderEstatePlanning, renderRetaliation } = await import(
   pathToFileURL(bundle).href
 );
 
@@ -51,6 +51,8 @@ const pages = [
   { slug: "el-paso-wrongful-death-lawyers", marker: "wrongful-death", render: renderWrongfulDeath },
   { slug: "el-paso-medical-malpractice-lawyers", marker: "medical-malpractice", render: renderMedicalMalpractice },
   { slug: "el-paso-slip-and-fall-lawyers", marker: "slip-and-fall", render: renderSlipAndFall },
+  { slug: "el-paso-estate-planning-lawyers", marker: "estate-planning", render: renderEstatePlanning },
+  { slug: "el-paso-retaliation-lawyers", marker: "retaliation", render: renderRetaliation },
 ];
 const outputs = [];
 
