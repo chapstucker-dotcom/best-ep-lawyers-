@@ -116,3 +116,5 @@ export function renderMedicalMalpractice(): string { return renderAdditionalPage
 export function renderSlipAndFall(): string { return renderAdditionalPage('/el-paso-slip-and-fall-lawyers/', 'Slip and Fall'); }
 export function renderEstatePlanning(): string { return renderAdditionalPage('/el-paso-estate-planning-lawyers/', 'Estate Planning'); }
 export function renderRetaliation(): string { return renderAdditionalPage('/el-paso-retaliation-lawyers/', 'Retaliation'); }
+
+export function renderDWI(): string { return renderAdditionalPage('/el-paso-dwi-lawyers/', 'DWI'); }

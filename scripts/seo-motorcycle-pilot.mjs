@@ -29,6 +29,7 @@ const pages = [
   { path: '/el-paso-slip-and-fall-lawyers', source: 'src/pages/SlipAndFall.tsx', mode: 'pageData' },
   { path: '/el-paso-estate-planning-lawyers', source: 'src/pages/EstatePlanning.tsx', mode: 'pageData' },
   { path: '/el-paso-retaliation-lawyers', source: 'src/data/practiceAreaPages.ts', mode: 'shared' },
+  { path: '/el-paso-dwi-lawyers', source: 'src/pages/DWI.tsx', mode: 'pageData' },
 ];
 
 const escapeHtml = (value) => value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
