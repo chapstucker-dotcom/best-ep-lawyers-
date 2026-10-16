@@ -30,6 +30,7 @@ const pages = [
   { path: '/el-paso-estate-planning-lawyers', source: 'src/pages/EstatePlanning.tsx', mode: 'pageData' },
   { path: '/el-paso-retaliation-lawyers', source: 'src/data/practiceAreaPages.ts', mode: 'shared' },
   { path: '/el-paso-dwi-lawyers', source: 'src/pages/DWI.tsx', mode: 'pageData' },
+  { path: '/guides/uninsured-driver-accident-texas', source: 'src/data/articles.ts', mode: 'article' },
 ];
 
 const escapeHtml = (value) => value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -53,6 +54,14 @@ function replaceOne(html, pattern, replacement, label) {
 for (const page of pages) {
   const source = readFileSync(join(root, page.source), 'utf8');
   let title, description;
+  if (page.mode === 'article') {
+    const slug = page.path.split('/').pop();
+    const matches = [...source.matchAll(/^\s*slug:\s*'([^']+)',/gm)].filter((m) => m[1] === slug);
+    if (matches.length !== 1) throw new Error(`${page.path}: expected one article slug`);
+    const scope = source.slice(matches[0].index, source.indexOf('\n  },', matches[0].index));
+    title = extract(scope, /title:\s*'([^'\r\n]+)'/, `${page.path} title`) + ` | El Paso's Best Lawyers`;
+    description = extract(scope, /metaDescription:\s*'([^'\r\n]+)'/, `${page.path} description`);
+  } else
   if (page.mode === 'runtime') {
     title = extract(source, /const title\s*=\s*"([^"\r\n]+)"/, `${page.source} title`);
     description = extract(source, /const description\s*=\s*"([^"\r\n]+)"/, `${page.source} description`);

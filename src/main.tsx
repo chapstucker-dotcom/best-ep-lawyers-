@@ -43,6 +43,7 @@ const ssrRoutes: Record<string, string> = {
   "/el-paso-estate-planning-lawyers": "estate-planning",
   "/el-paso-retaliation-lawyers": "retaliation",
   "/el-paso-dwi-lawyers": "dwi",
+  "/guides/uninsured-driver-accident-texas": "uninsured-driver-guide",
 };
 
 const pathname = window.location.pathname.replace(/\/+$/, "") || "/";

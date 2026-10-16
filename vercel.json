@@ -1,5 +1,6 @@
 {
   "redirects": [
+    { "source": "/guides/uninsured-driver-texas-car-accident", "destination": "/guides/uninsured-driver-accident-texas/", "permanent": true },
     { "source": "/el-paso-dwi-lawyers", "destination": "/el-paso-dwi-lawyers/", "permanent": true },
     { "source": "/el-paso-dwi-dui-lawyers", "destination": "/el-paso-dwi-lawyers/", "permanent": true },
     { "source": "/el-paso-estate-planning-lawyers", "destination": "/el-paso-estate-planning-lawyers/", "permanent": true },
@@ -359,7 +360,7 @@
     },
     {
       "source": "/guides/uninsured-driver-accident-texas",
-      "destination": "/index.html"
+      "destination": "/guides/uninsured-driver-accident-texas/index.html"
     },
     {
       "source": "/guides/how-to-get-texas-crash-report-el-paso",

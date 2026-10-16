@@ -118,3 +118,4 @@ export function renderEstatePlanning(): string { return renderAdditionalPage('/e
 export function renderRetaliation(): string { return renderAdditionalPage('/el-paso-retaliation-lawyers/', 'Retaliation'); }
 
 export function renderDWI(): string { return renderAdditionalPage('/el-paso-dwi-lawyers/', 'DWI'); }
+export function renderUninsuredDriverGuide(): string { return renderAdditionalPage('/guides/uninsured-driver-accident-texas', 'Uninsured Driver Guide'); }

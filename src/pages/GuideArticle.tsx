@@ -130,7 +130,7 @@ export default function GuideArticle() {
             Updated{' '}
             {new Date(
               `${article.updatedAt}T12:00:00`
-            ).toLocaleDateString()}
+            ).toLocaleDateString('en-US')}
           </p>
 
           <div className="my-8 rounded-xl border-l-4 border-[#F5B800] bg-amber-50 p-5 text-sm leading-6 text-amber-950">

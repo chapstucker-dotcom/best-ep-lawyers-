@@ -9,7 +9,7 @@ if (!bundleSource.includes("Personal Injury SSR:")) {
   throw new Error("SSR bundle validation failed");
 }
 
-const { renderPersonalInjury, renderMotorcycle, renderCarAccident, renderTruckAccident, renderFamilyViolence, renderLandlordTenant, renderPrenuptialAgreement, renderSexDiscrimination, renderSideswipeAccident, renderTBoneAccident, renderUninsuredMotorist, renderWrongWayAccident, renderWageHour, renderSexualHarassment, renderCriminalDefense, renderImmigration, renderFamilyLaw, renderEmploymentLaw, renderWrongfulTermination, renderWrongfulDeath, renderMedicalMalpractice, renderSlipAndFall, renderEstatePlanning, renderRetaliation, renderDWI } = await import(
+const { renderPersonalInjury, renderMotorcycle, renderCarAccident, renderTruckAccident, renderFamilyViolence, renderLandlordTenant, renderPrenuptialAgreement, renderSexDiscrimination, renderSideswipeAccident, renderTBoneAccident, renderUninsuredMotorist, renderWrongWayAccident, renderWageHour, renderSexualHarassment, renderCriminalDefense, renderImmigration, renderFamilyLaw, renderEmploymentLaw, renderWrongfulTermination, renderWrongfulDeath, renderMedicalMalpractice, renderSlipAndFall, renderEstatePlanning, renderRetaliation, renderDWI, renderUninsuredDriverGuide } = await import(
   pathToFileURL(bundle).href
 );
 
@@ -54,6 +54,7 @@ const pages = [
   { slug: "el-paso-estate-planning-lawyers", marker: "estate-planning", render: renderEstatePlanning },
   { slug: "el-paso-retaliation-lawyers", marker: "retaliation", render: renderRetaliation },
   { slug: "el-paso-dwi-lawyers", marker: "dwi", render: renderDWI },
+  { slug: "guides/uninsured-driver-accident-texas", marker: "uninsured-driver-guide", render: renderUninsuredDriverGuide },
 ];
 const outputs = [];
 
