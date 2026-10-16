@@ -455,7 +455,7 @@
     },
     {
       "source": "/signup",
-      "destination": "/index.html"
+      "destination": "/signup/index.html"
     },
     {
       "source": "/dashboard",

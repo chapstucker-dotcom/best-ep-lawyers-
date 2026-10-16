@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/seo-motorcycle-pilot.mjs && vite build --ssr scripts/seo-ssr-pilot/entry.tsx --outDir .seo-ssr-test --emptyOutDir && node scripts/seo-ssr-pilot/inject.mjs",
+    "build": "vite build && node scripts/seo-motorcycle-pilot.mjs && vite build --ssr scripts/seo-ssr-pilot/entry.tsx --outDir .seo-ssr-test --emptyOutDir && node scripts/seo-ssr-pilot/inject.mjs && node scripts/seo-signup-html.mjs",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview"
