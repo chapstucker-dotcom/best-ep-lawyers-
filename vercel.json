@@ -1,6 +1,7 @@
 {
   "redirects": [
     { "source": "/el-paso-dwi-lawyers", "destination": "/el-paso-dwi-lawyers/", "permanent": true },
+    { "source": "/el-paso-dwi-dui-lawyers", "destination": "/el-paso-dwi-lawyers/", "permanent": true },
     { "source": "/el-paso-estate-planning-lawyers", "destination": "/el-paso-estate-planning-lawyers/", "permanent": true },
     { "source": "/el-paso-retaliation-lawyers", "destination": "/el-paso-retaliation-lawyers/", "permanent": true },
     { "source": "/el-paso-criminal-defense-lawyers", "destination": "/el-paso-criminal-defense-lawyers/", "permanent": true },
