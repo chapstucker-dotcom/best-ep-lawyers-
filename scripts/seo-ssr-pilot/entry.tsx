@@ -66,6 +66,8 @@ export function renderTruckAccident(): string {
   return renderAdditionalPage("/el-paso-truck-accident-lawyers/", "Truck Accident");
 }
 
+export function renderProtectiveOrder(): string { return renderAdditionalPage('/el-paso-protective-order-lawyers/', 'Protective Order'); }
+
 export function renderFamilyViolence(): string {
   return renderAdditionalPage("/el-paso-family-violence-lawyers/", "Family Violence");
 }

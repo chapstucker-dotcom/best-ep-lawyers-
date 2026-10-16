@@ -10,6 +10,7 @@ const pages = [
   { path: '/el-paso-car-accident-lawyers', source: 'src/pages/CarAccidentLawyers.tsx', mode: 'runtime' },
   { path: '/el-paso-truck-accident-lawyers', source: 'src/pages/TruckAccidentLawyers.tsx', mode: 'runtime' },
   { path: '/el-paso-family-violence-lawyers', source: 'src/data/practiceAreaPages.ts', mode: 'shared' },
+  { path: '/el-paso-protective-order-lawyers', source: 'src/data/practiceAreaPages.ts', mode: 'shared' },
   { path: '/el-paso-landlord-tenant-lawyers', source: 'src/data/practiceAreaPages.ts', mode: 'shared' },
   { path: '/el-paso-prenuptial-agreement-lawyers', source: 'src/data/practiceAreaPages.ts', mode: 'shared' },
   { path: '/el-paso-sex-discrimination-lawyers', source: 'src/pages/SexDiscrimination.tsx', mode: 'useSeo' },
