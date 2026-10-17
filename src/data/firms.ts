@@ -352,6 +352,7 @@ export const firms = [
 
   {
     id: "ellic-simon-sahualla-iii",
+    phone: "(915) 845-9994",
     logo_url: "/attorneys/ellic-sahualla.jpg",
     name: "Ellic Simon Sahualla III",
     category: "Criminal Defense",
