@@ -357,7 +357,7 @@ export const firms = [
     category: "Criminal Defense",
     categories: ["Criminal Defense"],
     specialties: ["Criminal Defense", "DWI Defense", "Criminal Appeals", "Expunctions", "Juvenile Law", "White Collar Crime"],
-    address: "114 Texas Avenue, El Paso, TX 79901",
+    address: "114 Texas Avenue",
     city: "El Paso",
     state: "TX",
     zip_code: "79901",
