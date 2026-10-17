@@ -350,6 +350,24 @@ export const firms = [
     bio: "El Paso law firm providing criminal defense representation to clients facing criminal charges in Texas.",
   },
 
+  {
+    id: "ellic-simon-sahualla-iii",
+    logo_url: "/attorneys/ellic-sahualla.jpg",
+    name: "Ellic Simon Sahualla III",
+    category: "Criminal Defense",
+    categories: ["Criminal Defense"],
+    specialties: ["Criminal Defense", "DWI Defense", "Criminal Appeals", "Expunctions", "Juvenile Law", "White Collar Crime"],
+    address: "114 Texas Avenue, El Paso, TX 79901",
+    city: "El Paso",
+    state: "TX",
+    zip_code: "79901",
+    featured: false,
+    exclusive: false,
+    verified: false,
+    plan: "free",
+    plan_key: "free",
+    bio: "Ellic Simon Sahualla III is an El Paso criminal defense attorney. Admitted to the Texas bar in 2007, he previously served as an assistant district attorney in El Paso County. His practice includes criminal defense, DWI matters, criminal appeals, expunctions, juvenile matters, and white-collar criminal defense.",
+  },
   // ============================================================
   // IMMIGRATION
   // ============================================================
