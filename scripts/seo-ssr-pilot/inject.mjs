@@ -9,11 +9,13 @@ if (!bundleSource.includes("Personal Injury SSR:")) {
   throw new Error("SSR bundle validation failed");
 }
 
-const { renderPersonalInjury, renderMotorcycle, renderCarAccident, renderTruckAccident, renderFamilyViolence, renderProtectiveOrder, renderLandlordTenant, renderPrenuptialAgreement, renderSexDiscrimination, renderSideswipeAccident, renderTBoneAccident, renderUninsuredMotorist, renderWrongWayAccident, renderWageHour, renderSexualHarassment, renderCriminalDefense, renderImmigration, renderFamilyLaw, renderEmploymentLaw, renderWrongfulTermination, renderWrongfulDeath, renderMedicalMalpractice, renderSlipAndFall, renderEstatePlanning, renderRetaliation, renderDWI, renderUninsuredDriverGuide } = await import(
+const { renderPersonalInjury, renderMotorcycle, renderCarAccident, renderTruckAccident, renderFamilyViolence, renderProtectiveOrder, renderLandlordTenant, renderPrenuptialAgreement, renderSexDiscrimination, renderSideswipeAccident, renderTBoneAccident, renderUninsuredMotorist, renderWrongWayAccident, renderWageHour, renderSexualHarassment, renderCriminalDefense, renderImmigration, renderFamilyLaw, renderEmploymentLaw, renderWrongfulTermination, renderWrongfulDeath, renderMedicalMalpractice, renderSlipAndFall, renderEstatePlanning, renderRetaliation, renderDWI, renderUninsuredDriverGuide, renderTrafficTicket, renderWorkersCompensation } = await import(
   pathToFileURL(bundle).href
 );
 
 const pages = [
+  { slug: "el-paso-traffic-ticket-lawyers", marker: "traffic-ticket", render: renderTrafficTicket },
+  { slug: "el-paso-workers-compensation-lawyers", marker: "workers-compensation", render: renderWorkersCompensation },
   {
     slug: "el-paso-personal-injury-lawyers",
     marker: "personal-injury",

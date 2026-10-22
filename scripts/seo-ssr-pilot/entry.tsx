@@ -121,3 +121,6 @@ export function renderRetaliation(): string { return renderAdditionalPage('/el-p
 
 export function renderDWI(): string { return renderAdditionalPage('/el-paso-dwi-lawyers/', 'DWI'); }
 export function renderUninsuredDriverGuide(): string { return renderAdditionalPage('/guides/uninsured-driver-accident-texas', 'Uninsured Driver Guide'); }
+
+export function renderTrafficTicket(): string { return renderAdditionalPage('/el-paso-traffic-ticket-lawyers/', 'Traffic Ticket'); }
+export function renderWorkersCompensation(): string { return renderAdditionalPage('/el-paso-workers-compensation-lawyers/', 'Workers Compensation'); }
