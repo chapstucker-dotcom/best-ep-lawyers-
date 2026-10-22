@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import type { Firm } from "../data/types";
 import type { PracticeAreaPageData } from "../data/practiceAreaPages";
 import { getAllFirms } from "../services/firmService";
+import seoFirmSnapshot from "../data/seoFirmSnapshot.json";
 import { trackEvent } from "@/services/analyticsService";
 import { getLocalExclusiveShowcase, isLocalExclusiveShowcaseId } from "../data/exclusiveShowcases";
 import { getCommercialProductByPlanId } from "../data/commercialModel";
@@ -288,10 +289,10 @@ export default function PracticeAreaFirmDirectory({
   );
 
   const [firms, setFirms] =
-    useState<PublicFirm[]>([]);
+    useState<PublicFirm[]>(seoFirmSnapshot as PublicFirm[]);
 
   const [loading, setLoading] =
-    useState(true);
+    useState(false);
 
   useEffect(() => {
     let active = true;
