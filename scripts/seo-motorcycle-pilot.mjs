@@ -5,6 +5,7 @@ const root = process.cwd();
 const template = readFileSync(join(root, 'dist/index.html'), 'utf8');
 const site = 'https://www.elpasosbestlawyers.com';
 const pages = [
+  { path: '/community-legal-resources', source: 'src/pages/CommunityLegalResources.tsx', mode: 'useSeo' },
   { path: '/el-paso-traffic-ticket-lawyers', source: 'src/data/practiceAreaPages.ts', mode: 'shared' },
   { path: '/el-paso-workers-compensation-lawyers', source: 'src/pages/WorkersCompensation.tsx', mode: 'pageData' },
   { path: '/el-paso-motorcycle-accident-lawyers', source: 'src/pages/MotorcycleAccident.tsx', mode: 'pageData' },

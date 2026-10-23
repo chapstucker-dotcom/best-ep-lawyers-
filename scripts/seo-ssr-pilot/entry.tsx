@@ -58,6 +58,10 @@ function renderAdditionalPage(path: string, name: string): string {
   return html;
 }
 
+export function renderCommunityLegalResources(): string {
+  return renderAdditionalPage("/community-legal-resources", "Community Legal Resources");
+}
+
 export function renderCarAccident(): string {
   return renderAdditionalPage("/el-paso-car-accident-lawyers/", "Car Accident");
 }

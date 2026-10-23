@@ -90,6 +90,7 @@
     }
   ],
   "rewrites": [
+    {"source":"/community-legal-resources","destination":"/community-legal-resources/index.html"},
     {
       "source": "/injury-help",
       "destination": "/index.html"
