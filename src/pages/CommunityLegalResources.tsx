@@ -24,6 +24,29 @@ const categories: Array<"All resources" | Category> = ["All resources", "Legal A
 
 export default function CommunityLegalResources() {
   const [query, setQuery] = useState("");
+  const [contact, setContact] = useState({ name: "", email: "", organization: "", message: "", website: "" });
+  const [contactStatus, setContactStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [contactError, setContactError] = useState("");
+  async function submitContact(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (contactStatus === "sending") return;
+    setContactStatus("sending");
+    setContactError("");
+    try {
+      const response = await fetch("/api/community-resource-contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(contact),
+      });
+      const result = await response.json().catch(() => null);
+      if (!response.ok || result?.success !== true) throw new Error(result?.error || "We could not send your inquiry. Please try again.");
+      setContactStatus("success");
+      setContact({ name: "", email: "", organization: "", message: "", website: "" });
+    } catch (error) {
+      setContactError(error instanceof Error ? error.message : "We could not send your inquiry. Please try again.");
+      setContactStatus("error");
+    }
+  }
   const [category, setCategory] = useState<(typeof categories)[number]>("All resources");
   useSeo({
     title: "El Paso Community Legal Resources | Legal Aid & Public Help",
@@ -97,7 +120,26 @@ export default function CommunityLegalResources() {
         </section>
 
         <section className="bg-[#0F2A43] px-5 py-16 text-white">
-          <div className="mx-auto max-w-5xl"><div className="flex items-center gap-3 text-amber-300"><Users size={28} /><span className="text-sm font-bold uppercase tracking-widest">Community collaboration</span></div><h2 className="mt-4 text-3xl font-bold md:text-4xl">Help keep El Paso connected to legal resources</h2><p className="mt-4 max-w-3xl leading-8 text-slate-200">We welcome corrections, updated program information and opportunities to collaborate on useful public legal education. Resource inclusion is free and does not require endorsements, referrals or reciprocal links.</p><a href="mailto:support@elpasosbestlawyers.com?subject=Community%20Legal%20Resources%20Inquiry" className="mt-7 inline-flex items-center gap-2 rounded-lg bg-amber-400 px-6 py-3 font-bold text-slate-950 hover:bg-amber-300">Contact us about a resource <ArrowRight size={17} /></a></div>
+          <div className="mx-auto max-w-5xl"><div className="flex items-center gap-3 text-amber-300"><Users size={28} /><span className="text-sm font-bold uppercase tracking-widest">Community collaboration</span></div><h2 className="mt-4 text-3xl font-bold md:text-4xl">Help keep El Paso connected to legal resources</h2><p className="mt-4 max-w-3xl leading-8 text-slate-200">We welcome corrections, updated program information and opportunities to collaborate on useful public legal education. Resource inclusion is free and does not require endorsements, referrals or reciprocal links.</p><div className="mt-8 max-w-3xl rounded-xl border border-white/20 bg-white/10 p-5 sm:p-7">
+              <h3 className="text-xl font-bold">Contact us about a resource</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-200">Suggest a resource, report an update, or ask about community collaboration. Please do not include confidential legal or case information.</p>
+              {contactStatus === "success" ? (
+                <div role="status" className="mt-5 rounded-lg border border-emerald-300/50 bg-emerald-950/40 p-4 text-white">
+                  Thank you. Your inquiry has been submitted.
+                  <button type="button" onClick={() => setContactStatus("idle")} className="ml-3 font-bold underline">Send another inquiry</button>
+                </div>
+              ) : (
+                <form onSubmit={submitContact} className="mt-5 grid gap-4 sm:grid-cols-2">
+                  <label className="text-sm font-semibold">Your name *<input required maxLength={120} autoComplete="name" value={contact.name} onChange={(event) => setContact({ ...contact, name: event.target.value })} className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-3 text-slate-900" /></label>
+                  <label className="text-sm font-semibold">Email address *<input required type="email" maxLength={254} autoComplete="email" value={contact.email} onChange={(event) => setContact({ ...contact, email: event.target.value })} className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-3 text-slate-900" /></label>
+                  <label className="text-sm font-semibold sm:col-span-2">Organization (optional)<input maxLength={150} autoComplete="organization" value={contact.organization} onChange={(event) => setContact({ ...contact, organization: event.target.value })} className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-3 text-slate-900" /></label>
+                  <label className="text-sm font-semibold sm:col-span-2">Message *<textarea required minLength={10} maxLength={3000} rows={5} value={contact.message} onChange={(event) => setContact({ ...contact, message: event.target.value })} className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-3 text-slate-900" /></label>
+                  <div aria-hidden="true" className="absolute -left-[10000px]" ><label>Leave this field blank<input tabIndex={-1} autoComplete="off" value={contact.website} onChange={(event) => setContact({ ...contact, website: event.target.value })} /></label></div>
+                  {contactStatus === "error" && <p role="alert" className="sm:col-span-2 text-sm font-semibold text-amber-200">{contactError}</p>}
+                  <div className="sm:col-span-2"><button type="submit" disabled={contactStatus === "sending"} className="inline-flex items-center gap-2 rounded-lg bg-amber-400 px-6 py-3 font-bold text-slate-950 hover:bg-amber-300 disabled:cursor-wait disabled:opacity-60">{contactStatus === "sending" ? "Sending…" : "Send resource inquiry"} <ArrowRight size={17} /></button></div>
+                </form>
+              )}
+            </div></div>
         </section>
         <section className="mx-auto max-w-6xl px-5 py-10 text-sm leading-7 text-slate-600"><strong>Information only.</strong> El Paso&apos;s Best Lawyers is an independent attorney directory, not a law firm or legal aid provider. This page does not provide legal advice, determine eligibility, or create an attorney-client relationship. Inclusion does not imply an endorsement, affiliation or partnership.</section>
       </main>
