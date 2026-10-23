@@ -1035,6 +1035,35 @@ export default function AppLayout() {
         </div>
       </section>
 
+      {/* Community Legal Resources feature */}
+      <section id="community-resources-feature" className="border-y border-slate-200 bg-slate-50 py-14 sm:py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-2xl border border-slate-200 bg-white px-6 py-9 shadow-sm sm:px-10 sm:py-12">
+            <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+              <div className="max-w-2xl">
+                <div className="mb-4 flex items-center gap-3 text-sm font-bold uppercase tracking-wider text-teal-700">
+                  <HeartHandshake className="h-6 w-6" aria-hidden="true" />
+                  Free Community Resource
+                </div>
+                <h2 className="text-3xl font-bold tracking-tight text-[#0F2A43] sm:text-4xl">
+                  Need Legal Help Beyond Hiring an Attorney?
+                </h2>
+                <p className="mt-4 text-base leading-7 text-slate-600">
+                  Explore El Paso legal aid organizations, immigration assistance, court resources, mediation services, and community support. Browse free public information and find official service providers in one place.
+                </p>
+                <p className="mt-3 text-sm text-slate-500">
+                  Independent informational directory. Listings do not imply partnerships or endorsements.
+                </p>
+              </div>
+              <div className="shrink-0">
+                <Link to="/community-legal-resources" className="inline-flex items-center justify-center rounded-lg bg-[#0F2A43] px-7 py-4 text-center font-bold text-white transition hover:bg-[#163b5d]">
+                  Explore Community Legal Resources
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <LawFirmMarketplace
         firmCount={firms.length}
         categoryCount={categories.length}
