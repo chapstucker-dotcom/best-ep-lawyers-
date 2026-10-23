@@ -1030,6 +1030,7 @@ export default function AppLayout() {
           </div>
           <div className="mt-8 text-center">
             <a href="/guides" className="inline-flex items-center rounded-lg bg-[#0F2A43] px-6 py-3 font-bold text-white transition hover:bg-[#163b5d]">Browse All Texas Law Guides</a>
+            <a href="/community-legal-resources" className="mt-3 inline-flex items-center rounded-lg border-2 border-[#0F2A43] px-6 py-3 font-bold text-[#0F2A43] transition hover:bg-slate-100 sm:ml-3 sm:mt-0">Community Legal Resources</a>
           </div>
         </div>
       </section>
