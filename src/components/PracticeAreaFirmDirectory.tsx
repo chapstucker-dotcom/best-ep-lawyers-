@@ -382,6 +382,16 @@ export default function PracticeAreaFirmDirectory({
       )
       .sort(alphabetical);
 
+    // Exclusive subscribers retain priority only on their assigned specialty.
+    // Elsewhere, eligible firms receive an ordinary directory listing.
+    const ordinaryExclusiveFirms = matched
+      .filter(
+        (firm) =>
+          getCommercialProductForFirm(firm).key === "market_exclusive" &&
+          !isExclusiveForPracticeArea(firm, page)
+      )
+      .sort(alphabetical);
+
     const freeFirms = matched
       .filter(
         (firm) =>
@@ -395,6 +405,7 @@ export default function PracticeAreaFirmDirectory({
       ...premierFirms,
       ...featuredFirms,
       ...expertFirms,
+      ...ordinaryExclusiveFirms,
       ...freeFirms,
     ].slice(0, 12);
   }, [firms, page]);
@@ -520,20 +531,24 @@ export default function PracticeAreaFirmDirectory({
                 const plan =
                   getPlanKey(firm);
 
+                const isExclusive =
+                  isExclusiveForPracticeArea(firm, page);
+
+                // Do not advertise exclusive benefits on other practice areas.
+                const ordinaryExclusive =
+                  plan === "market_exclusive" && !isExclusive;
+
                 const rank =
-                  getPlanRank(firm);
+                  ordinaryExclusive ? 0 : getPlanRank(firm);
 
                 const tier =
-                  getPlanLabel(firm);
+                  ordinaryExclusive ? null : getPlanLabel(firm);
 
                 const verified =
                   Boolean(
                     firm.is_verified ??
                       firm.verified
                   );
-
-                const isExclusive =
-                  isExclusiveForPracticeArea(firm, page);
 
                 const isPremier =
                   plan === "premier";
