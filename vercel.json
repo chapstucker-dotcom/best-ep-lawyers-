@@ -63,6 +63,8 @@
       "destination": "/el-paso-wrong-way-accident-lawyers/",
       "permanent": true
     },
+    {"source": "/el-paso-brain-injury-lawyers", "destination": "/el-paso-brain-injury-lawyers/", "permanent": true},
+    {"source": "/el-paso-construction-accident-lawyers", "destination": "/el-paso-construction-accident-lawyers/", "permanent": true},
     {
       "source": "/el-paso-personal-injury-lawyers",
       "destination": "/el-paso-personal-injury-lawyers/",
@@ -93,14 +95,6 @@
     {"source":"/community-legal-resources","destination":"/community-legal-resources/index.html"},
     {
       "source": "/injury-help",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/el-paso-brain-injury-lawyers",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/el-paso-construction-accident-lawyers",
       "destination": "/index.html"
     },
     {

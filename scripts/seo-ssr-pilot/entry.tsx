@@ -128,3 +128,5 @@ export function renderUninsuredDriverGuide(): string { return renderAdditionalPa
 
 export function renderTrafficTicket(): string { return renderAdditionalPage('/el-paso-traffic-ticket-lawyers/', 'Traffic Ticket'); }
 export function renderWorkersCompensation(): string { return renderAdditionalPage('/el-paso-workers-compensation-lawyers/', 'Workers Compensation'); }
+export function renderBrainInjury(): string { return renderAdditionalPage('/el-paso-brain-injury-lawyers/', 'Brain Injury'); }
+export function renderConstructionAccident(): string { return renderAdditionalPage('/el-paso-construction-accident-lawyers/', 'Construction Accident'); }
