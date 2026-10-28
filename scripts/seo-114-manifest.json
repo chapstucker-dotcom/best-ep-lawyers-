@@ -1,0 +1,800 @@
+[
+  {
+    "path": "/",
+    "existing_html": true,
+    "source_type": "homepage-existing",
+    "source_file": "pages/Index.tsx",
+    "component": "Index"
+  },
+  {
+    "path": "/pricing",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/Pricing.tsx",
+    "component": "Pricing"
+  },
+  {
+    "path": "/for-law-firms",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/ForLawFirms.tsx",
+    "component": "ForLawFirms"
+  },
+  {
+    "path": "/el-paso-personal-injury-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/PersonalInjury.tsx",
+    "component": "PersonalInjury"
+  },
+  {
+    "path": "/el-paso-slip-and-fall-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/SlipAndFall.tsx",
+    "component": "SlipAndFall"
+  },
+  {
+    "path": "/el-paso-medical-malpractice-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/MedicalMalpractice.tsx",
+    "component": "MedicalMalpractice"
+  },
+  {
+    "path": "/el-paso-brain-injury-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/BrainInjury.tsx",
+    "component": "BrainInjury"
+  },
+  {
+    "path": "/el-paso-construction-accident-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/ConstructionAccident.tsx",
+    "component": "ConstructionAccident"
+  },
+  {
+    "path": "/el-paso-dog-bite-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": "DogBite"
+  },
+  {
+    "path": "/el-paso-traumatic-brain-injury-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-18-wheeler-accident-lawyer",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-semi-truck-accident-lawyer",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-car-accident-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/CarAccidentLawyers.tsx",
+    "component": "CarAccidentLawyers"
+  },
+  {
+    "path": "/el-paso-truck-accident-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/TruckAccidentLawyers.tsx",
+    "component": "TruckAccidentLawyers"
+  },
+  {
+    "path": "/el-paso-motorcycle-accident-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/MotorcycleAccident.tsx",
+    "component": "MotorcycleAccident"
+  },
+  {
+    "path": "/el-paso-wrongful-death-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/WrongfulDeath.tsx",
+    "component": "WrongfulDeath"
+  },
+  {
+    "path": "/el-paso-pedestrian-accident-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": "PedestrianAccident"
+  },
+  {
+    "path": "/el-paso-bicycle-accident-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": "BicycleAccident"
+  },
+  {
+    "path": "/el-paso-uber-lyft-accident-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-rideshare-accident-lawyers",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/RideshareAccident.tsx",
+    "component": "RideshareAccident"
+  },
+  {
+    "path": "/el-paso-uninsured-motorist-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/UninsuredMotorist.tsx",
+    "component": "UninsuredMotorist"
+  },
+  {
+    "path": "/el-paso-drunk-driving-accident-lawyers",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/DrunkDrivingAccident.tsx",
+    "component": "DrunkDrivingAccident"
+  },
+  {
+    "path": "/el-paso-distracted-driving-accident-lawyers",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/DistractedDrivingAccident.tsx",
+    "component": "DistractedDrivingAccident"
+  },
+  {
+    "path": "/el-paso-rear-end-accident-lawyers",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/RearEndAccident.tsx",
+    "component": "RearEndAccident"
+  },
+  {
+    "path": "/el-paso-hit-and-run-accident-lawyers",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/HitAndRunAccident.tsx",
+    "component": "HitAndRunAccident"
+  },
+  {
+    "path": "/el-paso-intersection-accident-lawyers",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/IntersectionAccident.tsx",
+    "component": "IntersectionAccident"
+  },
+  {
+    "path": "/el-paso-highway-accident-lawyers",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/HighwayAccident.tsx",
+    "component": "HighwayAccident"
+  },
+  {
+    "path": "/el-paso-multi-vehicle-accident-lawyers",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/MultiVehicleAccident.tsx",
+    "component": "MultiVehicleAccident"
+  },
+  {
+    "path": "/el-paso-head-on-collision-lawyers",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/HeadOnCollision.tsx",
+    "component": "HeadOnCollision"
+  },
+  {
+    "path": "/el-paso-wrong-way-accident-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/WrongWayAccident.tsx",
+    "component": "WrongWayAccident"
+  },
+  {
+    "path": "/el-paso-t-bone-accident-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/TBoneAccident.tsx",
+    "component": "TBoneAccident"
+  },
+  {
+    "path": "/el-paso-rollover-accident-lawyers",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/RolloverAccident.tsx",
+    "component": "RolloverAccident"
+  },
+  {
+    "path": "/el-paso-sideswipe-accident-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/SideswipeAccident.tsx",
+    "component": "SideswipeAccident"
+  },
+  {
+    "path": "/el-paso-lane-change-accident-lawyers",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/LaneChangeAccident.tsx",
+    "component": "LaneChangeAccident"
+  },
+  {
+    "path": "/el-paso-merging-accident-lawyers",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/MergingAccident.tsx",
+    "component": "MergingAccident"
+  },
+  {
+    "path": "/el-paso-failure-to-yield-accident-lawyers",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/FailureToYieldAccident.tsx",
+    "component": "FailureToYieldAccident"
+  },
+  {
+    "path": "/el-paso-red-light-accident-lawyers",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/RedLightAccident.tsx",
+    "component": "RedLightAccident"
+  },
+  {
+    "path": "/el-paso-premises-liability-lawyers",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/PremisesLiability.tsx",
+    "component": "PremisesLiability"
+  },
+  {
+    "path": "/el-paso-product-liability-lawyers",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/ProductLiability.tsx",
+    "component": "ProductLiability"
+  },
+  {
+    "path": "/el-paso-criminal-defense-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/CriminalDefense.tsx",
+    "component": "CriminalDefense"
+  },
+  {
+    "path": "/el-paso-dwi-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/DWI.tsx",
+    "component": "DWI"
+  },
+  {
+    "path": "/el-paso-traffic-ticket-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": null,
+    "component": null
+  },
+  {
+    "path": "/el-paso-drug-crimes-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-assault-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-domestic-violence-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-theft-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-expunction-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-juvenile-defense-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-federal-criminal-defense-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-weapons-charges-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-white-collar-crime-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-probation-violation-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-felony-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-family-violence-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": null,
+    "component": null
+  },
+  {
+    "path": "/el-paso-protective-order-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": null,
+    "component": null
+  },
+  {
+    "path": "/el-paso-immigration-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/Immigration.tsx",
+    "component": "Immigration"
+  },
+  {
+    "path": "/el-paso-green-card-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-citizenship-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-deportation-defense-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-visa-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-business-immigration-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-family-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/FamilyLaw.tsx",
+    "component": "FamilyLaw"
+  },
+  {
+    "path": "/el-paso-divorce-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-child-custody-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-child-support-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-adoption-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-uncontested-divorce-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-spousal-support-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-prenuptial-agreement-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": null,
+    "component": null
+  },
+  {
+    "path": "/el-paso-estate-planning-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/EstatePlanning.tsx",
+    "component": "EstatePlanning"
+  },
+  {
+    "path": "/el-paso-probate-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-bankruptcy-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-employment-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/EmploymentLaw.tsx",
+    "component": "EmploymentLaw"
+  },
+  {
+    "path": "/el-paso-wage-hour-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/WageHour.tsx",
+    "component": "WageHour"
+  },
+  {
+    "path": "/el-paso-workplace-discrimination-lawyers",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/WorkplaceDiscrimination.tsx",
+    "component": "WorkplaceDiscrimination"
+  },
+  {
+    "path": "/el-paso-age-discrimination-lawyers",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/AgeDiscrimination.tsx",
+    "component": "AgeDiscrimination"
+  },
+  {
+    "path": "/el-paso-sex-discrimination-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/SexDiscrimination.tsx",
+    "component": "SexDiscrimination"
+  },
+  {
+    "path": "/el-paso-overtime-pay-disputes-lawyers",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/OvertimePayDisputes.tsx",
+    "component": "OvertimePayDisputes"
+  },
+  {
+    "path": "/el-paso-workers-compensation-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/WorkersCompensation.tsx",
+    "component": "WorkersCompensation"
+  },
+  {
+    "path": "/el-paso-social-security-disability-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-wrongful-termination-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/WrongfulTermination.tsx",
+    "component": "WrongfulTermination"
+  },
+  {
+    "path": "/el-paso-retaliation-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": null,
+    "component": null
+  },
+  {
+    "path": "/el-paso-sexual-harassment-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": null,
+    "component": null
+  },
+  {
+    "path": "/el-paso-employment-contract-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-severance-agreement-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-business-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-real-estate-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-civil-litigation-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/guides",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/Guides.tsx",
+    "component": "Guides"
+  },
+  {
+    "path": "/featured-on-el-pasos-best-lawyers",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/FeaturedBadge.tsx",
+    "component": "FeaturedBadge"
+  },
+  {
+    "path": "/guides/what-to-do-after-car-accident-el-paso",
+    "existing_html": false,
+    "source_type": "guide-article",
+    "source_file": "data/articles.ts",
+    "component": null
+  },
+  {
+    "path": "/guides/texas-car-accident-statute-of-limitations",
+    "existing_html": false,
+    "source_type": "guide-article",
+    "source_file": "data/articles.ts",
+    "component": null
+  },
+  {
+    "path": "/guides/uninsured-driver-accident-texas",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": null,
+    "component": null
+  },
+  {
+    "path": "/guides/how-to-get-texas-crash-report-el-paso",
+    "existing_html": false,
+    "source_type": "guide-article",
+    "source_file": "data/articles.ts",
+    "component": null
+  },
+  {
+    "path": "/guides/truck-accident-evidence-texas",
+    "existing_html": false,
+    "source_type": "guide-article",
+    "source_file": "data/articles.ts",
+    "component": null
+  },
+  {
+    "path": "/guides/texas-wrongful-death-deadline",
+    "existing_html": false,
+    "source_type": "guide-article",
+    "source_file": "data/articles.ts",
+    "component": null
+  },
+  {
+    "path": "/guides/texas-dwi-basics-el-paso",
+    "existing_html": false,
+    "source_type": "guide-article",
+    "source_file": "data/articles.ts",
+    "component": null
+  },
+  {
+    "path": "/guides/texas-child-custody-conservatorship-basics",
+    "existing_html": false,
+    "source_type": "guide-article",
+    "source_file": "data/articles.ts",
+    "component": null
+  },
+  {
+    "path": "/guides/what-to-do-after-uber-lyft-accident-el-paso",
+    "existing_html": false,
+    "source_type": "guide-article",
+    "source_file": "data/articles.ts",
+    "component": null
+  },
+  {
+    "path": "/guides/what-to-do-after-arrest-el-paso",
+    "existing_html": false,
+    "source_type": "guide-article",
+    "source_file": "data/articles.ts",
+    "component": null
+  },
+  {
+    "path": "/guides/texas-dwi-license-suspension-alr-hearing-el-paso",
+    "existing_html": false,
+    "source_type": "guide-article",
+    "source_file": "data/articles.ts",
+    "component": null
+  },
+  {
+    "path": "/guides/how-to-file-for-divorce-texas-el-paso",
+    "existing_html": false,
+    "source_type": "guide-article",
+    "source_file": "data/articles.ts",
+    "component": null
+  },
+  {
+    "path": "/guides/how-to-modify-child-custody-child-support-texas-el-paso",
+    "existing_html": false,
+    "source_type": "guide-article",
+    "source_file": "data/articles.ts",
+    "component": null
+  },
+  {
+    "path": "/guides/how-to-get-protective-order-texas-el-paso",
+    "existing_html": false,
+    "source_type": "guide-article",
+    "source_file": "data/articles.ts",
+    "component": null
+  },
+  {
+    "path": "/guides/how-does-probate-work-texas-el-paso",
+    "existing_html": false,
+    "source_type": "guide-article",
+    "source_file": "data/articles.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-elder-law-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-guardianship-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-nursing-home-abuse-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-tax-irs-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-landlord-tenant-lawyers",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": null,
+    "component": null
+  },
+  {
+    "path": "/el-paso-appeals-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-civil-rights-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/el-paso-military-law-lawyers",
+    "existing_html": false,
+    "source_type": "shared-practice-area",
+    "source_file": "data/practiceAreaPages.ts",
+    "component": null
+  },
+  {
+    "path": "/community-legal-resources",
+    "existing_html": true,
+    "source_type": "existing",
+    "source_file": "pages/CommunityLegalResources.tsx",
+    "component": "CommunityLegalResources"
+  }
+]
