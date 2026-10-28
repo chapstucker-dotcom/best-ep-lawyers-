@@ -35,6 +35,7 @@ import OvertimePayDisputes from "./pages/OvertimePayDisputes";
 import PracticeAreaPage from "./pages/PracticeAreaPage";
 import WorkersCompensation from "./pages/WorkersCompensation";
 import BrainInjury from "./pages/BrainInjury";
+import CatastrophicInjury from "./pages/CatastrophicInjury";
 import ConstructionAccident from "./pages/ConstructionAccident";
 import MedicalMalpractice from "./pages/MedicalMalpractice";
 import PremisesLiability from "./pages/PremisesLiability";
@@ -92,6 +93,7 @@ const customPracticeAreaPaths = [
   "/el-paso-overtime-pay-disputes-lawyers",
   "/el-paso-workers-compensation-lawyers",
   "/el-paso-brain-injury-lawyers",
+  "/el-paso-catastrophic-injury-lawyers",
   "/el-paso-construction-accident-lawyers",
   "/el-paso-medical-malpractice-lawyers",
   "/el-paso-premises-liability-lawyers",
@@ -198,6 +200,10 @@ export default function App() {
         <Route
           path="/el-paso-brain-injury-lawyers"
           element={<BrainInjury />}
+        />
+        <Route
+          path="/el-paso-catastrophic-injury-lawyers"
+          element={<CatastrophicInjury />}
         />
         <Route
           path="/el-paso-construction-accident-lawyers"

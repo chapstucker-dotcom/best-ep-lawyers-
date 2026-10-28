@@ -9,6 +9,7 @@ const pages = [
   { path: '/el-paso-traffic-ticket-lawyers', source: 'src/data/practiceAreaPages.ts', mode: 'shared' },
   { path: '/el-paso-workers-compensation-lawyers', source: 'src/pages/WorkersCompensation.tsx', mode: 'pageData' },
   { path: '/el-paso-brain-injury-lawyers', source: 'src/pages/BrainInjury.tsx', mode: 'pageData' },
+  { path: '/el-paso-catastrophic-injury-lawyers', source: 'src/pages/CatastrophicInjury.tsx', mode: 'pageData' },
   { path: '/el-paso-construction-accident-lawyers', source: 'src/pages/ConstructionAccident.tsx', mode: 'pageData' },
   { path: '/el-paso-motorcycle-accident-lawyers', source: 'src/pages/MotorcycleAccident.tsx', mode: 'pageData' },
   { path: '/el-paso-personal-injury-lawyers', source: 'src/pages/PersonalInjury.tsx', mode: 'runtime' },

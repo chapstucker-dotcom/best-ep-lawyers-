@@ -64,6 +64,7 @@
       "permanent": true
     },
     {"source": "/el-paso-brain-injury-lawyers", "destination": "/el-paso-brain-injury-lawyers/", "permanent": true},
+    {"source": "/el-paso-catastrophic-injury-lawyers", "destination": "/el-paso-catastrophic-injury-lawyers/", "permanent": true},
     {"source": "/el-paso-construction-accident-lawyers", "destination": "/el-paso-construction-accident-lawyers/", "permanent": true},
     {
       "source": "/el-paso-personal-injury-lawyers",

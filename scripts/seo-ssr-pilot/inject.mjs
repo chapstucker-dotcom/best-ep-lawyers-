@@ -9,7 +9,7 @@ if (!bundleSource.includes("Personal Injury SSR:")) {
   throw new Error("SSR bundle validation failed");
 }
 
-const { renderCommunityLegalResources, renderPersonalInjury, renderMotorcycle, renderCarAccident, renderTruckAccident, renderFamilyViolence, renderProtectiveOrder, renderLandlordTenant, renderPrenuptialAgreement, renderSexDiscrimination, renderSideswipeAccident, renderTBoneAccident, renderUninsuredMotorist, renderWrongWayAccident, renderWageHour, renderSexualHarassment, renderCriminalDefense, renderImmigration, renderFamilyLaw, renderEmploymentLaw, renderWrongfulTermination, renderWrongfulDeath, renderMedicalMalpractice, renderSlipAndFall, renderEstatePlanning, renderRetaliation, renderDWI, renderUninsuredDriverGuide, renderTrafficTicket, renderWorkersCompensation, renderBrainInjury, renderConstructionAccident } = await import(
+const { renderCommunityLegalResources, renderPersonalInjury, renderMotorcycle, renderCarAccident, renderTruckAccident, renderFamilyViolence, renderProtectiveOrder, renderLandlordTenant, renderPrenuptialAgreement, renderSexDiscrimination, renderSideswipeAccident, renderTBoneAccident, renderUninsuredMotorist, renderWrongWayAccident, renderWageHour, renderSexualHarassment, renderCriminalDefense, renderImmigration, renderFamilyLaw, renderEmploymentLaw, renderWrongfulTermination, renderWrongfulDeath, renderMedicalMalpractice, renderSlipAndFall, renderEstatePlanning, renderRetaliation, renderDWI, renderUninsuredDriverGuide, renderTrafficTicket, renderWorkersCompensation, renderBrainInjury, renderCatastrophicInjury, renderConstructionAccident } = await import(
   pathToFileURL(bundle).href
 );
 
@@ -18,6 +18,7 @@ const pages = [
   { slug: "el-paso-traffic-ticket-lawyers", marker: "traffic-ticket", render: renderTrafficTicket },
   { slug: "el-paso-workers-compensation-lawyers", marker: "workers-compensation", render: renderWorkersCompensation },
   { slug: "el-paso-brain-injury-lawyers", marker: "brain-injury", render: renderBrainInjury },
+  { slug: "el-paso-catastrophic-injury-lawyers", marker: "catastrophic-injury", render: renderCatastrophicInjury },
   { slug: "el-paso-construction-accident-lawyers", marker: "construction-accident", render: renderConstructionAccident },
   {
     slug: "el-paso-personal-injury-lawyers",
