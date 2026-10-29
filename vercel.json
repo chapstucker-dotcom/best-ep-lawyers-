@@ -649,6 +649,12 @@
       "source": "/attorney/:id",
       "destination": "/index.html"
     },
+    { "source": "/firm/bill-d-hicks", "destination": "/firm/bill-d-hicks/index.html" },
+    { "source": "/firm/carter-law-firm", "destination": "/firm/carter-law-firm/index.html" },
+    { "source": "/firm/cesar-ornelas-injury-law", "destination": "/firm/cesar-ornelas-injury-law/index.html" },
+    { "source": "/firm/labinoti-law-firm", "destination": "/firm/labinoti-law-firm/index.html" },
+    { "source": "/firm/lozano-meza-law-firm", "destination": "/firm/lozano-meza-law-firm/index.html" },
+    { "source": "/firm/scherr-legate-pllc", "destination": "/firm/scherr-legate-pllc/index.html" },
     {
       "source": "/firm/:id",
       "destination": "/index.html"
