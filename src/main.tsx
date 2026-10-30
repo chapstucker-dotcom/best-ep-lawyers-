@@ -2,6 +2,7 @@ import { createRoot, hydrateRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
 import MetaPixelTracker from "./components/MetaPixelTracker";
+import { Analytics } from "@vercel/analytics/react";
 import "./index.css";
 
 const root = document.getElementById("root");
@@ -13,6 +14,7 @@ if (!root) {
 const app = (
   <BrowserRouter>
     <MetaPixelTracker />
+    <Analytics />
     <App />
   </BrowserRouter>
 );

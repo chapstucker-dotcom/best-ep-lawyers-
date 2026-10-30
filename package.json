@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/seo-firm-snapshot/generate.mjs \u0026\u0026 vite build \u0026\u0026 node scripts/seo-motorcycle-pilot.mjs \u0026\u0026 vite build --ssr scripts/seo-ssr-pilot/entry.tsx --outDir .seo-ssr-test --emptyOutDir \u0026\u0026 node scripts/seo-114-generate.mjs \u0026\u0026 node scripts/seo-ssr-pilot/inject.mjs \u0026\u0026 node scripts/seo-signup-html.mjs \u0026\u0026 node scripts/seo-firm-pages/generate.mjs",
+    "build": "node scripts/seo-firm-snapshot/generate.mjs && vite build && node scripts/seo-motorcycle-pilot.mjs && vite build --ssr scripts/seo-ssr-pilot/entry.tsx --outDir .seo-ssr-test --emptyOutDir && node scripts/seo-114-generate.mjs && node scripts/seo-ssr-pilot/inject.mjs && node scripts/seo-signup-html.mjs && node scripts/seo-firm-pages/generate.mjs",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -42,6 +42,7 @@
     "@supabase/supabase-js": "^2.106.1",
     "@tanstack/react-query": "^5.56.2",
     "@types/uuid": "^10.0.0",
+    "@vercel/analytics": "^2.0.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
