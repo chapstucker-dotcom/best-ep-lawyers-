@@ -61,15 +61,9 @@ const HOMEPAGE_CATEGORY_SLUGS = [
   'personal-injury',
   'criminal-defense',
   'family-law',
-  'immigration',
-  'estate-planning',
-  'business-law',
-  'real-estate',
-  'employment-law',
-  'bankruptcy',
-  'dwi-dui',
-  'probate',
-  'civil-litigation',
+  'landlord-tenant',
+  'protective-orders',
+  'prenuptial-agreements',
 ];
 
 const CATEGORY_ICONS: Record<
@@ -253,7 +247,18 @@ export default function AppLayout() {
         );
       }
 
-      setFirms(data ?? []);
+      const internalQaNames = new Set([
+        'epbl onboarding qa october 2026',
+        'epbl fresh onboarding qa',
+      ]);
+      setFirms(
+        (data ?? []).filter(
+          (firm) =>
+            !internalQaNames.has(
+              String(firm.name ?? '').trim().toLowerCase()
+            )
+        )
+      );
       setLoading(false);
     };
 
@@ -293,8 +298,8 @@ export default function AppLayout() {
   );
 
   const displayedCategories = (
-    showAllCategories ? categories : homepageCategories
-  ).slice().sort((a, b) => a.title.localeCompare(b.title));
+    showAllCategories ? categories.slice().sort((a, b) => a.title.localeCompare(b.title)) : homepageCategories
+  ).slice();
 
   const getFirmSearchText = (
     firm: Firm
@@ -788,7 +793,7 @@ export default function AppLayout() {
             </p>
 
             <h2 className="text-3xl font-bold text-[#0F2A43]">
-              Browse by Practice Area
+              Explore Legal Services in El Paso
             </h2>
 
             <p className="mt-3 text-gray-600">
@@ -821,14 +826,14 @@ export default function AppLayout() {
                         category.slug
                       )
                     }
-                    className="group flex min-h-36 flex-col items-center justify-center rounded-2xl border bg-white p-6 text-center shadow-sm transition hover:-translate-y-1 hover:border-[#1FA8A1] hover:shadow-lg"
+                    className="group flex min-h-36 flex-col items-center justify-center rounded-2xl border bg-white p-6 text-center shadow-sm transition hover:-translate-y-1 hover:border-[#D4A62A] hover:shadow-lg"
                   >
-                    <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0F2A43] to-[#1FA8A1] text-white shadow-sm transition group-hover:scale-105">
+                    <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0F2A43] text-[#F5B800] shadow-sm transition group-hover:scale-105">
                       <Icon className="h-7 w-7" />
                     </span>
 
                     <span className="font-bold text-[#0F2A43]">
-                      {category.title}
+                      {category.slug === 'landlord-tenant' ? 'Landlord-Tenant' : category.title}
                     </span>
                   </button>
                 );
@@ -836,6 +841,21 @@ export default function AppLayout() {
             )}
           </div>
 
+          {!showAllCategories && (
+            <div className="mt-4 flex justify-center">
+              <Link
+                to="/el-paso-sex-discrimination-lawyers"
+                className="group flex min-h-36 w-full flex-col items-center justify-center rounded-2xl border border-[#D4A62A]/30 bg-white p-6 text-center shadow-sm transition hover:-translate-y-1 hover:border-[#D4A62A] hover:shadow-lg sm:max-w-[calc(50%-0.5rem)] lg:max-w-[calc(25%-0.75rem)]"
+              >
+                <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0F2A43] text-[#F5B800] transition group-hover:scale-105">
+                  <Scale className="h-7 w-7" />
+                </span>
+                <span className="font-bold text-[#0F2A43]">
+                  Sex Discrimination
+                </span>
+              </Link>
+            </div>
+          )}
           <div className="mt-10 flex justify-center">
             <button
               type="button"
