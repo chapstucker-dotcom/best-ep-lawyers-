@@ -25,6 +25,29 @@ interface ModerationReview {
   disputed_at: string | null;
 }
 
+interface ConsumerLead {
+  id: string;
+  created_at: string | null;
+  full_name: string | null;
+  email: string | null;
+  phone: string | null;
+  legal_issue: string | null;
+  practice_area: string | null;
+  firm_name: string | null;
+  firm_id: string | null;
+  status: string | null;
+  source_url: string | null;
+  landing_page: string | null;
+  referrer: string | null;
+  source: string | null;
+  medium: string | null;
+  campaign: string | null;
+  matter_location: string | null;
+  matter_timing: string | null;
+}
+
+const LEAD_STATUSES = ["new", "contacted", "in_progress", "closed"] as const;
+
 type ModerationAction = "published" | "rejected" | "removed";
 type DisputeAction = "resolved" | "dismissed";
 
@@ -52,6 +75,59 @@ export default function AdminDashboard() {
     path: "/admin",
     robots: "noindex, nofollow",
   });
+
+  const [leads, setLeads] = useState<ConsumerLead[]>([]);
+  const [leadsLoading, setLeadsLoading] = useState(true);
+  const [leadsError, setLeadsError] = useState<string | null>(null);
+  const [leadActionError, setLeadActionError] = useState<string | null>(null);
+  const [workingLeadId, setWorkingLeadId] = useState<string | null>(null);
+  const [leadFilter, setLeadFilter] = useState("all");
+
+  const loadLeads = useCallback(async () => {
+    setLeadsLoading(true);
+    setLeadsError(null);
+    const { data, error } = await supabase
+      .from("leads")
+      .select("id,created_at,full_name,email,phone,legal_issue,practice_area,firm_name,firm_id,status,source_url,landing_page,referrer,source,medium,campaign,matter_location,matter_timing")
+      .order("created_at", { ascending: false })
+      .limit(100);
+
+    if (error) {
+      setLeadsError(error.message || "Unable to load consumer leads.");
+    } else {
+      setLeads((data ?? []) as ConsumerLead[]);
+    }
+    setLeadsLoading(false);
+  }, []);
+
+  useEffect(() => {
+    void loadLeads();
+  }, [loadLeads]);
+
+  const updateLeadStatus = async (lead: ConsumerLead, status: string) => {
+    if (workingLeadId || status === lead.status) return;
+    setWorkingLeadId(lead.id);
+    setLeadActionError(null);
+    const { data, error } = await supabase
+      .from("leads")
+      .update({ status })
+      .eq("id", lead.id)
+      .select("id,status")
+      .maybeSingle();
+
+    if (error || !data) {
+      setLeadActionError(error?.message || "Status update was not confirmed. Check administrator permissions.");
+    } else {
+      setLeads((current) => current.map((item) =>
+        item.id === lead.id ? { ...item, status: data.status } : item,
+      ));
+    }
+    setWorkingLeadId(null);
+  };
+
+  const filteredLeads = useMemo(() =>
+    leadFilter === "all" ? leads : leads.filter((lead) => (lead.status || "new") === leadFilter),
+  [leads, leadFilter]);
 
   const [reviews, setReviews] = useState<ModerationReview[]>([]);
   const [loading, setLoading] = useState(true);
@@ -152,6 +228,77 @@ export default function AdminDashboard() {
   return (
     <main className="min-h-screen bg-slate-950 px-4 py-10 text-white sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
+        <section aria-labelledby="consumer-leads-title" className="mb-12">
+          <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h2 id="consumer-leads-title" className="text-2xl font-bold">Consumer Leads</h2>
+              <p className="mt-2 text-sm text-slate-300">
+                Latest 100 inquiries. Email delivery is not tracked here; verify follow-up separately.
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <label htmlFor="lead-filter" className="text-sm text-slate-300">Status</label>
+              <select id="lead-filter" value={leadFilter} onChange={(event) => setLeadFilter(event.target.value)}
+                className="rounded-lg border border-slate-600 bg-slate-900 px-3 py-2 text-sm text-white">
+                <option value="all">All</option>
+                {LEAD_STATUSES.map((status) => <option key={status} value={status}>{formatLabel(status)}</option>)}
+              </select>
+              <button type="button" onClick={() => void loadLeads()}
+                className="rounded-lg border border-amber-400 px-4 py-2 text-sm font-semibold text-amber-300">
+                Refresh
+              </button>
+            </div>
+          </div>
+          {leadActionError && <p role="alert" className="mb-4 rounded-lg border border-red-700 p-4 text-red-200">{leadActionError}</p>}
+          {leadsLoading ? <p className="text-slate-300">Loading consumer leads…</p>
+          : leadsError ? <div role="alert" className="rounded-xl border border-red-700 p-5 text-red-200">
+              Unable to load consumer leads: {leadsError}
+              <button type="button" onClick={() => void loadLeads()} className="ml-4 underline">Retry</button>
+            </div>
+          : filteredLeads.length === 0 ? <p className="rounded-xl border border-slate-800 p-6 text-slate-300">No matching consumer leads among the latest 100 inquiries.</p>
+          : <div className="space-y-4">
+              {filteredLeads.map((lead) => <article key={lead.id} className="rounded-2xl border border-slate-800 bg-slate-900 p-5">
+                <div className="flex flex-wrap items-start justify-between gap-4">
+                  <div>
+                    <h3 className="text-lg font-semibold">{lead.full_name || "Name not provided"}</h3>
+                    <p className="mt-1 text-xs text-slate-400">Submitted {formatDate(lead.created_at)} · {lead.practice_area || "General inquiry"}</p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <label htmlFor={`lead-status-${lead.id}`} className="text-sm text-slate-300">Status</label>
+                    <select id={`lead-status-${lead.id}`} value={lead.status || "new"}
+                      disabled={workingLeadId !== null}
+                      onChange={(event) => void updateLeadStatus(lead, event.target.value)}
+                      className="rounded-lg border border-slate-600 bg-slate-950 px-3 py-2 text-sm text-white disabled:opacity-50">
+                      {!LEAD_STATUSES.includes((lead.status || "new") as typeof LEAD_STATUSES[number]) &&
+                        <option value={lead.status || "new"}>{formatLabel(lead.status)}</option>}
+                      {LEAD_STATUSES.map((status) => <option key={status} value={status}>{formatLabel(status)}</option>)}
+                    </select>
+                  </div>
+                </div>
+                <div className="mt-4 grid gap-4 text-sm md:grid-cols-2">
+                  <div className="space-y-2">
+                    <p><span className="text-slate-400">Email:</span> {lead.email || "Not provided"}</p>
+                    <p><span className="text-slate-400">Phone:</span> {lead.phone || "Not provided"}</p>
+                    <p><span className="text-slate-400">Firm:</span> {lead.firm_name || lead.firm_id || "General inquiry / not assigned"}</p>
+                    <p><span className="text-slate-400">Location:</span> {lead.matter_location || "Not provided"}</p>
+                    <p><span className="text-slate-400">Timing:</span> {lead.matter_timing || "Not provided"}</p>
+                  </div>
+                  <div className="space-y-2 break-words">
+                    <p><span className="text-slate-400">Source / medium:</span> {lead.source || "Unknown"} / {lead.medium || "Unknown"}</p>
+                    <p><span className="text-slate-400">Campaign:</span> {lead.campaign || "None"}</p>
+                    <p><span className="text-slate-400">Landing page:</span> {lead.landing_page || "Unknown"}</p>
+                    <p><span className="text-slate-400">Source URL:</span> {lead.source_url || "Unknown"}</p>
+                    <p><span className="text-slate-400">Referrer:</span> {lead.referrer || "Unknown"}</p>
+                  </div>
+                </div>
+                <div className="mt-4 border-t border-slate-700 pt-4">
+                  <h4 className="text-sm font-semibold text-amber-300">Legal issue</h4>
+                  <p className="mt-2 whitespace-pre-wrap break-words text-sm leading-6 text-slate-200">{lead.legal_issue || "Not provided"}</p>
+                </div>
+              </article>)}
+            </div>}
+        </section>
+
         <div className="mb-10">
           <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-amber-400">
             El Paso&apos;s Best Lawyers
