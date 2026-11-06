@@ -58,6 +58,38 @@ interface ConsumerLead {
 
 const LEAD_STATUSES = ["new", "contacted", "in_progress", "closed"] as const;
 
+const ACTIVITY_TYPES = [
+  "consumer_contact",
+  "firm_outreach",
+  "firm_response",
+  "follow_up",
+  "referral_outcome",
+  "internal_note",
+] as const;
+
+type LeadActivityType = typeof ACTIVITY_TYPES[number];
+
+interface LeadActivity {
+  id: string;
+  lead_id: string;
+  created_by: string;
+  activity_type: LeadActivityType;
+  firm_name: string | null;
+  outcome: string | null;
+  notes: string;
+  follow_up_at: string | null;
+  created_at: string;
+}
+
+const ACTIVITY_OUTCOMES: Record<LeadActivityType, string[]> = {
+  consumer_contact: ["contacted", "no_answer", "message_left", "awaiting_reply"],
+  firm_outreach: ["contacted", "awaiting_reply", "declined", "accepted"],
+  firm_response: ["accepted", "declined", "needs_information", "no_response"],
+  follow_up: ["scheduled", "completed", "no_answer", "awaiting_reply"],
+  referral_outcome: ["accepted", "not_placed", "consumer_declined", "pending"],
+  internal_note: [],
+};
+
 type ModerationAction = "published" | "rejected" | "removed";
 type DisputeAction = "resolved" | "dismissed";
 
@@ -94,6 +126,16 @@ export default function AdminDashboard() {
   const [leadActionError, setLeadActionError] = useState<string | null>(null);
   const [workingLeadId, setWorkingLeadId] = useState<string | null>(null);
   const [leadFilter, setLeadFilter] = useState("all");
+  const [expandedLeadId, setExpandedLeadId] = useState<string | null>(null);
+  const [activities, setActivities] = useState<LeadActivity[]>([]);
+  const [activitiesLoading, setActivitiesLoading] = useState(false);
+  const [activitiesError, setActivitiesError] = useState<string | null>(null);
+  const [activityType, setActivityType] = useState<LeadActivityType>("consumer_contact");
+  const [activityFirm, setActivityFirm] = useState("");
+  const [activityOutcome, setActivityOutcome] = useState("");
+  const [activityNotes, setActivityNotes] = useState("");
+  const [activityFollowUp, setActivityFollowUp] = useState("");
+  const [savingActivity, setSavingActivity] = useState(false);
 
   const loadLeads = useCallback(async () => {
     setLeadsLoading(true);
@@ -144,6 +186,95 @@ export default function AdminDashboard() {
       ));
     }
     setWorkingLeadId(null);
+  };
+
+  const loadActivities = useCallback(async (leadId: string) => {
+    setActivitiesLoading(true);
+    setActivitiesError(null);
+    const { data, error } = await supabase
+      .from("lead_activities")
+      .select("id,lead_id,created_by,activity_type,firm_name,outcome,notes,follow_up_at,created_at")
+      .eq("lead_id", leadId)
+      .order("created_at", { ascending: false })
+      .limit(200);
+
+    if (error) {
+      setActivitiesError(error.message || "Unable to load activity history.");
+      setActivities([]);
+    } else {
+      setActivities((data ?? []) as LeadActivity[]);
+    }
+    setActivitiesLoading(false);
+  }, []);
+
+  const toggleLeadActivities = (leadId: string) => {
+    if (expandedLeadId === leadId) {
+      setExpandedLeadId(null);
+      return;
+    }
+    setExpandedLeadId(leadId);
+    setActivities([]);
+    setActivitiesError(null);
+    setActivityType("consumer_contact");
+    setActivityFirm("");
+    setActivityOutcome("");
+    setActivityNotes("");
+    setActivityFollowUp("");
+    void loadActivities(leadId);
+  };
+
+  const saveLeadActivity = async (leadId: string) => {
+    if (savingActivity || !activityNotes.trim()) return;
+    if ((activityType === "firm_outreach" || activityType === "firm_response") && !activityFirm.trim()) {
+      setActivitiesError("Enter the law firm contacted.");
+      return;
+    }
+    if (activityNotes.trim().length > 5000) {
+      setActivitiesError("Notes must not exceed 5,000 characters.");
+      return;
+    }
+    let followUpAt: string | null = null;
+    if (activityFollowUp) {
+      const parsed = new Date(activityFollowUp);
+      if (Number.isNaN(parsed.getTime())) {
+        setActivitiesError("Enter a valid follow-up date.");
+        return;
+      }
+      followUpAt = parsed.toISOString();
+    }
+
+    setSavingActivity(true);
+    setActivitiesError(null);
+    const { data: authData, error: authError } = await supabase.auth.getUser();
+    if (authError || !authData.user) {
+      setActivitiesError("Your administrator session could not be verified. Sign in again.");
+      setSavingActivity(false);
+      return;
+    }
+
+    const { data, error } = await supabase.from("lead_activities")
+      .insert({
+        lead_id: leadId,
+        created_by: authData.user.id,
+        activity_type: activityType,
+        firm_name: activityFirm.trim() || null,
+        outcome: activityOutcome || null,
+        notes: activityNotes.trim(),
+        follow_up_at: followUpAt,
+      })
+      .select("id,lead_id,created_by,activity_type,firm_name,outcome,notes,follow_up_at,created_at")
+      .single();
+
+    if (error || !data) {
+      setActivitiesError(error?.message || "Activity was not saved. Check super-admin permissions.");
+    } else {
+      setActivities((current) => [data as LeadActivity, ...current]);
+      setActivityFirm("");
+      setActivityOutcome("");
+      setActivityNotes("");
+      setActivityFollowUp("");
+    }
+    setSavingActivity(false);
   };
 
   const filteredLeads = useMemo(() =>
@@ -327,6 +458,94 @@ export default function AdminDashboard() {
                 <div className="mt-4 border-t border-slate-700 pt-4">
                   <h4 className="text-sm font-semibold text-amber-300">Legal issue</h4>
                   <p className="mt-2 whitespace-pre-wrap break-words text-sm leading-6 text-slate-200">{lead.legal_issue || "Not provided"}</p>
+                </div>
+                <div className="mt-5 border-t border-slate-700 pt-4">
+                  <button type="button"
+                    aria-expanded={expandedLeadId === lead.id}
+                    aria-controls={`lead-activity-${lead.id}`}
+                    onClick={() => toggleLeadActivities(lead.id)}
+                    className="rounded-lg border border-amber-500 px-4 py-2 text-sm font-semibold text-amber-300 hover:bg-slate-800">
+                    {expandedLeadId === lead.id ? "Hide activity history" : "Activity history / Log outreach"}
+                  </button>
+                  {expandedLeadId === lead.id && (
+                    <div id={`lead-activity-${lead.id}`} className="mt-5 space-y-5">
+                      <div className="flex flex-wrap items-center justify-between gap-3">
+                        <h4 className="font-semibold text-amber-300">Consumer assistance history</h4>
+                        <button type="button" onClick={() => void loadActivities(lead.id)}
+                          disabled={activitiesLoading || savingActivity}
+                          className="text-sm text-slate-300 underline disabled:opacity-50">
+                          Refresh history
+                        </button>
+                      </div>
+                      {activitiesError && <p role="alert" className="rounded-lg border border-red-700 p-3 text-sm text-red-200">{activitiesError}</p>}
+                      {activitiesLoading ? <p className="text-sm text-slate-400">Loading activity history…</p>
+                        : activities.length === 0 ? <p className="text-sm text-slate-400">No activity recorded for this inquiry.</p>
+                        : <ol className="space-y-3">
+                          {activities.map((activity) => (
+                            <li key={activity.id} className="rounded-lg border border-slate-700 bg-slate-950 p-4">
+                              <div className="flex flex-wrap items-center justify-between gap-2">
+                                <strong className="text-sm text-amber-300">{formatLabel(activity.activity_type)}</strong>
+                                <span className="text-xs text-slate-400">{formatDate(activity.created_at)}</span>
+                              </div>
+                              {activity.firm_name && <p className="mt-2 text-sm">Firm: {activity.firm_name}</p>}
+                              {activity.outcome && <p className="mt-1 text-sm">Outcome: {formatLabel(activity.outcome)}</p>}
+                              <p className="mt-2 whitespace-pre-wrap break-words text-sm text-slate-200">{activity.notes}</p>
+                              {activity.follow_up_at && <p className="mt-2 text-xs text-amber-200">Follow-up: {formatDate(activity.follow_up_at)}</p>}
+                              <p className="mt-2 text-xs text-slate-500">Recorded by: {activity.created_by}</p>
+                            </li>
+                          ))}
+                        </ol>}
+                      <form className="rounded-xl border border-slate-700 bg-slate-950 p-4"
+                        onSubmit={(event) => { event.preventDefault(); void saveLeadActivity(lead.id); }}>
+                        <h5 className="mb-3 font-semibold">Record a new activity</h5>
+                        <div className="grid gap-4 md:grid-cols-2">
+                          <label className="text-sm">Activity type
+                            <select value={activityType}
+                              onChange={(event) => {
+                                setActivityType(event.target.value as LeadActivityType);
+                                setActivityOutcome("");
+                              }}
+                              className="mt-1 block w-full rounded-lg border border-slate-600 bg-slate-900 p-2">
+                              {ACTIVITY_TYPES.map((type) => <option key={type} value={type}>{formatLabel(type)}</option>)}
+                            </select>
+                          </label>
+                          <label className="text-sm">Law firm (required for firm outreach/response)
+                            <input value={activityFirm} onChange={(event) => setActivityFirm(event.target.value)}
+                              maxLength={200}
+                              required={activityType === "firm_outreach" || activityType === "firm_response"}
+                              className="mt-1 block w-full rounded-lg border border-slate-600 bg-slate-900 p-2"
+                              placeholder="Firm name" />
+                          </label>
+                          <label className="text-sm">Outcome
+                            <select value={activityOutcome} onChange={(event) => setActivityOutcome(event.target.value)}
+                              className="mt-1 block w-full rounded-lg border border-slate-600 bg-slate-900 p-2">
+                              <option value="">Not specified</option>
+                              {ACTIVITY_OUTCOMES[activityType].map((outcome) =>
+                                <option key={outcome} value={outcome}>{formatLabel(outcome)}</option>)}
+                            </select>
+                          </label>
+                          <label className="text-sm">Next follow-up (optional)
+                            <input type="datetime-local" value={activityFollowUp}
+                              onChange={(event) => setActivityFollowUp(event.target.value)}
+                              className="mt-1 block w-full rounded-lg border border-slate-600 bg-slate-900 p-2" />
+                          </label>
+                        </div>
+                        <label className="mt-4 block text-sm">Notes (required)
+                          <textarea value={activityNotes} onChange={(event) => setActivityNotes(event.target.value)}
+                            required maxLength={5000} rows={3}
+                            placeholder="Record what happened. Avoid unnecessary sensitive details."
+                            className="mt-1 block w-full rounded-lg border border-slate-600 bg-slate-900 p-2" />
+                        </label>
+                        <p className="mt-2 text-xs text-slate-400">
+                          Entries are permanent and timestamped. Saving does not send an email or change the lead status.
+                        </p>
+                        <button type="submit" disabled={savingActivity || !activityNotes.trim()}
+                          className="mt-3 rounded-lg bg-amber-400 px-4 py-2 text-sm font-semibold text-slate-950 disabled:opacity-50">
+                          {savingActivity ? "Saving…" : "Save activity"}
+                        </button>
+                      </form>
+                    </div>
+                  )}
                 </div>
               </article>)}
             </div>}
