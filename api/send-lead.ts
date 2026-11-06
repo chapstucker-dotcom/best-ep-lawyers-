@@ -1487,6 +1487,43 @@ const sendFirmLead = async ({
   });
 };
 
+// Each notification is claimed once before contacting Resend. Accepted messages
+// are never automatically resent: provider acceptance is not inbox delivery.
+const sendTracked = async (
+  leadId: string,
+  recipientType: "admin" | "firm" | "consumer",
+  recipientEmail: string,
+  send: () => Promise<{ data: { id: string } | null; error: unknown }>
+) => {
+  const db = getSupabaseServerClient();
+  if (!db || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    throw new Error("Notification tracking requires server credentials");
+  }
+  const key = { lead_id: leadId, recipient_type: recipientType, recipient_email: recipientEmail };
+  const { error: createError } = await db.from("lead_notifications")
+    .upsert({ ...key, status: "pending" }, { onConflict: "lead_id,recipient_type,recipient_email", ignoreDuplicates: true });
+  if (createError) throw createError;
+  const { data: claimed, error: claimError } = await db.from("lead_notifications")
+    .update({ status: "sending", updated_at: new Date().toISOString(), last_attempt_at: new Date().toISOString() })
+    .eq("lead_id", leadId).eq("recipient_type", recipientType).eq("recipient_email", recipientEmail)
+    .eq("status", "pending").select("id,attempt_count").maybeSingle();
+  if (claimError) throw claimError;
+  if (!claimed) return { data: null, error: null, skipped: true };
+  let result: { data: { id: string } | null; error: unknown };
+  try { result = await send(); }
+  catch (error) { result = { data: null, error }; }
+  const errorMessage = result.error ? String((result.error as Error)?.message || result.error).slice(0, 2000) : null;
+  const { error: recordError } = await db.from("lead_notifications").update({
+    status: errorMessage ? "failed" : "accepted",
+    provider_message_id: result.data?.id || null,
+    last_error: errorMessage,
+    attempt_count: (claimed.attempt_count || 0) + 1,
+    updated_at: new Date().toISOString(),
+  }).eq("id", claimed.id);
+  if (recordError) console.error("Notification audit update failed", recordError);
+  return { ...result, skipped: false };
+};
+
 export default async function handler(
   req: any,
   res: any
@@ -1503,6 +1540,8 @@ export default async function handler(
 
   try {
     const {
+      leadId,
+      turnstileToken,
       fullName,
       email,
       phone,
@@ -1511,6 +1550,11 @@ export default async function handler(
       firmName,
       practiceArea,
       sourceUrl,
+      landingPage,
+      referrer,
+      source,
+      medium,
+      campaign,
       matterLocation,
       matterTiming,
     } = req.body ?? {};
@@ -1593,6 +1637,86 @@ export default async function handler(
           ).trim()
         : null;
 
+    // Turnstile tokens are short-lived and single-use. Validate them before
+    // any notification lookup, routing or email attempt.
+    if (!process.env.TURNSTILE_SECRET_KEY) {
+      return res.status(503).json({ success: false, error: "Bot verification unavailable" });
+    }
+    if (typeof turnstileToken !== "string" || turnstileToken.length < 10 || turnstileToken.length > 2048) {
+      return res.status(403).json({ success: false, error: "Security verification required" });
+    }
+    const verification = new URLSearchParams({
+      secret: process.env.TURNSTILE_SECRET_KEY,
+      response: turnstileToken,
+    });
+    const remoteIp = String(req.headers?.["x-forwarded-for"] || "").split(",")[0].trim();
+    if (remoteIp) verification.set("remoteip", remoteIp);
+    let challenge: { success?: boolean; hostname?: string };
+    try {
+      const challengeResponse = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: verification.toString(),
+        signal: AbortSignal.timeout(8000),
+      });
+      if (!challengeResponse.ok) throw new Error("Turnstile verification unavailable");
+      challenge = await challengeResponse.json();
+    } catch (error) {
+      console.error("Turnstile verification failed", error);
+      return res.status(503).json({ success: false, error: "Security verification temporarily unavailable" });
+    }
+    const allowedHosts = new Set(["www.elpasosbestlawyers.com", "elpasosbestlawyers.com"]);
+    if (!challenge.success || !challenge.hostname || !allowedHosts.has(challenge.hostname)) {
+      return res.status(403).json({ success: false, error: "Security verification failed" });
+    }
+
+    // Persist only after successful server-side bot verification. The client
+    // cannot write to leads directly once the accompanying RLS change is applied.
+    if (typeof leadId !== "string" || !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(leadId)) {
+      return res.status(400).json({ success: false, error: "Invalid submission ID" });
+    }
+    if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      return res.status(503).json({ success: false, error: "Lead storage unavailable" });
+    }
+    const db = getSupabaseServerClient();
+    if (!db) return res.status(503).json({ success: false, error: "Database unavailable" });
+    if (cleanFullName.length > 160 || cleanEmail.length > 254 ||
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail) ||
+        cleanLegalIssue.length < 10 || cleanLegalIssue.length > 10000 ||
+        cleanPhone.length > 60 || area.length > 180) {
+      return res.status(400).json({ success: false, error: "Invalid lead information" });
+    }
+    const safeText = (value: unknown, limit: number) =>
+      typeof value === "string" ? value.slice(0, limit) : null;
+    const leadRecord = {
+      id: leadId,
+      full_name: cleanFullName,
+      email: cleanEmail,
+      phone: cleanPhone,
+      legal_issue: cleanLegalIssue,
+      firm_id: firmId || null,
+      firm_name: safeText(firmName, 250),
+      practice_area: area,
+      status: "new",
+      source_url: safeText(cleanSourceUrl, 2000),
+      landing_page: safeText(landingPage, 2000),
+      referrer: safeText(referrer, 2000),
+      source: safeText(source, 200),
+      medium: safeText(medium, 200),
+      campaign: safeText(campaign, 200),
+      matter_location: safeText(cleanMatterLocation, 500),
+      matter_timing: safeText(cleanMatterTiming, 500),
+    };
+    const { error: saveError } = await db.from("leads").insert(leadRecord);
+    if (saveError) {
+      // Never send a second set of notifications for an already-used ID.
+      if (saveError.code === "23505") {
+        return res.status(409).json({ success: false, error: "Submission already processed" });
+      }
+      console.error("Lead persistence failed", saveError);
+      return res.status(503).json({ success: false, error: "Unable to save inquiry" });
+    }
+
     let routedFirm:
       RoutedFirm | null =
       null;
@@ -1631,7 +1755,7 @@ export default async function handler(
         error:
           firmEmailError,
       } =
-        await sendFirmLead({
+        await sendTracked(leadId, "firm", routedFirm.email, () => sendFirmLead({
           routedFirm,
 
           fullName:
@@ -1657,7 +1781,7 @@ export default async function handler(
 
           matterTiming:
             cleanMatterTiming,
-        });
+        }));
 
       if (firmEmailError) {
         console.error(
@@ -1678,7 +1802,7 @@ export default async function handler(
       error:
         adminEmailError,
     } =
-      await resend.emails.send({
+      await sendTracked(leadId, "admin", ADMIN_EMAIL, () => resend.emails.send({
         from: FROM_EMAIL,
 
         to: [
@@ -1855,7 +1979,7 @@ export default async function handler(
             </div>
           </div>
         `,
-      });
+      }));
 
     if (adminEmailError) {
       console.error(
@@ -1871,7 +1995,7 @@ export default async function handler(
       error:
         consumerEmailError,
     } =
-      await resend.emails.send({
+      await sendTracked(leadId, "consumer", cleanEmail, () => resend.emails.send({
         from: FROM_EMAIL,
 
         to: [
@@ -1954,7 +2078,7 @@ export default async function handler(
             </p>
           </div>
         `,
-      });
+      }));
 
     if (
       consumerEmailError

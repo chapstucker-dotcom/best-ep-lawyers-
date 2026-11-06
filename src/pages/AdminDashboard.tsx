@@ -25,6 +25,16 @@ interface ModerationReview {
   disputed_at: string | null;
 }
 
+interface LeadNotification {
+  lead_id: string;
+  recipient_type: string;
+  recipient_email: string;
+  status: string;
+  attempt_count: number;
+  last_error: string | null;
+  updated_at: string;
+}
+
 interface ConsumerLead {
   id: string;
   created_at: string | null;
@@ -77,6 +87,8 @@ export default function AdminDashboard() {
   });
 
   const [leads, setLeads] = useState<ConsumerLead[]>([]);
+  const [leadNotifications, setLeadNotifications] = useState<LeadNotification[]>([]);
+  const [notificationsError, setNotificationsError] = useState<string | null>(null);
   const [leadsLoading, setLeadsLoading] = useState(true);
   const [leadsError, setLeadsError] = useState<string | null>(null);
   const [leadActionError, setLeadActionError] = useState<string | null>(null);
@@ -96,6 +108,15 @@ export default function AdminDashboard() {
       setLeadsError(error.message || "Unable to load consumer leads.");
     } else {
       setLeads((data ?? []) as ConsumerLead[]);
+    }
+    const notificationsResult = await supabase.from("lead_notifications")
+      .select("lead_id,recipient_type,recipient_email,status,attempt_count,last_error,updated_at")
+      .order("updated_at", { ascending: false }).limit(300);
+    if (notificationsResult.error) {
+      setNotificationsError(notificationsResult.error.message);
+    } else {
+      setNotificationsError(null);
+      setLeadNotifications((notificationsResult.data ?? []) as LeadNotification[]);
     }
     setLeadsLoading(false);
   }, []);
@@ -233,7 +254,7 @@ export default function AdminDashboard() {
             <div>
               <h2 id="consumer-leads-title" className="text-2xl font-bold">Consumer Leads</h2>
               <p className="mt-2 text-sm text-slate-300">
-                Latest 100 inquiries. Email delivery is not tracked here; verify follow-up separately.
+                Latest 100 inquiries. Notification status reflects provider acceptance, not confirmed inbox delivery.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
@@ -274,6 +295,18 @@ export default function AdminDashboard() {
                       {LEAD_STATUSES.map((status) => <option key={status} value={status}>{formatLabel(status)}</option>)}
                     </select>
                   </div>
+                </div>
+                <div className="mt-3 space-y-1 text-xs text-slate-300">
+                  {leadNotifications.filter((notification) => notification.lead_id === lead.id).map((notification) => (
+                    <p key={`${notification.recipient_type}:${notification.recipient_email}`}>
+                      <span className="font-semibold">{formatLabel(notification.recipient_type)}:</span> {formatLabel(notification.status)}
+                      {` · attempts ${notification.attempt_count}`}
+                      {notification.last_error ? <span className="text-red-300"> · {notification.last_error}</span> : null}
+                    </p>
+                  ))}
+                  {!leadNotifications.some((notification) => notification.lead_id === lead.id) &&
+                    <p>Notifications not recorded for this lead.</p>}
+                  {notificationsError && <p className="text-red-300">Notification audit unavailable: {notificationsError}</p>}
                 </div>
                 <div className="mt-4 grid gap-4 text-sm md:grid-cols-2">
                   <div className="space-y-2">

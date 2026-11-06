@@ -1,5 +1,7 @@
 import {
   useState,
+  useEffect,
+  useRef,
   type FormEvent,
 } from 'react';
 
@@ -13,7 +15,6 @@ import {
   UserRound,
 } from 'lucide-react';
 
-import { supabase } from '@/lib/supabase';
 import { trackEvent } from '@/services/analyticsService';
 import { trackMetaLead } from '@/services/metaPixel';
 import {
@@ -61,6 +62,66 @@ const EMPTY_FORM: FormState = {
   matterLocation: '',
   matterTiming: '',
 };
+
+const TURNSTILE_SITE_KEY = '0x4AAAAAAF1rD3_kl_i-tVxx';
+
+type TurnstileAPI = {
+  render: (element: HTMLElement, options: Record<string, unknown>) => string;
+  remove: (id: string) => void;
+  reset: (id: string) => void;
+};
+
+declare global {
+  interface Window { turnstile?: TurnstileAPI; }
+}
+
+function LeadTurnstile({ onToken, resetKey }: {
+  onToken: (token: string | null) => void;
+  resetKey: number;
+}) {
+  const container = useRef<HTMLDivElement>(null);
+  const widgetId = useRef<string | null>(null);
+  const callback = useRef(onToken);
+  callback.current = onToken;
+
+  useEffect(() => {
+    let cancelled = false;
+    const renderWidget = () => {
+      if (cancelled || !container.current || !window.turnstile || widgetId.current) return;
+      widgetId.current = window.turnstile.render(container.current, {
+        sitekey: TURNSTILE_SITE_KEY,
+        theme: 'auto',
+        callback: (token: string) => callback.current(token),
+        'expired-callback': () => callback.current(null),
+        'error-callback': () => callback.current(null),
+      });
+    };
+    if (!document.querySelector('script[data-epbl-turnstile]')) {
+      const script = document.createElement('script');
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      script.async = true;
+      script.defer = true;
+      script.dataset.epblTurnstile = 'true';
+      document.head.appendChild(script);
+    }
+    const poll = window.setInterval(renderWidget, 150);
+    renderWidget();
+    return () => {
+      cancelled = true;
+      window.clearInterval(poll);
+      if (widgetId.current && window.turnstile) window.turnstile.remove(widgetId.current);
+      widgetId.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (resetKey > 0 && widgetId.current && window.turnstile) {
+      window.turnstile.reset(widgetId.current);
+      callback.current(null);
+    }
+  }, [resetKey]);
+  return <div ref={container} aria-label="Security verification" />;
+}
 
 const GENERAL_LEGAL_INQUIRY = 'General Legal Inquiry';
 
@@ -224,6 +285,8 @@ export default function LeadCaptureForm({
 
   const [loading, setLoading] =
     useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
 
   const [successMessage, setSuccessMessage] =
     useState('');
@@ -287,63 +350,7 @@ export default function LeadCaptureForm({
     return '';
   };
 
-  const saveLead = async () => {
-    const baseLead = {
-      full_name: form.fullName.trim(),
-      email: form.email.trim(),
-      phone: form.phone.trim(),
-      legal_issue: form.legalIssue.trim(),
-    };
-
-    /*
-     * First try to save the complete lead record.
-     */
-    const attribution = getLeadAttribution();
-
-    const enrichedLead = {
-      ...baseLead,
-      firm_id: firmId || null,
-      firm_name: firmName || null,
-      practice_area:
-        effectivePracticeArea ||
-        'General Legal Inquiry',
-      status: 'new',
-      source_url: attribution.sourceUrl,
-      landing_page: attribution.landingPage,
-      referrer: attribution.referrer,
-      source: attribution.source,
-      medium: attribution.medium,
-      campaign: attribution.campaign,
-      matter_location: form.matterLocation.trim() || null,
-      matter_timing: form.matterTiming.trim() || null,
-    };
-
-    const firstAttempt = await supabase
-      .from('leads')
-      .insert([enrichedLead]);
-
-    if (!firstAttempt.error) {
-      return firstAttempt;
-    }
-
-    /*
-     * If the existing Supabase table does not yet
-     * contain the newer tracking columns, keep the
-     * lead instead of losing it.
-     */
-    if (
-      isMissingColumnError(firstAttempt.error)
-    ) {
-      return supabase
-        .from('leads')
-        .insert([baseLead]);
-    }
-
-    return firstAttempt;
-  };
-
-  const sendLeadNotification = async () => {
-    try {
+  const sendLeadNotification = async (leadId: string, token: string) => {
       const response = await fetch(
         '/api/send-lead',
         {
@@ -355,6 +362,8 @@ export default function LeadCaptureForm({
           },
 
           body: JSON.stringify({
+            leadId,
+            turnstileToken: token,
             fullName:
               form.fullName.trim(),
 
@@ -391,21 +400,12 @@ export default function LeadCaptureForm({
       );
 
       if (!response.ok) {
-        console.warn(
-          'Lead saved, but email notification was not delivered.',
-          response.status
-        );
+        throw new Error(response.status === 403
+          ? 'Security verification failed. Please try again.'
+          : response.status === 409
+            ? 'This request has already been submitted.'
+            : 'Your request could not be saved. Please try again.');
       }
-    } catch (error) {
-      /*
-       * The lead is already stored.
-       * Email failure must not lose it.
-       */
-      console.warn(
-        'Lead notification request failed:',
-        error
-      );
-    }
   };
 
   const handleSubmit = async (
@@ -424,16 +424,16 @@ export default function LeadCaptureForm({
       return;
     }
 
+    if (!turnstileToken) {
+      setErrorMessage('Please complete the security verification before submitting.');
+      return;
+    }
+
     setLoading(true);
 
     try {
-      const { error } =
-        await saveLead();
-
-      if (error) {
-        throw error;
-      }
-
+      const leadId = crypto.randomUUID();
+      await sendLeadNotification(leadId, turnstileToken);
       trackMetaLead();
 
       if (firmId) {
@@ -464,7 +464,7 @@ export default function LeadCaptureForm({
         }
       }
 
-      await sendLeadNotification();
+      setTurnstileResetKey((value) => value + 1);
 
       /*
        * Do not claim that a specific firm has
@@ -479,6 +479,7 @@ export default function LeadCaptureForm({
 
       onSuccess?.();
     } catch (error) {
+      setTurnstileResetKey((value) => value + 1);
       console.error(
         'Lead submission failed:',
         error
@@ -729,6 +730,7 @@ export default function LeadCaptureForm({
                   </>
                 )}
               </Button>
+              <LeadTurnstile onToken={setTurnstileToken} resetKey={turnstileResetKey} />
             </form>
           </div>
         </div>
@@ -960,6 +962,7 @@ export default function LeadCaptureForm({
           <p className="text-center text-xs leading-5 text-gray-500">
             El Paso&apos;s Best Lawyers may review your information and share it with a participating law firm to evaluate your inquiry. Submission does not establish an attorney-client relationship or guarantee representation. Do not include confidential or highly sensitive information. See our <a href="/privacy" className="font-semibold underline">Privacy Policy</a>.
           </p>
+          <LeadTurnstile onToken={setTurnstileToken} resetKey={turnstileResetKey} />
         </form>
       </div>
     </section>
