@@ -891,6 +891,7 @@ type FirmRow = {
   specialties?: string[] | null;
 
   is_active?: boolean | null;
+  status?: string | null;
 };
 
 type RoutedFirm = {
@@ -1140,7 +1141,8 @@ const choosePriorityFirm = (
           firm,
           practiceArea
         ) &&
-        firm.is_active !== false
+        firm.is_active !== false &&
+        String(firm.status ?? "").trim().toLowerCase() === "active"
       );
     })
     .map((firm): RoutedFirm => {
@@ -1249,7 +1251,8 @@ const lookupSpecificFirm = async (
   if (
     !email ||
     !planIncludesLeadRouting(firm) ||
-    firm.is_active === false
+    firm.is_active === false ||
+    String(firm.status ?? "").trim().toLowerCase() !== "active"
   ) {
     return null;
   }
