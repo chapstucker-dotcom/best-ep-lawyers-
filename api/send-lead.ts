@@ -1757,6 +1757,7 @@ export default async function handler(
       const {
         error:
           firmEmailError,
+        skipped: firmEmailSkipped,
       } =
         await sendTracked(leadId, "firm", routedFirm.email, () => sendFirmLead({
           routedFirm,
@@ -1791,7 +1792,7 @@ export default async function handler(
           "Firm lead delivery failed:",
           firmEmailError
         );
-      } else {
+      } else if (!firmEmailSkipped) {
         routedSuccessfully =
           true;
       }
@@ -1926,7 +1927,7 @@ export default async function handler(
                 <strong>Delivery:</strong>
                 ${
                   routedSuccessfully
-                    ? "Successfully delivered"
+                    ? "Accepted by email provider (delivery not confirmed)"
                     : "Admin capture only"
                 }
               </p>
