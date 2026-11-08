@@ -1,6 +1,16 @@
 {
   "redirects": [
     {
+      "source": "/practice-areas/personal-injury",
+      "destination": "/el-paso-personal-injury-lawyers/",
+      "permanent": true
+    },
+    {
+      "source": "/practice-areas/personal-injury/",
+      "destination": "/el-paso-personal-injury-lawyers/",
+      "permanent": true
+    },
+    {
       "source": "/guides/uninsured-driver-texas-car-accident",
       "destination": "/guides/uninsured-driver-accident-texas/",
       "permanent": true
