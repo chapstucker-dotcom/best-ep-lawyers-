@@ -1,6 +1,56 @@
 {
   "redirects": [
     {
+      "source": "/practice-areas/car-accident",
+      "destination": "/el-paso-car-accident-lawyers/",
+      "permanent": true
+    },
+    {
+      "source": "/practice-areas/car-accident/",
+      "destination": "/el-paso-car-accident-lawyers/",
+      "permanent": true
+    },
+    {
+      "source": "/practice-areas/truck-accident",
+      "destination": "/el-paso-truck-accident-lawyers/",
+      "permanent": true
+    },
+    {
+      "source": "/practice-areas/truck-accident/",
+      "destination": "/el-paso-truck-accident-lawyers/",
+      "permanent": true
+    },
+    {
+      "source": "/practice-areas/immigration",
+      "destination": "/el-paso-immigration-lawyers/",
+      "permanent": true
+    },
+    {
+      "source": "/practice-areas/immigration/",
+      "destination": "/el-paso-immigration-lawyers/",
+      "permanent": true
+    },
+    {
+      "source": "/practice-areas/divorce",
+      "destination": "/el-paso-divorce-lawyers/",
+      "permanent": true
+    },
+    {
+      "source": "/practice-areas/divorce/",
+      "destination": "/el-paso-divorce-lawyers/",
+      "permanent": true
+    },
+    {
+      "source": "/practice-areas/motorcycle-accident",
+      "destination": "/el-paso-motorcycle-accident-lawyers/",
+      "permanent": true
+    },
+    {
+      "source": "/practice-areas/motorcycle-accident/",
+      "destination": "/el-paso-motorcycle-accident-lawyers/",
+      "permanent": true
+    },
+    {
       "source": "/practice-areas/personal-injury",
       "destination": "/el-paso-personal-injury-lawyers/",
       "permanent": true
