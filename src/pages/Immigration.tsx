@@ -1,6 +1,19 @@
+import PracticeAreaFirmDirectory from "../components/PracticeAreaFirmDirectory";
+import type { PracticeAreaPageData } from "../data/practiceAreaPages";
 import LeadCaptureForm from "../components/LeadCaptureForm";
 import { useSeo } from "../hooks/use-seo";
 
+const immigrationDirectoryPage: PracticeAreaPageData = {
+  path: "/el-paso-immigration-lawyers",
+  shortTitle: "Immigration",
+  title: "",
+  description: "",
+  metaDescription: "",
+  heroText: "",
+  topics: ["Immigration"],
+  faqs: [],
+  relatedPages: [],
+};
 const relatedPages = [
   ["Green Card", "/el-paso-green-card-lawyers"],
   ["Citizenship", "/el-paso-citizenship-lawyers"],
@@ -322,6 +335,10 @@ export default function Immigration() {
             consultas, personal bilingüe, actualizaciones del caso y documentos
             disponibles en español.
           </p>
+        </section>
+
+        <section style={{ marginBottom: "52px" }}>
+          <PracticeAreaFirmDirectory page={immigrationDirectoryPage} />
         </section>
 
         <section style={{ marginBottom: "52px" }}>
