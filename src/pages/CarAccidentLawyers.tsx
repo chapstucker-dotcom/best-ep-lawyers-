@@ -223,7 +223,7 @@ export default function CarAccidentLawyers() {
               lineHeight: 1.1,
             }}
           >
-            Best Car Accident Lawyers in El Paso, TX
+            Compare Car Accident Lawyers in El Paso, TX
           </h1>
 
           <p
@@ -251,7 +251,25 @@ export default function CarAccidentLawyers() {
             Whether you are searching for a car accident lawyer in El Paso,
             comparing local attorneys after a crash, or looking for help with a
             serious injury claim, this page is designed to help you understand
-            your options and connect with participating firms.
+            your options and compare participating firms.
+          </p>
+          <a
+            href="#consultation-request"
+            style={{
+              display: "inline-block",
+              marginTop: "24px",
+              padding: "16px 24px",
+              borderRadius: "12px",
+              background: "#fbbf24",
+              color: "#0f172a",
+              fontWeight: 700,
+              textDecoration: "none",
+            }}
+          >
+            Request a Consultation
+          </a>
+          <p style={{ color: "#cbd5e1", fontSize: "14px", lineHeight: 1.6, marginTop: "12px" }}>
+            El Paso&apos;s Best Lawyers receives and reviews inquiries. A referral to a participating law firm is not guaranteed.
           </p>
         </section>
 
@@ -481,7 +499,7 @@ export default function CarAccidentLawyers() {
           </div>
         </section>
 
-        <section
+        <section id="consultation-request"
           style={{
             background: "#111827",
             border: "1px solid #1e293b",
@@ -500,8 +518,8 @@ export default function CarAccidentLawyers() {
               marginBottom: "24px",
             }}
           >
-            Use the form below to submit your information and connect with a
-            participating law firm.
+            Submit your inquiry to El Paso&apos;s Best Lawyers for review. We may share it
+            with an eligible participating firm, but a referral or representation is not guaranteed.
           </p>
           <LeadCaptureForm phoneOptional />
         </section>
