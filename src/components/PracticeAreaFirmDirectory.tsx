@@ -85,8 +85,10 @@ function getConsumerSpecialtyLabel(
     page.shortTitle
   );
 
+  const specialties = getFirmSpecialtyValues(firm);
+
   if (resolution.practiceArea) {
-    const matchingSpecialty = getFirmSpecialtyValues(firm).find(
+    const matchingSpecialty = specialties.find(
       (value) =>
         getPracticeAreaByValue(value)?.slug ===
         resolution.practiceArea?.slug
@@ -97,15 +99,30 @@ function getConsumerSpecialtyLabel(
     }
   }
 
-  const category = String(firm.category ?? "").trim();
+  if (resolution.market) {
+    const matchingSpecialty = specialties.find(
+      (value) =>
+        valueMatchesMarket(value, resolution.market!.key)
+    );
 
-  if (category) {
-    return category;
+    if (matchingSpecialty) {
+      return matchingSpecialty;
+    }
+
+    const matchingCategory = getFirmMarketValues(firm).find(
+      (value) =>
+        valueMatchesMarket(value, resolution.market!.key)
+    );
+
+    if (matchingCategory) {
+      return matchingCategory;
+    }
+
+    return null;
   }
 
-  return getFirmSpecialtyValues(firm)[0] ?? null;
+  return null;
 }
-
 function valueMatchesMarket(
   value: string,
   targetMarketKey: string
