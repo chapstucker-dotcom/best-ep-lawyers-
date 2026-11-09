@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 
 export const config = { api: { bodyParser: false } };
-import { Webhook } from "standardwebhooks";
+import { Resend } from "resend";
 
 // Vercel Node function: read the original request bytes; never verify a reserialized JSON body.
 type RequestLike = AsyncIterable<Uint8Array | string> & {
@@ -54,10 +54,14 @@ export default async function handler(req: RequestLike, res: ResponseLike) {
 
   let event: unknown;
   try {
-    event = new Webhook(secret).verify(payload, {
-      id: header(req, "webhook-id"),
-      timestamp: header(req, "webhook-timestamp"),
-      signature: header(req, "webhook-signature"),
+    event = new Resend("re_webhook_verification_only").webhooks.verify({
+      payload,
+      webhookSecret: secret,
+      headers: {
+        id: header(req, "svix-id"),
+        timestamp: header(req, "svix-timestamp"),
+        signature: header(req, "svix-signature"),
+      },
     });
   } catch {
     return res.status(401).json({ error: "Invalid webhook signature" });
