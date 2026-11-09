@@ -416,6 +416,64 @@ export default function CarAccidentLawyers() {
           </p>
         </section>
 
+        <section
+          aria-labelledby="el-paso-crash-report-heading"
+          style={{
+            background: "#111827",
+            padding: "30px",
+            borderRadius: "16px",
+            border: "1px solid #1e293b",
+            marginBottom: "52px",
+          }}
+        >
+          <h2 id="el-paso-crash-report-heading" style={{ fontSize: "30px", marginBottom: "14px" }}>
+            How to Get a Car Accident Report in El Paso
+          </h2>
+          <p style={{ color: "#cbd5e1", lineHeight: 1.75, marginBottom: "16px" }}>
+            If an officer investigated your collision, a crash report may help you
+            identify the responding agency, vehicles involved, reported circumstances,
+            and other information to discuss with an attorney or insurer. The report
+            is one source of evidence; it does not necessarily determine legal fault.
+          </p>
+          <ol style={{ color: "#cbd5e1", lineHeight: 1.8, paddingLeft: "24px", marginBottom: "20px" }}>
+            <li>
+              <strong>Identify the investigating agency.</strong> A crash within El Paso
+              city limits may have been investigated by El Paso Police; other crashes
+              may have been handled by the El Paso County Sheriff or another agency.
+            </li>
+            <li>
+              <strong>Gather the details you have.</strong> Keep the collision date,
+              location, involved drivers or vehicles, and any report or incident number
+              provided by the responding officer.
+            </li>
+            <li>
+              <strong>Request the report from an official source.</strong> Check the
+              investigating agency's records process or the Texas Department of
+              Transportation's crash-report purchase system. Texas law restricts
+              access to certain crash reports to eligible requesters.
+            </li>
+          </ol>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "14px", marginBottom: "18px" }}>
+            <a href="https://eppd.org/public-services/records-reports" target="_blank" rel="noopener noreferrer" style={{ color: "#fbbf24", fontWeight: 700 }}>
+              El Paso Police Records &amp; Reports
+            </a>
+            <a href="https://www.txdot.gov/data-maps/crash-reports-records.html" target="_blank" rel="noopener noreferrer" style={{ color: "#fbbf24", fontWeight: 700 }}>
+              TxDOT Crash Reports &amp; Records
+            </a>
+            <a href="https://epcso.org/1166/Criminal-Accident-Reports" target="_blank" rel="noopener noreferrer" style={{ color: "#fbbf24", fontWeight: 700 }}>
+              El Paso County Sheriff's Office Reports
+            </a>
+          </div>
+          <p style={{ color: "#cbd5e1", lineHeight: 1.75, marginBottom: "16px" }}>
+            Report availability, eligibility, processing time, and fees depend on the
+            agency and request. If you cannot obtain the report immediately, preserve
+            your own photos, witness information, medical records, and insurance documents.
+          </p>
+          <a href="#consultation-request" style={{ color: "#fbbf24", fontWeight: 700, textDecoration: "underline" }}>
+            Need help understanding your next steps? Request a consultation.
+          </a>
+        </section>
+
         <section style={{ marginBottom: "52px" }}>
           <h2 style={{ fontSize: "32px", marginBottom: "18px" }}>
             Explore Related Accident Lawyers
@@ -452,7 +510,7 @@ export default function CarAccidentLawyers() {
                     marginTop: "8px",
                   }}
                 >
-                  Compare El Paso attorneys →
+                  Compare El Paso attorneys â†’
                 </span>
               </a>
             ))}
@@ -536,7 +594,7 @@ export default function CarAccidentLawyers() {
             fontWeight: "bold",
           }}
         >
-          ← Back Home
+          â† Back Home
         </a>
       </div>
     </main>
