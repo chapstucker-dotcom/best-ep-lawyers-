@@ -4,7 +4,7 @@ import type { PracticeAreaPageData } from "../data/practiceAreaPages";
 const carAccidentPage: PracticeAreaPageData = {
   path: "/el-paso-car-accident-lawyers",
   shortTitle: "Car Accident",
-  title: "Best Car Accident Lawyers in El Paso, Texas",
+  title: "Car Accident Lawyers in El Paso, TX | Compare Local Attorneys",
   description:
     "Compare El Paso car accident attorneys handling serious injury claims, uninsured motorists, hit-and-run crashes, insurance disputes, lost income, catastrophic injuries, and wrongful death cases.",
   metaDescription:
@@ -93,6 +93,11 @@ const carAccidentPage: PracticeAreaPageData = {
       answer:
         "Preserve photographs, video, witness information, police reports, medical records, bills, repair estimates, insurance correspondence, wage records, receipts, and a written account of symptoms and limitations.",
     },
+  ],
+  resourceLinks: [
+    { label: "What to Do After a Car Accident in El Paso", path: "/guides/what-to-do-after-car-accident-el-paso" },
+    { label: "Texas Car Accident Filing Deadlines", path: "/guides/texas-car-accident-statute-of-limitations" },
+    { label: "How to Get a Texas Crash Report in El Paso", path: "/guides/how-to-get-texas-crash-report-el-paso" },
   ],
   relatedPages: [
     { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },

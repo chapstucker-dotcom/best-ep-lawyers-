@@ -297,7 +297,7 @@ export default function PracticeAreaTemplate({ page }: Props) {
         </div>
       </section>
 
-      {page.path === "/el-paso-motorcycle-accident-lawyers" && (
+      {["/el-paso-motorcycle-accident-lawyers", "/el-paso-car-accident-lawyers"].includes(page.path) && (
         <PracticeAreaFirmDirectory page={page} />
       )}
 
@@ -448,7 +448,7 @@ export default function PracticeAreaTemplate({ page }: Props) {
         </div>
       </section>
 
-      {page.path !== "/el-paso-motorcycle-accident-lawyers" && (
+      {!["/el-paso-motorcycle-accident-lawyers", "/el-paso-car-accident-lawyers"].includes(page.path) && (
         <PracticeAreaFirmDirectory page={page} />
       )}
 
