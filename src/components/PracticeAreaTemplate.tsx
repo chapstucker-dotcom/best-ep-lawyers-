@@ -297,6 +297,10 @@ export default function PracticeAreaTemplate({ page }: Props) {
         </div>
       </section>
 
+      {page.path === "/el-paso-motorcycle-accident-lawyers" && (
+        <PracticeAreaFirmDirectory page={page} />
+      )}
+
       <section className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr]">
           <article>
@@ -444,7 +448,9 @@ export default function PracticeAreaTemplate({ page }: Props) {
         </div>
       </section>
 
-      <PracticeAreaFirmDirectory page={page} />
+      {page.path !== "/el-paso-motorcycle-accident-lawyers" && (
+        <PracticeAreaFirmDirectory page={page} />
+      )}
 
       <section className="border-b border-slate-200 bg-white">
         <div className="mx-auto max-w-7xl px-6 py-16">
