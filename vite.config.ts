@@ -7,6 +7,13 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    proxy: {
+      "/api": {
+        target: "https://www.elpasosbestlawyers.com",
+        changeOrigin: true,
+        secure: true,
+      },
+    },
   },
   plugins: [
     react()

@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight, BookOpen, ExternalLink, HandHeart, Landmark, Search, ShieldCheck, Users } from "lucide-react";
+import { ArrowRight, BookOpen, CalendarDays, ExternalLink, HandHeart, Landmark, Link2, MapPin, Search, ShieldCheck, Users, Scale, HeartHandshake } from "lucide-react";
+import skyline from "@/assets/hero-franklin-star.png";
 import Footer from "@/components/Footer";
 import { useSeo } from "../hooks/use-seo";
 
@@ -22,128 +23,110 @@ const resources: Resource[] = [
 
 const categories: Array<"All resources" | Category> = ["All resources", "Legal Aid", "Immigration", "Courts & Research", "Dispute Resolution", "Community Support"];
 
-export default function CommunityLegalResources() {
-  const [query, setQuery] = useState("");
-  const [contact, setContact] = useState({ name: "", email: "", organization: "", message: "", website: "" });
-  const [contactStatus, setContactStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
-  const [contactError, setContactError] = useState("");
-  async function submitContact(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (contactStatus === "sending") return;
-    setContactStatus("sending");
-    setContactError("");
-    try {
-      const response = await fetch("/api/community-resource-contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(contact),
-      });
-      const result = await response.json().catch(() => null);
-      if (!response.ok || result?.success !== true) throw new Error(result?.error || "We could not send your inquiry. Please try again.");
-      setContactStatus("success");
-      setContact({ name: "", email: "", organization: "", message: "", website: "" });
-    } catch (error) {
-      setContactError(error instanceof Error ? error.message : "We could not send your inquiry. Please try again.");
-      setContactStatus("error");
-    }
-  }
-  const [category, setCategory] = useState<(typeof categories)[number]>("All resources");
-  useSeo({
-    title: "El Paso Community Legal Resources | Legal Aid & Public Help",
-    description: "Explore free and low-cost legal aid, immigration assistance, court resources, mediation and community legal services in El Paso, Texas.",
-    path: "/community-legal-resources",
-  });
-  const filtered = useMemo(() => resources.filter((resource) => {
-    const matchesCategory = category === "All resources" || resource.category === category;
-    const needle = query.trim().toLowerCase();
-    return matchesCategory && (!needle || `${resource.name} ${resource.category} ${resource.summary}`.toLowerCase().includes(needle));
-  }), [category, query]);
+type Tab = "events" | "resources" | "programs";
+type ContributionType = "Event" | "Resource" | "Program";
 
-  return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
-      <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-5">
-          <Link to="/" className="font-bold text-[#0F2A43]">El Paso&apos;s Best Lawyers</Link>
-          <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold text-[#0F2A43] hover:text-teal-700"><ArrowLeft size={16} /> Home</Link>
-        </div>
-      </header>
-      <main>
-        <section className="bg-[#0F2A43] px-5 py-16 text-white md:py-20">
-          <div className="mx-auto max-w-5xl">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-amber-300/40 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-widest text-amber-300"><HandHeart size={16} /> Free community resource</div>
-            <h1 className="max-w-4xl text-4xl font-extrabold leading-tight md:text-6xl">El Paso Community Legal Resources</h1>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-200">Find organizations and public resources offering legal information, free or low-cost assistance, immigration support, mediation, and court-related guidance in the El Paso area.</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#find-resources" className="rounded-lg bg-amber-400 px-6 py-3 font-bold text-slate-950 hover:bg-amber-300">Explore resources</a>
-              <Link to="/guides" className="inline-flex items-center gap-2 rounded-lg border border-white/40 px-6 py-3 font-semibold hover:bg-white/10"><BookOpen size={17} /> Read legal guides</Link>
+export default function CommunityLegalResources() {
+  const [tab, setTab] = useState<Tab>("events");
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState<(typeof categories)[number]>("All resources");
+  const [contributionType, setContributionType] = useState<ContributionType>("Event");
+  const [form, setForm] = useState({ name: "", email: "", organization: "", title: "", date: "", location: "", link: "", details: "", website: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errorText, setErrorText] = useState("");
+  const filtered = useMemo(() => resources.filter((r) => (category === "All resources" || r.category === category) && `${r.name} ${r.category} ${r.summary}`.toLowerCase().includes(query.trim().toLowerCase())), [category, query]);
+  useSeo({ title: "El Paso Community Resources, Events & Legal Aid | El Paso's Best Lawyers", description: "Find El Paso community resources, legal aid organizations, nonprofit programs, and upcoming educational events. Submit a resource or event for free review.", path: "/community-legal-resources" });
+
+  async function submit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (status === "sending") return;
+    if (contributionType === "Event") {
+      const today = new Date();
+      const localToday = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}-${String(today.getDate()).padStart(2,"0")}`;
+      if (!form.date || form.date < localToday) {
+        setStatus("error");
+        setErrorText("Please select today or a future date for your event.");
+        return;
+      }
+    }
+    setStatus("sending"); setErrorText("");
+    const message = [`Submission type: ${contributionType}`, `Title: ${form.title}`, form.date ? `Date: ${form.date}` : "", form.location ? `Location: ${form.location}` : "", form.link ? `Source URL: ${form.link}` : "", `Details: ${form.details}`].filter(Boolean).join("\n");
+    try {
+      const response = await fetch("/api/community-resource-contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: form.name, email: form.email, organization: form.organization, message, website: form.website }) });
+      const result = await response.json().catch(() => null);
+      if (!response.ok || result?.success !== true) throw new Error(result?.error || "Submission failed. Please try again.");
+      setStatus("success"); setForm({ name: "", email: "", organization: "", title: "", date: "", location: "", link: "", details: "", website: "" });
+    } catch (err) { setStatus("error"); setErrorText(err instanceof Error ? err.message : "Submission failed."); }
+  }
+
+  const tabs: { id: Tab; label: string; icon: typeof CalendarDays }[] = [
+    { id: "events", label: "Upcoming Events", icon: CalendarDays },
+    { id: "resources", label: "Community Resources", icon: Link2 },
+    { id: "programs", label: "Programs & Services", icon: Users },
+  ];
+  const types: { id: ContributionType; description: string; icon: typeof CalendarDays }[] = [
+    { id: "Event", subtitle: "Workshop, clinic or community event", icon: CalendarDays },
+    { id: "Resource", subtitle: "Free legal help, form or guide", icon: Link2 },
+    { id: "Program", subtitle: "Nonprofit program or service", icon: HeartHandshake },
+  ];
+  return <div className="min-h-screen bg-[#FBF8F1] text-[#0A2340]">
+    <header className="bg-[#06182C] text-white border-b border-[#D9AE50]/40">
+      <div className="mx-auto max-w-[1440px] px-5 py-4 flex flex-wrap items-center justify-between gap-4">
+        <Link to="/" className="text-lg sm:text-xl font-black tracking-wide text-white">✦ EL PASO'S <span className="text-[#E4BB65]">BEST LAWYERS</span></Link>
+        <nav aria-label="Community hub navigation" className="flex items-center gap-4 sm:gap-7 text-sm font-semibold"><Link to="/">Find a Lawyer</Link><Link to="/guides">Legal Guides</Link><span className="border-b-2 border-[#E4BB65] pb-1 text-[#E4BB65]">Resources</span><Link to="/for-law-firms">For Law Firms</Link></nav>
+      </div>
+    </header>
+    <main>
+      <section className="relative isolate overflow-hidden bg-[#06182C] text-white">
+        <img src={skyline} alt="El Paso skyline, Franklin Mountains and illuminated star" className="absolute inset-0 -z-20 h-full w-full object-cover object-center" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#06182C]/95 via-[#06182C]/75 to-[#06182C]/60" />
+        <div className="mx-auto max-w-[1440px] grid gap-8 px-5 py-12 lg:grid-cols-[minmax(0,1.3fr)_minmax(360px,0.7fr)] lg:items-center lg:py-16">
+          <div><p className="mb-3 text-sm font-black uppercase tracking-[0.2em] text-[#F1CA78]">— El Paso Community Resources —</p>
+            <h1 className="max-w-3xl font-serif text-4xl font-bold leading-tight sm:text-5xl xl:text-6xl">Your El Paso Legal &amp; Community Resource Hub</h1>
+            <p className="mt-5 max-w-2xl text-base leading-7 sm:text-lg">Free legal information, community resources, educational events and local programs to help El Paso families, workers and small businesses.</p>
+            <div className="mt-8 grid grid-cols-2 gap-3 rounded-xl border border-white/20 bg-[#06182C]/80 p-4 sm:grid-cols-4">
+              {[{icon:CalendarDays,heading:"Community Events",desc:"Workshops & clinics"},{icon:BookOpen,heading:"Helpful Resources",desc:"Guides & services"},{icon:Users,heading:"Local Programs",desc:"Community support"},{icon:HandHeart,heading:"Get Involved",desc:"Share information"}].map(({icon:Icon,title,desc})=><div key={title} className="text-center sm:text-left"><Icon className="mx-auto mb-2 h-7 w-7 text-[#F1CA78] sm:mx-0"/><div className="text-sm font-bold">{title}</div><div className="mt-1 text-xs text-slate-200">{desc}</div></div>)}
             </div>
           </div>
-        </section>
-
-        <section className="border-b border-slate-200 bg-white px-5 py-8">
-          <div className="mx-auto grid max-w-6xl gap-5 md:grid-cols-3">
-            <div className="flex items-start gap-3"><HandHeart className="mt-1 shrink-0 text-teal-700" /><div><h2 className="font-bold">Free to explore</h2><p className="mt-1 text-sm leading-6 text-slate-600">No fee to browse resources or visit their official websites.</p></div></div>
-            <div className="flex items-start gap-3"><Landmark className="mt-1 shrink-0 text-teal-700" /><div><h2 className="font-bold">Public and nonprofit services</h2><p className="mt-1 text-sm leading-6 text-slate-600">Find different types of assistance in one place.</p></div></div>
-            <div className="flex items-start gap-3"><ShieldCheck className="mt-1 shrink-0 text-teal-700" /><div><h2 className="font-bold">Clear independence</h2><p className="mt-1 text-sm leading-6 text-slate-600">Listings do not imply endorsement or formal partnership.</p></div></div>
+          <aside className="rounded-2xl border-2 border-[#F0C66D] bg-[#06182C]/95 p-5 shadow-2xl sm:p-7">
+            <div className="flex items-start gap-3"><Users className="h-9 w-9 shrink-0 text-[#F0C66D]"/><div><h2 className="font-serif text-2xl font-bold">Share a Community Resource</h2><p className="mt-2 text-sm leading-6 text-slate-200">Help El Paso residents by sharing an event, program or useful resource. No account required.</p></div></div>
+            <div className="mt-5 grid grid-cols-3 gap-2">{types.map(({id,icon:Icon})=><button key={id} type="button" onClick={()=>{setContributionType(id);document.getElementById("contribute")?.scrollIntoView({behavior:"smooth"});}} className="rounded-lg border border-white/25 bg-white/10 px-2 py-4 text-center text-xs font-semibold hover:border-[#F0C66D]"><Icon className="mx-auto mb-2 h-6 w-6 text-[#F0C66D]"/>{id}</button>)}</div>
+            <a href="#contribute" className="mt-5 flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-[#F7D88C] to-[#D4A345] px-5 py-3 font-black text-[#06182C] hover:brightness-110">Submit a Contribution <ArrowRight className="h-4 w-4"/></a>
+            <p className="mt-4 text-center text-xs text-slate-200">✓ Free to contribute &nbsp; ✓ Reviewed before publication</p>
+          </aside>
+        </div>
+      </section>
+      <section className="mx-auto max-w-[1440px] px-5 py-9">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-wrap gap-2" role="tablist" aria-label="Community resources">{tabs.map(({id,label,icon:Icon})=><button role="tab" aria-selected={tab===id} key={id} onClick={()=>setTab(id)} className={`inline-flex items-center gap-2 rounded-lg border px-4 py-3 text-sm font-bold shadow-sm ${tab===id?"border-[#BC8B36] bg-[#C9973D] text-white":"border-[#DDD3C0] bg-white text-[#0A2340] hover:border-[#BC8B36]"}`}><Icon className="h-5 w-5"/>{label}</button>)}</div>
+          <label className="flex items-center gap-2 rounded-full border border-[#DDD3C0] bg-white px-4 py-2"><Search className="h-4 w-4 text-slate-500"/><input value={query} onChange={e=>{setQuery(e.target.value);if(tab==="events")setTab("resources");}} aria-label="Search resources" placeholder="Search resources or organizations..." className="w-full bg-transparent text-sm outline-none sm:w-64"/></label>
+        </div>
+        <div className="mt-7 grid gap-7 lg:grid-cols-[minmax(0,1.7fr)_minmax(280px,0.85fr)]">
+          <div>
+            {tab==="events" && <div className="rounded-xl border border-[#DDD3C0] bg-white p-7 shadow-sm"><div className="flex items-center gap-3"><CalendarDays className="h-8 w-8 text-[#B98A38]"/><h2 className="font-serif text-2xl font-bold">Upcoming Community Events</h2></div><p className="mt-4 leading-7 text-slate-600">We're collecting verified workshops, legal clinics and educational events from El Paso organizations. No events are published until their details have been reviewed.</p><a href="#contribute" onClick={()=>setContributionType("Event")} className="mt-5 inline-flex items-center gap-2 font-bold text-[#946B28] underline">Submit an upcoming event <ArrowRight className="h-4 w-4"/></a></div>}
+            {tab==="resources" && <><h2 className="font-serif text-2xl font-bold">Explore Community Resources</h2><div className="my-4 flex flex-wrap gap-2">{categories.map(c=><button key={c} onClick={()=>setCategory(c)} aria-pressed={category===c} className={`rounded-full border px-3 py-2 text-xs font-bold ${category===c?"bg-[#0A2340] text-white":"bg-white text-[#0A2340]"}`}>{c}</button>)}</div><div className="grid gap-3">{filtered.map(r=><article key={r.name} className="rounded-xl border border-[#DDD3C0] bg-white p-5 shadow-sm"><p className="text-xs font-bold uppercase text-[#946B28]">{r.category}</p><h3 className="mt-1 text-lg font-bold">{r.name}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{r.summary}</p>{r.note&&<p className="mt-2 text-xs text-slate-500">{r.note}</p>}<a href={r.url} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-bold text-[#946B28] underline">Visit official website <ExternalLink className="h-4 w-4"/></a></article>)}{filtered.length===0&&<p>No resources match your search.</p>}</div></>}
+            {tab==="programs" && <div className="rounded-xl border border-[#DDD3C0] bg-white p-7 shadow-sm"><div className="flex items-center gap-3"><Users className="h-8 w-8 text-[#B98A38]"/><h2 className="font-serif text-2xl font-bold">Programs &amp; Services</h2></div><p className="mt-4 leading-7 text-slate-600">Explore public and nonprofit support programs. We're inviting local organizations to share current program information for review.</p><button onClick={()=>{setTab("resources");setCategory("Community Support")}} className="mt-5 font-bold text-[#946B28] underline">Browse existing community support resources</button></div>}
           </div>
-        </section>
-
-        <section id="find-resources" className="mx-auto max-w-7xl px-5 py-16">
-          <p className="text-sm font-bold uppercase tracking-widest text-teal-700">Resource directory</p>
-          <h2 className="mt-2 text-3xl font-bold text-[#0F2A43] md:text-4xl">Find the right starting point</h2>
-          <p className="mt-3 max-w-3xl leading-7 text-slate-600">Select a category or search by service. Each listing links to an organization's website so you can check current eligibility, availability and contact details.</p>
-          <div className="mt-8 flex items-center gap-3 rounded-xl border border-slate-300 bg-white px-4 py-3 shadow-sm">
-            <Search className="shrink-0 text-slate-500" size={20} />
-            <input aria-label="Search community legal resources" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search organizations, legal aid, immigration, mediation..." className="w-full bg-transparent text-base outline-none placeholder:text-slate-500" />
-          </div>
-          <div className="mt-5 flex flex-wrap gap-2" aria-label="Filter resource categories">
-            {categories.map((item) => <button key={item} type="button" onClick={() => setCategory(item)} aria-pressed={category === item} className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${category === item ? "border-[#0F2A43] bg-[#0F2A43] text-white" : "border-slate-300 bg-white text-slate-700 hover:border-teal-600"}`}>{item}</button>)}
-          </div>
-          <p className="mt-7 text-sm text-slate-500" aria-live="polite">Showing {filtered.length} of {resources.length} resources</p>
-          {filtered.length ? <div className="mt-4 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {filtered.map((resource) => <article key={resource.name} className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <span className="text-xs font-bold uppercase tracking-wider text-teal-700">{resource.category}</span>
-              <h3 className="mt-3 text-xl font-bold text-[#0F2A43]">{resource.name}</h3>
-              <p className="mt-3 flex-1 text-sm leading-7 text-slate-600">{resource.summary}</p>
-              {resource.note && <p className="mt-3 text-xs leading-5 text-slate-500">{resource.note}</p>}
-              <a href={resource.url} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex items-center gap-2 font-bold text-teal-800 hover:underline">Visit official website <ExternalLink size={16} /></a>
-            </article>)}
-          </div> : <div className="mt-5 rounded-xl border border-slate-200 bg-white p-8 text-slate-600">No resources match your search. Try another keyword or choose “All resources.”</div>}
-          <p className="mt-6 text-sm leading-6 text-slate-500">Independent informational listings. Organizations shown here have not necessarily reviewed or approved their listings and are not represented as partners. Services and eligibility may change; confirm details directly with each provider.</p>
-        </section>
-
-        <section className="bg-white px-5 py-16">
-          <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-2">
-            <div><p className="text-sm font-bold uppercase tracking-widest text-teal-700">Another path to help</p><h2 className="mt-2 text-3xl font-bold text-[#0F2A43]">Looking for a private attorney?</h2><p className="mt-4 leading-8 text-slate-600">Free legal services may have income, case-type or capacity requirements. If you are seeking private representation, explore our El Paso attorney directories and compare listed firms by practice area.</p><Link to="/" className="mt-6 inline-flex items-center gap-2 rounded-lg bg-[#0F2A43] px-6 py-3 font-bold text-white hover:bg-[#183b5c]">Find El Paso lawyers <ArrowRight size={17} /></Link></div>
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-8"><BookOpen className="text-teal-700" size={30} /><h3 className="mt-4 text-2xl font-bold text-[#0F2A43]">Understand your options</h3><p className="mt-3 leading-7 text-slate-600">Read plain-English Texas legal guides on accidents, family law, criminal defense and other common legal questions.</p><Link to="/guides" className="mt-5 inline-flex items-center gap-2 font-bold text-teal-800 hover:underline">Browse legal guides <ArrowRight size={17} /></Link></div>
-          </div>
-        </section>
-
-        <section className="bg-[#0F2A43] px-5 py-16 text-white">
-          <div className="mx-auto max-w-5xl"><div className="flex items-center gap-3 text-amber-300"><Users size={28} /><span className="text-sm font-bold uppercase tracking-widest">Community collaboration</span></div><h2 className="mt-4 text-3xl font-bold md:text-4xl">Help keep El Paso connected to legal resources</h2><p className="mt-4 max-w-3xl leading-8 text-slate-200">We welcome corrections, updated program information and opportunities to collaborate on useful public legal education. Resource inclusion is free and does not require endorsements, referrals or reciprocal links.</p><div className="mt-8 max-w-3xl rounded-xl border border-white/20 bg-white/10 p-5 sm:p-7">
-              <h3 className="text-xl font-bold">Contact us about a resource</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-200">Suggest a resource, report an update, or ask about community collaboration. Please do not include confidential legal or case information.</p>
-              {contactStatus === "success" ? (
-                <div role="status" className="mt-5 rounded-lg border border-emerald-300/50 bg-emerald-950/40 p-4 text-white">
-                  Thank you. Your inquiry has been submitted.
-                  <button type="button" onClick={() => setContactStatus("idle")} className="ml-3 font-bold underline">Send another inquiry</button>
-                </div>
-              ) : (
-                <form onSubmit={submitContact} className="mt-5 grid gap-4 sm:grid-cols-2">
-                  <label className="text-sm font-semibold">Your name *<input required maxLength={120} autoComplete="name" value={contact.name} onChange={(event) => setContact({ ...contact, name: event.target.value })} className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-3 text-slate-900" /></label>
-                  <label className="text-sm font-semibold">Email address *<input required type="email" maxLength={254} autoComplete="email" value={contact.email} onChange={(event) => setContact({ ...contact, email: event.target.value })} className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-3 text-slate-900" /></label>
-                  <label className="text-sm font-semibold sm:col-span-2">Organization (optional)<input maxLength={150} autoComplete="organization" value={contact.organization} onChange={(event) => setContact({ ...contact, organization: event.target.value })} className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-3 text-slate-900" /></label>
-                  <label className="text-sm font-semibold sm:col-span-2">Message *<textarea required minLength={10} maxLength={3000} rows={5} value={contact.message} onChange={(event) => setContact({ ...contact, message: event.target.value })} className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-3 py-3 text-slate-900" /></label>
-                  <div aria-hidden="true" className="absolute -left-[10000px]" ><label>Leave this field blank<input tabIndex={-1} autoComplete="off" value={contact.website} onChange={(event) => setContact({ ...contact, website: event.target.value })} /></label></div>
-                  {contactStatus === "error" && <p role="alert" className="sm:col-span-2 text-sm font-semibold text-amber-200">{contactError}</p>}
-                  <div className="sm:col-span-2"><button type="submit" disabled={contactStatus === "sending"} className="inline-flex items-center gap-2 rounded-lg bg-amber-400 px-6 py-3 font-bold text-slate-950 hover:bg-amber-300 disabled:cursor-wait disabled:opacity-60">{contactStatus === "sending" ? "Sending…" : "Send resource inquiry"} <ArrowRight size={17} /></button></div>
-                </form>
-              )}
-            </div></div>
-        </section>
-        <section className="mx-auto max-w-6xl px-5 py-10 text-sm leading-7 text-slate-600"><strong>Information only.</strong> El Paso&apos;s Best Lawyers is an independent attorney directory, not a law firm or legal aid provider. This page does not provide legal advice, determine eligibility, or create an attorney-client relationship. Inclusion does not imply an endorsement, affiliation or partnership.</section>
-      </main>
-      <Footer />
-    </div>
-  );
+          <aside className="space-y-5"><div className="rounded-xl border border-[#DDD3C0] bg-white p-6 shadow-sm"><h2 className="flex items-center gap-2 text-xl font-bold"><BookOpen className="h-6 w-6"/>Featured Community Resources</h2><div className="mt-5 space-y-4">{resources.slice(0,3).map(r=><a key={r.name} href={r.url} target="_blank" rel="noopener noreferrer" className="block border-b border-slate-100 pb-3 last:border-0"><span className="font-bold">{r.name}</span><p className="mt-1 text-xs leading-5 text-slate-600">{r.summary}</p></a>)}</div></div>
+            <div className="rounded-xl border border-[#DDD3C0] bg-[#F2EEE6] p-6 shadow-sm"><h2 className="flex items-center gap-2 text-xl font-bold"><HeartHandshake className="h-7 w-7 text-[#C9973D]"/>Community Collaboration</h2><p className="mt-3 text-sm leading-6">Nonprofits, libraries and community organizations can share useful information for El Paso residents at no charge. Listing does not imply a formal partnership or endorsement.</p><a href="#contribute" className="mt-4 inline-flex rounded-lg border border-[#B98A38] px-4 py-2 text-sm font-bold text-[#0A2340] underline">Contribute information</a></div></aside>
+        </div>
+      </section>
+      <section id="contribute" className="scroll-mt-6 bg-[#0A2340] px-5 py-14 text-white"><div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.8fr_1.2fr]"><div><p className="text-sm font-bold uppercase tracking-widest text-[#F0C66D]">Get involved</p><h2 className="mt-3 font-serif text-3xl font-bold">Submit a Community Contribution</h2><p className="mt-4 leading-7 text-slate-200">Share an event, resource or program without creating a profile. Submissions go to our team for manual review and are not published automatically.</p><p className="mt-4 text-sm text-slate-300">Please do not submit confidential case details or personal legal information.</p></div>
+        <div className="rounded-xl border border-[#F0C66D]/40 bg-white p-6 text-[#0A2340] shadow-lg"><h3 className="text-xl font-bold">Share information for review</h3>{status==="success"?<div role="status" className="mt-5 rounded-lg bg-emerald-50 p-4">Thank you. Your contribution was sent for review.<button onClick={()=>setStatus("idle")} className="ml-2 font-bold underline">Send another</button></div>:<form onSubmit={submit} className="mt-5 grid gap-4 sm:grid-cols-2">
+          <fieldset className="sm:col-span-2"><legend className="mb-2 text-sm font-bold">What would you like to share?</legend><div className="grid grid-cols-3 gap-2">{types.map(({id,icon:Icon})=><button key={id} type="button" aria-pressed={contributionType===id} onClick={()=>setContributionType(id)} className={`flex flex-col items-center rounded-lg border px-2 py-3 text-sm font-bold ${contributionType===id?"border-[#B98A38] bg-[#FFF4DA]":"border-slate-200"}`}><Icon className="mb-1 h-5 w-5"/>{id}</button>)}</div></fieldset>
+          <label className="text-sm font-bold">Your name *<input required maxLength={120} value={form.name} onChange={e=>setForm({...form,name:e.target.value})} className="mt-1 w-full rounded-lg border border-slate-300 p-3"/></label>
+          <label className="text-sm font-bold">Email *<input required type="email" maxLength={254} value={form.email} onChange={e=>setForm({...form,email:e.target.value})} className="mt-1 w-full rounded-lg border border-slate-300 p-3"/></label>
+          <label className="text-sm font-bold sm:col-span-2">Organization name *<input required maxLength={150} value={form.organization} onChange={e=>setForm({...form,organization:e.target.value})} className="mt-1 w-full rounded-lg border border-slate-300 p-3"/></label>
+          <label className="text-sm font-bold sm:col-span-2">{contributionType} title *<input required maxLength={180} value={form.title} onChange={e=>setForm({...form,title:e.target.value})} className="mt-1 w-full rounded-lg border border-slate-300 p-3"/></label>
+          {contributionType==="Event"&&<label className="text-sm font-bold">Event date *<input required type="date" min={new Date().toLocaleDateString("en-CA")} value={form.date} onChange={e=>setForm({...form,date:e.target.value})} className="mt-1 w-full rounded-lg border border-slate-300 p-3"/></label>}
+          <label className="text-sm font-bold">Location {contributionType==="Event"?"*":"(optional)"}<input required={contributionType==="Event"} maxLength={180} value={form.location} onChange={e=>setForm({...form,location:e.target.value})} placeholder="Address or online" className="mt-1 w-full rounded-lg border border-slate-300 p-3"/></label>
+          <label className="text-sm font-bold sm:col-span-2">Relevant website or source link<input type="url" maxLength={500} value={form.link} onChange={e=>setForm({...form,link:e.target.value})} placeholder="https://" className="mt-1 w-full rounded-lg border border-slate-300 p-3"/></label>
+          <label className="text-sm font-bold sm:col-span-2">Details *<textarea required minLength={10} maxLength={1800} rows={4} value={form.details} onChange={e=>setForm({...form,details:e.target.value})} className="mt-1 w-full rounded-lg border border-slate-300 p-3"/></label>
+          <div className="absolute -left-[10000px]" aria-hidden="true"><label>Leave blank<input tabIndex={-1} autoComplete="off" value={form.website} onChange={e=>setForm({...form,website:e.target.value})}/></label></div>
+          {status==="error"&&<p role="alert" className="text-sm text-red-700 sm:col-span-2">{errorText}</p>}
+          <button disabled={status==="sending"} className="flex items-center justify-center gap-2 rounded-lg bg-[#0A2340] px-6 py-3 font-bold text-white disabled:opacity-60 sm:col-span-2">{status==="sending"?"Sending...":"Submit for Review"}<ArrowRight className="h-4 w-4"/></button><p className="text-xs text-slate-500 sm:col-span-2">Free to submit. No account required. We review submissions before publication.</p>
+        </form>}</div></div></section>
+      <section className="mx-auto max-w-6xl px-5 py-8 text-xs leading-6 text-slate-600"><ShieldCheck className="mr-2 inline h-4 w-4"/>El Paso's Best Lawyers is an independent attorney directory, not a law firm or legal aid provider. Information is not legal advice. Resource inclusion does not imply endorsement or formal partnership. Verify services and eligibility directly with providers.</section>
+    </main><Footer/>
+  </div>;
 }
