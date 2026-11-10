@@ -1,10 +1,31 @@
 import { createRoot, hydrateRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, useLocation, useNavigationType } from "react-router-dom";
+import { useEffect, useRef } from "react";
 import App from "./App.tsx";
 import MetaPixelTracker from "./components/MetaPixelTracker";
 import { Analytics } from "@vercel/analytics/react";
 import "./index.css";
 
+function ScrollToTop() {
+  const location = useLocation();
+  const navigationType = useNavigationType();
+  const previousKey = useRef(location.key);
+
+  useEffect(() => {
+    if (previousKey.current === location.key) return;
+    previousKey.current = location.key;
+
+    if (location.hash) {
+      requestAnimationFrame(() => {
+        document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView();
+      });
+    } else if (navigationType !== "POP") {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
+  }, [location, navigationType]);
+
+  return null;
+}
 const root = document.getElementById("root");
 
 if (!root) {
@@ -13,6 +34,7 @@ if (!root) {
 
 const app = (
   <BrowserRouter>
+    <ScrollToTop />
     <MetaPixelTracker />
     <Analytics />
     <App />
