@@ -84,7 +84,7 @@ const faqs = [
 const personalInjuryDirectoryPage: PracticeAreaPageData = {
   path: "/el-paso-personal-injury-lawyers",
   shortTitle: "Personal Injury",
-  title: "Best Personal Injury Lawyers in El Paso, TX",
+  title: "Personal Injury Lawyers in El Paso, TX",
 
   description:
     "Compare El Paso personal injury law firms handling car accidents, truck crashes, motorcycle accidents, slip and falls, dog bites, wrongful death, and insurance disputes.",
@@ -116,7 +116,7 @@ const personalInjuryDirectoryPage: PracticeAreaPageData = {
 export default function PersonalInjury() {
   useEffect(() => {
     const title =
-      "Best Personal Injury Lawyers in El Paso, TX | El Paso's Best Lawyers";
+      "Personal Injury Lawyers in El Paso, TX | Compare Local Attorneys";
 
     const description =
       "Compare personal injury lawyers in El Paso, Texas for car accidents, truck crashes, slip and falls, dog bites, serious injuries, wrongful death, and insurance disputes.";
@@ -280,7 +280,7 @@ export default function PersonalInjury() {
             </p>
 
             <h1 className="text-4xl font-extrabold leading-tight text-amber-400 md:text-6xl">
-              Best Personal Injury Lawyers in El Paso, TX
+              Compare Personal Injury Lawyers in El Paso, TX
             </h1>
 
             <p className="mt-7 max-w-3xl text-lg leading-8 text-slate-300 md:text-xl">
@@ -299,6 +299,12 @@ export default function PersonalInjury() {
                 Compare Personal Injury Lawyers
               </button>
 
+              <a
+                href="#personal-injury-consultation"
+                className="rounded-xl border border-amber-400 px-6 py-3 font-semibold text-amber-400 transition hover:bg-amber-400 hover:text-slate-950"
+              >
+                Request a Consultation
+              </a>
               <Link
                 to="/"
                 className="rounded-xl border border-slate-600 px-6 py-3 font-semibold text-white transition hover:border-amber-400 hover:text-amber-400"
@@ -306,6 +312,9 @@ export default function PersonalInjury() {
                 Browse All Practice Areas
               </Link>
             </div>
+            <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-400">
+              El Paso&apos;s Best Lawyers receives and reviews inquiries for possible referral to an eligible participating firm. A referral or representation is not guaranteed.
+            </p>
           </div>
         </div>
       </section>
@@ -349,12 +358,12 @@ export default function PersonalInjury() {
             </h2>
 
             <ul className="mt-5 space-y-3 text-slate-300">
-              <li>• Serious injuries after a vehicle crash</li>
-              <li>• Disputes over fault or insurance coverage</li>
-              <li>• Medical bills and lost income after an accident</li>
-              <li>• Injuries caused by unsafe property conditions</li>
-              <li>• Dog attacks and bite injuries</li>
-              <li>• Fatal accidents involving a family member</li>
+              <li>â€¢ Serious injuries after a vehicle crash</li>
+              <li>â€¢ Disputes over fault or insurance coverage</li>
+              <li>â€¢ Medical bills and lost income after an accident</li>
+              <li>â€¢ Injuries caused by unsafe property conditions</li>
+              <li>â€¢ Dog attacks and bite injuries</li>
+              <li>â€¢ Fatal accidents involving a family member</li>
             </ul>
           </aside>
         </div>
@@ -395,7 +404,7 @@ export default function PersonalInjury() {
                 </p>
 
                 <span className="mt-5 inline-block font-semibold text-white">
-                  Compare lawyers →
+                  Compare lawyers â†’
                 </span>
               </Link>
             ))}
@@ -488,15 +497,25 @@ export default function PersonalInjury() {
             <h2 className="mt-3 text-3xl font-bold">Personal Injury Claims in El Paso, Texas</h2>
             <p className="mt-5 text-lg leading-8 text-slate-300">Personal injury claims in El Paso can arise from crashes on major roads such as Interstate 10 and Loop 375, commercial vehicle collisions, unsafe property conditions, workplace-related incidents involving third parties, and other accidents. The facts of the incident determine which people, businesses, insurers, or other entities may be involved.</p>
             <p className="mt-5 text-lg leading-8 text-slate-300">Where a claim may be filed and which Texas rules apply can depend on where the accident occurred, where the parties are located, and the identity of the defendant. Claims involving governmental entities or other special circumstances can also involve additional procedures or deadlines. A Texas attorney can evaluate those issues based on the specific facts of a case.</p>
+            <p className="mt-5 leading-7 text-slate-300">
+              Learn more about potential filing deadlines in our{" "}
+              <Link
+                to="/guides/texas-car-accident-statute-of-limitations"
+                className="font-semibold text-amber-400 underline underline-offset-4 hover:text-amber-300"
+              >
+                guide to Texas car accident filing deadlines
+              </Link>
+              . Deadlines for other personal injury claims can differ, so seek advice about your specific circumstances.
+            </p>
           </article>
           <aside className="rounded-2xl border border-slate-800 bg-slate-900 p-7">
             <h2 className="text-xl font-bold text-amber-400">Start with the type of claim</h2>
             <p className="mt-4 leading-7 text-slate-300">If you already know what kind of accident is involved, use the focused directory pages to narrow your search.</p>
             <div className="mt-5 space-y-3">
-              <Link to="/el-paso-car-accident-lawyers" className="block font-semibold text-white hover:text-amber-400">Car Accident Lawyers →</Link>
-              <Link to="/el-paso-truck-accident-lawyers" className="block font-semibold text-white hover:text-amber-400">Truck Accident Lawyers →</Link>
-              <Link to="/el-paso-motorcycle-accident-lawyers" className="block font-semibold text-white hover:text-amber-400">Motorcycle Accident Lawyers →</Link>
-              <Link to="/el-paso-wrongful-death-lawyers" className="block font-semibold text-white hover:text-amber-400">Wrongful Death Lawyers →</Link>
+              <Link to="/el-paso-car-accident-lawyers" className="block font-semibold text-white hover:text-amber-400">Car Accident Lawyers â†’</Link>
+              <Link to="/el-paso-truck-accident-lawyers" className="block font-semibold text-white hover:text-amber-400">Truck Accident Lawyers â†’</Link>
+              <Link to="/el-paso-motorcycle-accident-lawyers" className="block font-semibold text-white hover:text-amber-400">Motorcycle Accident Lawyers â†’</Link>
+              <Link to="/el-paso-wrongful-death-lawyers" className="block font-semibold text-white hover:text-amber-400">Wrongful Death Lawyers â†’</Link>
             </div>
           </aside>
         </div>
@@ -555,7 +574,7 @@ export default function PersonalInjury() {
       </section>
 
       {/* LEAD FORM */}
-      <section className="border-t border-slate-800 bg-slate-900/50">
+      <section id="personal-injury-consultation" className="scroll-mt-8 border-t border-slate-800 bg-slate-900/50">
         <div className="mx-auto max-w-6xl px-6 py-16">
           <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr]">
             <div>
@@ -568,9 +587,7 @@ export default function PersonalInjury() {
               </h2>
 
               <p className="mt-4 leading-7 text-slate-300">
-                Tell us what type of legal help you are looking for. Your
-                information can be used to help connect you with an
-                appropriate participating attorney or firm.
+                Tell us what type of legal help you are looking for. El Paso&apos;s Best Lawyers reviews inquiries and may share them with an eligible participating firm. A referral or representation is not guaranteed.
               </p>
             </div>
 
