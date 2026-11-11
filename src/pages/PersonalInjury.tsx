@@ -319,6 +319,11 @@ export default function PersonalInjury() {
         </div>
       </section>
 
+      {/* LIVE PERSONAL INJURY DIRECTORY */}
+      <div id="personal-injury-firms" className="scroll-mt-24">
+        <PracticeAreaFirmDirectory page={personalInjuryDirectoryPage} />
+      </div>
+
       {/* INTRO */}
       <section className="mx-auto max-w-6xl px-6 py-16">
         <div className="grid gap-10 lg:grid-cols-[1.35fr_.65fr]">
@@ -518,34 +523,6 @@ export default function PersonalInjury() {
               <Link to="/el-paso-wrongful-death-lawyers" className="block font-semibold text-white hover:text-amber-400">Wrongful Death Lawyers â†’</Link>
             </div>
           </aside>
-        </div>
-      </section>
-
-      {/* LIVE PERSONAL INJURY DIRECTORY */}
-      <section
-        id="personal-injury-firms"
-        className="border-y border-slate-800 bg-slate-900/50"
-      >
-        <div className="mx-auto max-w-6xl px-6 py-16">
-          <p className="font-semibold uppercase tracking-[0.16em] text-amber-400">
-            Local Directory
-          </p>
-
-          <h2 className="mt-3 text-3xl font-bold">
-            El Paso Personal Injury Lawyers & Law Firms
-          </h2>
-
-          <p className="mt-4 max-w-3xl leading-7 text-slate-300">
-            Compare listed El Paso firms that identify personal injury as
-            an area of practice. Review firm information, practice focus,
-            attorneys, and contact details before deciding whom to contact.
-          </p>
-
-          <div className="mt-8">
-            <PracticeAreaFirmDirectory
-              page={personalInjuryDirectoryPage}
-            />
-          </div>
         </div>
       </section>
 
