@@ -1079,6 +1079,7 @@ export default function AppLayout() {
                 <Link to="/community-legal-resources" className="inline-flex items-center justify-center rounded-lg bg-[#0F2A43] px-7 py-4 text-center font-bold text-white transition hover:bg-[#163b5d]">
                   Explore Community Legal Resources
                 </Link>
+                <Link to="/support-and-recovery" className="mt-3 inline-flex w-full items-center justify-center rounded-lg border-2 border-[#0F2A43] px-7 py-3 text-center font-bold text-[#0F2A43] hover:bg-slate-100">Support &amp; Recovery Network</Link>
               </div>
             </div>
           </div>

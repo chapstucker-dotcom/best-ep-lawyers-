@@ -796,5 +796,12 @@
     "source_type": "existing",
     "source_file": "pages/CommunityLegalResources.tsx",
     "component": "CommunityLegalResources"
+  },
+  {
+    "path": "/support-and-recovery",
+    "existing_html": false,
+    "source_type": "component",
+    "source_file": "pages/SupportRecovery.tsx",
+    "component": "SupportRecovery"
   }
 ]

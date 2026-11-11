@@ -65,6 +65,7 @@ import EstatePlanning from "./pages/EstatePlanning";
 
 import Guides from "./pages/Guides";
 import CommunityLegalResources from "./pages/CommunityLegalResources";
+import SupportRecovery from "./pages/SupportRecovery";
 import GuideArticle from "./pages/GuideArticle";
 import FeaturedBadge from "./pages/FeaturedBadge";
 import Privacy from "./pages/Privacy";
@@ -316,6 +317,7 @@ export default function App() {
           ))}
 
         <Route path="/community-legal-resources" element={<CommunityLegalResources />} />
+        <Route path="/support-and-recovery" element={<SupportRecovery />} />
         <Route path="/guides" element={<Guides />} />
         <Route path="/guides/:slug" element={<GuideArticle />} />
 

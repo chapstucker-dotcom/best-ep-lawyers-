@@ -135,6 +135,8 @@ export default function CommunityLegalResources() {
           </div>
         </section>
 
+        <section className="border-b border-amber-200 bg-amber-50 px-5 py-12"><div className="mx-auto flex max-w-6xl flex-col gap-5 md:flex-row md:items-center md:justify-between"><div><p className="text-sm font-bold uppercase tracking-widest text-teal-800">New community resource</p><h2 className="mt-2 text-3xl font-bold text-[#0F2A43]">Support &amp; Recovery in El Paso</h2><p className="mt-3 max-w-2xl text-slate-700">Find grief support, trauma recovery, family safety resources, advocacy and other community assistance. No attorney referral required.</p></div><Link to="/support-and-recovery" className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-[#0F2A43] px-6 py-3 font-bold text-white hover:bg-[#183b5c]">Explore support resources <ArrowRight size={18}/></Link></div></section>
+
         <section id="find-resources" className="mx-auto max-w-7xl px-5 py-16">
           <p className="text-sm font-bold uppercase tracking-widest text-teal-700">Resource directory</p>
           <h2 className="mt-2 text-3xl font-bold text-[#0F2A43] md:text-4xl">Find the right starting point</h2>
@@ -191,7 +193,7 @@ export default function CommunityLegalResources() {
           </div>
         </section>
 
-        <section className="bg-[#0F2A43] px-5 py-16 text-white">
+        <section id="community-submission" className="bg-[#0F2A43] px-5 py-16 text-white">
           <div className="mx-auto max-w-5xl"><div className="flex items-center gap-3 text-amber-300"><Users size={28} /><span className="text-sm font-bold uppercase tracking-widest">Community collaboration</span></div><h2 className="mt-4 text-3xl font-bold md:text-4xl">Help keep El Paso connected to legal resources</h2><p className="mt-4 max-w-3xl leading-8 text-slate-200">We welcome corrections, updated program information and opportunities to collaborate on useful public legal education. Resource inclusion is free and does not require endorsements, referrals or reciprocal links.</p><div className="mt-8 max-w-3xl rounded-xl border border-white/20 bg-white/10 p-5 sm:p-7">
               <h3 className="text-xl font-bold">Submit a community resource, program or event</h3>
               <p className="mt-2 text-sm leading-6 text-slate-200">Share a local resource, program or upcoming event for review. Submissions are not published automatically. Do not include confidential legal or case information.</p>

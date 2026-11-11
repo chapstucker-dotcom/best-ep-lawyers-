@@ -326,6 +326,10 @@
       "destination": "/el-paso-landlord-tenant-lawyers/index.html"
     },
     {
+      "source": "/support-and-recovery",
+      "destination": "/index.html"
+    },
+    {
       "source": "/community-legal-resources",
       "destination": "/community-legal-resources/index.html"
     },
