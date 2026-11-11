@@ -919,7 +919,7 @@ export default function LeadCaptureForm({
 
           <div className="space-y-2">
             <Label htmlFor="lead-legal-issue">
-              How can a lawyer help? *
+              {es ? "¿Cómo puede ayudarle un abogado? *" : "How can a lawyer help? *"}
             </Label>
 
             <Textarea
