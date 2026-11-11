@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { supabase } from "../lib/supabase";
 import { useSeo } from "../hooks/use-seo";
+import CommunitySubmissionsAdmin from "../components/CommunitySubmissionsAdmin";
 
 type ModerationStatus = "pending" | "published" | "rejected" | "disputed" | "removed";
 type DisputeStatus = "submitted" | "reviewing" | "resolved" | "dismissed" | null;
@@ -380,6 +381,7 @@ export default function AdminDashboard() {
   return (
     <main className="min-h-screen bg-slate-950 px-4 py-10 text-white sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
+        <CommunitySubmissionsAdmin />
         <section aria-labelledby="consumer-leads-title" className="mb-12">
           <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
             <div>
