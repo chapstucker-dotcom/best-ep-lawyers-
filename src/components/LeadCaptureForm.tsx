@@ -335,7 +335,7 @@ export default function LeadCaptureForm({
       !phoneOptional &&
       form.phone.trim().length < 7
     ) {
-      return 'Enter a valid phone number.';
+      return es ? 'Escriba un número de teléfono válido.' : 'Enter a valid phone number.';
     }
 
     if (
@@ -343,11 +343,11 @@ export default function LeadCaptureForm({
       form.phone.trim().length > 0 &&
       form.phone.trim().length < 7
     ) {
-      return 'Enter a valid phone number or leave it blank.';
+      return es ? 'Escriba un número de teléfono válido o deje el campo vacío.' : 'Enter a valid phone number or leave it blank.';
     }
 
     if (form.legalIssue.trim().length < 10) {
-      return 'Please briefly describe how a lawyer may be able to help.';
+      return es ? 'Describa brevemente cómo puede ayudarle un abogado.' : 'Please briefly describe how a lawyer may be able to help.';
     }
 
     return '';
@@ -404,10 +404,10 @@ export default function LeadCaptureForm({
 
       if (!response.ok) {
         throw new Error(response.status === 403
-          ? 'Security verification failed. Please try again.'
+          ? (es ? 'Falló la verificación de seguridad. Inténtelo de nuevo.' : 'Security verification failed. Please try again.')
           : response.status === 409
-            ? 'This request has already been submitted.'
-            : 'Your request could not be saved. Please try again.');
+            ? (es ? 'Esta solicitud ya se envió.' : 'This request has already been submitted.')
+            : (es ? 'No se pudo guardar su solicitud. Inténtelo de nuevo.' : 'Your request could not be saved. Please try again.'));
       }
   };
 
