@@ -50,6 +50,10 @@ const personalInjurySchema = {
   ],
 };
 
+const languagePairs = [
+  ["/el-paso-immigration-lawyers", "/es/abogados-de-inmigracion-el-paso"],
+  ["/el-paso-car-accident-lawyers", "/es/abogados-de-accidentes-de-auto-el-paso"],
+];
 for (const path of ["/", ...routes]) {
   const file = join(root, "dist", path.slice(1), "index.html");
   if (!existsSync(file)) throw new Error(`Missing generated HTML for ${path}`);
@@ -68,6 +72,16 @@ for (const path of ["/", ...routes]) {
     output = output.replace("</head>", `<script id="personal-injury-seo-schema" type="application/ld+json">${schemaJson}</script></head>`);
   }
 
+  const pair = languagePairs.find(([en, es]) => path === en || path === es);
+  if (pair) {
+    const [en, es] = pair;
+    const base = "https://www.elpasosbestlawyers.com";
+    const alternates = `<link rel="alternate" hreflang="en-US" href="${base}${en}/" />\n` +
+      `<link rel="alternate" hreflang="es-US" href="${base}${es}/" />\n`;
+    if ((output.match(/<\/head>/gi) ?? []).length !== 1) throw Error(`${path}: missing unique head`);
+    if (/hreflang="(?:en-US|es-US)"/.test(output)) throw Error(`${path}: preexisting hreflang requires review`);
+    output = output.replace("</head>", `${alternates}</head>`);
+  }
   writeFileSync(file, output);
   console.log(`SSR: ${path}`);
 }

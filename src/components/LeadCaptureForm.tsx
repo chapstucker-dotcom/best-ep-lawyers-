@@ -43,6 +43,7 @@ interface LeadCaptureFormProps {
   onSuccess?: () => void;
   variant?: 'default' | 'homepage';
   phoneOptional?: boolean;
+  locale?: "en" | "es";
 }
 
 type FormState = {
@@ -279,7 +280,9 @@ export default function LeadCaptureForm({
   onSuccess,
   variant = 'default',
   phoneOptional = false,
+  locale = "en",
 }: LeadCaptureFormProps) {
+  const es = locale === "es";
   const [form, setForm] =
     useState<FormState>(EMPTY_FORM);
 
@@ -317,7 +320,7 @@ export default function LeadCaptureForm({
 
   const validateForm = (): string => {
     if (form.fullName.trim().length < 2) {
-      return 'Enter your full name.';
+      return (es ? 'Escriba su nombre completo.' : 'Enter your full name.');
     }
 
     if (
@@ -325,7 +328,7 @@ export default function LeadCaptureForm({
         form.email.trim()
       )
     ) {
-      return 'Enter a valid email address.';
+      return (es ? 'Escriba un correo electrónico válido.' : 'Enter a valid email address.');
     }
 
     if (
@@ -425,7 +428,7 @@ export default function LeadCaptureForm({
     }
 
     if (!turnstileToken) {
-      setErrorMessage('Please complete the security verification before submitting.');
+      setErrorMessage((es ? 'Complete la verificación de seguridad antes de enviar.' : 'Please complete the security verification before submitting.'));
       return;
     }
 
@@ -472,7 +475,7 @@ export default function LeadCaptureForm({
        * the lead first.
        */
       setSuccessMessage(
-        "Your consultation request was submitted successfully. El Paso's Best Lawyers has received your request."
+        (es ? "Su solicitud se envió correctamente. El Paso's Best Lawyers recibió su solicitud." : "Your consultation request was submitted successfully. El Paso's Best Lawyers has received your request.")
       );
 
       setForm(EMPTY_FORM);
@@ -488,7 +491,7 @@ export default function LeadCaptureForm({
       setErrorMessage(
         error instanceof Error
           ? error.message
-          : 'Your request could not be submitted. Please try again.'
+          : (es ? 'No se pudo enviar su solicitud. Inténtelo de nuevo.' : 'Your request could not be submitted. Please try again.')
       );
     } finally {
       setLoading(false);
@@ -745,7 +748,7 @@ export default function LeadCaptureForm({
     >
       <div className="bg-gradient-to-r from-[#0F2A43] to-[#176B78] px-6 py-6 text-white sm:px-8">
         <p className="text-sm font-bold uppercase tracking-widest text-[#F5B800]">
-          Legal Help
+          {es ? "Ayuda legal" : "Legal Help"}
         </p>
 
         <h2 className="mt-2 text-2xl font-bold sm:text-3xl">
@@ -788,7 +791,7 @@ export default function LeadCaptureForm({
           <div className="grid gap-5 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="lead-full-name">
-                Full Name *
+                {es ? "Nombre completo *" : "Full Name *"}
               </Label>
 
               <div className="relative">
@@ -803,7 +806,7 @@ export default function LeadCaptureForm({
                       event.target.value
                     )
                   }
-                  placeholder="Your full name"
+                  placeholder={es ? "Su nombre completo" : "Your full name"}
                   autoComplete="name"
                   className="pl-10 text-slate-900"
                   disabled={loading}
@@ -814,7 +817,7 @@ export default function LeadCaptureForm({
 
             <div className="space-y-2">
               <Label htmlFor="lead-email">
-                Email Address *
+                {es ? "Correo electrónico *" : "Email Address *"}
               </Label>
 
               <div className="relative">
@@ -841,7 +844,7 @@ export default function LeadCaptureForm({
 
             <div className="space-y-2 md:col-span-2">
               <Label htmlFor="lead-phone">
-                Phone Number{phoneOptional ? ' (Optional)' : ' *'}
+                {es ? 'Teléfono' : 'Phone Number'}{phoneOptional ? (es ? ' (Opcional)' : ' (Optional)') : ' *'}
               </Label>
 
               <div className="relative">
@@ -870,9 +873,9 @@ export default function LeadCaptureForm({
           <div className="grid gap-5 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="lead-matter-location">
-                Where did this happen?{' '}
+                {es ? "¿Dónde ocurrió?" : "Where did this happen?"}{' '}
                 <span className="font-normal text-gray-500">
-                  (Optional)
+                  {es ? "(Opcional)" : "(Optional)"}
                 </span>
               </Label>
 
@@ -885,16 +888,16 @@ export default function LeadCaptureForm({
                     event.target.value
                   )
                 }
-                placeholder="El Paso, another Texas city, or elsewhere"
+                placeholder={es ? "El Paso, otra ciudad de Texas u otro lugar" : "El Paso, another Texas city, or elsewhere"}
                 className="text-slate-900"
                 disabled={loading}
               />
             </div>
             <div className="space-y-2">
               <Label htmlFor="lead-matter-timing">
-                When did this happen?{' '}
+                {es ? "¿Cuándo ocurrió?" : "When did this happen?"}{' '}
                 <span className="font-normal text-gray-500">
-                  (Optional)
+                  {es ? "(Opcional)" : "(Optional)"}
                 </span>
               </Label>
 
@@ -907,7 +910,7 @@ export default function LeadCaptureForm({
                     event.target.value
                   )
                 }
-                placeholder="e.g. last week, June 2026"
+                placeholder={es ? "Por ejemplo, la semana pasada" : "e.g. last week, June 2026"}
                 className="text-slate-900"
                 disabled={loading}
               />
@@ -928,7 +931,7 @@ export default function LeadCaptureForm({
                   event.target.value
                 )
               }
-              placeholder="Briefly describe your legal issue, important dates, and the type of help you are seeking."
+              placeholder={es ? "Describa brevemente su asunto legal, fechas importantes y el tipo de ayuda que necesita." : "Briefly describe your legal issue, important dates, and the type of help you are seeking."}
               rows={6}
               className="text-slate-900"
               disabled={loading}
@@ -936,8 +939,7 @@ export default function LeadCaptureForm({
             />
 
             <p className="text-xs text-gray-500">
-              Do not include confidential or highly
-              sensitive information.
+              {es ? "No incluya información confidencial ni muy sensible." : "Do not include confidential or highly sensitive information."}
             </p>
           </div>
 
@@ -949,18 +951,18 @@ export default function LeadCaptureForm({
             {loading ? (
               <>
                 <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                Submitting Request...
+                {es ? "Enviando solicitud..." : "Submitting Request..."}
               </>
             ) : (
               <>
                 <Send className="mr-2 h-5 w-5" />
-                Request Consultation
+                {es ? "Solicitar consulta" : "Request Consultation"}
               </>
             )}
           </Button>
 
           <p className="text-center text-xs leading-5 text-gray-500">
-            El Paso&apos;s Best Lawyers may review your information and share it with a participating law firm to evaluate your inquiry. Submission does not establish an attorney-client relationship or guarantee representation. Do not include confidential or highly sensitive information. See our <a href="/privacy" className="font-semibold underline">Privacy Policy</a>.
+            {es ? "El Paso's Best Lawyers puede revisar sus datos y compartirlos con un despacho participante para evaluar su solicitud. El envío no crea una relación abogado-cliente ni garantiza representación. No incluya información confidencial. Consulte nuestra " : "El Paso's Best Lawyers may review your information and share it with a participating law firm to evaluate your inquiry. Submission does not establish an attorney-client relationship or guarantee representation. Do not include confidential or highly sensitive information. See our "}<a href="/privacy" className="font-semibold underline">{es ? "Política de privacidad" : "Privacy Policy"}</a>.
           </p>
           <LeadTurnstile onToken={setTurnstileToken} resetKey={turnstileResetKey} />
         </form>

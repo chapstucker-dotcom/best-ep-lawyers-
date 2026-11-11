@@ -20,6 +20,7 @@ import WageHour from "./pages/WageHour";
 import WorkplaceDiscrimination from "./pages/WorkplaceDiscrimination";
 import CriminalDefense from "./pages/CriminalDefense";
 import Immigration from "./pages/Immigration";
+import SpanishLegalPage from "./pages/SpanishLegalPage";
 import CarAccidentLawyers from "./pages/CarAccidentLawyers";
 import DogBite from "./pages/DogBite";
 import SlipAndFall from "./pages/SlipAndFall";
@@ -130,6 +131,8 @@ export default function App() {
         <Route path="/" element={<Index />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
+        <Route path="/es/abogados-de-inmigracion-el-paso" element={<SpanishLegalPage topic="immigration" />} />
+        <Route path="/es/abogados-de-accidentes-de-auto-el-paso" element={<SpanishLegalPage topic="car" />} />
 
         <Route
           path="/el-paso-personal-injury-lawyers"

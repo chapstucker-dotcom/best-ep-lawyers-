@@ -803,5 +803,19 @@
     "source_type": "component",
     "source_file": "pages/SupportRecovery.tsx",
     "component": "SupportRecovery"
+  },
+  {
+    "path": "/es/abogados-de-inmigracion-el-paso",
+    "existing_html": false,
+    "source_type": "spanish",
+    "source_file": "pages/SpanishLegalPage.tsx",
+    "component": "SpanishLegalPage"
+  },
+  {
+    "path": "/es/abogados-de-accidentes-de-auto-el-paso",
+    "existing_html": false,
+    "source_type": "spanish",
+    "source_file": "pages/SpanishLegalPage.tsx",
+    "component": "SpanishLegalPage"
   }
 ]

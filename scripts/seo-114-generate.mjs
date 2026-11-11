@@ -7,7 +7,16 @@ const template=readFileSync(join(root,"dist/index.html"),"utf8");
 const escape=v=>v.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 const one=(s,re,label)=>{const a=[...s.matchAll(new RegExp(re.source,re.flags.includes("g")?re.flags:re.flags+"g"))];if(a.length!==1)throw Error(`${label}: expected one match, got ${a.length}`);return a[0][1]};
 const val=(s,key)=>{const m=s.match(new RegExp(`\\b${key}\\s*:\\s*["']([^"'\\r\\n]+)["']`));return m?.[1]};
+const spanishMeta = {
+  "/es/abogados-de-inmigracion-el-paso": { title: "Abogados de inmigración en El Paso, Texas | Compare opciones", description: "Compare abogados de inmigración en El Paso para visas, residencia permanente, ciudadanía, peticiones familiares y defensa en procesos de deportación." },
+  "/es/abogados-de-accidentes-de-auto-el-paso": { title: "Abogados de accidentes de auto en El Paso, Texas", description: "Compare abogados de accidentes automovilísticos en El Paso para lesiones, reclamaciones de seguros, responsabilidad y choques con conductores sin seguro." },
+};
 function metadata(route){
+ if (route.source_type === "spanish") {
+   if (!spanishMeta[route.path]) throw Error(`${route.path}: missing Spanish metadata`);
+   return spanishMeta[route.path];
+ }
+
  const src=readFileSync(join(root,"src",route.source_file),"utf8");
  let title,description;
  if(route.source_type==="shared-practice-area"){
@@ -38,6 +47,10 @@ for(const path of routes){
  if(!route)throw Error(`${path}: absent from manifest`);
  const {title,description}=metadata(route),canonical=`${site}${path}/`;
  let html=template;
+ if (route.source_type === "spanish") {
+   html=replace(html,/<html\b[^>]*>/, '<html lang="es">', `${path} html language`);
+ }
+
  html=replace(html,/<title>[^<]*<\/title>/,`<title>${escape(title)}</title>`,`${path} title`);
  html=replace(html,/<meta\b(?=[^>]*\bname="description")[^>]*>/gs,`<meta name="description" content="${escape(description)}" />`,`${path} description`);
  html=replace(html,/<link\b(?=[^>]*\brel="canonical")[^>]*>/gs,`<link rel="canonical" href="${canonical}" />`,`${path} canonical`);

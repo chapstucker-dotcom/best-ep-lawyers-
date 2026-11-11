@@ -218,6 +218,22 @@
   ],
   "rewrites": [
     {
+      "source": "/es/abogados-de-inmigracion-el-paso/",
+      "destination": "/es/abogados-de-inmigracion-el-paso/index.html"
+    },
+    {
+      "source": "/es/abogados-de-accidentes-de-auto-el-paso/",
+      "destination": "/es/abogados-de-accidentes-de-auto-el-paso/index.html"
+    },
+    {
+      "source": "/es/abogados-de-inmigracion-el-paso",
+      "destination": "/es/abogados-de-inmigracion-el-paso/index.html"
+    },
+    {
+      "source": "/es/abogados-de-accidentes-de-auto-el-paso",
+      "destination": "/es/abogados-de-accidentes-de-auto-el-paso/index.html"
+    },
+    {
       "source": "/el-paso-personal-injury-lawyers",
       "destination": "/el-paso-personal-injury-lawyers/index.html"
     },
@@ -713,12 +729,30 @@
       "source": "/attorney/:id",
       "destination": "/index.html"
     },
-    { "source": "/firm/bill-d-hicks", "destination": "/firm/bill-d-hicks/index.html" },
-    { "source": "/firm/carter-law-firm", "destination": "/firm/carter-law-firm/index.html" },
-    { "source": "/firm/cesar-ornelas-injury-law", "destination": "/firm/cesar-ornelas-injury-law/index.html" },
-    { "source": "/firm/labinoti-law-firm", "destination": "/firm/labinoti-law-firm/index.html" },
-    { "source": "/firm/lozano-meza-law-firm", "destination": "/firm/lozano-meza-law-firm/index.html" },
-    { "source": "/firm/scherr-legate-pllc", "destination": "/firm/scherr-legate-pllc/index.html" },
+    {
+      "source": "/firm/bill-d-hicks",
+      "destination": "/firm/bill-d-hicks/index.html"
+    },
+    {
+      "source": "/firm/carter-law-firm",
+      "destination": "/firm/carter-law-firm/index.html"
+    },
+    {
+      "source": "/firm/cesar-ornelas-injury-law",
+      "destination": "/firm/cesar-ornelas-injury-law/index.html"
+    },
+    {
+      "source": "/firm/labinoti-law-firm",
+      "destination": "/firm/labinoti-law-firm/index.html"
+    },
+    {
+      "source": "/firm/lozano-meza-law-firm",
+      "destination": "/firm/lozano-meza-law-firm/index.html"
+    },
+    {
+      "source": "/firm/scherr-legate-pllc",
+      "destination": "/firm/scherr-legate-pllc/index.html"
+    },
     {
       "source": "/firm/:id",
       "destination": "/index.html"
