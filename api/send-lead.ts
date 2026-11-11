@@ -1992,24 +1992,29 @@ export default async function handler(
       );
     }
 
+    const spanishAcknowledgement = /^\/es(?:\/|$)/.test(String(landingPage || "").replace(/^https?:\/\/[^/]+/i, ""));
+
     /*
      * CONSUMER ACKNOWLEDGEMENT
      */
-    const {
-      error:
-        consumerEmailError,
-    } =
-      await sendTracked(leadId, "consumer", cleanEmail, () => resend.emails.send({
-        from: FROM_EMAIL,
-
-        to: [
-          cleanEmail,
-        ],
-
-        subject:
-          "We Received Your Consultation Request",
-
-        html: `
+    const { error: consumerEmailError } = await sendTracked(leadId, "consumer", cleanEmail, () => resend.emails.send({
+      from: FROM_EMAIL,
+      to: [cleanEmail],
+      subject: spanishAcknowledgement ? "Recibimos su solicitud de consulta" : "We Received Your Consultation Request",
+      html: spanishAcknowledgement ? `
+        <div style="font-family: Arial, sans-serif; max-width: 650px; margin: 0 auto; color: #172033;">
+          <h2>Recibimos su solicitud</h2>
+          <p>Hola ${escapeHtml(cleanFullName)},</p>
+          <p>Su solicitud de consulta se envió a través de <strong>El Paso's Best Lawyers</strong>.</p>
+          <p>Su solicitud corresponde a <strong>${escapeHtml(area)}</strong>.</p>
+          ${routedSuccessfully && routedFirm
+            ? `<p>Su solicitud fue enviada a <strong>${escapeHtml(routedFirm.name)}</strong> para su revisión.</p>`
+            : `<p>El Paso's Best Lawyers ha recibido su solicitud y está siendo procesada.</p>`}
+          <p>El envío de esta solicitud no establece una relación abogado-cliente ni garantiza representación legal.</p>
+          <p>Evite enviar información confidencial o muy sensible hasta establecer una relación abogado-cliente con un abogado.</p>
+          <p>El Paso's Best Lawyers</p>
+        </div>
+      ` : `
           <div
             style="
               font-family: Arial, sans-serif;
