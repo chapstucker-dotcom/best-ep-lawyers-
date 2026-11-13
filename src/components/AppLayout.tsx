@@ -1,8 +1,6 @@
-import LawFirmMarketplace from "./LawFirmMarketplace";
 import SeoPracticeAreaLinks from "./SeoPracticeAreaLinks";
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button } from "@/components/ui/button";
 
 
 
@@ -38,12 +36,10 @@ import {
   BriefcaseBusiness,
   Building2,
   Car,
-  CheckCircle2,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
   Crown,
-  ExternalLink,
   MapPin,
   Phone,
   ChevronUp,
@@ -217,6 +213,8 @@ export default function AppLayout() {
   const navigate = useNavigate();
   const [firms, setFirms] = useState<Firm[]>([]);
   const [loading, setLoading] = useState(true);
+  const [featuredStartIndex, setFeaturedStartIndex] = useState(0);
+  const [featuredPaused, setFeaturedPaused] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] =
@@ -551,8 +549,37 @@ export default function AppLayout() {
         )
     );
 
-    return rotatingFeatured.slice(0, 3);
+    return rotatingFeatured;
   }, [firms]);
+
+  const canRotateFeatured = homepageFeaturedFirms.length > 3;
+  const visibleFeaturedFirms = useMemo(() => {
+    const count = homepageFeaturedFirms.length;
+    if (count <= 3) return homepageFeaturedFirms;
+    const start = featuredStartIndex % count;
+    return Array.from({ length: 3 }, (_, index) =>
+      homepageFeaturedFirms[(start + index) % count]
+    );
+  }, [homepageFeaturedFirms, featuredStartIndex]);
+
+  useEffect(() => {
+    if (!canRotateFeatured || featuredPaused) return;
+    const timer = window.setInterval(() => {
+      if (!document.hidden) {
+        setFeaturedStartIndex((index) =>
+          (index + 1) % homepageFeaturedFirms.length
+        );
+      }
+    }, 5000);
+    return () => window.clearInterval(timer);
+  }, [canRotateFeatured, featuredPaused, homepageFeaturedFirms.length]);
+
+  const stepFeaturedFirms = (direction: number) => {
+    if (!canRotateFeatured) return;
+    setFeaturedStartIndex((index) =>
+      (index + direction + homepageFeaturedFirms.length) % homepageFeaturedFirms.length
+    );
+  };
 
   const selectedCategoryTitle =
     selectedCategory === 'all'
@@ -654,7 +681,17 @@ export default function AppLayout() {
                 </div>
               </div>
 
-              <div className="mt-1.5 rounded-2xl border border-[#1FA8A1]/35 bg-[#071D2F]/60 px-3 pb-3 pt-1 sm:px-4">
+              <div
+                className="mt-1.5 rounded-2xl border border-[#1FA8A1]/35 bg-[#071D2F]/60 px-3 pb-3 pt-1 sm:px-4"
+                onMouseEnter={() => setFeaturedPaused(true)}
+                onMouseLeave={() => setFeaturedPaused(false)}
+                onFocusCapture={() => setFeaturedPaused(true)}
+                onBlurCapture={(event) => {
+                  if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                    setFeaturedPaused(false);
+                  }
+                }}
+              >
                 <div className="relative mb-2 flex min-h-10 items-center justify-center">
                   <div className="flex items-center gap-2">
                     <Award className="h-6 w-6 fill-[#42C6BE] text-[#42C6BE]" />
@@ -677,18 +714,19 @@ export default function AppLayout() {
                   </button>
                 </div>
 
-                <div className="grid items-center gap-2 lg:grid-cols-[42px_1fr_42px]">
+                <div className="grid grid-cols-[40px_minmax(0,1fr)_40px] items-center gap-2 lg:grid-cols-[42px_1fr_42px]">
                   <button
                     type="button"
                     aria-label="Previous featured firms"
-                    disabled
-                    className="hidden h-10 w-10 items-center justify-center rounded-full border border-[#D4A62A] text-[#D4A62A] opacity-70 lg:flex"
+                    onClick={() => stepFeaturedFirms(-1)}
+                    disabled={!canRotateFeatured}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-[#D4A62A] text-[#D4A62A] transition hover:bg-[#D4A62A]/15 disabled:cursor-not-allowed disabled:opacity-35"
                   >
                     <ChevronLeft className="h-5 w-5" />
                   </button>
 
                   <div className="grid gap-3 lg:grid-cols-[repeat(3,minmax(0,390px))] lg:justify-between">
-                    {homepageFeaturedFirms.slice(0, 3).map((firm) => {
+                    {visibleFeaturedFirms.map((firm) => {
                       const category = getFeaturedCategory(firm);
                       const logo = getHomepageFirmLogo(firm);
                       const location = getHomepageFirmLocation(firm);
@@ -756,8 +794,9 @@ export default function AppLayout() {
                   <button
                     type="button"
                     aria-label="Next featured firms"
-                    disabled
-                    className="hidden h-10 w-10 items-center justify-center rounded-full border border-[#D4A62A] text-[#D4A62A] opacity-70 lg:flex"
+                    onClick={() => stepFeaturedFirms(1)}
+                    disabled={!canRotateFeatured}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-[#D4A62A] text-[#D4A62A] transition hover:bg-[#D4A62A]/15 disabled:cursor-not-allowed disabled:opacity-35"
                   >
                     <ChevronRight className="h-5 w-5" />
                   </button>
@@ -1085,138 +1124,6 @@ export default function AppLayout() {
           </div>
         </div>
       </section>
-      <LawFirmMarketplace
-        firmCount={firms.length}
-        categoryCount={categories.length}
-      />
-
-      {/* Law firm business gateway */}
-      <section className="border-y border-[#D4A62A]/25 bg-gradient-to-br from-[#061A2C] via-[#0F2A43] to-[#123D55] py-14 text-white">
-  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
-      <div>
-        <div className="mb-3 text-sm font-bold uppercase tracking-[0.18em] text-[#D4A62A]">
-          For El Paso Law Firms
-        </div>
-
-        <h2 className="max-w-3xl text-3xl font-bold tracking-tight sm:text-4xl">
-          More Visibility. More Opportunities to Connect.
-        </h2>
-
-        <p className="mt-4 max-w-3xl text-base leading-7 text-slate-200 sm:text-lg">
-          Build your presence where people are actively searching for El Paso
-          legal help. Start with a complimentary firm listing, then add enhanced
-          profiles, lead tools, advertising, and limited premium category
-          visibility as your firm grows.
-        </p>
-
-        <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-          <Button
-            asChild
-            className="bg-[#D4A62A] font-semibold text-[#061A2C] hover:bg-[#E3B83E]"
-          >
-            <Link to="/for-law-firms">
-              Advertising &amp; Law Firm Listings
-              <ChevronRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-
-          <Button
-            asChild
-            variant="outline"
-            className="border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white"
-          >
-            <Link to="/pricing">Compare Firm Plans</Link>
-          </Button>
-        </div>
-
-        <p className="mt-3 text-sm text-slate-300">
-          Complimentary firm listings available.
-        </p>
-      </div>
-
-      <div className="rounded-2xl border border-white/15 bg-white/10 p-6 shadow-xl backdrop-blur-sm">
-        <div className="flex items-start gap-3">
-          <Award className="mt-1 h-6 w-6 shrink-0 text-[#D4A62A]" />
-          <div>
-            <h3 className="text-xl font-bold">Built for the El Paso Legal Market</h3>
-            <p className="mt-2 text-sm leading-6 text-slate-200">
-              Present your firm clearly, highlight your attorneys and practice
-              areas, and give prospective clients direct ways to learn more.
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-6 grid gap-3 sm:grid-cols-2">
-          {[
-            "Local El Paso legal directory exposure",
-            "Practice-area visibility",
-            "Firm and attorney profile options",
-            "Limited premium placement inventory",
-          ].map((item) => (
-            <div
-              key={item}
-              className="flex items-start gap-2 rounded-lg border border-white/10 bg-[#061A2C]/35 p-3"
-            >
-              <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#D4A62A]" />
-              <span className="text-sm text-slate-100">{item}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-
-    <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-      <div className="rounded-xl border border-white/10 bg-white p-5 text-[#061A2C] shadow-lg">
-        <Award className="h-6 w-6 text-[#B88A12]" />
-        <h3 className="mt-4 text-lg font-bold">Premium Visibility</h3>
-        <p className="mt-2 text-sm leading-6 text-slate-600">
-          Increase visibility in relevant practice areas with enhanced firm
-          presentation and limited Featured or Exclusive category
-          opportunities.
-        </p>
-      </div>
-
-      <div className="rounded-xl border border-white/10 bg-white p-5 text-[#061A2C] shadow-lg">
-        <Users className="h-6 w-6 text-[#B88A12]" />
-        <h3 className="mt-4 text-lg font-bold">
-          Enhanced Firm &amp; Attorney Profiles
-        </h3>
-        <p className="mt-2 text-sm leading-6 text-slate-600">
-          Showcase your firm, attorneys, practice areas, biography, photos,
-          contact information, website, and other details available with your
-          plan.
-        </p>
-      </div>
-
-      <div className="rounded-xl border border-white/10 bg-white p-5 text-[#061A2C] shadow-lg">
-        <Phone className="h-6 w-6 text-[#B88A12]" />
-        <h3 className="mt-4 text-lg font-bold">Lead &amp; Contact Tools</h3>
-        <p className="mt-2 text-sm leading-6 text-slate-600">
-          Give prospective clients clear ways to view your profile, visit your
-          website, contact your firm, and submit consultation inquiries when
-          included with your plan.
-        </p>
-      </div>
-
-      <div className="rounded-xl border border-white/10 bg-white p-5 text-[#061A2C] shadow-lg">
-        <ExternalLink className="h-6 w-6 text-[#B88A12]" />
-        <h3 className="mt-4 text-lg font-bold">Search &amp; Content Visibility</h3>
-        <p className="mt-2 text-sm leading-6 text-slate-600">
-          Build visibility across the El Paso legal directory, practice-area
-          pages, attorney profiles, and relevant consumer legal resources.
-        </p>
-      </div>
-    </div>
-
-    <p className="mt-7 text-center text-xs leading-5 text-slate-300">
-      Paid placement increases visibility but does not constitute an
-      endorsement, ranking of legal ability, or guarantee of clients, leads,
-      search rankings, or case results.
-    </p>
-  </div>
-</section>
-
       {/* Disclaimers */}
       <section
         id="disclaimers"
