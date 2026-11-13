@@ -9,6 +9,10 @@ import {
   Users,
 } from 'lucide-react';
 
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ShieldCheck } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/lib/supabase';
 import { getPlanRules } from '@/config/planRules';
 
@@ -57,6 +61,19 @@ export function DashboardNav({
   currentPlan = 'free',
 }: DashboardNavProps) {
   const planRules = getPlanRules(currentPlan);
+  const { user } = useAuth();
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    setIsAdmin(false);
+    if (!user || !supabase) return;
+    void supabase.from('admin_users').select('role').eq('user_id', user.id).maybeSingle()
+      .then(({ data, error }) => {
+        if (active) setIsAdmin(!error && data?.role === 'super_admin');
+      });
+    return () => { active = false; };
+  }, [user]);
 
   const handleSignOut = async () => {
     const { error } =
@@ -163,6 +180,12 @@ export function DashboardNav({
                   </button>
                 );
               }
+            )}
+            {isAdmin && (
+              <Link to="/admin" className="inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100">
+                <ShieldCheck className="h-4 w-4" />
+                Admin Dashboard
+              </Link>
             )}
           </nav>
         </div>
