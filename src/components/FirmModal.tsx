@@ -43,6 +43,7 @@ import { categories } from "../data/categories";
 import { ReviewForm } from "./ReviewForm";
 import LeadCaptureForm from "./LeadCaptureForm";
 import { supabase } from "@/lib/supabase";
+import { FIRM_SELECT_COLUMNS } from "@/services/firmSelectColumns";
 import { getPlanRules } from "@/config/planRules";
 import { trackEvent } from "@/services/analyticsService";
 
@@ -150,7 +151,7 @@ function FirmModal({
   const loadLiveFirm = async (firmId: string) => {
     const { data, error } = await supabase
       .from("firms")
-      .select("*")
+      .select(FIRM_SELECT_COLUMNS)
       .eq("id", firmId)
       .maybeSingle();
 

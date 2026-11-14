@@ -1,6 +1,7 @@
 import { firms as localFirms } from "@/data/firms";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
 import type { Firm } from "@/data/types";
+import { FIRM_SELECT_COLUMNS } from "@/services/firmSelectColumns";
 
 type FirmInput = Partial<Firm> & Record<string, unknown>;
 
@@ -126,6 +127,44 @@ export const getLocalFirmById = (
     (firm) => firm.id === firmId
   ) ?? null;
 
+// Only ordinary profile fields may be submitted by browser-side profile saves.
+// Commercial entitlements, ownership, approval, and billing are server-managed.
+// The database must independently enforce these restrictions (including video access).
+const EDITABLE_PROFILE_FIELDS = [
+  "name", "slug", "description", "phone", "email", "website",
+  "address", "city", "state", "zip", "zip_code", "bio",
+  "category", "logo_url", "practice_areas", "image_url", "banner_url",
+  "primary_category", "specialties", "years_experience",
+  "consultation_free", "accepts_payment_plans", "languages",
+  "team_size", "consultation_fee", "office_hours",
+  "awards", "google_maps_url", "gallery_urls", "facebook_url",
+  "linkedin_url", "twitter_url", "instagram_url",
+] as const;
+
+// Fields that influence paid placement or canonical routing may be supplied
+// during initial registration, but cannot be changed by a browser-side update.
+const REGISTRATION_ONLY_FIELDS = new Set([
+  "slug", "category", "primary_category", "practice_areas",
+]);
+
+const safeProfileFields = (
+  input: FirmInput,
+  mode: "insert" | "update"
+): Record<string, unknown> => {
+  const result: Record<string, unknown> = {};
+  for (const key of EDITABLE_PROFILE_FIELDS) {
+    if ((mode === "insert" || !REGISTRATION_ONLY_FIELDS.has(key)) &&
+        Object.prototype.hasOwnProperty.call(input, key) && input[key] !== undefined) {
+      result[key] = input[key];
+    }
+  }
+  return result;
+};
+
+const restrictedWrite = {
+  message: "This operation must be performed through an authorized server endpoint.",
+};
+
 const notConfigured = {
   message: "Supabase is not configured",
 };
@@ -171,7 +210,7 @@ export const getAllFirms = async (): Promise<{
 
   const { data, error } = await supabase
     .from("firms")
-    .select("*")
+    .select(FIRM_SELECT_COLUMNS)
     .order("created_at", {
       ascending: false,
     });
@@ -227,7 +266,7 @@ export const getFirmById = async (
 
   const { data, error } = await supabase
     .from("firms")
-    .select("*")
+    .select(FIRM_SELECT_COLUMNS)
     .eq("id", firmId)
     .maybeSingle();
 
@@ -267,7 +306,7 @@ export const getFirmByUserId = async (
 
   return supabase
     .from("firms")
-    .select("*")
+    .select(FIRM_SELECT_COLUMNS)
     .eq("user_id", userId)
     .maybeSingle();
 };
@@ -279,140 +318,78 @@ export const saveFirmProfile = async (
   data: Firm | null;
   error: any;
 }> => {
-  if (
-    !isSupabaseConfigured ||
-    !supabase
-  ) {
-    return {
-      data: null,
-      error: notConfigured,
-    };
+  if (!isSupabaseConfigured || !supabase) {
+    return { data: null, error: notConfigured };
   }
 
-  const updateResult =
-    await supabase
-      .from("firms")
-      .update({
-        ...profile,
-        user_id: userId,
-      })
-      .eq("user_id", userId)
-      .select("*")
-      .maybeSingle();
+  // Verify the authenticated identity rather than trusting a caller-supplied ID.
+  const { data: authData, error: authError } = await supabase.auth.getUser();
+  if (authError || !authData.user || authData.user.id !== userId) {
+    return { data: null, error: { message: "Not authorized to edit this firm." } };
+  }
+
+  const updateFields = safeProfileFields(profile, "update");
+  const insertFields = safeProfileFields(profile, "insert");
+  if (Object.keys(insertFields).length === 0) {
+    return { data: null, error: { message: "No editable profile fields were provided." } };
+  }
+
+  // A registration-only payload must not create an empty UPDATE request.
+  const updateResult = Object.keys(updateFields).length > 0
+    ? await supabase
+    .from("firms")
+    .update(updateFields)
+    .eq("user_id", userId)
+    .select(FIRM_SELECT_COLUMNS)
+    .maybeSingle()
+    : { data: null, error: null };
 
   if (updateResult.error) {
-    return {
-      data: null,
-      error: updateResult.error,
-    };
+    return { data: null, error: updateResult.error };
   }
-
   if (updateResult.data) {
-    return {
-      data:
-        updateResult.data as Firm,
-      error: null,
-    };
+    return { data: updateResult.data as Firm, error: null };
+  }
+  if (Object.keys(updateFields).length === 0) {
+    const existing = await supabase.from("firms").select(FIRM_SELECT_COLUMNS)
+      .eq("user_id", userId).maybeSingle();
+    if (existing.error) return { data: null, error: existing.error };
+    if (existing.data) return { data: existing.data as Firm, error: null };
   }
 
-  const insertResult =
-    await supabase
-      .from("firms")
-      .insert({
-        ...profile,
-        user_id: userId,
-      })
-      .select("*")
-      .single();
+  // Registration only supplies ordinary profile details plus the authenticated
+  // owner ID. Plan/approval/verification/payment status come from DB defaults.
+  const insertResult = await supabase
+    .from("firms")
+    .insert({ ...insertFields, user_id: authData.user.id })
+    .select(FIRM_SELECT_COLUMNS)
+    .single();
 
   return {
-    data:
-      (insertResult.data as
-        | Firm
-        | null) ?? null,
+    data: (insertResult.data as Firm | null) ?? null,
     error: insertResult.error,
   };
 };
 
+// No active application callers remain. Keep these exports for compatibility,
+// but prevent accidental browser-side bypass of server-controlled workflows.
 export const createFirm = async (
-  firm: FirmInput
-): Promise<{
-  data: Firm | null;
-  error: any;
-}> => {
-  if (
-    !isSupabaseConfigured ||
-    !supabase
-  ) {
-    return {
-      data: null,
-      error: notConfigured,
-    };
-  }
-
-  const { data, error } =
-    await supabase
-      .from("firms")
-      .insert(firm)
-      .select("*")
-      .single();
-
-  return {
-    data: data as Firm | null,
-    error,
-  };
-};
+  _firm: FirmInput
+): Promise<{ data: Firm | null; error: any }> => ({
+  data: null,
+  error: restrictedWrite,
+});
 
 export const updateFirm = async (
-  firmId: string,
-  updates: FirmInput
-): Promise<{
-  data: Firm | null;
-  error: any;
-}> => {
-  if (
-    !isSupabaseConfigured ||
-    !supabase
-  ) {
-    return {
-      data: null,
-      error: notConfigured,
-    };
-  }
-
-  const { data, error } =
-    await supabase
-      .from("firms")
-      .update(updates)
-      .eq("id", firmId)
-      .select("*")
-      .single();
-
-  return {
-    data: data as Firm | null,
-    error,
-  };
-};
+  _firmId: string,
+  _updates: FirmInput
+): Promise<{ data: Firm | null; error: any }> => ({
+  data: null,
+  error: restrictedWrite,
+});
 
 export const deleteFirm = async (
-  firmId: string
-): Promise<{
-  error: any;
-}> => {
-  if (
-    !isSupabaseConfigured ||
-    !supabase
-  ) {
-    return {
-      error: notConfigured,
-    };
-  }
-
-  const { error } =
-    await supabase
-      .from("firms")
-      .delete()
-      .eq("id", firmId);
-
-  return { error };
-};
+  _firmId: string
+): Promise<{ error: any }> => ({
+  error: restrictedWrite,
+});
