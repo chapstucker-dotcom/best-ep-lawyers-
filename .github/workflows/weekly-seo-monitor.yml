@@ -1,0 +1,46 @@
+﻿name: Weekly Live SEO Monitor
+
+on:
+  schedule:
+    - cron: '0 15 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: weekly-live-seo-monitor
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    name: Audit public sitemap URLs
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run live SEO audit
+        id: seo
+        continue-on-error: true
+        run: node scripts/seo-live-monitor/monitor.mjs
+
+      - name: Upload SEO audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-seo-report
+          path: seo-live-report.json
+          retention-days: 30
+          if-no-files-found: warn
+
+      - name: Fail workflow when audit fails
+        if: steps.seo.outcome == 'failure'
+        run: exit 1
