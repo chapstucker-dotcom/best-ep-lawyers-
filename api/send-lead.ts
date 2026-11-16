@@ -1747,6 +1747,55 @@ export default async function handler(
         );
     }
 
+    // Record the selected recipient independently of the consumer-requested firm.
+    // Assignment is not proof of email acceptance or delivery; those outcomes
+    // remain authoritative in public.lead_notifications.
+    if (routedFirm) {
+      const { error: assignmentError } = await db
+        .from("leads")
+        .update({
+          assigned_firm_id: routedFirm.id,
+          assigned_firm_name: routedFirm.name,
+          assigned_firm_tier: routedFirm.planKey,
+          assigned_at: new Date().toISOString(),
+        })
+        .eq("id", leadId);
+
+      if (assignmentError) {
+        // Do not lose or suppress an already-captured inquiry when audit
+        // enrichment fails. The administrator still receives the lead.
+        console.error("Lead assignment audit update failed:", assignmentError);
+      }
+    }
+
+    // Canonical consultation conversion: one server-side event per persisted lead.
+    // The assigned recipient, not the consumer-requested firm, receives credit.
+    // This is independent of Resend acceptance or confirmed email delivery.
+    if (routedFirm) {
+      const canonicalPractice = SERVER_SAFE_PRACTICE_AREAS.find(
+        (practice) =>
+          normalize(practice.title) === normalize(area) ||
+          normalize(practice.slug) === normalize(area)
+      );
+      const market = resolveMarketValue(area);
+      const { error: conversionError } = await db.from("attribution_events")
+        .insert({
+          lead_id: leadId,
+          firm_id: routedFirm.id,
+          action: "consultation_submit",
+          market: market?.key ?? null,
+          specialty: canonicalPractice?.slug ?? null,
+          page: safeText(landingPage, 2000),
+          source: safeText(source, 200),
+          medium: safeText(medium, 200),
+          campaign: safeText(campaign, 200),
+          referrer: safeText(referrer, 2000),
+        });
+      if (conversionError && conversionError.code !== "23505") {
+        console.error("Canonical consultation attribution failed:", conversionError);
+      }
+    }
+
     let routedSuccessfully =
       false;
 

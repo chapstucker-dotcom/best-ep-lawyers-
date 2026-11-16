@@ -46,6 +46,10 @@ interface ConsumerLead {
   practice_area: string | null;
   firm_name: string | null;
   firm_id: string | null;
+  assigned_firm_id: string | null;
+  assigned_firm_name: string | null;
+  assigned_firm_tier: string | null;
+  assigned_at: string | null;
   status: string | null;
   source_url: string | null;
   landing_page: string | null;
@@ -143,7 +147,7 @@ export default function AdminDashboard() {
     setLeadsError(null);
     const { data, error } = await supabase
       .from("leads")
-      .select("id,created_at,full_name,email,phone,legal_issue,practice_area,firm_name,firm_id,status,source_url,landing_page,referrer,source,medium,campaign,matter_location,matter_timing")
+      .select("id,created_at,full_name,email,phone,legal_issue,practice_area,firm_name,firm_id,assigned_firm_id,assigned_firm_name,assigned_firm_tier,assigned_at,status,source_url,landing_page,referrer,source,medium,campaign,matter_location,matter_timing")
       .order("created_at", { ascending: false })
       .limit(100);
 
@@ -387,7 +391,7 @@ export default function AdminDashboard() {
             <div>
               <h2 id="consumer-leads-title" className="text-2xl font-bold">Consumer Leads</h2>
               <p className="mt-2 text-sm text-slate-300">
-                Latest 100 inquiries. Notification status reflects provider acceptance, not confirmed inbox delivery.
+                Latest 100 inquiries. Assignment is not proof of notification delivery; delivered, accepted, failed and bounced are tracked separately.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
@@ -445,7 +449,10 @@ export default function AdminDashboard() {
                   <div className="space-y-2">
                     <p><span className="text-slate-400">Email:</span> {lead.email || "Not provided"}</p>
                     <p><span className="text-slate-400">Phone:</span> {lead.phone || "Not provided"}</p>
-                    <p><span className="text-slate-400">Firm:</span> {lead.firm_name || lead.firm_id || "General inquiry / not assigned"}</p>
+                    <p><span className="text-slate-400">Requested firm:</span> {lead.firm_name || lead.firm_id || "No specific firm requested"}</p>
+                    <p><span className="text-slate-400">Assigned firm:</span> {lead.assigned_firm_name || lead.assigned_firm_id || "Not assigned"}</p>
+                    {lead.assigned_firm_id && <p><span className="text-slate-400">Assignment tier:</span> {formatLabel(lead.assigned_firm_tier)}</p>}
+                    {lead.assigned_at && <p><span className="text-slate-400">Assigned:</span> {formatDate(lead.assigned_at)}</p>}
                     <p><span className="text-slate-400">Location:</span> {lead.matter_location || "Not provided"}</p>
                     <p><span className="text-slate-400">Timing:</span> {lead.matter_timing || "Not provided"}</p>
                   </div>
