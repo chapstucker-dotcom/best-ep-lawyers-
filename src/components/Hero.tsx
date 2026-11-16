@@ -65,12 +65,10 @@ export default function Hero({ onSearch }: HeroProps) {
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="flex min-w-0 items-center gap-3 text-left"
           >
-            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#F7C84A] to-[#DDA321] text-[#071D2F] shadow-lg sm:h-14 sm:w-14">
-              <Scale className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={2.2} />
-            </span>
+            <img src="/logo.png" alt="El Paso's Best Lawyers emblem" width={56} height={56} className="h-12 w-12 shrink-0 rounded-full object-contain sm:h-14 sm:w-14" />
             <span className="min-w-0">
               <span className="block font-serif text-lg font-black leading-tight sm:text-[26px]">El Paso&apos;s Best Lawyers</span>
-              <span className="block text-xs text-white/85 sm:text-sm">Find and Compare Local Lawyers</span>
+              <span className="block text-xs text-white/85 sm:text-sm">Connecting People. Strengthening Community.</span>
             </span>
           </button>
 
