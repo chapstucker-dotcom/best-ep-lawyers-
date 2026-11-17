@@ -327,6 +327,20 @@ export default function PersonalInjury() {
 
       {/* LIVE PERSONAL INJURY DIRECTORY */}
       <div id="personal-injury-firms" className="scroll-mt-24">
+        <div className="mx-auto max-w-7xl px-6 pt-8">
+          <div className="rounded-xl border border-amber-400/25 bg-slate-900 px-6 py-5">
+            <h2 className="text-lg font-bold text-amber-400">
+              Choosing the right personal injury attorney
+            </h2>
+            <p className="mt-2 max-w-4xl text-sm leading-7 text-slate-300">
+              Firms listed here serve the broader Personal Injury category.
+              Some also identify specific areas of practice. A category
+              listing does not necessarily mean a firm handles every type
+              of injury claim. Review each firm's profile and confirm its
+              experience with your particular case before choosing an attorney.
+            </p>
+          </div>
+        </div>
         <PracticeAreaFirmDirectory page={personalInjuryDirectoryPage} />
       </div>
 
