@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 
 import { trackMetaLead } from '@/services/metaPixel';
+import { getLeadAttribution } from '@/services/leadAttribution';
 import {
   getPracticeAreaByValue,
   resolvePracticeAreaPage,
@@ -123,42 +124,6 @@ function LeadTurnstile({ onToken, resetKey }: {
 }
 
 const GENERAL_LEGAL_INQUIRY = 'General Legal Inquiry';
-
-type LeadAttribution = {
-  sourceUrl: string | null;
-  landingPage: string | null;
-  referrer: string | null;
-  source: string | null;
-  medium: string | null;
-  campaign: string | null;
-};
-
-const getLeadAttribution = (): LeadAttribution => {
-  if (typeof window === 'undefined') {
-    return {
-      sourceUrl: null,
-      landingPage: null,
-      referrer: null,
-      source: null,
-      medium: null,
-      campaign: null,
-    };
-  }
-
-  const params = new URLSearchParams(window.location.search);
-
-  return {
-    sourceUrl: window.location.href,
-    landingPage: `${window.location.pathname}${window.location.search}`,
-    referrer:
-      typeof document !== 'undefined'
-        ? document.referrer || null
-        : null,
-    source: params.get('utm_source'),
-    medium: params.get('utm_medium'),
-    campaign: params.get('utm_campaign'),
-  };
-};
 
 const resolveCanonicalPracticeArea = (
   value: string | null | undefined

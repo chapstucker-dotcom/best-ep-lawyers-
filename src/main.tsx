@@ -2,6 +2,7 @@ import { createRoot, hydrateRoot } from "react-dom/client";
 import { BrowserRouter, useLocation, useNavigationType } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import App from "./App.tsx";
+import { initializeLeadAttribution } from "./services/leadAttribution";
 import MetaPixelTracker from "./components/MetaPixelTracker";
 import { Analytics } from "@vercel/analytics/react";
 import "./index.css";
@@ -26,6 +27,8 @@ function ScrollToTop() {
 
   return null;
 }
+initializeLeadAttribution();
+
 const root = document.getElementById("root");
 
 if (!root) {
