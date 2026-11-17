@@ -344,6 +344,49 @@ export default function PersonalInjury() {
         <PracticeAreaFirmDirectory page={personalInjuryDirectoryPage} />
       </div>
 
+      {/* CONSUMER CONVERSION AFTER DIRECTORY */}
+      <section
+        aria-labelledby="pi-next-step-heading"
+        className="border-y border-amber-400/20 bg-[#0b2348]"
+      >
+        <div className="mx-auto max-w-6xl px-6 py-12 md:py-16">
+          <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-widest text-amber-400">
+                Your Next Step
+              </p>
+              <h2
+                id="pi-next-step-heading"
+                className="mt-3 text-2xl font-bold text-white md:text-3xl"
+              >
+                Need help finding the right personal injury attorney?
+              </h2>
+              <p className="mt-4 max-w-2xl leading-7 text-slate-300">
+                Tell us about your legal matter. We can review your inquiry
+                for possible referral to an eligible participating law firm.
+                You can also contact firms directly using their listings above.
+              </p>
+              <p className="mt-3 text-sm leading-6 text-slate-400">
+                A referral, consultation, or legal representation is not guaranteed.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row md:flex-col">
+              <a
+                href="#personal-injury-consultation"
+                className="inline-flex min-h-12 items-center justify-center rounded-xl bg-amber-400 px-6 py-3 text-center font-bold text-slate-950 transition hover:bg-amber-300"
+              >
+                Request Help Finding an Attorney
+              </a>
+              <a
+                href="#personal-injury-firms"
+                className="inline-flex min-h-12 items-center justify-center rounded-xl border border-slate-500 px-6 py-3 text-center font-semibold text-white transition hover:border-amber-400 hover:text-amber-400"
+              >
+                Review Attorney Listings
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
       {/* INTRO */}
       <section className="mx-auto max-w-6xl px-6 py-16">
         <div className="grid gap-10 lg:grid-cols-[1.35fr_.65fr]">
