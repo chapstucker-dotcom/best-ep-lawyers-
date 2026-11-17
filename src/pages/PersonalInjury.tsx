@@ -25,6 +25,12 @@ const caseTypes = [
     path: "/el-paso-motorcycle-accident-lawyers",
   },
   {
+    title: "Medical Malpractice",
+    description:
+      "Compare El Paso attorneys handling injuries involving alleged medical negligence, healthcare errors, and related malpractice claims.",
+    path: "/el-paso-medical-malpractice-lawyers",
+  },
+  {
     title: "Slip and Fall",
     description:
       "Compare attorneys for premises-liability claims involving unsafe property conditions, falls, and resulting injuries.",
@@ -595,6 +601,13 @@ export default function PersonalInjury() {
               className="rounded-lg border border-slate-700 px-4 py-2 text-sm hover:border-amber-400 hover:text-amber-400"
             >
               Truck Accident Lawyers
+            </Link>
+
+            <Link
+              to="/el-paso-medical-malpractice-lawyers"
+              className="rounded-lg border border-slate-700 px-4 py-2 text-sm hover:border-amber-400 hover:text-amber-400"
+            >
+              Medical Malpractice Lawyers
             </Link>
 
             <Link
