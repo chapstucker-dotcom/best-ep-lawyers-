@@ -215,6 +215,20 @@ export default function AppLayout() {
   const [loading, setLoading] = useState(true);
   const [featuredStartIndex, setFeaturedStartIndex] = useState(0);
   const [featuredPaused, setFeaturedPaused] = useState(false);
+  const [exclusiveVisitOffset] = useState(() => {
+    try {
+      const key = 'epbl-exclusive-visit-offset';
+      const previous = Number(window.sessionStorage.getItem(key) ?? '-1');
+      const next =
+        Number.isSafeInteger(previous) && previous >= -1
+          ? previous + 1
+          : 0;
+      window.sessionStorage.setItem(key, String(next));
+      return next;
+    } catch {
+      return 0;
+    }
+  });
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] =
@@ -512,23 +526,19 @@ export default function AppLayout() {
     return sorted;
   }, [filteredFirms, sortBy]);
 
-  const homepageExclusiveFirms = useMemo(
-    () =>
-      firms
-        .filter(
-          (firm) =>
-            getPlanRules(
-              getFirmPlanKey(firm)
-            ).categoryOwner
-        )
-        .sort((a, b) =>
-          String(a.name ?? '').localeCompare(
-            String(b.name ?? '')
-          )
-        ),
-    [firms]
-  );
+  const homepageExclusiveFirms = useMemo(() => {
+    const eligible = firms
+      .filter((firm) => getPlanRules(getFirmPlanKey(firm)).categoryOwner)
+      .sort((a, b) =>
+        String(a.name ?? '').localeCompare(String(b.name ?? ''))
+      )
+      .slice(0, 5);
 
+    if (eligible.length <= 1) return eligible;
+
+    const offset = exclusiveVisitOffset % eligible.length;
+    return [...eligible.slice(offset), ...eligible.slice(0, offset)];
+  }, [firms, exclusiveVisitOffset]);
   const homepageFeaturedFirms = useMemo(() => {
     const rotatingFeatured = rotateFeaturedFirms(
       firms
