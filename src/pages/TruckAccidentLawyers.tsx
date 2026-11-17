@@ -49,6 +49,14 @@ import type { PracticeAreaPageData } from "../data/practiceAreaPages";
       href: "/el-paso-car-accident-lawyers",
     },
     {
+      label: "18-Wheeler Accident Lawyers",
+      href: "/el-paso-18-wheeler-accident-lawyer",
+    },
+    {
+      label: "Semi-Truck Accident Lawyers",
+      href: "/el-paso-semi-truck-accident-lawyer",
+    },
+    {
       label: "Motorcycle Accident Lawyers",
       href: "/el-paso-motorcycle-accident-lawyers",
     },
@@ -93,6 +101,8 @@ import type { PracticeAreaPageData } from "../data/practiceAreaPages";
     relatedPages: [
       { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
       { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
+      { label: "18-Wheeler Accident", path: "/el-paso-18-wheeler-accident-lawyer" },
+      { label: "Semi-Truck Accident", path: "/el-paso-semi-truck-accident-lawyer" },
       { label: "Motorcycle Accident", path: "/el-paso-motorcycle-accident-lawyers" },
       { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
     ],
