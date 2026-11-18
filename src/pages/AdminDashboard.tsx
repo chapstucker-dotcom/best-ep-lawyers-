@@ -282,6 +282,29 @@ export default function AdminDashboard() {
     setSavingActivity(false);
   };
 
+  // Latest-100 operational snapshot, not an all-time or unique-visitor metric.
+  const conversionOverview = useMemo(() => {
+    const group = (value: (lead: ConsumerLead) => string) => {
+      const counts = new Map<string, number>();
+      for (const lead of leads) {
+        const key = value(lead).trim() || "Unknown / direct";
+        counts.set(key, (counts.get(key) ?? 0) + 1);
+      }
+      return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8);
+    };
+    const firmNotifications = leadNotifications.filter((item) => item.recipient_type === "firm");
+    const notifiedIds = new Set(firmNotifications.map((item) => item.lead_id));
+    const acceptedIds = new Set(firmNotifications.filter((item) => ["accepted", "delivered"].includes(item.status)).map((item) => item.lead_id));
+    return {
+      total: leads.length,
+      assigned: leads.filter((lead) => Boolean(lead.assigned_firm_id)).length,
+      firmNotificationRecorded: leads.filter((lead) => notifiedIds.has(lead.id)).length,
+      firmNotificationAcceptedOrDelivered: leads.filter((lead) => acceptedIds.has(lead.id)).length,
+      sources: group((lead) => lead.source || (lead.referrer ? "Referral (unclassified)" : "Unknown / direct")),
+      pages: group((lead) => lead.landing_page || "Unknown landing page"),
+      firms: group((lead) => lead.assigned_firm_name || (lead.assigned_firm_id ? lead.assigned_firm_id : "Unassigned")),
+    };
+  }, [leads, leadNotifications]);
   const filteredLeads = useMemo(() =>
     leadFilter === "all" ? leads : leads.filter((lead) => (lead.status || "new") === leadFilter),
   [leads, leadFilter]);
@@ -386,6 +409,31 @@ export default function AdminDashboard() {
     <main className="min-h-screen bg-slate-950 px-4 py-10 text-white sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <CommunitySubmissionsAdmin />
+        <section aria-labelledby="conversion-overview-title" className="mb-10 rounded-2xl border border-amber-400/30 bg-slate-900 p-6">
+          <h2 id="conversion-overview-title" className="text-2xl font-bold text-amber-400">Inquiry Conversion Overview</h2>
+          <p className="mt-2 text-sm text-slate-300">Operational snapshot of the latest 100 saved inquiries, not an all-time count or website conversion rate. Notification counts use a limited recent-record window and may be incomplete. Notification acceptance is not proof of delivery or representation.</p>
+          {leadsLoading ? <p className="mt-5 text-slate-300">Loading inquiry snapshot...</p> : leadsError ? <p role="alert" className="mt-5 text-red-300">Inquiry snapshot unavailable: {leadsError}</p> : <>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                ["Saved inquiries", conversionOverview.total],
+                ["Assigned to firms", conversionOverview.assigned],
+                ["Firm notifications recorded", conversionOverview.firmNotificationRecorded],
+                ["Firm email accepted / delivered", conversionOverview.firmNotificationAcceptedOrDelivered],
+              ].map(([label, count]) => <div key={String(label)} className="rounded-xl border border-slate-700 bg-slate-950 p-4"><p className="text-xs text-slate-300">{label}</p><p className="mt-2 text-3xl font-bold text-white">{count}</p></div>)}
+            </div>
+            {notificationsError && <p role="alert" className="mt-4 text-sm text-red-300">Notification counts may be incomplete: {notificationsError}</p>}
+            <div className="mt-6 grid gap-5 lg:grid-cols-3">
+              {([
+                ["Traffic sources", conversionOverview.sources],
+                ["Landing pages", conversionOverview.pages],
+                ["Assigned firms", conversionOverview.firms],
+              ] as const).map(([heading, rows]) => <div key={heading} className="min-w-0 rounded-xl border border-slate-700 p-4">
+                <h3 className="font-semibold text-white">{heading}</h3>
+                {rows.length === 0 ? <p className="mt-3 text-sm text-slate-400">No saved inquiries</p> : <ul className="mt-3 space-y-3">{rows.map(([name, count]) => <li key={name} className="flex items-start justify-between gap-3 text-sm"><span className="min-w-0 break-words text-slate-300">{name}</span><span className="shrink-0 font-bold text-amber-300">{count}</span></li>)}</ul>}
+              </div>)}
+            </div>
+          </>}
+        </section>
         <section aria-labelledby="consumer-leads-title" className="mb-12">
           <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
             <div>
