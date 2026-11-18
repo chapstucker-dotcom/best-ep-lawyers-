@@ -80,7 +80,7 @@ Deno.serve(async (req) => {
     });
     const { data: firm, error: firmError } = await adminClient
       .from("firms")
-      .select("id, user_id, stripe_subscription_id")
+      .select("id, user_id, plan, plan_key, is_featured, is_exclusive, stripe_subscription_id")
       .eq("id", firmId)
       .eq("user_id", authData.user.id)
       .maybeSingle();
@@ -95,6 +95,23 @@ Deno.serve(async (req) => {
 
     // A recorded subscription must be resolved through the existing billing
     // workflow before another self-service subscription can be created.
+    const isNonFreePlan = (value: unknown): boolean => {
+      if (typeof value !== "string") return false;
+      const normalized = value.trim().toLowerCase().replace(/[\s_]+/g, "-");
+      return normalized !== "" && normalized !== "free" && normalized !== "basic";
+    };
+
+    if (
+      isNonFreePlan(firm.plan) ||
+      isNonFreePlan(firm.plan_key) ||
+      firm.is_featured === true ||
+      firm.is_exclusive === true
+    ) {
+      return jsonResponse(
+        { error: "This firm already has a paid plan or premium placement. Contact support for billing changes." },
+        409
+      );
+    }
     if (firm.stripe_subscription_id) {
       return jsonResponse({ error: "This firm already has a recorded subscription. Contact support for billing changes." }, 409);
     }

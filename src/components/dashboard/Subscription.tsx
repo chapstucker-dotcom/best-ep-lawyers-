@@ -409,6 +409,15 @@ export const Subscription =
           return;
         }
 
+        if (
+          planId === "expert" &&
+          currentPlan !== "free"
+        ) {
+          setFirmError(
+            "Your firm already has a subscription or premium placement. Contact support to request billing changes."
+          );
+          return;
+        }
         if (!firmId) {
           setFirmError(
             "Your firm profile is still loading. Please wait a moment and try again."
@@ -692,6 +701,15 @@ export const Subscription =
                         disabled
                       >
                         Availability Review Required
+                      </Button>
+                    ) : currentPlan !== "free" ? (
+                      <Button
+                        type="button"
+                        className="w-full"
+                        variant="outline"
+                        disabled
+                      >
+                        Contact Support for Plan Changes
                       </Button>
                     ) : (
                       <Button
