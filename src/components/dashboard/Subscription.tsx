@@ -698,17 +698,15 @@ export const Subscription =
                         type="button"
                         className="w-full"
                         variant="outline"
-                        disabled
-                      >
-                        Availability Review Required
+                        onClick={() => { window.location.href = "mailto:support@elpasosbestlawyers.com?subject=Category%20Featured%20Availability%20Request"; }} >
+                        Request Availability Review
                       </Button>
                     ) : currentPlan !== "free" ? (
                       <Button
                         type="button"
                         className="w-full"
                         variant="outline"
-                        disabled
-                      >
+                        onClick={() => { window.location.href = "mailto:support@elpasosbestlawyers.com?subject=Firm%20Subscription%20Plan%20Change"; }} >
                         Contact Support for Plan Changes
                       </Button>
                     ) : (
