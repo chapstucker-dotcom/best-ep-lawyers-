@@ -131,6 +131,11 @@ export const Subscription =
       setFirmError,
     ] = useState("");
 
+    const [
+      openingBillingPortal,
+      setOpeningBillingPortal,
+    ] = useState(false);
+
     const {
       user,
     } = useAuth();
@@ -516,6 +521,54 @@ export const Subscription =
         setLoadingPlan(null);
       };
 
+    const handleManageBilling = async () => {
+      if (!firmId || !user || openingBillingPortal) return;
+
+      setFirmError("");
+      setOpeningBillingPortal(true);
+
+      try {
+        if (!supabase) {
+          throw new Error("Billing service is unavailable.");
+        }
+
+        const { data, error } = await supabase.functions.invoke(
+          "create-billing-portal",
+          { body: { firmId } }
+        );
+
+        if (error) throw error;
+        if (typeof data?.url !== "string") {
+          throw new Error("Stripe did not return a billing portal URL.");
+        }
+
+        const portalUrl = new URL(data.url);
+        if (
+          portalUrl.protocol !== "https:" ||
+          (portalUrl.hostname !== "stripe.com" &&
+            !portalUrl.hostname.endsWith(".stripe.com"))
+        ) {
+          throw new Error("The billing portal returned an invalid URL.");
+        }
+
+        window.location.assign(portalUrl.toString());
+      } catch (error) {
+        console.error("Unable to open billing portal:", error);
+        const message =
+          error instanceof Error
+            ? error.message
+            : "Unable to open billing management. Please try again.";
+        setFirmError(message);
+        toast({
+          title: "Billing management unavailable",
+          description: message,
+          variant: "destructive",
+        });
+      } finally {
+        setOpeningBillingPortal(false);
+      }
+    };
+
     return (
       <div className="space-y-6">
         <div>
@@ -536,6 +589,30 @@ export const Subscription =
                 {PLAN_LABELS[currentPlan] || currentPlan}
               </Badge>
             </div>
+
+            {currentPlan !== "free" && (
+              <div className="mt-4 border-t pt-4">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => void handleManageBilling()}
+                  disabled={!firmId || openingBillingPortal}
+                >
+                  {openingBillingPortal ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Opening Billing...
+                    </>
+                  ) : (
+                    "Manage Billing"
+                  )}
+                </Button>
+                <p className="mt-2 text-sm text-gray-500">
+                  View invoices and manage payment methods through Stripe.
+                  Plan changes require approval from our team.
+                </p>
+              </div>
+            )}
 
             {(currentPlan === "category-featured" ||
               currentPlan === "category-exclusive") &&
