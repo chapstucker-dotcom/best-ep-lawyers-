@@ -136,6 +136,8 @@ export const Subscription =
       setOpeningBillingPortal,
     ] = useState(false);
 
+    const [billingConnection, setBillingConnection] = useState<"loading" | "connected" | "unconnected" | "unavailable">("loading");
+
     const {
       user,
     } = useAuth();
@@ -304,6 +306,31 @@ export const Subscription =
       user,
       selectedMarket,
     ]);
+
+    useEffect(() => {
+      let cancelled = false;
+      if (!user || !firmId || currentPlan === "free") {
+        setBillingConnection("loading");
+        return;
+      }
+      setBillingConnection("loading");
+      void (async () => {
+        try {
+          const { data, error } = await supabase.functions.invoke("create-billing-portal", {
+            body: { firmId, action: "status" },
+          });
+          if (error) throw error;
+          if (!data || typeof data.connected !== "boolean") {
+            throw new Error("Unexpected billing status response");
+          }
+          if (!cancelled) setBillingConnection(data.connected ? "connected" : "unconnected");
+        } catch (error) {
+          console.error("Unable to check billing connection:", error);
+          if (!cancelled) setBillingConnection("unavailable");
+        }
+      })();
+      return () => { cancelled = true; };
+    }, [user, firmId, currentPlan]);
 
     const checkAvailability =
       async (
@@ -537,7 +564,17 @@ export const Subscription =
           { body: { firmId } }
         );
 
-        if (error) throw error;
+        if (error) {
+          let serverMessage = "";
+          const context = (error as { context?: Response }).context;
+          if (context && typeof context.json === "function") {
+            try {
+              const payload = await context.json();
+              if (typeof payload?.error === "string") serverMessage = payload.error;
+            } catch { /* Preserve original error if the response is not JSON. */ }
+          }
+          throw new Error(serverMessage || error.message);
+        }
         if (typeof data?.url !== "string") {
           throw new Error("Stripe did not return a billing portal URL.");
         }
@@ -590,7 +627,7 @@ export const Subscription =
               </Badge>
             </div>
 
-            {currentPlan !== "free" && (
+            {currentPlan !== "free" && billingConnection === "connected" && (
               <div className="mt-4 border-t pt-4">
                 <Button
                   type="button"
@@ -611,6 +648,16 @@ export const Subscription =
                   View invoices and manage payment methods through Stripe.
                   Plan changes require approval from our team.
                 </p>
+              </div>
+            )}
+
+            {currentPlan !== "free" && billingConnection !== "connected" && (
+              <div className="mt-4 border-t pt-4 text-sm text-gray-600">
+                {billingConnection === "loading"
+                  ? "Checking billing connection..."
+                  : billingConnection === "unconnected"
+                    ? "Your premium placement is unchanged. Online billing management is not connected to this account. Contact support@elpasosbestlawyers.com for billing assistance."
+                    : "Billing connection status is temporarily unavailable. Please try again later or contact support@elpasosbestlawyers.com."}
               </div>
             )}
 

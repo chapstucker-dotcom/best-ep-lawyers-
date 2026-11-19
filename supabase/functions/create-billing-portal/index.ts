@@ -97,6 +97,11 @@ Deno.serve(async (req: Request) => {
       return jsonResponse({ error: "Unable to verify firm ownership" }, 500);
     }
     if (!firm) return jsonResponse({ error: "Firm not found or access denied" }, 403);
+
+    // Read-only eligibility check. Never send Stripe identifiers to the browser.
+    if ((body as { action?: unknown }).action === "status") {
+      return jsonResponse({ connected: Boolean(firm.stripe_customer_id && firm.stripe_subscription_id) }, 200);
+    }
     if (!firm.stripe_customer_id || !firm.stripe_subscription_id) {
       return jsonResponse({ error: "No active billing account is connected to this firm" }, 409);
     }
