@@ -1122,11 +1122,11 @@ const practiceMatches = (
   );
 };
 
-const choosePriorityFirm = (
+const getEligibleInquiryFirms = (
   firms: FirmRow[],
   practiceArea: string
-): RoutedFirm | null => {
-  const eligible = firms
+): RoutedFirm[] => {
+  return firms
     .filter((firm) => {
       const email =
         String(firm.email ?? "").trim();
@@ -1177,6 +1177,14 @@ const choosePriorityFirm = (
         b.name
       );
     });
+
+};
+
+const choosePriorityFirm = (
+  firms: FirmRow[],
+  practiceArea: string
+): RoutedFirm | null => {
+  const eligible = getEligibleInquiryFirms(firms, practiceArea);
 
   if (eligible.length === 0) {
     return null;
@@ -1528,6 +1536,69 @@ export default async function handler(
   req: any,
   res: any
 ) {
+  if (req.method === "GET" && req.query?.action === "eligible-firms") {
+    res.setHeader("Cache-Control", "no-store");
+
+    const area = req.query?.practiceArea;
+
+    if (typeof area !== "string" || !area.trim() || area.length > 180) {
+      return res.status(400).json({
+        success: false,
+        error: "A valid practice area is required",
+      });
+    }
+
+    try {
+      const db = getSupabaseServerClient();
+
+      if (!db) {
+        return res.status(503).json({
+          success: false,
+          error: "Firm selection unavailable",
+        });
+      }
+
+      const { data, error } = await db
+        .from("firms")
+        .select(
+          "id,name,email,plan,plan_key,primary_category,category,practice_areas,specialties,is_active,status,consultation_free"
+        )
+        .eq("is_active", true)
+        .eq("status", "active");
+
+      if (error) throw error;
+
+      const rows = (data ?? []) as (FirmRow & {
+        consultation_free?: boolean | null;
+      })[];
+
+      const consultations = new Map(
+        rows.map((firm) => [
+          String(firm.id),
+          firm.consultation_free === true,
+        ])
+      );
+
+      const firms = getEligibleInquiryFirms(rows, area.trim())
+        .map((firm) => ({
+          id: firm.id,
+          name: firm.name,
+          freeConsultation: consultations.get(firm.id) === true,
+        }))
+        .sort((a, b) => a.name.localeCompare(b.name));
+
+      return res.status(200).json({
+        success: true,
+        firms,
+      });
+    } catch {
+      return res.status(503).json({
+        success: false,
+        error: "Unable to retrieve participating firms",
+      });
+    }
+  }
+
   if (req.method !== "POST") {
     return res
       .status(405)
