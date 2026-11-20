@@ -167,7 +167,7 @@ function getPlanLabel(
   const product = getCommercialProductForFirm(firm);
 
   if (product.key === "market_exclusive") {
-    return "Category Exclusive";
+    return "Gold";
   }
 
   if (product.key === "premier") {
@@ -175,7 +175,7 @@ function getPlanLabel(
   }
 
   if (product.key === "featured") {
-    return "Category Featured";
+    return "Silver";
   }
 
   if (product.key === "expert") {
@@ -651,7 +651,7 @@ export default function PracticeAreaFirmDirectory({
                     {isExclusive && (
                       <div className="-mx-6 -mt-6 mb-6 flex items-center justify-center gap-2 bg-[#d6a928] px-4 py-3 text-sm font-extrabold uppercase tracking-wider text-[#07162f]">
                         <Crown className="h-4 w-4" />
-                        Category Exclusive
+                        Gold · Sponsored
                       </div>
                     )}
 
@@ -663,9 +663,9 @@ export default function PracticeAreaFirmDirectory({
                     )}
 
                     {isFeatured && (
-                      <div className="-mx-6 -mt-6 mb-6 flex items-center justify-center gap-2 bg-[#d6a928] px-4 py-3 text-sm font-extrabold uppercase tracking-wider text-[#07162f]">
+                      <div className="-mx-6 -mt-6 mb-6 flex items-center justify-center gap-2 bg-gradient-to-r from-slate-300 via-slate-100 to-slate-300 px-4 py-3 text-sm font-extrabold uppercase tracking-wider text-slate-900">
                         <Star className="h-4 w-4 fill-current" />
-                        Category Featured
+                        Silver · Sponsored
                       </div>
                     )}
 
@@ -788,7 +788,7 @@ export default function PracticeAreaFirmDirectory({
                     {isExclusive && (
                       <div className="mt-4 flex items-center gap-2 text-sm font-bold text-[#d6a928]">
                         <Crown className="h-4 w-4" />
-                        Top category placement
+                        Sponsored category placement
                       </div>
                     )}
 

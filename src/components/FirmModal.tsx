@@ -396,9 +396,9 @@ function FirmModal({
 
   const premiumHighlights = [
     isCategoryExclusive
-      ? "Category Owner placement"
+      ? "Gold sponsored placement"
       : isCategoryFeatured
-        ? "Premium featured placement"
+        ? "Silver sponsored placement"
         : null,
     videoEmbedUrl
       ? "Video introduction"
@@ -447,27 +447,17 @@ function FirmModal({
 
             <div className="min-w-0 flex-1">
               <div className="mb-3 flex flex-wrap gap-2">
-                {(publicFirm.plan_key || publicFirm.plan) && (
-                  <Badge className="border border-white/30 bg-white/90 text-[#0F2A43]">
-                    {isCategoryExclusive
-                      ? "Category Exclusive"
-                      : isCategoryFeatured
-                        ? "Category Featured"
-                        : publicFirm.plan_key || publicFirm.plan}
-                  </Badge>
-                )}
-
                 {isCategoryExclusive && (
                   <Badge className="bg-[#F5B800] text-[#0F2A43]">
                     <Crown className="mr-1 h-3.5 w-3.5 fill-current" />
-                    Category Owner
+                    Gold · Sponsored
                   </Badge>
                 )}
 
-                {isFeatured && (
-                  <Badge className="bg-[#F5B800] text-[#0F2A43]">
+                {!isCategoryExclusive && (isCategoryFeatured || isFeatured) && (
+                  <Badge className="bg-gradient-to-r from-slate-300 via-slate-100 to-slate-300 text-slate-900">
                     <Star className="mr-1 h-3.5 w-3.5 fill-current" />
-                    Featured Firm
+                    Silver · Sponsored
                   </Badge>
                 )}
 
@@ -596,7 +586,7 @@ function FirmModal({
               <div className="border-b border-white/10 px-6 py-4 text-white">
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#D4A62A]">
                   {isCategoryExclusive
-                    ? "Exclusive Video Introduction"
+                    ? "Firm Video Introduction"
                     : "Featured Video Introduction"}
                 </p>
 
@@ -681,8 +671,8 @@ function FirmModal({
                     <div>
                       <p className="font-bold">
                         {isCategoryExclusive
-                          ? "Category Owner Profile"
-                          : "Category Featured Profile"}
+                          ? "Gold Sponsored Profile"
+                          : "Silver Sponsored Profile"}
                       </p>
                       <p className="mt-1 text-sm leading-6 text-white/75">
                         This firm receives premium visibility within the El Paso legal directory.

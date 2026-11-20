@@ -213,8 +213,7 @@ export default function AppLayout() {
   const [loading, setLoading] = useState(true);
   const [featuredStartIndex, setFeaturedStartIndex] = useState(0);
   const [featuredPaused, setFeaturedPaused] = useState(false);
-  // Rotate the starting position on each homepage visit while keeping every
-  // Exclusive card visible. Session storage tracks visits in this browser.
+  // Rotate the five visible Gold positions on each homepage visit.
   const [exclusiveVisitOffset] = useState(() => {
     try {
       const key = 'epbl-exclusive-visit-offset';
@@ -431,7 +430,7 @@ export default function AppLayout() {
 
     if (eligible.length <= 1) return eligible;
     const offset = exclusiveVisitOffset % eligible.length;
-    return [...eligible.slice(offset), ...eligible.slice(0, offset)];
+    return [...eligible.slice(offset), ...eligible.slice(0, offset)].slice(0, 5);
   }, [firms, exclusiveVisitOffset]);
 
   const homepageFeaturedFirms = useMemo(() => {
@@ -521,12 +520,13 @@ export default function AppLayout() {
                   <div className="flex items-center gap-2">
                     <Crown className="h-7 w-7 fill-[#F5B800] text-[#F5B800]" />
                     <h2 className="font-serif text-xl font-black uppercase tracking-wide text-[#F5B800] sm:text-2xl">
-                      Exclusive Law Firms
+                      Gold Law Firms
                     </h2>
                   </div>
                   <div className="hidden h-px max-w-28 flex-1 bg-gradient-to-l from-transparent to-[#D4A62A] sm:block" />
                 </div>
 
+                <p className="mb-3 text-center text-xs text-slate-300">Gold and Silver badges indicate sponsored placement, not legal ability.</p>
                 <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
                   {homepageExclusiveFirms.slice(0, 5).map((firm) => {
                     const category = getFeaturedCategory(firm);
@@ -539,7 +539,7 @@ export default function AppLayout() {
                         className="group relative flex min-h-[285px] flex-col overflow-visible rounded-xl border-[3px] border-[#FFD21F] bg-[#FFFDF8] px-4 pb-4 pt-8 text-[#071D2F] shadow-[0_0_14px_rgba(255,210,31,0.55),0_10px_28px_rgba(0,0,0,0.24)] transition hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,210,31,0.72),0_14px_34px_rgba(0,0,0,0.28)]"
                       >
                         <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-md border border-[#FFD45A] bg-gradient-to-r from-[#E0AB26] via-[#F5B800] to-[#FFD45A] px-4 py-1.5 text-[10px] font-black uppercase tracking-wider text-[#061A2C] shadow-[0_0_12px_rgba(245,184,0,0.55)]">
-                          Exclusive
+                          Gold · Sponsored
                         </span>
 
                         <div className="flex h-20 items-center justify-center">
@@ -599,9 +599,9 @@ export default function AppLayout() {
               >
                 <div className="relative mb-2 flex min-h-10 items-center justify-center">
                   <div className="flex items-center gap-2">
-                    <Award className="h-6 w-6 fill-[#42C6BE] text-[#42C6BE]" />
-                    <h2 className="text-lg font-black uppercase tracking-wide text-[#42C6BE] sm:text-xl">
-                      Featured Law Firms
+                    <Award className="h-6 w-6 fill-[#CBD5E1] text-[#CBD5E1]" />
+                    <h2 className="text-lg font-black uppercase tracking-wide text-[#CBD5E1] sm:text-xl">
+                      Silver Law Firms
                     </h2>
                   </div>
 
@@ -644,8 +644,8 @@ export default function AppLayout() {
                           className="group relative grid min-h-[108px] w-full grid-cols-[84px_1fr] overflow-hidden rounded-xl border border-[#1FA8A1]/45 bg-white text-[#071D2F] shadow-md transition hover:-translate-y-0.5"
                         >
                           <div className="relative flex items-center justify-center bg-gradient-to-br from-[#176B78] to-[#1FA8A1] p-3">
-                            <span className="absolute left-2 top-2 rounded bg-[#1FA8A1] px-2 py-0.5 text-[9px] font-black uppercase tracking-wide text-white">
-                              Featured
+                            <span className="absolute left-2 top-2 rounded bg-gradient-to-r from-slate-300 via-slate-100 to-slate-300 px-2 py-0.5 text-[9px] font-black uppercase tracking-wide text-slate-900">
+                              Silver
                             </span>
 
                             {logo ? (
@@ -1063,9 +1063,9 @@ export default function AppLayout() {
               </h3>
               <p>
                 Some listings are paid
-                advertisements. Featured
-                labels indicate paid
-                placement.
+                advertisements. Gold and Silver
+                badges indicate paid placement, not
+                an assessment of legal ability.
               </p>
             </div>
 

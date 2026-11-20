@@ -653,14 +653,14 @@ export default function FirmProfilePage() {
                 {isCategoryExclusive && (
                   <Badge className="bg-[#F5B800] text-[#0F2A43]">
                     <Crown className="mr-1 h-3.5 w-3.5 fill-current" />
-                    EXCLUSIVE
+                    Gold · Sponsored
                   </Badge>
                 )}
 
-                {isFeatured && (
-                  <Badge className="bg-[#F5B800] text-[#0F2A43]">
+                {!isCategoryExclusive && (isCategoryFeatured || isFeatured) && (
+                  <Badge className="bg-gradient-to-r from-slate-300 via-slate-100 to-slate-300 text-slate-900">
                     <Star className="mr-1 h-3.5 w-3.5 fill-current" />
-                    Featured Firm
+                    Silver · Sponsored
                   </Badge>
                 )}
 
@@ -797,7 +797,7 @@ export default function FirmProfilePage() {
               <div className="border-b border-white/10 px-6 py-4 text-white">
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#D4A62A]">
                   {isCategoryExclusive
-                    ? "Exclusive Video Introduction"
+                    ? "Firm Video Introduction"
                     : "Featured Video Introduction"}
                 </p>
 

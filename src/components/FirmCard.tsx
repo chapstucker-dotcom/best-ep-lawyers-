@@ -207,14 +207,14 @@ export default function FirmCard({
           {!hideCategoryOwnerBadge && isCategoryOwner && (
             <Badge className="border-0 bg-[#F5B800] text-[#0F2A43] shadow-sm">
               <Crown className="mr-1 h-3.5 w-3.5" />
-              Category Owner
+              Gold · Sponsored
             </Badge>
           )}
 
           {!hideFeaturedBadge && !isCategoryOwner && (isPremiumFeatured || isFeatured) && (
-            <Badge className="border-0 bg-[#F5B800] text-[#0F2A43] shadow-sm">
+            <Badge className="border-0 bg-gradient-to-r from-slate-300 via-slate-100 to-slate-300 text-slate-900 shadow-sm">
               <Star className="mr-1 h-3.5 w-3.5 fill-current" />
-              Category Featured
+              Silver · Sponsored
             </Badge>
           )}
 

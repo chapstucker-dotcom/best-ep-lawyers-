@@ -1,4 +1,4 @@
-﻿import { useSeo } from "../hooks/use-seo";
+import { useSeo } from "../hooks/use-seo";
 
 export default function DivorceLawyers() {
   useSeo({
@@ -107,7 +107,7 @@ export default function DivorceLawyers() {
               <div
                 style={{
                   display: "inline-block",
-                  background: "#fbbf24",
+                  background: "#cbd5e1",
                   color: "#0f172a",
                   padding: "6px 12px",
                   borderRadius: "999px",
@@ -115,7 +115,7 @@ export default function DivorceLawyers() {
                   marginBottom: "18px",
                 }}
               >
-                CATEGORY FEATURED
+                SILVER · SPONSORED
               </div>
 
               <h3
@@ -319,4 +319,3 @@ export default function DivorceLawyers() {
     </main>
   );
 }
-

@@ -593,6 +593,12 @@ export default function Dashboard() {
       />
 
       <div className="container mx-auto px-4 py-8">
+        <div className="mb-6 flex flex-wrap items-center justify-end gap-3">
+          <a href="/" className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-[#0F2A43] hover:bg-slate-50">Return to Website</a>
+          {!isLoadingFirm && !firmLoadError && firmId && (
+            <a href={`/firm/${encodeURIComponent(firmId)}`} target="_blank" rel="noopener noreferrer" className="rounded-lg bg-[#1FA8A1] px-4 py-2 text-sm font-semibold text-white hover:bg-[#178D87]">View Public Profile ↗</a>
+          )}
+        </div>
         {!isConfigured && (
           <Alert
             variant="destructive"
