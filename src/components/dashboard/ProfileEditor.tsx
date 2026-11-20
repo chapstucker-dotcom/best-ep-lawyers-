@@ -53,6 +53,7 @@ type FormState = {
   years_experience: string;
   team_size: string;
   consultation_fee: string;
+  consultation_free: boolean;
   logo_url: string;
   video_url: string;
   office_hours: string;
@@ -79,6 +80,7 @@ const EMPTY: FormState = {
   years_experience: "",
   team_size: "",
   consultation_fee: "",
+  consultation_free: false,
   logo_url: "",
   video_url: "",
   office_hours: "",
@@ -102,27 +104,6 @@ const integerInput = (value: string): string => {
   return digits
     ? digits.replace(/^0+(?=\d)/, "")
     : "";
-};
-
-const moneyInput = (value: string): string => {
-  const cleaned = value.replace(/[^\d.]/g, "");
-  const dot = cleaned.indexOf(".");
-
-  if (dot < 0) {
-    return cleaned.replace(/^0+(?=\d)/, "");
-  }
-
-  const whole =
-    cleaned
-      .slice(0, dot)
-      .replace(/^0+(?=\d)/, "") || "0";
-
-  const decimals = cleaned
-    .slice(dot + 1)
-    .replace(/\./g, "")
-    .slice(0, 2);
-
-  return `${whole}.${decimals}`;
 };
 
 const websiteValue = (
@@ -376,6 +357,7 @@ export const ProfileEditor = () => {
           consultation_fee: text(
             data.consultation_fee
           ),
+          consultation_free: data.consultation_free === true,
           logo_url: text(data.logo_url),
           video_url: text(data.video_url),
           office_hours: text(data.office_hours),
@@ -578,10 +560,7 @@ export const ProfileEditor = () => {
         team_size: optionalNumber(
           form.team_size
         ),
-        consultation_fee:
-          optionalNumber(
-            form.consultation_fee
-          ),
+        consultation_free: form.consultation_free,
         logo_url:
           form.logo_url || null,
 
@@ -649,6 +628,7 @@ export const ProfileEditor = () => {
       consultation_fee: text(
         data.consultation_fee
       ),
+      consultation_free: data.consultation_free === true,
       video_url: hasVideoAccess ? text(data.video_url) : current.video_url,
     }));
     originalSpecialties.current = Array.isArray(data.specialties)
@@ -1250,20 +1230,16 @@ export const ProfileEditor = () => {
               inputMode="numeric"
             />
 
-            <Field
-              label="Consultation Fee ($)"
-              id="consultation_fee"
-              value={
-                form.consultation_fee
-              }
-              onChange={(value) =>
-                setField(
-                  "consultation_fee",
-                  moneyInput(value)
-                )
-              }
-              inputMode="decimal"
-            />
+            <label htmlFor="consultation_free" className="flex items-center gap-3 rounded-lg border border-slate-200 bg-white p-4 text-sm text-[#0F2A43]">
+              <input
+                id="consultation_free"
+                type="checkbox"
+                checked={form.consultation_free}
+                onChange={(event) => setForm((current) => ({ ...current, consultation_free: event.target.checked }))}
+                className="h-5 w-5 accent-[#1FA8A1]"
+              />
+              <span><strong>Our firm offers free initial consultations.</strong><span className="mt-1 block text-xs text-slate-600">When checked, this appears on your public listing and profile. Only select it if your firm currently offers this service.</span></span>
+            </label>
           </section>
 
           <Button

@@ -243,6 +243,12 @@ export default function FirmCard({
           )}
         </div>
 
+        {publicFirm.consultation_free === true && (
+          <span className="mb-3 inline-flex w-fit items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-800">
+            <CheckCircle2 className="h-3.5 w-3.5" /> Free Initial Consultation
+          </span>
+        )}
+
         <p className="mb-4 line-clamp-3 text-sm leading-6 text-gray-600">
           {description}
         </p>

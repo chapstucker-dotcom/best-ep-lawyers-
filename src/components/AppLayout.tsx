@@ -236,6 +236,7 @@ export default function AppLayout() {
     useState('all');
   const [featuredOnly, setFeaturedOnly] =
     useState(false);
+  const [freeConsultationOnly, setFreeConsultationOnly] = useState(false);
   const [sortBy, setSortBy] =
     useState('relevance');
 
@@ -348,6 +349,7 @@ export default function AppLayout() {
     setSearchQuery('');
     setSearchInput('');
     setFeaturedOnly(false);
+    setFreeConsultationOnly(false);
     setSortBy('relevance');
   };
 
@@ -356,9 +358,9 @@ export default function AppLayout() {
     const textScore = scoreDirectoryText(firm, searchQuery);
     const matchesFeatured = !featuredOnly || Boolean(firm.is_featured || firm.featured) ||
       getPlanRules(getFirmPlanKey(firm)).featuredPlacement;
-    if (!categoryScore || !textScore || !matchesFeatured) return [];
+    if (!categoryScore || !textScore || !matchesFeatured || (freeConsultationOnly && firm.consultation_free !== true)) return [];
     return [{ firm, score: categoryScore + textScore }];
-  }), [firms, searchQuery, selectedCategory, featuredOnly]);
+  }), [firms, searchQuery, selectedCategory, featuredOnly, freeConsultationOnly]);
 
   const sortedFirms = useMemo(() => {
     const sorted = matchedFirms.map(({ firm }) => firm);
@@ -847,10 +849,10 @@ export default function AppLayout() {
             </h2>
 
             <p className="mt-2 text-gray-600">
-              {loading ? 'Loading El Paso law firms…' : `${sortedFirms.length} ${sortedFirms.length === 1 ? 'firm' : 'firms'} found${selectedCategoryTitle ? ` for ${selectedCategoryTitle}` : ''}${searchQuery ? `${selectedCategoryTitle ? ' matching' : ' for'} “${searchQuery}”` : ''}${featuredOnly ? ' · Featured firms only' : ''}.`}
+              {loading ? 'Loading El Paso law firms…' : `${sortedFirms.length} ${sortedFirms.length === 1 ? 'firm' : 'firms'} found${selectedCategoryTitle ? ` for ${selectedCategoryTitle}` : ''}${searchQuery ? `${selectedCategoryTitle ? ' matching' : ' for'} “${searchQuery}”` : ''}${featuredOnly ? ' · Featured firms only' : ''}${freeConsultationOnly ? ' · Free initial consultations' : ''}.`}
             </p>
             <p className="mt-1 text-sm text-gray-500">Relevance uses matching practice areas and profile information. Paid placement may break ties between equally matched firms; it does not establish legal ability.</p>
-            {(selectedCategory !== 'all' || searchQuery || featuredOnly || sortBy !== 'relevance') && (
+            {(selectedCategory !== 'all' || searchQuery || featuredOnly || freeConsultationOnly || sortBy !== 'relevance') && (
               <button type="button" onClick={clearSearch} className="mt-3 text-sm font-semibold text-[#1FA8A1] hover:underline">Clear filters and search</button>
             )}
           </div>
@@ -866,6 +868,8 @@ export default function AppLayout() {
                 onFeaturedChange={
                   setFeaturedOnly
                 }
+                freeConsultationOnly={freeConsultationOnly}
+                onFreeConsultationChange={setFreeConsultationOnly}
                 sortBy={sortBy}
                 onSortChange={setSortBy}
               />

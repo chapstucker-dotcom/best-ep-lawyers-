@@ -45,6 +45,7 @@ export interface Firm {
   years_experience?: number | string | null;
   team_size?: number | string | null;
   consultation_fee?: number | string | null;
+  consultation_free?: boolean | null;
   office_hours?: string | null;
   languages?: string[] | null;
   awards?: string[] | null;

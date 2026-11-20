@@ -7,6 +7,8 @@ interface SearchFiltersProps {
   selectedCategory: string;
   onCategoryChange: (category: string) => void;
   featuredOnly: boolean;
+  freeConsultationOnly: boolean;
+  onFreeConsultationChange: (enabled: boolean) => void;
   onFeaturedChange: (featured: boolean) => void;
   sortBy: string;
   onSortChange: (sort: string) => void;
@@ -17,6 +19,8 @@ export default function SearchFilters({
   onCategoryChange,
   featuredOnly,
   onFeaturedChange,
+  freeConsultationOnly,
+  onFreeConsultationChange,
   sortBy,
   onSortChange
 }: SearchFiltersProps) {
@@ -61,8 +65,16 @@ export default function SearchFilters({
           Featured firms only
         </Label>
       </div>
+      <div className="flex items-center space-x-2 pt-2">
+        <Checkbox
+          id="free-consultation"
+          checked={freeConsultationOnly}
+          onCheckedChange={(checked) => onFreeConsultationChange(checked === true)}
+        />
+        <Label htmlFor="free-consultation" className="cursor-pointer text-sm">
+          Free initial consultation
+        </Label>
+      </div>
     </div>
   );
 }
-
-

@@ -107,6 +107,7 @@ const fallbackFirms = (): Firm[] =>
     years_experience: firm.years_experience ?? 0,
     team_size: firm.team_size ?? 0,
     consultation_fee: firm.consultation_fee ?? 0,
+    consultation_free: false,
     office_hours: firm.office_hours ?? "",
     languages: firm.languages ?? [],
     awards: firm.awards ?? [],

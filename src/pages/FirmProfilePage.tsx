@@ -582,14 +582,7 @@ export default function FirmProfilePage() {
     publicFirm.team_size ?? 0
   );
 
-  const consultationFee = Number(
-    publicFirm.consultation_fee ?? 0
-  );
-
-  const hasFirmStats =
-    yearsExperience > 0 ||
-    teamSize > 0 ||
-    consultationFee > 0;
+  const hasFirmStats = yearsExperience > 0 || teamSize > 0;
 
   const languages =
     Array.isArray(publicFirm.languages)
@@ -743,6 +736,12 @@ export default function FirmProfilePage() {
           </div>
         </section>
 
+        {publicFirm.consultation_free === true && (
+          <div className="border-b bg-emerald-50 px-6 py-3 text-sm font-semibold text-emerald-800 sm:px-8">
+            <span className="inline-flex items-center gap-2"><CheckCircle2 className="h-4 w-4" /> Free Initial Consultation Available</span>
+          </div>
+        )}
+
         <div className="space-y-8 px-6 py-7 sm:px-8">
           <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {publicFirm.phone && (
@@ -865,24 +864,6 @@ export default function FirmProfilePage() {
                       </p>
                       <p className="text-sm text-gray-600">
                         Team members
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {consultationFee > 0 && (
-                <div className="rounded-2xl border bg-white p-5 shadow-sm">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#0F2A43] text-[#D4A62A]">
-                      <Scale className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <p className="text-2xl font-bold text-[#0F2A43]">
-                        ${consultationFee.toLocaleString("en-US")}
-                      </p>
-                      <p className="text-sm text-gray-600">
-                        Listed consultation fee
                       </p>
                     </div>
                   </div>
