@@ -16,6 +16,10 @@ export default function PricingCard({ plan }: PricingCardProps) {
   const isFree = plan.id === "free";
 
   const handleSelectPlan = () => {
+    if (isExclusive) {
+      navigate("/for-law-firms?interest=category-exclusive#business-inquiry");
+      return;
+    }
     navigate(`/signup?plan=${encodeURIComponent(plan.id)}`);
   };
 
@@ -95,11 +99,21 @@ export default function PricingCard({ plan }: PricingCardProps) {
             : "bg-[#D4A62A] text-[#06224A] hover:bg-[#E3B53A]"
         }`}
       >
-        {isFree ? "Create Free Listing" : `Choose ${plan.name}`}
+        {isFree
+          ? "Create Free Listing"
+          : isExclusive
+            ? "Check Exclusive Availability"
+            : isPopular
+              ? "Request Category Featured"
+              : `Choose ${plan.name}`}
       </Button>
 
       <p className="mt-3 text-center text-xs text-slate-400">
-        Create your account and complete your profile online.
+        {isExclusive
+          ? "Our team reviews exclusive placement availability."
+          : isPopular
+            ? "Create your account online. Placement requires availability review."
+            : "Create your account and complete your profile online."}
       </p>
     </Card>
   );

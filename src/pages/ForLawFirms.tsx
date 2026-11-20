@@ -1,5 +1,5 @@
 import { useEffect, type ReactNode } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   ArrowRight,
@@ -80,6 +80,7 @@ const productionFeatures = [
 
 export default function ForLawFirms() {
   const location = useLocation();
+  const navigate = useNavigate();
   useSeo({
     title: "For El Paso Law Firms | Advertising & Listings",
     description:
@@ -165,14 +166,13 @@ export default function ForLawFirms() {
               </p>
 
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <button
-                  type="button"
-                  onClick={scrollToInquiry}
+                <Link
+                  to="/signup?plan=free"
                   className="inline-flex items-center justify-center rounded-xl bg-[#D4A62A] px-7 py-4 font-extrabold text-[#06224A] transition hover:bg-[#E3B53A]"
                 >
-                  Talk About Advertising
+                  Create Free Listing
                   <ArrowRight className="ml-2 h-5 w-5" />
-                </button>
+                </Link>
 
                 <Link
                   to="/pricing"
@@ -183,7 +183,15 @@ export default function ForLawFirms() {
               </div>
 
               <p className="mt-4 text-sm text-white/60">
-                Complimentary firm listings are available.
+                Create your firm account online. Interested in premium
+                advertising?{" "}
+                <button
+                  type="button"
+                  onClick={scrollToInquiry}
+                  className="font-semibold text-[#D4A62A] underline underline-offset-4 hover:text-[#E3B53A]"
+                >
+                  Talk to our team.
+                </button>
               </p>
             </div>
 
@@ -389,10 +397,8 @@ export default function ForLawFirms() {
       </section>
 
       <WhyLawFirmsJoin
-        onListFirm={scrollToInquiry}
-        onViewPricing={() => {
-          window.location.href = "/pricing";
-        }}
+        onListFirm={() => navigate("/signup?plan=free")}
+        onViewPricing={() => navigate("/pricing")}
       />
 
       <section className="bg-white px-4 py-20 sm:px-6 lg:px-8">
@@ -479,7 +485,7 @@ export default function ForLawFirms() {
 
           <div className="mt-7 flex flex-col justify-center gap-4 sm:flex-row">
             <Link
-              to="/signup"
+              to="/signup?plan=free"
               className="inline-flex items-center justify-center rounded-xl bg-[#D4A62A] px-7 py-4 font-extrabold text-[#06224A] transition hover:bg-[#E3B53A]"
             >
               Claim Your Complimentary Listing

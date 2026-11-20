@@ -66,14 +66,14 @@ export default function Pricing() {
             Build your firm profile in minutes.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl leading-7 text-white/70">
-            Create your account, complete your firm profile, add attorneys, and
-            choose the visibility level that fits your growth goals.
+            Start with a free firm account, or choose a paid plan above.
+            Complete your profile online and expand your visibility when ready.
           </p>
           <Link
-            to="/signup"
+            to="/signup?plan=free"
             className="mt-7 inline-flex items-center justify-center rounded-xl bg-[#D4A62A] px-7 py-4 font-extrabold text-[#06224A] transition hover:bg-[#E3B53A]"
           >
-            Create Firm Account
+            Create Free Listing
             <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
         </div>

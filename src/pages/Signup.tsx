@@ -805,6 +805,17 @@ export default function Signup() {
                   0 &&
                   ` - $${selectedPlan.priceMonth.toLocaleString()}/month`}
               </p>
+              {isLimitedPlan ? (
+                <p className="mt-2 text-sm leading-6 text-slate-600">
+                  Account creation does not activate premium placement or collect
+                  payment. Category Featured is subject to availability and review.
+                </p>
+              ) : selectedPlan.id === "expert" ? (
+                <p className="mt-2 text-sm leading-6 text-slate-600">
+                  Create your account first, then complete Expert checkout from
+                  your firm dashboard.
+                </p>
+              ) : null}
             </div>
 
             {!isConfigured && (
