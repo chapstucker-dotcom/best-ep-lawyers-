@@ -539,7 +539,7 @@ export default function AppLayout() {
                         className="group relative flex min-h-[285px] flex-col overflow-visible rounded-xl border-[3px] border-[#FFD21F] bg-[#FFFDF8] px-4 pb-4 pt-8 text-[#071D2F] shadow-[0_0_14px_rgba(255,210,31,0.55),0_10px_28px_rgba(0,0,0,0.24)] transition hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,210,31,0.72),0_14px_34px_rgba(0,0,0,0.28)]"
                       >
                         <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-md border border-[#FFD45A] bg-gradient-to-r from-[#E0AB26] via-[#F5B800] to-[#FFD45A] px-4 py-1.5 text-[10px] font-black uppercase tracking-wider text-[#061A2C] shadow-[0_0_12px_rgba(245,184,0,0.55)]">
-                          Gold
+                          <Crown className="h-5 w-5 fill-current" aria-label="Gold advertising placement" />
                         </span>
 
                         <div className="flex h-20 items-center justify-center">
@@ -645,7 +645,7 @@ export default function AppLayout() {
                         >
                           <div className="relative flex items-center justify-center bg-gradient-to-br from-[#176B78] to-[#1FA8A1] p-3">
                             <span className="absolute left-2 top-2 rounded bg-gradient-to-r from-slate-300 via-slate-100 to-slate-300 px-2 py-0.5 text-[9px] font-black uppercase tracking-wide text-slate-900">
-                              Silver
+                              <Award className="h-4 w-4 fill-current" aria-label="Silver advertising placement" />
                             </span>
 
                             {logo ? (

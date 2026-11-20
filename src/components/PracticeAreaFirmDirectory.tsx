@@ -3,6 +3,7 @@ import {
   ArrowRight,
   BadgeCheck,
   Building2,
+  Award,
   Crown,
   Globe2,
   Loader2,
@@ -650,8 +651,7 @@ export default function PracticeAreaFirmDirectory({
                   >
                     {isExclusive && (
                       <div className="-mx-6 -mt-6 mb-6 flex items-center justify-center gap-2 bg-[#d6a928] px-4 py-3 text-sm font-extrabold uppercase tracking-wider text-[#07162f]">
-                        <Crown className="h-4 w-4" />
-                        Gold
+                        <Crown className="h-5 w-5 fill-current" aria-label="Gold advertising placement" />
                       </div>
                     )}
 
@@ -664,8 +664,7 @@ export default function PracticeAreaFirmDirectory({
 
                     {isFeatured && (
                       <div className="-mx-6 -mt-6 mb-6 flex items-center justify-center gap-2 bg-gradient-to-r from-slate-300 via-slate-100 to-slate-300 px-4 py-3 text-sm font-extrabold uppercase tracking-wider text-slate-900">
-                        <Star className="h-4 w-4 fill-current" />
-                        Silver
+                        <Award className="h-5 w-5 fill-current" aria-label="Silver advertising placement" />
                       </div>
                     )}
 

@@ -3,6 +3,7 @@ import type { MouseEvent } from 'react';
 import {
   Building2,
   CheckCircle2,
+  Award,
   Crown,
   Globe,
   MapPin,
@@ -206,15 +207,13 @@ export default function FirmCard({
         <div className="absolute left-3 top-3 flex flex-wrap gap-2">
           {!hideCategoryOwnerBadge && isCategoryOwner && (
             <Badge className="border-0 bg-[#F5B800] text-[#0F2A43] shadow-sm">
-              <Crown className="mr-1 h-3.5 w-3.5" />
-              Gold
+              <Crown className="h-5 w-5 fill-current" aria-label="Gold advertising placement" />
             </Badge>
           )}
 
           {!hideFeaturedBadge && !isCategoryOwner && (isPremiumFeatured || isFeatured) && (
             <Badge className="border-0 bg-gradient-to-r from-slate-300 via-slate-100 to-slate-300 text-slate-900 shadow-sm">
-              <Star className="mr-1 h-3.5 w-3.5 fill-current" />
-              Silver
+              <Award className="h-5 w-5 fill-current" aria-label="Silver advertising placement" />
             </Badge>
           )}
 

@@ -1,3 +1,4 @@
+import { Award } from "lucide-react";
 import { useSeo } from "../hooks/use-seo";
 
 export default function DivorceLawyers() {
@@ -115,7 +116,7 @@ export default function DivorceLawyers() {
                   marginBottom: "18px",
                 }}
               >
-                SILVER
+                <Award className="h-5 w-5" aria-label="Silver advertising placement" />
               </div>
 
               <h3

@@ -449,15 +449,13 @@ function FirmModal({
               <div className="mb-3 flex flex-wrap gap-2">
                 {isCategoryExclusive && (
                   <Badge className="bg-[#F5B800] text-[#0F2A43]">
-                    <Crown className="mr-1 h-3.5 w-3.5 fill-current" />
-                    Gold
+                    <Crown className="h-5 w-5 fill-current" aria-label="Gold advertising placement" />
                   </Badge>
                 )}
 
                 {!isCategoryExclusive && (isCategoryFeatured || isFeatured) && (
                   <Badge className="bg-gradient-to-r from-slate-300 via-slate-100 to-slate-300 text-slate-900">
-                    <Star className="mr-1 h-3.5 w-3.5 fill-current" />
-                    Silver
+                    <Award className="h-5 w-5 fill-current" aria-label="Silver advertising placement" />
                   </Badge>
                 )}
 
