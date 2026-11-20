@@ -57,9 +57,11 @@ const HOMEPAGE_CATEGORY_SLUGS = [
   'personal-injury',
   'criminal-defense',
   'family-law',
-  'landlord-tenant',
-  'protective-orders',
-  'prenuptial-agreements',
+  'immigration',
+  'estate-planning',
+  'employment-law',
+  'real-estate',
+  'business-law',
 ];
 
 const CATEGORY_ICONS: Record<
@@ -78,6 +80,9 @@ const CATEGORY_ICONS: Record<
   'dwi-dui': Car,
   probate: Scale,
   'civil-litigation': Gavel,
+  'landlord-tenant': Home,
+  'protective-orders': Shield,
+  'prenuptial-agreements': Users,
 };
 
 const normalizeText = (value: unknown): string =>
@@ -215,20 +220,22 @@ export default function AppLayout() {
   const [loading, setLoading] = useState(true);
   const [featuredStartIndex, setFeaturedStartIndex] = useState(0);
   const [featuredPaused, setFeaturedPaused] = useState(false);
+  // Rotate the starting position on each homepage visit while keeping every
+  // Exclusive card visible. Session storage tracks visits in this browser.
   const [exclusiveVisitOffset] = useState(() => {
     try {
       const key = 'epbl-exclusive-visit-offset';
       const previous = Number(window.sessionStorage.getItem(key) ?? '-1');
-      const next =
-        Number.isSafeInteger(previous) && previous >= -1
-          ? previous + 1
-          : 0;
+      const next = Number.isSafeInteger(previous) && previous >= -1
+        ? previous + 1
+        : 0;
       window.sessionStorage.setItem(key, String(next));
       return next;
     } catch {
       return 0;
     }
   });
+
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] =
@@ -529,16 +536,13 @@ export default function AppLayout() {
   const homepageExclusiveFirms = useMemo(() => {
     const eligible = firms
       .filter((firm) => getPlanRules(getFirmPlanKey(firm)).categoryOwner)
-      .sort((a, b) =>
-        String(a.name ?? '').localeCompare(String(b.name ?? ''))
-      )
-      .slice(0, 5);
+      .sort((a, b) => String(a.name ?? '').localeCompare(String(b.name ?? '')));
 
     if (eligible.length <= 1) return eligible;
-
     const offset = exclusiveVisitOffset % eligible.length;
     return [...eligible.slice(offset), ...eligible.slice(0, offset)];
   }, [firms, exclusiveVisitOffset]);
+
   const homepageFeaturedFirms = useMemo(() => {
     const rotatingFeatured = rotateFeaturedFirms(
       firms
@@ -853,11 +857,8 @@ export default function AppLayout() {
           </div>
 
           <div
-            className={`grid gap-4 ${
-              showAllCategories
-                ? 'sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
-                : 'sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
-            }`}
+            id="legal-services-grid"
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
           >
             {displayedCategories.map(
               (category) => {
@@ -888,26 +889,37 @@ export default function AppLayout() {
                 );
               }
             )}
-          </div>
-
-          {!showAllCategories && (
-            <div className="mt-4 flex justify-center">
+            {showAllCategories && (
               <Link
                 to="/el-paso-sex-discrimination-lawyers"
-                className="group flex min-h-36 w-full flex-col items-center justify-center rounded-2xl border border-[#D4A62A]/30 bg-white p-6 text-center shadow-sm transition hover:-translate-y-1 hover:border-[#D4A62A] hover:shadow-lg sm:max-w-[calc(50%-0.5rem)] lg:max-w-[calc(25%-0.75rem)]"
+                className="group flex min-h-36 flex-col items-center justify-center rounded-2xl border bg-white p-6 text-center shadow-sm transition hover:-translate-y-1 hover:border-[#D4A62A] hover:shadow-lg"
               >
-                <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0F2A43] text-[#F5B800] transition group-hover:scale-105">
+                <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0F2A43] text-[#F5B800] shadow-sm transition group-hover:scale-105">
                   <Scale className="h-7 w-7" />
                 </span>
                 <span className="font-bold text-[#0F2A43]">
                   Sex Discrimination
                 </span>
               </Link>
-            </div>
+            )}
+          </div>
+
+          {!showAllCategories && (
+            <p className="mt-5 text-center text-sm text-gray-600">
+              Looking for a specific legal issue?{' '}
+              <Link
+                to="/el-paso-sex-discrimination-lawyers"
+                className="font-semibold text-[#0F2A43] underline underline-offset-4 hover:text-[#B88900]"
+              >
+                Sex Discrimination
+              </Link>
+            </p>
           )}
           <div className="mt-10 flex justify-center">
             <button
               type="button"
+              aria-expanded={showAllCategories}
+              aria-controls="legal-services-grid"
               onClick={() =>
                 setShowAllCategories(
                   (current) => !current
