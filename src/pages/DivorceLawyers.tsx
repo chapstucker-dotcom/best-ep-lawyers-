@@ -115,7 +115,7 @@ export default function DivorceLawyers() {
                   marginBottom: "18px",
                 }}
               >
-                SILVER · SPONSORED
+                SILVER
               </div>
 
               <h3

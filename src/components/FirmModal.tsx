@@ -450,14 +450,14 @@ function FirmModal({
                 {isCategoryExclusive && (
                   <Badge className="bg-[#F5B800] text-[#0F2A43]">
                     <Crown className="mr-1 h-3.5 w-3.5 fill-current" />
-                    Gold · Sponsored
+                    Gold
                   </Badge>
                 )}
 
                 {!isCategoryExclusive && (isCategoryFeatured || isFeatured) && (
                   <Badge className="bg-gradient-to-r from-slate-300 via-slate-100 to-slate-300 text-slate-900">
                     <Star className="mr-1 h-3.5 w-3.5 fill-current" />
-                    Silver · Sponsored
+                    Silver
                   </Badge>
                 )}
 
@@ -671,8 +671,8 @@ function FirmModal({
                     <div>
                       <p className="font-bold">
                         {isCategoryExclusive
-                          ? "Gold Sponsored Profile"
-                          : "Silver Sponsored Profile"}
+                          ? "Gold Profile"
+                          : "Silver Profile"}
                       </p>
                       <p className="mt-1 text-sm leading-6 text-white/75">
                         This firm receives premium visibility within the El Paso legal directory.

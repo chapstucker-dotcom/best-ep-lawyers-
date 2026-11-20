@@ -653,14 +653,14 @@ export default function FirmProfilePage() {
                 {isCategoryExclusive && (
                   <Badge className="bg-[#F5B800] text-[#0F2A43]">
                     <Crown className="mr-1 h-3.5 w-3.5 fill-current" />
-                    Gold · Sponsored
+                    Gold
                   </Badge>
                 )}
 
                 {!isCategoryExclusive && (isCategoryFeatured || isFeatured) && (
                   <Badge className="bg-gradient-to-r from-slate-300 via-slate-100 to-slate-300 text-slate-900">
                     <Star className="mr-1 h-3.5 w-3.5 fill-current" />
-                    Silver · Sponsored
+                    Silver
                   </Badge>
                 )}
 
