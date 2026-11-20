@@ -30,6 +30,7 @@ import { getLocalExclusiveShowcase } from '../data/exclusiveShowcases';
 import { getPlanRules } from '@/config/planRules';
 
 import type { Firm } from '../data/types';
+import { resolveDirectoryArea, scoreDirectoryCategory, scoreDirectoryText } from '../data/directorySearch';
 
 import {
   Award,
@@ -84,14 +85,6 @@ const CATEGORY_ICONS: Record<
   'protective-orders': Shield,
   'prenuptial-agreements': Users,
 };
-
-const normalizeText = (value: unknown): string =>
-  String(value ?? '')
-    .toLowerCase()
-    .replace(/[-_/]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-
 
 type RankedFirm = Firm & {
   plan?: string | null;
@@ -238,6 +231,7 @@ export default function AppLayout() {
 
 
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchInput, setSearchInput] = useState('');
   const [selectedCategory, setSelectedCategory] =
     useState('all');
   const [featuredOnly, setFeaturedOnly] =
@@ -320,76 +314,16 @@ export default function AppLayout() {
     showAllCategories ? categories.slice().sort((a, b) => a.title.localeCompare(b.title)) : homepageCategories
   ).slice();
 
-  const getFirmSearchText = (
-    firm: Firm
-  ): string => {
-    const publicFirm = firm as Firm & {
-      category?: string | null;
-      description?: string | null;
-      bio?: string | null;
-      specialties?: string[] | null;
-      categories?: string[] | null;
-    };
-
-    return normalizeText(
-      [
-        publicFirm.name,
-        publicFirm.category,
-        publicFirm.description,
-        publicFirm.bio,
-        publicFirm.phone,
-        publicFirm.email,
-        publicFirm.website,
-        publicFirm.address,
-        publicFirm.city,
-        publicFirm.state,
-        ...(publicFirm.specialties ?? []),
-        ...(publicFirm.categories ?? []),
-      ]
-        .filter(Boolean)
-        .join(' ')
-    );
-  };
-
   const handleSearch = (
     query: string
   ) => {
-    const cleanQuery =
-      normalizeText(query);
-
-    if (!cleanQuery) {
-      setSelectedCategory('all');
-      setSearchQuery('');
-      scrollToSearch();
-      return;
-    }
-
-    const matchedCategory =
-      categories.find((category) => {
-        const title =
-          normalizeText(category.title);
-        const slug =
-          normalizeText(category.slug);
-
-        return (
-          cleanQuery === title ||
-          cleanQuery === slug ||
-          title.includes(cleanQuery) ||
-          slug.includes(cleanQuery) ||
-          cleanQuery.includes(title)
-        );
-      });
-
-    if (matchedCategory) {
-      setSelectedCategory(
-        matchedCategory.slug
-      );
-      setSearchQuery('');
-    } else {
-      setSelectedCategory('all');
-      setSearchQuery(query);
-    }
-
+    const cleanQuery = query.trim();
+    const matchedCategory = resolveDirectoryArea(cleanQuery);
+    setSelectedCategory(matchedCategory?.slug ?? 'all');
+    setSearchQuery(matchedCategory ? '' : cleanQuery);
+    setSearchInput(matchedCategory?.title ?? cleanQuery);
+    setFeaturedOnly(false);
+    setSortBy('relevance');
     scrollToSearch();
   };
 
@@ -398,85 +332,37 @@ export default function AppLayout() {
   ) => {
     setSelectedCategory(slug);
     setSearchQuery('');
+    setSearchInput(slug === 'all' ? '' : getPracticeAreaTitle(slug));
+    setFeaturedOnly(false);
     scrollToSearch();
   };
 
-  const filteredFirms =
-    useMemo(() => {
-      const query =
-        normalizeText(searchQuery);
+  // Filters refine an existing free-text search rather than silently replacing it.
+  const handleFilterCategoryChange = (slug: string) => {
+    setSelectedCategory(slug);
+    if (!searchQuery) setSearchInput(slug === 'all' ? '' : getPracticeAreaTitle(slug));
+  };
 
-      const selectedCategoryRecord =
-        categories.find(
-          (category) =>
-            category.slug ===
-            selectedCategory
-        );
+  const clearSearch = () => {
+    setSelectedCategory('all');
+    setSearchQuery('');
+    setSearchInput('');
+    setFeaturedOnly(false);
+    setSortBy('relevance');
+  };
 
-      const selectedTitle =
-        normalizeText(
-          selectedCategoryRecord?.title
-        );
-
-      const selectedSlug =
-        normalizeText(
-          selectedCategoryRecord?.slug ??
-            selectedCategory
-        );
-
-      return firms.filter((firm) => {
-        const searchableText =
-          getFirmSearchText(firm);
-
-        const matchesSearch =
-          !query ||
-          searchableText.includes(query) ||
-          query
-            .split(' ')
-            .some(
-              (word) =>
-                word.length > 2 &&
-                searchableText.includes(word)
-            );
-
-        const matchesCategory =
-          selectedCategory === 'all' ||
-          searchableText.includes(
-            selectedSlug
-          ) ||
-          searchableText.includes(
-            selectedTitle
-          ) ||
-            (selectedCategory === 'business-law' &&
-              searchableText.includes(
-                normalizeText(selectedCategoryRecord?.category)
-              ));
-
-        const matchesFeatured =
-          !featuredOnly ||
-          Boolean(
-            (
-              firm as Firm & {
-                is_featured?: boolean;
-              }
-            ).is_featured
-          );
-
-        return (
-          matchesSearch &&
-          matchesCategory &&
-          matchesFeatured
-        );
-      });
-    }, [
-      firms,
-      searchQuery,
-      selectedCategory,
-      featuredOnly,
-    ]);
+  const matchedFirms = useMemo(() => firms.flatMap((firm) => {
+    const categoryScore = scoreDirectoryCategory(firm, selectedCategory);
+    const textScore = scoreDirectoryText(firm, searchQuery);
+    const matchesFeatured = !featuredOnly || Boolean(firm.is_featured || firm.featured) ||
+      getPlanRules(getFirmPlanKey(firm)).featuredPlacement;
+    if (!categoryScore || !textScore || !matchesFeatured) return [];
+    return [{ firm, score: categoryScore + textScore }];
+  }), [firms, searchQuery, selectedCategory, featuredOnly]);
 
   const sortedFirms = useMemo(() => {
-    const sorted = [...filteredFirms];
+    const sorted = matchedFirms.map(({ firm }) => firm);
+    const scores = new Map(matchedFirms.map(({ firm, score }) => [firm.id, score]));
 
     if (sortBy === 'name') {
       sorted.sort((a, b) =>
@@ -510,6 +396,9 @@ export default function AppLayout() {
 
     if (sortBy === 'relevance') {
       sorted.sort((a, b) => {
+        const matchDifference = (scores.get(b.id) ?? 0) - (scores.get(a.id) ?? 0);
+        if (matchDifference !== 0) return matchDifference;
+
         const rankDifference =
           getFirmRank(b) -
           getFirmRank(a);
@@ -531,7 +420,7 @@ export default function AppLayout() {
     }
 
     return sorted;
-  }, [filteredFirms, sortBy]);
+  }, [matchedFirms, sortBy]);
 
   const homepageExclusiveFirms = useMemo(() => {
     const eligible = firms
@@ -614,7 +503,7 @@ export default function AppLayout() {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC]">
-      <Hero onSearch={handleSearch} />
+      <Hero onSearch={handleSearch} searchValue={searchInput} onSearchValueChange={setSearchInput} />
       {/* Premium homepage placements */}
       <section className="bg-[#061A2C] px-4 pb-3 pt-2 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1500px]">
@@ -719,6 +608,7 @@ export default function AppLayout() {
                     onClick={() => {
                       setSelectedCategory('all');
                       setSearchQuery('');
+                      setSearchInput('');
                       setFeaturedOnly(true);
                       scrollToSearch();
                     }}
@@ -957,10 +847,12 @@ export default function AppLayout() {
             </h2>
 
             <p className="mt-2 text-gray-600">
-              {selectedCategoryTitle
-                ? `Showing El Paso firms for ${selectedCategoryTitle}.`
-                : 'Search all listed El Paso law firms.'}
+              {loading ? 'Loading El Paso law firms…' : `${sortedFirms.length} ${sortedFirms.length === 1 ? 'firm' : 'firms'} found${selectedCategoryTitle ? ` for ${selectedCategoryTitle}` : ''}${searchQuery ? `${selectedCategoryTitle ? ' matching' : ' for'} “${searchQuery}”` : ''}${featuredOnly ? ' · Featured firms only' : ''}.`}
             </p>
+            <p className="mt-1 text-sm text-gray-500">Relevance uses matching practice areas and profile information. Paid placement may break ties between equally matched firms; it does not establish legal ability.</p>
+            {(selectedCategory !== 'all' || searchQuery || featuredOnly || sortBy !== 'relevance') && (
+              <button type="button" onClick={clearSearch} className="mt-3 text-sm font-semibold text-[#1FA8A1] hover:underline">Clear filters and search</button>
+            )}
           </div>
 
           <div className="grid gap-6 lg:grid-cols-4">
@@ -969,9 +861,7 @@ export default function AppLayout() {
                 selectedCategory={
                   selectedCategory
                 }
-                onCategoryChange={
-                  setSelectedCategory
-                }
+                onCategoryChange={handleFilterCategoryChange}
                 featuredOnly={featuredOnly}
                 onFeaturedChange={
                   setFeaturedOnly
@@ -996,13 +886,7 @@ export default function AppLayout() {
 
                   <button
                     type="button"
-                    onClick={() => {
-                      setSelectedCategory(
-                        'all'
-                      );
-                      setSearchQuery('');
-                      setFeaturedOnly(false);
-                    }}
+                    onClick={clearSearch}
                     className="mt-3 font-semibold text-[#1FA8A1] hover:underline"
                   >
                     Clear filters

@@ -2,17 +2,13 @@ import { ArrowRight, MapPin, Scale, Search, ShieldCheck, Phone, Users, Menu, X }
 import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import heroImage from "../assets/hero-franklin-star.png";
+import { directorySuggestions } from "../data/directorySearch";
 
 interface HeroProps {
   onSearch: (query: string) => void;
+  searchValue?: string;
+  onSearchValueChange?: (value: string) => void;
 }
-
-const practiceAreas = [
-  "Personal Injury", "Car Accidents", "Truck Accidents", "Criminal Defense",
-  "DWI / DUI", "Family Law", "Divorce", "Child Custody", "Immigration",
-  "Business Law", "Probate", "Estate Planning", "Employment Law",
-  "Civil Litigation", "Bankruptcy", "Real Estate Law",
-];
 
 const highlights = [
   { icon: Users, title: "Local Law Firms", detail: "Compare El Paso attorneys" },
@@ -21,16 +17,14 @@ const highlights = [
   { icon: MapPin, title: "El Paso Focused", detail: "Local legal resources" },
 ];
 
-export default function Hero({ onSearch }: HeroProps) {
-  const [searchQuery, setSearchQuery] = useState("");
+export default function Hero({ onSearch, searchValue, onSearchValueChange }: HeroProps) {
+  const [localSearchQuery, setLocalSearchQuery] = useState("");
+  const searchQuery = searchValue ?? localSearchQuery;
+  const setSearchQuery = onSearchValueChange ?? setLocalSearchQuery;
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const filteredSuggestions = searchQuery.trim()
-    ? practiceAreas.filter((area) =>
-        area.toLowerCase().includes(searchQuery.trim().toLowerCase())
-      ).slice(0, 6)
-    : [];
+  const filteredSuggestions = directorySuggestions(searchQuery);
 
   const scrollToSection = (id: string) => {
     setMobileMenuOpen(false);
