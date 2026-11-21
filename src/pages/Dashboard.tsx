@@ -160,6 +160,8 @@ export default function Dashboard() {
       setActiveTab(
         "subscription"
       );
+    } else if (searchParams.get("tab") === "inquiries") {
+      setActiveTab("inquiries");
     }
 
     if (
