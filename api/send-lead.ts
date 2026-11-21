@@ -1122,9 +1122,23 @@ const practiceMatches = (
   );
 };
 
+const matchesConsumerInquiryMarket = (
+  firm: FirmRow,
+  practiceArea: string
+): boolean => {
+  const market = resolveMarketValue(practiceArea);
+
+  if (!market) return false;
+
+  return getFirmPracticeValues(firm).some(
+    (value) => resolveMarketValue(value)?.key === market.key
+  );
+};
+
 const getEligibleInquiryFirms = (
   firms: FirmRow[],
-  practiceArea: string
+  practiceArea: string,
+  matcher = practiceMatches
 ): RoutedFirm[] => {
   return firms
     .filter((firm) => {
@@ -1134,7 +1148,7 @@ const getEligibleInquiryFirms = (
       return (
         Boolean(email) &&
         planIncludesLeadRouting(firm) &&
-        practiceMatches(
+        matcher(
           firm,
           practiceArea
         ) &&
@@ -1579,13 +1593,25 @@ export default async function handler(
         ])
       );
 
-      const firms = getEligibleInquiryFirms(rows, area.trim())
+      const firms = getEligibleInquiryFirms(
+        rows,
+        area.trim(),
+        matchesConsumerInquiryMarket
+      )
+        .filter((firm) =>
+          ["market_exclusive", "featured", "expert"].includes(firm.planKey)
+        )
         .map((firm) => ({
           id: firm.id,
           name: firm.name,
+          tier: firm.planKey === "market_exclusive"
+            ? "gold"
+            : firm.planKey === "featured"
+              ? "silver"
+              : "expert",
+          priority: firm.priority,
           freeConsultation: consultations.get(firm.id) === true,
-        }))
-        .sort((a, b) => a.name.localeCompare(b.name));
+        }));
 
       return res.status(200).json({
         success: true,
