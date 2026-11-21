@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import PublicProfileNavigation from '../components/PublicProfileNavigation';
 import {
-  ArrowLeft,
   Building2,
   GraduationCap,
   Linkedin,
@@ -160,6 +160,7 @@ export default function AttorneyDetails() {
   if (loading) {
     return (
       <main className="min-h-screen bg-gray-50">
+        <PublicProfileNavigation />
         <div className="mx-auto max-w-6xl px-4 py-16 text-center">
           Loading attorney profile...
         </div>
@@ -170,6 +171,7 @@ export default function AttorneyDetails() {
   if (!attorney || errorMessage) {
     return (
       <main className="min-h-screen bg-gray-50">
+        <PublicProfileNavigation />
         <div className="mx-auto max-w-3xl px-4 py-16">
           <Card>
             <CardContent className="p-8 text-center">
@@ -193,19 +195,7 @@ export default function AttorneyDetails() {
 
   return (
     <main className="min-h-screen bg-gray-50">
-      <header className="bg-[#0F2A43] text-white">
-        <div className="mx-auto max-w-6xl px-4 py-5">
-          <Button
-            type="button"
-            variant="ghost"
-            className="text-white hover:bg-white/10 hover:text-white"
-            onClick={() => navigate(-1)}
-          >
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back
-          </Button>
-        </div>
-      </header>
+      <PublicProfileNavigation firmId={firm?.id ?? attorney.firm_id} />
 
       <div className="mx-auto max-w-6xl px-4 py-10">
         <section className="mb-8 overflow-hidden rounded-xl border bg-white shadow-sm">

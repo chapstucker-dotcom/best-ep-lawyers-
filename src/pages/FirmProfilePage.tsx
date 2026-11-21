@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import PublicProfileNavigation from "../components/PublicProfileNavigation";
 
 import { Badge } from "../components/ui/badge";
 import { Button } from "../components/ui/button";
@@ -370,6 +371,7 @@ export default function FirmProfilePage() {
   if (loadingFirm) {
     return (
       <main className="min-h-screen bg-[#F8FAFC]">
+        <PublicProfileNavigation />
         <div className="mx-auto max-w-7xl px-6 py-20 text-center text-[#0F2A43]">
           Loading firm profile...
         </div>
@@ -380,6 +382,7 @@ export default function FirmProfilePage() {
   if (!liveFirm) {
     return (
       <main className="min-h-screen bg-[#F8FAFC]">
+        <PublicProfileNavigation />
         <div className="mx-auto max-w-3xl px-6 py-20 text-center">
           <h1 className="text-3xl font-bold text-[#0F2A43]">Firm profile not found</h1>
           <p className="mt-3 text-gray-600">
@@ -571,7 +574,7 @@ export default function FirmProfilePage() {
   };
 
   const openAttorneyProfile = (attorneyId: string) => {
-    navigate(`/attorney/${attorneyId}`);
+    navigate(`/attorney/${attorneyId}`, { state: location.state });
   };
 
   const yearsExperience = Number(
@@ -617,20 +620,7 @@ export default function FirmProfilePage() {
 
   return (
     <main className="min-h-screen bg-[#F8FAFC] pb-24">
-      <div className="border-b bg-[#061A2C]">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-8">
-          <Link to="/" className="font-serif text-xl font-black text-white">
-            El Paso&apos;s Best Lawyers
-          </Link>
-          <button
-            type="button"
-            onClick={() => navigate(-1)}
-            className="rounded-lg border border-white/25 px-4 py-2 text-sm font-bold text-white transition hover:bg-white/10"
-          >
-            Back
-          </button>
-        </div>
-      </div>
+      <PublicProfileNavigation />
 
       <div className="mx-auto max-w-7xl overflow-hidden bg-white shadow-sm">
 

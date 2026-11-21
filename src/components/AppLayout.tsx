@@ -1,6 +1,7 @@
 import SeoPracticeAreaLinks from "./SeoPracticeAreaLinks";
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import type { ProfileNavigationState } from './PublicProfileNavigation';
 
 
 
@@ -214,6 +215,7 @@ const getHomepageFirmInitials = (firm: Firm): string =>
 
 export default function AppLayout() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [firms, setFirms] = useState<Firm[]>([]);
   const [loading, setLoading] = useState(true);
   const [featuredStartIndex, setFeaturedStartIndex] = useState(0);
@@ -243,6 +245,21 @@ export default function AppLayout() {
   const [freeConsultationOnly, setFreeConsultationOnly] = useState(false);
   const [sortBy, setSortBy] =
     useState('relevance');
+
+  useEffect(() => {
+    if (location.hash !== '#search') return;
+    const saved = (location.state as ProfileNavigationState | null)?.directoryReturn;
+    setSearchQuery(saved?.searchQuery ?? '');
+    setSearchInput(saved?.searchInput ?? '');
+    setSelectedCategory(saved?.selectedCategory ?? 'all');
+    setFeaturedOnly(saved?.featuredOnly ?? false);
+    setFreeConsultationOnly(saved?.freeConsultationOnly ?? false);
+    setSortBy(saved?.sortBy ?? 'relevance');
+    const timer = window.setTimeout(() => {
+      document.getElementById('search')?.scrollIntoView({ block: 'start' });
+    }, 100);
+    return () => window.clearTimeout(timer);
+  }, [location.key, location.hash, location.state]);
 
   const [showAllCategories, setShowAllCategories] =
     useState(false);
@@ -589,7 +606,7 @@ export default function AppLayout() {
 
                           <button
                             type="button"
-                            onClick={() => navigate(`/firm/${firm.id}`)}
+                            onClick={() => navigate(`/firm/${firm.id}`, { state: { fromHome: true } })}
                             className="mt-auto inline-flex h-10 w-full items-center justify-center gap-2 rounded-lg border-2 border-[#E6B319] bg-white font-black text-[#071D2F] transition hover:bg-[#FFF6D9]"
                           >
                             View Profile
@@ -702,7 +719,7 @@ export default function AppLayout() {
 
                             <button
                               type="button"
-                              onClick={() => navigate(`/firm/${firm.id}`)}
+                              onClick={() => navigate(`/firm/${firm.id}`, { state: { fromHome: true } })}
                               className="mt-auto self-end text-[11px] font-bold text-[#168C8B] transition hover:text-[#0F5D66]"
                             >
                               View Profile →
@@ -923,6 +940,7 @@ export default function AppLayout() {
                       onClick={() =>
                         navigate(`/firm/${firm.id}`, {
                           state: {
+                            directoryReturn: { searchQuery, searchInput, selectedCategory, featuredOnly, freeConsultationOnly, sortBy },
                             attribution: {
                               market: selectedAttributionMarket?.key,
                               specialty: selectedAttributionPracticeArea?.slug,

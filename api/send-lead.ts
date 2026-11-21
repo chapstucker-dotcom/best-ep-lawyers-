@@ -1301,7 +1301,7 @@ const renderConsumerConfirmation = ({
           ${!expert && firm.profileSpecialty ? `<p style="margin:6px 0;color:#475569;font-size:13px;">${escapeHtml(firm.profileSpecialty)}</p>` : ""}
           ${gold && firm.profileDescription ? `<p style="line-height:1.55;margin:8px 0;">${escapeHtml(firm.profileDescription)}</p>` : ""}
           ${firm.freeConsultation ? `<p style="color:#166534;font-size:13px;">${tr("Free initial consultation", "Consulta inicial gratuita")}</p>` : ""}
-          <a href="${escapeHtml(profileUrl)}" style="display:inline-block;margin-top:8px;color:#0f2a43;font-weight:bold;text-decoration:underline;">${gold && firm.hasVideo ? tr("View profile and firm video", "Ver perfil y video") : tr("View firm profile", "Ver perfil del despacho")}</a>
+          <a href="${escapeHtml(profileUrl)}" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:8px;color:#0f2a43;font-weight:bold;text-decoration:underline;">${gold && firm.hasVideo ? tr("View profile and firm video", "Ver perfil y video") : tr("View firm profile", "Ver perfil del despacho")}</a>
         </td></tr></table>`;
       }).join("");
   }).join("");
