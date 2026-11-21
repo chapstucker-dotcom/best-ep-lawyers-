@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
+import { timingSafeEqual } from "node:crypto";
 
 const COMMERCIAL_PRODUCTS = {
   free: {
@@ -1201,17 +1202,40 @@ const getEligibleInquiryFirms = (
 };
 
 // The same server-side eligibility check is used for discovery and submission.
-const loadVerifiedRecipients = async (area: string, firmId?: string) => {
+// Temporary QA path: no real client content or real firm addresses are accepted.
+const QA_FIRMS = [
+  { id: "dd590d81-9518-4629-972b-d3f692ff8cd0", name: "Tucker Law Firm and Associates", plan: "category-exclusive", alias: "goldtest" },
+  { id: "c79f6a29-979a-4a3c-8859-86ef2afdfe47", name: "Bo Nixson Law", plan: "category-featured", alias: "silvertest" },
+];
+const qaInbox = (alias: string): string => {
+  const base = process.env.EPBL_INQUIRY_QA_EMAIL || "";
+  if (!/^[a-z0-9.]+@gmail\.com$/i.test(base)) throw new Error("QA inbox not configured");
+  return base.replace("@", "+" + alias + "@");
+};
+const validQaToken = (token: unknown) => {
+  const secret = process.env.EPBL_INQUIRY_QA_TOKEN;
+  return typeof secret === "string" && /^[a-f0-9]{64}$/i.test(secret) &&
+    typeof token === "string" && /^[a-f0-9]{64}$/i.test(token) &&
+    timingSafeEqual(Buffer.from(token, "utf8"), Buffer.from(secret, "utf8"));
+};
+
+const loadVerifiedRecipients = async (area: string, firmId?: string, qa = false) => {
   const db = getSupabaseServerClient();
   if (!db) throw new Error("Firm selection unavailable");
   let query = db.from("firms")
     .select("id,name,user_id,inquiry_email,inquiry_enabled,inquiry_verified_at,plan,plan_key,primary_category,category,practice_areas,specialties,is_active,status,consultation_free,description,logo_url,video_url")
-    .eq("is_active", true)
-    .eq("status", "active");
+    .eq("is_active", true);
+  if (qa) query = query.in("id", QA_FIRMS.map(firm => firm.id)).eq("status", "pending");
+  else query = query.eq("status", "active");
   if (firmId) query = query.eq("id", firmId);
   const { data, error } = await query;
   if (error) throw error;
-  const rows = (data ?? []).filter((firm) =>
+  const rows = qa ? (data ?? []).flatMap(firm => {
+    const fixture = QA_FIRMS.find(item => item.id === String(firm.id));
+    if (!fixture || firm.name !== fixture.name || firm.plan_key !== fixture.plan ||
+        firm.inquiry_enabled !== false || !firm.user_id) return [];
+    return [{ ...firm, status: "active", email: qaInbox(fixture.alias) }];
+  }) : (data ?? []).filter((firm) =>
     firm.inquiry_enabled === true &&
     typeof firm.user_id === "string" && Boolean(firm.user_id.trim()) &&
     Boolean(firm.inquiry_verified_at) &&
@@ -1544,6 +1568,11 @@ export default async function handler(
   req: any,
   res: any
 ) {
+  const qaHeader = req.headers?.["x-epbl-qa-token"];
+  const qa = qaHeader !== undefined;
+  if (qa && !validQaToken(qaHeader)) {
+    return res.status(403).json({ success: false, error: "QA authorization failed" });
+  }
   if (req.method === "GET" && req.query?.action === "eligible-firms") {
     res.setHeader("Cache-Control", "no-store");
 
@@ -1561,7 +1590,7 @@ export default async function handler(
       if (direct !== undefined && (typeof direct !== "string" || !direct || direct.length > 250)) {
         return res.status(400).json({ success: false, error: "Invalid firm ID" });
       }
-      const firms = (await loadVerifiedRecipients(area.trim(), direct)).map(firm => ({
+      const firms = (await loadVerifiedRecipients(area.trim(), direct, qa)).map(firm => ({
         id: firm.id, name: firm.name,
         tier: firm.planKey === "market_exclusive" ? "gold" : firm.planKey === "featured" ? "silver" : "expert",
         priority: firm.priority, freeConsultation: firm.freeConsultation,
@@ -1611,7 +1640,22 @@ export default async function handler(
       recipientIds,
       sharingConsent,
       consentVersion,
-    } = req.body ?? {};
+    } = qa ? {
+      leadId: req.body?.leadId,
+      turnstileToken: null,
+      fullName: "EPBL QA TEST — NOT A REAL CLIENT",
+      email: qaInbox("leadtest"),
+      phone: "",
+      legalIssue: "SYNTHETIC QA ONLY — Criminal Defense consultation workflow test. No real legal matter.",
+      firmId: null, firmName: null,
+      practiceArea: "Criminal Defense",
+      sourceUrl: null, landingPage: null, referrer: null,
+      source: "epbl-controlled-qa", medium: "qa", campaign: "multi-firm-qa",
+      matterLocation: "El Paso (test)", matterTiming: "Test only",
+      recipientIds: req.body?.recipientIds,
+      sharingConsent: req.body?.sharingConsent,
+      consentVersion: req.body?.consentVersion,
+    } : req.body ?? {};
 
     if (
       !fullName ||
@@ -1693,6 +1737,7 @@ export default async function handler(
 
     // Turnstile tokens are short-lived and single-use. Validate them before
     // any notification lookup, routing or email attempt.
+    if (!qa) {
     if (!process.env.TURNSTILE_SECRET_KEY) {
       return res.status(503).json({ success: false, error: "Bot verification unavailable" });
     }
@@ -1722,6 +1767,7 @@ export default async function handler(
     const allowedHosts = new Set(["www.elpasosbestlawyers.com", "elpasosbestlawyers.com"]);
     if (!challenge.success || !challenge.hostname || !allowedHosts.has(challenge.hostname)) {
       return res.status(403).json({ success: false, error: "Security verification failed" });
+    }
     }
 
     // Persist only after successful server-side bot verification. The client
@@ -1755,7 +1801,7 @@ export default async function handler(
         requestedIds.some(id => id !== firmId))) {
       return res.status(400).json({ success: false, error: "Invalid direct recipient" });
     }
-    const eligible = requestedIds.length ? await loadVerifiedRecipients(area, firmId || undefined) : [];
+    const eligible = requestedIds.length ? await loadVerifiedRecipients(area, firmId || undefined, qa) : [];
     const selected = eligible.filter(firm => requestedIds.includes(firm.id));
     if (selected.length !== requestedIds.length) {
       return res.status(422).json({ success: false, error: "Recipient availability changed; please review your selection" });
