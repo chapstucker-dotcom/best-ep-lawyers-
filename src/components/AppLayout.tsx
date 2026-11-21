@@ -26,6 +26,11 @@ import {
 } from '../data/platformModel';
 
 import { getLocalExclusiveShowcase } from '../data/exclusiveShowcases';
+import { CARTER_DEMO_FIRM_ID } from '../data/carterExclusiveDemo';
+import { CESAR_ORNELAS_DEMO_FIRM_ID } from '../data/cesarOrnelasExclusiveDemo';
+import { LABINOTI_DEMO_FIRM_ID } from '../data/labinotiExclusiveDemo';
+import { LOZANO_MEZA_DEMO_FIRM_ID } from '../data/lozanoMezaExclusiveDemo';
+import { SCHERR_LEGATE_DEMO_FIRM_ID } from '../data/scherrLegateExclusiveDemo';
 
 import { getPlanRules } from '@/config/planRules';
 
@@ -424,13 +429,24 @@ export default function AppLayout() {
   }, [matchedFirms, sortBy]);
 
   const homepageExclusiveFirms = useMemo(() => {
-    const eligible = firms
-      .filter((firm) => getPlanRules(getFirmPlanKey(firm)).categoryOwner)
-      .sort((a, b) => String(a.name ?? '').localeCompare(String(b.name ?? '')));
+    const homepageGoldIds = [
+      CESAR_ORNELAS_DEMO_FIRM_ID,
+      LABINOTI_DEMO_FIRM_ID,
+      LOZANO_MEZA_DEMO_FIRM_ID,
+      SCHERR_LEGATE_DEMO_FIRM_ID,
+      CARTER_DEMO_FIRM_ID,
+    ];
+
+    const eligible = homepageGoldIds
+      .map((id) => firms.find((firm) =>
+        firm.id === id &&
+        getPlanRules(getFirmPlanKey(firm)).categoryOwner
+      ))
+      .filter((firm): firm is Firm => firm !== undefined);
 
     if (eligible.length <= 1) return eligible;
     const offset = exclusiveVisitOffset % eligible.length;
-    return [...eligible.slice(offset), ...eligible.slice(0, offset)].slice(0, 5);
+    return [...eligible.slice(offset), ...eligible.slice(0, offset)];
   }, [firms, exclusiveVisitOffset]);
 
   const homepageFeaturedFirms = useMemo(() => {
