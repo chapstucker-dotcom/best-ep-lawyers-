@@ -1575,14 +1575,26 @@ export default async function handler(
       const { data, error } = await db
         .from("firms")
         .select(
-          "id,name,email,plan,plan_key,primary_category,category,practice_areas,specialties,is_active,status,consultation_free"
+          "id,name,inquiry_email,inquiry_enabled,inquiry_verified_at,plan,plan_key,primary_category,category,practice_areas,specialties,is_active,status,consultation_free"
         )
         .eq("is_active", true)
         .eq("status", "active");
 
       if (error) throw error;
 
-      const rows = (data ?? []) as (FirmRow & {
+      const verifiedRows = (data ?? [])
+        .filter((firm) =>
+          firm.inquiry_enabled === true &&
+          Boolean(firm.inquiry_verified_at) &&
+          typeof firm.inquiry_email === "string" &&
+          /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(firm.inquiry_email.trim())
+        )
+        .map((firm) => ({
+          ...firm,
+          email: firm.inquiry_email.trim(),
+        }));
+
+      const rows = verifiedRows as (FirmRow & {
         consultation_free?: boolean | null;
       })[];
 
