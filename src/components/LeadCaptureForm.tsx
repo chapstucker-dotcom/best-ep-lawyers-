@@ -315,9 +315,14 @@ export default function LeadCaptureForm({
     setSelectedIds(ids);
     setSharingConsent(false);
   };
+  const showFirmOptions = loadedKey === recipientKey && recipients.length > 0;
   const recipientSelection = (
-    <div className="space-y-3 rounded-xl border border-slate-300 bg-white p-4 text-slate-900">
-      <h3 className="font-semibold">{es ? "Elija los despachos que desea contactar" : "Choose which law firms to contact"}</h3>
+    <div className={variant === "homepage" && !showFirmOptions
+      ? "space-y-2 rounded-xl border border-white/15 bg-white/5 p-4 text-slate-200"
+      : "space-y-3 rounded-xl border border-slate-300 bg-white p-4 text-slate-900"}>
+      <h3 className="font-semibold">{showFirmOptions
+        ? (es ? "Elija los despachos que desea contactar" : "Choose which law firms to contact")
+        : (es ? "Solicite asistencia legal" : "Request Legal Assistance")}</h3>
       {loadedKey !== recipientKey ? (
         <p className="text-sm">{es ? "Buscando despachos participantes..." : "Checking participating law firms..."}</p>
       ) : recipients.length ? (
@@ -346,7 +351,7 @@ export default function LeadCaptureForm({
       ) : (
         <p className="text-sm">{recipientError
           ? (es ? "No se pudo consultar la disponibilidad. Puede enviar su solicitud solo a EPBL." : "Firm availability could not be checked. You may submit to EPBL only.")
-          : (es ? "No hay despachos participantes disponibles. Su solicitud se enviará solo a EPBL." : "No participating firms are available. Your request will go to EPBL only.")}</p>
+          : (es ? "Envíe su solicitud a El Paso's Best Lawyers. No compartiremos sus datos con ningún despacho sin su autorización." : "Submit your inquiry to El Paso's Best Lawyers. Your information will not be shared with any law firm without your permission.")}</p>
       )}
       {selectedIds.length > 0 ? (
         <label className="flex items-start gap-3 text-sm">
@@ -356,7 +361,7 @@ export default function LeadCaptureForm({
             ? "Autorizo a El Paso's Best Lawyers a compartir mi nombre, datos de contacto, descripción, lugar y fecha del asunto con los despachos que seleccioné para que puedan evaluar mi solicitud y contactarme."
             : "I authorize El Paso's Best Lawyers to share my name, contact information, legal inquiry, matter location and timing with the firms I selected so they may review my request and contact me."}</span>
         </label>
-      ) : <p className="text-xs text-slate-600">{es ? "Sin selección, solo EPBL recibe su solicitud." : "Without a selection, only EPBL receives your request."}</p>}
+      ) : showFirmOptions ? <p className="text-xs text-slate-600">{es ? "Sin selección, solo EPBL recibe su solicitud." : "Without a selection, only EPBL receives your request."}</p> : null}
     </div>
   );
 

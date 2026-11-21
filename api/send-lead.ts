@@ -1252,11 +1252,33 @@ const safeEmailLogo = (value?: string): string => {
 };
 
 const renderConsumerConfirmation = ({
-  name, area, accepted, selected, spanish,
+  name, area, legalIssue, accepted, selected, spanish,
 }: {
-  name: string; area: string; accepted: RoutedFirm[]; selected: RoutedFirm[]; spanish: boolean;
+  name: string; area: string; legalIssue: string; accepted: RoutedFirm[]; selected: RoutedFirm[]; spanish: boolean;
 }): string => {
   const tr = (en: string, es: string) => spanish ? es : en;
+  const practice = getPracticeAreaByValue(area)?.slug;
+  const market = resolveMarketValue(area)?.key;
+  const issue = legalIssue.toLowerCase();
+  const resources: { path: string; title: string }[] = [];
+  if (practice === "truck-accidents" || (market === "personal-injury" && /\b(truck|18[- ]?wheeler|semi[- ]?truck)\b/.test(issue))) {
+    resources.push({ path: "/guides/truck-accident-evidence-texas", title: tr("Evidence after a truck accident", "Pruebas después de un accidente de camión") });
+  } else if (practice === "car-accidents" || (market === "personal-injury" && /\b(car accident|car crash|auto accident|vehicle collision)\b/.test(issue))) {
+    resources.push({ path: "/guides/what-to-do-after-car-accident-el-paso", title: tr("What to do after a car accident", "Qué hacer después de un accidente de automóvil") });
+    resources.push({ path: "/guides/how-to-get-texas-crash-report-el-paso", title: tr("How to obtain a crash report", "Cómo obtener un informe del accidente") });
+  } else if (practice === "child-custody" || (market === "family-law" && /\b(child custody|conservatorship|parenting time)\b/.test(issue))) {
+    resources.push({ path: "/guides/texas-child-custody-conservatorship-basics", title: tr("Texas child custody basics", "Fundamentos de custodia de menores en Texas") });
+  } else if (practice === "dwi-dui" || (market === "criminal-defense" && /\b(dwi|dui)\b/.test(issue))) {
+    resources.push({ path: "/guides/texas-dwi-basics-el-paso", title: tr("Texas DWI basics", "Fundamentos de DWI en Texas") });
+  }
+  const guideLinks = [
+    { path: "/guides#consultation-preparation", title: tr("Prepare for your consultation", "Prepararse para su consulta") },
+    { path: "/guides#questions-to-ask", title: tr("Questions to ask an attorney", "Preguntas para un abogado") },
+    { path: "/guides#choosing-an-attorney", title: tr("How to choose an attorney", "Cómo elegir un abogado") },
+    ...resources,
+    { path: "/guides", title: tr("Browse all Texas law guides", "Explorar todas las guías legales de Texas") },
+    { path: "/community-legal-resources", title: tr("Explore El Paso community legal resources", "Explore recursos legales de la comunidad de El Paso") },
+  ].map(link => `<li style="margin:5px 0;"><a style="color:#0f2a43;" href="${PUBLIC_SITE}${link.path}">${escapeHtml(link.title)}</a></li>`).join("");
   const groups = [
     { key: "market_exclusive", label: "Gold", color: "#b18424", background: "#fffaf0" },
     { key: "featured", label: "Silver", color: "#74869b", background: "#f5f7fa" },
@@ -1294,12 +1316,14 @@ const renderConsumerConfirmation = ({
       ${accepted.length ? `<h2 style="font-size:20px;color:#0f2a43;">${tr("Firms notified", "Despachos notificados")}</h2>
         <p>${tr("Our email provider accepted notifications for the following firms you authorized. Inbox delivery and a response are not guaranteed.", "Nuestro proveedor de correo aceptó las notificaciones para los despachos que autorizó. No se garantiza la entrega ni una respuesta.")}</p>
         ${firmCards}<p style="font-size:12px;color:#475569;">${tr("Gold, Silver and Expert are advertising placements, not ratings or recommendations.", "Gold, Silver y Expert son espacios publicitarios, no calificaciones ni recomendaciones.")}</p>` :
-        `<p>${tr("No firm notification has been confirmed as accepted. EPBL has recorded your request.", "No se ha confirmado la aceptación de ninguna notificación a un despacho. EPBL ha registrado su solicitud.")}</p>`}
+        `<p>${selected.length ? tr("No firm notification has been confirmed as accepted. EPBL has recorded your request.", "No se ha confirmado la aceptación de ninguna notificación a un despacho. EPBL ha registrado su solicitud.") : tr("Your request has been received by El Paso's Best Lawyers. It has not been forwarded to a law firm.", "El Paso's Best Lawyers ha recibido su solicitud. No se ha enviado a ningún despacho.")}</p>`}
       ${pending.length ? `<p><strong>${tr("Notification acceptance not confirmed:", "Aceptación de notificaciones no confirmada:")}</strong> ${pending.map(firm => escapeHtml(firm.name)).join(", ")}.</p>` : ""}
       <div style="background:#f1f5f9;padding:16px;margin:24px 0;border-radius:8px;">
         <strong>${tr("What happens next?", "¿Qué sucede después?")}</strong>
-        <p style="margin:8px 0;">${tr("Firms that receive your request may contact you directly to discuss next steps. You choose whether to proceed.", "Los despachos que reciban su solicitud pueden contactarle directamente. Usted decide si desea continuar.")}</p>
-        <a style="color:#0f2a43;" href="${PUBLIC_SITE}/community-legal-resources">${tr("Explore El Paso community legal resources", "Explore recursos legales de la comunidad de El Paso")}</a>
+        <p style="margin:8px 0;">${selected.length ? tr("Firms that receive your request may contact you directly to discuss next steps. You choose whether to proceed.", "Los despachos que reciban su solicitud pueden contactarle directamente. Usted decide si desea continuar.") : tr("You can browse legal information and prepare for a conversation with a lawyer while exploring your options.", "Puede consultar información legal y prepararse para hablar con un abogado mientras explora sus opciones.")}</p>
+        <p style="margin:8px 0;"><strong>${tr("Helpful resources for your next step", "Recursos útiles para su próximo paso")}</strong></p>
+        ${spanish ? '<p style="font-size:12px;">Las siguientes guías están disponibles en inglés.</p>' : ""}
+        <ul style="padding-left:20px;margin:8px 0;">${guideLinks}</ul>
       </div>
       <p style="font-size:12px;color:#475569;">${tr("Submission does not create an attorney-client relationship or guarantee representation. Avoid sending additional confidential or highly sensitive information until you establish an attorney-client relationship.", "El envío no establece una relación abogado-cliente ni garantiza representación. Evite enviar información confidencial o muy sensible hasta establecer una relación abogado-cliente.")}</p>
       <p style="font-size:13px;"><a href="${PUBLIC_SITE}" style="color:#0f2a43;">El Paso's Best Lawyers</a> · <a href="${PUBLIC_SITE}/privacy" style="color:#0f2a43;">${tr("Privacy Policy", "Política de privacidad")}</a></p>
@@ -2020,7 +2044,7 @@ export default async function handler(
       from: FROM_EMAIL,
       to: [cleanEmail],
       subject: spanishAcknowledgement ? "Recibimos su solicitud de consulta" : "We Received Your Consultation Request",
-      html: renderConsumerConfirmation({ name: cleanFullName, area, accepted, selected, spanish: spanishAcknowledgement }),
+      html: renderConsumerConfirmation({ name: cleanFullName, area, legalIssue: cleanLegalIssue, accepted, selected, spanish: spanishAcknowledgement }),
       }));
 
     if (
