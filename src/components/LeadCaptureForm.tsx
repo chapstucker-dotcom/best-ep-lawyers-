@@ -271,6 +271,95 @@ export default function LeadCaptureForm({
       : practiceArea?.trim() ||
         inferPracticeAreaFromUrl();
 
+  type InquiryRecipient = {
+    id: string; name: string; tier: "gold" | "silver" | "expert";
+    freeConsultation: boolean;
+  };
+  const [recipients, setRecipients] = useState<InquiryRecipient[]>([]);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [sharingConsent, setSharingConsent] = useState(false);
+  const [loadedKey, setLoadedKey] = useState("");
+  const [recipientError, setRecipientError] = useState(false);
+  const recipientKey = JSON.stringify([effectivePracticeArea, firmId || ""]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    setRecipients([]);
+    setSelectedIds([]);
+    setSharingConsent(false);
+    setLoadedKey("");
+    setRecipientError(false);
+    const timer = window.setTimeout(async () => {
+      try {
+        const params = new URLSearchParams({
+          action: "eligible-firms", practiceArea: effectivePracticeArea,
+        });
+        if (firmId) params.set("firmId", firmId);
+        const response = await fetch("/api/send-lead?" + params, { signal: controller.signal });
+        const data = await response.json();
+        if (!response.ok || data.success !== true || !Array.isArray(data.firms)) throw Error("Recipients unavailable");
+        if (controller.signal.aborted) return;
+        setRecipients(data.firms);
+        setLoadedKey(recipientKey);
+      } catch {
+        if (!controller.signal.aborted) {
+          setRecipientError(true);
+          setLoadedKey(recipientKey);
+        }
+      }
+    }, 350);
+    return () => { window.clearTimeout(timer); controller.abort(); };
+  }, [recipientKey, effectivePracticeArea, firmId]);
+
+  const selectRecipients = (ids: string[]) => {
+    setSelectedIds(ids);
+    setSharingConsent(false);
+  };
+  const recipientSelection = (
+    <div className="space-y-3 rounded-xl border border-slate-300 bg-white p-4 text-slate-900">
+      <h3 className="font-semibold">{es ? "Elija los despachos que desea contactar" : "Choose which law firms to contact"}</h3>
+      {loadedKey !== recipientKey ? (
+        <p className="text-sm">{es ? "Buscando despachos participantes..." : "Checking participating law firms..."}</p>
+      ) : recipients.length ? (
+        <>
+          {!firmId && (
+            <button type="button" className="text-sm font-semibold text-teal-700 underline" disabled={loading}
+              onClick={() => selectRecipients(selectedIds.length === recipients.length ? [] : recipients.map(firm => firm.id))}>
+              {selectedIds.length === recipients.length ? (es ? "Deseleccionar todos" : "Deselect all") : (es ? "Seleccionar todos" : "Select all matching firms")}
+            </button>
+          )}
+          {recipients.map(firm => (
+            <label key={firm.id} className="flex items-start gap-3 rounded-lg border p-3 text-sm">
+              <input type="checkbox" className="mt-1" disabled={loading}
+                checked={selectedIds.includes(firm.id)}
+                onChange={event => selectRecipients(event.target.checked
+                  ? [...selectedIds, firm.id] : selectedIds.filter(id => id !== firm.id))} />
+              <span>
+                <span className="block font-semibold">{firm.name}</span>
+                <span className="block text-xs text-slate-600">{firm.tier === "gold" ? "Gold" : firm.tier === "silver" ? "Silver" : "Expert"} {es ? "publicidad" : "advertising placement"}</span>
+                {firm.freeConsultation && <span className="block text-xs text-teal-700">{es ? "Consulta inicial gratuita" : "Free initial consultation"}</span>}
+              </span>
+            </label>
+          ))}
+          <p className="text-xs text-slate-600">{es ? "Las categorías publicitarias no son recomendaciones." : "Advertising placements are not recommendations."}</p>
+        </>
+      ) : (
+        <p className="text-sm">{recipientError
+          ? (es ? "No se pudo consultar la disponibilidad. Puede enviar su solicitud solo a EPBL." : "Firm availability could not be checked. You may submit to EPBL only.")
+          : (es ? "No hay despachos participantes disponibles. Su solicitud se enviará solo a EPBL." : "No participating firms are available. Your request will go to EPBL only.")}</p>
+      )}
+      {selectedIds.length > 0 ? (
+        <label className="flex items-start gap-3 text-sm">
+          <input type="checkbox" className="mt-1" checked={sharingConsent} disabled={loading}
+            onChange={event => setSharingConsent(event.target.checked)} />
+          <span>{es
+            ? "Autorizo a El Paso's Best Lawyers a compartir mi nombre, datos de contacto, descripción, lugar y fecha del asunto con los despachos que seleccioné para que puedan evaluar mi solicitud y contactarme."
+            : "I authorize El Paso's Best Lawyers to share my name, contact information, legal inquiry, matter location and timing with the firms I selected so they may review my request and contact me."}</span>
+        </label>
+      ) : <p className="text-xs text-slate-600">{es ? "Sin selección, solo EPBL recibe su solicitud." : "Without a selection, only EPBL receives your request."}</p>}
+    </div>
+  );
+
   const updateField = (
     field: keyof FormState,
     value: string
@@ -360,6 +449,10 @@ export default function LeadCaptureForm({
             practiceArea:
               effectivePracticeArea,
 
+            recipientIds: selectedIds,
+            sharingConsent,
+            consentVersion: "epbl-inquiry-v1",
+
             ...getLeadAttribution(),
           }),
         }
@@ -370,6 +463,8 @@ export default function LeadCaptureForm({
           ? (es ? 'Falló la verificación de seguridad. Inténtelo de nuevo.' : 'Security verification failed. Please try again.')
           : response.status === 409
             ? (es ? 'Esta solicitud ya se envió.' : 'This request has already been submitted.')
+            : response.status === 422
+              ? (es ? 'La disponibilidad cambió. Actualice la página y revise su selección.' : 'Firm availability changed. Refresh the page and review your selection.')
             : (es ? 'No se pudo guardar su solicitud. Inténtelo de nuevo.' : 'Your request could not be saved. Please try again.'));
       }
   };
@@ -395,6 +490,11 @@ export default function LeadCaptureForm({
       return;
     }
 
+    if (loadedKey !== recipientKey || (selectedIds.length > 0 && !sharingConsent)) {
+      setErrorMessage(es ? "Revise los despachos y confirme su autorización antes de enviar." : "Review the firms and confirm your authorization before submitting.");
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -414,6 +514,7 @@ export default function LeadCaptureForm({
       );
 
       setForm(EMPTY_FORM);
+      selectRecipients([]);
 
       onSuccess?.();
     } catch (error) {
@@ -647,8 +748,9 @@ export default function LeadCaptureForm({
                 </div>
               </div>
 
+              {recipientSelection}
               <p className="text-xs leading-5 text-slate-400">
-                By submitting, you understand that El Paso&apos;s Best Lawyers may review your information and share it with a participating law firm to evaluate your inquiry. Submission does not establish an attorney-client relationship or guarantee representation. Do not include confidential or highly sensitive information. See our <a href="/privacy" className="font-semibold underline">Privacy Policy</a>.
+                El Paso&apos;s Best Lawyers receives your request. Your information is only forwarded to firms you authorize. Submission does not establish an attorney-client relationship or guarantee representation. Do not include confidential or highly sensitive information. See our <a href="/privacy" className="font-semibold underline">Privacy Policy</a>.
               </p>
 
               <Button
@@ -878,6 +980,7 @@ export default function LeadCaptureForm({
             </p>
           </div>
 
+          {recipientSelection}
           <Button
             type="submit"
             disabled={loading}
@@ -897,7 +1000,7 @@ export default function LeadCaptureForm({
           </Button>
 
           <p className="text-center text-xs leading-5 text-gray-500">
-            {es ? "El Paso's Best Lawyers puede revisar sus datos y compartirlos con un despacho participante para evaluar su solicitud. El envío no crea una relación abogado-cliente ni garantiza representación. No incluya información confidencial. Consulte nuestra " : "El Paso's Best Lawyers may review your information and share it with a participating law firm to evaluate your inquiry. Submission does not establish an attorney-client relationship or guarantee representation. Do not include confidential or highly sensitive information. See our "}<a href="/privacy" className="font-semibold underline">{es ? "Política de privacidad" : "Privacy Policy"}</a>.
+            {es ? "EPBL recibe su solicitud y solo la comparte con los despachos que autorice. El envío no crea una relación abogado-cliente ni garantiza representación. No incluya información confidencial. Consulte nuestra " : "EPBL receives your request and shares it only with firms you authorize. Submission does not establish an attorney-client relationship or guarantee representation. Do not include confidential or highly sensitive information. See our "}<a href="/privacy" className="font-semibold underline">{es ? "Política de privacidad" : "Privacy Policy"}</a>.
           </p>
           <LeadTurnstile onToken={setTurnstileToken} resetKey={turnstileResetKey} />
         </form>

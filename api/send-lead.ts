@@ -900,6 +900,12 @@ type RoutedFirm = {
   email: string;
   planKey: string;
   priority: number;
+  freeConsultation?: boolean;
+  profileDescription?: string;
+  profileSpecialty?: string;
+  logoUrl?: string;
+  hasVideo?: boolean;
+  recipientUserId?: string;
 };
 
 const escapeHtml = (value: unknown): string =>
@@ -1194,135 +1200,110 @@ const getEligibleInquiryFirms = (
 
 };
 
-const choosePriorityFirm = (
-  firms: FirmRow[],
-  practiceArea: string
-): RoutedFirm | null => {
-  const eligible = getEligibleInquiryFirms(firms, practiceArea);
-
-  if (eligible.length === 0) {
-    return null;
-  }
-
-  const bestPriority =
-    eligible[0].priority;
-
-  const highestTier =
-    eligible.filter(
-      (firm) =>
-        firm.priority ===
-        bestPriority
-    );
-
-  const randomIndex =
-    Math.floor(
-      Math.random() *
-        highestTier.length
-    );
-
-  return (
-    highestTier[randomIndex] ??
-    null
-  );
+// The same server-side eligibility check is used for discovery and submission.
+const loadVerifiedRecipients = async (area: string, firmId?: string) => {
+  const db = getSupabaseServerClient();
+  if (!db) throw new Error("Firm selection unavailable");
+  let query = db.from("firms")
+    .select("id,name,user_id,inquiry_email,inquiry_enabled,inquiry_verified_at,plan,plan_key,primary_category,category,practice_areas,specialties,is_active,status,consultation_free,description,logo_url,video_url")
+    .eq("is_active", true)
+    .eq("status", "active");
+  if (firmId) query = query.eq("id", firmId);
+  const { data, error } = await query;
+  if (error) throw error;
+  const rows = (data ?? []).filter((firm) =>
+    firm.inquiry_enabled === true &&
+    typeof firm.user_id === "string" && Boolean(firm.user_id.trim()) &&
+    Boolean(firm.inquiry_verified_at) &&
+    typeof firm.inquiry_email === "string" &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(firm.inquiry_email.trim())
+  ).map((firm) => ({ ...firm, email: firm.inquiry_email.trim().toLowerCase() }));
+  const consultations = new Map(rows.map(firm => [String(firm.id), firm.consultation_free === true]));
+  const profiles = new Map(rows.map(firm => [String(firm.id), firm] as const));
+  return getEligibleInquiryFirms(rows, area, firmId ? () => true : matchesConsumerInquiryMarket)
+    .filter(firm => ["market_exclusive", "featured", "expert"].includes(firm.planKey))
+    .map(firm => {
+      const profile = profiles.get(firm.id);
+      return {
+        ...firm,
+        freeConsultation: consultations.get(firm.id) === true,
+        profileDescription: String(profile?.description ?? "").trim().slice(0, 280),
+        profileSpecialty: String(profile?.primary_category ?? profile?.category ?? "").trim().slice(0, 120),
+        logoUrl: String(profile?.logo_url ?? "").trim(),
+        hasVideo: Boolean(String(profile?.video_url ?? "").trim()),
+        recipientUserId: String(profile?.user_id ?? ""),
+      };
+    });
 };
 
-const lookupSpecificFirm = async (
-  firmId: string
-): Promise<RoutedFirm | null> => {
-  const supabase =
-    getSupabaseServerClient();
+const PUBLIC_SITE = "https://www.elpasosbestlawyers.com";
 
-  if (!supabase) {
-    return null;
-  }
-
-  const { data, error } =
-    await supabase
-      .from("firms")
-      .select("*")
-      .eq("id", firmId)
-      .maybeSingle();
-
-  if (error) {
-    console.error(
-      "Could not verify selected firm:",
-      error
-    );
-
-    return null;
-  }
-
-  if (!data) {
-    return null;
-  }
-
-  const firm =
-    data as FirmRow;
-
-  const product =
-    getCommercialProductForFirm(firm);
-
-  const email =
-    String(
-      firm.email ?? ""
-    ).trim();
-
-  if (
-    !email ||
-    !planIncludesLeadRouting(firm) ||
-    firm.is_active === false ||
-    String(firm.status ?? "").trim().toLowerCase() !== "active"
-  ) {
-    return null;
-  }
-
-  return {
-    id: String(firm.id),
-
-    name:
-      String(
-        firm.name ?? ""
-      ).trim() ||
-      "Participating Law Firm",
-
-    email,
-
-    planKey:
-      product.key,
-
-    priority:
-      product.placementPriority,
-  };
+// Do not embed arbitrary third-party tracking images in consumer email.
+const safeEmailLogo = (value?: string): string => {
+  if (!value) return "";
+  try {
+    const url = new URL(value, PUBLIC_SITE);
+    const storageHost = new URL(process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || PUBLIC_SITE).hostname;
+    if (url.protocol !== "https:" || url.username || url.password || url.search || url.hash) return "";
+    if (url.hostname === "www.elpasosbestlawyers.com" || url.hostname === "elpasosbestlawyers.com") return url.href;
+    if (url.hostname === storageHost && url.pathname.startsWith("/storage/v1/object/public/")) return url.href;
+  } catch { /* Invalid or unapproved URL: display the firm name instead. */ }
+  return "";
 };
 
-const findPriorityFirm = async (
-  practiceArea: string
-): Promise<RoutedFirm | null> => {
-  const supabase =
-    getSupabaseServerClient();
-
-  if (!supabase) {
-    return null;
-  }
-
-  const { data, error } =
-    await supabase
-      .from("firms")
-      .select("*");
-
-  if (error) {
-    console.error(
-      "Could not load firms for priority routing:",
-      error
-    );
-
-    return null;
-  }
-
-  return choosePriorityFirm(
-    (data ?? []) as FirmRow[],
-    practiceArea
-  );
+const renderConsumerConfirmation = ({
+  name, area, accepted, selected, spanish,
+}: {
+  name: string; area: string; accepted: RoutedFirm[]; selected: RoutedFirm[]; spanish: boolean;
+}): string => {
+  const tr = (en: string, es: string) => spanish ? es : en;
+  const groups = [
+    { key: "market_exclusive", label: "Gold", color: "#b18424", background: "#fffaf0" },
+    { key: "featured", label: "Silver", color: "#74869b", background: "#f5f7fa" },
+    { key: "expert", label: "Expert", color: "#1fa8a1", background: "#ffffff" },
+  ];
+  const acceptedIds = new Set(accepted.map(firm => firm.id));
+  const pending = selected.filter(firm => !acceptedIds.has(firm.id));
+  const firmCards = groups.map(group => {
+    const firms = accepted.filter(firm => firm.planKey === group.key);
+    if (!firms.length) return "";
+    return `<h3 style="margin:24px 0 10px;color:#0f2a43;font-size:15px;">${group.label} · ${tr("Advertising placement", "Publicidad")}</h3>` +
+      firms.map(firm => {
+        const gold = group.key === "market_exclusive";
+        const expert = group.key === "expert";
+        const logo = expert ? "" : safeEmailLogo(firm.logoUrl);
+        const profileUrl = PUBLIC_SITE + "/firm/" + encodeURIComponent(firm.id);
+        return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid ${group.color};background:${group.background};border-radius:8px;margin-bottom:12px;"><tr><td style="padding:${gold ? "20" : expert ? "12" : "16"}px;">
+          ${logo ? `<img src="${escapeHtml(logo)}" alt="" width="${gold ? 112 : 72}" style="display:block;max-width:100%;height:auto;margin-bottom:12px;">` : ""}
+          <strong style="font-size:${gold ? "20" : "16"}px;color:#0f2a43;">${escapeHtml(firm.name)}</strong>
+          ${!expert && firm.profileSpecialty ? `<p style="margin:6px 0;color:#475569;font-size:13px;">${escapeHtml(firm.profileSpecialty)}</p>` : ""}
+          ${gold && firm.profileDescription ? `<p style="line-height:1.55;margin:8px 0;">${escapeHtml(firm.profileDescription)}</p>` : ""}
+          ${firm.freeConsultation ? `<p style="color:#166534;font-size:13px;">${tr("Free initial consultation", "Consulta inicial gratuita")}</p>` : ""}
+          <a href="${escapeHtml(profileUrl)}" style="display:inline-block;margin-top:8px;color:#0f2a43;font-weight:bold;text-decoration:underline;">${gold && firm.hasVideo ? tr("View profile and firm video", "Ver perfil y video") : tr("View firm profile", "Ver perfil del despacho")}</a>
+        </td></tr></table>`;
+      }).join("");
+  }).join("");
+  return `<div style="font-family:Arial,sans-serif;color:#172033;max-width:650px;margin:0 auto;line-height:1.6;">
+    <div style="background:#071d2f;color:#fff;padding:24px;border-top:5px solid #d4a62a;">
+      <div style="font-size:12px;letter-spacing:2px;color:#f5cd65;">EL PASO'S BEST LAWYERS</div>
+      <h1 style="font-size:25px;margin:8px 0 0;">${tr("Your consultation request is received", "Recibimos su solicitud de consulta")}</h1>
+    </div>
+    <div style="padding:24px;border:1px solid #d9e0e8;">
+      <p>${tr("Hello", "Hola")} ${escapeHtml(name)},</p>
+      <p>${tr("We received your request for legal help related to", "Recibimos su solicitud de ayuda legal relacionada con")} <strong>${escapeHtml(area)}</strong>.</p>
+      ${accepted.length ? `<h2 style="font-size:20px;color:#0f2a43;">${tr("Firms notified", "Despachos notificados")}</h2>
+        <p>${tr("Our email provider accepted notifications for the following firms you authorized. Inbox delivery and a response are not guaranteed.", "Nuestro proveedor de correo aceptó las notificaciones para los despachos que autorizó. No se garantiza la entrega ni una respuesta.")}</p>
+        ${firmCards}<p style="font-size:12px;color:#475569;">${tr("Gold, Silver and Expert are advertising placements, not ratings or recommendations.", "Gold, Silver y Expert son espacios publicitarios, no calificaciones ni recomendaciones.")}</p>` :
+        `<p>${tr("No firm notification has been confirmed as accepted. EPBL has recorded your request.", "No se ha confirmado la aceptación de ninguna notificación a un despacho. EPBL ha registrado su solicitud.")}</p>`}
+      ${pending.length ? `<p><strong>${tr("Notification acceptance not confirmed:", "Aceptación de notificaciones no confirmada:")}</strong> ${pending.map(firm => escapeHtml(firm.name)).join(", ")}.</p>` : ""}
+      <div style="background:#f1f5f9;padding:16px;margin:24px 0;border-radius:8px;">
+        <strong>${tr("What happens next?", "¿Qué sucede después?")}</strong>
+        <p style="margin:8px 0;">${tr("Firms that receive your request may contact you directly to discuss next steps. You choose whether to proceed.", "Los despachos que reciban su solicitud pueden contactarle directamente. Usted decide si desea continuar.")}</p>
+        <a style="color:#0f2a43;" href="${PUBLIC_SITE}/community-legal-resources">${tr("Explore El Paso community legal resources", "Explore recursos legales de la comunidad de El Paso")}</a>
+      </div>
+      <p style="font-size:12px;color:#475569;">${tr("Submission does not create an attorney-client relationship or guarantee representation. Avoid sending additional confidential or highly sensitive information until you establish an attorney-client relationship.", "El envío no establece una relación abogado-cliente ni garantiza representación. Evite enviar información confidencial o muy sensible hasta establecer una relación abogado-cliente.")}</p>
+      <p style="font-size:13px;"><a href="${PUBLIC_SITE}" style="color:#0f2a43;">El Paso's Best Lawyers</a> · <a href="${PUBLIC_SITE}/privacy" style="color:#0f2a43;">${tr("Privacy Policy", "Política de privacidad")}</a></p>
+    </div></div>`;
 };
 
 const sendFirmLead = async ({
@@ -1332,7 +1313,6 @@ const sendFirmLead = async ({
   phone,
   legalIssue,
   practiceArea,
-  sourceUrl,
   matterLocation,
   matterTiming,
 }: {
@@ -1342,7 +1322,6 @@ const sendFirmLead = async ({
   phone: string;
   legalIssue: string;
   practiceArea: string;
-  sourceUrl?: string | null;
   matterLocation?: string | null;
   matterTiming?: string | null;
 }) => {
@@ -1356,7 +1335,7 @@ const sendFirmLead = async ({
     replyTo: email,
 
     subject:
-      `NEW CLIENT INQUIRY | ${practiceArea} | ${fullName}`,
+      "New consultation inquiry | El Paso's Best Lawyers",
 
     html: `
       <div
@@ -1416,6 +1395,10 @@ const sendFirmLead = async ({
             )}
           </p>
 
+          <p style="font-size:13px;color:#166534;">
+            The consumer selected your firm and authorized sharing the inquiry and contact information with you.
+          </p>
+
           <hr
             style="
               border: 0;
@@ -1469,25 +1452,6 @@ const sendFirmLead = async ({
             legalIssue
           )}</div>
 
-          ${
-            sourceUrl
-              ? `
-                <p
-                  style="
-                    margin-top: 20px;
-                    font-size: 12px;
-                    color: #667085;
-                  "
-                >
-                  Source:
-                  ${escapeHtml(
-                    sourceUrl
-                  )}
-                </p>
-              `
-              : ""
-          }
-
           <div
             style="
               margin-top: 24px;
@@ -1502,6 +1466,7 @@ const sendFirmLead = async ({
             El Paso's Best Lawyers.
             Receiving this inquiry does not
             establish an attorney-client relationship.
+            Please handle these details confidentially and contact the consumer only about this request.
           </div>
         </div>
       </div>
@@ -1515,7 +1480,8 @@ const sendTracked = async (
   leadId: string,
   recipientType: "admin" | "firm" | "consumer",
   recipientEmail: string,
-  send: () => Promise<{ data: { id: string } | null; error: unknown }>
+  send: () => Promise<{ data: { id: string } | null; error: unknown }>,
+  recipientFirmId?: string
 ) => {
   const db = getSupabaseServerClient();
   if (!db || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
@@ -1523,18 +1489,22 @@ const sendTracked = async (
   }
   const key = { lead_id: leadId, recipient_type: recipientType, recipient_email: recipientEmail };
   const { error: createError } = await db.from("lead_notifications")
-    .upsert({ ...key, status: "pending" }, { onConflict: "lead_id,recipient_type,recipient_email", ignoreDuplicates: true });
+    .upsert({ ...key, firm_id: recipientFirmId ?? null, status: "pending" }, { onConflict: "lead_id,recipient_type,recipient_email", ignoreDuplicates: true });
   if (createError) throw createError;
-  const { data: claimed, error: claimError } = await db.from("lead_notifications")
+  let claim = db.from("lead_notifications")
     .update({ status: "sending", updated_at: new Date().toISOString(), last_attempt_at: new Date().toISOString() })
     .eq("lead_id", leadId).eq("recipient_type", recipientType).eq("recipient_email", recipientEmail)
-    .eq("status", "pending").select("id,attempt_count").maybeSingle();
+    .eq("status", "pending");
+  if (recipientFirmId) claim = claim.eq("firm_id", recipientFirmId);
+  const { data: claimed, error: claimError } = await claim.select("id,attempt_count").maybeSingle();
   if (claimError) throw claimError;
   if (!claimed) return { data: null, error: null, skipped: true };
   let result: { data: { id: string } | null; error: unknown };
   try { result = await send(); }
   catch (error) { result = { data: null, error }; }
-  const errorMessage = result.error ? String((result.error as Error)?.message || result.error).slice(0, 2000) : null;
+  const errorMessage = result.error
+    ? String((result.error as Error)?.message || result.error).slice(0, 2000)
+    : result.data?.id ? null : "Email provider did not return a message ID";
   const { error: recordError } = await db.from("lead_notifications").update({
     status: errorMessage ? "failed" : "accepted",
     provider_message_id: result.data?.id || null,
@@ -1563,67 +1533,15 @@ export default async function handler(
     }
 
     try {
-      const db = getSupabaseServerClient();
-
-      if (!db) {
-        return res.status(503).json({
-          success: false,
-          error: "Firm selection unavailable",
-        });
+      const direct = req.query?.firmId;
+      if (direct !== undefined && (typeof direct !== "string" || !direct || direct.length > 250)) {
+        return res.status(400).json({ success: false, error: "Invalid firm ID" });
       }
-
-      const { data, error } = await db
-        .from("firms")
-        .select(
-          "id,name,inquiry_email,inquiry_enabled,inquiry_verified_at,plan,plan_key,primary_category,category,practice_areas,specialties,is_active,status,consultation_free"
-        )
-        .eq("is_active", true)
-        .eq("status", "active");
-
-      if (error) throw error;
-
-      const verifiedRows = (data ?? [])
-        .filter((firm) =>
-          firm.inquiry_enabled === true &&
-          Boolean(firm.inquiry_verified_at) &&
-          typeof firm.inquiry_email === "string" &&
-          /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(firm.inquiry_email.trim())
-        )
-        .map((firm) => ({
-          ...firm,
-          email: firm.inquiry_email.trim(),
-        }));
-
-      const rows = verifiedRows as (FirmRow & {
-        consultation_free?: boolean | null;
-      })[];
-
-      const consultations = new Map(
-        rows.map((firm) => [
-          String(firm.id),
-          firm.consultation_free === true,
-        ])
-      );
-
-      const firms = getEligibleInquiryFirms(
-        rows,
-        area.trim(),
-        matchesConsumerInquiryMarket
-      )
-        .filter((firm) =>
-          ["market_exclusive", "featured", "expert"].includes(firm.planKey)
-        )
-        .map((firm) => ({
-          id: firm.id,
-          name: firm.name,
-          tier: firm.planKey === "market_exclusive"
-            ? "gold"
-            : firm.planKey === "featured"
-              ? "silver"
-              : "expert",
-          priority: firm.priority,
-          freeConsultation: consultations.get(firm.id) === true,
-        }));
+      const firms = (await loadVerifiedRecipients(area.trim(), direct)).map(firm => ({
+        id: firm.id, name: firm.name,
+        tier: firm.planKey === "market_exclusive" ? "gold" : firm.planKey === "featured" ? "silver" : "expert",
+        priority: firm.priority, freeConsultation: firm.freeConsultation,
+      }));
 
       return res.status(200).json({
         success: true,
@@ -1666,6 +1584,9 @@ export default async function handler(
       campaign,
       matterLocation,
       matterTiming,
+      recipientIds,
+      sharingConsent,
+      consentVersion,
     } = req.body ?? {};
 
     if (
@@ -1797,6 +1718,24 @@ export default async function handler(
     }
     const safeText = (value: unknown, limit: number) =>
       typeof value === "string" ? value.slice(0, limit) : null;
+    const requestedIds: string[] = Array.isArray(recipientIds)
+      ? [...new Set<string>(recipientIds.filter((id: unknown) => typeof id === "string" && id.length > 0 && id.length <= 250))]
+      : [];
+    if (recipientIds !== undefined && (!Array.isArray(recipientIds) || requestedIds.length !== recipientIds.length)) {
+      return res.status(400).json({ success: false, error: "Invalid recipient selection" });
+    }
+    if (requestedIds.length && (sharingConsent !== true || consentVersion !== "epbl-inquiry-v1")) {
+      return res.status(400).json({ success: false, error: "Sharing consent required" });
+    }
+    if (firmId && (typeof firmId !== "string" || firmId.length > 250 ||
+        requestedIds.some(id => id !== firmId))) {
+      return res.status(400).json({ success: false, error: "Invalid direct recipient" });
+    }
+    const eligible = requestedIds.length ? await loadVerifiedRecipients(area, firmId || undefined) : [];
+    const selected = eligible.filter(firm => requestedIds.includes(firm.id));
+    if (selected.length !== requestedIds.length) {
+      return res.status(422).json({ success: false, error: "Recipient availability changed; please review your selection" });
+    }
     const leadRecord = {
       id: leadId,
       full_name: cleanFullName,
@@ -1826,132 +1765,59 @@ export default async function handler(
       return res.status(503).json({ success: false, error: "Unable to save inquiry" });
     }
 
-    let routedFirm:
-      RoutedFirm | null =
-      null;
-
-    /*
-     * Firm-specific lead:
-     * verify the selected firm
-     * from Supabase.
-     */
-    if (firmId) {
-      routedFirm =
-        await lookupSpecificFirm(
-          String(firmId)
-        );
-    }
-
-    /*
-     * General practice-area lead:
-     * Market Exclusive -> Premier -> Featured -> Expert
-     */
-    if (
-      !firmId &&
-      !routedFirm
-    ) {
-      routedFirm =
-        await findPriorityFirm(
-          area
-        );
-    }
-
-    // Record the selected recipient independently of the consumer-requested firm.
-    // Assignment is not proof of email acceptance or delivery; those outcomes
-    // remain authoritative in public.lead_notifications.
-    if (routedFirm) {
-      const { error: assignmentError } = await db
-        .from("leads")
-        .update({
-          assigned_firm_id: routedFirm.id,
-          assigned_firm_name: routedFirm.name,
-          assigned_firm_tier: routedFirm.planKey,
-          assigned_at: new Date().toISOString(),
-        })
-        .eq("id", leadId);
-
+    // Never forward legacy or unconsented requests. Capture them for EPBL only.
+    const accepted: RoutedFirm[] = [];
+    let assigned: RoutedFirm[] = [];
+    if (selected.length) {
+      const now = new Date().toISOString();
+      const { error: assignmentError } = await db.from("lead_assignments").insert(
+        selected.map(firm => ({
+          lead_id: leadId, firm_id: firm.id, firm_name: firm.name,
+          firm_tier: firm.planKey, assignment_source: "consumer_selected",
+          recipient_user_id: firm.recipientUserId,
+          consent_at: now, consent_version: "epbl-inquiry-v1", assigned_at: now,
+        }))
+      );
       if (assignmentError) {
-        // Do not lose or suppress an already-captured inquiry when audit
-        // enrichment fails. The administrator still receives the lead.
-        console.error("Lead assignment audit update failed:", assignmentError);
+        console.error("Lead assignment failed; admin capture only", assignmentError);
+      } else {
+        assigned = selected;
       }
     }
-
-    // Canonical consultation conversion: one server-side event per persisted lead.
-    // The assigned recipient, not the consumer-requested firm, receives credit.
-    // This is independent of Resend acceptance or confirmed email delivery.
+    const routedFirm = assigned[0] ?? null;
     if (routedFirm) {
-      const canonicalPractice = SERVER_SAFE_PRACTICE_AREAS.find(
-        (practice) =>
-          normalize(practice.title) === normalize(area) ||
-          normalize(practice.slug) === normalize(area)
-      );
-      const market = resolveMarketValue(area);
-      const { error: conversionError } = await db.from("attribution_events")
-        .insert({
-          lead_id: leadId,
-          firm_id: routedFirm.id,
-          action: "consultation_submit",
-          market: market?.key ?? null,
-          specialty: canonicalPractice?.slug ?? null,
-          page: safeText(landingPage, 2000),
-          source: safeText(source, 200),
-          medium: safeText(medium, 200),
-          campaign: safeText(campaign, 200),
+      const { error } = await db.from("leads").update({
+        assigned_firm_id: routedFirm.id, assigned_firm_name: routedFirm.name,
+        assigned_firm_tier: routedFirm.planKey, assigned_at: new Date().toISOString(),
+      }).eq("id", leadId);
+      if (error) console.error("Legacy assignment summary failed", error);
+    }
+    const canonicalPractice = SERVER_SAFE_PRACTICE_AREAS.find(practice =>
+      normalize(practice.title) === normalize(area) || normalize(practice.slug) === normalize(area));
+    const market = resolveMarketValue(area);
+    // Keep existing notification idempotency by inbox; shared inboxes are not
+    // sent repeated copies or claimed as independent successful notifications.
+    for (const recipient of assigned) {
+      try {
+        const { error: conversionError } = await db.from("attribution_events").insert({
+          lead_id: leadId, firm_id: recipient.id, action: "consultation_submit",
+          market: market?.key ?? null, specialty: canonicalPractice?.slug ?? null,
+          page: safeText(landingPage, 2000), source: safeText(source, 200),
+          medium: safeText(medium, 200), campaign: safeText(campaign, 200),
           referrer: safeText(referrer, 2000),
         });
-      if (conversionError && conversionError.code !== "23505") {
-        console.error("Canonical consultation attribution failed:", conversionError);
+        if (conversionError && conversionError.code !== "23505") console.error("Attribution failed", conversionError);
+        const result = await sendTracked(leadId, "firm", recipient.email, () => sendFirmLead({
+          routedFirm: recipient, fullName: cleanFullName, email: cleanEmail,
+          phone: cleanPhone, legalIssue: cleanLegalIssue, practiceArea: area,
+          matterLocation: cleanMatterLocation, matterTiming: cleanMatterTiming,
+        }), recipient.id);
+        if (!result.error && !result.skipped && result.data?.id) accepted.push(recipient);
+      } catch (error) {
+        console.error("Recipient processing failed", error);
       }
     }
-
-    let routedSuccessfully =
-      false;
-
-    if (routedFirm) {
-      const {
-        error:
-          firmEmailError,
-        skipped: firmEmailSkipped,
-      } =
-        await sendTracked(leadId, "firm", routedFirm.email, () => sendFirmLead({
-          routedFirm,
-
-          fullName:
-            cleanFullName,
-
-          email:
-            cleanEmail,
-
-          phone:
-            cleanPhone,
-
-          legalIssue:
-            cleanLegalIssue,
-
-          practiceArea:
-            area,
-
-          sourceUrl:
-            cleanSourceUrl,
-
-          matterLocation:
-            cleanMatterLocation,
-
-          matterTiming:
-            cleanMatterTiming,
-        }));
-
-      if (firmEmailError) {
-        console.error(
-          "Firm lead delivery failed:",
-          firmEmailError
-        );
-      } else if (!firmEmailSkipped) {
-        routedSuccessfully =
-          true;
-      }
-    }
+    const routedSuccessfully = accepted.length > 0;
 
     /*
      * ADMIN COPY
@@ -2056,16 +1922,14 @@ export default async function handler(
               <p>
                 <strong>Routed Firm:</strong>
                 ${escapeHtml(
-                  routedFirm?.name ||
-                    "Not routed"
+                  assigned.map(firm => firm.name).join(", ") || "Not routed"
                 )}
               </p>
 
               <p>
                 <strong>Routing Tier:</strong>
                 ${escapeHtml(
-                  routedFirm?.planKey ||
-                    "N/A"
+                  assigned.map(firm => firm.planKey).join(", ") || "N/A"
                 )}
               </p>
 
@@ -2082,7 +1946,7 @@ export default async function handler(
                 <strong>Delivery:</strong>
                 ${
                   routedSuccessfully
-                    ? "Accepted by email provider (delivery not confirmed)"
+                    ? accepted.map(firm => escapeHtml(firm.name)).join(", ") + " — accepted by email provider (delivery not confirmed)"
                     : "Admin capture only"
                 }
               </p>
@@ -2156,92 +2020,7 @@ export default async function handler(
       from: FROM_EMAIL,
       to: [cleanEmail],
       subject: spanishAcknowledgement ? "Recibimos su solicitud de consulta" : "We Received Your Consultation Request",
-      html: spanishAcknowledgement ? `
-        <div style="font-family: Arial, sans-serif; max-width: 650px; margin: 0 auto; color: #172033;">
-          <h2>Recibimos su solicitud</h2>
-          <p>Hola ${escapeHtml(cleanFullName)},</p>
-          <p>Su solicitud de consulta se envió a través de <strong>El Paso's Best Lawyers</strong>.</p>
-          <p>Su solicitud corresponde a <strong>${escapeHtml(area)}</strong>.</p>
-          ${routedSuccessfully && routedFirm
-            ? `<p>Su solicitud fue enviada a <strong>${escapeHtml(routedFirm.name)}</strong> para su revisión.</p>`
-            : `<p>El Paso's Best Lawyers ha recibido su solicitud y está siendo procesada.</p>`}
-          <p>El envío de esta solicitud no establece una relación abogado-cliente ni garantiza representación legal.</p>
-          <p>Evite enviar información confidencial o muy sensible hasta establecer una relación abogado-cliente con un abogado.</p>
-          <p>El Paso's Best Lawyers</p>
-        </div>
-      ` : `
-          <div
-            style="
-              font-family: Arial, sans-serif;
-              max-width: 650px;
-              margin: 0 auto;
-              color: #172033;
-            "
-          >
-            <h2>
-              We received your request
-            </h2>
-
-            <p>
-              Hi ${escapeHtml(
-                cleanFullName
-              )},
-            </p>
-
-            <p>
-              Your consultation request was submitted through
-              <strong>
-                El Paso's Best Lawyers
-              </strong>.
-            </p>
-
-            <p>
-              Your request relates to
-              <strong>
-                ${escapeHtml(area)}
-              </strong>.
-            </p>
-
-            ${
-              routedSuccessfully &&
-              routedFirm
-                ? `
-                  <p>
-                    Your request was delivered to
-                    <strong>
-                      ${escapeHtml(
-                        routedFirm.name
-                      )}
-                    </strong>
-                    for review.
-                  </p>
-                `
-                : `
-                  <p>
-                    El Paso's Best Lawyers has received
-                    your request and it is being processed.
-                  </p>
-                `
-            }
-
-            <p>
-              Submission does not create an
-              attorney-client relationship and does not
-              guarantee representation.
-            </p>
-
-            <p>
-              Please avoid sending additional
-              confidential or highly sensitive
-              information until you establish an
-              attorney-client relationship with a lawyer.
-            </p>
-
-            <p>
-              El Paso's Best Lawyers
-            </p>
-          </div>
-        `,
+      html: renderConsumerConfirmation({ name: cleanFullName, area, accepted, selected, spanish: spanishAcknowledgement }),
       }));
 
     if (
@@ -2261,26 +2040,23 @@ export default async function handler(
         capturedBy:
           "El Paso's Best Lawyers",
 
+        notifiedFirms: accepted.map(firm => ({ id: firm.id, name: firm.name })),
         routedToFirm:
           routedSuccessfully,
 
         routedFirmId:
           routedSuccessfully
-            ? routedFirm?.id ??
-              null
+            ? accepted[0]?.id ?? null
             : null,
 
         routedFirmName:
           routedSuccessfully
-            ? routedFirm?.name ??
-              null
+            ? accepted[0]?.name ?? null
             : null,
 
         routingPriority:
           routedSuccessfully
-            ? routedFirm
-                ?.priority ??
-              null
+            ? accepted[0]?.priority ?? null
             : null,
       });
   } catch (err: any) {

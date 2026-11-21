@@ -36,6 +36,7 @@ import {
 } from "@/hooks/use-toast";
 import { useSeo } from "../hooks/use-seo";
 import { AccountSecurity } from "@/components/dashboard/AccountSecurity";
+import { FirmInquiries } from "@/components/dashboard/FirmInquiries";
 import {
   supabase,
   isSupabaseConfigured,
@@ -691,6 +692,12 @@ export default function Dashboard() {
         {activeTab ===
           "analytics" && (
           <Analytics />
+        )}
+
+        {activeTab === "inquiries" && (
+          user && firmId && !isLoadingFirm && !firmLoadError
+            ? <FirmInquiries key={user.id + ":" + firmId} firmId={firmId} />
+            : <div className="rounded-lg border bg-white p-6">A connected firm profile is required to view inquiries.</div>
         )}
 
         {activeTab ===

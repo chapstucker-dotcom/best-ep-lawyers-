@@ -4,6 +4,7 @@ import {
   Lock,
   LogOut,
   MessageSquare,
+  Inbox,
   Scale,
   UserRound,
   Users,
@@ -42,6 +43,11 @@ const navigationItems = [
     id: 'analytics',
     label: 'Analytics',
     icon: BarChart3,
+  },
+  {
+    id: 'inquiries',
+    label: 'Inquiries',
+    icon: Inbox,
   },
   {
     id: 'subscription',
