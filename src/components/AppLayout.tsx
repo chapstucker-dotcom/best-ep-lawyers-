@@ -755,6 +755,11 @@ export default function AppLayout() {
             description="Tell us what you're facing and we'll use your request to identify relevant legal options available through El Paso's Best Lawyers. You can also browse and compare local law firms yourself."
             variant="homepage"
             phoneOptional
+            onBrowsePracticeArea={(slug) => {
+              setFreeConsultationOnly(false);
+              setSortBy('relevance');
+              handleCategoryClick(slug);
+            }}
           />
         </div>
       </section>

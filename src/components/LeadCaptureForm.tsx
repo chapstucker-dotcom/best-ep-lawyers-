@@ -17,6 +17,8 @@ import {
 
 import { trackMetaLead } from '@/services/metaPixel';
 import { getLeadAttribution } from '@/services/leadAttribution';
+import { categories } from '@/data/categories';
+import { normalizeDirectoryText } from '@/data/directorySearch';
 import {
   getPracticeAreaByValue,
   resolvePracticeAreaPage,
@@ -43,6 +45,7 @@ interface LeadCaptureFormProps {
   variant?: 'default' | 'homepage';
   phoneOptional?: boolean;
   locale?: "en" | "es";
+  onBrowsePracticeArea?: (slug: string) => void;
 }
 
 type FormState = {
@@ -172,18 +175,31 @@ const inferPracticeAreaFromUrl = (): string => {
   return GENERAL_LEGAL_INQUIRY;
 };
 
-const inferPracticeAreaFromLegalIssue = (
+const suggestPracticeAreas = (
   legalIssue: string
-): string => {
-  const text = legalIssue
-    .toLowerCase()
-    .replace(/[^a-z0-9\s/]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-
-  if (!text) return 'General Legal Inquiry';
+): string[] => {
+  const text = normalizeDirectoryText(legalIssue);
+  if (!text) return [];
 
   const rules: Array<{ area: string; terms: string[] }> = [
+    { area: 'truck-accidents', terms: ['truck accident', 'truck crash', '18 wheeler', 'semi truck', 'tractor trailer'] },
+    { area: 'car-accidents', terms: ['car accident', 'car crash', 'car wreck', 'auto accident', 'motor vehicle accident', 'rear ended'] },
+    { area: 'motorcycle-accidents', terms: ['motorcycle accident', 'motorcycle crash'] },
+    { area: 'wrongful-death', terms: ['wrongful death', 'fatal accident', 'killed in an accident'] },
+    { area: 'catastrophic-injury', terms: ['catastrophic injury', 'serious injury', 'severe injury', 'permanent injury', 'serious injuries'] },
+    { area: 'brain-injury', terms: ['brain injury', 'traumatic brain injury', 'tbi'] },
+    { area: 'construction-accidents', terms: ['construction accident', 'construction injury'] },
+    { area: 'workers-compensation', terms: ['workers compensation', 'workers comp', 'injured at work', 'workplace injury'] },
+    { area: 'divorce', terms: ['divorce', 'end my marriage'] },
+    { area: 'child-custody', terms: ['child custody', 'custody', 'conservatorship'] },
+    { area: 'child-support', terms: ['child support'] },
+    { area: 'federal-crimes', terms: ['federal charge', 'federal crime', 'federal indictment'] },
+    { area: 'drug-crimes', terms: ['drug charge', 'drug possession'] },
+    { area: 'deportation-defense', terms: ['deportation', 'removal proceedings'] },
+    { area: 'green-cards', terms: ['green card', 'permanent residency'] },
+    { area: 'wrongful-termination', terms: ['wrongful termination', 'wrongfully terminated', 'fired from work'] },
+    { area: 'wage-and-hour', terms: ['unpaid wages', 'unpaid overtime', 'overtime pay'] },
+    { area: 'landlord-tenant', terms: ['landlord', 'tenant', 'eviction', 'lease dispute'] },
     { area: 'DWI / DUI', terms: ['dwi', 'dui', 'drunk driving', 'driving while intoxicated', 'driving under the influence'] },
     { area: 'Family Law', terms: ['family law', 'divorce', 'child custody', 'custody', 'child support', 'spousal support', 'alimony', 'adoption', 'paternity'] },
     { area: 'Immigration', terms: ['immigration', 'visa', 'green card', 'citizenship', 'deportation', 'asylum', 'naturalization'] },
@@ -198,20 +214,19 @@ const inferPracticeAreaFromLegalIssue = (
     { area: 'Civil Litigation', terms: ['civil litigation', 'civil lawsuit', 'civil case', 'being sued', 'file a lawsuit', 'lawsuit against'] },
   ];
 
+  const matches = new Set<string>();
   for (const rule of rules) {
-    if (rule.terms.some((term) => text.includes(term))) {
-      const practiceArea =
-        getPracticeAreaByValue(rule.area);
-
-      if (practiceArea) {
-        return practiceArea.title;
-      }
-
-      return rule.area;
+    if (rule.terms.some((term) => ` ${text} `.includes(` ${normalizeDirectoryText(term)} `))) {
+      const area = getPracticeAreaByValue(rule.area);
+      if (area) matches.add(area.slug);
     }
   }
-
-  return 'General Legal Inquiry';
+  // Specific accident contexts also warrant browsing the broader injury market.
+  if (['truck-accidents', 'car-accidents', 'motorcycle-accidents', 'wrongful-death', 'catastrophic-injury', 'brain-injury', 'construction-accidents'].some(slug => matches.has(slug))) {
+    matches.add('personal-injury');
+  }
+  if (['federal-crimes', 'drug-crimes', 'dwi-dui'].some(slug => matches.has(slug))) matches.add('criminal-defense');
+  return [...matches];
 };
 
 const isMissingColumnError = (
@@ -244,6 +259,7 @@ export default function LeadCaptureForm({
   variant = 'default',
   phoneOptional = false,
   locale = "en",
+  onBrowsePracticeArea,
 }: LeadCaptureFormProps) {
   const es = locale === "es";
   const [form, setForm] =
@@ -259,6 +275,9 @@ export default function LeadCaptureForm({
 
   const [errorMessage, setErrorMessage] =
     useState('');
+  const [chosenArea, setChosenArea] = useState('');
+  const suggestedAreas = variant === 'homepage' ? suggestPracticeAreas(form.legalIssue) : [];
+  const chosenPracticeArea = getPracticeAreaByValue(chosenArea);
 
   /*
    * Prefer a practice area explicitly supplied by a
@@ -267,7 +286,7 @@ export default function LeadCaptureForm({
    */
   const effectivePracticeArea =
     variant === 'homepage'
-      ? inferPracticeAreaFromLegalIssue(form.legalIssue)
+      ? chosenPracticeArea?.title ?? GENERAL_LEGAL_INQUIRY
       : practiceArea?.trim() ||
         inferPracticeAreaFromUrl();
 
@@ -369,6 +388,11 @@ export default function LeadCaptureForm({
     field: keyof FormState,
     value: string
   ) => {
+    if (field === 'legalIssue' && variant === 'homepage') {
+      setChosenArea('');
+      setSelectedIds([]);
+      setSharingConsent(false);
+    }
     setForm((current) => ({
       ...current,
       [field]: value,
@@ -519,6 +543,7 @@ export default function LeadCaptureForm({
       );
 
       setForm(EMPTY_FORM);
+      setChosenArea('');
       selectRecipients([]);
 
       onSuccess?.();
@@ -653,6 +678,44 @@ export default function LeadCaptureForm({
                 <p className="text-right text-xs text-slate-500">
                   {form.legalIssue.length}/1000
                 </p>
+              </div>
+
+              <div className="space-y-3 rounded-xl border border-[#D4A62A]/40 bg-white/5 p-4 text-white">
+                <h3 className="font-bold">Explore your legal options</h3>
+                <p className="text-sm text-slate-300">Choose the type of help you need. Suggestions are a starting point for exploration, not legal advice. You can change the practice area or leave it unspecified.</p>
+                {suggestedAreas.length > 0 && (
+                  <div className="flex flex-wrap gap-2">
+                    {suggestedAreas.map(slug => {
+                      const area = getPracticeAreaByValue(slug);
+                      return area ? (
+                        <button key={slug} type="button" disabled={loading} aria-pressed={chosenArea === slug}
+                          onClick={() => setChosenArea(slug)}
+                          className={chosenArea === slug
+                            ? "rounded-full border border-[#D4A62A] bg-[#D4A62A] px-3 py-2 text-sm font-semibold text-[#061A2C]"
+                            : "rounded-full border border-white/30 px-3 py-2 text-sm font-semibold text-white hover:bg-white/10"}>
+                          {area.title}
+                        </button>
+                      ) : null;
+                    })}
+                  </div>
+                )}
+                <Label htmlFor="homepage-practice-area" className="text-sm font-semibold text-white">Practice area for your request (optional)</Label>
+                <select id="homepage-practice-area" value={chosenArea} disabled={loading}
+                  onChange={event => setChosenArea(event.target.value)}
+                  className="w-full rounded-md border border-white/20 bg-[#0F2A43] px-3 py-3 text-sm text-white">
+                  <option value="">Not sure — send to EPBL only</option>
+                  {[...categories].sort((a, b) => a.title.localeCompare(b.title)).map(area => (
+                    <option key={area.slug} value={area.slug}>{area.title}</option>
+                  ))}
+                </select>
+                {chosenPracticeArea && onBrowsePracticeArea && (
+                  <button type="button" disabled={loading} onClick={() => onBrowsePracticeArea(chosenArea)}
+                    className="rounded-lg border border-[#D4A62A] px-4 py-2 text-sm font-bold text-[#F5CD65] hover:bg-white/10">
+                    Browse {chosenPracticeArea.title} firms
+                  </button>
+                )}
+                <p className="text-xs text-slate-300">You can compare firms without entering contact information. Participating firms for a consultation may practice in the broader legal category; review and choose the firms you want to contact.</p>
+                <a href="/guides#consultation-preparation" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-[#F5CD65] underline">Prepare for a consultation</a>
               </div>
 
               <div className="grid gap-3 md:grid-cols-2">
