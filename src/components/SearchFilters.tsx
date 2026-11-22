@@ -34,7 +34,7 @@ export default function SearchFilters({
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Categories</SelectItem>
-            {categories.map(cat => (
+            {[...categories].sort((a, b) => a.title.localeCompare(b.title)).map(cat => (
               <SelectItem key={cat.id} value={cat.slug}>{cat.title}</SelectItem>
             ))}
           </SelectContent>
