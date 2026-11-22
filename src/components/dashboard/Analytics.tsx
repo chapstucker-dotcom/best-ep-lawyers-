@@ -38,6 +38,7 @@ import {
 import { getFirmByUserId } from '@/services/firmService';
 import { getAnalyticsSummary } from '@/services/analyticsService';
 import { useToast } from '@/hooks/use-toast';
+import { InquiryPerformance } from './FirmInquiries';
 
 interface AnalyticsSummary {
   listing_impressions: number;
@@ -66,6 +67,8 @@ export const Analytics = () => {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [firmName, setFirmName] = useState('');
+  const [inquiryFirm, setInquiryFirm] = useState<{ id: string; ownerId: string } | null>(null);
+  const [inquiryRevision, setInquiryRevision] = useState(0);
   const [errorMessage, setErrorMessage] = useState('');
   const [summary, setSummary] =
     useState<AnalyticsSummary>(EMPTY_SUMMARY);
@@ -73,12 +76,14 @@ export const Analytics = () => {
   const loadAnalytics = useCallback(
     async (showRefreshMessage = false) => {
       if (!user) {
+        setInquiryFirm(null);
         setLoading(false);
         return;
       }
 
       if (showRefreshMessage) {
         setRefreshing(true);
+        setInquiryRevision(value => value + 1);
       } else {
         setLoading(true);
       }
@@ -92,6 +97,7 @@ export const Analytics = () => {
         } = await getFirmByUserId(user.id);
 
         if (firmError || !firm) {
+          setInquiryFirm(null);
           const message =
             'Create your firm profile before viewing analytics.';
 
@@ -108,6 +114,7 @@ export const Analytics = () => {
         }
 
         setFirmName(firm.name ?? '');
+        setInquiryFirm({ id: firm.id, ownerId: user.id });
 
         const {
           data,
@@ -215,27 +222,27 @@ export const Analytics = () => {
       label: 'Phone Clicks',
       value: summary.phone_clicks,
       description:
-        'Visitors who clicked to call your firm',
+        'Recorded clicks to call your firm',
       icon: Phone,
     },
     {
       label: 'Email Clicks',
       value: summary.email_clicks,
       description:
-        'Visitors who clicked your email button',
+        'Recorded clicks on your email button',
       icon: Mail,
     },
     {
       label: 'Website Clicks',
       value: summary.website_clicks,
       description:
-        'Visitors sent to your firm website',
+        'Recorded clicks to visit your firm website',
       icon: Globe,
     },
     {
-      label: 'Consultation Submissions',
+      label: 'Attributed Consultation Submissions',
       value: summary.consultation_submissions,
-      description: 'Consultation requests successfully submitted',
+      description: 'Recorded consultation submission events; see authorized inquiries below',
       icon: Send,
     },
   ];
@@ -289,13 +296,13 @@ export const Analytics = () => {
                 <BarChart3 className="h-6 w-6" />
 
                 <CardTitle className="text-2xl text-white">
-                  Analytics Dashboard
+                  Firm Performance Dashboard
                 </CardTitle>
               </div>
 
               <p className="max-w-2xl text-sm leading-6 text-white/80">
-                Track how visitors discover and
-                interact with{' '}
+                Track recorded visibility, engagement and
+                inquiry outcomes for{' '}
                 {firmName
                   ? firmName
                   : 'your firm profile'}.
@@ -305,7 +312,7 @@ export const Analytics = () => {
             <div className="flex flex-wrap items-center gap-3">
               <Badge className="border border-white/20 bg-white/10 text-white">
                 <Activity className="mr-1.5 h-3.5 w-3.5" />
-                Live activity
+                Recorded activity
               </Badge>
 
               <Button
@@ -338,6 +345,10 @@ export const Analytics = () => {
         </Alert>
       )}
 
+      <div>
+        <h2 className="text-xl font-bold text-[#0F2A43]">Visibility &amp; engagement</h2>
+        <p className="mt-1 text-sm text-gray-600">Recorded directory and profile events. Counts may include repeat actions and are not unique visitors.</p>
+      </div>
       <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {stats.map((stat) => {
           const Icon = stat.icon;
@@ -372,6 +383,21 @@ export const Analytics = () => {
           );
         })}
       </section>
+
+      {user && inquiryFirm?.ownerId === user.id && (
+        <InquiryPerformance key={user.id + ':' + inquiryFirm.id}
+          firmId={inquiryFirm.id} revision={inquiryRevision} />
+      )}
+
+      <Card className="border-teal-200 bg-teal-50/50">
+        <CardHeader>
+          <CardTitle className="text-lg text-[#0F2A43]">Understanding your advertising performance</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-2 text-sm text-gray-700">
+          <p>Visibility shows how often your listing was seen. Engagement shows recorded actions visitors took. Authorized inquiries and firm-reported retention outcomes measure a separate part of the experience.</p>
+          <p>Attribution events and inquiry assignments are different records and may not match one-for-one. Do not add them together. Recorded conversions are not verified revenue, and financial return on investment is not calculated without actual costs and revenue.</p>
+        </CardContent>
+      </Card>
 
       <section className="grid gap-6 lg:grid-cols-3">
         <Card className="lg:col-span-2">
@@ -510,7 +536,7 @@ export const Analytics = () => {
             </div>
 
             <h3 className="mt-5 text-lg font-bold text-[#0F2A43]">
-              Analytics will appear here
+              No visibility or engagement activity yet
             </h3>
 
             <p className="mx-auto mt-2 max-w-lg text-sm leading-6 text-gray-600">

@@ -48,7 +48,7 @@ type InquirySummary = {
   recorded_retained_count: number;
 };
 
-function InquiryPerformance({ firmId, revision }: { firmId: string; revision: number }) {
+export function InquiryPerformance({ firmId, revision }: { firmId: string; revision: number }) {
   const [summary, setSummary] = useState<InquirySummary | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
