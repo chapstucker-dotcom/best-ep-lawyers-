@@ -48,7 +48,9 @@ type InquirySummary = {
   recorded_retained_count: number;
 };
 
-export function InquiryPerformance({ firmId, revision }: { firmId: string; revision: number }) {
+export function InquiryPerformance({ firmId, revision, start = null, end = null }: {
+  firmId: string; revision: number; start?: string | null; end?: string | null;
+}) {
   const [summary, setSummary] = useState<InquirySummary | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -60,8 +62,10 @@ export function InquiryPerformance({ firmId, revision }: { firmId: string; revis
     async function load() {
       try {
         if (!supabase) throw new Error("Unavailable");
-        const { data, error: rpcError } = await supabase.rpc("get_owned_firm_inquiry_summary_v2", {
+        const { data, error: rpcError } = await supabase.rpc("get_owned_firm_inquiry_period", {
           p_firm_id: firmId,
+          p_start: start,
+          p_end: end,
         });
         if (rpcError || !Array.isArray(data) || data.length !== 1) throw new Error("Unavailable");
         const row = data[0] as InquirySummary;
@@ -80,15 +84,15 @@ export function InquiryPerformance({ firmId, revision }: { firmId: string; revis
     }
     void load();
     return () => { active = false; };
-  }, [firmId, revision]);
+  }, [firmId, revision, start, end]);
 
   return (
     <section className="rounded-xl border bg-white p-5 shadow-sm">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h3 className="text-xl font-bold text-[#0F2A43]">Inquiry performance</h3>
-        <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">All time · Firm-reported</span>
+        <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">{start && end ? `${start} to ${end}` : "All time"} · Firm-reported</span>
       </div>
-      <p className="mt-2 text-sm text-slate-600">Your firm's authorized inquiries across all pages, based on the statuses you record.</p>
+      <p className="mt-2 text-sm text-slate-600">Your firm's authorized inquiries received during the selected period, with their current statuses and recorded outcomes, including updates made later.</p>
       {loading ? <p className="mt-4 text-sm text-slate-600" role="status">Loading inquiry performance...</p>
         : error || !summary ? <p className="mt-4 text-sm text-red-700" role="alert">Performance unavailable. Use Refresh to try again.</p>
         : <>

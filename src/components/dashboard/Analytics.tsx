@@ -2,6 +2,7 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 
@@ -36,7 +37,7 @@ import {
 } from '@/components/ui/alert';
 
 import { getFirmByUserId } from '@/services/firmService';
-import { getAnalyticsSummary } from '@/services/analyticsService';
+import { supabase } from '@/lib/supabase';
 import { useToast } from '@/hooks/use-toast';
 import { InquiryPerformance } from './FirmInquiries';
 
@@ -60,6 +61,24 @@ const EMPTY_SUMMARY: AnalyticsSummary = {
   consultation_submissions: 0,
 };
 
+type Period = '7' | '30' | '90' | 'all' | 'custom';
+type DateRange = { start: string | null; end: string | null };
+
+function elPasoToday(): string {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Denver', year: 'numeric', month: '2-digit', day: '2-digit',
+  }).formatToParts(new Date());
+  const part = (type: string) => parts.find(item => item.type === type)?.value ?? '';
+  return `${part('year')}-${part('month')}-${part('day')}`;
+}
+
+function presetRange(days: number): DateRange {
+  const end = elPasoToday();
+  const date = new Date(end + 'T00:00:00Z');
+  date.setUTCDate(date.getUTCDate() - days + 1);
+  return { start: date.toISOString().slice(0, 10), end };
+}
+
 export const Analytics = () => {
   const { user } = useAuth();
   const { toast } = useToast();
@@ -69,12 +88,18 @@ export const Analytics = () => {
   const [firmName, setFirmName] = useState('');
   const [inquiryFirm, setInquiryFirm] = useState<{ id: string; ownerId: string } | null>(null);
   const [inquiryRevision, setInquiryRevision] = useState(0);
+  const [period, setPeriod] = useState<Period>('all');
+  const [range, setRange] = useState<DateRange>({ start: null, end: null });
+  const [customStart, setCustomStart] = useState(() => presetRange(30).start ?? '');
+  const [customEnd, setCustomEnd] = useState(() => elPasoToday());
+  const requestId = useRef(0);
   const [errorMessage, setErrorMessage] = useState('');
   const [summary, setSummary] =
     useState<AnalyticsSummary>(EMPTY_SUMMARY);
 
   const loadAnalytics = useCallback(
     async (showRefreshMessage = false) => {
+      const request = ++requestId.current;
       if (!user) {
         setInquiryFirm(null);
         setLoading(false);
@@ -95,6 +120,7 @@ export const Analytics = () => {
           data: firm,
           error: firmError,
         } = await getFirmByUserId(user.id);
+        if (request !== requestId.current) return;
 
         if (firmError || !firm) {
           setInquiryFirm(null);
@@ -116,14 +142,14 @@ export const Analytics = () => {
         setFirmName(firm.name ?? '');
         setInquiryFirm({ id: firm.id, ownerId: user.id });
 
-        const {
-          data,
-          error,
-        } = await getAnalyticsSummary(firm.id);
-
-        if (error) {
-          throw error;
-        }
+        if (!supabase) throw new Error('Analytics unavailable.');
+        const { data: result, error } = await supabase.rpc('get_owned_firm_attribution_period', {
+          p_firm_id: firm.id, p_start: range.start, p_end: range.end,
+        });
+        if (request !== requestId.current) return;
+        if (error || !Array.isArray(result) || result.length !== 1) throw new Error('Analytics unavailable.');
+        const data = result[0] as AnalyticsSummary;
+        if (Object.keys(EMPTY_SUMMARY).some(key => !Number.isSafeInteger(data[key as keyof AnalyticsSummary]) || data[key as keyof AnalyticsSummary] < 0)) throw new Error('Invalid analytics summary.');
 
         setSummary({
           listing_impressions:
@@ -150,6 +176,8 @@ export const Analytics = () => {
           });
         }
       } catch (error) {
+        if (request !== requestId.current) return;
+        setSummary(EMPTY_SUMMARY);
         console.error(
           'Failed to load analytics:',
           error
@@ -168,16 +196,25 @@ export const Analytics = () => {
           variant: 'destructive',
         });
       } finally {
-        setLoading(false);
-        setRefreshing(false);
+        if (request === requestId.current) {
+          setLoading(false);
+          setRefreshing(false);
+        }
       }
     },
-    [toast, user]
+    [toast, user, range.start, range.end]
   );
 
   useEffect(() => {
     void loadAnalytics();
+    return () => { requestId.current += 1; };
   }, [loadAnalytics]);
+
+  function choosePeriod(next: Period) {
+    setPeriod(next);
+    if (next === 'all') setRange({ start: null, end: null });
+    else if (next !== 'custom') setRange(presetRange(Number(next)));
+  }
 
   const actionsPer100Views = useMemo(() => {
     if (summary.total_views === 0) {
@@ -337,6 +374,37 @@ export const Analytics = () => {
         </CardHeader>
       </Card>
 
+      <Card>
+        <CardContent className="space-y-3 p-5">
+          <h2 className="font-semibold text-[#0F2A43]">Reporting period</h2>
+          <div className="flex flex-wrap gap-2">
+            {([
+              ['7', 'Last 7 days'], ['30', 'Last 30 days'], ['90', 'Last 90 days'],
+              ['all', 'All time'], ['custom', 'Custom range'],
+            ] as const).map(([value, label]) => (
+              <Button key={value} type="button" variant={period === value ? 'default' : 'outline'}
+                aria-pressed={period === value} disabled={refreshing} onClick={() => choosePeriod(value)}>{label}</Button>
+            ))}
+          </div>
+          {period === 'custom' && (
+            <div className="flex flex-wrap items-end gap-3">
+              <label className="text-sm font-medium">From
+                <input type="date" value={customStart} max={customEnd || elPasoToday()}
+                  onChange={event => setCustomStart(event.target.value)} className="mt-1 block rounded-md border p-2" />
+              </label>
+              <label className="text-sm font-medium">To
+                <input type="date" value={customEnd} min={customStart} max={elPasoToday()}
+                  onChange={event => setCustomEnd(event.target.value)} className="mt-1 block rounded-md border p-2" />
+              </label>
+              <Button type="button" disabled={refreshing || !customStart || !customEnd || customStart > customEnd || customEnd > elPasoToday()}
+                onClick={() => setRange({ start: customStart, end: customEnd })}>Apply dates</Button>
+            </div>
+          )}
+          <p className="text-sm text-gray-600">Showing: {range.start && range.end ? `${range.start} through ${range.end}` : 'All time'} · El Paso local time. The end date is inclusive.</p>
+          <p className="text-xs text-gray-500">Engagement uses event dates. Inquiry outcomes use inquiries received in this period and reflect their latest recorded status.</p>
+        </CardContent>
+      </Card>
+
       {errorMessage && (
         <Alert variant="destructive">
           <AlertDescription>
@@ -349,7 +417,7 @@ export const Analytics = () => {
         <h2 className="text-xl font-bold text-[#0F2A43]">Visibility &amp; engagement</h2>
         <p className="mt-1 text-sm text-gray-600">Recorded directory and profile events. Counts may include repeat actions and are not unique visitors.</p>
       </div>
-      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+      {!errorMessage && <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {stats.map((stat) => {
           const Icon = stat.icon;
 
@@ -382,11 +450,11 @@ export const Analytics = () => {
             </Card>
           );
         })}
-      </section>
+      </section>}
 
       {user && inquiryFirm?.ownerId === user.id && (
         <InquiryPerformance key={user.id + ':' + inquiryFirm.id}
-          firmId={inquiryFirm.id} revision={inquiryRevision} />
+          firmId={inquiryFirm.id} revision={inquiryRevision} start={range.start} end={range.end} />
       )}
 
       <Card className="border-teal-200 bg-teal-50/50">
@@ -399,7 +467,7 @@ export const Analytics = () => {
         </CardContent>
       </Card>
 
-      <section className="grid gap-6 lg:grid-cols-3">
+      {!errorMessage && <section className="grid gap-6 lg:grid-cols-3">
         <Card className="lg:col-span-2">
           <CardHeader>
             <div className="flex flex-wrap items-center justify-between gap-3">
@@ -526,7 +594,7 @@ export const Analytics = () => {
             </div>
           </CardContent>
         </Card>
-      </section>
+      </section>}
 
       {!hasActivity && !errorMessage && (
         <Card>
