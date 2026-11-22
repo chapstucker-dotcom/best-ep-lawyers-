@@ -37,7 +37,79 @@ const workflowOptions = [
   { value: "closed", label: "Closed" },
 ] as const;
 
-function InquiryWorkflow({ inquiry }: { inquiry: Inquiry }) {
+type InquirySummary = {
+  total: number;
+  new_count: number;
+  contacted_count: number;
+  scheduled_count: number;
+  retained_count: number;
+  closed_count: number;
+};
+
+function InquiryPerformance({ firmId, revision }: { firmId: string; revision: number }) {
+  const [summary, setSummary] = useState<InquirySummary | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  useEffect(() => {
+    let active = true;
+    setSummary(null);
+    setLoading(true);
+    setError(false);
+    async function load() {
+      try {
+        if (!supabase) throw new Error("Unavailable");
+        const { data, error: rpcError } = await supabase.rpc("get_owned_firm_inquiry_summary", {
+          p_firm_id: firmId,
+        });
+        if (rpcError || !Array.isArray(data) || data.length !== 1) throw new Error("Unavailable");
+        const row = data[0] as InquirySummary;
+        const values = [row.total, row.new_count, row.contacted_count, row.scheduled_count, row.retained_count, row.closed_count];
+        if (values.some(value => !Number.isSafeInteger(value) || value < 0)
+          || values.slice(1).reduce((sum, value) => sum + value, 0) !== row.total) throw new Error("Invalid summary");
+        if (active) setSummary(row);
+      } catch {
+        if (active) setError(true);
+      } finally {
+        if (active) setLoading(false);
+      }
+    }
+    void load();
+    return () => { active = false; };
+  }, [firmId, revision]);
+
+  return (
+    <section className="rounded-xl border bg-white p-5 shadow-sm">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h3 className="text-xl font-bold text-[#0F2A43]">Inquiry performance</h3>
+        <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">All time · Current status</span>
+      </div>
+      <p className="mt-2 text-sm text-slate-600">Your firm's authorized inquiries across all pages, based on the statuses you record.</p>
+      {loading ? <p className="mt-4 text-sm text-slate-600" role="status">Loading inquiry performance...</p>
+        : error || !summary ? <p className="mt-4 text-sm text-red-700" role="alert">Performance unavailable. Use Refresh to try again.</p>
+        : <>
+          <div className="mt-4 grid gap-3 grid-cols-2 lg:grid-cols-4">
+            {[
+              { label: "Total inquiries", value: summary.total },
+              { label: "Currently contacted", value: summary.contacted_count },
+              { label: "Consultations scheduled", value: summary.scheduled_count },
+              { label: "Currently retained", value: summary.retained_count },
+              { label: "New", value: summary.new_count },
+              { label: "Closed", value: summary.closed_count },
+              { label: "Current retained share", value: summary.total ? `${(100 * summary.retained_count / summary.total).toFixed(1)}%` : "—" },
+            ].map(metric => (
+              <div key={metric.label} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+                <p className="text-xs font-semibold text-slate-600">{metric.label}</p>
+                <p className="mt-1 text-2xl font-bold text-[#0F2A43] tabular-nums">{metric.value}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-4 text-xs text-slate-600">Each inquiry counts in exactly one current status. Retained share is currently retained divided by total inquiries; it is not a lifetime conversion rate. Closed inquiries do not count as retained. Outcomes are firm-reported, not independently verified.</p>
+        </>}
+    </section>
+  );
+}
+
+function InquiryWorkflow({ inquiry, onSaved }: { inquiry: Inquiry; onSaved: () => void }) {
   const [saved, setSaved] = useState(inquiry.workflow_status);
   const [selected, setSelected] = useState(inquiry.workflow_status);
   const [updatedAt, setUpdatedAt] = useState(inquiry.workflow_updated_at);
@@ -60,6 +132,7 @@ function InquiryWorkflow({ inquiry }: { inquiry: Inquiry }) {
       setSaved(selected);
       setUpdatedAt(data);
       setMessage("Status saved.");
+      onSaved();
     } catch {
       setFailed(true);
       setMessage("Could not save the status. Please try again.");
@@ -102,6 +175,7 @@ export function FirmInquiries({ firmId }: { firmId: string }) {
   const [page, setPage] = useState(0);
   const [hasNext, setHasNext] = useState(false);
   const [refresh, setRefresh] = useState(0);
+  const [summaryRevision, setSummaryRevision] = useState(0);
 
   useEffect(() => {
     let active = true;
@@ -140,11 +214,12 @@ export function FirmInquiries({ firmId }: { firmId: string }) {
             <p className="mt-2 text-sm text-white/80">Review requests from consumers who authorized sharing their information with your firm.</p>
           </div>
           <Button variant="outline" className="bg-white text-[#0F2A43]" disabled={loading}
-            onClick={() => setRefresh(value => value + 1)}>
+            onClick={() => { setRefresh(value => value + 1); setSummaryRevision(value => value + 1); }}>
             <RefreshCw className="mr-2 h-4 w-4" /> Refresh
           </Button>
         </div>
       </div>
+      <InquiryPerformance firmId={firmId} revision={summaryRevision} />
       <p className="text-sm text-slate-600">Treat all inquiry details as confidential. An inquiry is not a retained client or a guarantee of representation. Email delivery status is separate from whether you have responded.</p>
       {loading ? (
         <div className="rounded-xl border bg-white p-6" role="status">Loading inquiries...</div>
@@ -177,7 +252,7 @@ export function FirmInquiries({ firmId }: { firmId: string }) {
             <summary className="cursor-pointer font-semibold text-[#0F2A43]">Read inquiry details</summary>
             <p className="mt-3 whitespace-pre-wrap break-words text-sm text-slate-700">{inquiry.legal_issue || "No additional details provided."}</p>
           </details>
-          <InquiryWorkflow inquiry={inquiry} />
+          <InquiryWorkflow inquiry={inquiry} onSaved={() => setSummaryRevision(value => value + 1)} />
         </article>
       ))}
       <div className="flex items-center justify-between gap-3">
