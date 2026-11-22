@@ -31,7 +31,7 @@ export const lozanoMezaExclusiveFirm = {
     "Organized Crime",
     "Juvenile Law",
   ],
-  categories: ["Criminal Defense"],
+  categories: ["Criminal Defense", "Personal Injury"],
   category: "Criminal Defense",
   plan: "category_exclusive",
   plan_key: "category_exclusive",

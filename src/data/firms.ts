@@ -121,6 +121,7 @@ export const firms = [
     id: "lozano-meza-law-firm",
     name: "Lozano Meza Law Firm",
     category: "Criminal Defense",
+    categories: ["Criminal Defense", "Personal Injury"],
     phone: "(915) 706-2111",
     website: "https://www.lozanomeza.com/",
     address: "221 N Kansas St, Suite 1200, El Paso, TX 79901",
