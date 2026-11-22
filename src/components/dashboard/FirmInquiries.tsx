@@ -14,6 +14,8 @@ type Inquiry = {
   matter_location: string | null;
   matter_timing: string | null;
   notification_status: string;
+  workflow_status: string;
+  workflow_updated_at: string | null;
 };
 
 const PAGE_SIZE = 25;
@@ -26,6 +28,72 @@ const statusLabels: Record<string, string> = {
   bounced: "Email bounced",
   not_confirmed: "Email acceptance not confirmed",
 };
+
+const workflowOptions = [
+  { value: "new", label: "New" },
+  { value: "contacted", label: "Contacted" },
+  { value: "consultation_scheduled", label: "Consultation scheduled" },
+  { value: "retained", label: "Retained" },
+  { value: "closed", label: "Closed" },
+] as const;
+
+function InquiryWorkflow({ inquiry }: { inquiry: Inquiry }) {
+  const [saved, setSaved] = useState(inquiry.workflow_status);
+  const [selected, setSelected] = useState(inquiry.workflow_status);
+  const [updatedAt, setUpdatedAt] = useState(inquiry.workflow_updated_at);
+  const [saving, setSaving] = useState(false);
+  const [message, setMessage] = useState("");
+  const [failed, setFailed] = useState(false);
+
+  async function save() {
+    if (saving || selected === saved) return;
+    setSaving(true);
+    setMessage("");
+    setFailed(false);
+    try {
+      if (!supabase) throw new Error("Unavailable");
+      const { data, error } = await supabase.rpc("update_owned_firm_inquiry_status", {
+        p_assignment_id: inquiry.assignment_id,
+        p_status: selected,
+      });
+      if (error || typeof data !== "string") throw new Error("Save failed");
+      setSaved(selected);
+      setUpdatedAt(data);
+      setMessage("Status saved.");
+    } catch {
+      setFailed(true);
+      setMessage("Could not save the status. Please try again.");
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  return (
+    <div className="mt-4 rounded-lg border border-teal-100 bg-teal-50/60 p-4">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h4 className="font-semibold text-[#0F2A43]">Inquiry progress</h4>
+        <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-[#0F2A43]">
+          {workflowOptions.find(option => option.value === saved)?.label || "Unknown"}
+        </span>
+      </div>
+      <div className="mt-3 flex flex-wrap items-end gap-3">
+        <label className="min-w-0 flex-1 text-sm font-medium text-slate-700">
+          Update status
+          <select className="mt-1 block w-full rounded-md border border-slate-300 bg-white p-2 text-sm"
+            value={selected} disabled={saving}
+            onChange={event => { setSelected(event.target.value); setMessage(""); }}>
+            {workflowOptions.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}
+          </select>
+        </label>
+        <Button disabled={saving || selected === saved} onClick={() => void save()}>
+          {saving ? "Saving..." : "Save status"}
+        </Button>
+      </div>
+      {updatedAt && <p className="mt-2 text-xs text-slate-600">Last updated: {new Date(updatedAt).toLocaleString()}</p>}
+      {message && <p role={failed ? "alert" : "status"} className={`mt-2 text-sm ${failed ? "text-red-700" : "text-teal-800"}`}>{message}</p>}
+    </div>
+  );
+}
 
 export function FirmInquiries({ firmId }: { firmId: string }) {
   const [rows, setRows] = useState<Inquiry[]>([]);
@@ -44,7 +112,7 @@ export function FirmInquiries({ firmId }: { firmId: string }) {
     async function load() {
       try {
         if (!supabase) throw new Error("Unavailable");
-        const { data, error: rpcError } = await supabase.rpc("get_owned_firm_inquiries", {
+        const { data, error: rpcError } = await supabase.rpc("get_owned_firm_inquiries_v2", {
           p_firm_id: firmId,
           p_offset: page * PAGE_SIZE,
         });
@@ -109,6 +177,7 @@ export function FirmInquiries({ firmId }: { firmId: string }) {
             <summary className="cursor-pointer font-semibold text-[#0F2A43]">Read inquiry details</summary>
             <p className="mt-3 whitespace-pre-wrap break-words text-sm text-slate-700">{inquiry.legal_issue || "No additional details provided."}</p>
           </details>
+          <InquiryWorkflow inquiry={inquiry} />
         </article>
       ))}
       <div className="flex items-center justify-between gap-3">
