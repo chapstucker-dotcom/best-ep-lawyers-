@@ -16,6 +16,7 @@ type Inquiry = {
   notification_status: string;
   workflow_status: string;
   workflow_updated_at: string | null;
+  retained_at: string | null;
 };
 
 const PAGE_SIZE = 25;
@@ -44,6 +45,7 @@ type InquirySummary = {
   scheduled_count: number;
   retained_count: number;
   closed_count: number;
+  recorded_retained_count: number;
 };
 
 function InquiryPerformance({ firmId, revision }: { firmId: string; revision: number }) {
@@ -58,14 +60,17 @@ function InquiryPerformance({ firmId, revision }: { firmId: string; revision: nu
     async function load() {
       try {
         if (!supabase) throw new Error("Unavailable");
-        const { data, error: rpcError } = await supabase.rpc("get_owned_firm_inquiry_summary", {
+        const { data, error: rpcError } = await supabase.rpc("get_owned_firm_inquiry_summary_v2", {
           p_firm_id: firmId,
         });
         if (rpcError || !Array.isArray(data) || data.length !== 1) throw new Error("Unavailable");
         const row = data[0] as InquirySummary;
         const values = [row.total, row.new_count, row.contacted_count, row.scheduled_count, row.retained_count, row.closed_count];
         if (values.some(value => !Number.isSafeInteger(value) || value < 0)
-          || values.slice(1).reduce((sum, value) => sum + value, 0) !== row.total) throw new Error("Invalid summary");
+          || values.slice(1).reduce((sum, value) => sum + value, 0) !== row.total
+          || !Number.isSafeInteger(row.recorded_retained_count)
+          || row.recorded_retained_count < row.retained_count
+          || row.recorded_retained_count > row.total) throw new Error("Invalid summary");
         if (active) setSummary(row);
       } catch {
         if (active) setError(true);
@@ -81,7 +86,7 @@ function InquiryPerformance({ firmId, revision }: { firmId: string; revision: nu
     <section className="rounded-xl border bg-white p-5 shadow-sm">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h3 className="text-xl font-bold text-[#0F2A43]">Inquiry performance</h3>
-        <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">All time · Current status</span>
+        <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">All time · Firm-reported</span>
       </div>
       <p className="mt-2 text-sm text-slate-600">Your firm's authorized inquiries across all pages, based on the statuses you record.</p>
       {loading ? <p className="mt-4 text-sm text-slate-600" role="status">Loading inquiry performance...</p>
@@ -95,7 +100,8 @@ function InquiryPerformance({ firmId, revision }: { firmId: string; revision: nu
               { label: "Currently retained", value: summary.retained_count },
               { label: "New", value: summary.new_count },
               { label: "Closed", value: summary.closed_count },
-              { label: "Current retained share", value: summary.total ? `${(100 * summary.retained_count / summary.total).toFixed(1)}%` : "—" },
+              { label: "Recorded retained inquiries", value: summary.recorded_retained_count },
+              { label: "Recorded conversion rate", value: summary.total ? `${(100 * summary.recorded_retained_count / summary.total).toFixed(1)}%` : "—" },
             ].map(metric => (
               <div key={metric.label} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
                 <p className="text-xs font-semibold text-slate-600">{metric.label}</p>
@@ -103,7 +109,7 @@ function InquiryPerformance({ firmId, revision }: { firmId: string; revision: nu
               </div>
             ))}
           </div>
-          <p className="mt-4 text-xs text-slate-600">Each inquiry counts in exactly one current status. Retained share is currently retained divided by total inquiries; it is not a lifetime conversion rate. Closed inquiries do not count as retained. Outcomes are firm-reported, not independently verified.</p>
+          <p className="mt-4 text-xs text-slate-600">Current statuses are mutually exclusive. Recorded conversion rate is inquiries recorded as retained divided by total inquiries, including retained matters later closed. Older closed matters without a recorded retention outcome are not inferred. Outcomes are firm-reported, not independently verified; repeated inquiries are not necessarily unique clients.</p>
         </>}
     </section>
   );
@@ -113,25 +119,30 @@ function InquiryWorkflow({ inquiry, onSaved }: { inquiry: Inquiry; onSaved: () =
   const [saved, setSaved] = useState(inquiry.workflow_status);
   const [selected, setSelected] = useState(inquiry.workflow_status);
   const [updatedAt, setUpdatedAt] = useState(inquiry.workflow_updated_at);
+  const [retainedAt, setRetainedAt] = useState(inquiry.retained_at);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
   const [failed, setFailed] = useState(false);
 
-  async function save() {
-    if (saving || selected === saved) return;
+  async function save(clearRetention = false) {
+    if (saving || (!clearRetention && selected === saved)) return;
+    if (clearRetention && (saved === "retained" || selected !== saved || !retainedAt)) return;
+    if (clearRetention && !window.confirm("Remove the recorded retention outcome? Only use this to correct an incorrect entry, not to close a retained matter.")) return;
     setSaving(true);
     setMessage("");
     setFailed(false);
     try {
       if (!supabase) throw new Error("Unavailable");
-      const { data, error } = await supabase.rpc("update_owned_firm_inquiry_status", {
+      const { data, error } = await supabase.rpc("update_owned_firm_inquiry_outcome", {
         p_assignment_id: inquiry.assignment_id,
         p_status: selected,
+        p_clear_retention: clearRetention,
       });
-      if (error || typeof data !== "string") throw new Error("Save failed");
+      if (error || !Array.isArray(data) || data.length !== 1 || typeof data[0].workflow_updated_at !== "string") throw new Error("Save failed");
       setSaved(selected);
-      setUpdatedAt(data);
-      setMessage("Status saved.");
+      setUpdatedAt(data[0].workflow_updated_at);
+      setRetainedAt(data[0].retained_at ?? null);
+      setMessage(clearRetention ? "Retention outcome corrected." : "Status saved.");
       onSaved();
     } catch {
       setFailed(true);
@@ -163,6 +174,15 @@ function InquiryWorkflow({ inquiry, onSaved }: { inquiry: Inquiry; onSaved: () =
         </Button>
       </div>
       {updatedAt && <p className="mt-2 text-xs text-slate-600">Last updated: {new Date(updatedAt).toLocaleString()}</p>}
+      {retainedAt && (
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-teal-100 pt-3">
+          <p className="text-sm text-teal-900">Retention recorded: {new Date(retainedAt).toLocaleDateString()} · Counts even after closure.</p>
+          {saved !== "retained" && (
+            <Button variant="outline" size="sm" disabled={saving || selected !== saved}
+              onClick={() => void save(true)}>Correct retention record</Button>
+          )}
+        </div>
+      )}
       {message && <p role={failed ? "alert" : "status"} className={`mt-2 text-sm ${failed ? "text-red-700" : "text-teal-800"}`}>{message}</p>}
     </div>
   );
@@ -186,7 +206,7 @@ export function FirmInquiries({ firmId }: { firmId: string }) {
     async function load() {
       try {
         if (!supabase) throw new Error("Unavailable");
-        const { data, error: rpcError } = await supabase.rpc("get_owned_firm_inquiries_v2", {
+        const { data, error: rpcError } = await supabase.rpc("get_owned_firm_inquiries_v3", {
           p_firm_id: firmId,
           p_offset: page * PAGE_SIZE,
         });
