@@ -37,6 +37,7 @@ import { getPlanRules } from '@/config/planRules';
 
 import type { Firm } from '../data/types';
 import { resolveDirectoryArea, scoreDirectoryCategory, scoreDirectoryText } from '../data/directorySearch';
+import { suggestPracticeAreas } from '../data/guidedDiscovery';
 
 import {
   Award,
@@ -238,6 +239,7 @@ export default function AppLayout() {
 
   const [searchQuery, setSearchQuery] = useState('');
   const [searchInput, setSearchInput] = useState('');
+  const [suggestedSearchAreas, setSuggestedSearchAreas] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] =
     useState('all');
   const [featuredOnly, setFeaturedOnly] =
@@ -251,6 +253,7 @@ export default function AppLayout() {
     const saved = (location.state as ProfileNavigationState | null)?.directoryReturn;
     setSearchQuery(saved?.searchQuery ?? '');
     setSearchInput(saved?.searchInput ?? '');
+    setSuggestedSearchAreas(saved?.suggestedSearchAreas ?? []);
     setSelectedCategory(saved?.selectedCategory ?? 'all');
     setFeaturedOnly(saved?.featuredOnly ?? false);
     setFreeConsultationOnly(saved?.freeConsultationOnly ?? false);
@@ -341,9 +344,13 @@ export default function AppLayout() {
   ) => {
     const cleanQuery = query.trim();
     const matchedCategory = resolveDirectoryArea(cleanQuery);
-    setSelectedCategory(matchedCategory?.slug ?? 'all');
-    setSearchQuery(matchedCategory ? '' : cleanQuery);
-    setSearchInput(matchedCategory?.title ?? cleanQuery);
+    const matchesName = cleanQuery && firms.some(firm => scoreDirectoryText(firm, cleanQuery) >= 140);
+    const suggestions = matchedCategory || matchesName ? [] : suggestPracticeAreas(cleanQuery);
+    const category = matchedCategory?.slug ?? suggestions[0] ?? 'all';
+    setSuggestedSearchAreas(suggestions);
+    setSelectedCategory(category);
+    setSearchQuery(category === 'all' ? cleanQuery : '');
+    setSearchInput(category === 'all' ? cleanQuery : getPracticeAreaTitle(category));
     setFeaturedOnly(false);
     setSortBy('relevance');
     scrollToSearch();
@@ -352,6 +359,7 @@ export default function AppLayout() {
   const handleCategoryClick = (
     slug: string
   ) => {
+    setSuggestedSearchAreas([]);
     setSelectedCategory(slug);
     setSearchQuery('');
     setSearchInput(slug === 'all' ? '' : getPracticeAreaTitle(slug));
@@ -361,11 +369,13 @@ export default function AppLayout() {
 
   // Filters refine an existing free-text search rather than silently replacing it.
   const handleFilterCategoryChange = (slug: string) => {
+    if (!suggestedSearchAreas.includes(slug)) setSuggestedSearchAreas([]);
     setSelectedCategory(slug);
     if (!searchQuery) setSearchInput(slug === 'all' ? '' : getPracticeAreaTitle(slug));
   };
 
   const clearSearch = () => {
+    setSuggestedSearchAreas([]);
     setSelectedCategory('all');
     setSearchQuery('');
     setSearchInput('');
@@ -641,6 +651,7 @@ export default function AppLayout() {
                   <button
                     type="button"
                     onClick={() => {
+                      setSuggestedSearchAreas([]);
                       setSelectedCategory('all');
                       setSearchQuery('');
                       setSearchInput('');
@@ -890,6 +901,21 @@ export default function AppLayout() {
               {loading ? 'Loading El Paso law firms…' : `${sortedFirms.length} ${sortedFirms.length === 1 ? 'firm' : 'firms'} found${selectedCategoryTitle ? ` for ${selectedCategoryTitle}` : ''}${searchQuery ? `${selectedCategoryTitle ? ' matching' : ' for'} “${searchQuery}”` : ''}${featuredOnly ? ' · Featured firms only' : ''}${freeConsultationOnly ? ' · Free initial consultations' : ''}.`}
             </p>
             <p className="mt-1 text-sm text-gray-500">Relevance uses matching practice areas and profile information. Paid placement may break ties between equally matched firms; it does not establish legal ability.</p>
+            {suggestedSearchAreas.length > 0 && (
+              <div className="mt-4 rounded-xl border border-teal-200 bg-teal-50 p-4">
+                <h3 className="font-semibold text-[#0F2A43]">Explore related practice areas</h3>
+                <p className="mt-1 text-sm text-gray-700">Based on your search, these areas may be relevant. Choose a category to compare law firms. This is not legal advice.</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {suggestedSearchAreas.map(slug => (
+                    <button key={slug} type="button" aria-pressed={selectedCategory === slug}
+                      onClick={() => handleFilterCategoryChange(slug)}
+                      className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${selectedCategory === slug ? 'border-[#0F2A43] bg-[#0F2A43] text-white' : 'border-teal-300 bg-white text-[#0F2A43] hover:bg-teal-100'}`}>
+                      {getPracticeAreaTitle(slug)}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
             {(selectedCategory !== 'all' || searchQuery || featuredOnly || freeConsultationOnly || sortBy !== 'relevance') && (
               <button type="button" onClick={clearSearch} className="mt-3 text-sm font-semibold text-[#1FA8A1] hover:underline">Clear filters and search</button>
             )}
@@ -945,7 +971,7 @@ export default function AppLayout() {
                       onClick={() =>
                         navigate(`/firm/${firm.id}`, {
                           state: {
-                            directoryReturn: { searchQuery, searchInput, selectedCategory, featuredOnly, freeConsultationOnly, sortBy },
+                            directoryReturn: { searchQuery, searchInput, selectedCategory, featuredOnly, freeConsultationOnly, sortBy, suggestedSearchAreas },
                             attribution: {
                               market: selectedAttributionMarket?.key,
                               specialty: selectedAttributionPracticeArea?.slug,

@@ -4,6 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 export type DirectoryReturn = {
   searchQuery: string;
   searchInput: string;
+  suggestedSearchAreas?: string[];
   selectedCategory: string;
   featuredOnly: boolean;
   freeConsultationOnly: boolean;
