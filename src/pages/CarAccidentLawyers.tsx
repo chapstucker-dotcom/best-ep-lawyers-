@@ -515,6 +515,33 @@ export default function CarAccidentLawyers() {
               </a>
             ))}
           </div>
+
+          <nav
+            aria-label="Specific car accident scenarios"
+            style={{ marginTop: "24px" }}
+          >
+            <p style={{ color: "#cbd5e1", lineHeight: 1.75 }}>
+              Explore more specific accident situations:
+            </p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "12px 18px", marginTop: "12px" }}>
+              {[
+                ["Wrong-Way Accidents", "/el-paso-wrong-way-accident-lawyers"],
+                ["Sideswipe Accidents", "/el-paso-sideswipe-accident-lawyers"],
+                ["Lane-Change Accidents", "/el-paso-lane-change-accident-lawyers"],
+                ["Merging Accidents", "/el-paso-merging-accident-lawyers"],
+                ["Failure-to-Yield Accidents", "/el-paso-failure-to-yield-accident-lawyers"],
+                ["Red-Light Accidents", "/el-paso-red-light-accident-lawyers"],
+              ].map(([label, href]) => (
+                <a
+                  key={href}
+                  href={href}
+                  style={{ color: "#fbbf24", textDecoration: "underline" }}
+                >
+                  {label}
+                </a>
+              ))}
+            </div>
+          </nav>
         </section>
 
         <section style={{ marginBottom: "52px" }}>
