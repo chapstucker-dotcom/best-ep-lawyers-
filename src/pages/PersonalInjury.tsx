@@ -211,7 +211,7 @@ export default function PersonalInjury() {
               "@type": "ListItem",
               position: 1,
               name: "Home",
-              item: "https://elpasosbestlawyers.com/",
+              item: "https://www.elpasosbestlawyers.com/",
             },
             {
               "@type": "ListItem",
@@ -425,13 +425,13 @@ export default function PersonalInjury() {
               Common reasons people search for an injury lawyer
             </h2>
 
-            <ul className="mt-5 space-y-3 text-slate-300">
-              <li>â€¢ Serious injuries after a vehicle crash</li>
-              <li>â€¢ Disputes over fault or insurance coverage</li>
-              <li>â€¢ Medical bills and lost income after an accident</li>
-              <li>â€¢ Injuries caused by unsafe property conditions</li>
-              <li>â€¢ Dog attacks and bite injuries</li>
-              <li>â€¢ Fatal accidents involving a family member</li>
+            <ul className="mt-5 list-disc space-y-3 pl-5 text-slate-300">
+              <li>Serious injuries after a vehicle crash</li>
+              <li>Disputes over fault or insurance coverage</li>
+              <li>Medical bills and lost income after an accident</li>
+              <li>Injuries caused by unsafe property conditions</li>
+              <li>Dog attacks and bite injuries</li>
+              <li>Fatal accidents involving a family member</li>
             </ul>
           </aside>
         </div>
@@ -472,7 +472,7 @@ export default function PersonalInjury() {
                 </p>
 
                 <span className="mt-5 inline-block font-semibold text-white">
-                  Compare lawyers â†’
+                  Compare lawyers &rarr;
                 </span>
               </Link>
             ))}
@@ -580,10 +580,10 @@ export default function PersonalInjury() {
             <h2 className="text-xl font-bold text-amber-400">Start with the type of claim</h2>
             <p className="mt-4 leading-7 text-slate-300">If you already know what kind of accident is involved, use the focused directory pages to narrow your search.</p>
             <div className="mt-5 space-y-3">
-              <Link to="/el-paso-car-accident-lawyers" className="block font-semibold text-white hover:text-amber-400">Car Accident Lawyers â†’</Link>
-              <Link to="/el-paso-truck-accident-lawyers" className="block font-semibold text-white hover:text-amber-400">Truck Accident Lawyers â†’</Link>
-              <Link to="/el-paso-motorcycle-accident-lawyers" className="block font-semibold text-white hover:text-amber-400">Motorcycle Accident Lawyers â†’</Link>
-              <Link to="/el-paso-wrongful-death-lawyers" className="block font-semibold text-white hover:text-amber-400">Wrongful Death Lawyers â†’</Link>
+              <Link to="/el-paso-car-accident-lawyers" className="block font-semibold text-white hover:text-amber-400">Car Accident Lawyers &rarr;</Link>
+              <Link to="/el-paso-truck-accident-lawyers" className="block font-semibold text-white hover:text-amber-400">Truck Accident Lawyers &rarr;</Link>
+              <Link to="/el-paso-motorcycle-accident-lawyers" className="block font-semibold text-white hover:text-amber-400">Motorcycle Accident Lawyers &rarr;</Link>
+              <Link to="/el-paso-wrongful-death-lawyers" className="block font-semibold text-white hover:text-amber-400">Wrongful Death Lawyers &rarr;</Link>
             </div>
           </aside>
         </div>
