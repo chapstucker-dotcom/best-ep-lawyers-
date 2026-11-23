@@ -268,6 +268,13 @@ export default function CarAccidentLawyers() {
           >
             Request a Consultation
           </a>
+          <a
+            href="/es/abogados-de-accidentes-de-auto-el-paso/"
+            lang="es"
+            style={{ display: "inline-block", marginTop: "14px", color: "#fbbf24", fontWeight: 700, textDecoration: "underline" }}
+          >
+            Información en español
+          </a>
           <p style={{ color: "#cbd5e1", fontSize: "14px", lineHeight: 1.6, marginTop: "12px" }}>
             El Paso&apos;s Best Lawyers receives and reviews inquiries. A referral to a participating law firm is not guaranteed.
           </p>

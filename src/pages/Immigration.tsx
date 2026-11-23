@@ -335,6 +335,13 @@ export default function Immigration() {
             consultas, personal bilingüe, actualizaciones del caso y documentos
             disponibles en español.
           </p>
+          <a
+            href="/es/abogados-de-inmigracion-el-paso/"
+            lang="es"
+            style={{ display: "inline-block", marginTop: "16px", color: "#fbbf24", fontWeight: 700, textDecoration: "underline" }}
+          >
+            Ver directorio en español
+          </a>
         </section>
 
         <section style={{ marginBottom: "52px" }}>

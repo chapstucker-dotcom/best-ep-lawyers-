@@ -493,6 +493,7 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       },
     ],
     relatedPages: [
+      { label: "Landlord-Tenant", path: "/el-paso-landlord-tenant-lawyers" },
       { label: "Business Law", path: "/el-paso-business-lawyers" },
       { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
       { label: "Probate", path: "/el-paso-probate-lawyers" },
@@ -556,6 +557,7 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       { question: "When should I contact a business lawyer?", answer: "Consider contacting counsel before signing a significant agreement or transaction, when ownership or governance issues develop, or as soon as a business dispute, deadline, or risk of losing important evidence appears." },
     ],
     relatedPages: [
+      { label: "Tax / IRS", path: "/el-paso-tax-irs-lawyers" },
       { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
       { label: "Real Estate", path: "/el-paso-real-estate-lawyers" },
       { label: "Employment Law", path: "/el-paso-employment-lawyers" },
@@ -659,6 +661,7 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       },
     ],
     relatedPages: [
+      { label: "Civil Rights", path: "/el-paso-civil-rights-lawyers" },
       { label: "Business Law", path: "/el-paso-business-lawyers" },
       { label: "Real Estate", path: "/el-paso-real-estate-lawyers" },
       { label: "Employment Law", path: "/el-paso-employment-lawyers" },
@@ -4082,6 +4085,7 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       },
     ],
     relatedPages: [
+      { label: "Nursing Home Abuse", path: "/el-paso-nursing-home-abuse-lawyers" },
       { label: "Estate Planning", path: "/el-paso-estate-planning-lawyers" },
       { label: "Probate", path: "/el-paso-probate-lawyers" },
       {

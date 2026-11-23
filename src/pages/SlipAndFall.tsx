@@ -82,6 +82,7 @@ const slipAndFallDirectoryPage: PracticeAreaPageData = {
   ],
   faqs: faqs.map((faq) => ({ question: faq.q, answer: faq.a })),
   relatedPages: [
+    { label: "Premises Liability", path: "/el-paso-premises-liability-lawyers" },
     { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
     { label: "Construction Accident", path: "/el-paso-construction-accident-lawyers" },
     { label: "Brain Injury", path: "/el-paso-brain-injury-lawyers" },
