@@ -523,6 +523,16 @@ export default function PracticeAreaFirmDirectory({
               which firm may fit your
               legal needs.
             </p>
+
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-400">
+              <strong className="font-semibold text-slate-300">
+                Advertising disclosure:
+              </strong>{" "}
+              Gold, Silver, and Premier identify paid promotional placements.
+              Expert identifies an enhanced-profile subscription.
+              These designations are not rankings of legal ability or endorsements.
+              Compare each firm's qualifications and suitability independently.
+            </p>
           </div>
 
           <Link
