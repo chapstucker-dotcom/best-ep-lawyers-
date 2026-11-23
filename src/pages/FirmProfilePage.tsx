@@ -665,13 +665,35 @@ export default function FirmProfilePage() {
 
               {averageRating && (
                 <div className="mt-3 flex flex-wrap items-center gap-2">
-                  <div className="flex">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star
-                        key={star}
-                        className="h-5 w-5 fill-[#F5B800] text-[#F5B800]"
-                      />
-                    ))}
+                  <div
+                    className="relative h-5 w-[100px] shrink-0"
+                    role="img"
+                    aria-label={`${averageRating} out of 5 stars`}
+                  >
+                    <div className="flex" aria-hidden="true">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <Star
+                          key={star}
+                          className="h-5 w-5 shrink-0 fill-white/20 text-white/70"
+                        />
+                      ))}
+                    </div>
+                    <div
+                      className="absolute inset-y-0 left-0 overflow-hidden"
+                      style={{
+                        width: `${Math.max(0, Math.min(100, Number(averageRating) * 20))}%`,
+                      }}
+                      aria-hidden="true"
+                    >
+                      <div className="flex w-[100px]">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <Star
+                            key={star}
+                            className="h-5 w-5 shrink-0 fill-[#F5B800] text-[#F5B800]"
+                          />
+                        ))}
+                      </div>
+                    </div>
                   </div>
 
                   <span className="font-semibold">
