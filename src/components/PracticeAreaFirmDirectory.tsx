@@ -20,6 +20,7 @@ import type { Firm } from "../data/types";
 import type { PracticeAreaPageData } from "../data/practiceAreaPages";
 import { getAllFirms } from "../services/firmService";
 import seoFirmSnapshot from "../data/seoFirmSnapshot.json";
+import { piFirmPublishedPracticeAreas } from "../data/piFirmPublishedPracticeAreas";
 import { trackEvent } from "@/services/analyticsService";
 import { getLocalExclusiveShowcase, isLocalExclusiveShowcaseId } from "../data/exclusiveShowcases";
 import { getCommercialProductByPlanId } from "../data/commercialModel";
@@ -571,6 +572,10 @@ export default function PracticeAreaFirmDirectory({
 
                 const tier =
                   ordinaryExclusive ? null : getPlanLabel(firm);
+                const piPublishedAreas =
+                  page.path === "/el-paso-personal-injury-lawyers"
+                    ? piFirmPublishedPracticeAreas[String(firm.id ?? "")]
+                    : undefined;
 
                 const verified =
                   Boolean(
@@ -750,6 +755,49 @@ export default function PracticeAreaFirmDirectory({
                         `Local law firm listed for ${page.shortTitle.toLowerCase()} searches in El Paso.`}
                     </p>
 
+                    {piPublishedAreas && (
+                      <details
+                        className={`mt-4 rounded-xl border p-3 text-sm ${
+                          isExclusive
+                            ? "border-white/20 bg-white/5 text-slate-100"
+                            : "border-slate-200 bg-slate-50 text-slate-800"
+                        }`}
+                      >
+                        <summary className="cursor-pointer font-semibold">
+                          Practice areas published by the firm
+                        </summary>
+                        <ul className="mt-3 flex flex-wrap gap-1.5">
+                          {piPublishedAreas.areas.map((area) => (
+                            <li
+                              key={area}
+                              className={`rounded-md border px-2 py-1 text-xs ${
+                                isExclusive
+                                  ? "border-white/20 bg-white/10"
+                                  : "border-slate-200 bg-white"
+                              }`}
+                            >
+                              {area}
+                            </li>
+                          ))}
+                        </ul>
+                        <p className={`mt-3 text-xs leading-5 ${
+                          isExclusive ? "text-slate-200" : "text-slate-600"
+                        }`}>
+                          Firm-published examples, not independently
+                          verified specialties, rankings, or endorsements.
+                        </p>
+                        <a
+                          href={piPublishedAreas.sourceUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`mt-2 inline-block text-xs font-semibold underline ${
+                            isExclusive ? "text-amber-300" : "text-blue-900"
+                          }`}
+                        >
+                          Review source on firm website
+                        </a>
+                      </details>
+                    )}
                     {rank >= 2 && (
                       <div
                         className={
