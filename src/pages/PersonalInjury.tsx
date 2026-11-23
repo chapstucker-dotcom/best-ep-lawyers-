@@ -547,6 +547,20 @@ export default function PersonalInjury() {
             <h2 className="mt-3 text-3xl font-bold">How to Compare Personal Injury Lawyers in El Paso</h2>
             <p className="mt-4 leading-7 text-slate-300">The right lawyer for one injury claim may not be the right lawyer for another. When reviewing El Paso personal injury attorneys, consider the firm&apos;s experience with your type of accident, how the case will be staffed, how fees and case expenses are handled, and how the firm communicates with clients.</p>
           </div>
+          <p className="mt-5 leading-7 text-slate-300">
+            Before hiring an attorney, independently check licensing and
+            available public disciplinary information through the{" "}
+            <a
+              href="https://www.texasbar.com/findalawyer"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-amber-400 underline underline-offset-4 hover:text-amber-300"
+            >
+              State Bar of Texas Find a Lawyer directory
+            </a>
+            . Directory listings and paid promotional placements do not
+            establish an attorney's qualifications or suitability for your case.
+          </p>
           <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             <div className="rounded-2xl border border-slate-800 bg-slate-950 p-6"><h3 className="text-xl font-bold text-amber-400">Relevant case experience</h3><p className="mt-3 leading-7 text-slate-300">Look for attorneys who regularly handle the type of accident or injury involved in your claim, such as vehicle crashes, premises liability, or wrongful death.</p></div>
             <div className="rounded-2xl border border-slate-800 bg-slate-950 p-6"><h3 className="text-xl font-bold text-amber-400">Who will handle the case</h3><p className="mt-3 leading-7 text-slate-300">Ask whether an attorney, paralegal, or case manager will be your primary contact and who will make important decisions about the claim.</p></div>
