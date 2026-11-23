@@ -9,12 +9,14 @@ import {
 import {
   Activity,
   BarChart3,
+  Download,
   Eye,
   Globe,
   Loader2,
   Mail,
   MousePointerClick,
   Phone,
+  Printer,
   RefreshCw,
   Send,
   TrendingUp,
@@ -40,6 +42,7 @@ import { getFirmByUserId } from '@/services/firmService';
 import { supabase } from '@/lib/supabase';
 import { useToast } from '@/hooks/use-toast';
 import { InquiryPerformance } from './FirmInquiries';
+import { buildPerformancePrintHtml, downloadPerformanceCsv, validatePerformanceReport, type PerformanceReport } from '@/utils/firmPerformanceReport';
 
 interface AnalyticsSummary {
   listing_impressions: number;
@@ -85,6 +88,7 @@ export const Analytics = () => {
 
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [exporting, setExporting] = useState(false);
   const [firmName, setFirmName] = useState('');
   const [inquiryFirm, setInquiryFirm] = useState<{ id: string; ownerId: string } | null>(null);
   const [inquiryRevision, setInquiryRevision] = useState(0);
@@ -214,6 +218,57 @@ export const Analytics = () => {
     setPeriod(next);
     if (next === 'all') setRange({ start: null, end: null });
     else if (next !== 'custom') setRange(presetRange(Number(next)));
+  }
+
+  async function exportReport(format: 'csv' | 'pdf') {
+    if (exporting || refreshing || !user || inquiryFirm?.ownerId !== user.id || !supabase) return;
+    const request = requestId.current;
+    const reportFirm = inquiryFirm.id;
+    const reportName = firmName;
+    const reportRange = { ...range };
+    // Open synchronously in the user gesture to avoid popup blockers.
+    const printWindow = format === 'pdf' ? window.open('', '_blank') : null;
+    if (format === 'pdf' && !printWindow) {
+      toast({ title: 'Allow pop-ups', description: 'Allow the report tab to open and try again.', variant: 'destructive' });
+      return;
+    }
+    if (printWindow) {
+      printWindow.opener = null;
+      printWindow.document.title = 'Preparing EPBL performance report';
+      printWindow.document.body.textContent = 'Preparing your performance report...';
+    }
+    setExporting(true);
+    try {
+      const args = { p_firm_id: reportFirm, p_start: reportRange.start, p_end: reportRange.end };
+      const [engagement, inquiries] = await Promise.all([
+        supabase.rpc('get_owned_firm_attribution_period', args),
+        supabase.rpc('get_owned_firm_inquiry_period', args),
+      ]);
+      if (request !== requestId.current) throw new Error('Report context changed');
+      if (engagement.error || inquiries.error || !Array.isArray(engagement.data) || engagement.data.length !== 1
+        || !Array.isArray(inquiries.data) || inquiries.data.length !== 1) throw new Error('Report unavailable');
+      const report: PerformanceReport = {
+        firmName: reportName, ...reportRange, generatedAt: new Date().toISOString(),
+        engagement: engagement.data[0], inquiries: inquiries.data[0],
+      };
+      validatePerformanceReport(report);
+      if (format === 'csv') {
+        downloadPerformanceCsv(report);
+      } else if (printWindow && !printWindow.closed) {
+        printWindow.document.open();
+        printWindow.document.write(buildPerformancePrintHtml(report));
+        printWindow.document.close();
+        printWindow.document.getElementById('print-report')?.addEventListener('click', () => printWindow.print());
+        printWindow.focus();
+      } else {
+        throw new Error('Report tab closed');
+      }
+    } catch {
+      printWindow?.close();
+      if (request === requestId.current) toast({ title: 'Report unavailable', description: 'Could not prepare a complete report. Please try again.', variant: 'destructive' });
+    } finally {
+      setExporting(false);
+    }
   }
 
   const actionsPer100Views = useMemo(() => {
@@ -358,7 +413,7 @@ export const Analytics = () => {
                 onClick={() =>
                   void loadAnalytics(true)
                 }
-                disabled={refreshing}
+                disabled={refreshing || exporting}
                 className="border-white/30 bg-white text-[#0F2A43] hover:bg-white/90"
               >
                 {refreshing ? (
@@ -383,7 +438,7 @@ export const Analytics = () => {
               ['all', 'All time'], ['custom', 'Custom range'],
             ] as const).map(([value, label]) => (
               <Button key={value} type="button" variant={period === value ? 'default' : 'outline'}
-                aria-pressed={period === value} disabled={refreshing} onClick={() => choosePeriod(value)}>{label}</Button>
+                aria-pressed={period === value} disabled={refreshing || exporting} onClick={() => choosePeriod(value)}>{label}</Button>
             ))}
           </div>
           {period === 'custom' && (
@@ -396,12 +451,19 @@ export const Analytics = () => {
                 <input type="date" value={customEnd} min={customStart} max={elPasoToday()}
                   onChange={event => setCustomEnd(event.target.value)} className="mt-1 block rounded-md border p-2" />
               </label>
-              <Button type="button" disabled={refreshing || !customStart || !customEnd || customStart > customEnd || customEnd > elPasoToday()}
+              <Button type="button" disabled={refreshing || exporting || !customStart || !customEnd || customStart > customEnd || customEnd > elPasoToday()}
                 onClick={() => setRange({ start: customStart, end: customEnd })}>Apply dates</Button>
             </div>
           )}
           <p className="text-sm text-gray-600">Showing: {range.start && range.end ? `${range.start} through ${range.end}` : 'All time'} · El Paso local time. The end date is inclusive.</p>
           <p className="text-xs text-gray-500">Engagement uses event dates. Inquiry outcomes use inquiries received in this period and reflect their latest recorded status.</p>
+          <div className="flex flex-wrap gap-2 border-t pt-3">
+            <Button type="button" variant="outline" disabled={exporting || refreshing || !!errorMessage || !user || inquiryFirm?.ownerId !== user.id}
+              onClick={() => void exportReport('pdf')}><Printer className="mr-2 h-4 w-4" /> Print / Save PDF</Button>
+            <Button type="button" variant="outline" disabled={exporting || refreshing || !!errorMessage || !user || inquiryFirm?.ownerId !== user.id}
+              onClick={() => void exportReport('csv')}><Download className="mr-2 h-4 w-4" /> Download CSV</Button>
+          </div>
+          <p className="text-xs text-gray-500">{exporting ? 'Preparing report...' : 'Reports include fresh aggregate figures for the applied dates, not consumer details.'}</p>
         </CardContent>
       </Card>
 
