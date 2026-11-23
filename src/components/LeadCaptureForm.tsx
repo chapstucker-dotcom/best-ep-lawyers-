@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 
 import { trackMetaLead } from '@/services/metaPixel';
+import { trackGa4Lead } from '@/services/ga4Events';
 import { getLeadAttribution } from '@/services/leadAttribution';
 import { categories } from '@/data/categories';
 import { suggestPracticeAreas } from '@/data/guidedDiscovery';
@@ -475,6 +476,7 @@ export default function LeadCaptureForm({
     try {
       const leadId = crypto.randomUUID();
       await sendLeadNotification(leadId, turnstileToken);
+      trackGa4Lead();
       trackMetaLead();
 
       setTurnstileResetKey((value) => value + 1);
