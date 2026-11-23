@@ -94,6 +94,7 @@ const estatePlanningPage: PracticeAreaPageData = {
   ],
   relatedPages: [
     { label: "Probate", path: "/el-paso-probate-lawyers" },
+    { label: "Guardianship", path: "/el-paso-guardianship-lawyers" },
     { label: "Real Estate", path: "/el-paso-real-estate-lawyers" },
     { label: "Business Law", path: "/el-paso-business-lawyers" },
     { label: "Family Law", path: "/el-paso-family-lawyers" },

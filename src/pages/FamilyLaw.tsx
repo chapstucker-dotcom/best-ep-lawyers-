@@ -47,6 +47,7 @@ const familyLawPage: PracticeAreaPageData = {
   ],
   relatedPages: [
     { label: "Divorce", path: "/el-paso-divorce-lawyers" },
+    { label: "Prenuptial Agreements", path: "/el-paso-prenuptial-agreement-lawyers" },
     { label: "Child Custody", path: "/el-paso-child-custody-lawyers" },
     { label: "Estate Planning", path: "/el-paso-estate-planning-lawyers" },
     { label: "Civil Litigation", path: "/el-paso-civil-litigation-lawyers" },
