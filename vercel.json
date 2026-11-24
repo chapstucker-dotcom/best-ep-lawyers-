@@ -1,6 +1,16 @@
 {
   "redirects": [
     {
+      "source": "/el-paso-traffic-ticket-lawyers",
+      "destination": "/el-paso-traffic-ticket-lawyers/",
+      "permanent": true
+    },
+    {
+      "source": "/el-paso-workers-compensation-lawyers",
+      "destination": "/el-paso-workers-compensation-lawyers/",
+      "permanent": true
+    },
+    {
       "source": "/el-paso-federal-criminal-defense-lawyers",
       "destination": "/el-paso-federal-criminal-defense-lawyers/",
       "permanent": true
