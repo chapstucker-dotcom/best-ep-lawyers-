@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/el-paso-protective-order-lawyers",
+      "destination": "/el-paso-protective-order-lawyers/",
+      "permanent": true
+    },
+    {
       "source": "/el-paso-traffic-ticket-lawyers",
       "destination": "/el-paso-traffic-ticket-lawyers/",
       "permanent": true
