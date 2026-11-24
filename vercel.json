@@ -1,6 +1,26 @@
 {
   "redirects": [
     {
+      "source": "/el-paso-semi-truck-accident-lawyer",
+      "destination": "/el-paso-semi-truck-accident-lawyer/",
+      "permanent": true
+    },
+    {
+      "source": "/el-paso-citizenship-lawyers",
+      "destination": "/el-paso-citizenship-lawyers/",
+      "permanent": true
+    },
+    {
+      "source": "/el-paso-child-custody-lawyers",
+      "destination": "/el-paso-child-custody-lawyers/",
+      "permanent": true
+    },
+    {
+      "source": "/el-paso-18-wheeler-accident-lawyer",
+      "destination": "/el-paso-18-wheeler-accident-lawyer/",
+      "permanent": true
+    },
+    {
       "source": "/el-paso-protective-order-lawyers",
       "destination": "/el-paso-protective-order-lawyers/",
       "permanent": true
