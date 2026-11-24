@@ -42,7 +42,7 @@ import { supabase } from "@/lib/supabase";
 import { getPlanRules } from "@/config/planRules";
 import { trackEvent } from "@/services/analyticsService";
 
-import { getLocalExclusiveShowcase } from "../data/exclusiveShowcases";
+import { getLocalExclusiveShowcase, getLocalShowcasePracticeAreaLink } from "../data/exclusiveShowcases";
 import { useSeo } from "../hooks/use-seo";
 
 interface Review {
@@ -208,6 +208,7 @@ export default function FirmProfilePage() {
   } | null)?.attribution;
   const { id } = useParams<{ id: string }>();
   const localExclusiveShowcase = getLocalExclusiveShowcase(id);
+  const relatedPracticeAreaLink = getLocalShowcasePracticeAreaLink(id);
   const isLocalExclusiveShowcase = Boolean(localExclusiveShowcase);
 
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -979,6 +980,16 @@ export default function FirmProfilePage() {
             )}
           </section>
 
+          {relatedPracticeAreaLink && (
+            <p className="mb-6 pl-1 text-sm">
+              <Link
+                to={relatedPracticeAreaLink.path}
+                className="font-semibold text-[#0F2A43] underline-offset-4 hover:underline"
+              >
+                {relatedPracticeAreaLink.label}
+              </Link>
+            </p>
+          )}
           <section>
             <h3 className="mb-5 flex items-center gap-2 text-2xl font-bold text-[#0F2A43]">
               <UserRound className="h-6 w-6" />

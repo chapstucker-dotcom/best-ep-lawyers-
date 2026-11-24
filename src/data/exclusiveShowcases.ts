@@ -158,6 +158,39 @@ export const getLocalExclusiveShowcase = (
   return localExclusiveShowcases[id] ?? null;
 };
 
+const showcasePracticeAreaLinks: Record<string, { label: string; path: string }> = {
+  "personal-injury": {
+    label: "Explore El Paso personal injury lawyers",
+    path: "/el-paso-personal-injury-lawyers",
+  },
+  "truck-accidents": {
+    label: "Explore El Paso truck accident lawyers",
+    path: "/el-paso-truck-accident-lawyers",
+  },
+  "catastrophic-injury": {
+    label: "Explore El Paso catastrophic injury lawyers",
+    path: "/el-paso-catastrophic-injury-lawyers",
+  },
+  "brain-injury": {
+    label: "Explore El Paso brain injury lawyers",
+    path: "/el-paso-brain-injury-lawyers",
+  },
+  "federal-crimes": {
+    label: "Explore El Paso federal criminal defense lawyers",
+    path: "/el-paso-federal-criminal-defense-lawyers",
+  },
+  "construction-accidents": {
+    label: "Explore El Paso construction accident lawyers",
+    path: "/el-paso-construction-accident-lawyers",
+  },
+};
+
+export const getLocalShowcasePracticeAreaLink = (
+  id?: string | null
+): { label: string; path: string } | null => {
+  const slug = getLocalExclusiveShowcase(id)?.exclusivePracticeArea;
+  return slug ? showcasePracticeAreaLinks[slug] ?? null : null;
+};
 export const isLocalExclusiveShowcaseId = (
   id?: string | null
 ): boolean => Boolean(getLocalExclusiveShowcase(id));

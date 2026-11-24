@@ -16,12 +16,13 @@ const meta = (html, selector, replacement, label) => {
 };
 try {
   await build({ entryPoints:[join(cwd,'src/data/exclusiveShowcases.ts')], bundle:true, platform:'node', format:'esm', outfile:bundle, logLevel:'silent', external:[] });
-  const { getLocalExclusiveShowcase } = await import(pathToFileURL(bundle).href + `?v=${Date.now()}`);
+  const { getLocalExclusiveShowcase, getLocalShowcasePracticeAreaLink } = await import(pathToFileURL(bundle).href + `?v=${Date.now()}`);
   const template = readFileSync(join(dist,'index.html'),'utf8');
   for (const id of ids) {
     const showcase = getLocalExclusiveShowcase(id);
     if (!showcase || showcase.id !== id) throw new Error(`Showcase missing or mismatched: ${id}`);
     const firm = showcase.firm;
+    const related = getLocalShowcasePracticeAreaLink(id);
     if (typeof firm.name !== 'string' || !firm.name.trim() || typeof firm.description !== 'string' || !firm.description.trim()) throw new Error(`Missing firm name/description: ${id}`);
     const name = firm.name.trim();
     const description = firm.description.trim().replace(/\s+/g,' ').slice(0,300);
@@ -40,7 +41,7 @@ try {
     for (const [property,value] of [['twitter:title',title],['twitter:description',description]]) {
       html = meta(html, new RegExp(`<meta\\s+name="${property}"\\s+content="[\\s\\S]*?"\\s*\\/>`,'gi'), `<meta name="${property}" content="${escapeHtml(value)}" />`,property);
     }
-    const content = `<main data-firm-seo="${escapeHtml(id)}"><h1>${escapeHtml(name)}</h1><p>${escapeHtml(firm.description)}</p>${address?`<p>${escapeHtml(address)}</p>`:''}${categories.length?`<h2>Practice areas</h2><p>${escapeHtml(categories.join(', '))}</p>`:''}${specialties.length?`<h2>Legal services</h2><p>${escapeHtml(specialties.join(', '))}</p>`:''}</main>`;
+    const content = `<main data-firm-seo="${escapeHtml(id)}"><h1>${escapeHtml(name)}</h1><p>${escapeHtml(firm.description)}</p>${address?`<p>${escapeHtml(address)}</p>`:''}${categories.length?`<h2>Practice areas</h2><p>${escapeHtml(categories.join(', '))}</p>`:''}${specialties.length?`<h2>Legal services</h2><p>${escapeHtml(specialties.join(', '))}</p>`:''}${related?`<nav aria-label="Related practice area"><a href="${escapeHtml(related.path)}">${escapeHtml(related.label)}</a></nav>`:""}</main>`;
     html = meta(html, /<div id="root">[\s\S]*?<\/div>(?=\s*<script|\s*<\/body>)/g, `<div id="root">${content}</div>`, 'root');
     const outdir = join(dist,'firm',id);
     mkdirSync(outdir,{recursive:true});
