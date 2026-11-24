@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/el-paso-federal-criminal-defense-lawyers",
+      "destination": "/el-paso-federal-criminal-defense-lawyers/",
+      "permanent": true
+    },
+    {
       "source": "/practice-areas/car-accident",
       "destination": "/el-paso-car-accident-lawyers/",
       "permanent": true
