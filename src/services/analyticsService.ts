@@ -325,7 +325,12 @@ export const trackEvent = async (
   const legacyEventType =
     getLegacyEventType(eventType);
 
-  if (legacyEventType) {
+  const isLegacyCompatibleFirmId =
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(firmId);
+
+  // The legacy analytics table requires UUID firm IDs.
+  // Text-based firm IDs remain supported by attribution_events.
+  if (legacyEventType && isLegacyCompatibleFirmId) {
     const { error } = await supabase
       .from("analytics")
       .insert([
