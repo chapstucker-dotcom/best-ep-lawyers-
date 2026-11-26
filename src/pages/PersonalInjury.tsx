@@ -43,6 +43,36 @@ const caseTypes = [
     path: "/el-paso-dog-bite-lawyers",
   },
   {
+    title: "Catastrophic Injuries",
+    description:
+      "Compare attorneys for life-altering injuries, permanent impairment, long-term care needs, and complex injury claims.",
+    path: "/el-paso-catastrophic-injury-lawyers/",
+  },
+  {
+    title: "Brain Injuries",
+    description:
+      "Explore legal options for traumatic brain injuries, head injuries, and their long-term effects.",
+    path: "/el-paso-brain-injury-lawyers/",
+  },
+  {
+    title: "Construction Accidents",
+    description:
+      "Find attorneys handling construction-related injuries and potential third-party liability claims.",
+    path: "/el-paso-construction-accident-lawyers/",
+  },
+  {
+    title: "Pedestrian Accidents",
+    description:
+      "Compare lawyers handling injuries involving pedestrians struck by vehicles and disputed insurance claims.",
+    path: "/el-paso-pedestrian-accident-lawyers/",
+  },
+  {
+    title: "Bicycle Accidents",
+    description:
+      "Explore attorneys handling bicycle collisions, serious injuries, and related insurance disputes.",
+    path: "/el-paso-bicycle-accident-lawyers/",
+  },
+  {
     title: "Wrongful Death",
     description:
       "Explore attorneys who represent families in fatal accident and wrongful-death matters.",
@@ -254,7 +284,7 @@ export default function PersonalInjury() {
   }, []);
 
   const scrollToFirms = () => {
-    document.getElementById("personal-injury-firms")?.scrollIntoView({
+    document.getElementById("personal-injury-directory")?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
@@ -319,14 +349,14 @@ export default function PersonalInjury() {
               </Link>
             </div>
             <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-400">
-              El Paso&apos;s Best Lawyers receives and reviews inquiries for possible referral to an eligible participating firm. A referral or representation is not guaranteed.
+              You can choose whether to share your inquiry with eligible participating firms or submit it to El Paso&apos;s Best Lawyers only. A referral or representation is not guaranteed.
             </p>
           </div>
         </div>
       </section>
 
       {/* LIVE PERSONAL INJURY DIRECTORY */}
-      <div id="personal-injury-firms" className="scroll-mt-24">
+      <div id="personal-injury-directory" className="scroll-mt-24">
         <div className="mx-auto max-w-7xl px-6 pt-8">
           <div className="rounded-xl border border-amber-400/25 bg-slate-900 px-6 py-5">
             <h2 className="text-lg font-bold text-amber-400">
@@ -378,7 +408,7 @@ export default function PersonalInjury() {
                 Request Help Finding an Attorney
               </a>
               <a
-                href="#personal-injury-firms"
+                href="#personal-injury-directory"
                 className="inline-flex min-h-12 items-center justify-center rounded-xl border border-slate-500 px-6 py-3 text-center font-semibold text-white transition hover:border-amber-400 hover:text-amber-400"
               >
                 Review Attorney Listings
@@ -603,6 +633,62 @@ export default function PersonalInjury() {
         </div>
       </section>
 
+      <section className="mx-auto max-w-6xl px-6 py-12">
+        <p className="font-semibold uppercase tracking-[0.16em] text-amber-400">
+          Consumer Legal Resources
+        </p>
+
+        <h2 className="mt-3 text-3xl font-bold">
+          Helpful Resources After an Accident in El Paso
+        </h2>
+
+        <p className="mt-4 max-w-3xl leading-7 text-slate-300">
+          Understand practical next steps, important records,
+          and insurance issues before speaking with an attorney.
+        </p>
+
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
+          <Link
+            to="/guides/what-to-do-after-car-accident-el-paso/"
+            className="rounded-2xl border border-slate-800 bg-slate-900 p-6 hover:border-amber-400"
+          >
+            <h3 className="text-xl font-bold text-amber-400">
+              What to Do After a Car Accident
+            </h3>
+            <p className="mt-3 leading-7 text-slate-300">
+              Review practical steps following a collision
+              and prepare for conversations with insurers or attorneys.
+            </p>
+          </Link>
+
+          <Link
+            to="/guides/truck-accident-evidence-texas/"
+            className="rounded-2xl border border-slate-800 bg-slate-900 p-6 hover:border-amber-400"
+          >
+            <h3 className="text-xl font-bold text-amber-400">
+              Important Truck Accident Evidence
+            </h3>
+            <p className="mt-3 leading-7 text-slate-300">
+              Learn about records and evidence that may
+              be relevant to a commercial vehicle accident claim.
+            </p>
+          </Link>
+
+          <Link
+            to="/guides/uninsured-driver-accident-texas/"
+            className="rounded-2xl border border-slate-800 bg-slate-900 p-6 hover:border-amber-400"
+          >
+            <h3 className="text-xl font-bold text-amber-400">
+              Accidents Involving Uninsured Drivers
+            </h3>
+            <p className="mt-3 leading-7 text-slate-300">
+              Explore insurance considerations and potential
+              options following an uninsured driver accident.
+            </p>
+          </Link>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="mx-auto max-w-6xl px-6 py-16">
         <h2 className="text-3xl font-bold">
@@ -641,7 +727,7 @@ export default function PersonalInjury() {
               </h2>
 
               <p className="mt-4 leading-7 text-slate-300">
-                Tell us what type of legal help you are looking for. El Paso&apos;s Best Lawyers reviews inquiries and may share them with an eligible participating firm. A referral or representation is not guaranteed.
+                Tell us what type of legal help you are looking for. Use the form to choose whether to share your inquiry with eligible participating firms or submit it to El Paso&apos;s Best Lawyers only. A referral or representation is not guaranteed.
               </p>
             </div>
 

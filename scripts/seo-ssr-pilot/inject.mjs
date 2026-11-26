@@ -18,7 +18,7 @@ const personalInjurySchema = {
       "@type": "WebPage",
       "@id": `${canonicalUrl}#webpage`,
       url: canonicalUrl,
-      name: "Best Personal Injury Lawyers in El Paso, TX | El Paso's Best Lawyers",
+      name: "Personal Injury Lawyers in El Paso, TX | Compare Local Attorneys",
       description: "Compare personal injury lawyers in El Paso, Texas for car accidents, truck crashes, slip and falls, dog bites, serious injuries, wrongful death, and insurance disputes.",
       isPartOf: {
         "@type": "WebSite",
