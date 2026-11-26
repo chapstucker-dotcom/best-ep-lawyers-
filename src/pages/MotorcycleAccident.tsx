@@ -1,14 +1,14 @@
-﻿import PracticeAreaTemplate from "../components/PracticeAreaTemplate";
+import PracticeAreaTemplate from "../components/PracticeAreaTemplate";
 import type { PracticeAreaPageData } from "../data/practiceAreaPages";
 
 const motorcyclePage: PracticeAreaPageData = {
   path: "/el-paso-motorcycle-accident-lawyers",
   shortTitle: "Motorcycle Accident",
-  title: "Motorcycle Accident Lawyers in El Paso, TX | Compare Local Attorneys",
+  title: "Motorcycle Accident Lawyers in El Paso, TX",
   description:
     "Compare El Paso motorcycle accident lawyers and attorneys handling serious injuries, left-turn crashes, road hazards, uninsured drivers, insurance disputes, and wrongful death claims.",
   metaDescription:
-    "Compare El Paso motorcycle accident lawyers and attorneys for serious injury claims, left-turn crashes, road hazards, uninsured drivers, insurance disputes, and wrongful death.",
+    "Injured in a motorcycle crash? Compare El Paso motorcycle accident lawyers, explore local law firms and learn about your legal options.",
   heroText:
     "Compare El Paso motorcycle accident attorneys for serious injury claims, insurance disputes, unsafe road conditions, and fatal motorcycle crashes.",
   topics: [
@@ -23,6 +23,7 @@ const motorcyclePage: PracticeAreaPageData = {
     "Wrongful Death",
   ],
   overview: [
+    "When comparing motorcycle accident lawyers in El Paso, ask about experience with motorcycle collision investigations, disputed fault, serious injuries, insurance negotiations, and litigation. Directory listings may include firms serving the broader personal injury category. Confirm that the firm handles motorcycle accident claims before hiring an attorney.",
     "Motorcycle crashes often cause severe injuries because riders have less physical protection than occupants of passenger vehicles. A motorcycle accident attorney may investigate fault, preserve evidence, communicate with insurers, document injuries and lost income, negotiate a settlement, and file suit when necessary.",
     "Common evidence includes crash reports, scene photographs, witness statements, helmet and protective-gear information, medical records, traffic-camera or business video, vehicle damage, phone records, and electronic vehicle data. Prompt investigation can matter when fault is disputed or evidence may disappear.",
     "Insurance companies may argue that a rider was speeding, difficult to see, improperly positioned, or partly responsible for the collision. Texas proportionate-responsibility rules can affect recovery, so the specific evidence about how the crash occurred is important.",
@@ -41,6 +42,21 @@ const motorcyclePage: PracticeAreaPageData = {
     "An El Paso motorcycle accident attorney can help evaluate fault, preserve evidence, identify available insurance coverage, document damages, and determine whether negotiation or litigation is appropriate.",
   ],
   faqs: [
+    {
+      question: "How do I choose a motorcycle accident lawyer in El Paso?",
+      answer:
+        "Compare attorneys who handle motorcycle injury claims. Ask about relevant case experience, who will manage your claim, how evidence will be investigated, communication practices, and how legal fees and case expenses are handled.",
+    },
+    {
+      question: "How much does a motorcycle accident lawyer cost?",
+      answer:
+        "Fee arrangements vary by law firm. Ask whether the attorney offers a contingency-fee agreement, how the fee is calculated, and who is responsible for case expenses if there is no recovery. Review the written agreement before hiring an attorney.",
+    },
+    {
+      question: "What should I bring to a motorcycle accident consultation?",
+      answer:
+        "Bring available crash reports, photographs, medical records, insurance correspondence, witness information, motorcycle repair estimates, and records of missed work. Prepare a timeline of the collision and your treatment, even if some documents are not yet available.",
+    },
     {
       question: "When should I contact a motorcycle accident lawyer?",
       answer:
@@ -73,12 +89,17 @@ const motorcyclePage: PracticeAreaPageData = {
     },
   ],
   relatedPages: [
-    { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-    { label: "Car Accident", path: "/el-paso-car-accident-lawyers" },
-    { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers" },
-    { label: "Bicycle Accident", path: "/el-paso-bicycle-accident-lawyers" },
-    { label: "Uber/Lyft Accident", path: "/el-paso-uber-lyft-accident-lawyers" },
-    { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
+    { label: "Brain Injury Lawyers", path: "/el-paso-brain-injury-lawyers/" },
+    { label: "Catastrophic Injury Lawyers", path: "/el-paso-catastrophic-injury-lawyers/" },
+    { label: "Uninsured Motorist Lawyers", path: "/el-paso-uninsured-motorist-lawyers/" },
+    { label: "How to Get a Texas Crash Report", path: "/guides/how-to-get-texas-crash-report-el-paso/" },
+    { label: "Uninsured Driver Accident Guide", path: "/guides/uninsured-driver-accident-texas/" },
+    { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers/" },
+    { label: "Car Accident", path: "/el-paso-car-accident-lawyers/" },
+    { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers/" },
+    { label: "Bicycle Accident", path: "/el-paso-bicycle-accident-lawyers/" },
+    { label: "Uber/Lyft Accident", path: "/el-paso-uber-lyft-accident-lawyers/" },
+    { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers/" },
   ],
 };
 
