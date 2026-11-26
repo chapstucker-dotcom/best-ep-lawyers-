@@ -67,7 +67,7 @@ export default function PracticeAreaTemplate({ page }: Props) {
   useEffect(() => {
     const title = `${page.title} | El Paso's Best Lawyers`;
     const description = page.metaDescription || page.description;
-    const canonical = `${SITE_URL}${page.path}`;
+    const canonical = `${SITE_URL}${page.path.replace(/\/+$/, "")}/`;
 
     document.title = title;
 

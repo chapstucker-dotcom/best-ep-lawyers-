@@ -21,6 +21,16 @@
   ],
   "redirects": [
     {
+      "source": "/es/abogados-de-inmigracion-el-paso",
+      "destination": "/es/abogados-de-inmigracion-el-paso/",
+      "permanent": true
+    },
+    {
+      "source": "/es/abogados-de-accidentes-de-auto-el-paso",
+      "destination": "/es/abogados-de-accidentes-de-auto-el-paso/",
+      "permanent": true
+    },
+    {
       "source": "/el-paso-overtime-pay-disputes-lawyers",
       "destination": "/el-paso-overtime-pay-disputes-lawyers/",
       "permanent": true
