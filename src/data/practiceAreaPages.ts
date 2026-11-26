@@ -3128,11 +3128,11 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
   {
     path: "/el-paso-18-wheeler-accident-lawyer",
     shortTitle: "18 Wheeler Accident",
-    title: "Best 18 Wheeler Accident Lawyers in El Paso, Texas",
+    title: "18-Wheeler Accident Lawyers in El Paso, TX",
     description:
       "Compare El Paso 18-wheeler accident attorneys handling tractor-trailer crashes, FMCSA compliance, driver fatigue, electronic logging data, black-box evidence, cargo issues, catastrophic injuries, and wrongful death.",
     metaDescription:
-      "Compare 18-wheeler accident lawyers in El Paso for tractor-trailer crashes, FMCSA violations, electronic logs, black-box evidence, fatigue, and catastrophic injuries.",
+      "Compare El Paso 18-wheeler accident lawyers for serious tractor-trailer crashes, driver logs, electronic evidence and trucking safety investigations.",
     heroText:
       "Compare El Paso 18-wheeler accident attorneys handling serious tractor-trailer crashes, federal trucking regulations, electronic evidence, interstate carriers, catastrophic injuries, and wrongful death claims.",
     topics: [
@@ -3150,6 +3150,7 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       "Wrongful Death",
     ],
     overview: [
+      "After a serious tractor-trailer collision, ask an attorney about preserving electronic vehicle information, driver duty-status records, dash-camera footage and inspection records. Different records may help explain different aspects of the crash.",
       "An El Paso 18-wheeler accident lawyer can represent people injured in collisions involving tractor-trailers and large interstate commercial trucks. These cases often involve federal safety regulations, commercial carriers, multiple insurance policies, electronic evidence, and several potentially responsible companies.",
       "Evidence can include electronic logging device records, engine-control or onboard vehicle data, driver qualification files, hours-of-service information, inspection and maintenance records, dispatch communications, dash-camera footage, cargo documents, fuel and toll records, and company safety policies.",
       "Responsibility may extend beyond the truck driver. Depending on the facts, a motor carrier, trucking company, vehicle owner, maintenance provider, cargo loader, contractor, broker, manufacturer, or another business connected to the tractor-trailer operation may need to be investigated.",
@@ -3174,6 +3175,7 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       "An El Paso 18-wheeler accident attorney can investigate the driver and carrier, preserve electronic trucking evidence, review federal safety compliance, identify potentially responsible companies, evaluate commercial insurance, and document catastrophic injuries or wrongful-death losses.",
     ],
     faqs: [
+      { question: "What should I ask an 18-wheeler accident attorney about electronic evidence?", answer: "Ask which vehicle and driver records may exist, how they can be preserved, who may control them and whether technical experts may be needed to interpret the available information." },
       {
         question: "What makes an 18-wheeler accident case different from a regular car accident?",
         answer:
@@ -3226,13 +3228,14 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       },
     ],
     relatedPages: [
-      { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers" },
-      { label: "Semi Truck Accident", path: "/el-paso-semi-truck-accident-lawyer" },
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-      { label: "Traumatic Brain Injury", path: "/el-paso-traumatic-brain-injury-lawyers" },
-      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
+      { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers/" },
+      { label: "Semi Truck Accident", path: "/el-paso-semi-truck-accident-lawyer/" },
+      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers/" },
+      { label: "Traumatic Brain Injury", path: "/el-paso-traumatic-brain-injury-lawyers/" },
+      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers/" },
     ],
     resourceLinks: [
+      { label: "Important Truck Accident Evidence", path: "/guides/truck-accident-evidence-texas/" },
       { label: "Browse All Texas Law Guides", path: "/guides" },
     ],
     lastUpdated: "August 31, 2026",
@@ -3298,11 +3301,11 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
   {
     path: "/el-paso-semi-truck-accident-lawyer",
     shortTitle: "Semi Truck Accident",
-    title: "Best Semi Truck Accident Lawyers in El Paso, TX | Compare Attorneys",
+    title: "Semi-Truck Accident Lawyers in El Paso, TX",
     description:
       "Compare El Paso semi-truck accident lawyers handling commercial truck crashes, driver fatigue, federal safety rules, electronic evidence, maintenance failures, catastrophic injuries, and wrongful death claims.",
     metaDescription:
-      "Compare semi-truck accident lawyers in El Paso, TX for commercial trucking crashes, driver fatigue, electronic evidence, serious injuries, and wrongful death.",
+      "Compare El Paso semi-truck accident lawyers for serious collisions involving trucking companies, maintenance failures, cargo issues and commercial insurance.",
     heroText:
       "Compare El Paso semi-truck accident attorneys handling serious commercial trucking crashes involving driver fatigue, safety violations, electronic evidence, multiple companies, catastrophic injuries, and wrongful death.",
     topics: [
@@ -3322,6 +3325,7 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       "Wrongful Death",
     ],
     overview: [
+      "When a semi-truck collision involves several businesses, identifying who owned the vehicle, employed the driver, maintained the equipment and controlled the shipment may help an attorney evaluate responsibility.",
       "A semi-truck accident lawyer represents people injured in collisions involving tractor-trailers, commercial carriers, 18-wheelers, and other large trucks. These crashes can cause catastrophic injuries and may involve several businesses, insurance policies, and potentially responsible parties.",
       "Semi-truck cases can require investigation beyond the police crash report. Relevant evidence may include electronic logging information, onboard vehicle data, dash-camera footage, driver qualification records, dispatch communications, inspection and maintenance records, cargo documents, company safety policies, and witness accounts.",
       "Responsibility may extend beyond the truck driver. Depending on the facts, a motor carrier, trucking company, vehicle owner, maintenance provider, loading company, contractor, manufacturer, or another business connected to the truck or shipment may need to be evaluated.",
@@ -3344,6 +3348,7 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       "An El Paso semi-truck accident attorney can help evaluate driver and carrier records, electronic data, maintenance and inspection history, cargo information, available video, witness accounts, insurance coverage, medical evidence, and the roles of potentially responsible companies.",
     ],
     faqs: [
+      { question: "What information can help identify the companies involved in a semi-truck crash?", answer: "Available crash reports, carrier names, vehicle markings, insurance documents, shipping information and photographs may help an attorney identify companies connected to the truck and shipment." },
       {
         question: "How do I choose a semi-truck accident lawyer in El Paso?",
         answer:
@@ -3396,13 +3401,14 @@ export const practiceAreaPages: PracticeAreaPageData[] = [
       },
     ],
     relatedPages: [
-      { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers" },
-      { label: "18-Wheeler Accident", path: "/el-paso-18-wheeler-accident-lawyer" },
-      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers" },
-      { label: "Traumatic Brain Injury", path: "/el-paso-traumatic-brain-injury-lawyers" },
-      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers" },
+      { label: "Truck Accident", path: "/el-paso-truck-accident-lawyers/" },
+      { label: "18-Wheeler Accident", path: "/el-paso-18-wheeler-accident-lawyer/" },
+      { label: "Personal Injury", path: "/el-paso-personal-injury-lawyers/" },
+      { label: "Traumatic Brain Injury", path: "/el-paso-traumatic-brain-injury-lawyers/" },
+      { label: "Wrongful Death", path: "/el-paso-wrongful-death-lawyers/" },
     ],
     resourceLinks: [
+      { label: "Important Truck Accident Evidence", path: "/guides/truck-accident-evidence-texas/" },
       { label: "Browse All Texas Law Guides", path: "/guides" },
     ],
     lastUpdated: "September 1, 2026",

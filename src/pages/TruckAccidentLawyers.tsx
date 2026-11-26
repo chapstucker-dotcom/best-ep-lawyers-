@@ -1,9 +1,18 @@
 import { useEffect } from "react";
+import LeadCaptureForm from "../components/LeadCaptureForm";
 import PracticeAreaFirmDirectory from "../components/PracticeAreaFirmDirectory";
 import type { PracticeAreaPageData } from "../data/practiceAreaPages";
 
 ﻿export default function TruckAccidentLawyers() {
   const faqs = [
+    {
+      q: "How do I choose a truck accident lawyer in El Paso?",
+      a: "Compare experience with commercial vehicle collisions, serious injuries, trucking-company investigations, disputed responsibility, insurance negotiations, and litigation. Confirm that the firm handles your specific type of truck accident claim.",
+    },
+    {
+      q: "How much does a truck accident lawyer cost?",
+      a: "Ask whether the firm offers a contingency-fee agreement, how attorney fees are calculated, and who is responsible for investigation and litigation expenses. Review the written fee agreement before hiring an attorney.",
+    },
     {
       q: "What makes truck accident cases different from car accident cases?",
       a: "Truck accident cases can involve commercial carriers, federal and state trucking regulations, commercial insurance policies, driver records, vehicle maintenance records, electronic logging data, and multiple potentially responsible parties.",
@@ -41,39 +50,43 @@ import type { PracticeAreaPageData } from "../data/practiceAreaPages";
 
   const relatedPages = [
     {
+      label: "Important Truck Accident Evidence",
+      href: "/guides/truck-accident-evidence-texas/",
+    },
+    {
       label: "Personal Injury Lawyers",
-      href: "/el-paso-personal-injury-lawyers",
+      href: "/el-paso-personal-injury-lawyers/",
     },
     {
       label: "Car Accident Lawyers",
-      href: "/el-paso-car-accident-lawyers",
+      href: "/el-paso-car-accident-lawyers/",
     },
     {
       label: "18-Wheeler Accident Lawyers",
-      href: "/el-paso-18-wheeler-accident-lawyer",
+      href: "/el-paso-18-wheeler-accident-lawyer/",
     },
     {
       label: "Semi-Truck Accident Lawyers",
-      href: "/el-paso-semi-truck-accident-lawyer",
+      href: "/el-paso-semi-truck-accident-lawyer/",
     },
     {
       label: "Motorcycle Accident Lawyers",
-      href: "/el-paso-motorcycle-accident-lawyers",
+      href: "/el-paso-motorcycle-accident-lawyers/",
     },
     {
       label: "Wrongful Death Lawyers",
-      href: "/el-paso-wrongful-death-lawyers",
+      href: "/el-paso-wrongful-death-lawyers/",
     },
   ];
 
   const truckAccidentDirectoryPage: PracticeAreaPageData = {
     path: "/el-paso-truck-accident-lawyers",
     shortTitle: "Truck Accident",
-    title: "Best Truck Accident Lawyers in El Paso, TX",
+    title: "Truck Accident Lawyers in El Paso, TX",
     description:
       "Compare El Paso truck accident lawyers handling 18-wheeler collisions, commercial trucking crashes, catastrophic injuries, wrongful death claims, and commercial insurance disputes.",
     metaDescription:
-      "Compare truck accident lawyers in El Paso, TX for 18-wheeler crashes, commercial vehicle collisions, serious injuries, wrongful death, and trucking insurance disputes.",
+      "Compare El Paso truck accident lawyers for commercial vehicle crashes, serious injuries and insurance claims. Explore local firms and request legal assistance.",
     heroText:
       "Compare El Paso truck accident attorneys handling 18-wheeler crashes, commercial vehicle collisions, serious injuries, wrongful death, and trucking insurance disputes.",
     topics: caseTypes,
@@ -111,9 +124,9 @@ import type { PracticeAreaPageData } from "../data/practiceAreaPages";
 
   useEffect(() => {
     const title =
-      "Best Truck Accident Lawyers in El Paso, TX | El Paso's Best Lawyers";
+      "Truck Accident Lawyers in El Paso, TX | El Paso's Best Lawyers";
     const description =
-      "Compare truck accident lawyers in El Paso, TX for 18-wheeler crashes, commercial vehicle collisions, serious injuries, wrongful death, and trucking insurance disputes.";
+      "Compare El Paso truck accident lawyers for commercial vehicle crashes, serious injuries and insurance claims. Explore local firms and request legal assistance.";
     const canonical =
       "https://www.elpasosbestlawyers.com/el-paso-truck-accident-lawyers/";
 
@@ -185,7 +198,7 @@ import type { PracticeAreaPageData } from "../data/practiceAreaPages";
           isPartOf: {
             "@type": "WebSite",
             name: "El Paso's Best Lawyers",
-            url: "https://www.elpasosbestlawyers.com",
+            url: "https://www.elpasosbestlawyers.com/",
           },
           breadcrumb: {
             "@id": `${canonical}#breadcrumb`,
@@ -199,14 +212,14 @@ import type { PracticeAreaPageData } from "../data/practiceAreaPages";
               "@type": "ListItem",
               position: 1,
               name: "Home",
-              item: "https://www.elpasosbestlawyers.com",
+              item: "https://www.elpasosbestlawyers.com/",
             },
             {
               "@type": "ListItem",
               position: 2,
               name: "Personal Injury",
               item:
-                "https://www.elpasosbestlawyers.com/el-paso-personal-injury-lawyers",
+                "https://www.elpasosbestlawyers.com/el-paso-personal-injury-lawyers/",
             },
             {
               "@type": "ListItem",
@@ -282,7 +295,7 @@ import type { PracticeAreaPageData } from "../data/practiceAreaPages";
               lineHeight: 1.1,
             }}
           >
-            Best Truck Accident Lawyers in El Paso, TX
+            Truck Accident Lawyers in El Paso, TX
           </h1>
 
           <p
@@ -298,6 +311,21 @@ import type { PracticeAreaPageData } from "../data/practiceAreaPages";
             wrongful death claims, and commercial insurance disputes
             throughout El Paso County.
           </p>
+
+          <div className="mt-8 flex flex-wrap gap-4">
+            <a
+              href="#truck-accident-firms"
+              className="rounded-xl bg-amber-400 px-6 py-3 font-bold text-slate-950 hover:bg-amber-300"
+            >
+              Compare Truck Accident Lawyers
+            </a>
+            <a
+              href="#truck-accident-consultation"
+              className="rounded-xl border border-amber-400 px-6 py-3 font-semibold text-amber-400 hover:bg-amber-400 hover:text-slate-950"
+            >
+              Request Legal Assistance
+            </a>
+          </div>
         </div>
       </section>
 
@@ -333,6 +361,34 @@ import type { PracticeAreaPageData } from "../data/practiceAreaPages";
           </p>
 
           <PracticeAreaFirmDirectory page={truckAccidentDirectoryPage} />
+        </div>
+      </section>
+
+      <section
+        id="truck-accident-consultation"
+        className="scroll-mt-24 border-y border-slate-700 bg-slate-900"
+      >
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 lg:grid-cols-2">
+          <div>
+            <h2 className="text-3xl font-bold text-amber-400">
+              Get Help Finding a Truck Accident Attorney
+            </h2>
+            <p className="mt-5 leading-8 text-slate-300">
+              Tell us about your truck accident and the type of legal
+              assistance you are seeking. You can choose whether to
+              share your inquiry with eligible participating firms
+              or submit it to El Paso&apos;s Best Lawyers only.
+            </p>
+            <p className="mt-4 text-sm leading-6 text-slate-400">
+              El Paso&apos;s Best Lawyers is an attorney directory,
+              not a law firm. A referral, consultation or legal
+              representation is not guaranteed.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-slate-700 bg-slate-950 p-6">
+            <LeadCaptureForm practiceArea="Truck Accident" phoneOptional />
+          </div>
         </div>
       </section>
 
@@ -456,7 +512,7 @@ import type { PracticeAreaPageData } from "../data/practiceAreaPages";
               marginBottom: "24px",
             }}
           >
-            Related El Paso Injury Lawyer Guides
+            Related Injury Lawyers and Legal Guides
           </h2>
 
           <div
