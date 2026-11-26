@@ -38,9 +38,9 @@ const faqs = [
 
 export default function OvertimePayDisputes() {
   useSeo({
-    title: "Best Overtime & Pay Dispute Lawyers in El Paso, TX | Compare Attorneys",
+    title: "El Paso Overtime & Pay Dispute Lawyers | Unpaid Wages",
     description:
-      "Compare El Paso overtime and pay dispute lawyers handling unpaid overtime, off-the-clock work, minimum wage, misclassification, commissions, final paychecks, payroll issues, and wage retaliation.",
+      "Working overtime without proper pay? Explore your options and compare El Paso employment lawyers for unpaid overtime, off-the-clock work and wage disputes.",
     path: "/el-paso-overtime-pay-disputes-lawyers",
   });
 
@@ -52,7 +52,7 @@ export default function OvertimePayDisputes() {
         </p>
 
         <h1 className="max-w-5xl text-4xl font-medium leading-tight text-amber-400 md:text-6xl">
-          Best Overtime & Pay Dispute Lawyers in El Paso, TX
+          Overtime & Pay Dispute Lawyers in El Paso, TX
         </h1>
 
         <p className="mt-7 max-w-5xl text-xl leading-8 text-slate-100">
@@ -83,6 +83,83 @@ export default function OvertimePayDisputes() {
                 {item}
               </div>
             ))}
+          </div>
+        </section>
+
+        <section className="mt-14">
+          <h2 className="text-3xl font-medium">
+            Working Overtime Without Proper Pay?
+          </h2>
+
+          <div className="mt-5 max-w-5xl space-y-5 leading-7 text-slate-300">
+            <p>
+              Under federal wage law, covered employees who are not exempt
+              generally must receive overtime compensation at least 1.5 times
+              their regular pay rate for hours beyond 40 in a workweek.
+              Exceptions and special rules may apply.
+            </p>
+
+            <p>
+              Receiving a salary does not automatically make a worker
+              ineligible for overtime. Job duties, compensation arrangements
+              and applicable exemptions may affect eligibility.
+            </p>
+
+            <h3 className="text-xl font-semibold text-amber-400">
+              Possible Signs of Unpaid Working Time
+            </h3>
+
+            <ul className="list-disc space-y-3 pl-6">
+              <li>Completing required tasks before clocking in.</li>
+              <li>Continuing to work after clocking out.</li>
+              <li>Performing work during unpaid meal periods.</li>
+              <li>Traveling between job sites during the workday.</li>
+              <li>Having recorded hours reduced or altered.</li>
+              <li>Receiving straight-time pay when overtime may be required.</li>
+            </ul>
+
+            <p>
+              These circumstances do not automatically establish a violation.
+              An employment attorney can evaluate the actual hours worked,
+              payroll records, job duties and applicable law.
+            </p>
+
+            <p>
+              Official guidance is available from the{" "}
+              <a
+                href="https://www.dol.gov/agencies/whd/fact-sheets/23-flsa-overtime-pay"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-amber-400 underline"
+              >
+                U.S. Department of Labor
+              </a>
+              {" "}and its{" "}
+              <a
+                href="https://www.dol.gov/agencies/whd/fact-sheets/22-flsa-hours-worked"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-amber-400 underline"
+              >
+                guidance on compensable working time
+              </a>.
+            </p>
+
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="#overtime-inquiry"
+                className="rounded-lg bg-amber-400 px-6 py-3 font-semibold text-slate-950 hover:bg-amber-300"
+              >
+                Request Legal Assistance
+              </a>
+
+              <Link
+                to="/el-paso-employment-lawyers"
+                className="rounded-lg border border-slate-600 px-6 py-3 font-semibold hover:border-amber-400"
+              >
+                Explore Employment Lawyers
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -205,7 +282,7 @@ export default function OvertimePayDisputes() {
           </div>
         </section>
 
-        <section className="mt-14 rounded-2xl border border-amber-400/30 bg-slate-900/60 p-8">
+        <section id="overtime-inquiry" className="mt-14 rounded-2xl border border-amber-400/30 bg-slate-900/60 p-8">
           <h2 className="text-3xl font-medium">
             Get Help With an Overtime or Pay Dispute
           </h2>

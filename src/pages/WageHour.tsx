@@ -65,7 +65,7 @@ export default function WageHour() {
           <div className="mt-5 max-w-5xl space-y-5 leading-7 text-slate-300">
             <p>El Paso workers may encounter wage disputes involving minimum wage, unpaid time, overtime, payroll practices, deductions, commissions, bonuses, final pay, or worker classification. The analysis may depend on job duties, compensation method, hours worked, employer records, agreements, and applicable federal or Texas law.</p>
             <p>Wage and hour matters can arise across industries including construction, transportation and logistics, hospitality, retail, healthcare, manufacturing, professional services, and other El Paso workplaces. Preserving payroll records and workplace communications can help an attorney evaluate the issues involved.</p>
-            <p>If unpaid overtime or a specific pay dispute is the central issue, visit the{" "}<Link to="/el-paso-overtime-pay-disputes-lawyers" className="font-semibold text-amber-400 hover:underline">El Paso Overtime & Pay Dispute Lawyers</Link>{" "}directory for a more focused comparison.</p>
+            <p>If unpaid overtime or a specific pay dispute is the central issue, visit the{" "}<Link to="/el-paso-overtime-pay-disputes-lawyers/" className="font-semibold text-amber-400 hover:underline">El Paso Overtime & Pay Dispute Lawyers</Link>{" "}directory for a more focused comparison.</p>
           </div>
         </section>
 
@@ -85,7 +85,7 @@ export default function WageHour() {
           <h2 className="text-3xl font-medium">Explore Related El Paso Employment Law Directories</h2>
           <div className="mt-5 flex flex-wrap gap-3">
             <Link to="/el-paso-employment-lawyers" className="rounded-lg border border-slate-600 px-4 py-3 hover:border-amber-400">Employment Lawyers</Link>
-            <Link to="/el-paso-overtime-pay-disputes-lawyers" className="rounded-lg border border-slate-600 px-4 py-3 hover:border-amber-400">Overtime & Pay Dispute Lawyers</Link>
+            <Link to="/el-paso-overtime-pay-disputes-lawyers/" className="rounded-lg border border-slate-600 px-4 py-3 hover:border-amber-400">Overtime & Pay Dispute Lawyers</Link>
             <Link to="/el-paso-wrongful-termination-lawyers" className="rounded-lg border border-slate-600 px-4 py-3 hover:border-amber-400">Wrongful Termination Lawyers</Link>
             <Link to="/el-paso-workplace-discrimination-lawyers" className="rounded-lg border border-slate-600 px-4 py-3 hover:border-amber-400">Workplace Discrimination Lawyers</Link>
             <Link to="/el-paso-employment-contract-lawyers" className="rounded-lg border border-slate-600 px-4 py-3 hover:border-amber-400">Employment Contract Lawyers</Link>
