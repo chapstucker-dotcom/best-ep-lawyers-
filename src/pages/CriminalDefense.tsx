@@ -5,20 +5,31 @@ import PracticeAreaFirmDirectory from "../components/PracticeAreaFirmDirectory";
 import type { PracticeAreaPageData } from "../data/practiceAreaPages";
 
 const relatedPages = [
-  ["DWI / DUI", "/el-paso-dwi-lawyers"],
-  ["Drug Crimes", "/el-paso-drug-crimes-lawyers"],
-  ["Felony Defense", "/el-paso-felony-lawyers"],
-  ["Juvenile Defense", "/el-paso-juvenile-defense-lawyers"],
-  ["White-Collar Crime", "/el-paso-white-collar-crime-lawyers"],
-  ["Military Law", "/el-paso-military-law-lawyers"],
-  ["Theft", "/el-paso-theft-lawyers"],
-  ["Assault", "/el-paso-assault-lawyers"],
-  ["Domestic Violence", "/el-paso-domestic-violence-lawyers"],
-  ["Expunction", "/el-paso-expunction-lawyers"],
-  ["Civil Litigation", "/el-paso-civil-litigation-lawyers"],
+  ["Federal Criminal Defense", "/el-paso-federal-criminal-defense-lawyers/"],
+  ["Weapons Charges", "/el-paso-weapons-charges-lawyers/"],
+  ["Probation Violations", "/el-paso-probation-violation-lawyers/"],
+  ["DWI / DUI", "/el-paso-dwi-lawyers/"],
+  ["Drug Crimes", "/el-paso-drug-crimes-lawyers/"],
+  ["Felony Defense", "/el-paso-felony-lawyers/"],
+  ["Juvenile Defense", "/el-paso-juvenile-defense-lawyers/"],
+  ["White-Collar Crime", "/el-paso-white-collar-crime-lawyers/"],
+  ["Military Law", "/el-paso-military-law-lawyers/"],
+  ["Theft", "/el-paso-theft-lawyers/"],
+  ["Assault", "/el-paso-assault-lawyers/"],
+  ["Domestic Violence", "/el-paso-domestic-violence-lawyers/"],
+  ["Expunction", "/el-paso-expunction-lawyers/"],
+  ["Civil Litigation", "/el-paso-civil-litigation-lawyers/"],
 ];
 
 const faqs = [
+  {
+    q: "How much does a criminal defense lawyer cost in El Paso?",
+    a: "Fees vary according to the attorney, charge, complexity, and scope of representation. Ask whether the firm charges a flat fee or hourly rate, what services are included, and whether additional expenses may apply.",
+  },
+  {
+    q: "Can I contact a lawyer about an outstanding warrant in El Paso?",
+    a: "Yes. Ask a criminal defense attorney about reviewing the available warrant information, identifying the court and underlying charge, and discussing appropriate next steps. Gather any court documents or case numbers you have available.",
+  },
   {
     q: "How do I choose a criminal defense lawyer in El Paso?",
     a: "Compare experience with the type of charge involved, courtroom and trial experience, familiarity with local procedures, communication, fee structure, and whether the attorney regularly handles cases at the misdemeanor, felony, state, or federal level relevant to your matter.",
@@ -56,11 +67,11 @@ const faqs = [
 const criminalDefenseDirectoryPage = {
   path: "/el-paso-criminal-defense-lawyers",
   shortTitle: "Criminal Defense",
-  title: "Best Criminal Defense Lawyers in El Paso, TX",
+  title: "Criminal Defense Lawyers in El Paso, TX",
   description:
     "Compare El Paso criminal defense law firms handling DWI, drug charges, assault, domestic violence, theft, felonies, misdemeanors, federal matters, and other criminal cases.",
   metaDescription:
-    "Compare criminal defense lawyers in El Paso, Texas for DWI, drug charges, assault, theft, felonies, misdemeanors, and other criminal cases.",
+    "Facing an arrest, warrant or criminal charge? Compare El Paso criminal defense lawyers for DWI, drug charges, misdemeanors, felonies and federal cases.",
   heroText:
     "Compare El Paso criminal defense attorneys and law firms by practice focus, firm information, and contact details.",
   topics: [
@@ -80,10 +91,10 @@ const criminalDefenseDirectoryPage = {
 export default function CriminalDefense() {
   useEffect(() => {
     const title =
-      "Best Criminal Defense Lawyers in El Paso, TX | El Paso's Best Lawyers";
+      "Criminal Defense Lawyers in El Paso, TX | El Paso's Best Lawyers";
 
     const description =
-      "Compare criminal defense lawyers in El Paso, Texas for DWI, drug charges, assault, domestic violence, theft, felonies, misdemeanors, federal cases, and other criminal matters.";
+      "Facing an arrest, warrant or criminal charge? Compare El Paso criminal defense lawyers for DWI, drug charges, misdemeanors, felonies and federal cases.";
 
     document.title = title;
 
@@ -149,7 +160,7 @@ export default function CriminalDefense() {
           isPartOf: {
             "@type": "WebSite",
             name: "El Paso's Best Lawyers",
-            url: "https://elpasosbestlawyers.com/",
+            url: "https://www.elpasosbestlawyers.com/",
           },
           about: {
             "@type": "Thing",
@@ -163,7 +174,7 @@ export default function CriminalDefense() {
               "@type": "ListItem",
               position: 1,
               name: "Home",
-              item: "https://elpasosbestlawyers.com/",
+              item: "https://www.elpasosbestlawyers.com/",
             },
             {
               "@type": "ListItem",
@@ -241,12 +252,12 @@ export default function CriminalDefense() {
           <h1
             style={{
               color: "#fbbf24",
-              fontSize: "56px",
+              fontSize: "clamp(32px, 5vw, 56px)",
               marginBottom: "24px",
               lineHeight: 1.1,
             }}
           >
-            Best Criminal Defense Lawyers in El Paso, TX
+            Criminal Defense Lawyers in El Paso, TX
           </h1>
 
           <p
@@ -279,6 +290,28 @@ export default function CriminalDefense() {
             depend on the specific charge, whether the matter is pending in
             state or federal court, and the lawyer&apos;s experience with the
             procedures and consequences involved.
+          </p>
+
+          <div className="mt-8 flex flex-wrap gap-4">
+            <a
+              href="#criminal-defense-firms"
+              className="rounded-xl bg-amber-400 px-6 py-3 font-bold text-slate-950 hover:bg-amber-300"
+            >
+              Compare Criminal Defense Lawyers
+            </a>
+
+            <a
+              href="#criminal-defense-consultation"
+              className="rounded-xl border border-amber-400 px-6 py-3 font-semibold text-amber-400 hover:bg-amber-400 hover:text-slate-950"
+            >
+              Request Legal Assistance
+            </a>
+          </div>
+
+          <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-400">
+            El Paso&apos;s Best Lawyers is an attorney directory,
+            not a law firm. You choose whether to share your inquiry
+            with eligible participating firms. Representation is not guaranteed.
           </p>
         </section>
 
@@ -553,6 +586,58 @@ export default function CriminalDefense() {
           </div>
         </section>
 
+        <section className="mb-14">
+          <h2 className="text-3xl font-bold text-white">
+            Helpful Resources After an Arrest in El Paso
+          </h2>
+
+          <p className="mt-4 max-w-3xl leading-7 text-slate-300">
+            Explore our legal guides and prepare questions
+            for your criminal defense consultation.
+          </p>
+
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            <a
+              href="/guides/what-to-do-after-arrest-el-paso/"
+              className="rounded-xl border border-slate-700 bg-slate-900 p-6 hover:border-amber-400"
+            >
+              <h3 className="text-xl font-bold text-amber-400">
+                What to Do After an Arrest
+              </h3>
+              <p className="mt-3 leading-7 text-slate-300">
+                Review practical information and prepare
+                for conversations with defense counsel.
+              </p>
+            </a>
+
+            <a
+              href="/guides/texas-dwi-basics-el-paso/"
+              className="rounded-xl border border-slate-700 bg-slate-900 p-6 hover:border-amber-400"
+            >
+              <h3 className="text-xl font-bold text-amber-400">
+                Understanding Texas DWI Charges
+              </h3>
+              <p className="mt-3 leading-7 text-slate-300">
+                Learn about common issues that may arise
+                in a Texas DWI case.
+              </p>
+            </a>
+
+            <a
+              href="/guides/texas-dwi-license-suspension-alr-hearing-el-paso/"
+              className="rounded-xl border border-slate-700 bg-slate-900 p-6 hover:border-amber-400"
+            >
+              <h3 className="text-xl font-bold text-amber-400">
+                DWI License Suspension and ALR Hearings
+              </h3>
+              <p className="mt-3 leading-7 text-slate-300">
+                Explore information about administrative
+                license proceedings and related concerns.
+              </p>
+            </a>
+          </div>
+        </section>
+
         <section
           style={{
             marginBottom: "52px",
@@ -607,7 +692,7 @@ export default function CriminalDefense() {
           </div>
         </section>
 
-        <section
+        <section id="criminal-defense-consultation" className="scroll-mt-24"
           style={{
             background: "#111827",
             border: "1px solid #1e293b",
@@ -633,8 +718,10 @@ export default function CriminalDefense() {
               marginBottom: "24px",
             }}
           >
-            Use the form below to submit your information and connect with
-            a participating law firm.
+            Use the form below to choose whether to share your inquiry
+            with eligible participating law firms or submit it to
+            El Paso&apos;s Best Lawyers only. A referral, consultation,
+            or legal representation is not guaranteed.
           </p>
 
           <LeadCaptureForm phoneOptional />
