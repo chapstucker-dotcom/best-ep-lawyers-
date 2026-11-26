@@ -19,7 +19,7 @@ export default function Guides() {
     title: "Texas Law Guides for El Paso | El Paso's Best Lawyers",
     description:
       "Plain-English Texas legal guides for El Paso residents covering car accidents, personal injury, DWI, family law, wrongful death, insurance, and more.",
-    path: "/guides",
+    path: "/guides/",
   });
 
   return (

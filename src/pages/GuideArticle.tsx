@@ -2,12 +2,39 @@ import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react';
 import Footer from '@/components/Footer';
-import { getArticleBySlug } from '@/data/articles';
+import { articles, getArticleBySlug } from '@/data/articles';
 import { useSeo } from '../hooks/use-seo';
 
 export default function GuideArticle() {
   const { slug } = useParams();
   const article = getArticleBySlug(slug);
+
+  const accidentTopics = [
+    "Car Accidents",
+    "Personal Injury",
+    "Truck Accidents",
+    "Wrongful Death",
+    "Uber & Lyft Accidents",
+  ];
+
+  const relatedArticles = article
+    ? articles
+        .filter((candidate) =>
+          candidate.slug !== article.slug &&
+          (
+            candidate.topic === article.topic ||
+            (
+              accidentTopics.includes(article.topic) &&
+              accidentTopics.includes(candidate.topic)
+            )
+          )
+        )
+        .sort((a, b) =>
+          Number(b.topic === article.topic) -
+          Number(a.topic === article.topic)
+        )
+        .slice(0, 3)
+    : [];
 
   useSeo({
     title: article
@@ -17,7 +44,7 @@ export default function GuideArticle() {
       ? article.metaDescription
       : "The requested legal guide could not be found on El Paso's Best Lawyers.",
     path: article
-      ? `/guides/${article.slug}`
+      ? `/guides/${article.slug}/`
       : slug
         ? `/guides/${slug}`
         : '/guides',
@@ -29,7 +56,7 @@ export default function GuideArticle() {
     if (!article) return;
 
     const canonicalUrl =
-      `https://www.elpasosbestlawyers.com/guides/${article.slug}`;
+      `https://www.elpasosbestlawyers.com/guides/${article.slug}/`;
 
     const script = document.createElement('script');
     script.type = 'application/ld+json';
@@ -69,7 +96,7 @@ export default function GuideArticle() {
         </h1>
 
         <Link
-          to="/guides"
+          to="/guides/"
           className="mt-6 inline-block font-semibold text-[#1FA8A1]"
         >
           Browse all guides
@@ -87,7 +114,7 @@ export default function GuideArticle() {
           </Link>
 
           <Link
-            to="/guides"
+            to="/guides/"
             className="inline-flex items-center gap-2 text-sm font-semibold text-[#0F2A43] hover:text-[#1FA8A1]"
           >
             <ArrowLeft className="h-4 w-4" />
@@ -104,7 +131,7 @@ export default function GuideArticle() {
 
           <span className="mx-2">/</span>
 
-          <Link to="/guides" className="hover:text-[#1FA8A1]">
+          <Link to="/guides/" className="hover:text-[#1FA8A1]">
             Guides
           </Link>
 
@@ -137,6 +164,40 @@ export default function GuideArticle() {
             <strong>Important:</strong> This guide provides general
             educational information, not legal advice. Deadlines and legal
             outcomes depend on the facts.
+          </div>
+
+          <div className="mb-8 rounded-xl border border-slate-200 bg-slate-50 p-5">
+            <h2 className="text-xl font-bold text-[#0F2A43]">
+              Find legal help in El Paso
+            </h2>
+
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              Explore local attorney profiles, compare relevant experience,
+              and learn how to prepare for a consultation.
+            </p>
+
+            <div className="mt-4 flex flex-wrap gap-3">
+              <Link
+                to={`${article.relatedPracticeArea.path.replace(/\/+$/, "")}/`}
+                className="inline-flex items-center gap-2 rounded-lg bg-[#F5B800] px-5 py-3 font-bold text-[#0F2A43] hover:brightness-95"
+              >
+                {article.relatedPracticeArea.label}
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+
+              <a
+                href="/guides/#consultation-preparation"
+                className="inline-flex items-center rounded-lg border border-[#0F2A43] px-5 py-3 font-semibold text-[#0F2A43] hover:bg-white"
+              >
+                Prepare for a consultation
+              </a>
+            </div>
+
+            <p className="mt-3 text-xs leading-5 text-slate-600">
+              El Paso&apos;s Best Lawyers is a legal directory, not a law firm.
+              Confirm fees, availability and representation directly with
+              the attorney.
+            </p>
           </div>
 
           <div className="space-y-9">
@@ -174,7 +235,7 @@ export default function GuideArticle() {
             </p>
 
             <Link
-              to={article.relatedPracticeArea.path}
+              to={`${article.relatedPracticeArea.path.replace(/\/+$/, "")}/`}
               className="mt-5 inline-flex items-center gap-2 rounded-lg bg-[#F5B800] px-5 py-3 font-bold text-[#0F2A43] hover:brightness-95"
             >
               {article.relatedPracticeArea.label}
@@ -202,6 +263,40 @@ export default function GuideArticle() {
                       {faq.answer}
                     </p>
                   </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {relatedArticles.length > 0 && (
+            <section
+              aria-labelledby="related-guides-heading"
+              className="mt-10 border-t pt-7"
+            >
+              <h2
+                id="related-guides-heading"
+                className="mb-4 text-2xl font-bold text-[#0F2A43]"
+              >
+                Related Texas legal guides
+              </h2>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                {relatedArticles.map((related) => (
+                  <Link
+                    key={related.slug}
+                    to={`/guides/${related.slug}/`}
+                    className="rounded-xl border border-slate-200 p-5 hover:border-teal-600"
+                  >
+                    <p className="text-xs font-semibold text-teal-700">
+                      {related.topic}
+                    </p>
+                    <h3 className="mt-2 font-bold text-[#0F2A43]">
+                      {related.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-6 text-slate-600">
+                      {related.summary}
+                    </p>
+                  </Link>
                 ))}
               </div>
             </section>

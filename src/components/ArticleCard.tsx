@@ -9,7 +9,7 @@ interface ArticleCardProps {
 export default function ArticleCard({ article }: ArticleCardProps) {
   return (
     <Link
-      to={`/guides/${article.slug}`}
+      to={`/guides/${article.slug}/`}
       className="block rounded-xl border border-gray-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-[#1FA8A1] hover:shadow-lg"
     >
       <div className="flex items-start gap-4">
