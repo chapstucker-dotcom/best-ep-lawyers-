@@ -143,6 +143,16 @@ Deno.serve(async (req: Request) => {
     );
   }
 
+  // Production must never process sandbox events.
+  if (event.livemode !== true) {
+    console.warn("Ignoring non-live Stripe event:", event.id);
+    return jsonResponse({
+      received: true,
+      ignored: true,
+      reason: "non_live_event",
+    });
+  }
+
   const eventId = event.id;
 
   try {
@@ -216,9 +226,26 @@ Deno.serve(async (req: Request) => {
     }
 
     switch (event.type) {
-      case "checkout.session.completed": {
+      case "checkout.session.completed":
+      case "checkout.session.async_payment_succeeded": {
         const session =
           event.data.object as Stripe.Checkout.Session;
+
+        // Never activate membership before payment succeeds.
+        if (session.payment_status !== "paid") {
+          console.log("Checkout awaiting payment:", session.id);
+          break;
+        }
+
+        if (
+          session.mode !== "subscription" ||
+          !session.customer ||
+          !session.subscription
+        ) {
+          throw new Error(
+            "Invalid paid subscription checkout session"
+          );
+        }
 
         const firmId =
           session.client_reference_id;
