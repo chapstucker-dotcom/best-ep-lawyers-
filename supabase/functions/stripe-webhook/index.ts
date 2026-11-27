@@ -329,6 +329,123 @@ Deno.serve(async (req: Request) => {
         break;
       }
 
+      case "invoice.paid":
+      case "invoice.payment_failed":
+      case "customer.subscription.updated": {
+        let subscriptionId: string | null = null;
+
+        if (event.type === "customer.subscription.updated") {
+          const subscription =
+            event.data.object as Stripe.Subscription;
+
+          subscriptionId = subscription.id;
+        } else {
+          const eventInvoice =
+            event.data.object as Stripe.Invoice;
+
+          // Retrieve using our configured Stripe API version.
+          const invoice =
+            await stripe.invoices.retrieve(eventInvoice.id);
+
+          subscriptionId =
+            typeof invoice.subscription === "string"
+              ? invoice.subscription
+              : invoice.subscription?.id ?? null;
+        }
+
+        if (!subscriptionId) {
+          break;
+        }
+
+        const { data: firm, error: lookupError } =
+          await supabaseAdmin
+            .from("firms")
+            .select("id, stripe_customer_id")
+            .eq("stripe_subscription_id", subscriptionId)
+            .maybeSingle();
+
+        if (lookupError) {
+          throw new Error(
+            `Billing lookup failed: ${lookupError.message}`
+          );
+        }
+
+        // Do not modify unconnected or manual placements.
+        if (!firm) {
+          break;
+        }
+
+        // Retrieve current state to reduce stale-event risks.
+        const subscription =
+          await stripe.subscriptions.retrieve(subscriptionId, {
+            expand: ["latest_invoice"],
+          });
+
+        const customerId =
+          typeof subscription.customer === "string"
+            ? subscription.customer
+            : subscription.customer.id;
+
+        if (
+          !subscription.livemode ||
+          customerId !== firm.stripe_customer_id
+        ) {
+          throw new Error("Billing account mismatch");
+        }
+
+        let paymentStatus: string | null = null;
+
+        const latestInvoice =
+          typeof subscription.latest_invoice === "object"
+            ? subscription.latest_invoice
+            : null;
+
+        if (
+          subscription.status === "past_due" ||
+          subscription.status === "unpaid"
+        ) {
+          paymentStatus = "past_due";
+        } else if (subscription.status === "active") {
+          if (latestInvoice?.status === "paid") {
+            paymentStatus = "paid";
+          } else if (
+            latestInvoice?.status === "open" &&
+            latestInvoice.attempted &&
+            latestInvoice.attempt_count > 0 &&
+            event.type === "invoice.payment_failed" &&
+            latestInvoice.id === event.data.object.id
+          ) {
+            paymentStatus = "past_due";
+          }
+        }
+
+        if (paymentStatus) {
+          const { error: updateError } =
+            await supabaseAdmin
+              .from("firms")
+              .update({
+                payment_status: paymentStatus,
+              })
+              .eq("id", firm.id)
+              .eq("stripe_subscription_id", subscriptionId)
+              .eq("stripe_customer_id", customerId);
+
+          if (updateError) {
+            throw new Error(
+              `Billing status update failed: ${updateError.message}`
+            );
+          }
+
+          console.log(
+            "Subscription payment status synchronized:",
+            subscriptionId,
+            paymentStatus
+          );
+        }
+
+        break;
+      }
+
       case "customer.subscription.deleted": {
         const subscription =
           event.data.object as Stripe.Subscription;
@@ -362,9 +479,11 @@ Deno.serve(async (req: Request) => {
         }
 
         if (!canceledFirm) {
-          throw new Error(
-            `No firm found for Stripe subscription ${subscription.id}`
+          console.log(
+            "Subscription already disconnected or not linked:",
+            subscription.id
           );
+          break;
         }
 
         console.log(
@@ -393,9 +512,8 @@ Deno.serve(async (req: Request) => {
         .eq("stripe_event_id", eventId);
 
     if (successError) {
-      console.error(
-        "Could not mark event succeeded:",
-        successError
+      throw new Error(
+        `Could not mark event succeeded: ${successError.message}`
       );
     }
 
