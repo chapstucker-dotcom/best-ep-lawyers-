@@ -154,75 +154,38 @@ Deno.serve(async (req: Request) => {
   }
 
   const eventId = event.id;
+  const claimToken = crypto.randomUUID();
 
   try {
-    /*
-     * Only skip events that ACTUALLY succeeded.
-     *
-     * Failed events are allowed to retry.
-     */
-    const {
-      data: existingEvent,
-      error: existingEventError,
-    } = await supabaseAdmin
-      .from("stripe_webhook_events")
-      .select("stripe_event_id, status")
-      .eq("stripe_event_id", eventId)
-      .maybeSingle();
+    const { data: claim, error: claimError } =
+      await supabaseAdmin.rpc("claim_stripe_webhook_event", {
+        p_event_id: eventId,
+        p_event_type: event.type,
+        p_payload: event,
+        p_claim_token: claimToken,
+      });
 
-    if (existingEventError) {
+    if (claimError) {
       throw new Error(
-        `Could not check webhook event: ${existingEventError.message}`
+        `Webhook claim failed: ${claimError.message}`
       );
     }
 
-    if (
-      existingEvent?.stripe_event_id &&
-      existingEvent.status === "succeeded"
-    ) {
-      console.log(
-        "Webhook already successfully processed:",
-        eventId
-      );
-
+    if (claim === "duplicate") {
       return jsonResponse({
         received: true,
         duplicate: true,
       });
     }
 
-    /*
-     * Create the event only if it does not
-     * already exist.
-     */
-    if (!existingEvent?.stripe_event_id) {
-      const { error: insertError } =
-        await supabaseAdmin
-          .from("stripe_webhook_events")
-          .insert({
-            stripe_event_id: eventId,
-            event_type: event.type,
-            payload: event,
-            status: "received",
-          });
+    if (claim === "busy") {
+      return jsonResponse({
+        error: "Event is already being processed",
+      }, 503);
+    }
 
-      if (insertError) {
-        throw new Error(
-          `Could not create webhook record: ${insertError.message}`
-        );
-      }
-    } else {
-      /*
-       * Reset a previous failed event so
-       * this retry can be processed.
-       */
-      await supabaseAdmin
-        .from("stripe_webhook_events")
-        .update({
-          status: "received",
-          payload: event,
-        })
-        .eq("stripe_event_id", eventId);
+    if (claim !== "claimed") {
+      throw new Error("Unexpected webhook claim result");
     }
 
     switch (event.type) {
@@ -501,7 +464,7 @@ Deno.serve(async (req: Request) => {
         );
     }
 
-    const { error: successError } =
+    const { data: completedEvent, error: successError } =
       await supabaseAdmin
         .from("stripe_webhook_events")
         .update({
@@ -509,7 +472,15 @@ Deno.serve(async (req: Request) => {
           processed_at:
             new Date().toISOString(),
         })
-        .eq("stripe_event_id", eventId);
+        .eq("stripe_event_id", eventId)
+        .eq("processing_token", claimToken)
+        .eq("status", "processing")
+        .select("stripe_event_id")
+        .maybeSingle();
+
+    if (!completedEvent && !successError) {
+      throw new Error("Webhook claim was lost");
+    }
 
     if (successError) {
       throw new Error(
@@ -539,7 +510,9 @@ Deno.serve(async (req: Request) => {
         processed_at:
           new Date().toISOString(),
       })
-      .eq("stripe_event_id", eventId);
+      .eq("stripe_event_id", eventId)
+      .eq("processing_token", claimToken)
+      .eq("status", "processing");
 
     return jsonResponse(
       {
