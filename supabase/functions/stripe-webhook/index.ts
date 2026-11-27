@@ -228,6 +228,94 @@ Deno.serve(async (req: Request) => {
           );
         }
 
+        const subscriptionId =
+          typeof session.subscription === "string"
+            ? session.subscription
+            : session.subscription.id;
+
+        const customerId =
+          typeof session.customer === "string"
+            ? session.customer
+            : session.customer.id;
+
+        const currentSubscription =
+          await stripe.subscriptions.retrieve(subscriptionId);
+
+        const currentCustomerId =
+          typeof currentSubscription.customer === "string"
+            ? currentSubscription.customer
+            : currentSubscription.customer.id;
+
+        if (
+          !currentSubscription.livemode ||
+          currentCustomerId !== customerId
+        ) {
+          throw new Error("Subscription ownership mismatch");
+        }
+
+        if (
+          currentSubscription.status === "canceled" ||
+          currentSubscription.status === "incomplete_expired"
+        ) {
+          console.log("Ignoring obsolete checkout:", session.id);
+          break;
+        }
+
+        if (
+          currentSubscription.status !== "active" &&
+          currentSubscription.status !== "past_due"
+        ) {
+          throw new Error("Subscription requires billing review");
+        }
+
+        if (
+          planKey === "expert" &&
+          (
+            currentSubscription.items.has_more ||
+            currentSubscription.items.data.length !== 1 ||
+            currentSubscription.items.data[0].price.id !==
+              "price_1TXOu8C9X7qoxVlJLgqLVvfH" ||
+            currentSubscription.items.data[0].quantity !== 1
+          )
+        ) {
+          throw new Error("Unexpected Expert subscription price");
+        }
+
+        const { data: currentFirm, error: lookupError } =
+          await supabaseAdmin
+            .from("firms")
+            .select("id, user_id, plan, plan_key, is_featured, is_exclusive, stripe_subscription_id")
+            .eq("id", firmId)
+            .single();
+
+        if (lookupError || !currentFirm) {
+          throw new Error("Unable to verify firm membership");
+        }
+
+        if (
+          session.metadata?.user_id &&
+          session.metadata.user_id !== currentFirm.user_id
+        ) {
+          throw new Error("Checkout owner mismatch");
+        }
+
+        if (currentFirm.stripe_subscription_id === subscriptionId) {
+          break;
+        }
+
+        const isFree = (value: unknown) =>
+          ["", "free", "basic"].includes(normalizePlan(value));
+
+        if (
+          currentFirm.stripe_subscription_id ||
+          !isFree(currentFirm.plan) ||
+          !isFree(currentFirm.plan_key) ||
+          currentFirm.is_featured ||
+          currentFirm.is_exclusive
+        ) {
+          throw new Error("Existing membership requires billing review");
+        }
+
         console.log(
           "Activating plan:",
           planKey,
@@ -248,7 +336,7 @@ Deno.serve(async (req: Request) => {
           .update({
             plan: planKey,
             plan_key: planKey,
-            payment_status: "paid",
+            payment_status: currentSubscription.status === "past_due" ? "past_due" : "paid",
 
             stripe_customer_id:
               typeof session.customer === "string"
@@ -267,6 +355,12 @@ Deno.serve(async (req: Request) => {
               planKey === "category-exclusive",
           })
           .eq("id", firmId)
+          .is("stripe_subscription_id", null)
+          .filter("plan", currentFirm.plan == null ? "is" : "eq", currentFirm.plan ?? "null")
+          .filter("plan_key", currentFirm.plan_key == null ? "is" : "eq", currentFirm.plan_key ?? "null")
+          .filter("user_id", currentFirm.user_id == null ? "is" : "eq", currentFirm.user_id ?? "null")
+          .filter("is_featured", currentFirm.is_featured == null ? "is" : "eq", currentFirm.is_featured ?? "null")
+          .filter("is_exclusive", currentFirm.is_exclusive == null ? "is" : "eq", currentFirm.is_exclusive ?? "null")
           .select(
             "id, name, plan, plan_key, payment_status, is_featured, is_exclusive, stripe_customer_id, stripe_subscription_id"
           )
