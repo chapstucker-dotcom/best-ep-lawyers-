@@ -292,11 +292,34 @@ Deno.serve(async (req: Request) => {
           throw new Error("Unable to verify firm membership");
         }
 
+        if (String(planKey) !== "expert") {
+          throw new Error("Only Expert supports automated checkout");
+        }
+
         if (
-          session.metadata?.user_id &&
-          session.metadata.user_id !== currentFirm.user_id
+          !currentFirm.user_id ||
+          session.metadata?.user_id !== currentFirm.user_id ||
+          session.metadata?.firm_id !== firmId ||
+          !session.metadata?.checkout_attempt_id
         ) {
-          throw new Error("Checkout owner mismatch");
+          throw new Error("Checkout ownership metadata mismatch");
+        }
+
+        const { data: reservation, error: reservationError } =
+          await supabaseAdmin
+            .from("stripe_checkout_attempts")
+            .select("firm_id, user_id, attempt_id, stripe_session_id")
+            .eq("firm_id", firmId)
+            .maybeSingle();
+
+        if (
+          reservationError ||
+          !reservation ||
+          reservation.user_id !== currentFirm.user_id ||
+          reservation.attempt_id !== session.metadata.checkout_attempt_id ||
+          reservation.stripe_session_id !== session.id
+        ) {
+          throw new Error("Checkout reservation verification failed");
         }
 
         if (currentFirm.stripe_subscription_id === subscriptionId) {
