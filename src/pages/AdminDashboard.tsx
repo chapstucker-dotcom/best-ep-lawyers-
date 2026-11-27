@@ -1,3 +1,4 @@
+import PlanChangeRequestsAdmin from "../components/PlanChangeRequestsAdmin";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { supabase } from "../lib/supabase";
 import { useSeo } from "../hooks/use-seo";
@@ -408,6 +409,7 @@ export default function AdminDashboard() {
   return (
     <main className="min-h-screen bg-slate-950 px-4 py-10 text-white sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
+        <PlanChangeRequestsAdmin />
         <CommunitySubmissionsAdmin />
         <section aria-labelledby="conversion-overview-title" className="mb-10 rounded-2xl border border-amber-400/30 bg-slate-900 p-6">
           <h2 id="conversion-overview-title" className="text-2xl font-bold text-amber-400">Inquiry Conversion Overview</h2>

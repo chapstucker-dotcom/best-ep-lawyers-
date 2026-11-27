@@ -136,6 +136,16 @@ export const Subscription =
       setOpeningBillingPortal,
     ] = useState(false);
 
+    const [planRequests, setPlanRequests] = useState<{
+      id: string;
+      requested_plan: string;
+      status: string;
+      created_at: string;
+    }[]>([]);
+    const [requestBusy, setRequestBusy] = useState(false);
+    const [requestsReady, setRequestsReady] = useState(false);
+    const [requestError, setRequestError] = useState("");
+
     const [billingConnection, setBillingConnection] = useState<"loading" | "connected" | "unconnected" | "unavailable">("loading");
 
     const {
@@ -331,6 +341,107 @@ export const Subscription =
       })();
       return () => { cancelled = true; };
     }, [user, firmId, currentPlan]);
+
+    const refreshPlanRequests = async () => {
+      if (!supabase || !firmId) return;
+
+      const { data, error } = await supabase.rpc(
+        "get_firm_plan_change_requests",
+        { p_firm_id: firmId }
+      );
+
+      if (error) {
+        setRequestsReady(false);
+        setRequestError(error.message);
+        return;
+      }
+
+      setPlanRequests(data || []);
+      setRequestsReady(true);
+      setRequestError("");
+    };
+
+    useEffect(() => {
+      setPlanRequests([]);
+      setRequestsReady(false);
+      if (user && firmId) void refreshPlanRequests();
+    }, [user, firmId]);
+
+    const pendingRequest = planRequests.find(
+      (request) => request.status === "pending"
+    );
+
+    const handlePlanRequest = async (planId: string) => {
+      if (!supabase || !firmId || !user || requestBusy ||
+          !requestsReady || pendingRequest) return;
+
+      const label = PLAN_LABELS[planId] || planId;
+
+      if (!window.confirm(
+        `Submit a request to change your membership to ${label}? Your current membership remains active until the change is completed.`
+      )) return;
+
+      setRequestBusy(true);
+      setRequestError("");
+
+      try {
+        const { data, error } = await supabase.rpc(
+          "request_firm_plan_change",
+          {
+            p_firm_id: firmId,
+            p_requested_plan: planId,
+          }
+        );
+
+        if (error) throw error;
+        if (!data) throw new Error("Request was not confirmed.");
+
+        toast({
+          title: "Plan change requested",
+          description: `Your ${label} request has been submitted. No payment has been taken.`,
+        });
+
+        await refreshPlanRequests();
+      } catch (error) {
+        setRequestError(
+          (error as { message?: string }).message ||
+          "Unable to submit plan change."
+        );
+      } finally {
+        setRequestBusy(false);
+      }
+    };
+
+    const cancelPlanRequest = async (requestId: string) => {
+      if (!supabase || requestBusy) return;
+      if (!window.confirm("Cancel this pending plan change?")) return;
+
+      setRequestBusy(true);
+      setRequestError("");
+
+      try {
+        const { data, error } = await supabase.rpc(
+          "resolve_firm_plan_change_request",
+          {
+            p_request_id: requestId,
+            p_status: "cancelled",
+          }
+        );
+
+        if (error) throw error;
+        if (!data) throw new Error("Cancellation was not confirmed.");
+
+        toast({ title: "Plan change request cancelled" });
+        await refreshPlanRequests();
+      } catch (error) {
+        setRequestError(
+          (error as { message?: string }).message ||
+          "Unable to cancel request."
+        );
+      } finally {
+        setRequestBusy(false);
+      }
+    };
 
     const checkAvailability =
       async (
@@ -656,8 +767,8 @@ export const Subscription =
                 {billingConnection === "loading"
                   ? "Checking billing connection..."
                   : billingConnection === "unconnected"
-                    ? "Your premium placement is unchanged. Online billing management is not connected to this account. Contact support@elpasosbestlawyers.com for billing assistance."
-                    : "Billing connection status is temporarily unavailable. Please try again later or contact support@elpasosbestlawyers.com."}
+                    ? "Your premium placement remains active. Use the plan options below to request a membership change."
+                    : "Billing connection status is temporarily unavailable. Please refresh to try again."}
               </div>
             )}
 
@@ -722,6 +833,58 @@ export const Subscription =
               }
             </AlertDescription>
           </Alert>
+        )}
+
+        {requestError && (
+          <Alert variant="destructive">
+            <AlertTriangle className="h-4 w-4" />
+            <AlertDescription>{requestError}</AlertDescription>
+          </Alert>
+        )}
+
+        {pendingRequest && (
+          <Card className="border-[#1FA8A1]">
+            <CardHeader>
+              <CardTitle>Pending Plan Change</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <p>
+                Requested plan:{" "}
+                <strong>
+                  {PLAN_LABELS[pendingRequest.requested_plan] ||
+                    pendingRequest.requested_plan}
+                </strong>
+              </p>
+              <p className="text-sm text-gray-600">
+                Your request is being reviewed. Your existing
+                membership remains active until the change is completed.
+              </p>
+              <Button
+                type="button"
+                variant="outline"
+                disabled={requestBusy}
+                onClick={() => void cancelPlanRequest(pendingRequest.id)}
+              >
+                Cancel Request
+              </Button>
+            </CardContent>
+          </Card>
+        )}
+
+        {planRequests.filter((request) => request.status !== "pending").length > 0 && (
+          <Card>
+            <CardHeader>
+              <CardTitle>Recent Plan Requests</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              {planRequests.filter((request) => request.status !== "pending").slice(0, 5).map((request) => (
+                <div key={request.id} className="flex items-center justify-between border-b py-2 text-sm">
+                  <span>{PLAN_LABELS[request.requested_plan] || request.requested_plan}</span>
+                  <Badge variant="outline">{request.status}</Badge>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
         )}
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -808,30 +971,22 @@ export const Subscription =
                       >
                         Current Plan
                       </Button>
-                    ) : isFreePlan ? (
+                    ) : isFreePlan || isFeaturedPlan || currentPlan !== "free" ? (
                       <Button
                         type="button"
-                        className="w-full"
-                        variant="outline"
-                        disabled
+                        className="w-full bg-[#1FA8A1] hover:bg-[#178d87]"
+                        disabled={!firmId || !requestsReady || requestBusy || !!pendingRequest || !!loadingPlan}
+                        onClick={() => void handlePlanRequest(plan.id)}
                       >
-                        Free Listing
-                      </Button>
-                    ) : isFeaturedPlan ? (
-                      <Button
-                        type="button"
-                        className="w-full"
-                        variant="outline"
-                        onClick={() => { window.location.href = "mailto:support@elpasosbestlawyers.com?subject=Category%20Featured%20Availability%20Request"; }} >
-                        Request Availability Review
-                      </Button>
-                    ) : currentPlan !== "free" ? (
-                      <Button
-                        type="button"
-                        className="w-full"
-                        variant="outline"
-                        onClick={() => { window.location.href = "mailto:support@elpasosbestlawyers.com?subject=Firm%20Subscription%20Plan%20Change"; }} >
-                        Contact Support for Plan Changes
+                        {pendingRequest?.requested_plan === plan.id
+                          ? "Request Pending"
+                          : requestBusy
+                            ? "Processing..."
+                            : isFreePlan
+                              ? "Request Switch to Free"
+                              : isFeaturedPlan
+                                ? "Request Featured Placement"
+                                : "Request Switch to Expert"}
                       </Button>
                     ) : (
                       <Button
@@ -845,7 +1000,10 @@ export const Subscription =
                         }
                         disabled={
                           isLoading ||
-                          !firmId
+                          !firmId ||
+                          !requestsReady ||
+                          requestBusy ||
+                          !!pendingRequest
                         }
                       >
                         {isLoading ? (
