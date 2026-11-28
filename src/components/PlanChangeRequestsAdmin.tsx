@@ -58,9 +58,15 @@ export default function PlanChangeRequestsAdmin() {
   ) => {
     if (!supabase || working) return;
 
-    const message = status === "completed"
-      ? "Confirm that membership, billing and placement changes have already been completed."
-      : "Decline this membership change request?";
+    const applyingFree =
+      status === "completed" &&
+      request.requested_plan === "free";
+
+    const message = applyingFree
+      ? "Approve this Free downgrade? Confirm that all billing and contractual obligations have been resolved. This immediately removes premium placement benefits while preserving the firm profile."
+      : status === "completed"
+        ? "Confirm that membership, billing and placement changes have already been completed."
+        : "Decline this membership change request?";
 
     if (!window.confirm(message)) return;
 
@@ -68,13 +74,21 @@ export default function PlanChangeRequestsAdmin() {
     setError("");
 
     try {
-      const { data, error } = await supabase.rpc(
-        "resolve_firm_plan_change_request",
-        {
-          p_request_id: request.id,
-          p_status: status,
-        }
-      );
+      const { data, error } = applyingFree
+        ? await supabase.rpc(
+            "apply_free_plan_change",
+            {
+              p_request_id: request.id,
+              p_billing_confirmed: true,
+            }
+          )
+        : await supabase.rpc(
+            "resolve_firm_plan_change_request",
+            {
+              p_request_id: request.id,
+              p_status: status,
+            }
+          );
 
       if (error) throw error;
       if (!data) throw new Error("Request resolution was not confirmed.");
@@ -164,7 +178,7 @@ export default function PlanChangeRequestsAdmin() {
                       onClick={() => void resolve(request, "completed")}
                       className="rounded-lg bg-teal-700 px-4 py-2 text-sm text-white"
                     >
-                      Mark Completed
+                      {request.requested_plan === "free" ? "Approve & Apply Downgrade" : "Mark Completed"}
                     </button>
                     <button
                       type="button"
