@@ -62,10 +62,60 @@ export default function PlanChangeRequestsAdmin() {
       status === "completed" &&
       request.requested_plan === "free";
 
+    const applyingPaid =
+      status === "completed" &&
+      ["expert", "category-featured"].includes(request.requested_plan);
+
+    let paymentReference = "";
+    let paymentAmountCents = 0;
+
+    setError("");
+
+    if (status === "completed" && !applyingFree && !applyingPaid) {
+      setError("Unsupported membership change.");
+      return;
+    }
+
+    if (applyingPaid) {
+      const expectedAmount =
+        request.requested_plan === "expert" ? 29900 : 200000;
+
+      const reference = window.prompt(
+        "Enter the independently verified payment or receipt reference. Do not enter card or bank account details."
+      );
+
+      if (reference === null) return;
+
+      paymentReference = reference.trim();
+
+      if (paymentReference.length < 5 || paymentReference.length > 200) {
+        setError("A valid payment reference is required.");
+        return;
+      }
+
+      const amount = window.prompt(
+        `Enter the verified payment amount in USD. Required: $${(expectedAmount / 100).toFixed(2)}`
+      );
+
+      if (amount === null) return;
+
+      if (!/^\d+(\.\d{1,2})?$/.test(amount.trim())) {
+        setError("Enter a valid dollar amount.");
+        return;
+      }
+
+      paymentAmountCents = Math.round(Number(amount) * 100);
+
+      if (paymentAmountCents !== expectedAmount) {
+        setError("Payment amount does not match the requested membership.");
+        return;
+      }
+    }
+
     const message = applyingFree
       ? "Approve this Free downgrade? Confirm that all billing and contractual obligations have been resolved. This immediately removes premium placement benefits while preserving the firm profile."
-      : status === "completed"
-        ? "Confirm that membership, billing and placement changes have already been completed."
+      : applyingPaid
+        ? `Activate the requested paid membership for ${request.firm_name}? Confirm that payment has been independently verified and existing contractual obligations have been resolved. This action does not collect payment or establish recurring billing.`
         : "Decline this membership change request?";
 
     if (!window.confirm(message)) return;
@@ -82,13 +132,23 @@ export default function PlanChangeRequestsAdmin() {
               p_billing_confirmed: true,
             }
           )
-        : await supabase.rpc(
-            "resolve_firm_plan_change_request",
-            {
-              p_request_id: request.id,
-              p_status: status,
-            }
-          );
+        : applyingPaid
+          ? await supabase.rpc(
+              "apply_paid_plan_change",
+              {
+                p_request_id: request.id,
+                p_payment_reference: paymentReference,
+                p_payment_amount_cents: paymentAmountCents,
+                p_payment_confirmed: true,
+              }
+            )
+          : await supabase.rpc(
+              "resolve_firm_plan_change_request",
+              {
+                p_request_id: request.id,
+                p_status: status,
+              }
+            );
 
       if (error) throw error;
       if (!data) throw new Error("Request resolution was not confirmed.");
@@ -124,7 +184,7 @@ export default function PlanChangeRequestsAdmin() {
 
       <p className="mt-2 text-sm text-slate-300">
         Review customer membership changes and premium placement requests.
-        Confirm billing and inventory before marking a request completed.
+        Verify billing and contractual obligations before approval. Paid memberships require a verified payment reference and amount. Featured inventory is checked by the server.
       </p>
 
       {error && <p role="alert" className="mt-4 text-red-300">{error}</p>}
@@ -178,7 +238,7 @@ export default function PlanChangeRequestsAdmin() {
                       onClick={() => void resolve(request, "completed")}
                       className="rounded-lg bg-teal-700 px-4 py-2 text-sm text-white"
                     >
-                      {request.requested_plan === "free" ? "Approve & Apply Downgrade" : "Mark Completed"}
+                      {request.requested_plan === "free" ? "Approve & Apply Downgrade" : "Approve & Apply Paid Membership"}
                     </button>
                     <button
                       type="button"
